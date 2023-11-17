@@ -20,21 +20,86 @@ class HomeController extends Controller
         return view('component.costumer-service-admin.index', compact('userCs'));
     }
 
+    public function getDesainer()
+    {
+        $userDesainer = User::where('roles', 'disainer')->get();
+
+        return view('component.desainer-admin.index', compact('userDesainer'));
+    }
+
+    public function getLayout()
+    {
+        $userLaytout = User::where('roles', 'layout')->get();
+
+        return view('component.layout-admin.index', compact('userLaytout'));
+    }
+
     public function postUpdatePirmission(Request $request)
     {
-        foreach ($request->userCs as $userId => $permissions) {
-            // Ambil user berdasarkan ID (pastikan $userId adalah ID yang sah)
-            $user = User::find($userId);
-
-            if ($user) {
-                $user->update([
-                    'permission_edit' => isset($permissions['permission_edit']) ? 1 : 0,
-                    'permission_hapus' => isset($permissions['permission_hapus']) ? 1 : 0,
-                    'permission_create' => isset($permissions['permission_create']) ? 1 : 0,
-                ]);
-            }
+        for ($i = 0; $i < count($request->id); $i++) {
+            $data[] = $request->id;
+            $edit = $request->permission_edit[$request->id[$i]] == 'on' ? 1 : 0;
+            $hapus = $request->permission_hapus[$request->id[$i]] == 'on' ? 1 : 0;
+            $create = $request->permission_create[$request->id[$i]] == 'on' ? 1 : 0;
+            $user = User::findOrFail($request->id[$i]);
+            $user->update([
+                'permission_edit' => $edit,
+                'permission_hapus' => $hapus,
+                'permission_create' => $create
+            ]);
         }
 
         return redirect()->back()->with('success', 'Permission telah diperbarui.');
+    }
+
+    public function postPegawaiCs(Request $request)
+    {
+        $email = $request->input('email');
+        if (User::where('email', $email)->exists()) {
+            return redirect()->back()->with('error', 'Email Pegawai sudah ada mohon buat yang berbeda.');
+        }
+
+        User::create([
+            'name' => $request->input('name'),
+            'email' => $email,
+            'roles' => $request->input('roles'),
+            'password' => bcrypt('12345678')
+        ]);
+
+        return redirect()->back()->with('success', 'Data pegawai telah ditambah.');
+    }
+
+    public function postPegawaiDesainer(Request $request)
+    {
+        $email = $request->input('email');
+        if (User::where('email', $email)->exists()) {
+            return redirect()->back()->with('error', 'Email Pegawai sudah ada mohon buat yang berbeda.');
+        }
+
+        User::create([
+            'name' => $request->input('name'),
+            'email' => $email,
+            'roles' => $request->input('roles'),
+            'password' => bcrypt('12345678')
+        ]);
+
+        return redirect()->back()->with('success', 'Data pegawai telah ditambah.');
+    }
+
+    public function postPegawaiLayout(Request $request)
+    {
+        $email = $request->input('email');
+        if (User::where('email', $email)->exists()) {
+            return redirect()->back()->with('error', 'Email Pegawai sudah ada mohon buat yang berbeda.');
+        }
+
+        User::create([
+            'name' => $request->input('name'),
+            'email' => $email,
+            'roles' => $request->input('roles'),
+            'password' => bcrypt('12345678')
+        ]);
+
+        return redirect()->back()->with('success', 'Data pegawai telah ditambah.');
     }
 }

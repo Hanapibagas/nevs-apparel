@@ -57,7 +57,7 @@
 
     <ul class="menu-inner py-1">
         <li class="menu-item">
-            <a href="index.html" class="menu-link">
+            <a href="{{ route('indexHome') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-home-circle"></i>
                 <div data-i18n="Analytics">Dashboard</div>
             </a>
@@ -66,6 +66,7 @@
         <li class="menu-header small text-uppercase">
             <span class="menu-header-text"></span>
         </li>
+        @if (Auth::user()->roles == 'super_admin')
         <li class="menu-item">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-dock-top"></i>
@@ -78,16 +79,53 @@
                     </a>
                 </li>
                 <li class="menu-item">
-                    <a href="pages-account-settings-notifications.html" class="menu-link">
+                    <a href="{{ route('getIndexDesainer') }}" class="menu-link">
                         <div data-i18n="Notifications">Desainer</div>
                     </a>
                 </li>
                 <li class="menu-item">
-                    <a href="pages-account-settings-connections.html" class="menu-link">
+                    <a href="{{ route('getIndexLayout') }}" class="menu-link">
                         <div data-i18n="Connections">Layout</div>
                     </a>
                 </li>
             </ul>
         </li>
+        @endif
+
+        @if (Auth::user()->roles == 'cs')
+        <li class="menu-item">
+            <a href="{{ route('getIndexCsPegawai') }}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-detail"></i>
+                <div data-i18n="Analytics">Costumer Service</div>
+            </a>
+        </li>
+        @endif
+
+        @if (Auth::user()->roles == 'disainer')
+        <li class="menu-item">
+            <a href="{{ route('getIndexDisainerPegawai') }}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-detail"></i>
+                <div data-i18n="Analytics">Data Masuk Disainer</div>
+            </a>
+        </li>
+        @endif
+
+        @if ( Auth::user()->roles == 'atexco')
+        <li class="menu-item">
+            <a href="{{ route('getIndexMesinAtexcoPegawai') }}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-detail"></i>
+                <div data-i18n="Analytics">Data Masuk Mesin Atxco</div>
+            </a>
+        </li>
+        @endif
+
+        @if ( Auth::user()->roles == 'mimaki')
+        <li class="menu-item">
+            <a href="{{ route('getIndexMesinMimakiPegawai') }}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-detail"></i>
+                <div data-i18n="Analytics">Data Masuk Mesin Mimaki</div>
+            </a>
+        </li>
+        @endif
     </ul>
 </aside>

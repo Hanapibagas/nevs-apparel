@@ -13,7 +13,7 @@
                         @php
                         $user = Auth::user();
                         @endphp
-                        @if (Storage::disk('public')->exists($user->gambar))
+                        @if ($user && $user->gambar && Storage::disk('public')->exists($user->gambar))
                         <img src="{{ Storage::url($user->gambar) }}" alt="{{ $user->nama }}" class="rounded-circle" />
                         @else
                         <img src="https://ui-avatars.com/api/?name={{ Auth::user()->name }}" width="40"
@@ -41,10 +41,13 @@
                         <div class="dropdown-divider"></div>
                     </li>
                     <li>
-                        <a class="dropdown-item" href="auth-login-basic.html">
-                            <i class="bx bx-power-off me-2"></i>
-                            <span class="align-middle">Log Out</span>
-                        </a>
+                        <form action="{{ route('logout') }}" method="POST">
+                            @csrf
+                            <button class="dropdown-item">
+                                <i class="bx bx-power-off me-2"></i>
+                                <span class="align-middle">Log Out</span>
+                            </button>
+                        </form>
                     </li>
                 </ul>
             </li>
