@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Cs\CostumerServicesController;
+use App\Http\Controllers\Disainer\DataMesinController;
 use App\Http\Controllers\Disainer\DisainerController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Mesin\AtexcoController;
@@ -34,7 +35,13 @@ Route::middleware(['auth', 'checkroll:disainer'])->group(function () {
     // route pegawai disainer
     Route::get('/disainer', [DisainerController::class, 'getIndexUserDisainer'])->name('getIndexDisainerPegawai');
     Route::get('/disainer/create/{nama_tim}', [DisainerController::class, 'getCreateToTeamMesin'])->name('getCreateToTeamMesinPegawai');
+    Route::get('/disainer/create-Cs/{nama_tim}', [DisainerController::class, 'getCreateToTeamCs'])->name('getCreateToTeamCsPegawai');
     Route::post('/disainer/post-tim-mesin', [DisainerController::class, 'postToTeamMesin'])->name('postToTeamMesinPegawai');
+    Route::post('/disainer/post-Cs', [DisainerController::class, 'postToCustomerServices'])->name('postToCsPegawai');
+
+    // data mesin
+    Route::get('/data-mesin-disainer-atexco', [DataMesinController::class, 'getDataMesinAtexco'])->name('getIndexDataMesinAtexcoPegawai');
+    Route::get('/data-mesin-disainer-mimaki', [DataMesinController::class, 'getDataMesinMimaki'])->name('getIndexDataMesinMimakiPegawai');
 });
 
 Route::middleware(['auth', 'checkroll:atexco'])->group(function () {

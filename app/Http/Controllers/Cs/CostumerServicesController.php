@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Cs;
 
 use App\Http\Controllers\Controller;
+use App\Models\BarangMasukCostumerServices;
 use App\Models\BarangMasukDisainer;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -12,7 +13,12 @@ class CostumerServicesController extends Controller
 {
     public function getIndexCs()
     {
+        $auth = Auth::user();
         $users = User::where('roles', 'disainer')->get();
+
+        $cs = BarangMasukCostumerServices::where('cs_id', $auth->id)->with('BarangMasukDisainer', 'Users')->get();
+
+        // return response()->json($cs);
 
         $userCounts = [];
         foreach ($users as $user) {
@@ -21,7 +27,7 @@ class CostumerServicesController extends Controller
             $userCounts[$userId] = $barangMasukCount;
         }
 
-        return view('component.costumer-service-pegawai.index', compact('users', 'userCounts'));
+        return view('component.costumer-service-pegawai.index', compact('users', 'userCounts', 'cs'));
     }
 
     public function postToTimDisainer(Request $request)

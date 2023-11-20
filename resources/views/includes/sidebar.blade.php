@@ -108,6 +108,18 @@
                 <div data-i18n="Analytics">Data Masuk Disainer</div>
             </a>
         </li>
+        <li class="menu-item">
+            <a href="{{ route('getIndexDataMesinAtexcoPegawai') }}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-detail"></i>
+                <div data-i18n="Analytics">Data Disainer Mesin Atexco</div>
+            </a>
+        </li>
+        <li class="menu-item">
+            <a href="{{ route('getIndexDataMesinMimakiPegawai') }}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-detail"></i>
+                <div data-i18n="Analytics">Data Disainer Mesin Mimaki</div>
+            </a>
+        </li>
         @endif
 
         @if ( Auth::user()->roles == 'atexco')

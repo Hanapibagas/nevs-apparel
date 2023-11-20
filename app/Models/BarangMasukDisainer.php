@@ -24,4 +24,9 @@ class BarangMasukDisainer extends Model
     {
         return $this->hasMany(BarangMasukMesin::class, 'barang_masuk_disainer_id', 'id');
     }
+
+    public function BarangMasukCostumer()
+    {
+        return $this->belongsTo(BarangMasukCostumerServices::class, 'barang_masuk_disainer_id');
+    }
 }

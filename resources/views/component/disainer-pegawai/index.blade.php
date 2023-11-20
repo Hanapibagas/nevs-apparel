@@ -39,6 +39,7 @@
                                 <th>No</th>
                                 <th>Nama Tim</th>
                                 <th>Nama CS</th>
+                                <th>status</th>
                                 <th>aksi</th>
                             </tr>
                         </thead>
@@ -52,8 +53,12 @@
                                     </strong>
                                 </td>
                                 <td>{{ $disainers->Users->name }}</td>
+                                <td style="margin-top: 10px; margin-left: 20px;"
+                                    class="badge bg-{{ $disainers->DataMesin[0]->status == 1 ? 'success' : 'danger' }}">
+                                    {{ $disainers->DataMesin[0]->status == 1 ? 'SELESAI' : 'PANDING' }}
+                                </td>
                                 <td>
-                                    <div class="dropdown">
+                                    <div class=" dropdown">
                                         <button type="button" class="btn p-0 dropdown-toggle hide-arrow"
                                             data-bs-toggle="dropdown">
                                             <i class="bx bx-dots-vertical-rounded"></i>
@@ -62,6 +67,9 @@
                                             <a class="dropdown-item"
                                                 href="{{ route('getCreateToTeamMesinPegawai', $disainers->nama_tim) }}"><i
                                                     class="bx bx-send me-1"></i> Kirim ke tim mesin</a>
+                                            <a class="dropdown-item"
+                                                href="{{ route('getCreateToTeamCsPegawai', $disainers->nama_tim) }}"><i
+                                                    class="bx bx-send me-1"></i> Kirim ke tim CS</a>
                                             <a class="dropdown-item" data-bs-toggle="modal"
                                                 data-bs-target="#modalCenter{{ $disainers->id }}"
                                                 style="cursor: pointer"><i class="bx bx-info-circle me-1"></i>
@@ -107,14 +115,6 @@
                                                     <textarea id="basic-default-message" readonly class="form-control"
                                                         name="keterangan"
                                                         aria-describedby="basic-icon-default-message2">{{ $dataMesin->keterangan }}</textarea>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col mb-3">
-                                                    <label for="status" class="form-label">Status</label><br>
-                                                    <span
-                                                        class="badge bg-{{ $dataMesin->status == 1 ? 'success' : 'danger' }}">{{
-                                                        $dataMesin->status == 1 ? 'SELESAI' : 'PANDING' }}</span>
                                                 </div>
                                             </div>
                                             @endforeach
