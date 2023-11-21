@@ -23,18 +23,19 @@
 
 <div class="container-xxl flex-grow-1 container-p-y">
     <h4 class="fw-bold py-3 mb-4">
-        <span class="text-muted fw-light">Account Settings /</span> Pegawai Desainer
+        <span class="text-muted fw-light">Account Settings /</span> Pegawai Mesin Pembagian Layout
     </h4>
 
     <h4 class="fw-bold py-3 mb-4">
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalCenter">
-            Tambah Pengawai Desainer
+            Tambah Pengawai Mesin Pembagian Layout
         </button>
         <div class="modal fade" id="modalCenter" tabindex="-1" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="modalCenterTitle">Form penambahan pegawai desainer</h5>
+                        <h5 class="modal-title" id="modalCenterTitle">Form penambahan pegawai mesin pembagian layout
+                        </h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <form action="{{ route('postCreateDesainer') }}" method="POST">
@@ -71,7 +72,7 @@
     <div class="row">
         <div class="col-md-12">
             <div class="card">
-                <h5 class="card-header">Daftar Pegawai Desainer</h5>
+                <h5 class="card-header">Daftar Pegawai Mesin Pembagian Layout</h5>
                 <div class="table-responsive">
                     <table class="table table-striped table-borderless border-bottom">
                         <thead>
@@ -85,7 +86,7 @@
                         <form method="POST" action="{{ route('postPirmission') }}">
                             @csrf
                             <tbody>
-                                @foreach ($userDesainer as $user)
+                                @foreach ($userPembagianLayout as $user)
                                 <tr>
                                     <td class="text-nowrap">{{ $user->name }}</td>
                                     <td>

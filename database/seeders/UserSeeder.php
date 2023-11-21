@@ -26,8 +26,8 @@ class UserSeeder extends Seeder
             'password' => bcrypt('superadmin')
         ]);
         User::create([
-            'name' => 'Hanapi bagas',
-            'email' => 'hanafi@gmail.com',
+            'name' => 'heru',
+            'email' => 'heru@gmail.com',
             'roles' => 'cs',
             'gambar' => 'cs.jpg',
             'permission_edit' => 1,
@@ -36,8 +36,8 @@ class UserSeeder extends Seeder
             'password' => bcrypt('12345678')
         ]);
         User::create([
-            'name' => 'Hanapi bagas 1',
-            'email' => 'hanafi1@gmail.com',
+            'name' => 'fauzi',
+            'email' => 'fauzi@gmail.com',
             'roles' => 'disainer',
             'gambar' => 'disainer.jpg',
             'permission_edit' => 1,
@@ -46,10 +46,40 @@ class UserSeeder extends Seeder
             'password' => bcrypt('12345678')
         ]);
         User::create([
-            'name' => 'Hanapi bagas 2',
-            'email' => 'hanafi2@gmail.com',
+            'name' => 'hafid',
+            'email' => 'hafid@gmail.com',
             'roles' => 'layout',
             'gambar' => 'layout.jpg',
+            'permission_edit' => 1,
+            'permission_hapus' => 1,
+            'permission_create' => 1,
+            'password' => bcrypt('12345678')
+        ]);
+        User::create([
+            'name' => 'ridwan',
+            'email' => 'ridwan@gmail.com',
+            'roles' => 'atexco',
+            'gambar' => 'atexco.jpg',
+            'permission_edit' => 1,
+            'permission_hapus' => 1,
+            'permission_create' => 1,
+            'password' => bcrypt('12345678')
+        ]);
+        User::create([
+            'name' => 'malik',
+            'email' => 'malik@gmail.com',
+            'roles' => 'mimaki',
+            'gambar' => 'atexco.jpg',
+            'permission_edit' => 1,
+            'permission_hapus' => 1,
+            'permission_create' => 1,
+            'password' => bcrypt('12345678')
+        ]);
+        User::create([
+            'name' => 'aldi',
+            'email' => 'aldi@gmail.com',
+            'roles' => 'pb',
+            'gambar' => 'atexco.jpg',
             'permission_edit' => 1,
             'permission_hapus' => 1,
             'permission_create' => 1,

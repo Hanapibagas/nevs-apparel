@@ -39,7 +39,6 @@
                                 <th>No</th>
                                 <th>Nama Mesin</th>
                                 <th>Nama Desainer</th>
-                                <th>status</th>
                                 <th>aksi</th>
                             </tr>
                         </thead>
@@ -53,9 +52,6 @@
                                     </strong>
                                 </td>
                                 <td>{{ $mesins->Users->name }}</td>
-                                <td class="badge bg-{{ $mesins->status == 1 ? 'success' : 'danger' }}"
-                                    style="margin-top: 10px; margin-left: 20px;">{{
-                                    $mesins->status == 1 ? 'SELESAI' : 'PANDING' }}</td>
                                 <td>
                                     <div class="dropdown">
                                         <button type="button" class="btn p-0 dropdown-toggle hide-arrow"

@@ -54,8 +54,9 @@
                                 </td>
                                 <td>{{ $disainers->Users->name }}</td>
                                 <td style="margin-top: 10px; margin-left: 20px;"
-                                    class="badge bg-{{ $disainers->DataMesin[0]->status == 1 ? 'success' : 'danger' }}">
-                                    {{ $disainers->DataMesin[0]->status == 1 ? 'SELESAI' : 'PANDING' }}
+                                    class="badge bg-{{ isset($disainers->DataMesin[0]) && $disainers->DataMesin[0]->status == 1 ? 'success' : 'danger' }}">
+                                    {{ isset($disainers->DataMesin[0]) && $disainers->DataMesin[0]->status == 1 ?
+                                    'SELESAI' : 'PANDING' }}
                                 </td>
                                 <td>
                                     <div class=" dropdown">
@@ -102,8 +103,10 @@
                                                     <label for="keterangan" class="form-label">Nama Penanggung Jawab
                                                         Mesin</label>
                                                     @php
-                                                    $namaPenanggungJawab = $disainers->users->where('id',
-                                                    $dataMesin->nama_penanggung_jawab_mesin_ACC)->first()->name;
+                                                    $namaPenanggungJawabUser = $disainers->users->where('id',
+                                                    $dataMesin->nama_penanggung_jawab_mesin_ACC)->first();
+                                                    $namaPenanggungJawab = $namaPenanggungJawabUser ?
+                                                    $namaPenanggungJawabUser->name : 'User Tidak Ditemukan';
                                                     @endphp
                                                     <input type="text" id="status" class="form-control"
                                                         value="{{ $namaPenanggungJawab }}" readonly />

@@ -88,6 +88,21 @@
                         <div data-i18n="Connections">Layout</div>
                     </a>
                 </li>
+                <li class="menu-item">
+                    <a href="{{ route('getIndexMesinAtexco') }}" class="menu-link">
+                        <div data-i18n="Connections">Mesin Atxco</div>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="{{ route('getIndexMesinMimaki') }}" class="menu-link">
+                        <div data-i18n="Connections">Mesin Mimaki</div>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="{{ route('getIndexPembagianLayout') }}" class="menu-link">
+                        <div data-i18n="Connections">Pemabagian Layout</div>
+                    </a>
+                </li>
             </ul>
         </li>
         @endif

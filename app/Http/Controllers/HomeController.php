@@ -34,6 +34,27 @@ class HomeController extends Controller
         return view('component.layout-admin.index', compact('userLaytout'));
     }
 
+    public function getMesinAtexco()
+    {
+        $userMesinAtexco = User::where('roles', 'atexco')->get();
+
+        return view('component.mesin-atexco-admin.index', compact('userMesinAtexco'));
+    }
+
+    public function getMesinMimaki()
+    {
+        $userMimaki = User::where('roles', 'mimaki')->get();
+
+        return view('component.mesin-mimaki-admin.index', compact('userMimaki'));
+    }
+
+    public function getPembagianLayout()
+    {
+        $userPembagianLayout = User::where('roles', 'pb')->get();
+
+        return view('component.pembagian-layout-admin.index', compact('userPembagianLayout'));
+    }
+
     public function postUpdatePirmission(Request $request)
     {
         for ($i = 0; $i < count($request->id); $i++) {

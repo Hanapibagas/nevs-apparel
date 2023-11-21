@@ -88,6 +88,7 @@
                                 <th>nama disainer</th>
                                 <th>jenis mesin</th>
                                 <th>Status produksi</th>
+                                <th>aksi</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -98,8 +99,77 @@
                                 <td>{{ $costumer->Users->name }}</td>
                                 <td>{{ $costumer->jenis_mesin }}</td>
                                 <td>{{ $costumer->status_produksi }}</td>
+                                <td>
+                                    <div class=" dropdown">
+                                        <button type="button" class="btn p-0 dropdown-toggle hide-arrow"
+                                            data-bs-toggle="dropdown">
+                                            <i class="bx bx-dots-vertical-rounded"></i>
+                                        </button>
+                                        <div class="dropdown-menu">
+                                            {{-- <a class="dropdown-item"
+                                                href="{{ route('getCreateToTeamMesinPegawai', $disainers->nama_tim) }}"><i
+                                                    class="bx bx-send me-1"></i> Kirim ke tim mesin</a>
+                                            <a class="dropdown-item"
+                                                href="{{ route('getCreateToTeamCsPegawai', $disainers->nama_tim) }}"><i
+                                                    class="bx bx-send me-1"></i> Kirim ke tim CS</a> --}}
+                                            <a class="dropdown-item" <button type="button" class="btn btn-primary"
+                                                data-bs-toggle="modal" data-bs-target="#largeModal{{ $costumer->id }}"
+                                                style=" cursor: pointer"><i class="bx bx-info-circle me-1"></i>
+                                                Detail data</a>
+                                        </div>
+                                    </div>
+                                </td>
                             </tr>
-                            @endforeach
+                            <div class="modal fade" id="largeModal{{ $costumer->id }}" tabindex="-1" aria-hidden="true">
+                                <div class="modal-dialog modal-lg" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel3">Modal title</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="row g-2">
+                                                <div class="col mb-0">
+                                                    <label for="emailLarge" class="form-label">Nama tim</label>
+                                                    <input type="text" id="emailLarge" class="form-control"
+                                                        value="{{ $costumer->BarangMasukDisainer->nama_tim }}" readonly>
+                                                </div>
+                                                <div class="col mb-0">
+                                                    <label for="dobLarge" class="form-label">Nama disainer</label>
+                                                    <input type="text" id="dobLarge" class="form-control"
+                                                        value="{{ $costumer->Users->name }}" readonly </div>
+                                                </div>
+                                                <div class="row g-2">
+                                                    <div class="col mb-0">
+                                                        <label for="emailLarge" class="form-label">jenis mesin</label>
+                                                        <input type="text" id="emailLarge" class="form-control"
+                                                            value="{{ $costumer->jenis_mesin }}" readonly>
+                                                    </div>
+                                                    <div class="col mb-0">
+                                                        <label for="dobLarge" class="form-label">Status produksi</label>
+                                                        <input type="text" id="dobLarge" class="form-control"
+                                                            value="{{ $costumer->status_produksi }}" readonly>
+                                                    </div>
+                                                </div>
+                                                <div class="row g-2">
+                                                    <div class="col mb-0">
+                                                        <label for="dobLarge" class="form-label">deadaline</label>
+                                                        <input type="text" id="dobLarge" class="form-control"
+                                                            value="{{ $costumer->deadline }}" readonly>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-outline-secondary"
+                                                    data-bs-dismiss="modal">
+                                                    Close
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                @endforeach
                         </tbody>
                     </table>
                 </div>

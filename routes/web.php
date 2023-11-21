@@ -19,10 +19,21 @@ Route::middleware(['auth', 'checkroll:super_admin,disainer,layout,cs,atexco,mima
     Route::post('/costumer-service-admin/createCs', [HomeController::class, 'postPegawaiCs'])->name('postCreateCs');
     Route::post('/costumer-service-admin/createDesainer', [HomeController::class, 'postPegawaiDesainer'])->name('postCreateDesainer');
     Route::post('/costumer-service-admin/createLayout', [HomeController::class, 'postPegawaiLayout'])->name('postCreateLayout');
+
     // route admin disainer
     Route::get('/desainer-admin', [HomeController::class, 'getDesainer'])->name('getIndexDesainer');
+
     // route admin layout
     Route::get('/layout-admin', [HomeController::class, 'getLayout'])->name('getIndexLayout');
+
+    // route admin layout
+    Route::get('/mesin-mimaki-admin', [HomeController::class, 'getMesinMimaki'])->name('getIndexMesinMimaki');
+
+    // route admin layout
+    Route::get('/mesin-atexco-admin', [HomeController::class, 'getMesinAtexco'])->name('getIndexMesinAtexco');
+
+    // route admin layout
+    Route::get('/pembagian-layout-admin', [HomeController::class, 'getPembagianLayout'])->name('getIndexPembagianLayout');
 });
 
 Route::middleware(['auth', 'checkroll:cs'])->group(function () {

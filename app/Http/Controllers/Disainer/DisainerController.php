@@ -19,6 +19,7 @@ class DisainerController extends Controller
             ->with('Users', 'DataMesin')
             ->get();
 
+        // return response()->json($disainer);
         return view('component.disainer-pegawai.index', compact('disainer'));
     }
 
