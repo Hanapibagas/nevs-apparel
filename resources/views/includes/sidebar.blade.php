@@ -56,17 +56,17 @@
     <div class="menu-inner-shadow"></div>
 
     <ul class="menu-inner py-1">
-        <li class="menu-item">
+        <li class="menu-item {{ request()->is('/') ? 'active' : '' }}">
             <a href="{{ route('indexHome') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-home-circle"></i>
                 <div data-i18n="Analytics">Dashboard</div>
             </a>
         </li>
 
-        <li class="menu-header small text-uppercase">
-            <span class="menu-header-text"></span>
-        </li>
         @if (Auth::user()->roles == 'super_admin')
+        <li class="menu-header small text-uppercase">
+            <span class="menu-header-text">Super Admin</span>
+        </li>
         <li class="menu-item">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-dock-top"></i>
@@ -108,49 +108,102 @@
         @endif
 
         @if (Auth::user()->roles == 'cs')
-        <li class="menu-item">
+        @php
+        $dataMasuk = App\Models\BarangMasukCostumerServices::where('tanda_telah_mengerjakan', 0)->count();
+        $dataLk = App\Models\BarangMasukCostumerServices::where('tanda_telah_mengerjakan', 1)->count();
+        @endphp
+        <li class="menu-header small text-uppercase">
+            <span class="menu-header-text">Costumer Services</span>
+        </li>
+        <li
+            class="menu-item {{ request()->is('data-order-disainer') || request()->is('data-order-disainer/LK/*') ? 'active' : '' }}">
+            <a href="{{ route('getIndexOrderCsPegawai') }}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-shopping-bag"></i>
+                <div data-i18n="Analytics">Data Order</div>
+                <span style="margin-left: 10px; margin-bottom: 20px;" class="badge bg-label-success">{{ $dataMasuk
+                    }}</span>
+            </a>
+        </li>
+        <li class="menu-item {{ request()->is('data-order') ? 'active' : '' }}">
             <a href="{{ route('getIndexCsPegawai') }}" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-detail"></i>
-                <div data-i18n="Analytics">Costumer Service</div>
+                <i class="menu-icon tf-icons bx bx-list-ul"></i>
+                <div data-i18n="Analytics">Data Disainer</div>
+            </a>
+        </li>
+        <li class="menu-item {{ request()->is('data-lk') || request()->is('data-lk/edit/*') ? 'active' : '' }}">
+            <a href="{{ route('getIndexLkCsPegawai') }}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-file"></i>
+                <div data-i18n="Analytics">Data LK</div>
+                <span style="margin-left: 10px; margin-bottom: 20px;" class="badge bg-label-success">{{ $dataLk
+                    }}</span>
             </a>
         </li>
         @endif
 
         @if (Auth::user()->roles == 'disainer')
-        <li class="menu-item">
+        @php
+        $dataMasuk = App\Models\BarangMasukDisainer::where('tanda_telah_mengerjakan', 0)->count();
+        $dataFix = App\Models\BarangMasukDisainer::where('tanda_telah_mengerjakan', 1)->count();
+        @endphp
+        <li class="menu-header small text-uppercase">
+            <span class="menu-header-text">Disainer</span>
+        </li>
+        <li
+            class="menu-item {{ request()->is('disainer') || request()->is('disainer/create/*') || request()->is('disainer/create-Cs/*') ? 'active' : '' }}">
             <a href="{{ route('getIndexDisainerPegawai') }}" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-detail"></i>
+                <i class="menu-icon tf-icons bx bx-cloud-download"></i>
                 <div data-i18n="Analytics">Data Masuk Disainer</div>
+                <span style="margin-left: 10px; margin-bottom: 20px;" class="badge bg-label-success">{{ $dataMasuk
+                    }}</span>
             </a>
         </li>
-        <li class="menu-item">
+        <li class="menu-item {{ request()->is('data-mesin-disainer-atexco') ? 'active' : '' }}">
             <a href="{{ route('getIndexDataMesinAtexcoPegawai') }}" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-detail"></i>
+                <i class="menu-icon tf-icons bx bx-cog"></i>
                 <div data-i18n="Analytics">Data Disainer Mesin Atexco</div>
             </a>
         </li>
-        <li class="menu-item">
+        <li class="menu-item {{ request()->is('data-mesin-disainer-mimaki') ? 'active' : '' }}">
             <a href="{{ route('getIndexDataMesinMimakiPegawai') }}" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-detail"></i>
+                <i class="menu-icon tf-icons bx bx-cog"></i>
                 <div data-i18n="Analytics">Data Disainer Mesin Mimaki</div>
+            </a>
+        </li>
+        <li class="menu-item {{ request()->is('data-fix-disainer') ? 'active' : '' }}">
+            <a href="{{ route('getDataFixDisainerPegawai') }}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-check-double"></i>
+                <div data-i18n="Analytics">Data Fix Disainer</div>
+                <span style="margin-left: 10px; margin-bottom: 20px;" class="badge bg-label-success">{{ $dataFix
+                    }}</span>
             </a>
         </li>
         @endif
 
         @if ( Auth::user()->roles == 'atexco')
+        {{-- @php
+        // $dataMasuk = App\Models\BarangMasukMesin::where('tanda_telah_mengerjakan', 0)->count();
+        @endphp --}}
+        <li class="menu-header small text-uppercase">
+            <span class="menu-header-text">Mesin Atexco</span>
+        </li>
         <li class="menu-item">
             <a href="{{ route('getIndexMesinAtexcoPegawai') }}" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-detail"></i>
+                <i class="menu-icon tf-icons bx bx-cog"></i>
                 <div data-i18n="Analytics">Data Masuk Mesin Atxco</div>
+                {{-- <span style="margin-left: 10px; margin-bottom: 20px;" class="badge bg-label-success">10</span> --}}
             </a>
         </li>
         @endif
 
         @if ( Auth::user()->roles == 'mimaki')
+        <li class="menu-header small text-uppercase">
+            <span class="menu-header-text">Mesin Mimaki</span>
+        </li>
         <li class="menu-item">
             <a href="{{ route('getIndexMesinMimakiPegawai') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-detail"></i>
                 <div data-i18n="Analytics">Data Masuk Mesin Mimaki</div>
+                {{-- <span style="margin-left: 10px; margin-bottom: 20px;" class="badge bg-label-success">10</span> --}}
             </a>
         </li>
         @endif

@@ -1,7 +1,8 @@
 @extends('layouts.app')
 
 @push('css')
-
+{{--
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.css" /> --}}
 @endpush
 
 @section('content')
@@ -77,99 +78,37 @@
             </div>
         </div>
         <div class="card">
-            <h5 class="card-header">Data dari tim disainer </h5>
+            <h5 class="card-header">Data untuk tim disainer </h5>
             <div class="card-body">
                 <div class="table-responsive text-nowrap">
-                    <table class="table table-bordered">
+                    <table id="desain" class="table">
                         <thead>
                             <tr>
                                 <th>No</th>
                                 <th>nama tim</th>
                                 <th>nama disainer</th>
-                                <th>jenis mesin</th>
-                                <th>Status produksi</th>
-                                <th>aksi</th>
+                                <th>status</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ( $cs as $key => $costumer )
+                            @foreach ( $disainer as $key => $disainers )
                             <tr>
                                 <td>{{ $key+1 }}</td>
-                                <td>{{ $costumer->BarangMasukDisainer->nama_tim }}</td>
-                                <td>{{ $costumer->Users->name }}</td>
-                                <td>{{ $costumer->jenis_mesin }}</td>
-                                <td>{{ $costumer->status_produksi }}</td>
                                 <td>
-                                    <div class=" dropdown">
-                                        <button type="button" class="btn p-0 dropdown-toggle hide-arrow"
-                                            data-bs-toggle="dropdown">
-                                            <i class="bx bx-dots-vertical-rounded"></i>
-                                        </button>
-                                        <div class="dropdown-menu">
-                                            {{-- <a class="dropdown-item"
-                                                href="{{ route('getCreateToTeamMesinPegawai', $disainers->nama_tim) }}"><i
-                                                    class="bx bx-send me-1"></i> Kirim ke tim mesin</a>
-                                            <a class="dropdown-item"
-                                                href="{{ route('getCreateToTeamCsPegawai', $disainers->nama_tim) }}"><i
-                                                    class="bx bx-send me-1"></i> Kirim ke tim CS</a> --}}
-                                            <a class="dropdown-item" <button type="button" class="btn btn-primary"
-                                                data-bs-toggle="modal" data-bs-target="#largeModal{{ $costumer->id }}"
-                                                style=" cursor: pointer"><i class="bx bx-info-circle me-1"></i>
-                                                Detail data</a>
-                                        </div>
-                                    </div>
+                                    <strong>
+                                        {{ $disainers->nama_tim }}
+                                    </strong>
+                                </td>
+                                <td>{{ $disainers->Users->name }}</td>
+                                <td>
+                                    <span
+                                        class="badge bg-label-{{ isset($disainers->DataMesin[0]) && $disainers->DataMesin[0]->status == 1 ? 'success' : 'danger' }}">
+                                        {{ isset($disainers->DataMesin[0]) && $disainers->DataMesin[0]->status == 1 ?
+                                        'SELESAI' : 'PANDING' }}
+                                    </span>
                                 </td>
                             </tr>
-                            <div class="modal fade" id="largeModal{{ $costumer->id }}" tabindex="-1" aria-hidden="true">
-                                <div class="modal-dialog modal-lg" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel3">Modal title</h5>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                aria-label="Close"></button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <div class="row g-2">
-                                                <div class="col mb-0">
-                                                    <label for="emailLarge" class="form-label">Nama tim</label>
-                                                    <input type="text" id="emailLarge" class="form-control"
-                                                        value="{{ $costumer->BarangMasukDisainer->nama_tim }}" readonly>
-                                                </div>
-                                                <div class="col mb-0">
-                                                    <label for="dobLarge" class="form-label">Nama disainer</label>
-                                                    <input type="text" id="dobLarge" class="form-control"
-                                                        value="{{ $costumer->Users->name }}" readonly </div>
-                                                </div>
-                                                <div class="row g-2">
-                                                    <div class="col mb-0">
-                                                        <label for="emailLarge" class="form-label">jenis mesin</label>
-                                                        <input type="text" id="emailLarge" class="form-control"
-                                                            value="{{ $costumer->jenis_mesin }}" readonly>
-                                                    </div>
-                                                    <div class="col mb-0">
-                                                        <label for="dobLarge" class="form-label">Status produksi</label>
-                                                        <input type="text" id="dobLarge" class="form-control"
-                                                            value="{{ $costumer->status_produksi }}" readonly>
-                                                    </div>
-                                                </div>
-                                                <div class="row g-2">
-                                                    <div class="col mb-0">
-                                                        <label for="dobLarge" class="form-label">deadaline</label>
-                                                        <input type="text" id="dobLarge" class="form-control"
-                                                            value="{{ $costumer->deadline }}" readonly>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-outline-secondary"
-                                                    data-bs-dismiss="modal">
-                                                    Close
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                @endforeach
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
@@ -178,3 +117,9 @@
     </div>
 </div>
 @endsection
+
+@push('js')
+<script>
+    new DataTable('#desain');
+</script>
+@endpush

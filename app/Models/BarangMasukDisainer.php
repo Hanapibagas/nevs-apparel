@@ -12,7 +12,8 @@ class BarangMasukDisainer extends Model
     protected $fillable = [
         'users_id',
         'nama_cs',
-        'nama_tim'
+        'nama_tim',
+        'tanda_telah_mengerjakan',
     ];
 
     public function Users()
@@ -21,6 +22,11 @@ class BarangMasukDisainer extends Model
     }
 
     public function DataMesin()
+    {
+        return $this->hasMany(BarangMasukMesin::class, 'barang_masuk_disainer_id', 'id');
+    }
+
+    public function DataMesinFix()
     {
         return $this->hasMany(BarangMasukMesin::class, 'barang_masuk_disainer_id', 'id');
     }

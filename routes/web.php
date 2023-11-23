@@ -38,8 +38,13 @@ Route::middleware(['auth', 'checkroll:super_admin,disainer,layout,cs,atexco,mima
 
 Route::middleware(['auth', 'checkroll:cs'])->group(function () {
     // route pegawai cs
-    Route::get('/costumer-service', [CostumerServicesController::class, 'getIndexCs'])->name('getIndexCsPegawai');
+    Route::get('/data-order-disainer', [CostumerServicesController::class, 'getIndexOrderCs'])->name('getIndexOrderCsPegawai');
+    Route::get('/data-order', [CostumerServicesController::class, 'getIndexCs'])->name('getIndexCsPegawai');
+    Route::get('/data-lk', [CostumerServicesController::class, 'getIndexLkCs'])->name('getIndexLkCsPegawai');
+    Route::get('/data-lk/edit/{id}', [CostumerServicesController::class, 'puUpdateLK'])->name('getEditIndexLkCsPegawai');
     Route::post('costumer-service/todisainer', [CostumerServicesController::class, 'postToTimDisainer'])->name('postKeTimDisainerPegawai');
+    Route::get('/data-order-disainer/LK/{id}', [CostumerServicesController::class, 'createLK'])->name('getCreateToLkPegawai');
+    Route::put('/data-lk/update/{id}', [CostumerServicesController::class, 'putDataLk'])->name('putDataLkPegawai');
 });
 
 Route::middleware(['auth', 'checkroll:disainer'])->group(function () {
@@ -48,7 +53,8 @@ Route::middleware(['auth', 'checkroll:disainer'])->group(function () {
     Route::get('/disainer/create/{nama_tim}', [DisainerController::class, 'getCreateToTeamMesin'])->name('getCreateToTeamMesinPegawai');
     Route::get('/disainer/create-Cs/{nama_tim}', [DisainerController::class, 'getCreateToTeamCs'])->name('getCreateToTeamCsPegawai');
     Route::post('/disainer/post-tim-mesin', [DisainerController::class, 'postToTeamMesin'])->name('postToTeamMesinPegawai');
-    Route::post('/disainer/post-Cs', [DisainerController::class, 'postToCustomerServices'])->name('postToCsPegawai');
+    Route::post('/disainer/post-Cs/{nama_tim}', [DisainerController::class, 'postToCustomerServices'])->name('postToCsPegawai');
+    Route::get('/data-fix-disainer', [DisainerController::class, 'getDataFixDisainer'])->name('getDataFixDisainerPegawai');
 
     // data mesin
     Route::get('/data-mesin-disainer-atexco', [DataMesinController::class, 'getDataMesinAtexco'])->name('getIndexDataMesinAtexcoPegawai');

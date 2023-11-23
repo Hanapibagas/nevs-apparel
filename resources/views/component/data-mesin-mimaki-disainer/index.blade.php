@@ -28,12 +28,11 @@
 <div class="content-wrapper">
     <div class="container-xxl flex-grow-1 container-p-y">
         <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Tables /</span> Mesin Mimaki</h4>
-
         <div class="card">
             <h5 class="card-header">Data disainer di mesin mimaki</h5>
             <div class="card-body">
                 <div class="table-responsive text-nowrap">
-                    <table class="table table-bordered">
+                    <table class="table" id="mimaki">
                         <thead>
                             <tr>
                                 <th>No</th>
@@ -54,9 +53,10 @@
                                 </td>
                                 <td>{{ $mesins->Users->name }}</td>
                                 <td>{{ $mesins->BarangMasukDisainer->nama_tim }}</td>
-                                <td class="badge bg-{{ $mesins->status == 1 ? 'success' : 'danger' }}"
-                                    style="margin-top: 10px; margin-left: 20px;">{{
-                                    $mesins->status == 1 ? 'SELESAI' : 'PANDING' }}
+                                <td>
+                                    <span class="badge bg-label-{{ $mesins->status == 1 ? 'success' : 'danger' }}">
+                                        {{ $mesins->status == 1 ? 'SELESAI' : 'PANDING' }}
+                                    </span>
                                 </td>
                             </tr>
                             @endforeach
@@ -68,3 +68,9 @@
     </div>
 </div>
 @endsection
+
+@push('js')
+<script>
+    new DataTable('#mimaki');
+</script>
+@endpush

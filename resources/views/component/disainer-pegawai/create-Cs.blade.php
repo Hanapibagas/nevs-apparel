@@ -13,7 +13,8 @@
                     <h5 class="mb-0">Form untuk mengirim ke Costumer Services</h5>
                 </div>
                 <div class="card-body">
-                    <form action="{{ route('postToCsPegawai') }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('postToCsPegawai', $disainer->nama_tim) }}" method="POST"
+                        enctype="multipart/form-data">
                         @csrf
                         <div class="row mb-3">
                             <label class="col-sm-2 col-form-label" for="basic-default-name">nama tim</label>
@@ -44,16 +45,6 @@
                             </div>
                         </div>
                         <div class="row mb-3">
-                            <label class="col-sm-2 col-form-label" for="basic-default-company">status produksi</label>
-                            <div class="col-sm-10">
-                                <select name="status_produksi" class="form-control">
-                                    <option selected>-- Silahkan Pilih Status Produksi --</option>
-                                    <option style="text-transform: uppercase" value="Express">Express</option>
-                                    <option style="text-transform: uppercase" value="normal">normal</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="row mb-3">
                             <label class="col-sm-2 col-form-label" for="basic-default-company">File</label>
                             <div class="col-sm-10">
                                 <input type="file" class="form-control" accept=".jpg, .eps" id="basic-default-company"
@@ -62,7 +53,12 @@
                         </div>
                         <div class="row justify-content-end">
                             <div class="col-sm-10">
-                                <button type="submit" class="btn btn-primary">kirim</button>
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="menu-icon tf-icons bx bx-send"></i>
+                                    kirim
+                                </button>
+                                <a href="{{ route('getIndexDisainerPegawai') }}" class="btn btn-outline-secondary"><i
+                                        class="menu-icon tf-icons bx bx-undo"></i>Kembali</a>
                             </div>
                         </div>
                     </form>

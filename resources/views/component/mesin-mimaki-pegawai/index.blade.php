@@ -33,13 +33,12 @@
             <h5 class="card-header">Data masuk dari Disainer</h5>
             <div class="card-body">
                 <div class="table-responsive text-nowrap">
-                    <table class="table table-bordered">
+                    <table id="atexco" class="table">
                         <thead>
                             <tr>
                                 <th>No</th>
                                 <th>Nama Mesin</th>
                                 <th>Nama Desainer</th>
-                                <th>status</th>
                                 <th>aksi</th>
                             </tr>
                         </thead>
@@ -53,22 +52,12 @@
                                     </strong>
                                 </td>
                                 <td>{{ $mesins->Users->name }}</td>
-                                <td class="badge bg-{{ $mesins->status == 1 ? 'success' : 'danger' }}"
-                                    style="margin-top: 10px; margin-left: 20px;">{{
-                                    $mesins->status == 1 ? 'SELESAI' : 'PANDING' }}</td>
                                 <td>
-                                    <div class="dropdown">
-                                        <button type="button" class="btn p-0 dropdown-toggle hide-arrow"
-                                            data-bs-toggle="dropdown">
-                                            <i class="bx bx-dots-vertical-rounded"></i>
-                                        </button>
-                                        <div class="dropdown-menu">
-                                            <a class="dropdown-item" data-bs-toggle="modal"
-                                                data-bs-target="#modalCenter{{ $mesins->id }}"
-                                                style="cursor: pointer"><i class="bx bx-info-circle me-1"></i>
-                                                Detail data</a>
-                                        </div>
-                                    </div>
+                                    <a data-bs-toggle="modal" data-bs-target="#modalCenter{{ $mesins->id }}"
+                                        style="cursor: pointer; text-decoration: none; color: white"
+                                        class="btn btn-warning">
+                                        <i class="menu-icon tf-icons bx bx-show"></i>
+                                        Detail</a>
                                 </td>
                             </tr>
 
@@ -150,3 +139,9 @@
     </div>
 </div>
 @endsection
+
+@push('js')
+<script>
+    new DataTable('#atexco');
+</script>
+@endpush

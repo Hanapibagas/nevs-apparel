@@ -33,7 +33,7 @@
             <h5 class="card-header">Data masuk dari Disainer</h5>
             <div class="card-body">
                 <div class="table-responsive text-nowrap">
-                    <table class="table table-bordered">
+                    <table id="atexco" class="table">
                         <thead>
                             <tr>
                                 <th>No</th>
@@ -53,21 +53,13 @@
                                 </td>
                                 <td>{{ $mesins->Users->name }}</td>
                                 <td>
-                                    <div class="dropdown">
-                                        <button type="button" class="btn p-0 dropdown-toggle hide-arrow"
-                                            data-bs-toggle="dropdown">
-                                            <i class="bx bx-dots-vertical-rounded"></i>
-                                        </button>
-                                        <div class="dropdown-menu">
-                                            <a class="dropdown-item" data-bs-toggle="modal"
-                                                data-bs-target="#modalCenter{{ $mesins->id }}"
-                                                style="cursor: pointer"><i class="bx bx-info-circle me-1"></i>
-                                                Detail data</a>
-                                        </div>
-                                    </div>
+                                    <a data-bs-toggle="modal" data-bs-target="#modalCenter{{ $mesins->id }}"
+                                        style="cursor: pointer; text-decoration: none; color: white"
+                                        class="btn btn-warning">
+                                        <i class="menu-icon tf-icons bx bx-show"></i>
+                                        Detail</a>
                                 </td>
                             </tr>
-
                             <div class="modal fade" id="modalCenter{{ $mesins->id }}" tabindex="-1" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered" role="document">
                                     <div class="modal-content">
@@ -146,3 +138,9 @@
     </div>
 </div>
 @endsection
+
+@push('js')
+<script>
+    new DataTable('#atexco');
+</script>
+@endpush

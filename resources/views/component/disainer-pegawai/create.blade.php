@@ -51,7 +51,12 @@
                         </div>
                         <div class="row justify-content-end">
                             <div class="col-sm-10">
-                                <button type="submit" class="btn btn-primary">kirim</button>
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="menu-icon tf-icons bx bx-send"></i>
+                                    kirim
+                                </button>
+                                <a href="{{ route('getIndexDisainerPegawai') }}" class="btn btn-outline-secondary"><i
+                                        class="menu-icon tf-icons bx bx-undo"></i>Kembali</a>
                             </div>
                         </div>
                     </form>
