@@ -207,5 +207,18 @@
             </a>
         </li>
         @endif
+
+        @if ( Auth::user()->roles == 'layout')
+        <li class="menu-header small text-uppercase">
+            <span class="menu-header-text">Layout</span>
+        </li>
+        <li class="menu-item {{ request()->is('data-Lk-Layout') ? 'active' : '' }}">
+            <a href="{{ route('getIndexLkLayoutPegawai') }}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-file"></i>
+                <div data-i18n="Analytics">Data LK</div>
+                {{-- <span style="margin-left: 10px; margin-bottom: 20px;" class="badge bg-label-success">10</span> --}}
+            </a>
+        </li>
+        @endif
     </ul>
 </aside>

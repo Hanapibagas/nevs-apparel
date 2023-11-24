@@ -4,6 +4,7 @@ use App\Http\Controllers\Cs\CostumerServicesController;
 use App\Http\Controllers\Disainer\DataMesinController;
 use App\Http\Controllers\Disainer\DisainerController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Layout\LayoutController;
 use App\Http\Controllers\Mesin\AtexcoController;
 use App\Http\Controllers\Mesin\MimakiController;
 use Illuminate\Support\Facades\Auth;
@@ -69,6 +70,11 @@ Route::middleware(['auth', 'checkroll:atexco'])->group(function () {
 Route::middleware(['auth', 'checkroll:mimaki'])->group(function () {
     Route::get('/mesin-mimaki', [MimakiController::class, 'getIndexMimaki'])->name('getIndexMesinMimakiPegawai');
     Route::put('/mesin-mimaki/{id}', [MimakiController::class, 'putFeedBackToDisainer'])->name('putFeedbackByMimakiPegawai');
+});
+
+Route::middleware(['auth', 'checkroll:layout'])->group(function () {
+    Route::get('/data-Lk-Layout', [LayoutController::class, 'getIndexLkCs'])->name('getIndexLkLayoutPegawai');
+    // Route::put('/mesin-mimaki/{id}', [MimakiController::class, 'putFeedBackToDisainer'])->name('putFeedbackByMimakiPegawai');
 });
 
 Auth::routes();
