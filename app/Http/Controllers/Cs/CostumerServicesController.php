@@ -20,7 +20,7 @@ class CostumerServicesController extends Controller
             ->where('tanda_telah_mengerjakan', 0)
             ->get();
 
-        return view('component.costumer-service-order-pegawai.index', compact('oderCs'));
+        return view('component.Cs.costumer-service-order-pegawai.index', compact('oderCs'));
     }
 
     public function getIndexLkCs()
@@ -31,7 +31,7 @@ class CostumerServicesController extends Controller
             ->where('tanda_telah_mengerjakan', 1)
             ->get();
 
-        return view('component.costumer-service-lk-pegawai.index', compact('oderCs'));
+        return view('component.Cs.costumer-service-lk-pegawai.index', compact('oderCs'));
     }
 
     public function getIndexCs()
@@ -49,7 +49,7 @@ class CostumerServicesController extends Controller
             $userCounts[$userId] = $barangMasukCount;
         }
 
-        return view('component.costumer-service-pegawai.index', compact('users', 'userCounts', 'disainer'));
+        return view('component.Cs.costumer-service-pegawai.index', compact('users', 'userCounts', 'disainer'));
     }
 
     public function postToTimDisainer(Request $request)
@@ -77,7 +77,7 @@ class CostumerServicesController extends Controller
         }
         $oderCs = BarangMasukCostumerServices::with('BarangMasukDisainer', 'Users', 'UsersOrder')->find($id);
 
-        return view('component.costumer-service-order-pegawai.create', compact('oderCs', 'users', 'userCounts'));
+        return view('component.Cs.costumer-service-order-pegawai.create', compact('oderCs', 'users', 'userCounts'));
     }
 
     public function puUpdateLK($id)
@@ -93,7 +93,7 @@ class CostumerServicesController extends Controller
         }
         $oderCs = BarangMasukCostumerServices::with('BarangMasukDisainer', 'Users', 'UsersOrder', 'UsersLk')->find($id);
 
-        return view('component.costumer-service-lk-pegawai.update', compact('oderCs', 'users', 'userCounts'));
+        return view('component.Cs.costumer-service-lk-pegawai.update', compact('oderCs', 'users', 'userCounts'));
     }
 
     public function putDataLk(Request $request, $id)

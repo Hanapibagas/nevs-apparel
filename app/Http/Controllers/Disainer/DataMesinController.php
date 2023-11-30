@@ -14,7 +14,7 @@ class DataMesinController extends Controller
         $user = Auth::user();
         $mesin = BarangMasukMesin::where('nama_mesin', 'atexco')->where('users_id', $user->id)->get();
 
-        return view('component.data-mesin-atexco-disainer.index', compact('mesin'));
+        return view('component.Disainer.data-mesin-atexco-disainer.index', compact('mesin'));
     }
 
     public function getDataMesinMimaki()
@@ -22,6 +22,6 @@ class DataMesinController extends Controller
         $user = Auth::user();
         $mesin = BarangMasukMesin::where('nama_mesin', 'mimaki')->where('users_id', $user->id)->get();
 
-        return view('component.data-mesin-mimaki-disainer.index', compact('mesin'));
+        return view('component.Disainer.data-mesin-mimaki-disainer.index', compact('mesin'));
     }
 }

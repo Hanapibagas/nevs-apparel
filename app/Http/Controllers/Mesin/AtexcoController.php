@@ -13,7 +13,7 @@ class AtexcoController extends Controller
     {
         $mesin = BarangMasukMesin::where('nama_mesin', 'atexco')->with('Users', 'BarangMasukDisainer')->get();
 
-        return view('component.mesin-atexco-pegawai.index', compact('mesin'));
+        return view('component.Mesin.mesin-atexco-pegawai.index', compact('mesin'));
     }
 
     public function putFeedBackToDisainer(Request $request, $id)

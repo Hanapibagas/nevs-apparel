@@ -17,6 +17,6 @@ class LayoutController extends Controller
             ->where('tanda_telah_mengerjakan', 1)
             ->get();
 
-        return view('component.layout-lk-pegawai.index', compact('oderCs'));
+        return view('component.Layout.layout-lk-pegawai.index', compact('oderCs'));
     }
 }

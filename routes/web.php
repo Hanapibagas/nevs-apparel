@@ -53,7 +53,7 @@ Route::middleware(['auth', 'checkroll:disainer'])->group(function () {
     Route::get('/disainer', [DisainerController::class, 'getIndexUserDisainer'])->name('getIndexDisainerPegawai');
     Route::get('/disainer/create/{nama_tim}', [DisainerController::class, 'getCreateToTeamMesin'])->name('getCreateToTeamMesinPegawai');
     Route::get('/disainer/create-Cs/{nama_tim}', [DisainerController::class, 'getCreateToTeamCs'])->name('getCreateToTeamCsPegawai');
-    Route::post('/disainer/post-tim-mesin', [DisainerController::class, 'postToTeamMesin'])->name('postToTeamMesinPegawai');
+    Route::post('/disainer/post-tim-mesin/{nama_tim}', [DisainerController::class, 'postToTeamMesin'])->name('postToTeamMesinPegawai');
     Route::post('/disainer/post-Cs/{nama_tim}', [DisainerController::class, 'postToCustomerServices'])->name('postToCsPegawai');
     Route::get('/data-fix-disainer', [DisainerController::class, 'getDataFixDisainer'])->name('getDataFixDisainerPegawai');
 

@@ -13,7 +13,7 @@ class MimakiController extends Controller
     {
         $mesin = BarangMasukMesin::where('nama_mesin', 'mimaki')->with('Users', 'BarangMasukDisainer')->get();
 
-        return view('component.mesin-mimaki-pegawai.index', compact('mesin'));
+        return view('component.Mesin.mesin-mimaki-pegawai.index', compact('mesin'));
     }
 
     public function putFeedBackToDisainer(Request $request, $id)

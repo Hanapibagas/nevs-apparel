@@ -17,42 +17,42 @@ class HomeController extends Controller
     {
         $userCs = User::where('roles', 'cs')->get();
 
-        return view('component.costumer-service-admin.index', compact('userCs'));
+        return view('component.Admin.costumer-service-admin.index', compact('userCs'));
     }
 
     public function getDesainer()
     {
         $userDesainer = User::where('roles', 'disainer')->get();
 
-        return view('component.desainer-admin.index', compact('userDesainer'));
+        return view('component.Admin.desainer-admin.index', compact('userDesainer'));
     }
 
     public function getLayout()
     {
         $userLaytout = User::where('roles', 'layout')->get();
 
-        return view('component.layout-admin.index', compact('userLaytout'));
+        return view('component.Admin.layout-admin.index', compact('userLaytout'));
     }
 
     public function getMesinAtexco()
     {
         $userMesinAtexco = User::where('roles', 'atexco')->get();
 
-        return view('component.mesin-atexco-admin.index', compact('userMesinAtexco'));
+        return view('component.Admin.mesin-atexco-admin.index', compact('userMesinAtexco'));
     }
 
     public function getMesinMimaki()
     {
         $userMimaki = User::where('roles', 'mimaki')->get();
 
-        return view('component.mesin-mimaki-admin.index', compact('userMimaki'));
+        return view('component.Admin.mesin-mimaki-admin.index', compact('userMimaki'));
     }
 
     public function getPembagianLayout()
     {
         $userPembagianLayout = User::where('roles', 'pb')->get();
 
-        return view('component.pembagian-layout-admin.index', compact('userPembagianLayout'));
+        return view('component.Admin.pembagian-layout-admin.index', compact('userPembagianLayout'));
     }
 
     public function postUpdatePirmission(Request $request)

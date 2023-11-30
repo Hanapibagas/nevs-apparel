@@ -153,8 +153,8 @@
             <a href="{{ route('getIndexDisainerPegawai') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-cloud-download"></i>
                 <div data-i18n="Analytics">Data Masuk Disainer</div>
-                <span style="margin-left: 10px; margin-bottom: 20px;" class="badge bg-label-success">{{ $dataMasuk
-                    }}</span>
+                <span id="dataMasuk" style="margin-left: 10px; margin-bottom: 20px;" class="badge bg-label-success">{{
+                    $dataMasuk }}</span>
             </a>
         </li>
         <li class="menu-item {{ request()->is('data-mesin-disainer-atexco') ? 'active' : '' }}">

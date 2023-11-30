@@ -14,6 +14,7 @@ class BarangMasukDisainer extends Model
         'nama_cs',
         'nama_tim',
         'tanda_telah_mengerjakan',
+        'aksi',
     ];
 
     public function Users()

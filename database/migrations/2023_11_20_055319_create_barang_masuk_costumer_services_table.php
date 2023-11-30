@@ -22,7 +22,8 @@ return new class extends Migration
             $table->foreignId('cs_id')->constrained('users')->onUpdate('cascade')->onDelete('cascade');
             $table->foreignId('layout_id')->nullable()->constrained('users')->onUpdate('cascade')->onDelete('cascade');
             $table->string('jenis_mesin')->nullable();
-            $table->string('file_corel')->nullable();
+            $table->string('file_baju')->nullable();
+            $table->string('file_celana')->nullable();
             $table->date('tanggal_masuk')->nullable();
             $table->date('status_produksi')->nullable();
             $table->date('deadline')->nullable();

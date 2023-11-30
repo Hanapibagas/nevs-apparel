@@ -21,17 +21,17 @@ class DisainerController extends Controller
             ->where('tanda_telah_mengerjakan', 0)
             ->get();
 
-        return view('component.disainer-pegawai.index', compact('disainer'));
+        return view('component.Disainer.disainer-pegawai.index', compact('disainer'));
     }
 
     public function getCreateToTeamMesin($nama_tim)
     {
         $disainer = BarangMasukDisainer::where('nama_tim', $nama_tim)->first();
 
-        return view('component.disainer-pegawai.create', compact('disainer'));
+        return view('component.Disainer.disainer-pegawai.create', compact('disainer'));
     }
 
-    public function postToTeamMesin(Request $request)
+    public function postToTeamMesin(Request $request, $nama_tim)
     {
         $user = Auth::user();
 
@@ -49,6 +49,11 @@ class DisainerController extends Controller
             'keterangan' => $request->keterangan
         ]);
 
+        $update = BarangMasukDisainer::where('nama_tim', $nama_tim)->first();
+        $update->update([
+            'aksi' => '1'
+        ]);
+
         return redirect()->route('getIndexDisainerPegawai')->with('success', 'Selamat data yang anda input telah terkirim!');
     }
 
@@ -56,17 +61,23 @@ class DisainerController extends Controller
     {
         $disainer = BarangMasukDisainer::where('nama_tim', $nama_tim)->first();
 
-        return view('component.disainer-pegawai.create-Cs', compact('disainer'));
+        return view('component.Disainer.disainer-pegawai.create-Cs', compact('disainer'));
     }
 
     public function postToCustomerServices(Request $request, $nama_tim)
     {
         $user = Auth::user();
 
-        if ($request->file('file_corel')) {
-            $uploadFile = $request->file('file_corel');
+        if ($request->file('file_baju')) {
+            $uploadFile = $request->file('file_baju');
             $originalFileName = $uploadFile->getClientOriginalName();
-            $file = $uploadFile->storeAs('file-dari-disainer-to-Cs', $originalFileName, 'public');
+            $filebaju = $uploadFile->storeAs('file-dari-disainer-to-Cs-baju', $originalFileName, 'public');
+        }
+
+        if ($request->file('file_celana')) {
+            $uploadFile = $request->file('file_celana');
+            $originalFileName = $uploadFile->getClientOriginalName();
+            $fileCelana = $uploadFile->storeAs('file-dari-disainer-to-Cs-celana', $originalFileName, 'public');
         }
 
         $no_order = '#10-12' . str_pad(mt_rand(1, 999), 3, '0', STR_PAD_LEFT);
@@ -77,7 +88,8 @@ class DisainerController extends Controller
             'disainer_id' => $user->id,
             'cs_id' => $request->cs_id,
             'jenis_mesin' => $request->jenis_mesin,
-            'file_corel' => $file,
+            'file_baju' => $filebaju,
+            'file_celana' => $fileCelana,
             'tanggal_masuk' => Carbon::now(),
         ]);
 
@@ -99,6 +111,6 @@ class DisainerController extends Controller
 
         // return response()->json($disainer);
 
-        return view('component.data-fix-disainer-pegawai.index', compact('disainer'));
+        return view('component.Disainer.data-fix-disainer-pegawai.index', compact('disainer'));
     }
 }

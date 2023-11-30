@@ -49,7 +49,13 @@
                                     </strong>
                                 </td>
                                 <td>{{ $disainers->Users->name }}</td>
-                                <td>{{ $disainers->DataMesinFix->first()->nama_mesin }}</td>
+                                <td>
+                                    @if ($disainers->DataMesinFix->isNotEmpty())
+                                    {{ $disainers->DataMesinFix->first()->nama_mesin }}
+                                    @else
+                                    No DataMesinFix available
+                                    @endif
+                                </td>
                                 <td>
                                     <span
                                         class="badge bg-label-{{ $disainers->tanda_telah_mengerjakan == 1 ? 'success' : 'danger' }}">

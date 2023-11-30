@@ -49,14 +49,18 @@
                                 </td>
                                 <td>{{ $disainers->Users->name }}</td>
                                 <td>
+                                    @if ($disainers->aksi == 0)
                                     <a href="{{ route('getCreateToTeamMesinPegawai', $disainers->nama_tim) }}"
                                         class="btn btn-warning">
                                         <i class="menu-icon tf-icons bx bx-cog"></i>
                                         Kirim ke tim mesin</a>
+                                    @elseif ($disainers->aksi == 1)
                                     <a href="{{ route('getCreateToTeamCsPegawai', $disainers->nama_tim) }}"
                                         class="btn btn-primary">
                                         <i class="menu-icon tf-icons bx bx-headphone"></i>
                                         Kirim ke tim CS</a>
+                                    @endif
+                                </td>
                             </tr>
                             @endforeach
                         </tbody>

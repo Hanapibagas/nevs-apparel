@@ -19,6 +19,7 @@ return new class extends Migration
             $table->foreignId('nama_cs')->constrained('users')->onUpdate('cascade')->onDelete('cascade');
             $table->string('nama_tim');
             $table->string('tanda_telah_mengerjakan')->default('0');
+            $table->string('aksi')->default('0');
             $table->timestamps();
         });
     }

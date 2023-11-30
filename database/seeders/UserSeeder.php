@@ -75,15 +75,5 @@ class UserSeeder extends Seeder
             'permission_create' => 1,
             'password' => bcrypt('12345678')
         ]);
-        User::create([
-            'name' => 'aldi',
-            'email' => 'aldi@gmail.com',
-            'roles' => 'pb',
-            'gambar' => 'atexco.jpg',
-            'permission_edit' => 1,
-            'permission_hapus' => 1,
-            'permission_create' => 1,
-            'password' => bcrypt('12345678')
-        ]);
     }
 }
