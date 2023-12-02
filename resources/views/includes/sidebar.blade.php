@@ -177,6 +177,30 @@
                     }}</span>
             </a>
         </li>
+        <li
+            class="menu-item {{ request()->is('list-data-jenis-kerah') || request()->is('list-data-jenis-lengan') || request()->is('list-data-jenis-celana') ? 'active' : '' }}">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons bx bx-dock-top"></i>
+                <div data-i18n="Account Settings">Lis Data Bahan</div>
+            </a>
+            <ul class="menu-sub">
+                <li class="menu-item {{ request()->is('list-data-jenis-kerah') ? 'active' : '' }}">
+                    <a href="{{ route('getIndexListDataJenisKerah') }}" class="menu-link">
+                        <div data-i18n="Account">Jenis kerah</div>
+                    </a>
+                </li>
+                <li class="menu-item {{ request()->is('list-data-jenis-lengan') ? 'active' : '' }}">
+                    <a href="{{ route('getIndexListDataJenisLengan') }}" class="menu-link">
+                        <div data-i18n="Notifications">Pola lengan</div>
+                    </a>
+                </li>
+                <li class="menu-item {{ request()->is('list-data-jenis-celana') ? 'active' : '' }}">
+                    <a href="{{ route('getIndexListDataJenisCelana') }}" class="menu-link">
+                        <div data-i18n="Connections">Pola celana</div>
+                    </a>
+                </li>
+            </ul>
+        </li>
         @endif
 
         @if ( Auth::user()->roles == 'atexco')

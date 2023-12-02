@@ -3,6 +3,7 @@
 use App\Http\Controllers\Cs\CostumerServicesController;
 use App\Http\Controllers\Disainer\DataMesinController;
 use App\Http\Controllers\Disainer\DisainerController;
+use App\Http\Controllers\Disainer\ListDataController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Layout\LayoutController;
 use App\Http\Controllers\Mesin\AtexcoController;
@@ -56,6 +57,22 @@ Route::middleware(['auth', 'checkroll:disainer'])->group(function () {
     Route::post('/disainer/post-tim-mesin/{nama_tim}', [DisainerController::class, 'postToTeamMesin'])->name('postToTeamMesinPegawai');
     Route::post('/disainer/post-Cs/{nama_tim}', [DisainerController::class, 'postToCustomerServices'])->name('postToCsPegawai');
     Route::get('/data-fix-disainer', [DisainerController::class, 'getDataFixDisainer'])->name('getDataFixDisainerPegawai');
+
+    // list data
+    Route::get('/list-data-jenis-kerah', [ListDataController::class, 'getIndexLisDataJenisKerah'])->name('getIndexListDataJenisKerah');
+    Route::post('/list-data-jenis-kerah/create', [ListDataController::class, 'postDataJenisKerah'])->name('getCreateistDataJenisKerah');
+    Route::put('/list-data-jenis-kerah/update/{id}', [ListDataController::class, 'putDataJenisKerah'])->name('putListDataJenisKerah');
+    Route::delete('/list-data-jenis-kerah/delete/{id}', [ListDataController::class, 'deletJenisDatakerah'])->name('deleteListDataJenisKerah');
+    //
+    Route::get('/list-data-jenis-lengan', [ListDataController::class, 'getIndexLisDataJenisLengan'])->name('getIndexListDataJenisLengan');
+    Route::post('/list-data-jenis-lengan/create', [ListDataController::class, 'postDataJenisLengan'])->name('getCreateistDataJenisLengan');
+    Route::put('/list-data-jenis-lengan/update/{id}', [ListDataController::class, 'putDataJenisLengan'])->name('putListDataJenisLengan');
+    Route::delete('/list-data-jenis-lengan/delete/{id}', [ListDataController::class, 'deletJenisDataLengan'])->name('deleteListDataJenisLengan');
+    //
+    Route::get('/list-data-jenis-celana', [ListDataController::class, 'getIndexLisDataJenisCelana'])->name('getIndexListDataJenisCelana');
+    Route::post('/list-data-jenis-celana/create', [ListDataController::class, 'postDataJenisCelana'])->name('getCreateistDataJenisCelana');
+    Route::put('/list-data-jenis-celana/update/{id}', [ListDataController::class, 'putDataJenisCelana'])->name('putListDataJenisCelana');
+    Route::delete('/list-data-jenis-celana/delete/{id}', [ListDataController::class, 'deletJenisDataCelana'])->name('deleteListDataJenisCelana');
 
     // data mesin
     Route::get('/data-mesin-disainer-atexco', [DataMesinController::class, 'getDataMesinAtexco'])->name('getIndexDataMesinAtexcoPegawai');
