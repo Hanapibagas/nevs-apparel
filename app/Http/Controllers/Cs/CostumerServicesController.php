@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Cs;
 use App\Http\Controllers\Controller;
 use App\Models\BarangMasukCostumerServices;
 use App\Models\BarangMasukDisainer;
-use App\Models\BarangMasukDisainerBp;
+use App\Models\KeraBaju;
+use App\Models\PolaCeleana;
+use App\Models\PolaLengan;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -30,7 +32,6 @@ class CostumerServicesController extends Controller
             ->with('BarangMasukDisainer', 'Users', 'UsersOrder', 'UsersLk')
             ->where('tanda_telah_mengerjakan', 1)
             ->get();
-
         return view('component.Cs.costumer-service-lk-pegawai.index', compact('oderCs'));
     }
 
@@ -77,7 +78,11 @@ class CostumerServicesController extends Controller
         }
         $oderCs = BarangMasukCostumerServices::with('BarangMasukDisainer', 'Users', 'UsersOrder')->find($id);
 
-        return view('component.Cs.costumer-service-order-pegawai.create', compact('oderCs', 'users', 'userCounts'));
+        $kera = KeraBaju::all();
+        $lengan = PolaLengan::all();
+        $celana = PolaCeleana::all();
+
+        return view('component.Cs.costumer-service-order-pegawai.create', compact('oderCs', 'users', 'userCounts', 'kera', 'lengan', 'celana'));
     }
 
     public function puUpdateLK($id)
@@ -101,12 +106,18 @@ class CostumerServicesController extends Controller
         $lk = BarangMasukCostumerServices::find($id);
 
         $lk->update([
+            'tanggal_jahit' => $request->tanggal_jahit,
+            'nama_penjahit' => $request->nama_penjahit,
             'no_nota' => $request->no_nota,
-            'deadline' => $request->deadline,
+
             'layout_id' => $request->layout_id,
             'jenis_produksi' => $request->jenis_produksi,
-            'jenis_kerah' => $request->jenis_kerah,
             'pola' => $request->pola,
+            'deadline' => $request->deadline,
+
+            'nama_penjahit' => $request->nama_penjahit,
+            'tanggal_jahit' => $request->tanggal_jahit,
+            'jenis_kerah' => $request->jenis_kerah,
             'jumlah_baju' => $request->jumlah_baju,
             'jenis_sablon_baju' => $request->jenis_sablon_baju,
             'jenis_kain_baju' => $request->jenis_kain_baju,

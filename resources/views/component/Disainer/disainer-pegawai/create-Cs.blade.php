@@ -45,17 +45,47 @@
                             </div>
                         </div>
                         <div class="row mb-3">
-                            <label class="col-sm-2 col-form-label" for="basic-default-company">File Baju</label>
+                            <label class="col-sm-2 col-form-label" for="basic-default-company">File Baju Pelayer</label>
                             <div class="col-sm-10">
-                                <input type="file" class="form-control" accept=".jpg, .eps" id="basic-default-company"
-                                    name="file_baju" />
+                                <input type="file" class="form-control" id="basic-default-company"
+                                    name="file_baju_player" />
                             </div>
                         </div>
                         <div class="row mb-3">
-                            <label class="col-sm-2 col-form-label" for="basic-default-company">File Celana</label>
+                            <label class="col-sm-2 col-form-label" for="basic-default-company">File Baju Pelatih</label>
                             <div class="col-sm-10">
-                                <input type="file" class="form-control" accept=".jpg, .eps" id="basic-default-company"
-                                    name="file_celana" />
+                                <input type="file" class="form-control" id="basic-default-company"
+                                    name="file_baju_pelatih" />
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label class="col-sm-2 col-form-label" for="basic-default-company">File Baju Kiper</label>
+                            <div class="col-sm-10">
+                                <input type="file" class="form-control" id="basic-default-company"
+                                    name="file_baju_kiper" />
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label class="col-sm-2 col-form-label" for="basic-default-company">File Celana
+                                1</label>
+                            <div class="col-sm-10">
+                                <input type="file" class="form-control" id="basic-default-company"
+                                    name="file_celana_player" />
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label class="col-sm-2 col-form-label" for="basic-default-company">File Celana 2</label>
+                            <div class="col-sm-10">
+                                <input type="file" class="form-control" id="basic-default-company"
+                                    name="file_celana_pelatih" />
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label class="col-sm-2 col-form-label" for="basic-default-company">File Celana
+                                3</label>
+                            <div class="col-sm-10">
+                                <input type="file" class="form-control" id="basic-default-company"
+                                    name="file_celana_kiper" />
                             </div>
                         </div>
                         <div class="row justify-content-end">

@@ -68,19 +68,46 @@ class DisainerController extends Controller
     {
         $user = Auth::user();
 
-        if ($request->file('file_baju')) {
-            $uploadFile = $request->file('file_baju');
-            $originalFileName = $uploadFile->getClientOriginalName();
-            $filebaju = $uploadFile->storeAs('file-dari-disainer-to-Cs-baju', $originalFileName, 'public');
-        }
-
-        if ($request->file('file_celana')) {
-            $uploadFile = $request->file('file_celana');
-            $originalFileName = $uploadFile->getClientOriginalName();
-            $fileCelana = $uploadFile->storeAs('file-dari-disainer-to-Cs-celana', $originalFileName, 'public');
-        }
-
         $no_order = '#10-12' . str_pad(mt_rand(1, 999), 3, '0', STR_PAD_LEFT);
+
+        $filebajuplayer = null;
+        $filebajupelatih = null;
+        $filebajukiper = null;
+        $fileCelanaplayer = null;
+        $fileCelanapelatih = null;
+        $fileCelanakiper = null;
+
+        if ($request->file('file_baju_player')) {
+            $uploadFile = $request->file('file_baju_player');
+            $originalFileName = $uploadFile->getClientOriginalName();
+            $filebajuplayer = $uploadFile->storeAs('file-dari-disainer-to-Cs-baju', $originalFileName, 'public');
+        }
+        if ($request->file('file_baju_pelatih')) {
+            $uploadFile = $request->file('file_baju_pelatih');
+            $originalFileName = $uploadFile->getClientOriginalName();
+            $filebajupelatih = $uploadFile->storeAs('file-dari-disainer-to-Cs-baju', $originalFileName, 'public');
+        }
+        if ($request->file('file_baju_kiper')) {
+            $uploadFile = $request->file('file_baju_kiper');
+            $originalFileName = $uploadFile->getClientOriginalName();
+            $filebajukiper = $uploadFile->storeAs('file-dari-disainer-to-Cs-baju', $originalFileName, 'public');
+        }
+
+        if ($request->file('file_celana_player')) {
+            $uploadFile = $request->file('file_celana_player');
+            $originalFileName = $uploadFile->getClientOriginalName();
+            $fileCelanaplayer = $uploadFile->storeAs('file-dari-disainer-to-Cs-celana', $originalFileName, 'public');
+        }
+        if ($request->file('file_celana_pelatih')) {
+            $uploadFile = $request->file('file_celana_pelatih');
+            $originalFileName = $uploadFile->getClientOriginalName();
+            $fileCelanapelatih = $uploadFile->storeAs('file-dari-disainer-to-Cs-celana', $originalFileName, 'public');
+        }
+        if ($request->file('file_celana_kiper')) {
+            $uploadFile = $request->file('file_celana_kiper');
+            $originalFileName = $uploadFile->getClientOriginalName();
+            $fileCelanakiper = $uploadFile->storeAs('file-dari-disainer-to-Cs-celana', $originalFileName, 'public');
+        }
 
         BarangMasukCostumerServices::create([
             'no_order' => $no_order,
@@ -88,8 +115,12 @@ class DisainerController extends Controller
             'disainer_id' => $user->id,
             'cs_id' => $request->cs_id,
             'jenis_mesin' => $request->jenis_mesin,
-            'file_baju' => $filebaju,
-            'file_celana' => $fileCelana,
+            'file_baju_player' => $filebajuplayer,
+            'file_baju_pelatih' => $filebajupelatih,
+            'file_baju_kiper' => $filebajukiper,
+            'file_celana_player' => $fileCelanaplayer,
+            'file_celana_pelatih' => $fileCelanapelatih,
+            'file_celana_kiper' => $fileCelanakiper,
             'tanggal_masuk' => Carbon::now(),
         ]);
 
@@ -108,8 +139,6 @@ class DisainerController extends Controller
             ->with('Users', 'DataMesinFix')
             ->where('tanda_telah_mengerjakan', 1)
             ->get();
-
-        // return response()->json($disainer);
 
         return view('component.Disainer.data-fix-disainer-pegawai.index', compact('disainer'));
     }

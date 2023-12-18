@@ -10,33 +10,49 @@ class BarangMasukCostumerServices extends Model
     use HasFactory;
 
     protected $fillable = [
+        // order
         'no_order',
-        'no_nota',
         'barang_masuk_disainer_id',
-        'disainer_id',
         'cs_id',
-        'layout_id',
+        'disainer_id',
         'jenis_mesin',
+        'tanggal_jahit',
+        'nama_penjahit',
+        'no_nota',
+
+        // produksi
+        'layout_id',
+        'jenis_produksi',
+        'pola',
+        'tanggal_masuk',
+        'deadline',
+
+        // baju
+        'jumlah_baju',
+        'jenis_sablon_baju',
+        'jenis_kerah_baju_id',
+        'jenis_pola_lengan_id',
+        'jenis_kain_baju',
+        'ket_kumis_baju',
+        'ket_bantalan_baju',
+        'ket_celana',
+        'ket_tambahan_baju',
         'file_baju_player',
         'file_baju_pelatih',
         'file_baju_kiper',
+
+        // celana
+        'jumlah_celana',
+        'jenis_sablon_celana',
+        'jenis_pola_celana_id',
+        'jenis_kain_celana',
+        'ket_warna_kain_celana',
+        'ket_bis_celana_celana',
+        'ket_tambahan_celana',
         'file_celana_player',
         'file_celana_pelatih',
         'file_celana_kiper',
-        'status_produksi',
-        'tanggal_masuk',
-        'deadline',
-        'jenis_produksi',
-        'jenis_kerah_id',
-        'jenis_pola_id',
-        'jenis_celana_id',
-        'jumlah_baju',
-        'jenis_sablon_baju',
-        'jenis_kain_baju',
-        'jumlah_celana',
-        'jenis_sablon_celana',
-        'jenis_kain_celana',
-        'list_data',
+
         'aksi',
         'tanda_telah_mengerjakan',
     ];
