@@ -66,6 +66,12 @@
                             </div>
                         </div>
                         <div class="row mb-3">
+                            <label class="col-sm-2 col-form-label" for="basic-default-company">File Baju 1</label>
+                            <div class="col-sm-10">
+                                <input type="file" class="form-control" id="basic-default-company" name="file_baju_1" />
+                            </div>
+                        </div>
+                        <div class="row mb-3">
                             <label class="col-sm-2 col-form-label" for="basic-default-company">File Celana
                                 1</label>
                             <div class="col-sm-10">
@@ -86,6 +92,14 @@
                             <div class="col-sm-10">
                                 <input type="file" class="form-control" id="basic-default-company"
                                     name="file_celana_kiper" />
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label class="col-sm-2 col-form-label" for="basic-default-company">File Celana
+                                4</label>
+                            <div class="col-sm-10">
+                                <input type="file" class="form-control" id="basic-default-company"
+                                    name="file_celana_1" />
                             </div>
                         </div>
                         <div class="row justify-content-end">

@@ -59,6 +59,16 @@
                                                 <input class="form-control" type="text" name="no_nota" id="lastName"
                                                     value="" />
                                             </div>
+                                            <div class="mb-3 col-md-6">
+                                                <label for="lastName" class="form-label">Kota Produksi</label>
+                                                <select id="country" name="kota_produksi" class="select2 form-select">
+                                                    <option value="">-- Kota Produksi --</option>
+                                                    <option value="Makassar">Makassar</option>
+                                                    <option value="Jakarta">Jakarta</option>
+                                                    <option value="Surabaya">Surabaya</option>
+                                                    <option value="Bandung">Bandung</option>
+                                                </select>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -237,6 +247,12 @@
                                 </div>
                             </div>
                         </div>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="menu-icon tf-icons bx bx-send"></i>
+                            Buat LK
+                        </button>
+                        <a href="{{ route('getIndexOrderCsPegawai') }}" class="btn btn-outline-secondary"><i
+                                class="menu-icon tf-icons bx bx-undo"></i>Kembali</a>
                     </form>
                 </div>
             </div>

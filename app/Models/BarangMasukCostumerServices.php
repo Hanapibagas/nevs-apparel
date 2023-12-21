@@ -12,6 +12,7 @@ class BarangMasukCostumerServices extends Model
     protected $fillable = [
         // order
         'no_order',
+        'kota_produksi',
         'barang_masuk_disainer_id',
         'cs_id',
         'disainer_id',
@@ -40,6 +41,7 @@ class BarangMasukCostumerServices extends Model
         'file_baju_player',
         'file_baju_pelatih',
         'file_baju_kiper',
+        'file_baju_1',
 
         // celana
         'jumlah_celana',
@@ -52,6 +54,7 @@ class BarangMasukCostumerServices extends Model
         'file_celana_player',
         'file_celana_pelatih',
         'file_celana_kiper',
+        'file_celana_1',
 
         'aksi',
         'tanda_telah_mengerjakan',
@@ -75,5 +78,20 @@ class BarangMasukCostumerServices extends Model
     public function UsersLk()
     {
         return $this->belongsTo(User::class, 'layout_id');
+    }
+
+    public function Kera()
+    {
+        return $this->belongsTo(KeraBaju::class, 'jenis_kerah_baju_id');
+    }
+
+    public function Lengan()
+    {
+        return $this->belongsTo(PolaLengan::class, 'jenis_pola_lengan_id');
+    }
+
+    public function Celana()
+    {
+        return $this->belongsTo(PolaCeleana::class, 'jenis_pola_celana_id');
     }
 }

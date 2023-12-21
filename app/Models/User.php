@@ -21,6 +21,7 @@ class User extends Authenticatable
         'name',
         'email',
         'roles',
+        'asal_kota',
         'permission_edit',
         'permission_hapus',
         'permission_create',

@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('email');
             $table->string('roles')->nullable();
             $table->string('gambar')->nullable();
+            $table->string('asal_kota')->nullable();
             $table->string('permission_edit')->default(0);
             $table->string('permission_hapus')->default(0);
             $table->string('permission_create')->default(0);

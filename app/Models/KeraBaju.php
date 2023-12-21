@@ -13,4 +13,9 @@ class KeraBaju extends Model
         'jenis_kera',
         'gambar',
     ];
+
+    public function BarangMasukCostumerServices()
+    {
+        return $this->hasMany(BarangMasukCostumerServices::class, 'jenis_kerah_baju_id');
+    }
 }

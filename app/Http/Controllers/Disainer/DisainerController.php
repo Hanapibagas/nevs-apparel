@@ -73,9 +73,11 @@ class DisainerController extends Controller
         $filebajuplayer = null;
         $filebajupelatih = null;
         $filebajukiper = null;
+        $filebaju1 = null;
         $fileCelanaplayer = null;
         $fileCelanapelatih = null;
         $fileCelanakiper = null;
+        $fileCelana1 = null;
 
         if ($request->file('file_baju_player')) {
             $uploadFile = $request->file('file_baju_player');
@@ -91,6 +93,11 @@ class DisainerController extends Controller
             $uploadFile = $request->file('file_baju_kiper');
             $originalFileName = $uploadFile->getClientOriginalName();
             $filebajukiper = $uploadFile->storeAs('file-dari-disainer-to-Cs-baju', $originalFileName, 'public');
+        }
+        if ($request->file('file_baju_1')) {
+            $uploadFile = $request->file('file_baju_1');
+            $originalFileName = $uploadFile->getClientOriginalName();
+            $filebaju1 = $uploadFile->storeAs('file-dari-disainer-to-Cs-baju', $originalFileName, 'public');
         }
 
         if ($request->file('file_celana_player')) {
@@ -108,6 +115,11 @@ class DisainerController extends Controller
             $originalFileName = $uploadFile->getClientOriginalName();
             $fileCelanakiper = $uploadFile->storeAs('file-dari-disainer-to-Cs-celana', $originalFileName, 'public');
         }
+        if ($request->file('file_celana_1')) {
+            $uploadFile = $request->file('file_celana_1');
+            $originalFileName = $uploadFile->getClientOriginalName();
+            $fileCelana1 = $uploadFile->storeAs('file-dari-disainer-to-Cs-celana', $originalFileName, 'public');
+        }
 
         BarangMasukCostumerServices::create([
             'no_order' => $no_order,
@@ -118,9 +130,11 @@ class DisainerController extends Controller
             'file_baju_player' => $filebajuplayer,
             'file_baju_pelatih' => $filebajupelatih,
             'file_baju_kiper' => $filebajukiper,
+            'file_baju_1' => $filebaju1,
             'file_celana_player' => $fileCelanaplayer,
             'file_celana_pelatih' => $fileCelanapelatih,
             'file_celana_kiper' => $fileCelanakiper,
+            'file_celana_1' => $fileCelana1,
             'tanggal_masuk' => Carbon::now(),
         ]);
 

@@ -29,9 +29,11 @@ class CostumerServicesController extends Controller
     {
         $user = Auth::user();
         $oderCs = BarangMasukCostumerServices::where('cs_id', $user->id)
-            ->with('BarangMasukDisainer', 'Users', 'UsersOrder', 'UsersLk')
+            ->with('BarangMasukDisainer', 'Users', 'UsersOrder', 'UsersLk', 'Kera', 'Lengan', 'Celana')
             ->where('tanda_telah_mengerjakan', 1)
             ->get();
+
+        // return response()->json($oderCs);
         return view('component.Cs.costumer-service-lk-pegawai.index', compact('oderCs'));
     }
 
@@ -96,9 +98,14 @@ class CostumerServicesController extends Controller
                 ->count();
             $userCounts[$userId] = $barangMasukCount;
         }
-        $oderCs = BarangMasukCostumerServices::with('BarangMasukDisainer', 'Users', 'UsersOrder', 'UsersLk')->find($id);
+        $oderCs = BarangMasukCostumerServices::with('BarangMasukDisainer', 'Users', 'UsersOrder', 'UsersLk', 'Kera', 'Lengan', 'Celana')->find($id);
 
-        return view('component.Cs.costumer-service-lk-pegawai.update', compact('oderCs', 'users', 'userCounts'));
+        // return response()->json($oderCs);
+        $kera = KeraBaju::all();
+        $lengan = PolaLengan::all();
+        $celana = PolaCeleana::all();
+
+        return view('component.Cs.costumer-service-lk-pegawai.update', compact('oderCs', 'users', 'userCounts', 'kera', 'lengan', 'celana'));
     }
 
     public function putDataLk(Request $request, $id)
@@ -109,22 +116,31 @@ class CostumerServicesController extends Controller
             'tanggal_jahit' => $request->tanggal_jahit,
             'nama_penjahit' => $request->nama_penjahit,
             'no_nota' => $request->no_nota,
+            'kota_produksi' => $request->kota_produksi,
 
             'layout_id' => $request->layout_id,
             'jenis_produksi' => $request->jenis_produksi,
             'pola' => $request->pola,
             'deadline' => $request->deadline,
 
-            'nama_penjahit' => $request->nama_penjahit,
-            'tanggal_jahit' => $request->tanggal_jahit,
-            'jenis_kerah' => $request->jenis_kerah,
             'jumlah_baju' => $request->jumlah_baju,
             'jenis_sablon_baju' => $request->jenis_sablon_baju,
+            'jenis_kerah_baju_id' => $request->jenis_kerah_baju_id,
+            'jenis_pola_lengan_id' => $request->jenis_pola_lengan_id,
             'jenis_kain_baju' => $request->jenis_kain_baju,
+            'ket_kumis_baju' => $request->ket_kumis_baju,
+            'ket_bantalan_baju' => $request->ket_bantalan_baju,
+            'ket_celana' => $request->ket_celana,
+            'ket_tambahan_baju' => $request->ket_tambahan_baju,
+
             'jumlah_celana' => $request->jumlah_celana,
             'jenis_sablon_celana' => $request->jenis_sablon_celana,
+            'jenis_pola_celana_id' => $request->jenis_pola_celana_id,
             'jenis_kain_celana' => $request->jenis_kain_celana,
-            'list_data' => $request->list_data,
+            'ket_warna_kain_celana' => $request->ket_warna_kain_celana,
+            'ket_bis_celana_celana' => $request->ket_bis_celana_celana,
+            'ket_tambahan_celana' => $request->ket_tambahan_celana,
+
             'aksi' => '1',
             'tanda_telah_mengerjakan' => '1',
         ]);

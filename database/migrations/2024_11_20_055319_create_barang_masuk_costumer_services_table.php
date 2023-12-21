@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('barang_masuk_costumer_services', function (Blueprint $table) {
             $table->id();
             $table->string('no_order')->nullable();
+            $table->string('kota_produksi')->nullable();
             $table->foreignId('barang_masuk_disainer_id')->constrained('barang_masuk_disainers')->onUpdate('cascade')->onDelete('cascade');
             $table->foreignId('cs_id')->constrained('users')->onUpdate('cascade')->onDelete('cascade');
             $table->foreignId('disainer_id')->constrained('users')->onUpdate('cascade')->onDelete('cascade');

@@ -13,4 +13,9 @@ class PolaLengan extends Model
         'jenis_kera',
         'gambar',
     ];
+
+    public function BarangMasukCostumerServices()
+    {
+        return $this->hasMany(BarangMasukCostumerServices::class, 'jenis_pola_lengan_id');
+    }
 }
