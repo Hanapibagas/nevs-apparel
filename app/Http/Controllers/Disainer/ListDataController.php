@@ -39,9 +39,7 @@ class ListDataController extends Controller
         ]);
 
         if ($request->file('gambar')) {
-            $uploadFile = $request->file('gambar');
-            $originalFileName = $uploadFile->getClientOriginalName();
-            $filebaju = $uploadFile->storeAs('file-jenis-kerah', $originalFileName, 'public');
+            $filebaju = $request->file('gambar')->store('data-jenis-kera', 'public');
         }
 
         KeraBaju::create([
@@ -59,9 +57,7 @@ class ListDataController extends Controller
         ]);
 
         if ($request->file('gambar')) {
-            $uploadFile = $request->file('gambar');
-            $originalFileName = $uploadFile->getClientOriginalName();
-            $filebaju = $uploadFile->storeAs('file-jenis-kerah', $originalFileName, 'public');
+            $filebaju = $request->file('gambar')->store('data-jenis-celana', 'public');
         }
 
         PolaCeleana::create([
@@ -79,9 +75,7 @@ class ListDataController extends Controller
         ]);
 
         if ($request->file('gambar')) {
-            $uploadFile = $request->file('gambar');
-            $originalFileName = $uploadFile->getClientOriginalName();
-            $filebaju = $uploadFile->storeAs('file-jenis-kerah', $originalFileName, 'public');
+            $filebaju = $request->file('gambar')->store('data-jenis-lengan', 'public');
         }
 
         PolaLengan::create([
@@ -99,9 +93,7 @@ class ListDataController extends Controller
         $filebaju = $update->gambar;
 
         if ($request->file('gambar')) {
-            $uploadFile = $request->file('gambar');
-            $originalFileName = $uploadFile->getClientOriginalName();
-            $filebaju = $uploadFile->storeAs('file-jenis-kerah', $originalFileName, 'public');
+            $filebaju = $request->file('gambar')->store('data-jenis-kera', 'public');
         }
 
         $update->update([
@@ -119,9 +111,7 @@ class ListDataController extends Controller
         $filebaju = $update->gambar;
 
         if ($request->file('gambar')) {
-            $uploadFile = $request->file('gambar');
-            $originalFileName = $uploadFile->getClientOriginalName();
-            $filebaju = $uploadFile->storeAs('file-jenis-kerah', $originalFileName, 'public');
+            $filebaju = $request->file('gambar')->store('data-jenis-lengan', 'public');
         }
 
         $update->update([
@@ -139,9 +129,7 @@ class ListDataController extends Controller
         $filebaju = $update->gambar;
 
         if ($request->file('gambar')) {
-            $uploadFile = $request->file('gambar');
-            $originalFileName = $uploadFile->getClientOriginalName();
-            $filebaju = $uploadFile->storeAs('file-jenis-kerah', $originalFileName, 'public');
+            $filebaju = $request->file('gambar')->store('data-jenis-celana', 'public');
         }
 
         $update->update([

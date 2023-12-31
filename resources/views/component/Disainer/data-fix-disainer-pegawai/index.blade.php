@@ -48,7 +48,7 @@
                                         {{ $disainers->nama_tim }}
                                     </strong>
                                 </td>
-                                <td>{{ $disainers->Users->name }}</td>
+                                <td>{{ $disainers->UsersCs->name }}</td>
                                 <td>
                                     @if ($disainers->DataMesinFix->isNotEmpty())
                                     {{ $disainers->DataMesinFix->first()->nama_mesin }}

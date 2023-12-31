@@ -53,6 +53,8 @@
                                 <td>{{ $disainers->BarangMasukDisainer->nama_tim }}</td>
                                 <td>
                                     {{ $disainers->UsersLk->name }}
+                                    {{-- <img src="{{ Storage::url($disainers->file_baju_player) }}" alt="" srcset="">
+                                    --}}
                                 </td>
                                 @php
                                 $tanggalMasuk = new DateTime($disainers->tanggal_masuk);
@@ -191,132 +193,12 @@
                                                             <input type="date" id="dobLarge" class="form-control"
                                                                 readonly value="{{ $disainers->deadline}}">
                                                         </div>
-                                                    </div>
-                                                </div>
-                                            </div><br>
-                                            <div class="card">
-                                                <div class="card-body">
-                                                    <div class="row g-2">
-                                                        <div class="col mb-0">
-                                                            <label for="emailLarge" class="form-label">* Baju
-                                                            </label><br>
-                                                            <label for="emailLarge" class="form-label">Jumlah baju
-                                                            </label>
-                                                            <input type="text" id="emailLarge" class="form-control"
-                                                                value="{{ $disainers->jumlah_baju }}" readonly>
-                                                        </div>
-                                                        <div class="col mb-0">
-                                                            <label for="dobLarge" class="form-label">*
-                                                                Celana</label><br>
-                                                            <label for="dobLarge" class="form-label">jumlah
-                                                                celana</label>
-                                                            <input type="text" id="dobLarge" class="form-control"
-                                                                value="{{ $disainers->jumlah_celana }}" readonly>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row g-2">
-                                                        <div class="col mb-0">
-                                                            <label for="emailLarge" class="form-label">Jenis
-                                                                Sublim</label>
-                                                            <input type="text" id="emailLarge" class="form-control"
-                                                                readonly value="{{ $disainers->jenis_sablon_baju }}">
-                                                        </div>
-                                                        <div class="col mb-0">
-                                                            <label for="emailLarge" class="form-label">Jenis
-                                                                Sublim</label>
-                                                            <input type="text" id="emailLarge" class="form-control"
-                                                                readonly value="{{ $disainers->jenis_sablon_celana }}">
-                                                        </div>
-                                                    </div>
-                                                    <div class="row g-2">
-                                                        <div class="col mb-0">
-                                                            <label for="emailLarge" class="form-label">Jenis
-                                                                kerah</label>
-                                                            <input type="text" id="emailLarge" class="form-control"
-                                                                readonly
-                                                                value="{{ $disainers->Kera->jenis_kera ?? '' }}">
-                                                        </div>
-                                                        <div class="col mb-0">
-                                                            <label for="emailLarge" class="form-label">pola
-                                                                celana</label>
-                                                            <input type="text" id="emailLarge" class="form-control"
-                                                                readonly
-                                                                value="{{ $disainers->Celana->jenis_kera  ?? ''}}">
-                                                        </div>
-                                                    </div>
-                                                    <div class="row g-2">
-                                                        <div class="col mb-0">
-                                                            <label for="emailLarge" class="form-label">Jenis
-                                                                pola lengan</label>
-                                                            <input type="text" id="emailLarge" class="form-control"
-                                                                readonly
-                                                                value="{{ $disainers->Lengan->jenis_kera ?? ''}}">
-                                                        </div>
-                                                        <div class="col mb-0">
-                                                            <label for="emailLarge" class="form-label">jenis
-                                                                kain</label>
-                                                            <input type="text" id="emailLarge" class="form-control"
-                                                                readonly value="{{ $disainers->jenis_kain_celana }}">
-                                                        </div>
-                                                    </div>
-                                                    <div class="row g-2">
-                                                        <div class="col mb-0">
-                                                            <label for="emailLarge" class="form-label">Jenis
-                                                                kain</label>
-                                                            <input type="text" id="emailLarge" class="form-control"
-                                                                readonly value="{{ $disainers->jenis_kain_baju }}">
-                                                        </div>
-                                                        <div class="col mb-0">
-                                                            <label for="emailLarge" class="form-label">Ket.warna
-                                                                kain</label>
-                                                            <input type="text" id="emailLarge" class="form-control"
-                                                                readonly
-                                                                value="{{ $disainers->ket_warna_kain_celana }}">
-                                                        </div>
-                                                    </div>
-                                                    <div class="row g-2">
-                                                        <div class="col mb-0">
-                                                            <label for="emailLarge" class="form-label">ket.kumis</label>
-                                                            <input type="text" id="emailLarge" class="form-control"
-                                                                readonly value="{{ $disainers->ket_kumis_baju }}">
-                                                        </div>
-                                                        <div class="col mb-0">
-                                                            <label for="emailLarge" class="form-label">Ket.bis
-                                                                celana</label>
-                                                            <input type="text" id="emailLarge" class="form-control"
-                                                                readonly
-                                                                value="{{ $disainers->ket_bis_celana_celana }}">
-                                                        </div>
-                                                    </div>
-                                                    <div class="row g-2">
-                                                        <div class="col mb-0">
-                                                            <label for="emailLarge"
-                                                                class="form-label">ket.bantalan</label>
-                                                            <input type="text" id="emailLarge" class="form-control"
-                                                                readonly value="{{ $disainers->ket_bantalan_baju }}">
-                                                            <label for="emailLarge"
-                                                                class="form-label">ket.celana</label>
-                                                            <input type="text" id="emailLarge" class="form-control"
-                                                                readonly value="{{ $disainers->ket_celana }}">
-                                                            <label for="emailLarge"
-                                                                class="form-label">ket.tambahan</label>
-                                                            <input type="text" id="emailLarge" class="form-control"
-                                                                readonly value="{{ $disainers->ket_tambahan_baju }}">
-                                                            <button style="margin-top: 10px"
-                                                                class="btn rounded-pill btn-danger" type="button">
-                                                                <i class="menu-icon tf-icons bx bxs-file-pdf"></i>Export
-                                                                data baju</button>
-                                                        </div>
-                                                        <div class="col mb-0">
-                                                            <label for="emailLarge"
-                                                                class="form-label">Ket.tambahan</label>
-                                                            <input type="text" id="emailLarge" class="form-control"
-                                                                readonly value="{{ $disainers->ket_tambahan_celana }}">
-                                                            <button style="margin-top: 10px"
-                                                                class="btn rounded-pill btn-danger" type="button">
-                                                                <i class="menu-icon tf-icons bx bxs-file-pdf"></i>Export
-                                                                data celana</button>
-                                                        </div>
+                                                        <a target="_blank"
+                                                            href="{{ route('getCetakDataLk', $disainers->id) }}"
+                                                            style="margin-top: 10px" class="btn rounded-pill btn-danger"
+                                                            type="button">
+                                                            <i class="menu-icon tf-icons bx bxs-file-pdf"></i>Export
+                                                            data LK</a>
                                                     </div>
                                                 </div>
                                             </div>

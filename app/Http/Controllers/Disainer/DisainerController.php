@@ -150,7 +150,7 @@ class DisainerController extends Controller
     {
         $user = Auth::user();
         $disainer = BarangMasukDisainer::where('users_id', $user->id)
-            ->with('Users', 'DataMesinFix')
+            ->with('UsersCs', 'DataMesinFix')
             ->where('tanda_telah_mengerjakan', 1)
             ->get();
 

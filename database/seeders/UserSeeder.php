@@ -2,6 +2,9 @@
 
 namespace Database\Seeders;
 
+use App\Models\KeraBaju;
+use App\Models\PolaCeleana;
+use App\Models\PolaLengan;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -74,6 +77,19 @@ class UserSeeder extends Seeder
             'permission_hapus' => 1,
             'permission_create' => 1,
             'password' => bcrypt('12345678')
+        ]);
+
+        KeraBaju::create([
+            'jenis_kera' => 'Kerah Narrow PSM',
+            'gambar' => 'data-jenis-kera/0R4b65U9sl9AfbxBjqTVhkVCNtjVw776EFUh6O3n.jpg'
+        ]);
+        PolaLengan::create([
+            'jenis_kera' => 'Kerah Narrow PSM',
+            'gambar' => 'data-jenis-lengan/DH71I45dnvvJyBenCL1D5r2uIiUtmUvoZDta9vtE.jpg'
+        ]);
+        PolaCeleana::create([
+            'jenis_kera' => 'Lama',
+            'gambar' => 'data-jenis-celana/g8oeidt7ABUAtDSX8BYvpb8cC6n9zLWscuF8L0UT.jpg'
         ]);
     }
 }

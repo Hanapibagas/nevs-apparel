@@ -19,6 +19,11 @@ class BarangMasukDisainer extends Model
 
     public function Users()
     {
+        return $this->belongsTo(User::class, 'users_id');
+    }
+
+    public function UsersCs()
+    {
         return $this->belongsTo(User::class, 'nama_cs');
     }
 

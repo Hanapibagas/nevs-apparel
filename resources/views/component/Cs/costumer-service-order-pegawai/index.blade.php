@@ -39,7 +39,6 @@
                                 <th>no.order</th>
                                 <th>nama tim</th>
                                 <th>nama disainer</th>
-                                <th>waktu produksi</th>
                                 <th>aksi</th>
                             </tr>
                         </thead>
@@ -52,7 +51,6 @@
                                 </td>
                                 <td>{{ $disainers->BarangMasukDisainer->nama_tim }}</td>
                                 <td>{{ $disainers->Users->name }}</td>
-                                <td>{{ $disainers->status_produksi }}</td>
                                 <td>
                                     @if ($disainers->aksi == 0)
                                     <a href="{{ route('getCreateToLkPegawai', $disainers->id) }}"
