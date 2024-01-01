@@ -1540,7 +1540,7 @@
                                                 <h4 class="fw-bold py-3 mb-4">Keterangan Tambahan</h4>
                                                 <div class="row">
                                                     <div class="mb-3 col-md-12">
-                                                        <textarea class="form-control"
+                                                        <textarea class="form-control" rows="7"
                                                             name="keterangan_lengkap"></textarea>
                                                     </div>
                                                 </div>
@@ -1567,7 +1567,7 @@
 @push('js')
 <script src="https://cdn.ckeditor.com/4.19.1/standard/ckeditor.js"></script>
 <script>
-    CKEDITOR.replace('keterangan_lengkap');
+    // CKEDITOR.replace('keterangan_lengkap');
     // CKEDITOR.replace('keterangan_lengkap');
 </script>
 @endpush

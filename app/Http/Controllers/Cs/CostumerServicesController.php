@@ -92,13 +92,13 @@ class CostumerServicesController extends Controller
         foreach ($users as $user) {
             $userId = $user->id;
             $barangMasukCount = BarangMasukCostumerServices::where('layout_id', $userId)
-                ->where('tanda_telah_mengerjakan', 0)
+                ->where('tanda_telah_mengerjakan', 1)
                 ->count();
             $userCounts[$userId] = $barangMasukCount;
         }
         $oderCs = BarangMasukCostumerServices::with('BarangMasukDisainer', 'Users', 'UsersOrder')->find($id);
 
-        // return response()->json($oderCs);
+        // return response()->json($userCounts);
         $kera = KeraBaju::all();
         $lengan = PolaLengan::all();
         $celana = PolaCeleana::all();
@@ -400,10 +400,27 @@ class CostumerServicesController extends Controller
 
     public function cetakDataLk($id)
     {
-        $dataLk = BarangMasukCostumerServices::with('BarangMasukDisainer', 'Users', 'UsersOrder', 'UsersLk', 'Kera', 'Lengan', 'Celana')->findOrFail($id);
+        $dataLk = BarangMasukCostumerServices::with(
+            'BarangMasukDisainer',
+            'Users',
+            'UsersOrder',
+            'UsersLk',
+            'KeraPlayer',
+            'LenganPlayer',
+            'CelanaPlayer',
+            'KeraPelatih',
+            'LenganPelatih',
+            'CelanaPelatih',
+            'KeraKiper',
+            'LenganKiper',
+            'CelanaKiper',
+            'Kera1',
+            'Lengan1',
+            'Celana1'
+        )->findOrFail($id);
 
         // return response()->json($dataLk);
-        view()->share('dataLk', $dataLk);
+        view()->share('dataLk', $dataLk->BarangMasukDisainer->nama_tim);
 
         $pdf = PDF::loadview('component.Cs.costumer-service-lk-pegawai.export-data-baju', compact('dataLk'));
         $pdf->setPaper('F4', 'portrait');

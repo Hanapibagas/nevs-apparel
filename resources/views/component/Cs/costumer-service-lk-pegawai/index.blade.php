@@ -53,8 +53,6 @@
                                 <td>{{ $disainers->BarangMasukDisainer->nama_tim }}</td>
                                 <td>
                                     {{ $disainers->UsersLk->name }}
-                                    {{-- <img src="{{ Storage::url($disainers->file_baju_player) }}" alt="" srcset="">
-                                    --}}
                                 </td>
                                 @php
                                 $tanggalMasuk = new DateTime($disainers->tanggal_masuk);
@@ -82,14 +80,23 @@
                                             class="btn btn-primary">
                                             <i class="menu-icon tf-icons bx bx-pencil"></i>
                                             Edit LK</a>
-                                        <button data-bs-toggle="modal" data-bs-target="#largeModal{{ $disainers->id }}"
-                                            type="button" class="btn btn-warning">
+                                        <a target="_blank" href="{{ route('getCetakDataLk', $disainers->id) }}"
+                                            class="btn btn-danger">
+                                            <i class="menu-icon tf-icons bx bxs-file-pdf"></i>Export
+                                            data LK</a>
+                                        {{-- <a target="_blank" href="{{ route('getCetakDataLk', $disainers->id) }}"
+                                            style="margin-top: 10px" class="btn rounded-pill btn-danger" type="button">
+                                            <i class="menu-icon tf-icons bx bxs-file-pdf"></i>Export
+                                            data LK</a> --}}
+                                        {{-- <button data-bs-toggle="modal"
+                                            data-bs-target="#largeModal{{ $disainers->id }}" type="button"
+                                            class="btn btn-warning">
                                             <i class="menu-icon tf-icons bx bx-show"></i>
-                                            Lihat Detail</button>
+                                            Lihat Detail</button> --}}
                                         @endif
                                     </td>
                             </tr>
-                            <div class="modal fade" id="largeModal{{ $disainers->id }}" tabindex="-1"
+                            {{-- <div class="modal fade" id="largeModal{{ $disainers->id }}" tabindex="-1"
                                 aria-hidden="true">
                                 <div class="modal-dialog modal-lg" role="document">
                                     <div class="modal-content">
@@ -211,7 +218,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
                             @endforeach
                         </tbody>
                     </table>
