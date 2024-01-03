@@ -3,8 +3,8 @@
 @section('content')
 <div class="container-xxl flex-grow-1 container-p-y">
     <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Tables /</span> <span class="text-muted fw-light"><a
-                href="{{ route('getIndexDisainerPegawai') }}" style="color: inherit">Disainer</a></span>/ Kirim data ke
-        Costumer Services</h4>
+                href="{{ route('getIndexDisainerPegawai') }}" style="color: inherit">Disainer</a></span>/ Kirim disain
+        fix ke tim CS</h4>
 
     <div class="row">
         <div class="col-xxl">
@@ -48,58 +48,74 @@
                             <label class="col-sm-2 col-form-label" for="basic-default-company">File Baju Pelayer</label>
                             <div class="col-sm-10">
                                 <input type="file" class="form-control" id="basic-default-company"
-                                    name="file_baju_player" />
+                                    name="file_baju_player" accept=".jpg, .png" />
                             </div>
                         </div>
                         <div class="row mb-3">
                             <label class="col-sm-2 col-form-label" for="basic-default-company">File Baju Pelatih</label>
                             <div class="col-sm-10">
                                 <input type="file" class="form-control" id="basic-default-company"
-                                    name="file_baju_pelatih" />
+                                    name="file_baju_pelatih" accept=".jpg, .png" />
+                                <span style="font-size: 13px;"><i>*kosong saja jika tidak ada</i></span>
                             </div>
                         </div>
                         <div class="row mb-3">
                             <label class="col-sm-2 col-form-label" for="basic-default-company">File Baju Kiper</label>
                             <div class="col-sm-10">
                                 <input type="file" class="form-control" id="basic-default-company"
-                                    name="file_baju_kiper" />
+                                    name="file_baju_kiper" accept=".jpg, .png" />
+                                <span style="font-size: 13px;"><i>*kosong saja jika tidak ada</i></span>
                             </div>
                         </div>
                         <div class="row mb-3">
                             <label class="col-sm-2 col-form-label" for="basic-default-company">File Baju 1</label>
                             <div class="col-sm-10">
-                                <input type="file" class="form-control" id="basic-default-company" name="file_baju_1" />
+                                <input type="file" class="form-control" id="basic-default-company" name="file_baju_1"
+                                    accept=".jpg, .png" />
+                                <span style="font-size: 13px;"><i>*kosong saja jika tidak ada</i></span>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label class="col-sm-2 col-form-label" for="basic-default-company">File Celana
+                                player</label>
+                            <div class="col-sm-10">
+                                <input type="file" class="form-control" id="basic-default-company"
+                                    name="file_celana_player" accept=".jpg, .png" />
+                                <span style="font-size: 13px;"><i>*kosong saja jika tidak ada</i></span>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label class="col-sm-2 col-form-label" for="basic-default-company">File Celana
+                                pelatih</label>
+                            <div class="col-sm-10">
+                                <input type="file" class="form-control" id="basic-default-company"
+                                    name="file_celana_pelatih" accept=".jpg, .png" />
+                                <span style="font-size: 13px;"><i>*kosong saja jika tidak ada</i></span>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label class="col-sm-2 col-form-label" for="basic-default-company">File Celana
+                                kiper</label>
+                            <div class="col-sm-10">
+                                <input type="file" class="form-control" id="basic-default-company"
+                                    name="file_celana_kiper" accept=".jpg, .png" />
+                                <span style="font-size: 13px;"><i>*kosong saja jika tidak ada</i></span>
                             </div>
                         </div>
                         <div class="row mb-3">
                             <label class="col-sm-2 col-form-label" for="basic-default-company">File Celana
                                 1</label>
                             <div class="col-sm-10">
-                                <input type="file" class="form-control" id="basic-default-company"
-                                    name="file_celana_player" />
+                                <input type="file" class="form-control" id="basic-default-company" name="file_celana_1"
+                                    accept=".jpg, .png" />
+                                <span style="font-size: 13px;"><i>*kosong saja jika tidak ada</i></span>
                             </div>
                         </div>
                         <div class="row mb-3">
-                            <label class="col-sm-2 col-form-label" for="basic-default-company">File Celana 2</label>
+                            <label class="col-sm-2 col-form-label" for="basic-default-company">File Corel</label>
                             <div class="col-sm-10">
                                 <input type="file" class="form-control" id="basic-default-company"
-                                    name="file_celana_pelatih" />
-                            </div>
-                        </div>
-                        <div class="row mb-3">
-                            <label class="col-sm-2 col-form-label" for="basic-default-company">File Celana
-                                3</label>
-                            <div class="col-sm-10">
-                                <input type="file" class="form-control" id="basic-default-company"
-                                    name="file_celana_kiper" />
-                            </div>
-                        </div>
-                        <div class="row mb-3">
-                            <label class="col-sm-2 col-form-label" for="basic-default-company">File Celana
-                                4</label>
-                            <div class="col-sm-10">
-                                <input type="file" class="form-control" id="basic-default-company"
-                                    name="file_celana_1" />
+                                    name="file_corel_disainer" accept=".cdr" />
                             </div>
                         </div>
                         <div class="row justify-content-end">

@@ -47,14 +47,11 @@
             </span>
             <span class="app-brand-text demo menu-text fw-bolder ms-2">Nevs Apparel</span>
         </a>
-
         <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
             <i class="bx bx-chevron-left bx-sm align-middle"></i>
         </a>
     </div>
-
     <div class="menu-inner-shadow"></div>
-
     <ul class="menu-inner py-1">
         <li class="menu-item {{ request()->is('/') ? 'active' : '' }}">
             <a href="{{ route('indexHome') }}" class="menu-link">
@@ -233,14 +230,30 @@
         @endif
 
         @if ( Auth::user()->roles == 'layout')
+        @php
+        // $userId = Auth::id();
+        // $dataFix = App\Models\BarangMasukDisainer::where('layout_id', $userId)->
+        // where('tanda_telah_mengerjakan', 1)->
+        // count();
+        // dd($dataFix);
+        @endphp
         <li class="menu-header small text-uppercase">
             <span class="menu-header-text">Layout</span>
         </li>
-        <li class="menu-item {{ request()->is('data-Lk-Layout') ? 'active' : '' }}">
+        <li
+            class="menu-item {{ request()->is('data-Lk-Layout') || request()->is('create-laporan-lk/*') ? 'active' : '' }}">
             <a href="{{ route('getIndexLkLayoutPegawai') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-file"></i>
                 <div data-i18n="Analytics">Data LK</div>
-                {{-- <span style="margin-left: 10px; margin-bottom: 20px;" class="badge bg-label-success">10</span> --}}
+                {{-- <span style="margin-left: 10px; margin-bottom: 20px;" class="badge bg-label-success">{{ $dataFix
+                    }}</span> --}}
+            </a>
+        </li>
+        <li
+            class="menu-item {{ request()->is('laporan-Lk-Layout') || request()->is('show-laporan-Lk-Layout/*')  ? 'active' : '' }}">
+            <a href="{{ route('getIndexLaporanLk') }}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-file"></i>
+                <div data-i18n="Analytics">Laporan data Lk</div>
             </a>
         </li>
         @endif

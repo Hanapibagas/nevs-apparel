@@ -119,6 +119,7 @@ return new class extends Migration
             $table->string('ket_tambahan_celana_1')->nullable();
             $table->longText('keterangan_celana_1')->nullable();
 
+            $table->longText('file_corel_disainer')->nullable();
             $table->longText('keterangan_lengkap')->nullable();
 
             $table->string('aksi')->default('0');

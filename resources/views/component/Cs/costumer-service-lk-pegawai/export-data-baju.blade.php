@@ -449,6 +449,7 @@
         </tr>
     </table>
 
+    @if ($dataLk->file_celana_player)
     {{-- celana pelayer --}}
     <h3 style="text-align: center; margin-top: 110px;"></h3>
     <h4 style="display: flex; margin-top: -210px; text-transform: uppercase;">DISINER : {{ $dataLk->Users->name }}
@@ -557,7 +558,9 @@
             <td>{{ $dataLk->ket_bis_celana_celana_player }}</td>
         </tr>
     </table>
+    @endif
 
+    @if ($dataLk->file_celana_pelatih)
     {{-- celana pelatih --}}
     <h3 style="text-align: center; margin-top: 110px;page-break-before: always;"></h3>
     <h4 style="display: flex; margin-top: -210px; text-transform: uppercase;">DISINER : {{ $dataLk->Users->name }}
@@ -667,7 +670,9 @@
             <td>{{ $dataLk->ket_bis_celana_celana_pelatih }}</td>
         </tr>
     </table>
+    @endif
 
+    @if ($dataLk->file_celana_kiper)
     {{-- celana kiper --}}
     <h3 style="text-align: center; margin-top: 110px;page-break-before: always;"></h3>
     <h4 style="display: flex; margin-top: -210px; text-transform: uppercase;">DISINER : {{ $dataLk->Users->name }}
@@ -777,7 +782,9 @@
             <td>{{ $dataLk->ket_bis_celana_celana_kiper }}</td>
         </tr>
     </table>
+    @endif
 
+    @if ($dataLk->file_celana_1)
     {{-- celana pelayer 1 --}}
     <h3 style="text-align: center; margin-top: 110px;page-break-before: always;"></h3>
     <h4 style="display: flex; margin-top: -210px; text-transform: uppercase;">DISINER : {{ $dataLk->Users->name }}
@@ -887,10 +894,16 @@
             <td>{{ $dataLk->ket_bis_celana_celana_1 }}</td>
         </tr>
     </table>
+    @endif
 
-    <div class=""><br>
-        <h1 style="font-size: 30px; margin-top: 230px;">
-            {{ $dataLk->keterangan_lengkap }}
+    <style>
+        .font {
+            font-size: 30px;
+        }
+    </style>
+    <div class="font"><br>
+        <h1 style="margin-top: 230px;">
+            {!! $dataLk->keterangan_lengkap !!}
         </h1>
     </div>
 
@@ -1207,6 +1220,7 @@
         </tr>
     </table>
 
+    @if ($dataLk->file_celana_player)
     {{-- celana pelayer --}}
     <h3 style="text-align: center; margin-top: 110px;"></h3>
     <h4 style="display: flex; margin-top: -210px; text-transform: uppercase;">DISINER : {{ $dataLk->Users->name }}
@@ -1315,7 +1329,9 @@
             <td>{{ $dataLk->ket_bis_celana_celana_player }}</td>
         </tr>
     </table>
+    @endif
 
+    @if ($dataLk->file_celana_pelatih)
     {{-- celana pelatih --}}
     <h3 style="text-align: center; margin-top: 110px;page-break-before: always;"></h3>
     <h4 style="display: flex; margin-top: -210px; text-transform: uppercase;">DISINER : {{ $dataLk->Users->name }}
@@ -1425,6 +1441,9 @@
             <td>{{ $dataLk->ket_bis_celana_celana_pelatih }}</td>
         </tr>
     </table>
+    @endif
+
+    @if ($dataLk->file_celana_kiper)
     {{-- celana kiper --}}
     <h3 style="text-align: center; margin-top: 110px;page-break-before: always;"></h3>
     <h4 style="display: flex; margin-top: -210px; text-transform: uppercase;">DISINER : {{ $dataLk->Users->name }}
@@ -1534,10 +1553,16 @@
             <td>{{ $dataLk->ket_bis_celana_celana_kiper }}</td>
         </tr>
     </table>
+    @endif
 
-    <div class=""><br>
-        <h1 style="font-size: 30px; margin-top: 230px;">
-            {{ $dataLk->keterangan_lengkap }}
+    <style>
+        .font {
+            font-size: 30px;
+        }
+    </style>
+    <div class="font"><br>
+        <h1 style="margin-top: 230px;">
+            {!! $dataLk->keterangan_lengkap !!}
         </h1>
     </div>
     @elseif ($dataLk->file_baju_pelatih)
@@ -1749,6 +1774,7 @@
         </tr>
     </table>
 
+    @if ($dataLk->file_celana_player)
     {{-- celana pelayer --}}
     <h3 style="text-align: center; margin-top: 110px; page-break-before: always;"></h3>
     <h4 style="display: flex; margin-top: -210px; text-transform: uppercase;">DISINER : {{ $dataLk->Users->name }}
@@ -1857,7 +1883,9 @@
             <td>{{ $dataLk->ket_bis_celana_celana_player }}</td>
         </tr>
     </table>
+    @endif
 
+    @if ($dataLk->file_celana_pelatih)
     {{-- celana pelatih --}}
     <h3 style="text-align: center; margin-top: 110px;page-break-before: always;"></h3>
     <h4 style="display: flex; margin-top: -210px; text-transform: uppercase;">DISINER : {{ $dataLk->Users->name }}
@@ -1967,10 +1995,16 @@
             <td>{{ $dataLk->ket_bis_celana_celana_pelatih }}</td>
         </tr>
     </table>
+    @endif
 
-    <div class=""><br>
-        <h1 style="font-size: 30px; margin-top: 230px;">
-            {{ $dataLk->keterangan_lengkap }}
+    <style>
+        .font {
+            font-size: 30px;
+        }
+    </style>
+    <div class="font"><br>
+        <h1 style="margin-top: 230px;">
+            {!! $dataLk->keterangan_lengkap !!}
         </h1>
     </div>
     @elseif ($dataLk->file_baju_player)
@@ -2078,6 +2112,7 @@
         </tr>
     </table>
 
+    @if ($dataLk->file_celana_player)
     {{-- celana pelayer --}}
     <h3 style="text-align: center; margin-top: 110px;"></h3>
     <h4 style="display: flex; margin-top: -210px; text-transform: uppercase;">DISINER : {{ $dataLk->Users->name }}
@@ -2186,10 +2221,16 @@
             <td>{{ $dataLk->ket_bis_celana_celana_player }}</td>
         </tr>
     </table>
+    @endif
 
-    <div class=""><br>
-        <h1 style="font-size: 30px; margin-top: 230px;">
-            {{ $dataLk->keterangan_lengkap }}
+    <style>
+        .font {
+            font-size: 30px;
+        }
+    </style>
+    <div class="font"><br>
+        <h1 style="margin-top: 230px;">
+            {!! $dataLk->keterangan_lengkap !!}
         </h1>
     </div>
     @endif

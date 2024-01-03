@@ -82,8 +82,7 @@
                                             Edit LK</a>
                                         <a target="_blank" href="{{ route('getCetakDataLk', $disainers->id) }}"
                                             class="btn btn-danger">
-                                            <i class="menu-icon tf-icons bx bxs-file-pdf"></i>Export
-                                            data LK</a>
+                                            <i class="menu-icon tf-icons bx bxs-file-pdf"></i>Download PDF LK</a>
                                         {{-- <a target="_blank" href="{{ route('getCetakDataLk', $disainers->id) }}"
                                             style="margin-top: 10px" class="btn rounded-pill btn-danger" type="button">
                                             <i class="menu-icon tf-icons bx bxs-file-pdf"></i>Export

@@ -1,0 +1,76 @@
+@extends('layouts.app')
+
+@push('css')
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.css" />
+@endpush
+
+@section('content')
+@if (session('success'))
+<script>
+    Swal.fire({
+        icon: 'success',
+        title: 'Sukses!',
+        text : "{{ session('success') }}",
+    });
+</script>
+@endif
+
+@if (session('error'))
+<script>
+    Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: "{{ session('error') }}",
+    })
+</script>
+@endif
+
+<div class="content-wrapper">
+    <div class="container-xxl flex-grow-1 container-p-y">
+        <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Tables /</span> Layout</h4>
+        <div class="card">
+            <h5 class="card-header">Data Lembaran Kerja</h5>
+            <div class="card-body">
+                <div class="table-responsive text-nowrap">
+                    <table id="cs" class="table">
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>no.order</th>
+                                <th>nama tim</th>
+                                <th>nama layout</th>
+                                <th>aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ( $oderCs as $key => $disainers )
+                            <tr>
+                                <td>{{ $key+1 }}</td>
+                                <td>
+                                    {{ $disainers->no_order }}
+                                </td>
+                                <td>{{ $disainers->BarangMasukDisainer->nama_tim }}</td>
+                                <td>
+                                    {{ $disainers->UsersLk->name }}
+                                </td>
+                                <td>
+                                    <a href="{{ route('getShowLaporanLkLayout' , $disainers->id) }}"
+                                        class="btn btn-info">
+                                        <i class="menu-icon tf-icons bx bxs-show"></i>Show Laporan</a>
+                                </td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@endsection
+
+@push('js')
+<script>
+    new DataTable('#cs');
+</script>
+@endpush

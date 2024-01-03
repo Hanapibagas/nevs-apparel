@@ -1567,7 +1567,14 @@
 @push('js')
 <script src="https://cdn.ckeditor.com/4.19.1/standard/ckeditor.js"></script>
 <script>
-    // CKEDITOR.replace('keterangan_lengkap');
-    // CKEDITOR.replace('keterangan_lengkap');
+    CKEDITOR.replace('keterangan_lengkap');
+    CKEDITOR.replace('keterangan_baju_pelayer');
+    CKEDITOR.replace('keterangan_baju_pelatih');
+    CKEDITOR.replace('keterangan_baju_kiper');
+    CKEDITOR.replace('keterangan_baju_1');
+    CKEDITOR.replace('keterangan_celana_pelayer');
+    CKEDITOR.replace('keterangan_celana_pelatih');
+    CKEDITOR.replace('keterangan_celana_kiper');
+    CKEDITOR.replace('keterangan_celana_1');
 </script>
 @endpush

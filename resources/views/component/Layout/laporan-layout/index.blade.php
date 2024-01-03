@@ -27,9 +27,9 @@
 
 <div class="content-wrapper">
     <div class="container-xxl flex-grow-1 container-p-y">
-        <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Tables /</span> Layout</h4>
+        <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Tables /</span> Costumer Service</h4>
         <div class="card">
-            <h5 class="card-header">Data Lembaran Kerja</h5>
+            <h5 class="card-header">Data LK </h5>
             <div class="card-body">
                 <div class="table-responsive text-nowrap">
                     <table id="cs" class="table">
@@ -43,7 +43,7 @@
                                 <th>aksi</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        {{-- <tbody>
                             @foreach ( $oderCs as $key => $disainers )
                             <tr>
                                 <td>{{ $key+1 }}</td>
@@ -78,18 +78,13 @@
                                         @elseif ($disainers->aksi == 1)
                                         <a target="_blank" href="{{ route('getCetakDataLkLayout', $disainers->id) }}"
                                             class="btn btn-danger">
-                                            <i class="menu-icon tf-icons bx bxs-file-pdf"></i>Download LK</a>
-                                        <a target="_blank" href="storage/{{ $disainers->file_corel_disainer }}"
-                                            class="btn btn-success">
-                                            <i class="menu-icon tf-icons bx bxs-download"></i>Download File Corel</a>
-                                        <a href="{{ route('getCreateLaporanLkLayout' , $disainers->id) }}"
-                                            class="btn btn-info">
-                                            <i class="menu-icon tf-icons bx bxs-inbox"></i>Input Laporan</a>
+                                            <i class="menu-icon tf-icons bx bxs-file-pdf"></i>Export
+                                            data LK</a>
                                         @endif
                                     </td>
                             </tr>
                             @endforeach
-                        </tbody>
+                        </tbody> --}}
                     </table>
                 </div>
             </div>

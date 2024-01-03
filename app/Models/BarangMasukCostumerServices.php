@@ -116,6 +116,7 @@ class BarangMasukCostumerServices extends Model
         'ket_tambahan_celana_1',
         'keterangan_celana_1',
 
+        'file_corel_disainer',
         'keterangan_lengkap',
         'aksi',
         'tanda_telah_mengerjakan',

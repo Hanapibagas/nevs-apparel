@@ -120,6 +120,11 @@ class DisainerController extends Controller
             $originalFileName = $uploadFile->getClientOriginalName();
             $fileCelana1 = $uploadFile->storeAs('file-dari-disainer-to-Cs-celana', $originalFileName, 'public');
         }
+        if ($request->file('file_corel_disainer')) {
+            $uploadFile = $request->file('file_corel_disainer');
+            $originalFileName = $uploadFile->getClientOriginalName();
+            $fileCorelDisainer = $uploadFile->storeAs('file-corel-disainer', $originalFileName, 'public');
+        }
 
         BarangMasukCostumerServices::create([
             'no_order' => $no_order,
@@ -135,6 +140,7 @@ class DisainerController extends Controller
             'file_celana_pelatih' => $fileCelanapelatih,
             'file_celana_kiper' => $fileCelanakiper,
             'file_celana_1' => $fileCelana1,
+            'file_corel_disainer' => $fileCorelDisainer,
             'tanggal_masuk' => Carbon::now(),
         ]);
 
