@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Mesin;
 
 use App\Http\Controllers\Controller;
+use App\Models\BarangMasukCostumerServices;
 use App\Models\BarangMasukMesin;
+use App\Models\MesinAtexco;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -28,5 +30,13 @@ class AtexcoController extends Controller
         ]);
 
         return redirect()->back()->with('success', 'Selamat data yang input berhasil!');
+    }
+
+    // $dataMasuk = MesinAtexco::with(['BarangMasukCs', 'BarangMasukAtexco'])->get();
+    public function getIndexDataMasukAtexco()
+    {
+        $dataMasuk = BarangMasukCostumerServices::where('jenis_mesin', 'atexco')->with('LaporanLkLayout', 'MesinAtexco')->get();
+
+        return response()->json($dataMasuk);
     }
 }

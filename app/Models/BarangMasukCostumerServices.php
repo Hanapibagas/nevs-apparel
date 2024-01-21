@@ -120,6 +120,7 @@ class BarangMasukCostumerServices extends Model
         'keterangan_lengkap',
         'aksi',
         'tanda_telah_mengerjakan',
+        // 'tanda_inputan_laporan',
     ];
 
     public function BarangMasukDisainer()
@@ -140,6 +141,16 @@ class BarangMasukCostumerServices extends Model
     public function UsersLk()
     {
         return $this->belongsTo(User::class, 'layout_id');
+    }
+
+    public function LaporanLkLayout()
+    {
+        return $this->hasMany(LaporanLkLayout::class, 'no_order_id');
+    }
+
+    public function MesinAtexco()
+    {
+        return $this->hasMany(MesinAtexco::class, 'barang_masuk');
     }
 
     // player

@@ -21,7 +21,7 @@ return new class extends Migration
             $table->foreignId('nama_penanggung_jawab_mesin_ACC')->nullable()->constrained('users')->onUpdate('cascade')->onDelete('cascade');;
             $table->string('file');
             $table->string('status')->default('0');
-            $table->longText('keterangan');
+            $table->longText('keterangan')->nullable();
             $table->timestamps();
         });
     }

@@ -83,6 +83,8 @@ Route::middleware(['auth', 'checkroll:disainer'])->group(function () {
 
 Route::middleware(['auth', 'checkroll:atexco'])->group(function () {
     Route::get('/mesin-atexco', [AtexcoController::class, 'getIndexAtexco'])->name('getIndexMesinAtexcoPegawai');
+    Route::get('/data-masuk-mesin-atexco', [AtexcoController::class, 'getIndexDataMasukAtexco'])->name('getIndexDataMasukMesinAtexco');
+
     Route::put('/mesin-atxco/{id}', [AtexcoController::class, 'putFeedBackToDisainer'])->name('putFeedbackByAtexcoPegawai');
 });
 

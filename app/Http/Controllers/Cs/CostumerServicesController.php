@@ -4,14 +4,26 @@ namespace App\Http\Controllers\Cs;
 
 use App\Http\Controllers\Controller;
 use App\Models\BarangMasukCostumerServices;
+use App\Models\BarangMasukDatalayout;
 use App\Models\BarangMasukDisainer;
+use App\Models\DataJahitBaju;
+use App\Models\DataJahitCelana;
+use App\Models\DataLaserCut;
+use App\Models\DataManualCut;
+use App\Models\DataPacking;
+use App\Models\DataPressKain;
+use App\Models\DataPressTagSize;
+use App\Models\DataSortir;
 use App\Models\KeraBaju;
+use App\Models\MesinAtexco;
+use App\Models\MesinMimaki;
 use App\Models\PolaCeleana;
 use App\Models\PolaLengan;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use PDF;
+use Carbon\Carbon;
 
 class CostumerServicesController extends Controller
 {
@@ -98,7 +110,6 @@ class CostumerServicesController extends Controller
         }
         $oderCs = BarangMasukCostumerServices::with('BarangMasukDisainer', 'Users', 'UsersOrder')->find($id);
 
-        // return response()->json($userCounts);
         $kera = KeraBaju::all();
         $lengan = PolaLengan::all();
         $celana = PolaCeleana::all();
@@ -394,7 +405,68 @@ class CostumerServicesController extends Controller
             'tanda_telah_mengerjakan' => '1',
         ]);
 
-        // return response()->json($lk);
+        if (Carbon::parse($lk->tanggal_masuk)->dayOfWeek === Carbon::SATURDAY) {
+            $deadline = Carbon::parse($lk->tanggal_masuk)->addDays(2);
+            $barangMasukDataLayout = BarangMasukDatalayout::create([
+                'users_layout_id' => $lk->layout_id,
+                'no_order_id' => $lk->id,
+                'deadline' => $deadline,
+            ]);
+        } else {
+            $deadline = Carbon::parse($lk->tanggal_masuk)->addDay();
+            $barangMasukDataLayout = BarangMasukDatalayout::create([
+                'users_layout_id' => $lk->layout_id,
+                'no_order_id' => $lk->id,
+                'deadline' => $deadline,
+            ]);
+        }
+
+        if ($lk->jenis_mesin == 'atexco') {
+            MesinAtexco::create([
+                'barang_masuk_disainer_id' => $lk->id,
+                'barang_masuk_layout_id' => $barangMasukDataLayout->id,
+                'nama_mesin' => $lk->jenis_mesin,
+            ]);
+        } elseif ($lk->jenis_mesin == 'mimaki') {
+            MesinMimaki::create([
+                'barang_masuk_disainer_id' => $lk->id,
+                'barang_masuk_layout_id' => $barangMasukDataLayout->id,
+                'nama_mesin' => $lk->jenis_mesin,
+            ]);
+        }
+
+        $dataPressKain = DataPressKain::create([
+            'no_order_id' => $lk->id,
+        ]);
+
+        $dataLaseCut = DataLaserCut::create([
+            'no_order_id' => $lk->id,
+        ]);
+
+        $dataManualCut = DataManualCut::create([
+            'no_order_id' => $lk->id,
+        ]);
+
+        $dataSortit = DataSortir::create([
+            'no_order_id' => $lk->id,
+        ]);
+
+        $dataJahitBaju = DataJahitBaju::create([
+            'no_order_id' => $lk->id,
+        ]);
+
+        $dataJahitCelana = DataJahitCelana::create([
+            'no_order_id' => $lk->id,
+        ]);
+
+        $dataPressSize = DataPressTagSize::create([
+            'no_order_id' => $lk->id,
+        ]);
+
+        $dataPacking = DataPacking::create([
+            'no_order_id' => $lk->id,
+        ]);
+
         return redirect()->route('getIndexLkCsPegawai')->with('success', 'Selamat data yang input berhasil!');
     }
 

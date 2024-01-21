@@ -13,12 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('laporan_lk_layouts', function (Blueprint $table) {
+        Schema::create('data_jahit_bajus', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('users_layout_id')->nullable()->constrained('users')->onUpdate('cascade')->onDelete('cascade');
             $table->foreignId('no_order_id')->nullable()->constrained('barang_masuk_costumer_services')->onUpdate('cascade')->onDelete('cascade');
-            $table->string('panjang_kertas')->nullable();
-            $table->string('file_corel_layout')->nullable();
+            $table->string('deadline')->nullable();
             $table->timestamps();
         });
     }
@@ -30,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('laporan_lk_layouts');
+        Schema::dropIfExists('data_jahit_bajus');
     }
 };

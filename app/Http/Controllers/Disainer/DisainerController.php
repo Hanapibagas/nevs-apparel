@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\BarangMasukCostumerServices;
 use App\Models\BarangMasukDisainer;
 use App\Models\BarangMasukMesin;
+use App\Models\MesinAtexco;
+use App\Models\MesinMimaki;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -126,7 +128,7 @@ class DisainerController extends Controller
             $fileCorelDisainer = $uploadFile->storeAs('file-corel-disainer', $originalFileName, 'public');
         }
 
-        BarangMasukCostumerServices::create([
+        $barangMasuk = BarangMasukCostumerServices::create([
             'no_order' => $no_order,
             'barang_masuk_disainer_id' => $request->barang_masuk_disainer_id,
             'disainer_id' => $user->id,
@@ -143,6 +145,18 @@ class DisainerController extends Controller
             'file_corel_disainer' => $fileCorelDisainer,
             'tanggal_masuk' => Carbon::now(),
         ]);
+
+        // if ($request->jenis_mesin == 'atexco') {
+        //     MesinAtexco::create([
+        //         'barang_masuk' => $barangMasuk->id,
+        //         'nama_mesin' => $barangMasuk->jenis_mesin,
+        //     ]);
+        // } elseif ($request->jenis_mesin == 'mimaki') {
+        //     MesinMimaki::create([
+        //         'barang_masuk' => $barangMasuk->id,
+        //         'nama_mesin' => $barangMasuk->jenis_mesin,
+        //     ]);
+        // }
 
         $update = BarangMasukDisainer::where('nama_tim', $nama_tim)->first();
         $update->update([

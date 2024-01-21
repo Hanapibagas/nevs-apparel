@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Layout;
 
 use App\Http\Controllers\Controller;
 use App\Models\BarangMasukCostumerServices;
+use App\Models\BarangMasukDatalayout;
 use App\Models\LaporanLkLayout;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -14,9 +15,8 @@ class LayoutController extends Controller
     public function getIndexLkCs()
     {
         $user = Auth::user();
-        $oderCs = BarangMasukCostumerServices::where('layout_id', $user->id)
-            ->with('BarangMasukDisainer', 'Users', 'UsersOrder', 'UsersLk')
-            ->where('tanda_input_laporan', 0)
+        $oderCs = BarangMasukDatalayout::with('UserLayout', 'BarangMasukCsLK')
+            ->where('users_layout_id', $user->id)
             ->get();
 
         return view('component.Layout.layout-lk-pegawai.index', compact('oderCs'));
@@ -25,9 +25,8 @@ class LayoutController extends Controller
     public function getIndexLaporanLk()
     {
         $user = Auth::user();
-        $oderCs = BarangMasukCostumerServices::where('layout_id', $user->id)
-            ->with('BarangMasukDisainer', 'Users', 'UsersOrder', 'UsersLk')
-            ->where('tanda_input_laporan', 1)
+        $oderCs = BarangMasukDatalayout::with('UserLayout', 'BarangMasukCsLK')
+            ->where('users_layout_id', $user->id)
             ->get();
 
         return view('component.Layout.layout-lk-pegawai.index-laporan-lk', compact('oderCs'));
@@ -70,34 +69,34 @@ class LayoutController extends Controller
         return view('component.Layout.layout-lk-pegawai.cerate-laporan-lk', compact('dataLk'));
     }
 
-    public function postLaporanLk(Request $request)
-    {
-        $user = Auth::user();
+    // public function postLaporanLk(Request $request)
+    // {
+    //     $user = Auth::user();
 
-        if ($request->file('file_corel_layout')) {
-            $uploadFile = $request->file('file_corel_layout');
-            $originalFileName = $uploadFile->getClientOriginalName();
-            $filebajuplayer = $uploadFile->storeAs('file-dari-layout', $originalFileName, 'public');
-        }
+    //     if ($request->file('file_corel_layout')) {
+    //         $uploadFile = $request->file('file_corel_layout');
+    //         $originalFileName = $uploadFile->getClientOriginalName();
+    //         $filebajuplayer = $uploadFile->storeAs('file-dari-layout', $originalFileName, 'public');
+    //     }
 
-        LaporanLkLayout::create([
-            'users_layout_id' => $user->id,
-            'no_order_id' => $request->no_order_id,
-            'panjang_kertas' => $request->panjang_kertas,
-            'file_corel_layout' => $filebajuplayer,
-        ]);
+    //     LaporanLkLayout::create([
+    //         'users_layout_id' => $user->id,
+    //         'no_order_id' => $request->no_order_id,
+    //         'panjang_kertas' => $request->panjang_kertas,
+    //         'file_corel_layout' => $filebajuplayer,
+    //     ]);
 
-        $updateLaporan = $request->no_order_id;
-        BarangMasukCostumerServices::where('id', $updateLaporan)->update(['tanda_input_laporan' => 1]);
+    //     $updateLaporan = $request->no_order_id;
+    //     BarangMasukCostumerServices::where('id', $updateLaporan)->update(['tanda_input_laporan' => 1]);
 
-        return redirect()->route('getIndexLkLayoutPegawai')->with('success', 'Selamat data yang anda input telah terkirim!');
-    }
+    //     return redirect()->route('getIndexLkLayoutPegawai')->with('success', 'Selamat data yang anda input telah terkirim!');
+    // }
 
-    public function showDataLaporanLk($id)
-    {
-        $show = LaporanLkLayout::with('UserLayout', 'BarangMasukCsLK')->find($id);
+    // public function showDataLaporanLk($id)
+    // {
+    //     $show = LaporanLkLayout::with('UserLayout', 'BarangMasukCsLK')->find($id);
 
-        // return response()->json($show);
-        return view('component.Layout.layout-lk-pegawai.show-laporan-lk', compact('show'));
-    }
+    //     // return response()->json($show);
+    //     return view('component.Layout.layout-lk-pegawai.show-laporan-lk', compact('show'));
+    // }
 }

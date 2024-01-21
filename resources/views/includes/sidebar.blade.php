@@ -213,6 +213,12 @@
                 <div data-i18n="Analytics">Data Masuk Mesin Atxco</div>
                 {{-- <span style="margin-left: 10px; margin-bottom: 20px;" class="badge bg-label-success">10</span> --}}
             </a>
+        <li class="menu-item">
+            <a href="{{ route('getIndexDataMasukMesinAtexco') }}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-cog"></i>
+                <div data-i18n="Analytics">Data Masuk </div>
+                {{-- <span style="margin-left: 10px; margin-bottom: 20px;" class="badge bg-label-success">10</span> --}}
+            </a>
         </li>
         @endif
 
