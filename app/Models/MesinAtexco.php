@@ -10,10 +10,10 @@ class MesinAtexco extends Model
     use HasFactory;
 
     protected $fillable = [
-        'barang_masuk_disainer_id',
+        'no_order_id',
         'barang_masuk_layout_id',
         'nama_mesin',
-        'deadline'
+        'deadline',
     ];
 
     public function BarangMasukCs()

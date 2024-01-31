@@ -28,8 +28,9 @@ return new class extends Migration
             $table->foreignId('layout_id')->nullable()->constrained('users')->onUpdate('cascade')->onDelete('cascade');
             $table->string('jenis_produksi')->nullable();
             $table->string('pola')->nullable();
-            $table->dateTime('tanggal_masuk')->nullable();
-            $table->dateTime('deadline')->nullable();
+            $table->date('tanggal_masuk')->nullable();
+            $table->date('deadline')->nullable();
+            $table->string('total')->nullable();
 
             // ukuran player
             $table->string('file_baju_player')->nullable();

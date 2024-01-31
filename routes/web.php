@@ -16,6 +16,8 @@ use Illuminate\Support\Facades\Route;
 Route::middleware(['auth', 'checkroll:super_admin,disainer,layout,cs,atexco,mimaki'])->group(function () {
     Route::get('/', [HomeController::class, 'index'])->name('indexHome');
     // route admin cs
+    Route::get('/laporan', [HomeController::class, 'getLaporan'])->name('getIndexLaporan');
+
     Route::get('/costumer-service-admin', [HomeController::class, 'getCostumerSevices'])->name('getIndexCs');
     Route::post('/costumer-service-admin/update', [HomeController::class, 'postUpdatePirmission'])->name('postPirmission');
     Route::post('/costumer-service-admin/createCs', [HomeController::class, 'postPegawaiCs'])->name('postCreateCs');

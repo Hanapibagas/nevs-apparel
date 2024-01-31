@@ -18,6 +18,7 @@ return new class extends Migration
             $table->foreignId('users_layout_id')->nullable()->constrained('users')->onUpdate('cascade')->onDelete('cascade');
             $table->foreignId('no_order_id')->nullable()->constrained('barang_masuk_costumer_services')->onUpdate('cascade')->onDelete('cascade');
             $table->string('deadline')->nullable();
+            $table->string('selesai')->nullable();
             $table->string('panjang_kertas')->nullable();
             $table->string('file_corel_layout')->nullable();
             $table->timestamps();

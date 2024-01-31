@@ -143,10 +143,10 @@ class BarangMasukCostumerServices extends Model
         return $this->belongsTo(User::class, 'layout_id');
     }
 
-    public function LaporanLkLayout()
-    {
-        return $this->hasMany(LaporanLkLayout::class, 'no_order_id');
-    }
+    // public function LaporanLkLayout()
+    // {
+    //     return $this->hasMany(LaporanLkLayout::class, 'no_order_id');
+    // }
 
     public function MesinAtexco()
     {

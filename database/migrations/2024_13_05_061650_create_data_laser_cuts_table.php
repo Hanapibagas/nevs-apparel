@@ -16,7 +16,9 @@ return new class extends Migration
         Schema::create('data_laser_cuts', function (Blueprint $table) {
             $table->id();
             $table->foreignId('no_order_id')->nullable()->constrained('barang_masuk_costumer_services')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('penanggung_jawab_id')->nullable()->constrained('users')->onUpdate('cascade')->onDelete('cascade');
             $table->string('deadline')->nullable();
+            $table->string('selesai')->nullable();
             $table->timestamps();
         });
     }

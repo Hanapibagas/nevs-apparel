@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Laporan;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -122,5 +123,30 @@ class HomeController extends Controller
         ]);
 
         return redirect()->back()->with('success', 'Data pegawai telah ditambah.');
+    }
+
+    public function getLaporan()
+    {
+        $laporans = Laporan::with(
+            'BarangMasukCs.UsersOrder',
+            'BarangMasukCs.Users',
+            'BarangMasukCs.UsersLk',
+            'BarangMasukCs.BarangMasukDisainer',
+            'BarangMasukLayout',
+            'BarangMasukLayout.UserLayout',
+            'BarangMasukMesinAtexco',
+            'BarangMasukMesinMimaki',
+            'BarangMasukPressKain',
+            'BarangMasukLaserCut',
+            'BarangMasukManualcut',
+            'BarangMasukSortir',
+            'BarangMasukJahitBaju',
+            'BarangMasukJahitCelana',
+            'BarangMasukPressTag',
+            'BarangMasukPacking',
+        )->get();
+
+        // return response()->json($laporans);
+        return view('component.Admin.laporan-pengerjaan.index', compact('laporans'));
     }
 }

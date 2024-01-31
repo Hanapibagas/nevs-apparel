@@ -102,6 +102,12 @@
                 </li>
             </ul>
         </li>
+        <li class="menu-item {{ request()->is('laporan')  ? 'active' : '' }}">
+            <a href="{{ route('getIndexLaporan') }}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-list-ul"></i>
+                <div data-i18n="Analytics">Laporan pengerjaan</div>
+            </a>
+        </li>
         @endif
 
         @if (Auth::user()->roles == 'cs')

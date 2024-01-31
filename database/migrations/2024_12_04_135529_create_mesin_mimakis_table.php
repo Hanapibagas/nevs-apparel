@@ -15,9 +15,11 @@ return new class extends Migration
     {
         Schema::create('mesin_mimakis', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('barang_masuk_disainer_id')->nullable()->constrained('barang_masuk_costumer_services')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('no_order_id')->nullable()->constrained('barang_masuk_costumer_services')->onUpdate('cascade')->onDelete('cascade');
             $table->foreignId('barang_masuk_layout_id')->nullable()->constrained('barang_masuk_datalayouts')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('penanggung_jawab_id')->nullable()->constrained('users')->onUpdate('cascade')->onDelete('cascade');
             $table->string('deadline')->nullable();
+            $table->string('selesai')->nullable();
             $table->string('nama_mesin')->nullable();
             $table->timestamps();
         });
