@@ -1,3 +1,21 @@
+@php
+$isActive = request()->routeIs('getIndexCs') ||
+$isActive = request()->routeIs('getIndexDesainer') ||
+$isActive = request()->routeIs('getIndexLayout') ||
+$isActive = request()->routeIs('getIndexMesinAtexco') ||
+$isActive = request()->routeIs('getIndexMesinMimaki') ||
+$isActive = request()->routeIs('getPressKain') ||
+$isActive = request()->routeIs('getLaserCut') ||
+$isActive = request()->routeIs('getManualut') ||
+$isActive = request()->routeIs('getSortir') ||
+$isActive = request()->routeIs('getJahitBaju') ||
+$isActive = request()->routeIs('getJahitCelana') ||
+$isActive = request()->routeIs('getPressTag') ||
+$isActive = request()->routeIs('getPacking')
+;
+$activeClass = $isActive ? 'open' : '';
+$active = $isActive ? 'active' : '';
+@endphp
 <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
     <div class="app-brand demo">
         <a href="index.html" class="app-brand-link">
@@ -64,49 +82,84 @@
         <li class="menu-header small text-uppercase">
             <span class="menu-header-text">Super Admin</span>
         </li>
-        <li class="menu-item">
-            <a href="javascript:void(0);" class="menu-link menu-toggle">
-                <i class="menu-icon tf-icons bx bx-dock-top"></i>
-                <div data-i18n="Account Settings">Account Settings</div>
-            </a>
-            <ul class="menu-sub">
-                <li class="menu-item">
-                    <a href="{{ route('getIndexCs') }}" class="menu-link">
-                        <div data-i18n="Account">Costumer Service</div>
-                    </a>
-                </li>
-                <li class="menu-item">
-                    <a href="{{ route('getIndexDesainer') }}" class="menu-link">
-                        <div data-i18n="Notifications">Desainer</div>
-                    </a>
-                </li>
-                <li class="menu-item">
-                    <a href="{{ route('getIndexLayout') }}" class="menu-link">
-                        <div data-i18n="Connections">Layout</div>
-                    </a>
-                </li>
-                <li class="menu-item">
-                    <a href="{{ route('getIndexMesinAtexco') }}" class="menu-link">
-                        <div data-i18n="Connections">Mesin Atxco</div>
-                    </a>
-                </li>
-                <li class="menu-item">
-                    <a href="{{ route('getIndexMesinMimaki') }}" class="menu-link">
-                        <div data-i18n="Connections">Mesin Mimaki</div>
-                    </a>
-                </li>
-                <li class="menu-item">
-                    <a href="{{ route('getIndexPembagianLayout') }}" class="menu-link">
-                        <div data-i18n="Connections">Pemabagian Layout</div>
-                    </a>
-                </li>
-            </ul>
-        </li>
         <li class="menu-item {{ request()->is('laporan')  ? 'active' : '' }}">
             <a href="{{ route('getIndexLaporan') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-list-ul"></i>
                 <div data-i18n="Analytics">Laporan pengerjaan</div>
             </a>
+        </li>
+        <li class="menu-item {{ $activeClass }} {{ $active }}">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons bx bx-dock-top"></i>
+                <div data-i18n="Account Settings">Account Settings</div>
+            </a>
+            <ul class="menu-sub">
+                <li class="menu-item {{ request()->is('costumer-service-admin')  ? 'active' : '' }}">
+                    <a href="{{ route('getIndexCs') }}" class="menu-link">
+                        <div data-i18n="Account">Costumer Service</div>
+                    </a>
+                </li>
+                <li class="menu-item {{ request()->is('desainer-admin')  ? 'active' : '' }}">
+                    <a href="{{ route('getIndexDesainer') }}" class="menu-link">
+                        <div data-i18n="Notifications">Desainer</div>
+                    </a>
+                </li>
+                <li class="menu-item {{ request()->is('layout-admin')  ? 'active' : '' }}">
+                    <a href="{{ route('getIndexLayout') }}" class="menu-link">
+                        <div data-i18n="Connections">Layout</div>
+                    </a>
+                </li>
+                <li class="menu-item {{ request()->is('mesin-atexco-admin')  ? 'active' : '' }}">
+                    <a href="{{ route('getIndexMesinAtexco') }}" class="menu-link">
+                        <div data-i18n="Connections">Mesin Atxco</div>
+                    </a>
+                </li>
+                <li class="menu-item {{ request()->is('mesin-mimaki-admin')  ? 'active' : '' }}">
+                    <a href="{{ route('getIndexMesinMimaki') }}" class="menu-link">
+                        <div data-i18n="Connections">Mesin Mimaki</div>
+                    </a>
+                </li>
+                <li class="menu-item {{ request()->is('press-kain-admin')  ? 'active' : '' }}">
+                    <a href="{{ route('getPressKain') }}" class="menu-link">
+                        <div data-i18n="Connections">Press Kain</div>
+                    </a>
+                </li>
+                <li class="menu-item {{ request()->is('laser-cut-admin')  ? 'active' : '' }}">
+                    <a href="{{ route('getLaserCut') }}" class="menu-link">
+                        <div data-i18n="Connections">Laser Cut</div>
+                    </a>
+                </li>
+                <li class="menu-item {{ request()->is('manual-cut-admin')  ? 'active' : '' }}">
+                    <a href="{{ route('getManualut') }}" class="menu-link">
+                        <div data-i18n="Connections">Manual Cut</div>
+                    </a>
+                </li>
+                <li class="menu-item {{ request()->is('sortir-admin')  ? 'active' : '' }}">
+                    <a href="{{ route('getSortir') }}" class="menu-link">
+                        <div data-i18n="Connections">Sortir</div>
+                    </a>
+                </li>
+                <li class="menu-item {{ request()->is('jahit-baju-admin')  ? 'active' : '' }}">
+                    <a href="{{ route('getJahitBaju') }}" class="menu-link">
+                        <div data-i18n="Connections">Jahit Baju</div>
+                    </a>
+                </li>
+                <li class="menu-item {{ request()->is('jahit-celana-admin')  ? 'active' : '' }}">
+                    <a href="{{ route('getJahitCelana') }}" class="menu-link">
+                        <div data-i18n="Connections">Jahit Celana</div>
+                    </a>
+                </li>
+                <li class="menu-item {{ request()->is('press-tag-admin')  ? 'active' : '' }}">
+                    <a href="{{ route('getPressTag') }}" class="menu-link">
+                        <div data-i18n="Connections">Press Tag</div>
+                    </a>
+                </li>
+                <li class="menu-item {{ request()->is('packing-admin')  ? 'active' : '' }}">
+                    <a href="{{ route('getPacking') }}" class="menu-link">
+                        <div data-i18n="Connections">Packing</div>
+                    </a>
+                </li>
+            </ul>
         </li>
         @endif
 
@@ -207,36 +260,43 @@
         @endif
 
         @if ( Auth::user()->roles == 'atexco')
-        {{-- @php
-        // $dataMasuk = App\Models\BarangMasukMesin::where('tanda_telah_mengerjakan', 0)->count();
-        @endphp --}}
+        @php
+        $dataTes = App\Models\BarangMasukMesin::where('status', 0)->where('nama_mesin',
+        'atexco')->count();
+        @endphp
         <li class="menu-header small text-uppercase">
             <span class="menu-header-text">Mesin Atexco</span>
         </li>
         <li class="menu-item">
-            <a href="{{ route('getIndexMesinAtexcoPegawai') }}" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-cog"></i>
-                <div data-i18n="Analytics">Data Masuk Mesin Atxco</div>
-                {{-- <span style="margin-left: 10px; margin-bottom: 20px;" class="badge bg-label-success">10</span> --}}
-            </a>
-        <li class="menu-item">
             <a href="{{ route('getIndexDataMasukMesinAtexco') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-cog"></i>
                 <div data-i18n="Analytics">Data Masuk </div>
-                {{-- <span style="margin-left: 10px; margin-bottom: 20px;" class="badge bg-label-success">10</span> --}}
+            </a>
+        </li>
+        <li class="menu-item {{ request()->is('mesin-atexco') ? 'active' : '' }}">
+            <a href="{{ route('getIndexMesinAtexcoPegawai') }}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-cog"></i>
+                <div data-i18n="Analytics">Data Tes Disainer</div>
+                <span style="margin-left: 10px; margin-bottom: 20px;" class="badge bg-label-warnig">{{ $dataTes
+                    }}</span>
             </a>
         </li>
         @endif
 
         @if ( Auth::user()->roles == 'mimaki')
+        @php
+        $dataTes = App\Models\BarangMasukMesin::where('status', 0)->where('nama_mesin',
+        'mimaki')->count();
+        @endphp
         <li class="menu-header small text-uppercase">
             <span class="menu-header-text">Mesin Mimaki</span>
         </li>
-        <li class="menu-item">
+        <li class="menu-item {{ request()->is('mesin-mimaki') ? 'active' : '' }}">
             <a href="{{ route('getIndexMesinMimakiPegawai') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-detail"></i>
-                <div data-i18n="Analytics">Data Masuk Mesin Mimaki</div>
-                {{-- <span style="margin-left: 10px; margin-bottom: 20px;" class="badge bg-label-success">10</span> --}}
+                <div data-i18n="Analytics">Data Tes Disainer</div>
+                <span style="margin-left: 10px; margin-bottom: 20px;" class="badge bg-label-warning">{{ $dataTes
+                    }}</span>
             </a>
         </li>
         @endif

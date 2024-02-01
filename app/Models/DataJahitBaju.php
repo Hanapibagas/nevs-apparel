@@ -11,11 +11,20 @@ class DataJahitBaju extends Model
 
     protected $fillable = [
         'no_order_id',
-        'deadline'
+        'deadline',
+        'selesai',
+        'leher',
+        'pola_badan',
+        'penanggung_jawab_id'
     ];
 
     public function BarangmasukJahitBaju()
     {
         return $this->belongsTo(BarangMasukCostumerServices::class, 'no_order_id');
+    }
+
+    public function UserJahitBaju()
+    {
+        return $this->belongsTo(User::class, 'penanggung_jawab_id');
     }
 }

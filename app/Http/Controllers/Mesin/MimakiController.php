@@ -11,7 +11,10 @@ class MimakiController extends Controller
 {
     public function getIndexMimaki()
     {
-        $mesin = BarangMasukMesin::where('nama_mesin', 'mimaki')->with('Users', 'BarangMasukDisainer')->get();
+        $mesin = BarangMasukMesin::where('nama_mesin', 'mimaki')
+            ->with('Users', 'BarangMasukDisainer')
+            ->orderBy('created_at', 'desc')
+            ->get();
 
         return view('component.Mesin.mesin-mimaki-pegawai.index', compact('mesin'));
     }

@@ -43,11 +43,12 @@
                             <tr>
                                 <td>{{ $key+1 }}</td>
                                 <td>
-                                    <strong>
+                                    <strong style="text-transform: uppercase">
                                         {{ $disainers->nama_tim }}
                                     </strong>
                                 </td>
-                                <td>{{ $disainers->Users->name }}</td>
+                                <td><strong style="text-transform: uppercase">{{ $disainers->Users->name }}</strong>
+                                </td>
                                 <td>
                                     @if ($disainers->aksi == 0)
                                     <a href="{{ route('getCreateToTeamMesinPegawai', $disainers->nama_tim) }}"

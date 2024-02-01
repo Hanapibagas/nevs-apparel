@@ -26,18 +26,17 @@ Route::middleware(['auth', 'checkroll:super_admin,disainer,layout,cs,atexco,mima
 
     // route admin disainer
     Route::get('/desainer-admin', [HomeController::class, 'getDesainer'])->name('getIndexDesainer');
-
-    // route admin layout
     Route::get('/layout-admin', [HomeController::class, 'getLayout'])->name('getIndexLayout');
-
-    // route admin layout
     Route::get('/mesin-mimaki-admin', [HomeController::class, 'getMesinMimaki'])->name('getIndexMesinMimaki');
-
-    // route admin layout
     Route::get('/mesin-atexco-admin', [HomeController::class, 'getMesinAtexco'])->name('getIndexMesinAtexco');
-
-    // route admin layout
-    Route::get('/pembagian-layout-admin', [HomeController::class, 'getPembagianLayout'])->name('getIndexPembagianLayout');
+    Route::get('/press-kain-admin', [HomeController::class, 'getPressKain'])->name('getPressKain');
+    Route::get('/laser-cut-admin', [HomeController::class, 'getLaserCut'])->name('getLaserCut');
+    Route::get('/manual-cut-admin', [HomeController::class, 'getManualut'])->name('getManualut');
+    Route::get('/sortir-admin', [HomeController::class, 'getSortir'])->name('getSortir');
+    Route::get('/jahit-baju-admin', [HomeController::class, 'getJahitBaju'])->name('getJahitBaju');
+    Route::get('/jahit-celana-admin', [HomeController::class, 'getJahitCelana'])->name('getJahitCelana');
+    Route::get('/press-tag-admin', [HomeController::class, 'getPressTag'])->name('getPressTag');
+    Route::get('/packing-admin', [HomeController::class, 'getPacking'])->name('getPacking');
 });
 
 Route::middleware(['auth', 'checkroll:cs'])->group(function () {

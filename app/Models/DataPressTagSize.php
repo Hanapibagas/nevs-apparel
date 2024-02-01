@@ -11,7 +11,8 @@ class DataPressTagSize extends Model
 
     protected $fillable = [
         'no_order_id',
-        'deadline'
+        'deadline',
+        'selesai',
     ];
 
     public function BarangmasukJahitBaju()

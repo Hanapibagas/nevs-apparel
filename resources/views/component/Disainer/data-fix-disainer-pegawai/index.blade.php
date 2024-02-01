@@ -44,14 +44,16 @@
                             <tr>
                                 <td>{{ $key+1 }}</td>
                                 <td>
-                                    <strong>
+                                    <strong style="text-transform: uppercase">
                                         {{ $disainers->nama_tim }}
                                     </strong>
                                 </td>
-                                <td>{{ $disainers->UsersCs->name }}</td>
+                                <td><strong style="text-transform: uppercase">{{ $disainers->UsersCs->name }}</strong>
+                                </td>
                                 <td>
                                     @if ($disainers->DataMesinFix->isNotEmpty())
-                                    {{ $disainers->DataMesinFix->first()->nama_mesin }}
+                                    <strong style="text-transform: uppercase">{{
+                                        $disainers->DataMesinFix->first()->nama_mesin }}</strong>
                                     @else
                                     No DataMesinFix available
                                     @endif

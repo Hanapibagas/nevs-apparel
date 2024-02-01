@@ -27,6 +27,7 @@ class BarangMasukCostumerServices extends Model
         'pola',
         'tanggal_masuk',
         'deadline',
+        'total',
 
         // baju player
         'file_baju_player',

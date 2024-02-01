@@ -13,7 +13,10 @@ class AtexcoController extends Controller
 {
     public function getIndexAtexco()
     {
-        $mesin = BarangMasukMesin::where('nama_mesin', 'atexco')->with('Users', 'BarangMasukDisainer')->get();
+        $mesin = BarangMasukMesin::where('nama_mesin', 'atexco')
+            ->with('Users', 'BarangMasukDisainer')
+            ->orderBy('created_at', 'desc')
+            ->get();
 
         return view('component.Mesin.mesin-atexco-pegawai.index', compact('mesin'));
     }
@@ -32,11 +35,13 @@ class AtexcoController extends Controller
         return redirect()->back()->with('success', 'Selamat data yang input berhasil!');
     }
 
-    // $dataMasuk = MesinAtexco::with(['BarangMasukCs', 'BarangMasukAtexco'])->get();
     public function getIndexDataMasukAtexco()
     {
-        $dataMasuk = BarangMasukCostumerServices::where('jenis_mesin', 'atexco')->with('LaporanLkLayout', 'MesinAtexco')->get();
+        $dataMasuk = BarangMasukCostumerServices::where('jenis_mesin', 'atexco')
+            ->with('LaporanLkLayout', 'MesinAtexco')
+            ->orderBy('created_at', 'desc')
+            ->get();
 
-        return response()->json($dataMasuk);
+        // return response()->json($dataMasuk);
     }
 }

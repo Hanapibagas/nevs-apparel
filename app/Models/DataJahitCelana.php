@@ -11,11 +11,19 @@ class DataJahitCelana extends Model
 
     protected $fillable = [
         'no_order_id',
+        'penanggung_jawab_id',
+        'selesai',
+        'pola_celana',
         'deadline'
     ];
 
     public function BarangmasukJahitBaju()
     {
         return $this->belongsTo(BarangMasukCostumerServices::class, 'no_order_id');
+    }
+
+    public function UserJahitCelana()
+    {
+        return $this->belongsTo(User::class, 'penanggung_jawab_id');
     }
 }

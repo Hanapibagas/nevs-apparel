@@ -51,8 +51,9 @@
                                         {{ $mesins->nama_mesin }}
                                     </strong>
                                 </td>
-                                <td>{{ $mesins->Users->name }}</td>
-                                <td>{{ $mesins->BarangMasukDisainer->nama_tim }}</td>
+                                <td><strong style="text-transform: uppercase">{{ $mesins->Users->name }}</strong></td>
+                                <td><strong style="text-transform: uppercase">{{ $mesins->BarangMasukDisainer->nama_tim
+                                        }}</strong></td>
                                 <td>
                                     <span class="badge bg-label-{{ $mesins->status == 1 ? 'success' : 'danger' }}">
                                         {{ $mesins->status == 1 ? 'SELESAI' : 'PANDING' }}

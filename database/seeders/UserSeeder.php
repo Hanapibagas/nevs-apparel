@@ -26,56 +26,164 @@ class UserSeeder extends Seeder
             'permission_edit' => 1,
             'permission_hapus' => 1,
             'permission_create' => 1,
+            'permission_show' => 1,
+            'asal_kota' => "owner",
             'password' => bcrypt('superadmin')
         ]);
         User::create([
-            'name' => 'heru',
-            'email' => 'heru@gmail.com',
+            'name' => 'cs',
+            'email' => 'cs@gmail.com',
             'roles' => 'cs',
             'gambar' => 'cs.jpg',
             'permission_edit' => 1,
             'permission_hapus' => 1,
             'permission_create' => 1,
+            'permission_show' => 1,
+            'asal_kota' => "makassar",
             'password' => bcrypt('12345678')
         ]);
         User::create([
-            'name' => 'fauzi',
-            'email' => 'fauzi@gmail.com',
+            'name' => 'disiner',
+            'email' => 'disiner@gmail.com',
             'roles' => 'disainer',
             'gambar' => 'disainer.jpg',
             'permission_edit' => 1,
             'permission_hapus' => 1,
             'permission_create' => 1,
+            'permission_show' => 1,
+            'asal_kota' => "makassar",
             'password' => bcrypt('12345678')
         ]);
         User::create([
-            'name' => 'hafid',
-            'email' => 'hafid@gmail.com',
+            'name' => 'layout',
+            'email' => 'layout@gmail.com',
             'roles' => 'layout',
             'gambar' => 'layout.jpg',
             'permission_edit' => 1,
             'permission_hapus' => 1,
             'permission_create' => 1,
+            'permission_show' => 1,
+            'asal_kota' => "makassar",
             'password' => bcrypt('12345678')
         ]);
         User::create([
-            'name' => 'ridwan',
-            'email' => 'ridwan@gmail.com',
+            'name' => 'atexco',
+            'email' => 'atexco@gmail.com',
             'roles' => 'atexco',
             'gambar' => 'atexco.jpg',
             'permission_edit' => 1,
             'permission_hapus' => 1,
             'permission_create' => 1,
+            'permission_show' => 1,
+            'asal_kota' => "makassar",
             'password' => bcrypt('12345678')
         ]);
         User::create([
-            'name' => 'malik',
-            'email' => 'malik@gmail.com',
+            'name' => 'mimaki',
+            'email' => 'mimaki@gmail.com',
             'roles' => 'mimaki',
-            'gambar' => 'atexco.jpg',
+            'gambar' => 'mimaki.jpg',
             'permission_edit' => 1,
             'permission_hapus' => 1,
-            'permission_create' => 1,
+            'permission_hapus' => 1,
+            'permission_show' => 1,
+            'asal_kota' => "makassar",
+            'password' => bcrypt('12345678')
+        ]);
+        User::create([
+            'name' => 'preskain',
+            'email' => 'preskain@gmail.com',
+            'roles' => 'pres_kain',
+            'gambar' => 'preskain.jpg',
+            'permission_edit' => 1,
+            'permission_hapus' => 1,
+            'permission_hapus' => 1,
+            'permission_show' => 1,
+            'asal_kota' => "makassar",
+            'password' => bcrypt('12345678')
+        ]);
+        User::create([
+            'name' => 'lasercut',
+            'email' => 'lasercut@gmail.com',
+            'roles' => 'laser_cut',
+            'gambar' => 'lasercut.jpg',
+            'permission_edit' => 1,
+            'permission_hapus' => 1,
+            'permission_hapus' => 1,
+            'permission_show' => 1,
+            'asal_kota' => "makassar",
+            'password' => bcrypt('12345678')
+        ]);
+        User::create([
+            'name' => 'manualcut',
+            'email' => 'manualcut@gmail.com',
+            'roles' => 'manual_cut',
+            'gambar' => 'manualcut.jpg',
+            'permission_edit' => 1,
+            'permission_hapus' => 1,
+            'permission_hapus' => 1,
+            'permission_show' => 1,
+            'asal_kota' => "makassar",
+            'password' => bcrypt('12345678')
+        ]);
+        User::create([
+            'name' => 'sortir',
+            'email' => 'sortir@gmail.com',
+            'roles' => 'sortir',
+            'gambar' => 'sortir.jpg',
+            'permission_edit' => 1,
+            'permission_hapus' => 1,
+            'permission_hapus' => 1,
+            'permission_show' => 1,
+            'asal_kota' => "makassar",
+            'password' => bcrypt('12345678')
+        ]);
+        User::create([
+            'name' => 'jahitbaju',
+            'email' => 'jahitbaju@gmail.com',
+            'roles' => 'jahit_baju',
+            'gambar' => 'jahitbaju.jpg',
+            'permission_edit' => 1,
+            'permission_hapus' => 1,
+            'permission_hapus' => 1,
+            'permission_show' => 1,
+            'asal_kota' => "makassar",
+            'password' => bcrypt('12345678')
+        ]);
+        User::create([
+            'name' => 'jahitcelana',
+            'email' => 'jahitcelana@gmail.com',
+            'roles' => 'jahit_celana',
+            'gambar' => 'jahitcelana.jpg',
+            'permission_edit' => 1,
+            'permission_hapus' => 1,
+            'permission_hapus' => 1,
+            'permission_show' => 1,
+            'asal_kota' => "makassar",
+            'password' => bcrypt('12345678')
+        ]);
+        User::create([
+            'name' => 'presstag',
+            'email' => 'presstag@gmail.com',
+            'roles' => 'press_tag',
+            'gambar' => 'presstag.jpg',
+            'permission_edit' => 1,
+            'permission_hapus' => 1,
+            'permission_hapus' => 1,
+            'permission_show' => 1,
+            'asal_kota' => "makassar",
+            'password' => bcrypt('12345678')
+        ]);
+        User::create([
+            'name' => 'packing',
+            'email' => 'packing@gmail.com',
+            'roles' => 'packing',
+            'gambar' => 'packing.jpg',
+            'permission_edit' => 1,
+            'permission_hapus' => 1,
+            'permission_hapus' => 1,
+            'permission_show' => 1,
+            'asal_kota' => "makassar",
             'password' => bcrypt('12345678')
         ]);
 

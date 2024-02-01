@@ -17,6 +17,7 @@ class LayoutController extends Controller
         $user = Auth::user();
         $oderCs = BarangMasukDatalayout::with('UserLayout', 'BarangMasukCsLK')
             ->where('users_layout_id', $user->id)
+            ->orderBy('created_at', 'desc')
             ->get();
 
         return view('component.Layout.layout-lk-pegawai.index', compact('oderCs'));
@@ -27,6 +28,7 @@ class LayoutController extends Controller
         $user = Auth::user();
         $oderCs = BarangMasukDatalayout::with('UserLayout', 'BarangMasukCsLK')
             ->where('users_layout_id', $user->id)
+            ->orderBy('created_at', 'desc')
             ->get();
 
         return view('component.Layout.layout-lk-pegawai.index-laporan-lk', compact('oderCs'));

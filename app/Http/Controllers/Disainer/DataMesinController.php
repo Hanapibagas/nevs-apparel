@@ -12,7 +12,10 @@ class DataMesinController extends Controller
     public function getDataMesinAtexco()
     {
         $user = Auth::user();
-        $mesin = BarangMasukMesin::where('nama_mesin', 'atexco')->where('users_id', $user->id)->get();
+        $mesin = BarangMasukMesin::where('nama_mesin', 'atexco')
+            ->where('users_id', $user->id)
+            ->orderBy('created_at', 'desc')
+            ->get();
 
         return view('component.Disainer.data-mesin-atexco-disainer.index', compact('mesin'));
     }
@@ -20,7 +23,10 @@ class DataMesinController extends Controller
     public function getDataMesinMimaki()
     {
         $user = Auth::user();
-        $mesin = BarangMasukMesin::where('nama_mesin', 'mimaki')->where('users_id', $user->id)->get();
+        $mesin = BarangMasukMesin::where('nama_mesin', 'mimaki')
+            ->where('users_id', $user->id)
+            ->orderBy('created_at', 'desc')
+            ->get();
 
         return view('component.Disainer.data-mesin-mimaki-disainer.index', compact('mesin'));
     }

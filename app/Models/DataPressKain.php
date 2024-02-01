@@ -11,11 +11,20 @@ class DataPressKain extends Model
 
     protected $fillable = [
         'no_order_id',
-        'deadline'
+        'penanggung_jawab_id',
+        'deadline',
+        'selesai',
+        'kain',
+        'berat',
     ];
 
     public function BarangmasukJahitBaju()
     {
         return $this->belongsTo(BarangMasukCostumerServices::class, 'no_order_id');
+    }
+
+    public function UserPressKain()
+    {
+        return $this->belongsTo(User::class, 'penanggung_jawab_id');
     }
 }

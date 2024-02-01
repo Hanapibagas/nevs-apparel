@@ -23,21 +23,21 @@
 
 <div class="container-xxl flex-grow-1 container-p-y">
     <h4 class="fw-bold py-3 mb-4">
-        <span class="text-muted fw-light">Account Settings /</span> Pegawai Layout
+        <span class="text-muted fw-light">Account Settings /</span> Pegawai Press Tag
     </h4>
 
     <h4 class="fw-bold py-3 mb-4">
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalCenter">
-            Tambah Pengawai Layout
+            Tambah Pengawai Press Tag
         </button>
         <div class="modal fade" id="modalCenter" tabindex="-1" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="modalCenterTitle">Form penambahan pegawai layout</h5>
+                        <h5 class="modal-title" id="modalCenterTitle">Form penambahan pegawai press tag</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <form action="{{ route('postCreateLayout') }}" method="POST">
+                    <form action="{{ route('postCreateDesainer') }}" method="POST">
                         @csrf
                         <div class="modal-body">
                             <div class="row">
@@ -52,7 +52,7 @@
                                     <label for="nameWithTitle" class="form-label">Email Pegawai</label>
                                     <input name="email" type="text" id="nameWithTitle" class="form-control"
                                         placeholder="Silahkan masukkan email ..." />
-                                    <input type="hidden" name="roles" value="layout">
+                                    <input type="hidden" name="roles" value="disainer">
                                 </div>
                             </div>
                         </div>
@@ -71,7 +71,7 @@
     <div class="row">
         <div class="col-md-12">
             <div class="card">
-                <h5 class="card-header">Daftar Pegawai Layout</h5>
+                <h5 class="card-header">Daftar Pegawai Press Tag</h5>
                 <div class="table-responsive">
                     <table class="table table-striped table-borderless border-bottom">
                         <thead>
@@ -86,7 +86,7 @@
                         <form method="POST" action="{{ route('postPirmission') }}">
                             @csrf
                             <tbody>
-                                @foreach ($userLaytout as $user)
+                                @foreach ($userPressTag as $user)
                                 <tr>
                                     <td class="text-nowrap">{{ $user->name }}</td>
                                     <td>

@@ -37,6 +37,7 @@ class CostumerServicesController extends Controller
         $oderCs = BarangMasukCostumerServices::where('cs_id', $user->id)
             ->with('BarangMasukDisainer', 'Users')
             ->where('tanda_telah_mengerjakan', 0)
+            ->orderBy('created_at', 'desc')
             ->get();
 
         return view('component.Cs.costumer-service-order-pegawai.index', compact('oderCs'));
@@ -65,6 +66,7 @@ class CostumerServicesController extends Controller
                 'Celana1'
             )
             ->where('tanda_telah_mengerjakan', 1)
+            // ->orderBy('updated_at', 'desc')
             ->get();
 
         // return response()->json($oderCs);

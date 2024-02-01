@@ -39,6 +39,7 @@
                                 <th>No</th>
                                 <th>Nama Mesin</th>
                                 <th>Nama Desainer</th>
+                                <th>Status</th>
                                 <th>aksi</th>
                             </tr>
                         </thead>
@@ -51,7 +52,16 @@
                                         {{ $mesins->nama_mesin }}
                                     </strong>
                                 </td>
-                                <td>{{ $mesins->Users->name }}</td>
+                                <td>
+                                    <strong style="text-transform: uppercase">
+                                        {{ $mesins->Users->name }}
+                                    </strong>
+                                </td>
+                                <td>
+                                    <span class="badge bg-label-{{ $mesins->status == 1 ? 'success' : 'warning'}}">
+                                        {{ $mesins->status == 1 ? 'Selesai' : 'Pending'}}
+                                    </span>
+                                </td>
                                 <td>
                                     <a data-bs-toggle="modal" data-bs-target="#modalCenter{{ $mesins->id }}"
                                         style="cursor: pointer; text-decoration: none; color: white"
@@ -93,7 +103,7 @@
                                                     <div class="col mb-3">
                                                         <label for="nameWithTitle" class="form-label">keterangan</label>
                                                         <textarea id="basic-default-message" class="form-control"
-                                                            readonly>{{ $mesins->nama_mesin  }}</textarea>
+                                                            readonly>{{ $mesins->keterangan  }}</textarea>
                                                     </div>
                                                 </div>
                                                 <div class="row">

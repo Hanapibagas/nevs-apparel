@@ -21,6 +21,7 @@ class DisainerController extends Controller
         $disainer = BarangMasukDisainer::where('users_id', $user->id)
             ->with('Users', 'DataMesin')
             ->where('tanda_telah_mengerjakan', 0)
+            ->orderBy('created_at', 'desc')
             ->get();
 
         return view('component.Disainer.disainer-pegawai.index', compact('disainer'));
@@ -172,6 +173,7 @@ class DisainerController extends Controller
         $disainer = BarangMasukDisainer::where('users_id', $user->id)
             ->with('UsersCs', 'DataMesinFix')
             ->where('tanda_telah_mengerjakan', 1)
+            ->orderBy('updated_at', 'desc')
             ->get();
 
         return view('component.Disainer.data-fix-disainer-pegawai.index', compact('disainer'));
