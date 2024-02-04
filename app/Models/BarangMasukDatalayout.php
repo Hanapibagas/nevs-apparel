@@ -14,6 +14,8 @@ class BarangMasukDatalayout extends Model
         'no_order_id',
         'deadline',
         'panjang_kertas',
+        'selesai',
+        'tanda_telah_mengerjakan',
         'file_corel_layout',
     ];
 

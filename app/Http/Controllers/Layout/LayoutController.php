@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\BarangMasukCostumerServices;
 use App\Models\BarangMasukDatalayout;
 use App\Models\LaporanLkLayout;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use PDF;
@@ -15,10 +16,43 @@ class LayoutController extends Controller
     public function getIndexLkCs()
     {
         $user = Auth::user();
-        $oderCs = BarangMasukDatalayout::with('UserLayout', 'BarangMasukCsLK')
-            ->where('users_layout_id', $user->id)
-            ->orderBy('created_at', 'desc')
-            ->get();
+        if ($user->asal_kota == 'makassar') {
+            $oderCs = BarangMasukDatalayout::with('UserLayout', 'BarangMasukCsLK')
+                ->where('users_layout_id', $user->id)
+                ->where('tanda_telah_mengerjakan', 0)
+                ->whereHas('BarangMasukCsLK', function ($query) use ($user) {
+                    $query->where('kota_produksi', 'Makassar');
+                })
+                ->orderBy('created_at', 'desc')
+                ->get();
+        } elseif ($user->asal_kota == 'jakarta') {
+            $oderCs = BarangMasukDatalayout::with('UserLayout', 'BarangMasukCsLK')
+                ->where('users_layout_id', $user->id)
+                ->where('tanda_telah_mengerjakan', 0)
+                ->whereHas('BarangMasukCsLK', function ($query) use ($user) {
+                    $query->where('kota_produksi', 'Jakarta');
+                })
+                ->orderBy('created_at', 'desc')
+                ->get();
+        } elseif ($user->asal_kota == 'bandung') {
+            $oderCs = BarangMasukDatalayout::with('UserLayout', 'BarangMasukCsLK')
+                ->where('users_layout_id', $user->id)
+                ->where('tanda_telah_mengerjakan', 0)
+                ->whereHas('BarangMasukCsLK', function ($query) use ($user) {
+                    $query->where('kota_produksi', 'Bandung');
+                })
+                ->orderBy('created_at', 'desc')
+                ->get();
+        } else {
+            $oderCs = BarangMasukDatalayout::with('UserLayout', 'BarangMasukCsLK')
+                ->where('users_layout_id', $user->id)
+                ->where('tanda_telah_mengerjakan', 0)
+                ->whereHas('BarangMasukCsLK', function ($query) use ($user) {
+                    $query->where('kota_produksi', 'Surabaya');
+                })
+                ->orderBy('created_at', 'desc')
+                ->get();
+        }
 
         return view('component.Layout.layout-lk-pegawai.index', compact('oderCs'));
     }
@@ -26,12 +60,45 @@ class LayoutController extends Controller
     public function getIndexLaporanLk()
     {
         $user = Auth::user();
-        $oderCs = BarangMasukDatalayout::with('UserLayout', 'BarangMasukCsLK')
-            ->where('users_layout_id', $user->id)
-            ->orderBy('created_at', 'desc')
-            ->get();
+        if ($user->asal_kota == 'makassar') {
+            $oderCs = BarangMasukDatalayout::with('UserLayout', 'BarangMasukCsLK')
+                ->where('users_layout_id', $user->id)
+                ->where('tanda_telah_mengerjakan', 1)
+                ->whereHas('BarangMasukCsLK', function ($query) use ($user) {
+                    $query->where('kota_produksi', 'Makassar');
+                })
+                ->orderBy('created_at', 'desc')
+                ->get();
+        } elseif ($user->asal_kota == 'jakarta') {
+            $oderCs = BarangMasukDatalayout::with('UserLayout', 'BarangMasukCsLK')
+                ->where('users_layout_id', $user->id)
+                ->where('tanda_telah_mengerjakan', 1)
+                ->whereHas('BarangMasukCsLK', function ($query) use ($user) {
+                    $query->where('kota_produksi', 'Jakarta');
+                })
+                ->orderBy('created_at', 'desc')
+                ->get();
+        } elseif ($user->asal_kota == 'bandung') {
+            $oderCs = BarangMasukDatalayout::with('UserLayout', 'BarangMasukCsLK')
+                ->where('users_layout_id', $user->id)
+                ->where('tanda_telah_mengerjakan', 1)
+                ->whereHas('BarangMasukCsLK', function ($query) use ($user) {
+                    $query->where('kota_produksi', 'Bandung');
+                })
+                ->orderBy('created_at', 'desc')
+                ->get();
+        } else {
+            $oderCs = BarangMasukDatalayout::with('UserLayout', 'BarangMasukCsLK')
+                ->where('users_layout_id', $user->id)
+                ->where('tanda_telah_mengerjakan', 1)
+                ->whereHas('BarangMasukCsLK', function ($query) use ($user) {
+                    $query->where('kota_produksi', 'Surabaya');
+                })
+                ->orderBy('created_at', 'desc')
+                ->get();
+        }
 
-        return view('component.Layout.layout-lk-pegawai.index-laporan-lk', compact('oderCs'));
+        return view('component.Layout.laporan-layout.index', compact('oderCs'));
     }
 
     public function cetakDataLk($id)
@@ -66,33 +133,29 @@ class LayoutController extends Controller
 
     public function createLaporanLk($id)
     {
-        $dataLk = BarangMasukCostumerServices::find($id);
+        $dataLk = BarangMasukDatalayout::with('BarangMasukCsLK')->find($id);
 
         return view('component.Layout.layout-lk-pegawai.cerate-laporan-lk', compact('dataLk'));
     }
 
-    // public function postLaporanLk(Request $request)
-    // {
-    //     $user = Auth::user();
+    public function putLaporanLs(Request $request, $id)
+    {
+        $dataLk = BarangMasukDatalayout::with('BarangMasukCsLK')->find($id);
+        if ($request->file('file_corel_layout')) {
+            $uploadFile = $request->file('file_corel_layout');
+            $originalFileName = $uploadFile->getClientOriginalName();
+            $filebajuplayer = $uploadFile->storeAs('file-dari-layout', $originalFileName, 'public');
+        }
 
-    //     if ($request->file('file_corel_layout')) {
-    //         $uploadFile = $request->file('file_corel_layout');
-    //         $originalFileName = $uploadFile->getClientOriginalName();
-    //         $filebajuplayer = $uploadFile->storeAs('file-dari-layout', $originalFileName, 'public');
-    //     }
+        $dataLk->update([
+            'selesai' => Carbon::now(),
+            'panjang_kertas' => $request->panjang_kertas,
+            'file_corel_layout' => $filebajuplayer,
+            'tanda_telah_mengerjakan' => 1,
+        ]);
 
-    //     LaporanLkLayout::create([
-    //         'users_layout_id' => $user->id,
-    //         'no_order_id' => $request->no_order_id,
-    //         'panjang_kertas' => $request->panjang_kertas,
-    //         'file_corel_layout' => $filebajuplayer,
-    //     ]);
-
-    //     $updateLaporan = $request->no_order_id;
-    //     BarangMasukCostumerServices::where('id', $updateLaporan)->update(['tanda_input_laporan' => 1]);
-
-    //     return redirect()->route('getIndexLkLayoutPegawai')->with('success', 'Selamat data yang anda input telah terkirim!');
-    // }
+        return redirect()->route('getIndexLkLayoutPegawai')->with('success', 'Selamat data yang anda input telah terkirim!');
+    }
 
     // public function showDataLaporanLk($id)
     // {

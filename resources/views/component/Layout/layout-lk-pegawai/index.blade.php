@@ -38,19 +38,47 @@
                                 <th>No</th>
                                 <th>no.order</th>
                                 <th>nama Cs</th>
+                                <th>waktu produksi</th>
                                 <th>aksi</th>
                             </tr>
                         </thead>
+                        @php
+                        function calculateWorkingDays($startDate, $endDate) {
+                        $start = new DateTime($startDate);
+                        $end = new DateTime($endDate);
+                        $interval = DateInterval::createFromDateString('1 day');
+                        $period = new DatePeriod($start, $interval, $end);
+                        $workingDays = 0;
+                        foreach ($period as $day) {
+                        if ($day->format('w') != 0) {
+                        $workingDays++;
+                        }
+                        }
+                        return $workingDays;
+                        }
+                        @endphp
                         <tbody>
                             @foreach ( $oderCs as $key => $disainers )
                             <tr>
                                 <td>{{ $key+1 }}</td>
                                 <td>
-                                    {{ $disainers->BarangMasukCsLK->no_order }}
+                                    <strong style="text-transform: uppercase">{{ $disainers->BarangMasukCsLK->no_order
+                                        }}</strong>
                                 </td>
                                 <td>
-                                    {{ $disainers->UserLayout->name }}
+                                    <strong style="text-transform: uppercase">{{ $disainers->UserLayout->name
+                                        }}</strong>
                                 </td>
+                                <td>
+                                    {{
+                                    calculateWorkingDays($disainers->BarangMasukCsLK->tanggal_masuk,
+                                    $disainers->BarangMasukCsLK->deadline) }} Hari
+                                    @php
+                                    $totalDays = calculateWorkingDays($disainers->BarangMasukCsLK->tanggal_masuk,
+                                    $disainers->BarangMasukCsLK->deadline);
+                                    $status = ($totalDays < 10) ? '<span class="badge bg-label-danger">Express</span>'
+                                        : '<span class="badge bg-label-warning">Normal</span>' ; @endphp {!! $status !!}
+                                        </td>
                                 <td>
                                     <a target="_blank"
                                         href="{{ route('getCetakDataLkLayout', $disainers->BarangMasukCsLK->id) }}"

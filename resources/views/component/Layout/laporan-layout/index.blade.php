@@ -35,56 +35,35 @@
                     <table id="cs" class="table">
                         <thead>
                             <tr>
+                            <tr>
                                 <th>No</th>
                                 <th>no.order</th>
-                                <th>nama tim</th>
-                                <th>nama layout</th>
-                                <th>waktu produksi</th>
-                                <th>aksi</th>
+                                <th>nama Cs</th>
+                                <th>status</th>
+                            </tr>
                             </tr>
                         </thead>
-                        {{-- <tbody>
+                        <tbody>
                             @foreach ( $oderCs as $key => $disainers )
                             <tr>
                                 <td>{{ $key+1 }}</td>
                                 <td>
-                                    {{ $disainers->no_order }}
+                                    <strong style="text-transform: uppercase">{{ $disainers->BarangMasukCsLK->no_order
+                                        }}</strong>
                                 </td>
-                                <td>{{ $disainers->BarangMasukDisainer->nama_tim }}</td>
                                 <td>
-                                    {{ $disainers->UsersLk->name }}
+                                    <strong style="text-transform: uppercase">{{ $disainers->UserLayout->name
+                                        }}</strong>
                                 </td>
-                                @php
-                                $tanggalMasuk = new DateTime($disainers->tanggal_masuk);
-                                $deadline = new DateTime($disainers->deadline);
-                                $now = new DateTime();
-                                $intervalToDeadline = $now->diff($deadline);
-                                $daysDifference = $intervalToDeadline->days;
-                                $statusProduksi = ($daysDifference <= 10) ? 'express' : 'normal' ; @endphp <td>
-                                    @if($statusProduksi === 'express')
-                                    <span class="badge bg-label-danger">{{ $statusProduksi }} ({{ $daysDifference }}
-                                        hari tersisa)</span>
-                                    @else
-                                    <span class="badge bg-label-warning">{{ $statusProduksi }} ({{ $daysDifference }}
-                                        hari tersisa)</span>
-                                    @endif
-                                    </td>
-                                    <td>
-                                        @if ($disainers->aksi == 0)
-                                        <a href="{{ route('getCreateToLkPegawai', $disainers->id) }}"
-                                            class="btn btn-primary">
-                                            <i class="menu-icon tf-icons bx bx-pencil"></i>
-                                            Edit LK</a>
-                                        @elseif ($disainers->aksi == 1)
-                                        <a target="_blank" href="{{ route('getCetakDataLkLayout', $disainers->id) }}"
-                                            class="btn btn-danger">
-                                            <i class="menu-icon tf-icons bx bxs-file-pdf"></i>Export
-                                            data LK</a>
-                                        @endif
-                                    </td>
+                                <td>
+                                    <span style="text-transform: uppercase"
+                                        class="badge bg-label-{{ $disainers->tanda_telah_mengerjakan == 1 ? 'success' : 'warning'}}">
+                                        {{ $disainers->tanda_telah_mengerjakan == 1 ? 'Selesai' : 'Pending'}}
+                                    </span>
+                                </td>
                             </tr>
                             @endforeach
-                        </tbody> --}}
+                        </tbody>
                     </table>
                 </div>
             </div>

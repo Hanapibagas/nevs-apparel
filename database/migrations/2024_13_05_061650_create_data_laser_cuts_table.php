@@ -19,6 +19,7 @@ return new class extends Migration
             $table->foreignId('penanggung_jawab_id')->nullable()->constrained('users')->onUpdate('cascade')->onDelete('cascade');
             $table->string('deadline')->nullable();
             $table->string('selesai')->nullable();
+            $table->string('tanda_telah_mengerjakan')->default('0');
             $table->timestamps();
         });
     }

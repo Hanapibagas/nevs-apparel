@@ -70,7 +70,6 @@ class DisainerController extends Controller
     public function postToCustomerServices(Request $request, $nama_tim)
     {
         $user = Auth::user();
-
         $no_order = '#10-12' . str_pad(mt_rand(1, 999), 3, '0', STR_PAD_LEFT);
 
         $filebajuplayer = null;
@@ -127,6 +126,8 @@ class DisainerController extends Controller
             $uploadFile = $request->file('file_corel_disainer');
             $originalFileName = $uploadFile->getClientOriginalName();
             $fileCorelDisainer = $uploadFile->storeAs('file-corel-disainer', $originalFileName, 'public');
+        } else {
+            return redirect()->back()->with('error', 'File Corel Disainer harus diisi!');
         }
 
         $barangMasuk = BarangMasukCostumerServices::create([
@@ -146,18 +147,6 @@ class DisainerController extends Controller
             'file_corel_disainer' => $fileCorelDisainer,
             'tanggal_masuk' => Carbon::now(),
         ]);
-
-        // if ($request->jenis_mesin == 'atexco') {
-        //     MesinAtexco::create([
-        //         'barang_masuk' => $barangMasuk->id,
-        //         'nama_mesin' => $barangMasuk->jenis_mesin,
-        //     ]);
-        // } elseif ($request->jenis_mesin == 'mimaki') {
-        //     MesinMimaki::create([
-        //         'barang_masuk' => $barangMasuk->id,
-        //         'nama_mesin' => $barangMasuk->jenis_mesin,
-        //     ]);
-        // }
 
         $update = BarangMasukDisainer::where('nama_tim', $nama_tim)->first();
         $update->update([

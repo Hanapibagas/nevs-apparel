@@ -97,9 +97,9 @@ Route::middleware(['auth', 'checkroll:mimaki'])->group(function () {
 Route::middleware(['auth', 'checkroll:layout'])->group(function () {
     Route::get('/data-Lk-Layout', [LayoutController::class, 'getIndexLkCs'])->name('getIndexLkLayoutPegawai');
     Route::get('/create-laporan-lk/{id}', [LayoutController::class, 'createLaporanLk'])->name('getCreateLaporanLkLayout');
-    Route::post('/kirim-laporan-lk', [LayoutController::class, 'postLaporanLk'])->name('postLaporanLkLayout');
+
     Route::get('/laporan-Lk-Layout', [LayoutController::class, 'getIndexLaporanLk'])->name('getIndexLaporanLk');
-    Route::get('/show-laporan-Lk-Layout/{id}', [LayoutController::class, 'showDataLaporanLk'])->name('getShowLaporanLkLayout');
+    Route::put('/kirim-laporan-lk/{id}', [LayoutController::class, 'putLaporanLs'])->name('putLaporanLs');
 
 
     Route::get('cetak-data-lk-fix/{id}', [LayoutController::class, 'cetakDataLk'])->name('getCetakDataLkLayout');

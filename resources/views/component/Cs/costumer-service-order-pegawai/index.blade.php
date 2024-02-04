@@ -47,10 +47,14 @@
                             <tr>
                                 <td>{{ $key+1 }}</td>
                                 <td>
-                                    {{ $disainers->no_order }}
+                                    <strong style="text-transform: uppercase">
+                                        {{ $disainers->no_order }}
+                                    </strong>
                                 </td>
-                                <td>{{ $disainers->BarangMasukDisainer->nama_tim }}</td>
-                                <td>{{ $disainers->Users->name }}</td>
+                                <td><strong style="text-transform: uppercase">{{
+                                        $disainers->BarangMasukDisainer->nama_tim }}</strong></td>
+                                <td><strong style="text-transform: uppercase">{{ $disainers->Users->name }}</strong>
+                                </td>
                                 <td>
                                     @if ($disainers->aksi == 0)
                                     <a href="{{ route('getCreateToLkPegawai', $disainers->id) }}"

@@ -421,78 +421,169 @@ class CostumerServicesController extends Controller
             'tanda_telah_mengerjakan' => '1',
         ]);
 
-
         $createDate = clone $tanggal_masuk;
         if ($tanggal_masuk->dayOfWeek === Carbon::SATURDAY) {
             $createDate->addDay(2);
         } elseif ($tanggal_masuk->dayOfWeek >= Carbon::MONDAY && $tanggal_masuk->dayOfWeek <= Carbon::FRIDAY) {
             $createDate->addDay();
         }
-        $createDate2 = clone $createDate;
-        if ($tanggal_masuk->dayOfWeek === Carbon::SATURDAY) {
-            $createDate2->addDay(1);
-        } elseif ($tanggal_masuk->dayOfWeek >= Carbon::MONDAY && $tanggal_masuk->dayOfWeek <= Carbon::FRIDAY) {
+        $createDate2 = clone $tanggal_masuk;
+        if ($tanggal_masuk->dayOfWeek === Carbon::MONDAY) {
             $createDate2->addDay(2);
+        } elseif ($tanggal_masuk->dayOfWeek === Carbon::TUESDAY) {
+            $createDate2->addDay(2);
+        } elseif ($tanggal_masuk->dayOfWeek === Carbon::WEDNESDAY) {
+            $createDate2->addDay(2);
+        } elseif ($tanggal_masuk->dayOfWeek === Carbon::THURSDAY) {
+            $createDate2->addDay(2);
+        } elseif ($tanggal_masuk->dayOfWeek === Carbon::FRIDAY) {
+            $createDate2->addDay(3);
+        } elseif ($tanggal_masuk->dayOfWeek === Carbon::SATURDAY) {
+            $createDate2->addDay(3);
         }
-        $createDate3 = clone $createDate;
-        if ($tanggal_masuk->dayOfWeek === Carbon::SATURDAY) {
-            $createDate3->addDay(2);
-        } elseif ($tanggal_masuk->dayOfWeek >= Carbon::MONDAY && $tanggal_masuk->dayOfWeek <= Carbon::FRIDAY) {
+        $createDate3 = clone $tanggal_masuk;
+        if ($tanggal_masuk->dayOfWeek === Carbon::MONDAY) {
             $createDate3->addDay(3);
+        } elseif ($tanggal_masuk->dayOfWeek === Carbon::TUESDAY) {
+            $createDate3->addDay(3);
+        } elseif ($tanggal_masuk->dayOfWeek === Carbon::WEDNESDAY) {
+            $createDate3->addDay(3);
+        } elseif ($tanggal_masuk->dayOfWeek === Carbon::THURSDAY) {
+            $createDate3->addDay(4);
+        } elseif ($tanggal_masuk->dayOfWeek === Carbon::FRIDAY) {
+            $createDate3->addDay(4);
+        } elseif ($tanggal_masuk->dayOfWeek === Carbon::SATURDAY) {
+            $createDate3->addDay(4);
         }
-        $createDate4 = clone $createDate;
-        if ($tanggal_masuk->dayOfWeek === Carbon::SATURDAY) {
-            $createDate4->addDay(3);
-        } elseif ($tanggal_masuk->dayOfWeek >= Carbon::MONDAY && $tanggal_masuk->dayOfWeek <= Carbon::FRIDAY) {
+        $createDate4 = clone $tanggal_masuk;
+        if ($tanggal_masuk->dayOfWeek === Carbon::MONDAY) {
             $createDate4->addDay(4);
+        } elseif ($tanggal_masuk->dayOfWeek === Carbon::TUESDAY) {
+            $createDate4->addDay(4);
+        } elseif ($tanggal_masuk->dayOfWeek === Carbon::WEDNESDAY) {
+            $createDate4->addDay(5);
+        } elseif ($tanggal_masuk->dayOfWeek === Carbon::THURSDAY) {
+            $createDate4->addDay(5);
+        } elseif ($tanggal_masuk->dayOfWeek === Carbon::FRIDAY) {
+            $createDate4->addDay(5);
+        } elseif ($tanggal_masuk->dayOfWeek === Carbon::SATURDAY) {
+            $createDate4->addDay(5);
         }
-        $createDate5 = clone $createDate;
-        if ($tanggal_masuk->dayOfWeek === Carbon::SATURDAY) {
-            $createDate5->addDay(4);
-        } elseif ($tanggal_masuk->dayOfWeek >= Carbon::MONDAY && $tanggal_masuk->dayOfWeek <= Carbon::FRIDAY) {
+        $createDate5 = clone $tanggal_masuk;
+        if ($tanggal_masuk->dayOfWeek === Carbon::MONDAY) {
             $createDate5->addDay(5);
+        } elseif ($tanggal_masuk->dayOfWeek === Carbon::TUESDAY) {
+            $createDate5->addDay(6);
+        } elseif ($tanggal_masuk->dayOfWeek === Carbon::WEDNESDAY) {
+            $createDate5->addDay(6);
+        } elseif ($tanggal_masuk->dayOfWeek === Carbon::THURSDAY) {
+            $createDate5->addDay(6);
+        } elseif ($tanggal_masuk->dayOfWeek === Carbon::FRIDAY) {
+            $createDate5->addDay(6);
+        } elseif ($tanggal_masuk->dayOfWeek === Carbon::SATURDAY) {
+            $createDate5->addDay(6);
         }
-        $createDate6 = clone $createDate;
-        if ($tanggal_masuk->dayOfWeek === Carbon::SATURDAY) {
-            $createDate6->addDay(5);
-        } elseif ($tanggal_masuk->dayOfWeek >= Carbon::MONDAY && $tanggal_masuk->dayOfWeek <= Carbon::FRIDAY) {
-            $createDate6->addDay(6);
+        $createDate6 = clone $tanggal_masuk;
+        if ($tanggal_masuk->dayOfWeek === Carbon::MONDAY) {
+            $createDate6->addDay(7);
+        } elseif ($tanggal_masuk->dayOfWeek === Carbon::TUESDAY) {
+            $createDate6->addDay(7);
+        } elseif ($tanggal_masuk->dayOfWeek === Carbon::WEDNESDAY) {
+            $createDate6->addDay(7);
+        } elseif ($tanggal_masuk->dayOfWeek === Carbon::THURSDAY) {
+            $createDate6->addDay(7);
+        } elseif ($tanggal_masuk->dayOfWeek === Carbon::FRIDAY) {
+            $createDate6->addDay(7);
+        } elseif ($tanggal_masuk->dayOfWeek === Carbon::SATURDAY) {
+            $createDate6->addDay(7);
         }
-        $createDate7 = clone $createDate;
-        if ($tanggal_masuk->dayOfWeek === Carbon::SATURDAY) {
-            $createDate7->addDay(7);
-        } elseif ($tanggal_masuk->dayOfWeek >= Carbon::MONDAY && $tanggal_masuk->dayOfWeek <= Carbon::FRIDAY) {
-            $createDate7->addDay(7);
+        $createDate7 = clone $tanggal_masuk;
+        if ($tanggal_masuk->dayOfWeek === Carbon::MONDAY) {
+            $createDate7->addDay(8);
+        } elseif ($tanggal_masuk->dayOfWeek === Carbon::TUESDAY) {
+            $createDate7->addDay(8);
+        } elseif ($tanggal_masuk->dayOfWeek === Carbon::WEDNESDAY) {
+            $createDate7->addDay(8);
+        } elseif ($tanggal_masuk->dayOfWeek === Carbon::THURSDAY) {
+            $createDate7->addDay(8);
+        } elseif ($tanggal_masuk->dayOfWeek === Carbon::FRIDAY) {
+            $createDate7->addDay(8);
+        } elseif ($tanggal_masuk->dayOfWeek === Carbon::SATURDAY) {
+            $createDate7->addDay(9);
         }
-        $createDate8 = clone $createDate;
-        if ($tanggal_masuk->dayOfWeek === Carbon::SATURDAY) {
-            $createDate8->addDay(8);
-        } elseif ($tanggal_masuk->dayOfWeek >= Carbon::MONDAY && $tanggal_masuk->dayOfWeek <= Carbon::FRIDAY) {
+        $createDate8 = clone $tanggal_masuk;
+        if ($tanggal_masuk->dayOfWeek === Carbon::MONDAY) {
             $createDate8->addDay(9);
+        } elseif ($tanggal_masuk->dayOfWeek === Carbon::TUESDAY) {
+            $createDate8->addDay(9);
+        } elseif ($tanggal_masuk->dayOfWeek === Carbon::WEDNESDAY) {
+            $createDate8->addDay(9);
+        } elseif ($tanggal_masuk->dayOfWeek === Carbon::THURSDAY) {
+            $createDate8->addDay(9);
+        } elseif ($tanggal_masuk->dayOfWeek === Carbon::FRIDAY) {
+            $createDate8->addDay(10);
+        } elseif ($tanggal_masuk->dayOfWeek === Carbon::SATURDAY) {
+            $createDate8->addDay(10);
         }
-        $createDate9 = clone $createDate;
-        if ($tanggal_masuk->dayOfWeek === Carbon::SATURDAY) {
-            $createDate9->addDay(9);
-        } elseif ($tanggal_masuk->dayOfWeek >= Carbon::MONDAY && $tanggal_masuk->dayOfWeek <= Carbon::FRIDAY) {
+
+        $createDate9 = clone $tanggal_masuk;
+        if ($tanggal_masuk->dayOfWeek === Carbon::MONDAY) {
             $createDate9->addDay(10);
+        } elseif ($tanggal_masuk->dayOfWeek === Carbon::TUESDAY) {
+            $createDate9->addDay(10);
+        } elseif ($tanggal_masuk->dayOfWeek === Carbon::WEDNESDAY) {
+            $createDate9->addDay(10);
+        } elseif ($tanggal_masuk->dayOfWeek === Carbon::THURSDAY) {
+            $createDate9->addDay(11);
+        } elseif ($tanggal_masuk->dayOfWeek === Carbon::FRIDAY) {
+            $createDate9->addDay(11);
+        } elseif ($tanggal_masuk->dayOfWeek === Carbon::SATURDAY) {
+            $createDate9->addDay(11);
         }
-        $createDate10 = clone $createDate;
-        if ($tanggal_masuk->dayOfWeek === Carbon::SATURDAY) {
-            $createDate10->addDay(10);
-        } elseif ($tanggal_masuk->dayOfWeek >= Carbon::MONDAY && $tanggal_masuk->dayOfWeek <= Carbon::FRIDAY) {
+
+        $createDate10 = clone $tanggal_masuk;
+        if ($tanggal_masuk->dayOfWeek === Carbon::MONDAY) {
             $createDate10->addDay(11);
+        } elseif ($tanggal_masuk->dayOfWeek === Carbon::TUESDAY) {
+            $createDate10->addDay(11);
+        } elseif ($tanggal_masuk->dayOfWeek === Carbon::WEDNESDAY) {
+            $createDate10->addDay(12);
+        } elseif ($tanggal_masuk->dayOfWeek === Carbon::THURSDAY) {
+            $createDate10->addDay(12);
+        } elseif ($tanggal_masuk->dayOfWeek === Carbon::FRIDAY) {
+            $createDate10->addDay(12);
+        } elseif ($tanggal_masuk->dayOfWeek === Carbon::SATURDAY) {
+            $createDate10->addDay(12);
         }
-        $createDate11 = clone $createDate;
-        if ($tanggal_masuk->dayOfWeek === Carbon::SATURDAY) {
-            $createDate11->addDay(11);
-        } elseif ($tanggal_masuk->dayOfWeek >= Carbon::MONDAY && $tanggal_masuk->dayOfWeek <= Carbon::FRIDAY) {
+
+        $createDate11 = clone $tanggal_masuk;
+        if ($tanggal_masuk->dayOfWeek === Carbon::MONDAY) {
             $createDate11->addDay(12);
+        } elseif ($tanggal_masuk->dayOfWeek === Carbon::TUESDAY) {
+            $createDate11->addDay(13);
+        } elseif ($tanggal_masuk->dayOfWeek === Carbon::WEDNESDAY) {
+            $createDate11->addDay(13);
+        } elseif ($tanggal_masuk->dayOfWeek === Carbon::THURSDAY) {
+            $createDate11->addDay(13);
+        } elseif ($tanggal_masuk->dayOfWeek === Carbon::FRIDAY) {
+            $createDate11->addDay(13);
+        } elseif ($tanggal_masuk->dayOfWeek === Carbon::SATURDAY) {
+            $createDate11->addDay(13);
         }
-        $createDate12 = clone $createDate;
-        if ($tanggal_masuk->dayOfWeek === Carbon::SATURDAY) {
-            $createDate12->addDay(12);
-        } elseif ($tanggal_masuk->dayOfWeek >= Carbon::MONDAY && $tanggal_masuk->dayOfWeek <= Carbon::FRIDAY) {
-            $createDate12->addDay(13);
+
+        $createDate12 = clone $tanggal_masuk;
+        if ($tanggal_masuk->dayOfWeek === Carbon::MONDAY) {
+            $createDate12->addDay(14);
+        } elseif ($tanggal_masuk->dayOfWeek === Carbon::TUESDAY) {
+            $createDate12->addDay(14);
+        } elseif ($tanggal_masuk->dayOfWeek === Carbon::WEDNESDAY) {
+            $createDate12->addDay(14);
+        } elseif ($tanggal_masuk->dayOfWeek === Carbon::THURSDAY) {
+            $createDate12->addDay(14);
+        } elseif ($tanggal_masuk->dayOfWeek === Carbon::FRIDAY) {
+            $createDate12->addDay(14);
+        } elseif ($tanggal_masuk->dayOfWeek === Carbon::SATURDAY) {
+            $createDate12->addDay(14);
         }
 
         if ($total_hari == 1) {

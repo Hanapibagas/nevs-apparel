@@ -35,7 +35,7 @@
                     <table id="cs" class="table">
                         <thead>
                             <tr>
-                                <th>No</th>
+                                <th></th>
                                 <th>no.order</th>
                                 <th>nama tim</th>
                                 <th>nama layout</th>
@@ -61,7 +61,7 @@
                         <tbody>
                             @foreach ( $oderCs as $key => $disainers )
                             <tr>
-                                <td>{{ $key+1 }}</td>
+                                <td></td>
                                 <td>{{ $disainers->no_order }}</td>
                                 <td>{{ $disainers->BarangMasukDisainer->nama_tim }}</td>
                                 <td> {{ $disainers->UsersLk->name }} </td>

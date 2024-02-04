@@ -1,11 +1,20 @@
 @extends('layouts.app')
 
 @section('content')
+@if (session('error'))
+<script>
+    Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: "{{ session('error') }}",
+    })
+</script>
+@endif
+
 <div class="container-xxl flex-grow-1 container-p-y">
     <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Tables /</span> <span class="text-muted fw-light"><a
                 href="{{ route('getIndexDisainerPegawai') }}" style="color: inherit">Disainer</a></span>/ Kirim disain
         fix ke tim CS</h4>
-
     <div class="row">
         <div class="col-xxl">
             <div class="card mb-4">

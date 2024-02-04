@@ -7,6 +7,11 @@
         <canvas id="myChart"></canvas>
     </div>
     @endif
+    @if (Auth::user()->roles == 'cs')
+    <div class="container">
+        <canvas id="myBarChart"></canvas>
+    </div>
+    @endif
 </div>
 @endsection
 
@@ -58,5 +63,45 @@
         }
     });
 </script>
+<script>
+    var dataFromServer = <?php echo json_encode($dataMasuk); ?>;
+    dataFromServer.sort(function(a, b) {
+        return a.month - b.month;
+    });
+    var labels = dataFromServer.map(function(item) {
+        var monthNames = [
+            "January", "February", "March",
+            "April", "May", "June", "July",
+            "August", "September", "October",
+            "November", "December"
+        ];
+        return monthNames[item.month - 1];
+    });
 
+    var data = dataFromServer.map(function(item) {
+        return item.total;
+    });
+
+    var ctx = document.getElementById('myBarChart').getContext('2d');
+    var myBarChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Total Data Masuk',
+                data: data,
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+</script>
 @endpush

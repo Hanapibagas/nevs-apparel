@@ -18,6 +18,7 @@ return new class extends Migration
             $table->foreignId('no_order_id')->nullable()->constrained('barang_masuk_costumer_services')->onUpdate('cascade')->onDelete('cascade');
             $table->string('deadline')->nullable();
             $table->string('selesai')->nullable();
+            $table->string('tanda_telah_mengerjakan')->default('0');
             $table->timestamps();
         });
     }

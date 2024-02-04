@@ -9,9 +9,9 @@
             <div class="card">
                 <div class="container-xxl flex-grow-1 container-p-y">
                     <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Input </span>data laporan</h4>
-                    <form action="{{ route('postLaporanLkLayout', $dataLk->id) }}" method="POST"
-                        enctype="multipart/form-data">
+                    <form action="{{ route('putLaporanLs', $dataLk->id) }}" method="POST" enctype="multipart/form-data">
                         @csrf
+                        @method('PUT')
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="card mb-4">
@@ -20,9 +20,8 @@
                                             <div class="mb-3 col-md-6">
                                                 <label for="firstName" class="form-label">No. Order</label>
                                                 <input class="form-control" type="text" id="firstName"
-                                                    value="{{ $dataLk->no_order }}" readonly autofocus />
-                                                <input class="form-control" type="hidden" id="firstName"
-                                                    name="no_order_id" value="{{ $dataLk->id }}" readonly autofocus />
+                                                    value="{{ $dataLk->BarangMasukCsLK->no_order }}" readonly
+                                                    autofocus />
                                             </div>
                                             <div class="mb-3 col-md-6">
                                                 <label for="lastName" class="form-label">Panjang Kertas</label>

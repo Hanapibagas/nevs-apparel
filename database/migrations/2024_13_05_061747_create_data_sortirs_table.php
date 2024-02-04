@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('no_error')->nullable();
             $table->string('panjang_kertas')->nullable();
             $table->string('selesai')->nullable();
+            $table->string('tanda_telah_mengerjakan')->default('0');
             $table->timestamps();
         });
     }

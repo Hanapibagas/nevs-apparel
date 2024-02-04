@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\BarangMasukCostumerServices;
 use App\Models\Laporan;
 use App\Models\User;
 use Carbon\Carbon;
@@ -12,6 +13,7 @@ class HomeController extends Controller
 {
     public function index()
     {
+        // admin
         $dashboardMakassar = Laporan::whereHas('BarangMasukCs', function ($query) {
             $query->where('kota_produksi', 'Makassar');
         })
@@ -37,7 +39,18 @@ class HomeController extends Controller
             ->groupByRaw('MONTH(created_at)')
             ->get();
 
-        return view('component.dashboard', compact('dashboardMakassar', 'dashboardBandung', 'dashboardSurabaya', 'dashboardJakarta'));
+        // cs
+        $user = Auth::user();
+
+        $dataMasuk = BarangMasukCostumerServices::where('cs_id', $user->id)
+            ->selectRaw('count(*) as total, MONTH(created_at) as month')
+            ->groupByRaw('MONTH(created_at)')
+            ->get();
+
+        // return response()->json($dataMasuk);
+
+
+        return view('component.dashboard', compact('dashboardMakassar', 'dashboardBandung', 'dashboardSurabaya', 'dashboardJakarta', 'dataMasuk'));
     }
 
     public function getCostumerSevices()

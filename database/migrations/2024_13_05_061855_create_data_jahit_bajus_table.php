@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('selesai')->nullable();
             $table->string('leher')->nullable();
             $table->string('pola_badan')->nullable();
+            $table->string('tanda_telah_mengerjakan')->default('0');
             $table->timestamps();
         });
     }
