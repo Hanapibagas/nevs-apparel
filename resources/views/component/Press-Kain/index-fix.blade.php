@@ -27,10 +27,10 @@
 
 <div class="content-wrapper">
     <div class="container-xxl flex-grow-1 container-p-y">
-        <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Tables /</span> Mesin Mimaki</h4>
+        <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Tables /</span> Press Kain</h4>
 
         <div class="card">
-            <h5 class="card-header">Data masuk dari Disainer</h5>
+            <h5 class="card-header">Data masuk</h5>
             <div class="card-body">
                 <div class="table-responsive text-nowrap">
                     <table id="atexco" class="table">

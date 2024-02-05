@@ -263,13 +263,14 @@ $active = $isActive ? 'active' : '';
         <li class="menu-header small text-uppercase">
             <span class="menu-header-text">Mesin Atexco</span>
         </li>
-        <li class="menu-item {{ request()->is('data-masuk-mesin-atexco') ? 'active' : '' }}">
+        <li
+            class="menu-item {{ request()->is('data-masuk-mesin-atexco') || request()->is('data-masuk-mesin-atexco/*') ? 'active' : '' }}">
             <a href="{{ route('getIndexDataMasukMesinAtexco') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-cog"></i>
                 <div data-i18n="Analytics">Data Masuk </div>
             </a>
         </li>
-        <li class="menu-item {{ request()->is('mesin-atexco') ? 'active' : '' }}">
+        <li class="menu-item {{ request()->is('mesin-atexco')  ? 'active' : '' }}">
             <a href="{{ route('getIndexMesinAtexcoPegawai') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-cog"></i>
                 <div data-i18n="Analytics">Data Tes Disainer</div>
@@ -287,7 +288,8 @@ $active = $isActive ? 'active' : '';
         <li class="menu-header small text-uppercase">
             <span class="menu-header-text">Mesin Mimaki</span>
         </li>
-        <li class="menu-item {{ request()->is('mesin-mimaki') ? 'active' : '' }}">
+        <li
+            class="menu-item {{ request()->is('data-masuk-mesin-mimaki') || request()->is('data-masuk-mesin-mimaki/*') ? 'active' : '' }}">
             <a href="{{ route('getIndexDataMasukMimaki') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-detail"></i>
                 <div data-i18n="Analytics">Data Masuk</div>
@@ -299,8 +301,8 @@ $active = $isActive ? 'active' : '';
                 <div data-i18n="Analytics">Data Tes Disainer</div>
             </a>
         </li>
-        <li class="menu-item {{ request()->is('mesin-mimaki') ? 'active' : '' }}">
-            <a href="{{ route('getIndexMesinMimakiPegawai') }}" class="menu-link">
+        <li class="menu-item {{ request()->is('data-masuk-mesin-mimaki-fix') ? 'active' : '' }}">
+            <a href="{{ route('getIndexDataMasukMimakiFix') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-detail"></i>
                 <div data-i18n="Analytics">Data Masuk Fix Mesin</div>
             </a>
@@ -323,6 +325,44 @@ $active = $isActive ? 'active' : '';
             <a href="{{ route('getIndexLaporanLk') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-file"></i>
                 <div data-i18n="Analytics">Laporan data Lk</div>
+            </a>
+        </li>
+        @endif
+
+        @if ( Auth::user()->roles == 'pres_kain')
+        <li class="menu-header small text-uppercase">
+            <span class="menu-header-text">Press Kain</span>
+        </li>
+        <li
+            class="menu-item {{ request()->is('data-masuk-press-kain') || request()->is('data-masuk-press-kain/*') ? 'active' : '' }}">
+            <a href="{{ route('getindexDataMasukPress') }}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-file"></i>
+                <div data-i18n="Analytics">Data Masuk</div>
+            </a>
+        </li>
+        <li class="menu-item {{ request()->is('data-masuk-press-kain-fix') ? 'active' : '' }}">
+            <a href="{{ route('getindexDataMasukPressFix') }}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-file"></i>
+                <div data-i18n="Analytics">Data Fix</div>
+            </a>
+        </li>
+        @endif
+
+        @if ( Auth::user()->roles == 'laser_cut')
+        <li class="menu-header small text-uppercase">
+            <span class="menu-header-text">laser Cut</span>
+        </li>
+        <li
+            class="menu-item {{ request()->is('data-masuk-press-kain') || request()->is('data-masuk-press-kain/*') ? 'active' : '' }}">
+            <a href="{{ route('getindexDataMasukPress') }}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-file"></i>
+                <div data-i18n="Analytics">Data Masuk</div>
+            </a>
+        </li>
+        <li class="menu-item {{ request()->is('data-masuk-press-kain-fix') ? 'active' : '' }}">
+            <a href="{{ route('getindexDataMasukPressFix') }}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-file"></i>
+                <div data-i18n="Analytics">Data Fix</div>
             </a>
         </li>
         @endif

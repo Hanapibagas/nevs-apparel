@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Mesin;
 use App\Http\Controllers\Controller;
 use App\Models\BarangMasukCostumerServices;
 use App\Models\BarangMasukMesin;
+use App\Models\Laporan;
 use App\Models\MesinAtexco;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -45,6 +47,35 @@ class AtexcoController extends Controller
             ->get();
 
         return view('component.Mesin.data-masuk-mesin-atexco.index', compact('dataMasuk'));
+    }
+
+    public function getInputLaporan($id)
+    {
+        $dataMasuk = MesinAtexco::with('BarangMasukCs')->find($id);
+        return view('component.Mesin.data-masuk-mesin-atexco.cerate-laporan-mesin', compact('dataMasuk'));
+    }
+
+    public function putLaporanMesin(Request $request, $id)
+    {
+        $user = Auth::user();
+        $dataMasuk = MesinAtexco::with('BarangMasukCs')->find($id);
+
+        $dataMasuk->update([
+            'penanggung_jawab_id' => $user->id,
+            'selesai' => Carbon::now(),
+            'tanda_telah_mengerjakan' => 1
+        ]);
+
+        if ($dataMasuk) {
+            $laporan = Laporan::where('barang_masuk_mesin_atexco_id', $dataMasuk->id)->first();
+            if ($laporan) {
+                $laporan->update([
+                    'status' => 'Press Kain',
+                ]);
+            }
+        }
+
+        return redirect()->route('getIndexDataMasukAtexcoFix')->with('success', 'Selamat data yang anda input telah terkirim!');
     }
 
     public function getIndexDataMasukAtexcoFix()

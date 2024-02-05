@@ -18,15 +18,21 @@ class DataPressKain extends Model
         'selesai',
         'kain',
         'berat',
+        'tanda_telah_mengerjakan',
     ];
 
-    public function BarangmasukJahitBaju()
+    public function BarangMasukCs()
     {
         return $this->belongsTo(BarangMasukCostumerServices::class, 'no_order_id');
     }
 
-    public function UserPressKain()
+    public function MesinMimaki()
     {
-        return $this->belongsTo(User::class, 'penanggung_jawab_id');
+        return $this->belongsTo(MesinMimaki::class, 'mesin_mimaki_id');
+    }
+
+    public function MesinAtexco()
+    {
+        return $this->belongsTo(MesinAtexco::class, 'mesin_atexco_id');
     }
 }

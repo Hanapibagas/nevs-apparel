@@ -36,39 +36,20 @@
                     <table id="atexco" class="table">
                         <thead>
                             <tr>
-                                <th></th>
                                 <th>no.order</th>
                                 <th>sisa waktu produksi</th>
-                                <th>aksi</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ( $dataMasuk as $key => $mesins )
                             <tr>
-                                <td></td>
                                 <td>
                                     <strong style="text-transform: uppercase">{{ $mesins->BarangMasukCs->no_order
                                         }}</strong>
                                 </td>
                                 <td>
-                                    <script>
-                                        var deadlineDate = new Date("{{ $mesins->deadline }}");
-                                        var currentDate = new Date();
-                                        var elapsedDays = Math.floor((currentDate - deadlineDate) / (1000 * 60 * 60 * 24));
-                                        if (elapsedDays > 0) {
-                                            document.write('<span class="badge bg-label-danger">' + elapsedDays + ' hari terlewatkan</span>');
-                                        } else if (elapsedDays === 0) {
-                                            document.write('<span class="badge bg-label-danger">Hari ini adalah batas waktu</span>');
-                                        } else {
-                                            var remainingDays = Math.ceil((-elapsedDays));
-                                            document.write('<span class="badge bg-label-success">Sisa ' + remainingDays + ' hari</span>');
-                                        }
-                                    </script>
-                                </td>
-                                <td>
-                                    <a href="{{ route('getCreateLaporanLkLayout' , $mesins->id) }}"
-                                        class="btn btn-info">
-                                        <i class="menu-icon tf-icons bx bxs-inbox"></i>Input Laporan</a>
+                                    <strong style="text-transform: uppercase">{{ strftime("%A, %e %B %Y",
+                                        strtotime($mesins->selesai)) }}</strong>
                                 </td>
                             </tr>
                             @endforeach

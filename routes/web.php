@@ -8,12 +8,13 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Layout\LayoutController;
 use App\Http\Controllers\Mesin\AtexcoController;
 use App\Http\Controllers\Mesin\MimakiController;
+use App\Http\Controllers\PressKain\PressKainController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 
 
-Route::middleware(['auth', 'checkroll:super_admin,disainer,layout,cs,atexco,mimaki'])->group(function () {
+Route::middleware(['auth', 'checkroll:super_admin,disainer,layout,cs,atexco,mimaki,pres_kain,laser_cut,manual_cut,sortir,jahit_baju,jahit_celana,press_tag,packing'])->group(function () {
     Route::get('/', [HomeController::class, 'index'])->name('indexHome');
     // route admin cs
     Route::get('/laporan', [HomeController::class, 'getLaporan'])->name('getIndexLaporan');
@@ -85,6 +86,8 @@ Route::middleware(['auth', 'checkroll:disainer'])->group(function () {
 Route::middleware(['auth', 'checkroll:atexco'])->group(function () {
     Route::get('/mesin-atexco', [AtexcoController::class, 'getIndexAtexco'])->name('getIndexMesinAtexcoPegawai');
     Route::get('/data-masuk-mesin-atexco', [AtexcoController::class, 'getIndexDataMasukAtexco'])->name('getIndexDataMasukMesinAtexco');
+    Route::get('/data-masuk-mesin-atexco/{id}', [AtexcoController::class, 'getInputLaporan'])->name('getInputLaporan');
+    Route::put('/data-masuk-mesin-atexco/{id}', [AtexcoController::class, 'putLaporanMesin'])->name('putLaporanMesin');
     Route::get('/data-masuk-mesin-atexco-fix', [AtexcoController::class, 'getIndexDataMasukAtexcoFix'])->name('getIndexDataMasukAtexcoFix');
 
     Route::put('/mesin-atxco/{id}', [AtexcoController::class, 'putFeedBackToDisainer'])->name('putFeedbackByAtexcoPegawai');
@@ -93,7 +96,9 @@ Route::middleware(['auth', 'checkroll:atexco'])->group(function () {
 Route::middleware(['auth', 'checkroll:mimaki'])->group(function () {
     Route::get('/mesin-mimaki', [MimakiController::class, 'getIndexMimaki'])->name('getIndexMesinMimakiPegawai');
     Route::get('/data-masuk-mesin-mimaki', [MimakiController::class, 'getIndexDataMasukMimaki'])->name('getIndexDataMasukMimaki');
-    Route::get('/data-masuk-mesin-mimaki-fix', [MimakiController::class, 'getIndexMimaki'])->name('getIndexMesinMimakiPegawai');
+    Route::get('/data-masuk-mesin-mimaki/{id}', [MimakiController::class, 'getInputLaporan'])->name('getInputLaporan');
+    Route::put('/data-masuk-mesin-mimaki/{id}', [MimakiController::class, 'putLaporanMesin'])->name('putLaporanMesin');
+    Route::get('/data-masuk-mesin-mimaki-fix', [MimakiController::class, 'getIndexDataMasukMimakiFix'])->name('getIndexDataMasukMimakiFix');
 
     Route::put('/mesin-mimaki/{id}', [MimakiController::class, 'putFeedBackToDisainer'])->name('putFeedbackByMimakiPegawai');
 });
@@ -107,6 +112,64 @@ Route::middleware(['auth', 'checkroll:layout'])->group(function () {
 
 
     Route::get('cetak-data-lk-fix/{id}', [LayoutController::class, 'cetakDataLk'])->name('getCetakDataLkLayout');
+});
+
+Route::middleware(['auth', 'checkroll:pres_kain'])->group(function () {
+    Route::get('/data-masuk-press-kain', [PressKainController::class, 'getindexDataMasukPress'])->name('getindexDataMasukPress');
+    Route::get('/data-masuk-press-kain/{id}', [PressKainController::class, 'getInputLaporan'])->name('getInputLaporan');
+    Route::put('/data-masuk-press-kain/{id}', [PressKainController::class, 'putLaporan'])->name('putLaporan');
+    Route::get('/data-masuk-press-kain-fix', [PressKainController::class, 'getindexDataMasukPressFix'])->name('getindexDataMasukPressFix');
+
+    Route::get('/data-Lk-Layout', [PressKainController::class, 'getIndexLkCs'])->name('getIndexLkLayoutPegawai');
+});
+
+Route::middleware(['auth', 'checkroll:laser_cut'])->group(function () {
+    Route::get('/data-Lk-Layout', [LayoutController::class, 'getIndexLkCs'])->name('getIndexLkLayoutPegawai');
+    Route::get('/data-Lk-Layout', [LayoutController::class, 'getIndexLkCs'])->name('getIndexLkLayoutPegawai');
+
+    Route::get('/data-Lk-Layout', [LayoutController::class, 'getIndexLkCs'])->name('getIndexLkLayoutPegawai');
+});
+
+Route::middleware(['auth', 'checkroll:manual_cut'])->group(function () {
+    Route::get('/data-Lk-Layout', [LayoutController::class, 'getIndexLkCs'])->name('getIndexLkLayoutPegawai');
+    Route::get('/data-Lk-Layout', [LayoutController::class, 'getIndexLkCs'])->name('getIndexLkLayoutPegawai');
+
+    Route::get('/data-Lk-Layout', [LayoutController::class, 'getIndexLkCs'])->name('getIndexLkLayoutPegawai');
+});
+
+Route::middleware(['auth', 'checkroll:sortir'])->group(function () {
+    Route::get('/data-Lk-Layout', [LayoutController::class, 'getIndexLkCs'])->name('getIndexLkLayoutPegawai');
+    Route::get('/data-Lk-Layout', [LayoutController::class, 'getIndexLkCs'])->name('getIndexLkLayoutPegawai');
+
+    Route::get('/data-Lk-Layout', [LayoutController::class, 'getIndexLkCs'])->name('getIndexLkLayoutPegawai');
+});
+
+Route::middleware(['auth', 'checkroll:jahit_baju'])->group(function () {
+    Route::get('/data-Lk-Layout', [LayoutController::class, 'getIndexLkCs'])->name('getIndexLkLayoutPegawai');
+    Route::get('/data-Lk-Layout', [LayoutController::class, 'getIndexLkCs'])->name('getIndexLkLayoutPegawai');
+
+    Route::get('/data-Lk-Layout', [LayoutController::class, 'getIndexLkCs'])->name('getIndexLkLayoutPegawai');
+});
+
+Route::middleware(['auth', 'checkroll:jahit_celana'])->group(function () {
+    Route::get('/data-Lk-Layout', [LayoutController::class, 'getIndexLkCs'])->name('getIndexLkLayoutPegawai');
+    Route::get('/data-Lk-Layout', [LayoutController::class, 'getIndexLkCs'])->name('getIndexLkLayoutPegawai');
+
+    Route::get('/data-Lk-Layout', [LayoutController::class, 'getIndexLkCs'])->name('getIndexLkLayoutPegawai');
+});
+
+Route::middleware(['auth', 'checkroll:press_tag'])->group(function () {
+    Route::get('/data-Lk-Layout', [LayoutController::class, 'getIndexLkCs'])->name('getIndexLkLayoutPegawai');
+    Route::get('/data-Lk-Layout', [LayoutController::class, 'getIndexLkCs'])->name('getIndexLkLayoutPegawai');
+
+    Route::get('/data-Lk-Layout', [LayoutController::class, 'getIndexLkCs'])->name('getIndexLkLayoutPegawai');
+});
+
+Route::middleware(['auth', 'checkroll:packing'])->group(function () {
+    Route::get('/data-Lk-Layout', [LayoutController::class, 'getIndexLkCs'])->name('getIndexLkLayoutPegawai');
+    Route::get('/data-Lk-Layout', [LayoutController::class, 'getIndexLkCs'])->name('getIndexLkLayoutPegawai');
+
+    Route::get('/data-Lk-Layout', [LayoutController::class, 'getIndexLkCs'])->name('getIndexLkLayoutPegawai');
 });
 
 Auth::routes();

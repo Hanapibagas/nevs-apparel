@@ -16,6 +16,7 @@ class MesinAtexco extends Model
         'nama_mesin',
         'deadline',
         'selesai',
+        'tanda_telah_mengerjakan',
     ];
 
     public function BarangMasukCs()
