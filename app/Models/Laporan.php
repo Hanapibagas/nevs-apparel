@@ -22,6 +22,7 @@ class Laporan extends Model
         'barang_masuk_jahit_celana_id',
         'barang_masuk_pressTagSize_id',
         'barang_masuk_packing_id',
+        'status'
     ];
 
     public function BarangMasukCs()

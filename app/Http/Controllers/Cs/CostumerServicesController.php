@@ -609,36 +609,53 @@ class CostumerServicesController extends Controller
                     'deadline' => $createDate->format('Y-m-d'),
                 ]);
             }
-            $dataPressKain = DataPressKain::create([
-                'no_order_id' => $lk->id,
-                'deadline' => $createDate->format('Y-m-d'),
-            ]);
+            if ($lk->jenis_mesin == 'atexco') {
+                $dataPressKain = DataPressKain::create([
+                    'no_order_id' => $lk->id,
+                    'mesin_atexco_id' => $mesinAtexco->id,
+                    'deadline' => $createDate->format('Y-m-d'),
+                ]);
+            } elseif ($lk->jenis_mesin == 'mimaki') {
+                $dataPressKain = DataPressKain::create([
+                    'no_order_id' => $lk->id,
+                    'mesin_mimaki_id' => $mesinMimaki->id,
+                    'deadline' => $createDate->format('Y-m-d'),
+                ]);
+            }
             $dataLaseCut = DataLaserCut::create([
                 'no_order_id' => $lk->id,
+                'press_kain_id' => $dataPressKain->id,
                 'deadline' => $createDate->format('Y-m-d'),
             ]);
             $dataManualCut = DataManualCut::create([
                 'no_order_id' => $lk->id,
+                'laser_cut_id' => $dataLaseCut->id,
                 'deadline' => $createDate->format('Y-m-d'),
             ]);
             $dataSortit = DataSortir::create([
                 'no_order_id' => $lk->id,
+                'manual_cut_id' => $dataManualCut->id,
                 'deadline' => $createDate->format('Y-m-d'),
             ]);
             $dataJahitBaju = DataJahitBaju::create([
                 'no_order_id' => $lk->id,
+                'sortir_id' => $dataSortit->id,
                 'deadline' => $createDate->format('Y-m-d'),
             ]);
             $dataJahitCelana = DataJahitCelana::create([
                 'no_order_id' => $lk->id,
+                'sortir_id' => $dataSortit->id,
                 'deadline' => $createDate->format('Y-m-d'),
             ]);
             $dataPressSize = DataPressTagSize::create([
                 'no_order_id' => $lk->id,
+                'jahit_baju_id' => $dataJahitBaju->id,
+                'jahit_celana_id' => $dataJahitCelana->id,
                 'deadline' => $createDate->format('Y-m-d'),
             ]);
             $dataPacking = DataPacking::create([
                 'no_order_id' => $lk->id,
+                'prass_id' => $dataPressSize->id,
                 'deadline' => $createDate->format('Y-m-d'),
             ]);
             if ($mesinAtexco || $mesinMimaki) {
@@ -681,36 +698,53 @@ class CostumerServicesController extends Controller
                     'deadline' => $createDate->format('Y-m-d'),
                 ]);
             }
-            $dataPressKain = DataPressKain::create([
-                'no_order_id' => $lk->id,
-                'deadline' => $createDate->format('Y-m-d'),
-            ]);
+            if ($lk->jenis_mesin == 'atexco') {
+                $dataPressKain = DataPressKain::create([
+                    'no_order_id' => $lk->id,
+                    'mesin_atexco_id' => $mesinAtexco->id,
+                    'deadline' => $createDate->format('Y-m-d'),
+                ]);
+            } elseif ($lk->jenis_mesin == 'mimaki') {
+                $dataPressKain = DataPressKain::create([
+                    'no_order_id' => $lk->id,
+                    'mesin_mimaki_id' => $mesinMimaki->id,
+                    'deadline' => $createDate->format('Y-m-d'),
+                ]);
+            }
             $dataLaseCut = DataLaserCut::create([
                 'no_order_id' => $lk->id,
+                'press_kain_id' => $dataPressKain->id,
                 'deadline' => $createDate->format('Y-m-d'),
             ]);
             $dataManualCut = DataManualCut::create([
                 'no_order_id' => $lk->id,
+                'laser_cut_id' => $dataLaseCut->id,
                 'deadline' => $createDate->format('Y-m-d'),
             ]);
             $dataSortit = DataSortir::create([
                 'no_order_id' => $lk->id,
+                'manual_cut_id' => $dataManualCut->id,
                 'deadline' => $createDate2->format('Y-m-d'),
             ]);
             $dataJahitBaju = DataJahitBaju::create([
                 'no_order_id' => $lk->id,
+                'sortir_id' => $dataSortit->id,
                 'deadline' => $createDate2->format('Y-m-d'),
             ]);
             $dataJahitCelana = DataJahitCelana::create([
                 'no_order_id' => $lk->id,
+                'sortir_id' => $dataSortit->id,
                 'deadline' => $createDate2->format('Y-m-d'),
             ]);
             $dataPressSize = DataPressTagSize::create([
                 'no_order_id' => $lk->id,
+                'jahit_baju_id' => $dataJahitBaju->id,
+                'jahit_celana_id' => $dataJahitCelana->id,
                 'deadline' => $createDate2->format('Y-m-d'),
             ]);
             $dataPacking = DataPacking::create([
                 'no_order_id' => $lk->id,
+                'prass_id' => $dataPressSize->id,
                 'deadline' => $createDate2->format('Y-m-d'),
             ]);
             if ($mesinAtexco || $mesinMimaki) {
@@ -753,36 +787,53 @@ class CostumerServicesController extends Controller
                     'deadline' => $createDate2->format('Y-m-d'),
                 ]);
             }
-            $dataPressKain = DataPressKain::create([
-                'no_order_id' => $lk->id,
-                'deadline' => $createDate2->format('Y-m-d'),
-            ]);
+            if ($lk->jenis_mesin == 'atexco') {
+                $dataPressKain = DataPressKain::create([
+                    'no_order_id' => $lk->id,
+                    'mesin_atexco_id' => $mesinAtexco->id,
+                    'deadline' => $createDate->format('Y-m-d'),
+                ]);
+            } elseif ($lk->jenis_mesin == 'mimaki') {
+                $dataPressKain = DataPressKain::create([
+                    'no_order_id' => $lk->id,
+                    'mesin_mimaki_id' => $mesinMimaki->id,
+                    'deadline' => $createDate->format('Y-m-d'),
+                ]);
+            }
             $dataLaseCut = DataLaserCut::create([
                 'no_order_id' => $lk->id,
+                'press_kain_id' => $dataPressKain->id,
                 'deadline' => $createDate2->format('Y-m-d'),
             ]);
             $dataManualCut = DataManualCut::create([
                 'no_order_id' => $lk->id,
+                'laser_cut_id' => $dataLaseCut->id,
                 'deadline' => $createDate2->format('Y-m-d'),
             ]);
             $dataSortit = DataSortir::create([
                 'no_order_id' => $lk->id,
+                'manual_cut_id' => $dataManualCut->id,
                 'deadline' => $createDate3->format('Y-m-d'),
             ]);
             $dataJahitBaju = DataJahitBaju::create([
                 'no_order_id' => $lk->id,
+                'sortir_id' => $dataSortit->id,
                 'deadline' => $createDate3->format('Y-m-d'),
             ]);
             $dataJahitCelana = DataJahitCelana::create([
                 'no_order_id' => $lk->id,
+                'sortir_id' => $dataSortit->id,
                 'deadline' => $createDate3->format('Y-m-d'),
             ]);
             $dataPressSize = DataPressTagSize::create([
                 'no_order_id' => $lk->id,
+                'jahit_baju_id' => $dataJahitBaju->id,
+                'jahit_celana_id' => $dataJahitCelana->id,
                 'deadline' => $createDate3->format('Y-m-d'),
             ]);
             $dataPacking = DataPacking::create([
                 'no_order_id' => $lk->id,
+                'prass_id' => $dataPressSize->id,
                 'deadline' => $createDate3->format('Y-m-d'),
             ]);
             if ($mesinAtexco || $mesinMimaki) {
@@ -825,36 +876,53 @@ class CostumerServicesController extends Controller
                     'deadline' => $createDate2->format('Y-m-d'),
                 ]);
             }
-            $dataPressKain = DataPressKain::create([
-                'no_order_id' => $lk->id,
-                'deadline' => $createDate2->format('Y-m-d'),
-            ]);
+            if ($lk->jenis_mesin == 'atexco') {
+                $dataPressKain = DataPressKain::create([
+                    'no_order_id' => $lk->id,
+                    'mesin_atexco_id' => $mesinAtexco->id,
+                    'deadline' => $createDate->format('Y-m-d'),
+                ]);
+            } elseif ($lk->jenis_mesin == 'mimaki') {
+                $dataPressKain = DataPressKain::create([
+                    'no_order_id' => $lk->id,
+                    'mesin_mimaki_id' => $mesinMimaki->id,
+                    'deadline' => $createDate->format('Y-m-d'),
+                ]);
+            }
             $dataLaseCut = DataLaserCut::create([
                 'no_order_id' => $lk->id,
+                'press_kain_id' => $dataPressKain->id,
                 'deadline' => $createDate3->format('Y-m-d'),
             ]);
             $dataManualCut = DataManualCut::create([
                 'no_order_id' => $lk->id,
+                'laser_cut_id' => $dataLaseCut->id,
                 'deadline' => $createDate3->format('Y-m-d'),
             ]);
             $dataSortit = DataSortir::create([
                 'no_order_id' => $lk->id,
+                'manual_cut_id' => $dataManualCut->id,
                 'deadline' => $createDate3->format('Y-m-d'),
             ]);
             $dataJahitBaju = DataJahitBaju::create([
                 'no_order_id' => $lk->id,
+                'sortir_id' => $dataSortit->id,
                 'deadline' => $createDate4->format('Y-m-d'),
             ]);
             $dataJahitCelana = DataJahitCelana::create([
                 'no_order_id' => $lk->id,
+                'sortir_id' => $dataSortit->id,
                 'deadline' => $createDate4->format('Y-m-d'),
             ]);
             $dataPressSize = DataPressTagSize::create([
                 'no_order_id' => $lk->id,
+                'jahit_baju_id' => $dataJahitBaju->id,
+                'jahit_celana_id' => $dataJahitCelana->id,
                 'deadline' => $createDate4->format('Y-m-d'),
             ]);
             $dataPacking = DataPacking::create([
                 'no_order_id' => $lk->id,
+                'prass_id' => $dataPressSize->id,
                 'deadline' => $createDate4->format('Y-m-d'),
             ]);
             if ($mesinAtexco || $mesinMimaki) {
@@ -897,36 +965,53 @@ class CostumerServicesController extends Controller
                     'deadline' => $createDate2->format('Y-m-d'),
                 ]);
             }
-            $dataPressKain = DataPressKain::create([
-                'no_order_id' => $lk->id,
-                'deadline' => $createDate3->format('Y-m-d'),
-            ]);
+            if ($lk->jenis_mesin == 'atexco') {
+                $dataPressKain = DataPressKain::create([
+                    'no_order_id' => $lk->id,
+                    'mesin_atexco_id' => $mesinAtexco->id,
+                    'deadline' => $createDate->format('Y-m-d'),
+                ]);
+            } elseif ($lk->jenis_mesin == 'mimaki') {
+                $dataPressKain = DataPressKain::create([
+                    'no_order_id' => $lk->id,
+                    'mesin_mimaki_id' => $mesinMimaki->id,
+                    'deadline' => $createDate->format('Y-m-d'),
+                ]);
+            }
             $dataLaseCut = DataLaserCut::create([
                 'no_order_id' => $lk->id,
+                'press_kain_id' => $dataPressKain->id,
                 'deadline' => $createDate3->format('Y-m-d'),
             ]);
             $dataManualCut = DataManualCut::create([
                 'no_order_id' => $lk->id,
+                'laser_cut_id' => $dataLaseCut->id,
                 'deadline' => $createDate3->format('Y-m-d'),
             ]);
             $dataSortit = DataSortir::create([
                 'no_order_id' => $lk->id,
+                'manual_cut_id' => $dataManualCut->id,
                 'deadline' => $createDate4->format('Y-m-d'),
             ]);
             $dataJahitBaju = DataJahitBaju::create([
                 'no_order_id' => $lk->id,
+                'sortir_id' => $dataSortit->id,
                 'deadline' => $createDate5->format('Y-m-d'),
             ]);
             $dataJahitCelana = DataJahitCelana::create([
                 'no_order_id' => $lk->id,
+                'sortir_id' => $dataSortit->id,
                 'deadline' => $createDate5->format('Y-m-d'),
             ]);
             $dataPressSize = DataPressTagSize::create([
                 'no_order_id' => $lk->id,
+                'jahit_baju_id' => $dataJahitBaju->id,
+                'jahit_celana_id' => $dataJahitCelana->id,
                 'deadline' => $createDate5->format('Y-m-d'),
             ]);
             $dataPacking = DataPacking::create([
                 'no_order_id' => $lk->id,
+                'prass_id' => $dataPressSize->id,
                 'deadline' => $createDate5->format('Y-m-d'),
             ]);
             if ($mesinAtexco || $mesinMimaki) {
@@ -969,36 +1054,53 @@ class CostumerServicesController extends Controller
                     'deadline' => $createDate2->format('Y-m-d'),
                 ]);
             }
-            $dataPressKain = DataPressKain::create([
-                'no_order_id' => $lk->id,
-                'deadline' => $createDate3->format('Y-m-d'),
-            ]);
+            if ($lk->jenis_mesin == 'atexco') {
+                $dataPressKain = DataPressKain::create([
+                    'no_order_id' => $lk->id,
+                    'mesin_atexco_id' => $mesinAtexco->id,
+                    'deadline' => $createDate->format('Y-m-d'),
+                ]);
+            } elseif ($lk->jenis_mesin == 'mimaki') {
+                $dataPressKain = DataPressKain::create([
+                    'no_order_id' => $lk->id,
+                    'mesin_mimaki_id' => $mesinMimaki->id,
+                    'deadline' => $createDate->format('Y-m-d'),
+                ]);
+            }
             $dataLaseCut = DataLaserCut::create([
                 'no_order_id' => $lk->id,
+                'press_kain_id' => $dataPressKain->id,
                 'deadline' => $createDate3->format('Y-m-d'),
             ]);
             $dataManualCut = DataManualCut::create([
                 'no_order_id' => $lk->id,
+                'laser_cut_id' => $dataLaseCut->id,
                 'deadline' => $createDate3->format('Y-m-d'),
             ]);
             $dataSortit = DataSortir::create([
                 'no_order_id' => $lk->id,
+                'manual_cut_id' => $dataManualCut->id,
                 'deadline' => $createDate5->format('Y-m-d'),
             ]);
             $dataJahitBaju = DataJahitBaju::create([
                 'no_order_id' => $lk->id,
+                'sortir_id' => $dataSortit->id,
                 'deadline' => $createDate6->format('Y-m-d'),
             ]);
             $dataJahitCelana = DataJahitCelana::create([
                 'no_order_id' => $lk->id,
+                'sortir_id' => $dataSortit->id,
                 'deadline' => $createDate6->format('Y-m-d'),
             ]);
             $dataPressSize = DataPressTagSize::create([
                 'no_order_id' => $lk->id,
+                'jahit_baju_id' => $dataJahitBaju->id,
+                'jahit_celana_id' => $dataJahitCelana->id,
                 'deadline' => $createDate6->format('Y-m-d'),
             ]);
             $dataPacking = DataPacking::create([
                 'no_order_id' => $lk->id,
+                'prass_id' => $dataPressSize->id,
                 'deadline' => $createDate6->format('Y-m-d'),
             ]);
             if ($mesinAtexco || $mesinMimaki) {
@@ -1041,36 +1143,53 @@ class CostumerServicesController extends Controller
                     'deadline' => $createDate2->format('Y-m-d'),
                 ]);
             }
-            $dataPressKain = DataPressKain::create([
-                'no_order_id' => $lk->id,
-                'deadline' => $createDate3->format('Y-m-d'),
-            ]);
+            if ($lk->jenis_mesin == 'atexco') {
+                $dataPressKain = DataPressKain::create([
+                    'no_order_id' => $lk->id,
+                    'mesin_atexco_id' => $mesinAtexco->id,
+                    'deadline' => $createDate->format('Y-m-d'),
+                ]);
+            } elseif ($lk->jenis_mesin == 'mimaki') {
+                $dataPressKain = DataPressKain::create([
+                    'no_order_id' => $lk->id,
+                    'mesin_mimaki_id' => $mesinMimaki->id,
+                    'deadline' => $createDate->format('Y-m-d'),
+                ]);
+            }
             $dataLaseCut = DataLaserCut::create([
                 'no_order_id' => $lk->id,
+                'press_kain_id' => $dataPressKain->id,
                 'deadline' => $createDate4->format('Y-m-d'),
             ]);
             $dataManualCut = DataManualCut::create([
                 'no_order_id' => $lk->id,
+                'laser_cut_id' => $dataLaseCut->id,
                 'deadline' => $createDate4->format('Y-m-d'),
             ]);
             $dataSortit = DataSortir::create([
                 'no_order_id' => $lk->id,
+                'manual_cut_id' => $dataManualCut->id,
                 'deadline' => $createDate5->format('Y-m-d'),
             ]);
             $dataJahitBaju = DataJahitBaju::create([
                 'no_order_id' => $lk->id,
+                'sortir_id' => $dataSortit->id,
                 'deadline' => $createDate7->format('Y-m-d'),
             ]);
             $dataJahitCelana = DataJahitCelana::create([
                 'no_order_id' => $lk->id,
+                'sortir_id' => $dataSortit->id,
                 'deadline' => $createDate7->format('Y-m-d'),
             ]);
             $dataPressSize = DataPressTagSize::create([
                 'no_order_id' => $lk->id,
+                'jahit_baju_id' => $dataJahitBaju->id,
+                'jahit_celana_id' => $dataJahitCelana->id,
                 'deadline' => $createDate7->format('Y-m-d'),
             ]);
             $dataPacking = DataPacking::create([
                 'no_order_id' => $lk->id,
+                'prass_id' => $dataPressSize->id,
                 'deadline' => $createDate7->format('Y-m-d'),
             ]);
             if ($mesinAtexco || $mesinMimaki) {
@@ -1113,36 +1232,53 @@ class CostumerServicesController extends Controller
                     'deadline' => $createDate3->format('Y-m-d'),
                 ]);
             }
-            $dataPressKain = DataPressKain::create([
-                'no_order_id' => $lk->id,
-                'deadline' => $createDate4->format('Y-m-d'),
-            ]);
+            if ($lk->jenis_mesin == 'atexco') {
+                $dataPressKain = DataPressKain::create([
+                    'no_order_id' => $lk->id,
+                    'mesin_atexco_id' => $mesinAtexco->id,
+                    'deadline' => $createDate->format('Y-m-d'),
+                ]);
+            } elseif ($lk->jenis_mesin == 'mimaki') {
+                $dataPressKain = DataPressKain::create([
+                    'no_order_id' => $lk->id,
+                    'mesin_mimaki_id' => $mesinMimaki->id,
+                    'deadline' => $createDate->format('Y-m-d'),
+                ]);
+            }
             $dataLaseCut = DataLaserCut::create([
                 'no_order_id' => $lk->id,
+                'press_kain_id' => $dataPressKain->id,
                 'deadline' => $createDate5->format('Y-m-d'),
             ]);
             $dataManualCut = DataManualCut::create([
                 'no_order_id' => $lk->id,
+                'laser_cut_id' => $dataLaseCut->id,
                 'deadline' => $createDate5->format('Y-m-d'),
             ]);
             $dataSortit = DataSortir::create([
                 'no_order_id' => $lk->id,
+                'manual_cut_id' => $dataManualCut->id,
                 'deadline' => $createDate6->format('Y-m-d'),
             ]);
             $dataJahitBaju = DataJahitBaju::create([
                 'no_order_id' => $lk->id,
+                'sortir_id' => $dataSortit->id,
                 'deadline' => $createDate8->format('Y-m-d'),
             ]);
             $dataJahitCelana = DataJahitCelana::create([
                 'no_order_id' => $lk->id,
+                'sortir_id' => $dataSortit->id,
                 'deadline' => $createDate8->format('Y-m-d'),
             ]);
             $dataPressSize = DataPressTagSize::create([
                 'no_order_id' => $lk->id,
+                'jahit_baju_id' => $dataJahitBaju->id,
+                'jahit_celana_id' => $dataJahitCelana->id,
                 'deadline' => $createDate8->format('Y-m-d'),
             ]);
             $dataPacking = DataPacking::create([
                 'no_order_id' => $lk->id,
+                'prass_id' => $dataPressSize->id,
                 'deadline' => $createDate8->format('Y-m-d'),
             ]);
             if ($mesinAtexco || $mesinMimaki) {
@@ -1185,36 +1321,53 @@ class CostumerServicesController extends Controller
                     'deadline' => $createDate3->format('Y-m-d'),
                 ]);
             }
-            $dataPressKain = DataPressKain::create([
-                'no_order_id' => $lk->id,
-                'deadline' => $createDate4->format('Y-m-d'),
-            ]);
+            if ($lk->jenis_mesin == 'atexco') {
+                $dataPressKain = DataPressKain::create([
+                    'no_order_id' => $lk->id,
+                    'mesin_atexco_id' => $mesinAtexco->id,
+                    'deadline' => $createDate->format('Y-m-d'),
+                ]);
+            } elseif ($lk->jenis_mesin == 'mimaki') {
+                $dataPressKain = DataPressKain::create([
+                    'no_order_id' => $lk->id,
+                    'mesin_mimaki_id' => $mesinMimaki->id,
+                    'deadline' => $createDate->format('Y-m-d'),
+                ]);
+            }
             $dataLaseCut = DataLaserCut::create([
                 'no_order_id' => $lk->id,
+                'press_kain_id' => $dataPressKain->id,
                 'deadline' => $createDate5->format('Y-m-d'),
             ]);
             $dataManualCut = DataManualCut::create([
                 'no_order_id' => $lk->id,
+                'laser_cut_id' => $dataLaseCut->id,
                 'deadline' => $createDate5->format('Y-m-d'),
             ]);
             $dataSortit = DataSortir::create([
                 'no_order_id' => $lk->id,
+                'manual_cut_id' => $dataManualCut->id,
                 'deadline' => $createDate6->format('Y-m-d'),
             ]);
             $dataJahitBaju = DataJahitBaju::create([
                 'no_order_id' => $lk->id,
+                'sortir_id' => $dataSortit->id,
                 'deadline' => $createDate8->format('Y-m-d'),
             ]);
             $dataJahitCelana = DataJahitCelana::create([
                 'no_order_id' => $lk->id,
+                'sortir_id' => $dataSortit->id,
                 'deadline' => $createDate8->format('Y-m-d'),
             ]);
             $dataPressSize = DataPressTagSize::create([
                 'no_order_id' => $lk->id,
+                'jahit_baju_id' => $dataJahitBaju->id,
+                'jahit_celana_id' => $dataJahitCelana->id,
                 'deadline' => $createDate9->format('Y-m-d'),
             ]);
             $dataPacking = DataPacking::create([
                 'no_order_id' => $lk->id,
+                'prass_id' => $dataPressSize->id,
                 'deadline' => $createDate9->format('Y-m-d'),
             ]);
             if ($mesinAtexco || $mesinMimaki) {
@@ -1257,36 +1410,53 @@ class CostumerServicesController extends Controller
                     'deadline' => $createDate3->format('Y-m-d'),
                 ]);
             }
-            $dataPressKain = DataPressKain::create([
-                'no_order_id' => $lk->id,
-                'deadline' => $createDate4->format('Y-m-d'),
-            ]);
+            if ($lk->jenis_mesin == 'atexco') {
+                $dataPressKain = DataPressKain::create([
+                    'no_order_id' => $lk->id,
+                    'mesin_atexco_id' => $mesinAtexco->id,
+                    'deadline' => $createDate->format('Y-m-d'),
+                ]);
+            } elseif ($lk->jenis_mesin == 'mimaki') {
+                $dataPressKain = DataPressKain::create([
+                    'no_order_id' => $lk->id,
+                    'mesin_mimaki_id' => $mesinMimaki->id,
+                    'deadline' => $createDate->format('Y-m-d'),
+                ]);
+            }
             $dataLaseCut = DataLaserCut::create([
                 'no_order_id' => $lk->id,
+                'press_kain_id' => $dataPressKain->id,
                 'deadline' => $createDate5->format('Y-m-d'),
             ]);
             $dataManualCut = DataManualCut::create([
                 'no_order_id' => $lk->id,
+                'laser_cut_id' => $dataLaseCut->id,
                 'deadline' => $createDate5->format('Y-m-d'),
             ]);
             $dataSortit = DataSortir::create([
                 'no_order_id' => $lk->id,
+                'manual_cut_id' => $dataManualCut->id,
                 'deadline' => $createDate6->format('Y-m-d'),
             ]);
             $dataJahitBaju = DataJahitBaju::create([
                 'no_order_id' => $lk->id,
+                'sortir_id' => $dataSortit->id,
                 'deadline' => $createDate9->format('Y-m-d'),
             ]);
             $dataJahitCelana = DataJahitCelana::create([
                 'no_order_id' => $lk->id,
+                'sortir_id' => $dataSortit->id,
                 'deadline' => $createDate9->format('Y-m-d'),
             ]);
             $dataPressSize = DataPressTagSize::create([
                 'no_order_id' => $lk->id,
+                'jahit_baju_id' => $dataJahitBaju->id,
+                'jahit_celana_id' => $dataJahitCelana->id,
                 'deadline' => $createDate10->format('Y-m-d'),
             ]);
             $dataPacking = DataPacking::create([
                 'no_order_id' => $lk->id,
+                'prass_id' => $dataPressSize->id,
                 'deadline' => $createDate10->format('Y-m-d'),
             ]);
             if ($mesinAtexco || $mesinMimaki) {
@@ -1329,36 +1499,53 @@ class CostumerServicesController extends Controller
                     'deadline' => $createDate4->format('Y-m-d'),
                 ]);
             }
-            $dataPressKain = DataPressKain::create([
-                'no_order_id' => $lk->id,
-                'deadline' => $createDate5->format('Y-m-d'),
-            ]);
+            if ($lk->jenis_mesin == 'atexco') {
+                $dataPressKain = DataPressKain::create([
+                    'no_order_id' => $lk->id,
+                    'mesin_atexco_id' => $mesinAtexco->id,
+                    'deadline' => $createDate->format('Y-m-d'),
+                ]);
+            } elseif ($lk->jenis_mesin == 'mimaki') {
+                $dataPressKain = DataPressKain::create([
+                    'no_order_id' => $lk->id,
+                    'mesin_mimaki_id' => $mesinMimaki->id,
+                    'deadline' => $createDate->format('Y-m-d'),
+                ]);
+            }
             $dataLaseCut = DataLaserCut::create([
                 'no_order_id' => $lk->id,
+                'press_kain_id' => $dataPressKain->id,
                 'deadline' => $createDate6->format('Y-m-d'),
             ]);
             $dataManualCut = DataManualCut::create([
                 'no_order_id' => $lk->id,
+                'laser_cut_id' => $dataLaseCut->id,
                 'deadline' => $createDate6->format('Y-m-d'),
             ]);
             $dataSortit = DataSortir::create([
                 'no_order_id' => $lk->id,
+                'manual_cut_id' => $dataManualCut->id,
                 'deadline' => $createDate7->format('Y-m-d'),
             ]);
             $dataJahitBaju = DataJahitBaju::create([
                 'no_order_id' => $lk->id,
+                'sortir_id' => $dataSortit->id,
                 'deadline' => $createDate10->format('Y-m-d'),
             ]);
             $dataJahitCelana = DataJahitCelana::create([
                 'no_order_id' => $lk->id,
+                'sortir_id' => $dataSortit->id,
                 'deadline' => $createDate10->format('Y-m-d'),
             ]);
             $dataPressSize = DataPressTagSize::create([
                 'no_order_id' => $lk->id,
+                'jahit_baju_id' => $dataJahitBaju->id,
+                'jahit_celana_id' => $dataJahitCelana->id,
                 'deadline' => $createDate11->format('Y-m-d'),
             ]);
             $dataPacking = DataPacking::create([
                 'no_order_id' => $lk->id,
+                'prass_id' => $dataPressSize->id,
                 'deadline' => $createDate11->format('Y-m-d'),
             ]);
             if ($mesinAtexco || $mesinMimaki) {
@@ -1401,36 +1588,53 @@ class CostumerServicesController extends Controller
                     'deadline' => $createDate4->format('Y-m-d'),
                 ]);
             }
-            $dataPressKain = DataPressKain::create([
-                'no_order_id' => $lk->id,
-                'deadline' => $createDate5->format('Y-m-d'),
-            ]);
+            if ($lk->jenis_mesin == 'atexco') {
+                $dataPressKain = DataPressKain::create([
+                    'no_order_id' => $lk->id,
+                    'mesin_atexco_id' => $mesinAtexco->id,
+                    'deadline' => $createDate->format('Y-m-d'),
+                ]);
+            } elseif ($lk->jenis_mesin == 'mimaki') {
+                $dataPressKain = DataPressKain::create([
+                    'no_order_id' => $lk->id,
+                    'mesin_mimaki_id' => $mesinMimaki->id,
+                    'deadline' => $createDate->format('Y-m-d'),
+                ]);
+            }
             $dataLaseCut = DataLaserCut::create([
                 'no_order_id' => $lk->id,
+                'press_kain_id' => $dataPressKain->id,
                 'deadline' => $createDate6->format('Y-m-d'),
             ]);
             $dataManualCut = DataManualCut::create([
                 'no_order_id' => $lk->id,
+                'laser_cut_id' => $dataLaseCut->id,
                 'deadline' => $createDate6->format('Y-m-d'),
             ]);
             $dataSortit = DataSortir::create([
                 'no_order_id' => $lk->id,
+                'manual_cut_id' => $dataManualCut->id,
                 'deadline' => $createDate7->format('Y-m-d'),
             ]);
             $dataJahitBaju = DataJahitBaju::create([
                 'no_order_id' => $lk->id,
+                'sortir_id' => $dataSortit->id,
                 'deadline' => $createDate10->format('Y-m-d'),
             ]);
             $dataJahitCelana = DataJahitCelana::create([
                 'no_order_id' => $lk->id,
+                'sortir_id' => $dataSortit->id,
                 'deadline' => $createDate10->format('Y-m-d'),
             ]);
             $dataPressSize = DataPressTagSize::create([
                 'no_order_id' => $lk->id,
+                'jahit_baju_id' => $dataJahitBaju->id,
+                'jahit_celana_id' => $dataJahitCelana->id,
                 'deadline' => $createDate12->format('Y-m-d'),
             ]);
             $dataPacking = DataPacking::create([
                 'no_order_id' => $lk->id,
+                'prass_id' => $dataPressSize->id,
                 'deadline' => $createDate12->format('Y-m-d'),
             ]);
             if ($mesinAtexco || $mesinMimaki) {

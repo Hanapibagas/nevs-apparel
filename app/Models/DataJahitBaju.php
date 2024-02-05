@@ -11,6 +11,7 @@ class DataJahitBaju extends Model
 
     protected $fillable = [
         'no_order_id',
+        'sortir_id',
         'deadline',
         'selesai',
         'leher',

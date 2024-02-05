@@ -12,6 +12,7 @@ class DataSortir extends Model
     protected $fillable = [
         'no_order_id',
         'penanggung_jawab_id',
+        'manual_cut_id',
         'no_error',
         'panjang_kertas',
         'selesai',

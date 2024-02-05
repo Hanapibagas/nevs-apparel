@@ -27,6 +27,8 @@ return new class extends Migration
             $table->foreignId('barang_masuk_jahit_celana_id')->nullable()->constrained('data_jahit_celanas')->onUpdate('cascade')->onDelete('cascade');
             $table->foreignId('barang_masuk_pressTagSize_id')->nullable()->constrained('data_press_tag_sizes')->onUpdate('cascade')->onDelete('cascade');
             $table->foreignId('barang_masuk_packing_id')->nullable()->constrained('data_packings')->onUpdate('cascade')->onDelete('cascade');
+            $table->string('status')->default('Layout');
+            $table->string('keterangan')->nullable();
             $table->timestamps();
         });
     }

@@ -11,6 +11,7 @@ class DataPacking extends Model
 
     protected $fillable = [
         'no_order_id',
+        'prass_id',
         'selesai',
         'deadline'
     ];

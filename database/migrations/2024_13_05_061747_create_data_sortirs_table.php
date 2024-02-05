@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('no_order_id')->nullable()->constrained('barang_masuk_costumer_services')->onUpdate('cascade')->onDelete('cascade');
             $table->foreignId('penanggung_jawab_id')->nullable()->constrained('users')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('manual_cut_id')->nullable()->constrained('data_manual_cuts')->onUpdate('cascade')->onDelete('cascade');
             $table->string('deadline')->nullable();
             $table->string('no_error')->nullable();
             $table->string('panjang_kertas')->nullable();

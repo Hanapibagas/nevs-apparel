@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @push('css')
-<link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.css" />
+
 @endpush
 
 @section('content')
@@ -27,36 +27,32 @@
 
 <div class="content-wrapper">
     <div class="container-xxl flex-grow-1 container-p-y">
-        <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Tables /</span> Layout</h4>
+        <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Tables /</span> Mesin Atexco</h4>
+
         <div class="card">
-            <h5 class="card-header">Data Lembaran Kerja</h5>
+            <h5 class="card-header">Data masuk dari Disainer</h5>
             <div class="card-body">
                 <div class="table-responsive text-nowrap">
-                    <table id="cs" class="table">
+                    <table id="atexco" class="table">
                         <thead>
                             <tr>
                                 <th></th>
                                 <th>no.order</th>
-                                <th>nama Cs</th>
                                 <th>sisa waktu produksi</th>
                                 <th>aksi</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ( $oderCs as $key=> $disainers )
+                            @foreach ( $dataMasuk as $key => $mesins )
                             <tr>
                                 <td></td>
                                 <td>
-                                    <strong style="text-transform: uppercase">{{ $disainers->BarangMasukCsLK->no_order
-                                        }}</strong>
-                                </td>
-                                <td>
-                                    <strong style="text-transform: uppercase">{{ $disainers->UserLayout->name
+                                    <strong style="text-transform: uppercase">{{ $mesins->BarangMasukCs->no_order
                                         }}</strong>
                                 </td>
                                 <td>
                                     <script>
-                                        var deadlineDate = new Date("{{ $disainers->deadline }}");
+                                        var deadlineDate = new Date("{{ $mesins->deadline }}");
                                         var currentDate = new Date();
                                         var elapsedDays = Math.floor((currentDate - deadlineDate) / (1000 * 60 * 60 * 24));
                                         if (elapsedDays > 0) {
@@ -70,15 +66,7 @@
                                     </script>
                                 </td>
                                 <td>
-                                    <a target="_blank"
-                                        href="{{ route('getCetakDataLkLayout', $disainers->BarangMasukCsLK->id) }}"
-                                        class="btn btn-danger">
-                                        <i class="menu-icon tf-icons bx bxs-file-pdf"></i>Download LK</a>
-                                    <a target="_blank"
-                                        href="storage/{{ $disainers->BarangMasukCsLK->file_corel_disainer }}"
-                                        class="btn btn-success">
-                                        <i class="menu-icon tf-icons bx bxs-download"></i>Download File Corel</a>
-                                    <a href="{{ route('getCreateLaporanLkLayout' , $disainers->id) }}"
+                                    <a href="{{ route('getCreateLaporanLkLayout' , $mesins->id) }}"
                                         class="btn btn-info">
                                         <i class="menu-icon tf-icons bx bxs-inbox"></i>Input Laporan</a>
                                 </td>
@@ -95,35 +83,6 @@
 
 @push('js')
 <script>
-    new DataTable('#cs');
+    new DataTable('#atexco');
 </script>
-
-<script>
-    // Mendapatkan tabel
-    var table = document.getElementById('cs');
-
-    // Mendapatkan baris pada tabel kecuali baris header
-    var rows = Array.from(table.querySelectorAll('tbody tr'));
-
-    // Mengurutkan baris berdasarkan sisa waktu produksi terendah ke tertinggi
-    rows.sort(function (a, b) {
-        var timeA = getTimeFromRow(a);
-        var timeB = getTimeFromRow(b);
-
-        return timeA - timeB;
-    });
-
-    // Menghapus baris yang ada di dalam tabel
-    rows.forEach(function (row) {
-        table.querySelector('tbody').appendChild(row);
-    });
-
-    // Fungsi untuk mendapatkan waktu dari sebuah baris
-    function getTimeFromRow(row) {
-        var timeText = row.querySelector('td:nth-child(4) span').innerText;
-        var time = parseInt(timeText.split(' ')[1]);
-        return time;
-    }
-</script>
-
 @endpush

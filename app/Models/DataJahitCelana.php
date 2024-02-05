@@ -12,6 +12,7 @@ class DataJahitCelana extends Model
     protected $fillable = [
         'no_order_id',
         'penanggung_jawab_id',
+        'sortir_id',
         'selesai',
         'pola_celana',
         'deadline'

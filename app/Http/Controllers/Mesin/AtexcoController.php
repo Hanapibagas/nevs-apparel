@@ -37,11 +37,25 @@ class AtexcoController extends Controller
 
     public function getIndexDataMasukAtexco()
     {
-        $dataMasuk = BarangMasukCostumerServices::where('jenis_mesin', 'atexco')
-            ->with('LaporanLkLayout', 'MesinAtexco')
-            ->orderBy('created_at', 'desc')
+        $dataMasuk = MesinAtexco::with('BarangMasukCs', 'BarangMasukLayout')
+            ->where('tanda_telah_mengerjakan', 0)
+            ->whereHas('BarangMasukLayout', function ($query) {
+                $query->whereNotNull('selesai');
+            })
             ->get();
 
-        // return response()->json($dataMasuk);
+        return view('component.Mesin.data-masuk-mesin-atexco.index', compact('dataMasuk'));
+    }
+
+    public function getIndexDataMasukAtexcoFix()
+    {
+        $dataMasuk = MesinAtexco::with('BarangMasukCs', 'BarangMasukLayout')
+            ->where('tanda_telah_mengerjakan', 1)
+            ->whereHas('BarangMasukLayout', function ($query) {
+                $query->whereNotNull('selesai');
+            })
+            ->get();
+
+        return view('component.Mesin.data-masuk-mesin-fix-atexco.index', compact('dataMasuk'));
     }
 }

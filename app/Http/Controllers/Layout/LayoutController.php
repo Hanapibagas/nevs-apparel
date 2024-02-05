@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Layout;
 use App\Http\Controllers\Controller;
 use App\Models\BarangMasukCostumerServices;
 use App\Models\BarangMasukDatalayout;
+use App\Models\Laporan;
 use App\Models\LaporanLkLayout;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -154,14 +155,22 @@ class LayoutController extends Controller
             'tanda_telah_mengerjakan' => 1,
         ]);
 
+        if ($dataLk->BarangMasukCsLK->jenis_mesin == 'mimaki') {
+            $laporan = Laporan::where('barang_masuk_layout_id', $dataLk->id)->first();
+            if ($laporan) {
+                $laporan->update([
+                    'status' => 'Mesin Mimaki',
+                ]);
+            }
+        } elseif ($dataLk->BarangMasukCsLK->jenis_mesin == 'atexco') {
+            $laporan = Laporan::where('barang_masuk_layout_id', $dataLk->id)->first();
+            if ($laporan) {
+                $laporan->update([
+                    'status' => 'Mesin Atexco',
+                ]);
+            }
+        }
+
         return redirect()->route('getIndexLkLayoutPegawai')->with('success', 'Selamat data yang anda input telah terkirim!');
     }
-
-    // public function showDataLaporanLk($id)
-    // {
-    //     $show = LaporanLkLayout::with('UserLayout', 'BarangMasukCsLK')->find($id);
-
-    //     // return response()->json($show);
-    //     return view('component.Layout.layout-lk-pegawai.show-laporan-lk', compact('show'));
-    // }
 }

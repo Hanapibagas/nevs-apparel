@@ -36,14 +36,13 @@
                         <thead>
                             <tr>
                                 <th>No</th>
-                                <th>Kota produksi</th>
                                 <th>no.inv</th>
                                 <th>no.po</th>
+                                <th>Nama tim</th>
                                 <th>nama admin</th>
-                                <th>nama desain</th>
-                                <th>nama layout</th>
-                                <th>layoutters</th>
-                                <th>waktu</th>
+                                <th>Status</th>
+                                <th>deadline</th>
+                                <th>sisa waktu</th>
                                 <th>aksi</th>
                             </tr>
                         </thead>
@@ -51,22 +50,17 @@
                             @foreach ( $laporans as $key => $laporan )
                             <tr>
                                 <td>{{ $key+1 }}</td>
-                                <td>{{ $laporan->BarangMasukCs->kota_produksi }}</td>
                                 <td>{{ $laporan->BarangMasukCs->no_nota }}</td>
                                 <td>{{ $laporan->BarangMasukCs->no_order }}</td>
-                                <td>{{ $laporan->BarangMasukCs->UsersOrder->name }}</td>
-                                <td>{{ $laporan->BarangMasukCs->Users->name }}</td>
-                                <td>{{ $laporan->BarangMasukCs->UsersLk->name }}</td>
                                 <td>{{ $laporan->BarangMasukCs->BarangMasukDisainer->nama_tim }}</td>
-                                <td>
-                                    @if($laporan->BarangMasukCs->total >= 1 && $laporan->BarangMasukCs->total <= 9)
-                                        <span class="badge bg-label-danger">{{ $laporan->BarangMasukCs->total }}
-                                        Hari Express</span>
-                                        @elseif($laporan->BarangMasukCs->total >= 10 && $laporan->BarangMasukCs->total
-                                        <= 32) <span class="badge bg-label-warning">{{ $laporan->BarangMasukCs->total }}
-                                            Hari Normal</span>
-                                            @endif
-                                </td>
+                                <td>{{ $laporan->BarangMasukCs->UsersOrder->name }}</td>
+
+
+
+
+                                <td>{{ $laporan->status }}</td>
+                                <td>{{ \Carbon\Carbon::parse($laporan->BarangMasukCs->deadline)->format('d F Y') }}</td>
+                                <td></td>
                                 <td>
                                     <button class="btn btn-primary" data-bs-toggle="modal"
                                         data-bs-target="#modalScrollable{{ $laporan->id }}" type="button"

@@ -12,6 +12,8 @@ class DataPressKain extends Model
     protected $fillable = [
         'no_order_id',
         'penanggung_jawab_id',
+        'mesin_atexco_id',
+        'mesin_mimaki_id',
         'deadline',
         'selesai',
         'kain',

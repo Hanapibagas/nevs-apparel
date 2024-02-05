@@ -20,7 +20,7 @@ class MesinAtexco extends Model
 
     public function BarangMasukCs()
     {
-        return $this->belongsTo(BarangMasukCostumerServices::class, 'barang_masuk');
+        return $this->belongsTo(BarangMasukCostumerServices::class, 'no_order_id');
     }
 
     public function UserMesinAtexco()
@@ -28,8 +28,8 @@ class MesinAtexco extends Model
         return $this->belongsTo(User::class, 'penanggung_jawab_id');
     }
 
-    // public function BarangMasukAtexco()
-    // {
-    //     return $this->hasMany(LaporanLkLayout::class, 'no_order_id');
-    // }
+    public function BarangMasukLayout()
+    {
+        return $this->hasMany(BarangMasukDatalayout::class, 'no_order_id');
+    }
 }

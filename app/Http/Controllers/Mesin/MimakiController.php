@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Mesin;
 
 use App\Http\Controllers\Controller;
 use App\Models\BarangMasukMesin;
+use App\Models\MesinMimaki;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -31,5 +32,17 @@ class MimakiController extends Controller
         ]);
 
         return redirect()->back()->with('success', 'Selamat data yang input berhasil!');
+    }
+
+    public function getIndexDataMasukMimaki()
+    {
+        $dataMasuk = MesinMimaki::with('BarangMasukCs', 'BarangMasukLayout')
+            ->where('tanda_telah_mengerjakan', 0)
+            ->whereHas('BarangMasukLayout', function ($query) {
+                $query->whereNotNull('selesai');
+            })
+            ->get();
+
+        return view('component.Mesin.data-masuk-mesin-mimaki.index', compact('dataMasuk'));
     }
 }

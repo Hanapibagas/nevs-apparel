@@ -11,6 +11,8 @@ class DataPressTagSize extends Model
 
     protected $fillable = [
         'no_order_id',
+        'jahit_baju_id',
+        'jahit_celana_id',
         'deadline',
         'selesai',
     ];

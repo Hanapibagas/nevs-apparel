@@ -11,6 +11,7 @@ class DataLaserCut extends Model
 
     protected $fillable = [
         'no_order_id',
+        'press_kain_id',
         'deadline',
         'penanggung_jawab_id',
         'selesai'

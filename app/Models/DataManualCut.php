@@ -12,6 +12,7 @@ class DataManualCut extends Model
     protected $fillable = [
         'no_order_id',
         'penanggung_jawab_id',
+        'laser_cut_id',
         'deadline',
         'selesai',
     ];

@@ -260,14 +260,10 @@ $active = $isActive ? 'active' : '';
         @endif
 
         @if ( Auth::user()->roles == 'atexco')
-        @php
-        $dataTes = App\Models\BarangMasukMesin::where('status', 0)->where('nama_mesin',
-        'atexco')->count();
-        @endphp
         <li class="menu-header small text-uppercase">
             <span class="menu-header-text">Mesin Atexco</span>
         </li>
-        <li class="menu-item">
+        <li class="menu-item {{ request()->is('data-masuk-mesin-atexco') ? 'active' : '' }}">
             <a href="{{ route('getIndexDataMasukMesinAtexco') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-cog"></i>
                 <div data-i18n="Analytics">Data Masuk </div>
@@ -277,38 +273,41 @@ $active = $isActive ? 'active' : '';
             <a href="{{ route('getIndexMesinAtexcoPegawai') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-cog"></i>
                 <div data-i18n="Analytics">Data Tes Disainer</div>
-                <span style="margin-left: 10px; margin-bottom: 20px;" class="badge bg-label-warnig">{{ $dataTes
-                    }}</span>
+            </a>
+        </li>
+        <li class="menu-item {{ request()->is('data-masuk-mesin-atexco-fix') ? 'active' : '' }}">
+            <a href="{{ route('getIndexDataMasukAtexcoFix') }}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-cog"></i>
+                <div data-i18n="Analytics">Data Masuk Fix Mesin</div>
             </a>
         </li>
         @endif
 
         @if ( Auth::user()->roles == 'mimaki')
-        @php
-        $dataTes = App\Models\BarangMasukMesin::where('status', 0)->where('nama_mesin',
-        'mimaki')->count();
-        @endphp
         <li class="menu-header small text-uppercase">
             <span class="menu-header-text">Mesin Mimaki</span>
+        </li>
+        <li class="menu-item {{ request()->is('mesin-mimaki') ? 'active' : '' }}">
+            <a href="{{ route('getIndexDataMasukMimaki') }}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-detail"></i>
+                <div data-i18n="Analytics">Data Masuk</div>
+            </a>
         </li>
         <li class="menu-item {{ request()->is('mesin-mimaki') ? 'active' : '' }}">
             <a href="{{ route('getIndexMesinMimakiPegawai') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-detail"></i>
                 <div data-i18n="Analytics">Data Tes Disainer</div>
-                <span style="margin-left: 10px; margin-bottom: 20px;" class="badge bg-label-warning">{{ $dataTes
-                    }}</span>
+            </a>
+        </li>
+        <li class="menu-item {{ request()->is('mesin-mimaki') ? 'active' : '' }}">
+            <a href="{{ route('getIndexMesinMimakiPegawai') }}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-detail"></i>
+                <div data-i18n="Analytics">Data Masuk Fix Mesin</div>
             </a>
         </li>
         @endif
 
         @if ( Auth::user()->roles == 'layout')
-        @php
-        // $userId = Auth::id();
-        // $dataFix = App\Models\BarangMasukDisainer::where('layout_id', $userId)->
-        // where('tanda_telah_mengerjakan', 1)->
-        // count();
-        // dd($dataFix);
-        @endphp
         <li class="menu-header small text-uppercase">
             <span class="menu-header-text">Layout</span>
         </li>
@@ -317,8 +316,6 @@ $active = $isActive ? 'active' : '';
             <a href="{{ route('getIndexLkLayoutPegawai') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-file"></i>
                 <div data-i18n="Analytics">Data LK</div>
-                {{-- <span style="margin-left: 10px; margin-bottom: 20px;" class="badge bg-label-success">{{ $dataFix
-                    }}</span> --}}
             </a>
         </li>
         <li

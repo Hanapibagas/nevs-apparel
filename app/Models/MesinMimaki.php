@@ -27,4 +27,9 @@ class MesinMimaki extends Model
     {
         return $this->belongsTo(User::class, 'penanggung_jawab_id');
     }
+    
+    public function BarangMasukLayout()
+    {
+        return $this->hasMany(BarangMasukDatalayout::class, 'no_order_id');
+    }
 }

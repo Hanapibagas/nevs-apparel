@@ -17,6 +17,8 @@ return new class extends Migration
             $table->id();
             $table->foreignId('no_order_id')->nullable()->constrained('barang_masuk_costumer_services')->onUpdate('cascade')->onDelete('cascade');
             $table->foreignId('penanggung_jawab_id')->nullable()->constrained('users')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('mesin_atexco_id')->nullable()->constrained('mesin_atexcos')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('mesin_mimaki_id')->nullable()->constrained('mesin_mimakis')->onUpdate('cascade')->onDelete('cascade');
             $table->string('deadline')->nullable();
             $table->string('selesai')->nullable();
             $table->string('kain')->nullable();
