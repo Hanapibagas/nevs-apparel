@@ -44,7 +44,7 @@ class PressTagController extends Controller
             $laporan = Laporan::where('barang_masuk_pressTagSize_id', $dataMasuk->id)->first();
             if ($laporan) {
                 $laporan->update([
-                    'status' => 'Packing    ',
+                    'status' => 'Packing',
                 ]);
             }
         }
