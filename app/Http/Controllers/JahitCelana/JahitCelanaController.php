@@ -1,50 +1,51 @@
 <?php
 
-namespace App\Http\Controllers\LaserCut;
+namespace App\Http\Controllers\JahitCelana;
 
 use App\Http\Controllers\Controller;
-use App\Models\DataLaserCut;
+use App\Models\DataJahitCelana;
 use App\Models\Laporan;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class LaserCutController extends Controller
+class JahitCelanaController extends Controller
 {
     public function getIndex()
     {
-        $dataMasuk = DataLaserCut::with('BarangMasukCs', 'BarangMasukPresKain')
+        $dataMasuk = DataJahitCelana::with('BarangMasukCs', 'BarangMasukSortir')
             ->where('tanda_telah_mengerjakan', 0)
-            ->whereHas('BarangMasukPresKain', function ($query) {
+            ->whereHas('BarangMasukSortir', function ($query) {
                 $query->whereNotNull('selesai');
             })
             ->get();
 
-        return view('component.Laser-Cut.index', compact('dataMasuk'));
+        return view('component.Jahit-Celana.index', compact('dataMasuk'));
     }
 
     public function getInputLaporan($id)
     {
-        $dataMasuk = DataLaserCut::with('BarangMasukPresKain')->find($id);
-        return view('component.Laser-Cut.cerate-laporan-mesin', compact('dataMasuk'));
+        $dataMasuk = DataJahitCelana::with('BarangMasukCs')->find($id);
+        return view('component.Jahit-Celana.cerate-laporan-mesin', compact('dataMasuk'));
     }
 
     public function putLaporan(Request $request, $id)
     {
         $user = Auth::user();
-        $dataMasuk = DataLaserCut::find($id);
+        $dataMasuk = DataJahitCelana::find($id);
 
         $dataMasuk->update([
             'penanggung_jawab_id' => $user->id,
             'selesai' => Carbon::now(),
+            'pola_celana' => $request->pola_celana,
             'tanda_telah_mengerjakan' => 1
         ]);
 
         if ($dataMasuk) {
-            $laporan = Laporan::where('barang_masuk_lasercut_id', $dataMasuk->id)->first();
+            $laporan = Laporan::where('barang_masuk_jahit_celana_id', $dataMasuk->id)->first();
             if ($laporan) {
                 $laporan->update([
-                    'status' => 'Manual Cut',
+                    'status' => 'Press Tag',
                 ]);
             }
         }
@@ -54,13 +55,13 @@ class LaserCutController extends Controller
 
     public function getIndexFix()
     {
-        $dataMasuk = DataLaserCut::with('BarangMasukCs', 'BarangMasukPresKain')
+        $dataMasuk = DataJahitCelana::with('BarangMasukCs', 'BarangMasukSortir')
             ->where('tanda_telah_mengerjakan', 1)
-            ->whereHas('BarangMasukPresKain', function ($query) {
+            ->whereHas('BarangMasukSortir', function ($query) {
                 $query->whereNotNull('selesai');
             })
             ->get();
 
-        return view('component.Laser-Cut.index-fix', compact('dataMasuk'));
+        return view('component.Jahit-Celana.index-fix', compact('dataMasuk'));
     }
 }

@@ -15,11 +15,17 @@ class DataManualCut extends Model
         'laser_cut_id',
         'deadline',
         'selesai',
+        'tanda_telah_mengerjakan',
     ];
 
-    public function BarangmasukJahitBaju()
+    public function BarangMasukCs()
     {
         return $this->belongsTo(BarangMasukCostumerServices::class, 'no_order_id');
+    }
+
+    public function BarangMasukLaserCut()
+    {
+        return $this->belongsTo(DataLaserCut::class, 'laser_cut_id');
     }
 
     public function UserLaserCut()

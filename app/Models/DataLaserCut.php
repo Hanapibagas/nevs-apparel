@@ -14,12 +14,18 @@ class DataLaserCut extends Model
         'press_kain_id',
         'deadline',
         'penanggung_jawab_id',
-        'selesai'
+        'selesai',
+        'tanda_telah_mengerjakan'
     ];
 
-    public function BarangmasukJahitBaju()
+    public function BarangMasukCs()
     {
         return $this->belongsTo(BarangMasukCostumerServices::class, 'no_order_id');
+    }
+
+    public function BarangMasukPresKain()
+    {
+        return $this->belongsTo(DataPressKain::class, 'press_kain_id');
     }
 
     public function UserLaserCut()

@@ -15,13 +15,20 @@ class DataJahitCelana extends Model
         'sortir_id',
         'selesai',
         'pola_celana',
-        'deadline'
+        'deadline',
+        'tanda_telah_mengerjakan',
     ];
 
-    public function BarangmasukJahitBaju()
+    public function BarangMasukCs()
     {
         return $this->belongsTo(BarangMasukCostumerServices::class, 'no_order_id');
     }
+
+    public function BarangMasukSortir()
+    {
+        return $this->belongsTo(DataSortir::class, 'sortir_id');
+    }
+
 
     public function UserJahitCelana()
     {

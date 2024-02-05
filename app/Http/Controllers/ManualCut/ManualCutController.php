@@ -1,21 +1,21 @@
 <?php
 
-namespace App\Http\Controllers\LaserCut;
+namespace App\Http\Controllers\ManualCut;
 
 use App\Http\Controllers\Controller;
-use App\Models\DataLaserCut;
+use App\Models\DataManualCut;
 use App\Models\Laporan;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class LaserCutController extends Controller
+class ManualCutController extends Controller
 {
     public function getIndex()
     {
-        $dataMasuk = DataLaserCut::with('BarangMasukCs', 'BarangMasukPresKain')
+        $dataMasuk = DataManualCut::with('BarangMasukCs', 'BarangMasukLaserCut')
             ->where('tanda_telah_mengerjakan', 0)
-            ->whereHas('BarangMasukPresKain', function ($query) {
+            ->whereHas('BarangMasukLaserCut', function ($query) {
                 $query->whereNotNull('selesai');
             })
             ->get();
@@ -25,14 +25,14 @@ class LaserCutController extends Controller
 
     public function getInputLaporan($id)
     {
-        $dataMasuk = DataLaserCut::with('BarangMasukPresKain')->find($id);
-        return view('component.Laser-Cut.cerate-laporan-mesin', compact('dataMasuk'));
+        $dataMasuk = DataManualCut::with('BarangMasukLaserCut')->find($id);
+        return view('component.Manual-Cut.cerate-laporan-mesin', compact('dataMasuk'));
     }
 
     public function putLaporan(Request $request, $id)
     {
         $user = Auth::user();
-        $dataMasuk = DataLaserCut::find($id);
+        $dataMasuk = DataManualCut::find($id);
 
         $dataMasuk->update([
             'penanggung_jawab_id' => $user->id,
@@ -41,10 +41,10 @@ class LaserCutController extends Controller
         ]);
 
         if ($dataMasuk) {
-            $laporan = Laporan::where('barang_masuk_lasercut_id', $dataMasuk->id)->first();
+            $laporan = Laporan::where('barang_masuk_manualcut_id', $dataMasuk->id)->first();
             if ($laporan) {
                 $laporan->update([
-                    'status' => 'Manual Cut',
+                    'status' => 'Sortir',
                 ]);
             }
         }
@@ -54,9 +54,9 @@ class LaserCutController extends Controller
 
     public function getIndexFix()
     {
-        $dataMasuk = DataLaserCut::with('BarangMasukCs', 'BarangMasukPresKain')
+        $dataMasuk = DataManualCut::with('BarangMasukCs', 'BarangMasukLaserCut')
             ->where('tanda_telah_mengerjakan', 1)
-            ->whereHas('BarangMasukPresKain', function ($query) {
+            ->whereHas('BarangMasukLaserCut', function ($query) {
                 $query->whereNotNull('selesai');
             })
             ->get();

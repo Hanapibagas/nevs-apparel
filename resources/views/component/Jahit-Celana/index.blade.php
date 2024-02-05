@@ -27,7 +27,7 @@
 
 <div class="content-wrapper">
     <div class="container-xxl flex-grow-1 container-p-y">
-        <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Tables /</span> Laser Cut</h4>
+        <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Tables /</span> Jahit Celana</h4>
 
         <div class="card">
             <h5 class="card-header">Data masuk</h5>
@@ -37,7 +37,8 @@
                         <thead>
                             <tr>
                                 <th>no.order</th>
-                                <th>Selesai</th>
+                                <th>sisa waktu produksi</th>
+                                <th>aksi</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -48,8 +49,23 @@
                                         }}</strong>
                                 </td>
                                 <td>
-                                    <strong style="text-transform: uppercase">{{ strftime("%A, %e %B %Y",
-                                        strtotime($mesins->selesai)) }}</strong>
+                                    <script>
+                                        var deadlineDate = new Date("{{ $mesins->deadline }}");
+                                        var currentDate = new Date();
+                                        var elapsedDays = Math.floor((currentDate - deadlineDate) / (1000 * 60 * 60 * 24));
+                                        if (elapsedDays > 0) {
+                                            document.write('<span class="badge bg-label-danger">' + elapsedDays + ' hari terlewatkan</span>');
+                                        } else if (elapsedDays === 0) {
+                                            document.write('<span class="badge bg-label-danger">Hari ini adalah batas waktu</span>');
+                                        } else {
+                                            var remainingDays = Math.ceil((-elapsedDays));
+                                            document.write('<span class="badge bg-label-success">Sisa ' + remainingDays + ' hari</span>');
+                                        }
+                                    </script>
+                                </td>
+                                <td>
+                                    <a href="{{ route('getInputLaporan' , $mesins->id) }}" class="btn btn-info">
+                                        <i class="menu-icon tf-icons bx bxs-inbox"></i>Input Laporan</a>
                                 </td>
                             </tr>
                             @endforeach

@@ -16,12 +16,18 @@ class DataJahitBaju extends Model
         'selesai',
         'leher',
         'pola_badan',
-        'penanggung_jawab_id'
+        'penanggung_jawab_id',
+        'tanda_telah_mengerjakan'
     ];
 
-    public function BarangmasukJahitBaju()
+    public function BarangMasukCs()
     {
         return $this->belongsTo(BarangMasukCostumerServices::class, 'no_order_id');
+    }
+
+    public function BarangMasukSortir()
+    {
+        return $this->belongsTo(DataSortir::class, 'sortir_id');
     }
 
     public function UserJahitBaju()

@@ -16,12 +16,18 @@ class DataSortir extends Model
         'no_error',
         'panjang_kertas',
         'selesai',
+        'tanda_telah_mengerjakan',
         'deadline'
     ];
 
-    public function BarangmasukJahitBaju()
+    public function BarangMasukCs()
     {
         return $this->belongsTo(BarangMasukCostumerServices::class, 'no_order_id');
+    }
+
+    public function BarangMasukManualCut()
+    {
+        return $this->belongsTo(DataManualCut::class, 'manual_cut_id');
     }
 
     public function UserSortir()

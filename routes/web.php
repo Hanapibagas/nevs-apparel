@@ -5,10 +5,15 @@ use App\Http\Controllers\Disainer\DataMesinController;
 use App\Http\Controllers\Disainer\DisainerController;
 use App\Http\Controllers\Disainer\ListDataController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\JahitBaju\JahitBajuController;
+use App\Http\Controllers\JahitCelana\JahitCelanaController;
+use App\Http\Controllers\LaserCut\LaserCutController;
 use App\Http\Controllers\Layout\LayoutController;
+use App\Http\Controllers\ManualCut\ManualCutController;
 use App\Http\Controllers\Mesin\AtexcoController;
 use App\Http\Controllers\Mesin\MimakiController;
 use App\Http\Controllers\PressKain\PressKainController;
+use App\Http\Controllers\Sortir\SortirController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -119,43 +124,41 @@ Route::middleware(['auth', 'checkroll:pres_kain'])->group(function () {
     Route::get('/data-masuk-press-kain/{id}', [PressKainController::class, 'getInputLaporan'])->name('getInputLaporan');
     Route::put('/data-masuk-press-kain/{id}', [PressKainController::class, 'putLaporan'])->name('putLaporan');
     Route::get('/data-masuk-press-kain-fix', [PressKainController::class, 'getindexDataMasukPressFix'])->name('getindexDataMasukPressFix');
-
-    Route::get('/data-Lk-Layout', [PressKainController::class, 'getIndexLkCs'])->name('getIndexLkLayoutPegawai');
 });
 
 Route::middleware(['auth', 'checkroll:laser_cut'])->group(function () {
-    Route::get('/data-Lk-Layout', [LayoutController::class, 'getIndexLkCs'])->name('getIndexLkLayoutPegawai');
-    Route::get('/data-Lk-Layout', [LayoutController::class, 'getIndexLkCs'])->name('getIndexLkLayoutPegawai');
-
-    Route::get('/data-Lk-Layout', [LayoutController::class, 'getIndexLkCs'])->name('getIndexLkLayoutPegawai');
+    Route::get('/data-masuk-laser-cut', [LaserCutController::class, 'getIndex'])->name('getIndex');
+    Route::get('/data-masuk-laser-cut/{id}', [LaserCutController::class, 'getInputLaporan'])->name('getInputLaporan');
+    Route::put('/data-masuk-laser-cut/{id}', [LaserCutController::class, 'putLaporan'])->name('putLaporan');
+    Route::get('/data-masuk-laser-cut-fix', [LaserCutController::class, 'getIndexFix'])->name('getIndexFix');
 });
 
 Route::middleware(['auth', 'checkroll:manual_cut'])->group(function () {
-    Route::get('/data-Lk-Layout', [LayoutController::class, 'getIndexLkCs'])->name('getIndexLkLayoutPegawai');
-    Route::get('/data-Lk-Layout', [LayoutController::class, 'getIndexLkCs'])->name('getIndexLkLayoutPegawai');
-
-    Route::get('/data-Lk-Layout', [LayoutController::class, 'getIndexLkCs'])->name('getIndexLkLayoutPegawai');
+    Route::get('/data-masuk-manual-cut', [ManualCutController::class, 'getIndex'])->name('getIndex');
+    Route::get('/data-masuk-manual-cut/{id}', [ManualCutController::class, 'getInputLaporan'])->name('getInputLaporan');
+    Route::put('/data-masuk-manual-cut/{id}', [ManualCutController::class, 'putLaporan'])->name('putLaporan');
+    Route::get('/data-masuk-manual-cut-fix', [ManualCutController::class, 'getIndexFix'])->name('getIndexFix');
 });
 
 Route::middleware(['auth', 'checkroll:sortir'])->group(function () {
-    Route::get('/data-Lk-Layout', [LayoutController::class, 'getIndexLkCs'])->name('getIndexLkLayoutPegawai');
-    Route::get('/data-Lk-Layout', [LayoutController::class, 'getIndexLkCs'])->name('getIndexLkLayoutPegawai');
-
-    Route::get('/data-Lk-Layout', [LayoutController::class, 'getIndexLkCs'])->name('getIndexLkLayoutPegawai');
+    Route::get('/data-masuk-sortir', [SortirController::class, 'getIndex'])->name('getIndex');
+    Route::get('/data-masuk-sortir/{id}', [SortirController::class, 'getInputLaporan'])->name('getInputLaporan');
+    Route::put('/data-masuk-sortir/{id}', [SortirController::class, 'putLaporan'])->name('putLaporan');
+    Route::get('/data-masuk-sortir-fix', [SortirController::class, 'getIndexFix'])->name('getIndexFix');
 });
 
 Route::middleware(['auth', 'checkroll:jahit_baju'])->group(function () {
-    Route::get('/data-Lk-Layout', [LayoutController::class, 'getIndexLkCs'])->name('getIndexLkLayoutPegawai');
-    Route::get('/data-Lk-Layout', [LayoutController::class, 'getIndexLkCs'])->name('getIndexLkLayoutPegawai');
-
-    Route::get('/data-Lk-Layout', [LayoutController::class, 'getIndexLkCs'])->name('getIndexLkLayoutPegawai');
+    Route::get('/data-masuk-jahit-baju', [JahitBajuController::class, 'getIndex'])->name('getIndex');
+    Route::get('/data-masuk-jahit-baju/{id}', [JahitBajuController::class, 'getInputLaporan'])->name('getInputLaporan');
+    Route::put('/data-masuk-jahit-baju/{id}', [JahitBajuController::class, 'putLaporan'])->name('putLaporan');
+    Route::get('/data-masuk-jahit-baju-fix', [JahitBajuController::class, 'getIndexFix'])->name('getIndexFix');
 });
 
 Route::middleware(['auth', 'checkroll:jahit_celana'])->group(function () {
-    Route::get('/data-Lk-Layout', [LayoutController::class, 'getIndexLkCs'])->name('getIndexLkLayoutPegawai');
-    Route::get('/data-Lk-Layout', [LayoutController::class, 'getIndexLkCs'])->name('getIndexLkLayoutPegawai');
-
-    Route::get('/data-Lk-Layout', [LayoutController::class, 'getIndexLkCs'])->name('getIndexLkLayoutPegawai');
+    Route::get('/data-masuk-jahit-celana', [JahitCelanaController::class, 'getIndex'])->name('getIndex');
+    Route::get('/data-masuk-jahit-celana/{id}', [JahitCelanaController::class, 'getInputLaporan'])->name('getInputLaporan');
+    Route::put('/data-masuk-jahit-celana/{id}', [JahitCelanaController::class, 'putLaporan'])->name('putLaporan');
+    Route::get('/data-masuk-jahit-celana-fix', [JahitCelanaController::class, 'getIndexFix'])->name('getIndexFix');
 });
 
 Route::middleware(['auth', 'checkroll:press_tag'])->group(function () {

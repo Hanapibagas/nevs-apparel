@@ -24,6 +24,16 @@
                                                     value="{{ $dataMasuk->BarangMasukCs->no_order }}" readonly
                                                     autofocus />
                                             </div>
+                                            <div class="mb-3 col-md-6">
+                                                <label for="firstName" class="form-label">No. Error</label>
+                                                <input class="form-control" type="text" id="firstName" name="no_error"
+                                                    autofocus />
+                                            </div>
+                                            <div class="mb-3 col-md-6">
+                                                <label for="firstName" class="form-label">Panjang Kertas</label>
+                                                <input class="form-control" type="text" id="firstName"
+                                                    name="panjang_kertas" autofocus />
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
