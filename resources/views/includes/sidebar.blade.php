@@ -407,7 +407,7 @@ $active = $isActive ? 'active' : '';
 
         @if ( Auth::user()->roles == 'jahit_baju')
         <li class="menu-header small text-uppercase">
-            <span class="menu-header-text">Sortir</span>
+            <span class="menu-header-text">Jahit baju</span>
         </li>
         <li
             class="menu-item {{ request()->is('data-masuk-jahit-baju') || request()->is('data-masuk-jahit-baju/*') ? 'active' : '' }}">
@@ -426,7 +426,7 @@ $active = $isActive ? 'active' : '';
 
         @if ( Auth::user()->roles == 'jahit_celana')
         <li class="menu-header small text-uppercase">
-            <span class="menu-header-text">Sortir</span>
+            <span class="menu-header-text">Jahit Celana</span>
         </li>
         <li
             class="menu-item {{ request()->is('data-masuk-jahit-celana') || request()->is('data-masuk-jahit-celana/*') ? 'active' : '' }}">
@@ -436,6 +436,44 @@ $active = $isActive ? 'active' : '';
             </a>
         </li>
         <li class="menu-item {{ request()->is('data-masuk-jahit-celana-fix') ? 'active' : '' }}">
+            <a href="{{ route('getIndexFix') }}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-file"></i>
+                <div data-i18n="Analytics">Data Fix</div>
+            </a>
+        </li>
+        @endif
+
+        @if ( Auth::user()->roles == 'press_tag')
+        <li class="menu-header small text-uppercase">
+            <span class="menu-header-text">Press Tag</span>
+        </li>
+        <li
+            class="menu-item {{ request()->is('data-masuk-press-tag') || request()->is('data-masuk-press-tag/*') ? 'active' : '' }}">
+            <a href="{{ route('getIndex') }}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-file"></i>
+                <div data-i18n="Analytics">Data Masuk</div>
+            </a>
+        </li>
+        <li class="menu-item {{ request()->is('data-masuk-press-tag-fix') ? 'active' : '' }}">
+            <a href="{{ route('getIndexFix') }}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-file"></i>
+                <div data-i18n="Analytics">Data Fix</div>
+            </a>
+        </li>
+        @endif
+
+        @if ( Auth::user()->roles == 'packing')
+        <li class="menu-header small text-uppercase">
+            <span class="menu-header-text">PACKING</span>
+        </li>
+        <li
+            class="menu-item {{ request()->is('data-masuk-packing') || request()->is('data-masuk-packing/*') ? 'active' : '' }}">
+            <a href="{{ route('getIndex') }}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-file"></i>
+                <div data-i18n="Analytics">Data Masuk</div>
+            </a>
+        </li>
+        <li class="menu-item {{ request()->is('data-masuk-packing-fix') ? 'active' : '' }}">
             <a href="{{ route('getIndexFix') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-file"></i>
                 <div data-i18n="Analytics">Data Fix</div>

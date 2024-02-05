@@ -12,7 +12,9 @@ use App\Http\Controllers\Layout\LayoutController;
 use App\Http\Controllers\ManualCut\ManualCutController;
 use App\Http\Controllers\Mesin\AtexcoController;
 use App\Http\Controllers\Mesin\MimakiController;
+use App\Http\Controllers\Packing\PackingController;
 use App\Http\Controllers\PressKain\PressKainController;
+use App\Http\Controllers\PressTag\PressTagController;
 use App\Http\Controllers\Sortir\SortirController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -162,17 +164,17 @@ Route::middleware(['auth', 'checkroll:jahit_celana'])->group(function () {
 });
 
 Route::middleware(['auth', 'checkroll:press_tag'])->group(function () {
-    Route::get('/data-Lk-Layout', [LayoutController::class, 'getIndexLkCs'])->name('getIndexLkLayoutPegawai');
-    Route::get('/data-Lk-Layout', [LayoutController::class, 'getIndexLkCs'])->name('getIndexLkLayoutPegawai');
-
-    Route::get('/data-Lk-Layout', [LayoutController::class, 'getIndexLkCs'])->name('getIndexLkLayoutPegawai');
+    Route::get('/data-masuk-press-tag', [PressTagController::class, 'getIndex'])->name('getIndex');
+    Route::get('/data-masuk-press-tag/{id}', [PressTagController::class, 'getInputLaporan'])->name('getInputLaporan');
+    Route::put('/data-masuk-press-tag/{id}', [PressTagController::class, 'putLaporan'])->name('putLaporan');
+    Route::get('/data-masuk-press-tag-fix', [PressTagController::class, 'getIndexFix'])->name('getIndexFix');
 });
 
 Route::middleware(['auth', 'checkroll:packing'])->group(function () {
-    Route::get('/data-Lk-Layout', [LayoutController::class, 'getIndexLkCs'])->name('getIndexLkLayoutPegawai');
-    Route::get('/data-Lk-Layout', [LayoutController::class, 'getIndexLkCs'])->name('getIndexLkLayoutPegawai');
-
-    Route::get('/data-Lk-Layout', [LayoutController::class, 'getIndexLkCs'])->name('getIndexLkLayoutPegawai');
+    Route::get('/data-masuk-packing', [PackingController::class, 'getIndex'])->name('getIndex');
+    Route::get('/data-masuk-packing/{id}', [PackingController::class, 'getInputLaporan'])->name('getInputLaporan');
+    Route::put('/data-masuk-packing/{id}', [PackingController::class, 'putLaporan'])->name('putLaporan');
+    Route::get('/data-masuk-packing-fix', [PackingController::class, 'getIndexFix'])->name('getIndexFix');
 });
 
 Auth::routes();

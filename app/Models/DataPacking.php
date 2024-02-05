@@ -13,11 +13,17 @@ class DataPacking extends Model
         'no_order_id',
         'prass_id',
         'selesai',
-        'deadline'
+        'deadline',
+        'tanda_telah_mengerjakan',
     ];
 
-    public function BarangmasukJahitBaju()
+    public function BarangMasukCs()
     {
         return $this->belongsTo(BarangMasukCostumerServices::class, 'no_order_id');
+    }
+
+    public function BarangMasukPress()
+    {
+        return $this->belongsTo(DataPressTagSize::class, 'prass_id');
     }
 }

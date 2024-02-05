@@ -15,10 +15,16 @@ class DataPressTagSize extends Model
         'jahit_celana_id',
         'deadline',
         'selesai',
+        'tanda_telah_mengerjakan',
     ];
 
-    public function BarangmasukJahitBaju()
+    public function BarangMasukCs()
     {
         return $this->belongsTo(BarangMasukCostumerServices::class, 'no_order_id');
+    }
+
+    public function BarangMasukJahitCelana()
+    {
+        return $this->belongsTo(DataJahitCelana::class, 'jahit_celana_id');
     }
 }
