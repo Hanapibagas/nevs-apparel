@@ -13,12 +13,48 @@ class PackingController extends Controller
 {
     public function getIndex()
     {
-        $dataMasuk = DataPacking::with('BarangMasukCs', 'BarangMasukPress')
-            ->where('tanda_telah_mengerjakan', 0)
-            ->whereHas('BarangMasukPress', function ($query) {
-                $query->whereNotNull('selesai');
-            })
-            ->get();
+        $user = Auth::user();
+        if ($user->asal_kota == 'makassar') {
+            $dataMasuk = DataPacking::with('BarangMasukCs', 'BarangMasukPress')
+                ->where('tanda_telah_mengerjakan', 0)
+                ->whereHas('BarangMasukPress', function ($query) {
+                    $query->whereNotNull('selesai');
+                })
+                ->whereHas('BarangMasukCs', function ($query) use ($user) {
+                    $query->where('kota_produksi', 'Makassar');
+                })
+                ->get();
+        } elseif ($user->asal_kota == 'jakarta') {
+            $dataMasuk = DataPacking::with('BarangMasukCs', 'BarangMasukPress')
+                ->where('tanda_telah_mengerjakan', 0)
+                ->whereHas('BarangMasukPress', function ($query) {
+                    $query->whereNotNull('selesai');
+                })
+                ->whereHas('BarangMasukCs', function ($query) use ($user) {
+                    $query->where('kota_produksi', 'Jakarta');
+                })
+                ->get();
+        } elseif ($user->asal_kota == 'bandung') {
+            $dataMasuk = DataPacking::with('BarangMasukCs', 'BarangMasukPress')
+                ->where('tanda_telah_mengerjakan', 0)
+                ->whereHas('BarangMasukPress', function ($query) {
+                    $query->whereNotNull('selesai');
+                })
+                ->whereHas('BarangMasukCs', function ($query) use ($user) {
+                    $query->where('kota_produksi', 'Bandung');
+                })
+                ->get();
+        } else {
+            $dataMasuk = DataPacking::with('BarangMasukCs', 'BarangMasukPress')
+                ->where('tanda_telah_mengerjakan', 0)
+                ->whereHas('BarangMasukPress', function ($query) {
+                    $query->whereNotNull('selesai');
+                })
+                ->whereHas('BarangMasukCs', function ($query) use ($user) {
+                    $query->where('kota_produksi', 'Surabaya');
+                })
+                ->get();
+        }
 
         return view('component.Packing.index', compact('dataMasuk'));
     }

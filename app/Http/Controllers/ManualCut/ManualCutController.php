@@ -13,12 +13,48 @@ class ManualCutController extends Controller
 {
     public function getIndex()
     {
-        $dataMasuk = DataManualCut::with('BarangMasukCs', 'BarangMasukLaserCut')
-            ->where('tanda_telah_mengerjakan', 0)
-            ->whereHas('BarangMasukLaserCut', function ($query) {
-                $query->whereNotNull('selesai');
-            })
-            ->get();
+        $user = Auth::user();
+        if ($user->asal_kota == 'makassar') {
+            $dataMasuk = DataManualCut::with('BarangMasukCs', 'BarangMasukLaserCut')
+                ->where('tanda_telah_mengerjakan', 0)
+                ->whereHas('BarangMasukLaserCut', function ($query) {
+                    $query->whereNotNull('selesai');
+                })
+                ->whereHas('BarangMasukCs', function ($query) use ($user) {
+                    $query->where('kota_produksi', 'Makassar');
+                })
+                ->get();
+        } elseif ($user->asal_kota == 'jakarta') {
+            $dataMasuk = DataManualCut::with('BarangMasukCs', 'BarangMasukLaserCut')
+                ->where('tanda_telah_mengerjakan', 0)
+                ->whereHas('BarangMasukLaserCut', function ($query) {
+                    $query->whereNotNull('selesai');
+                })
+                ->whereHas('BarangMasukCs', function ($query) use ($user) {
+                    $query->where('kota_produksi', 'Jakarta');
+                })
+                ->get();
+        } elseif ($user->asal_kota == 'bandung') {
+            $dataMasuk = DataManualCut::with('BarangMasukCs', 'BarangMasukLaserCut')
+                ->where('tanda_telah_mengerjakan', 0)
+                ->whereHas('BarangMasukLaserCut', function ($query) {
+                    $query->whereNotNull('selesai');
+                })
+                ->whereHas('BarangMasukCs', function ($query) use ($user) {
+                    $query->where('kota_produksi', 'Bandung');
+                })
+                ->get();
+        } else {
+            $dataMasuk = DataManualCut::with('BarangMasukCs', 'BarangMasukLaserCut')
+                ->where('tanda_telah_mengerjakan', 0)
+                ->whereHas('BarangMasukLaserCut', function ($query) {
+                    $query->whereNotNull('selesai');
+                })
+                ->whereHas('BarangMasukCs', function ($query) use ($user) {
+                    $query->where('kota_produksi', 'Surabaya');
+                })
+                ->get();
+        }
 
         return view('component.Laser-Cut.index', compact('dataMasuk'));
     }

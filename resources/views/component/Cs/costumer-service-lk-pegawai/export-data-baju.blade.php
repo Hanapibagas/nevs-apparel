@@ -37,7 +37,7 @@
                 }
             </style>
             <td colspan="2">
-                <img class="gambar1" src="{{ public_path('storage/'. $dataLk->Gambar->file_baju_pelatih)}}">
+                <img class="gambar1" src="{{ public_path('storage/'. $dataLk->Gambar->file_baju_player)}}">
             </td>
         </tr>
         <tr>
@@ -83,7 +83,7 @@
             <td colspan="2" style="text-align: center">
                 @if ($dataLk->ket_hari == 'Express')
                 <span style="color: red">DEADLINE EXPRESS</span>
-                @elseif ($dataLk->ket_hari == 'SNormal')
+                @elseif ($dataLk->ket_hari == 'Normal')
                 DEADLINE Normal
                 @endif
             </td>
@@ -158,34 +158,7 @@
         </tr>
     </table>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    {{-- celana --}}
-    {{-- <h3 style="text-align: center; margin-top: -30px; text-transform: uppercase; page-break-before: always;">{{
+    <h3 style="text-align: center; margin-top: -30px; text-transform: uppercase; page-break-before: always;">{{
         $dataLk->BarangMasukDisainer->nama_tim }}</h3><br>
     <h4 style="margin-top: -40px; text-align: center; text-transform: uppercase;">{{ $dataLk->no_order }}</h4><br>
     <h4 style="margin-top: -80px; text-transform: uppercase;">{{ $dataLk->kota_produksi }}</h4>
@@ -295,24 +268,7 @@
         <tr>
             <td colspan="2">{{ $dataLk->ket_bis_celana_celana_player }}</td>
         </tr>
-    </table> --}}
-    {{-- <table class="posisicelana3">
-        <tr>
-            <td colspan="2">ket kumis</td>
-        </tr>
-        <tr>
-            <td colspan="2">{{ $dataLk->UsersLk->name }}</td>
-        </tr>
-    </table> --}}
-
-
-
-
-
-
-
-
-
+    </table>
 
     {{-- @if ($dataLk->Gambar->file_baju_1)
     <h4 style="display: flex; margin-top: -210px; text-transform: uppercase;">DISINER : {{ $dataLk->Users->name }}

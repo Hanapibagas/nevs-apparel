@@ -13,12 +13,48 @@ class JahitCelanaController extends Controller
 {
     public function getIndex()
     {
-        $dataMasuk = DataJahitCelana::with('BarangMasukCs', 'BarangMasukSortir')
-            ->where('tanda_telah_mengerjakan', 0)
-            ->whereHas('BarangMasukSortir', function ($query) {
-                $query->whereNotNull('selesai');
-            })
-            ->get();
+        $user = Auth::user();
+        if ($user->asal_kota == 'makassar') {
+            $dataMasuk = DataJahitCelana::with('BarangMasukCs', 'BarangMasukSortir')
+                ->where('tanda_telah_mengerjakan', 0)
+                ->whereHas('BarangMasukSortir', function ($query) {
+                    $query->whereNotNull('selesai');
+                })
+                ->whereHas('BarangMasukCs', function ($query) use ($user) {
+                    $query->where('kota_produksi', 'Makassar');
+                })
+                ->get();
+        } elseif ($user->asal_kota == 'jakarta') {
+            $dataMasuk = DataJahitCelana::with('BarangMasukCs', 'BarangMasukSortir')
+                ->where('tanda_telah_mengerjakan', 0)
+                ->whereHas('BarangMasukSortir', function ($query) {
+                    $query->whereNotNull('selesai');
+                })
+                ->whereHas('BarangMasukCs', function ($query) use ($user) {
+                    $query->where('kota_produksi', 'Jakarta');
+                })
+                ->get();
+        } elseif ($user->asal_kota == 'bandung') {
+            $dataMasuk = DataJahitCelana::with('BarangMasukCs', 'BarangMasukSortir')
+                ->where('tanda_telah_mengerjakan', 0)
+                ->whereHas('BarangMasukSortir', function ($query) {
+                    $query->whereNotNull('selesai');
+                })
+                ->whereHas('BarangMasukCs', function ($query) use ($user) {
+                    $query->where('kota_produksi', 'Bandung');
+                })
+                ->get();
+        } else {
+            $dataMasuk = DataJahitCelana::with('BarangMasukCs', 'BarangMasukSortir')
+                ->where('tanda_telah_mengerjakan', 0)
+                ->whereHas('BarangMasukSortir', function ($query) {
+                    $query->whereNotNull('selesai');
+                })
+                ->whereHas('BarangMasukCs', function ($query) use ($user) {
+                    $query->where('kota_produksi', 'Surabaya');
+                })
+                ->get();
+        }
 
         return view('component.Jahit-Celana.index', compact('dataMasuk'));
     }

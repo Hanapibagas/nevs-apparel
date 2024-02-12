@@ -38,12 +38,48 @@ class MimakiController extends Controller
 
     public function getIndexDataMasukMimaki()
     {
-        $dataMasuk = MesinMimaki::with('BarangMasukCs', 'BarangMasukLayout')
-            ->where('tanda_telah_mengerjakan', 0)
-            ->whereHas('BarangMasukLayout', function ($query) {
-                $query->whereNotNull('selesai');
-            })
-            ->get();
+        $user = Auth::user();
+        if ($user->asal_kota == 'makassar') {
+            $dataMasuk = MesinMimaki::with('BarangMasukCs', 'BarangMasukLayout')
+                ->where('tanda_telah_mengerjakan', 0)
+                ->whereHas('BarangMasukCs', function ($query) use ($user) {
+                    $query->where('kota_produksi', 'Makassar');
+                })
+                ->whereHas('BarangMasukLayout', function ($query) {
+                    $query->whereNotNull('selesai');
+                })
+                ->get();
+        } elseif ($user->asal_kota == 'jakarta') {
+            $dataMasuk = MesinMimaki::with('BarangMasukCs', 'BarangMasukLayout')
+                ->where('tanda_telah_mengerjakan', 0)
+                ->whereHas('BarangMasukCs', function ($query) use ($user) {
+                    $query->where('kota_produksi', 'Jakarta');
+                })
+                ->whereHas('BarangMasukLayout', function ($query) {
+                    $query->whereNotNull('selesai');
+                })
+                ->get();
+        } elseif ($user->asal_kota == 'bandung') {
+            $dataMasuk = MesinMimaki::with('BarangMasukCs', 'BarangMasukLayout')
+                ->where('tanda_telah_mengerjakan', 0)
+                ->whereHas('BarangMasukCs', function ($query) use ($user) {
+                    $query->where('kota_produksi', 'Bandung');
+                })
+                ->whereHas('BarangMasukLayout', function ($query) {
+                    $query->whereNotNull('selesai');
+                })
+                ->get();
+        } else {
+            $dataMasuk = MesinMimaki::with('BarangMasukCs', 'BarangMasukLayout')
+                ->where('tanda_telah_mengerjakan', 0)
+                ->whereHas('BarangMasukCs', function ($query) use ($user) {
+                    $query->where('kota_produksi', 'Surabaya');
+                })
+                ->whereHas('BarangMasukLayout', function ($query) {
+                    $query->whereNotNull('selesai');
+                })
+                ->get();
+        }
 
         return view('component.Mesin.data-masuk-mesin-mimaki.index', compact('dataMasuk'));
     }

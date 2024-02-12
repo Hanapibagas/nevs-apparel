@@ -28,6 +28,7 @@ return new class extends Migration
             $table->string('pola')->nullable();
             $table->date('tanggal_masuk')->nullable();
             $table->date('deadline')->nullable();
+            $table->date('ket_hari')->nullable();
 
             // ukuran player
             $table->string('total_baju_player')->nullable();
