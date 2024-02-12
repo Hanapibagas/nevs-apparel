@@ -19,6 +19,7 @@ return new class extends Migration
             $table->foreignId('layout_id')->constrained('barang_masuk_datalayouts')->onUpdate('cascade')->onDelete('cascade');
             $table->string('jumlah_komisi')->nullable();
             $table->string('tanggal')->nullable();
+            $table->string('kota')->nullable();
             $table->timestamps();
         });
     }

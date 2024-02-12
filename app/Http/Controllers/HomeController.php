@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\BarangMasukCostumerServices;
+use App\Models\BarangMasukDatalayout;
 use App\Models\Laporan;
+use App\Models\PembagianKomisi;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -240,5 +242,46 @@ class HomeController extends Controller
         }
 
         return redirect()->back()->with('success', 'Permission telah diperbarui.');
+    }
+
+    public function getPembagianKomisi()
+    {
+        return view('component.Admin.pembagian-komisi-pengerjaan.index-filtering');
+    }
+
+    public function getFilterPembagianKomisi(Request $request)
+    {
+        $bulan = $request->input('bulan');
+        $tahun = $request->input('tahun');
+        $kotaProduksi = $request->input('kotaProduksi');
+
+        if (empty($bulan) || empty($tahun) || empty($kotaProduksi)) {
+            return redirect()->back()->with('error', 'Filtering data yang anda masukkan kurang lengkap !!');
+        }
+
+        $pembagianKomisi = PembagianKomisi::with('BarangMasukCs', 'UserLayout')
+            ->whereMonth('tanggal', $bulan)
+            ->whereYear('tanggal', $tahun)
+            ->where('kota', $kotaProduksi)
+            ->get()
+            ->groupBy('user_id');
+
+        $pembagianKomisiFiltered = $pembagianKomisi->map(function ($group) {
+            return $group->first()->load('BarangMasukCs', 'UserLayout');
+        });
+
+        $totalKomisiPerUser = [];
+
+        foreach ($pembagianKomisi as $user_id => $data) {
+            $totalKomisi = 0;
+            foreach ($data as $pembagian) {
+                $totalKomisi += $pembagian->jumlah_komisi;
+            }
+            $totalKomisiPerUser[$user_id] = $totalKomisi;
+        }
+
+        // return response()->json($totalKomisiPerUser);
+
+        return view('component.Admin.pembagian-komisi-pengerjaan.index', compact('pembagianKomisiFiltered', 'totalKomisiPerUser'))->with('success', 'Filtering data berhasil.');
     }
 }

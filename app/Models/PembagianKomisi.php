@@ -14,5 +14,17 @@ class PembagianKomisi extends Model
         'layout_id',
         'jumlah_komisi',
         'tanggal',
+        'kota'
     ];
+
+    public function BarangMasukCs()
+    {
+        return $this->belongsTo(BarangMasukCostumerServices::class, 'layout_id');
+    }
+
+
+    public function UserLayout()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
 }

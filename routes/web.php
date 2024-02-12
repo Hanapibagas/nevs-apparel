@@ -25,6 +25,8 @@ Route::middleware(['auth', 'checkroll:super_admin,disainer,layout,cs,atexco,mima
     Route::get('/', [HomeController::class, 'index'])->name('indexHome');
     // route admin cs
     Route::get('/laporan', [HomeController::class, 'getLaporan'])->name('getIndexLaporan');
+    Route::get('/pemabagain-komisi', [HomeController::class, 'getPembagianKomisi'])->name('getPembagianKomisi');
+    Route::get('/filtering-pemabagain-komisi', [HomeController::class, 'getFilterPembagianKomisi'])->name('getFilterPembagianKomisi');
 
     Route::get('/costumer-service-admin', [HomeController::class, 'getCostumerSevices'])->name('getIndexCs');
     Route::post('/costumer-service-admin/update', [HomeController::class, 'postUpdatePirmission'])->name('postPirmission');

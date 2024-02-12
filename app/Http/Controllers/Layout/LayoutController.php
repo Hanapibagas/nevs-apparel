@@ -19,7 +19,7 @@ class LayoutController extends Controller
     {
         $user = Auth::user();
         if ($user->asal_kota == 'makassar') {
-            $oderCs = BarangMasukDatalayout::with('UserLayout', 'BarangMasukCsLK')
+            $oderCs = BarangMasukDatalayout::with('UserLayout', 'BarangMasukCsLK', 'BarangMasukCsLK.UsersOrder')
                 ->where('users_layout_id', $user->id)
                 ->where('tanda_telah_mengerjakan', 0)
                 ->whereHas('BarangMasukCsLK', function ($query) use ($user) {
@@ -191,12 +191,15 @@ class LayoutController extends Controller
             }
         }
 
-        if ($keterangan == '-') {
+        // return response()->json($totalHarga);
+
+        if ($keterangan == "- $selisihHari") {
             PembagianKomisi::create([
                 'user_id' => $user->id,
                 'layout_id' => $dataLk->id,
                 'tanggal' => Carbon::now(),
                 'jumlah_komisi' => $totalHarga,
+                'kota' => $dataLk->BarangMasukCsLK->kota_produksi,
             ]);
         } else {
             PembagianKomisi::create([
@@ -204,6 +207,7 @@ class LayoutController extends Controller
                 'layout_id' => $dataLk->id,
                 'tanggal' => Carbon::now(),
                 'jumlah_komisi' => "0",
+                'kota' => $dataLk->BarangMasukCsLK->kota_produksi,
             ]);
         }
 

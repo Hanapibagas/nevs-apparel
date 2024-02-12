@@ -51,7 +51,8 @@
                                         }}</strong>
                                 </td>
                                 <td>
-                                    <strong style="text-transform: uppercase">{{ $disainers->UserLayout->name
+                                    <strong style="text-transform: uppercase">{{
+                                        $disainers->BarangMasukCsLK->UsersOrder->name
                                         }}</strong>
                                 </td>
                                 <td>

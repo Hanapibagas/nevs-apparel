@@ -340,7 +340,6 @@ class CostumerServicesController extends Controller
             'jenis_produksi' => $request->jenis_produksi,
             'pola' => $request->pola,
             'deadline' => $request->deadline,
-            'ket_hari' => $keterangan,
 
             // baju player
             'total_baju_player' => $request->total_baju_player,
