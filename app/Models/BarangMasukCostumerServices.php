@@ -17,8 +17,6 @@ class BarangMasukCostumerServices extends Model
         'cs_id',
         'disainer_id',
         'jenis_mesin',
-        'tanggal_jahit',
-        'nama_penjahit',
         'no_nota',
 
         // produksi
@@ -27,58 +25,58 @@ class BarangMasukCostumerServices extends Model
         'pola',
         'tanggal_masuk',
         'deadline',
-        'total',
+        'ket_hari',
 
         // baju player
-        'file_baju_player',
+        'total_baju_player',
         'jenis_sablon_baju_player',
         'kera_baju_player_id',
         'pola_lengan_player_id',
         'jenis_kain_baju_player',
         'ket_kumis_baju_player',
         'ket_bantalan_baju_player',
-        'ket_celana_player',
         'ket_tambahan_baju_player',
         'keterangan_baju_pelayer',
+        'ket_celana_player',
 
         // baju pelatih
-        'file_baju_pelatih',
+        'total_baju_pelatih',
         'jenis_sablon_baju_pelatih',
         'kerah_baju_pelatih_id',
         'pola_lengan_pelatih_id',
         'jenis_kain_baju_pelatih',
         'ket_kumis_baju_pelatih',
         'ket_bantalan_baju_pelatih',
-        'ket_celana_pelatih',
         'ket_tambahan_baju_pelatih',
         'keterangan_baju_pelatih',
+        'ket_celana_pelatih',
 
         // baju kiper
-        'file_baju_kiper',
+        'total_baju_kiper',
         'jenis_sablon_baju_kiper',
         'kerah_baju_kiper_id',
         'pola_lengan_kiper_id',
         'jenis_kain_baju_kiper',
         'ket_kumis_baju_kiper',
         'ket_bantalan_baju_kiper',
-        'ket_celana_kiper',
         'ket_tambahan_baju_kiper',
         'keterangan_baju_kiper',
+        'ket_celana_kiper',
 
         // baju 1
-        'file_baju_1',
+        'total_baju_1',
         'jenis_sablon_baju_1',
         'kerah_baju_1_id',
         'pola_lengan_1_id',
         'jenis_kain_baju_1',
         'ket_kumis_baju_1',
         'ket_bantalan_baju_1',
-        'ket_celana_1',
         'ket_tambahan_baju_1',
         'keterangan_baju_1',
+        'ket_celana_1',
 
         // celana player
-        'file_celana_player',
+        'total_celana_player',
         'jenis_sablon_celana_player',
         'pola_celana_player_id',
         'jenis_kain_celana_player',
@@ -88,7 +86,7 @@ class BarangMasukCostumerServices extends Model
         'keterangan_celana_pelayer',
 
         // celana pelatih
-        'file_celana_pelatih',
+        'total_celana_pelatih',
         'jenis_sablon_celana_pelatih',
         'pola_celana_pelatih_id',
         'jenis_kain_celana_pelatih',
@@ -98,7 +96,7 @@ class BarangMasukCostumerServices extends Model
         'keterangan_celana_pelatih',
 
         // celana kiper
-        'file_celana_kiper',
+        'total_celana_kiper',
         'jenis_sablon_celana_kiper',
         'pola_celana_kiper_id',
         'jenis_kain_celana_kiper',
@@ -108,13 +106,12 @@ class BarangMasukCostumerServices extends Model
         'keterangan_celana_kiper',
 
         // celana 1
-        'file_celana_1',
+        'total_celana_1',
         'jenis_sablon_celana_1',
         'pola_celana_1_id',
         'jenis_kain_celana_1',
         'ket_warna_kain_celana_1',
         'ket_bis_celana_celana_1',
-        'ket_tambahan_celana_1',
         'keterangan_celana_1',
 
         'file_corel_disainer',
@@ -123,6 +120,11 @@ class BarangMasukCostumerServices extends Model
         'tanda_telah_mengerjakan',
         // 'tanda_inputan_laporan',
     ];
+
+    public function Gambar()
+    {
+        return $this->belongsTo(Gambar::class, 'barang_masuk_disainer_id');
+    }
 
     public function BarangMasukDisainer()
     {
@@ -143,11 +145,6 @@ class BarangMasukCostumerServices extends Model
     {
         return $this->belongsTo(User::class, 'layout_id');
     }
-
-    // public function LaporanLkLayout()
-    // {
-    //     return $this->hasMany(LaporanLkLayout::class, 'no_order_id');
-    // }
 
     public function MesinAtexco()
     {

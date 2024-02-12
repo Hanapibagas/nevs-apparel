@@ -88,6 +88,12 @@ $active = $isActive ? 'active' : '';
                 <div data-i18n="Analytics">Laporan pengerjaan</div>
             </a>
         </li>
+        <li class="menu-item {{ request()->is('')  ? 'active' : '' }}">
+            <a href="{{ route('getIndexLaporan') }}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-list-ul"></i>
+                <div data-i18n="Analytics">Laporan pembagian komisi</div>
+            </a>
+        </li>
         <li class="menu-item {{ $activeClass }} {{ $active }}">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-dock-top"></i>

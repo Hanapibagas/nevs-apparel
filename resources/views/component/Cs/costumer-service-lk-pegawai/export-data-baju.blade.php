@@ -12,29 +12,309 @@
             margin-right: 20px;
         }
 
-        .posisi {
-            float: left;
-        }
-
         th,
         td {
             border: 1px solid black;
             padding: 8px;
         }
-
-        .gambar {
-            width: 350px;
-        }
-
-        .celana {
-            width: 250px;
-        }
     </style>
 </head>
 
 <body>
-    @if ($dataLk->file_baju_1)
-    <h3 style="text-align: center; margin-top: -30px;">LEMBARAN KERJA</h3>
+    {{-- player --}}
+    <h3 style="text-align: center; margin-top: -30px; text-transform: uppercase;">{{
+        $dataLk->BarangMasukDisainer->nama_tim }}</h3><br>
+    <h4 style="margin-top: -40px; text-align: center; text-transform: uppercase;">{{ $dataLk->no_order }}</h4><br>
+    <h4 style="margin-top: -80px; text-transform: uppercase;">{{ $dataLk->kota_produksi }}</h4>
+
+    <table class="posisi" style="width: 72%; margin-left: -20px; margin-top: -20px; text-transform: uppercase;">
+        <tr>
+            <style>
+                .gambar1 {
+                    max-width: 630px;
+                    min-width: 630px;
+                    margin-left: 50px;
+                }
+            </style>
+            <td colspan="2">
+                <img class="gambar1" src="{{ public_path('storage/'. $dataLk->Gambar->file_baju_pelatih)}}">
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" style="text-align: center">{!! $dataLk->keterangan_baju_pelayer !!} </td>
+        </tr>
+        <tr>
+            <td colspan="2" style="text-align: center">TOTAL {{ $dataLk->total_baju_player }} PCS</td>
+        </tr>
+    </table>
+
+    <style>
+        .posisi {
+            float: left;
+        }
+
+        .posisi1 {
+            clear: both;
+            width: 30%;
+            margin-left: 743px;
+            margin-top: -410px;
+            text-transform: uppercase;
+        }
+
+        .posisi2 {
+            position: absolute;
+            width: 30%;
+            text-transform: uppercase;
+            margin-left: 743px;
+            margin-top: -245px;
+        }
+
+        .posisi3 {
+            position: absolute;
+            width: 30%;
+            text-transform: uppercase;
+            margin-left: 743px;
+            margin-top: 40px;
+        }
+    </style>
+
+    <table class="posisi" style="width: 30%; margin-top: -20px; text-transform: uppercase;">
+        <tr>
+            <td colspan="2" style="text-align: center">
+                @if ($dataLk->ket_hari == 'Express')
+                <span style="color: red">DEADLINE EXPRESS</span>
+                @elseif ($dataLk->ket_hari == 'SNormal')
+                DEADLINE Normal
+                @endif
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" style="text-align: center">{{ $dataLk->deadline }}</td>
+        </tr>
+    </table>
+
+    <table class="posisi1">
+        <style>
+            .gambarket {
+                max-width: 60px;
+                min-width: 60px;
+                margin-left: 15px;
+            }
+        </style>
+        <tr>
+            <td>
+                <img class="gambarket" src="{{ public_path('storage/'. $dataLk->KeraPlayer->gambar)}}">
+            </td>
+            <td>{{ $dataLk->KeraPlayer->jenis_kera }}</td>
+        </tr>
+        <tr>
+            <td>
+                <img class="gambarket" src="{{ public_path('storage/'. $dataLk->LenganPlayer->gambar)}}">
+            </td>
+            <td>{{ $dataLk->LenganPlayer->jenis_kera }}</td>
+        </tr>
+    </table>
+
+    <table class="posisi2">
+        <tr>
+            <td>Jenis mesin</td>
+            <td>{{ $dataLk->jenis_mesin }}</td>
+        </tr>
+        <tr>
+            <td>jenis sublim</td>
+            <td>{{ $dataLk->jenis_sablon_baju_player }}</td>
+        </tr>
+        <tr>
+            <td>jenis kain</td>
+            <td>{{ $dataLk->jenis_kain_baju_player }}</td>
+        </tr>
+        <tr>
+            <td>ket. kumis</td>
+            <td>{{ $dataLk->ket_kumis_baju_player }}</td>
+        </tr>
+        <tr>
+            <td>ket. bantalan</td>
+            <td>{{ $dataLk->ket_bantalan_baju_player }}</td>
+        </tr>
+        <tr>
+            <td>ket. celana</td>
+            <td>{{ $dataLk->ket_celana_player }}</td>
+        </tr>
+        <tr>
+            <td colspan="2">keterangan tambahan <br>
+                {{ $dataLk->ket_tambahan_baju_player }}
+            </td>
+        </tr>
+    </table>
+
+    <table class="posisi3">
+        <tr>
+            <td>Admin</td>
+            <td>{{ $dataLk->UsersOrder->name }}</td>
+        </tr>
+        <tr>
+            <td>Layout</td>
+            <td>{{ $dataLk->UsersLk->name }}</td>
+        </tr>
+    </table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    {{-- celana --}}
+    {{-- <h3 style="text-align: center; margin-top: -30px; text-transform: uppercase; page-break-before: always;">{{
+        $dataLk->BarangMasukDisainer->nama_tim }}</h3><br>
+    <h4 style="margin-top: -40px; text-align: center; text-transform: uppercase;">{{ $dataLk->no_order }}</h4><br>
+    <h4 style="margin-top: -80px; text-transform: uppercase;">{{ $dataLk->kota_produksi }}</h4>
+
+    <table class="posisi" style="width: 72%; margin-left: -20px; margin-top: -20px; text-transform: uppercase;">
+        <tr>
+            <style>
+                .gambarcelanaplayer {
+                    max-width: 330px;
+                    min-width: 330px;
+                    margin-left: 200px;
+                }
+
+                .ketcelana {
+                    max-width: 130px;
+                    min-width: 130px;
+                    margin-left: 100px;
+                }
+            </style>
+            <td colspan="2">
+                <img class="gambarcelanaplayer" src="{{ public_path('storage/'. $dataLk->Gambar->file_celana_player)}}">
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" style="text-align: center">{!! $dataLk->keterangan_celana_pelayer !!} </td>
+        </tr>
+        <tr>
+            <td colspan="2" style="text-align: center">TOTAL {{ $dataLk->total_celana_player }} PCS</td>
+        </tr>
+        <tr>
+            <td style="text-align: center">keterangan tambahan <br> {{ $dataLk->ket_tambahan_celana_player }}</td>
+            <td>
+                <img class="ketcelana" src="{{ public_path('storage/'. $dataLk->CelanaPlayer->gambar)}}">
+            </td>
+        </tr>
+    </table>
+    <table class="posisi" style="width: 30%; margin-top: -20px; text-transform: uppercase;">
+        <tr>
+            <td colspan="2" style="text-align: center">
+                @if ($dataLk->ket_hari == 'Express')
+                <span style="color: red">DEADLINE EXPRESS</span>
+                @elseif ($dataLk->ket_hari == 'Normal')
+                DEADLINE Normal
+                @endif
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" style="text-align: center">{{ $dataLk->deadline }}</td>
+        </tr>
+    </table>
+
+    <style>
+        .posisicelanaplayer {
+            clear: both;
+            width: 30%;
+            margin-left: 743px;
+            margin-top: -440px;
+            text-transform: uppercase;
+        }
+
+        .posisicelana1 {
+            position: absolute;
+            width: 30%;
+            margin-left: 743px;
+            margin-top: -340px;
+            text-transform: uppercase;
+        }
+
+        .posisicelana2 {
+            position: absolute;
+            width: 30%;
+            margin-left: 743px;
+            margin-top: -240px;
+            text-transform: uppercase;
+        }
+
+        .posisicelana3 {
+            position: absolute;
+            width: 30%;
+            margin-left: 743px;
+            margin-top: -140px;
+            text-transform: uppercase;
+        }
+    </style>
+    <table class="posisicelanaplayer">
+        <tr>
+            <td>Admin</td>
+            <td>{{ $dataLk->UsersOrder->name }}</td>
+        </tr>
+        <tr>
+            <td>Layout</td>
+            <td>{{ $dataLk->UsersLk->name }}</td>
+        </tr>
+    </table>
+    <table class="posisicelana1">
+        <tr>
+            <td colspan="2">ket. warna kain</td>
+        </tr>
+        <tr>
+            <td colspan="2">{{ $dataLk->ket_warna_kain_celana_player }}</td>
+        </tr>
+    </table>
+    <table class="posisicelana2">
+        <tr>
+            <td colspan="2">ket bis celana</td>
+        </tr>
+        <tr>
+            <td colspan="2">{{ $dataLk->ket_bis_celana_celana_player }}</td>
+        </tr>
+    </table> --}}
+    {{-- <table class="posisicelana3">
+        <tr>
+            <td colspan="2">ket kumis</td>
+        </tr>
+        <tr>
+            <td colspan="2">{{ $dataLk->UsersLk->name }}</td>
+        </tr>
+    </table> --}}
+
+
+
+
+
+
+
+
+
+
+    {{-- @if ($dataLk->Gambar->file_baju_1)
     <h4 style="display: flex; margin-top: -210px; text-transform: uppercase;">DISINER : {{ $dataLk->Users->name }}
     </h4>
     <table class="posisi" style="width: 52%; margin-left: -20px; margin-top: -20px; text-transform: uppercase;">
@@ -113,7 +393,7 @@
             </style>
             <th colspan="2"><br>
                 <img class="gambar1" style="margin-top: 20px;"
-                    src="{{ public_path('storage/'. $dataLk->file_baju_player)}}">
+                    src="{{ public_path('storage/'. $dataLk->Gambar->file_baju_player)}}">
                 <h2 style="text-transform: uppercase;">Keterangan ukuran baju player</h2>
                 <hr style="margin-top: -20px; margin-bottom: 30px;">
                 <h5 style="margin-bottom: 5px; margin-top: -20px">
@@ -137,7 +417,6 @@
             <td>{{ $dataLk->ket_celana_player }}</td>
         </tr>
     </table>
-    {{-- baju pelatih --}}
     <h3 style="text-align: center; margin-top: 100px;"></h3>
     <h4 style="display: flex; margin-top: -210px; text-transform: uppercase;">DISINER : {{ $dataLk->Users->name }}
     </h4>
@@ -241,7 +520,6 @@
             <td>{{ $dataLk->ket_celana_pelatih }}</td>
         </tr>
     </table>
-    {{-- baju kiper --}}
     <h3 style="text-align: center; margin-top: 110px;page-break-before: always;"></h3>
     <h4 style="display: flex; margin-top: -210px; text-transform: uppercase;">DISINER : {{ $dataLk->Users->name }}
     </h4>
@@ -345,7 +623,6 @@
             <td>{{ $dataLk->ket_celana_kiper }}</td>
         </tr>
     </table>
-    {{-- baju 1 --}}
     <h3 style="text-align: center; margin-top: 110px;"></h3>
     <h4 style="display: flex; margin-top: -210px; text-transform: uppercase;">DISINER : {{ $dataLk->Users->name }}
     </h4>
@@ -449,8 +726,7 @@
         </tr>
     </table>
 
-    @if ($dataLk->file_celana_player)
-    {{-- celana pelayer --}}
+    @if ($dataLk->Gambar->file_celana_player)
     <h3 style="text-align: center; margin-top: 110px;"></h3>
     <h4 style="display: flex; margin-top: -210px; text-transform: uppercase;">DISINER : {{ $dataLk->Users->name }}
     </h4>
@@ -505,20 +781,6 @@
         </tr>
     </table>
     <table style="margin-top: 208px; margin-left: 150px; width: 50%; text-transform: uppercase;">
-        {{-- <tr>
-            <td style="text-align: center">
-                <img style="width: 30px; height: 30px;" src="{{ public_path('storage/'. $dataLk->KeraKiper->gambar) }}"
-                    alt="">
-            </td>
-            <td>{{ $dataLk->KeraKiper->jenis_kera }}</td>
-        </tr>
-        <tr>
-            <td style="text-align: center">
-                <img style="width: 30px; height: 30px;"
-                    src="{{ public_path('storage/' . $dataLk->LenganKiper->gambar) }}" alt="">
-            </td>
-            <td>{{ $dataLk->LenganKiper->jenis_kera }}</td>
-        </tr> --}}
     </table>
     <table style="margin-left: -20px; margin-top: 10px; width: 100%">
         <tr>
@@ -560,8 +822,7 @@
     </table>
     @endif
 
-    @if ($dataLk->file_celana_pelatih)
-    {{-- celana pelatih --}}
+    @if ($dataLk->Gambar->file_celana_pelatih)
     <h3 style="text-align: center; margin-top: 110px;page-break-before: always;"></h3>
     <h4 style="display: flex; margin-top: -210px; text-transform: uppercase;">DISINER : {{ $dataLk->Users->name }}
     </h4>
@@ -616,20 +877,6 @@
         </tr>
     </table>
     <table style="margin-top: 208px; margin-left: 150px; width: 50%; text-transform: uppercase;">
-        {{-- <tr>
-            <td style="text-align: center">
-                <img style="width: 30px; height: 30px;" src="{{ public_path('storage/'. $dataLk->KeraKiper->gambar) }}"
-                    alt="">
-            </td>
-            <td>{{ $dataLk->KeraKiper->jenis_kera }}</td>
-        </tr>
-        <tr>
-            <td style="text-align: center">
-                <img style="width: 30px; height: 30px;"
-                    src="{{ public_path('storage/' . $dataLk->LenganKiper->gambar) }}" alt="">
-            </td>
-            <td>{{ $dataLk->LenganKiper->jenis_kera }}</td>
-        </tr> --}}
     </table>
     <table style="margin-left: -20px; margin-top: 10px; width: 100%">
         <tr>
@@ -672,8 +919,7 @@
     </table>
     @endif
 
-    @if ($dataLk->file_celana_kiper)
-    {{-- celana kiper --}}
+    @if ($dataLk->Gambar->file_celana_kiper)
     <h3 style="text-align: center; margin-top: 110px;page-break-before: always;"></h3>
     <h4 style="display: flex; margin-top: -210px; text-transform: uppercase;">DISINER : {{ $dataLk->Users->name }}
     </h4>
@@ -728,20 +974,6 @@
         </tr>
     </table>
     <table style="margin-top: 208px; margin-left: 150px; width: 50%; text-transform: uppercase;">
-        {{-- <tr>
-            <td style="text-align: center">
-                <img style="width: 30px; height: 30px;" src="{{ public_path('storage/'. $dataLk->KeraKiper->gambar) }}"
-                    alt="">
-            </td>
-            <td>{{ $dataLk->KeraKiper->jenis_kera }}</td>
-        </tr>
-        <tr>
-            <td style="text-align: center">
-                <img style="width: 30px; height: 30px;"
-                    src="{{ public_path('storage/' . $dataLk->LenganKiper->gambar) }}" alt="">
-            </td>
-            <td>{{ $dataLk->LenganKiper->jenis_kera }}</td>
-        </tr> --}}
     </table>
     <table style="margin-left: -20px; margin-top: 10px; width: 100%">
         <tr>
@@ -784,8 +1016,7 @@
     </table>
     @endif
 
-    @if ($dataLk->file_celana_1)
-    {{-- celana pelayer 1 --}}
+    @if ($dataLk->Gambar->file_celana_1)
     <h3 style="text-align: center; margin-top: 110px;page-break-before: always;"></h3>
     <h4 style="display: flex; margin-top: -210px; text-transform: uppercase;">DISINER : {{ $dataLk->Users->name }}
     </h4>
@@ -840,20 +1071,6 @@
         </tr>
     </table>
     <table style="margin-top: 208px; margin-left: 150px; width: 50%; text-transform: uppercase;">
-        {{-- <tr>
-            <td style="text-align: center">
-                <img style="width: 30px; height: 30px;" src="{{ public_path('storage/'. $dataLk->KeraKiper->gambar) }}"
-                    alt="">
-            </td>
-            <td>{{ $dataLk->KeraKiper->jenis_kera }}</td>
-        </tr>
-        <tr>
-            <td style="text-align: center">
-                <img style="width: 30px; height: 30px;"
-                    src="{{ public_path('storage/' . $dataLk->LenganKiper->gambar) }}" alt="">
-            </td>
-            <td>{{ $dataLk->LenganKiper->jenis_kera }}</td>
-        </tr> --}}
     </table>
     <table style="margin-left: -20px; margin-top: 10px; width: 100%">
         <tr>
@@ -907,7 +1124,7 @@
         </h1>
     </div>
 
-    @elseif ($dataLk->file_baju_kiper)
+    @elseif ($dataLk->Gambar->file_baju_kiper)
     <h3 style="text-align: center; margin-top: -30px;">LEMBARAN KERJA</h3>
     <h4 style="display: flex; margin-top: -210px; text-transform: uppercase;">DISINER : {{ $dataLk->Users->name }}
     </h4>
@@ -987,7 +1204,7 @@
             </style>
             <th colspan="2"><br>
                 <img class="gambar1" style="margin-top: 20px;"
-                    src="{{ public_path('storage/'. $dataLk->file_baju_player)}}">
+                    src="{{ public_path('storage/'. $dataLk->Gambar->file_baju_player)}}">
                 <h2 style="text-transform: uppercase;">Keterangan ukuran baju player</h2>
                 <hr style="margin-top: -20px; margin-bottom: 30px;">
                 <h5 style="margin-bottom: 5px; margin-top: -20px">
@@ -1011,7 +1228,6 @@
             <td>{{ $dataLk->ket_celana_player }}</td>
         </tr>
     </table>
-    {{-- baju pelatih --}}
     <h3 style="text-align: center; margin-top: 100px;"></h3>
     <h4 style="display: flex; margin-top: -210px; text-transform: uppercase;">DISINER : {{ $dataLk->Users->name }}
     </h4>
@@ -1115,7 +1331,6 @@
             <td>{{ $dataLk->ket_celana_pelatih }}</td>
         </tr>
     </table>
-    {{-- baju kiper --}}
     <h3 style="text-align: center; margin-top: 110px;page-break-before: always;"></h3>
     <h4 style="display: flex; margin-top: -210px; text-transform: uppercase;">DISINER : {{ $dataLk->Users->name }}
     </h4>
@@ -1220,8 +1435,7 @@
         </tr>
     </table>
 
-    @if ($dataLk->file_celana_player)
-    {{-- celana pelayer --}}
+    @if ($dataLk->Gambar->file_celana_player)
     <h3 style="text-align: center; margin-top: 110px;"></h3>
     <h4 style="display: flex; margin-top: -210px; text-transform: uppercase;">DISINER : {{ $dataLk->Users->name }}
     </h4>
@@ -1276,20 +1490,6 @@
         </tr>
     </table>
     <table style="margin-top: 208px; margin-left: 150px; width: 50%; text-transform: uppercase;">
-        {{-- <tr>
-            <td style="text-align: center">
-                <img style="width: 30px; height: 30px;" src="{{ public_path('storage/'. $dataLk->KeraKiper->gambar) }}"
-                    alt="">
-            </td>
-            <td>{{ $dataLk->KeraKiper->jenis_kera }}</td>
-        </tr>
-        <tr>
-            <td style="text-align: center">
-                <img style="width: 30px; height: 30px;"
-                    src="{{ public_path('storage/' . $dataLk->LenganKiper->gambar) }}" alt="">
-            </td>
-            <td>{{ $dataLk->LenganKiper->jenis_kera }}</td>
-        </tr> --}}
     </table>
     <table style="margin-left: -20px; margin-top: 10px; width: 100%">
         <tr>
@@ -1331,8 +1531,7 @@
     </table>
     @endif
 
-    @if ($dataLk->file_celana_pelatih)
-    {{-- celana pelatih --}}
+    @if ($dataLk->Gambar->file_celana_pelatih)
     <h3 style="text-align: center; margin-top: 110px;page-break-before: always;"></h3>
     <h4 style="display: flex; margin-top: -210px; text-transform: uppercase;">DISINER : {{ $dataLk->Users->name }}
     </h4>
@@ -1387,20 +1586,6 @@
         </tr>
     </table>
     <table style="margin-top: 208px; margin-left: 150px; width: 50%; text-transform: uppercase;">
-        {{-- <tr>
-            <td style="text-align: center">
-                <img style="width: 30px; height: 30px;" src="{{ public_path('storage/'. $dataLk->KeraKiper->gambar) }}"
-                    alt="">
-            </td>
-            <td>{{ $dataLk->KeraKiper->jenis_kera }}</td>
-        </tr>
-        <tr>
-            <td style="text-align: center">
-                <img style="width: 30px; height: 30px;"
-                    src="{{ public_path('storage/' . $dataLk->LenganKiper->gambar) }}" alt="">
-            </td>
-            <td>{{ $dataLk->LenganKiper->jenis_kera }}</td>
-        </tr> --}}
     </table>
     <table style="margin-left: -20px; margin-top: 10px; width: 100%">
         <tr>
@@ -1443,8 +1628,7 @@
     </table>
     @endif
 
-    @if ($dataLk->file_celana_kiper)
-    {{-- celana kiper --}}
+    @if ($dataLk->Gambar->file_celana_kiper)
     <h3 style="text-align: center; margin-top: 110px;page-break-before: always;"></h3>
     <h4 style="display: flex; margin-top: -210px; text-transform: uppercase;">DISINER : {{ $dataLk->Users->name }}
     </h4>
@@ -1499,20 +1683,6 @@
         </tr>
     </table>
     <table style="margin-top: 208px; margin-left: 150px; width: 50%; text-transform: uppercase;">
-        {{-- <tr>
-            <td style="text-align: center">
-                <img style="width: 30px; height: 30px;" src="{{ public_path('storage/'. $dataLk->KeraKiper->gambar) }}"
-                    alt="">
-            </td>
-            <td>{{ $dataLk->KeraKiper->jenis_kera }}</td>
-        </tr>
-        <tr>
-            <td style="text-align: center">
-                <img style="width: 30px; height: 30px;"
-                    src="{{ public_path('storage/' . $dataLk->LenganKiper->gambar) }}" alt="">
-            </td>
-            <td>{{ $dataLk->LenganKiper->jenis_kera }}</td>
-        </tr> --}}
     </table>
     <table style="margin-left: -20px; margin-top: 10px; width: 100%">
         <tr>
@@ -1565,7 +1735,7 @@
             {!! $dataLk->keterangan_lengkap !!}
         </h1>
     </div>
-    @elseif ($dataLk->file_baju_pelatih)
+    @elseif ($dataLk->Gambar->file_baju_pelatih)
     <h3 style="text-align: center; margin-top: -30px;">LEMBARAN KERJA</h3>
     <h4 style="display: flex; margin-top: -210px; text-transform: uppercase;">DISINER : {{ $dataLk->Users->name }}
     </h4>
@@ -1645,7 +1815,7 @@
             </style>
             <th colspan="2"><br>
                 <img class="gambar1" style="margin-top: 20px;"
-                    src="{{ public_path('storage/'. $dataLk->file_baju_player)}}">
+                    src="{{ public_path('storage/'. $dataLk->Gambar->file_baju_player)}}">
                 <h2 style="text-transform: uppercase;">Keterangan ukuran baju player</h2>
                 <hr style="margin-top: -20px; margin-bottom: 30px;">
                 <h5 style="margin-bottom: 5px; margin-top: -20px">
@@ -1669,7 +1839,6 @@
             <td>{{ $dataLk->ket_celana_player }}</td>
         </tr>
     </table>
-    {{-- baju pelatih --}}
     <h3 style="text-align: center; margin-top: 100px;"></h3>
     <h4 style="display: flex; margin-top: -210px; text-transform: uppercase;">DISINER : {{ $dataLk->Users->name }}
     </h4>
@@ -1774,8 +1943,7 @@
         </tr>
     </table>
 
-    @if ($dataLk->file_celana_player)
-    {{-- celana pelayer --}}
+    @if ($dataLk->Gambar->file_celana_player)
     <h3 style="text-align: center; margin-top: 110px; page-break-before: always;"></h3>
     <h4 style="display: flex; margin-top: -210px; text-transform: uppercase;">DISINER : {{ $dataLk->Users->name }}
     </h4>
@@ -1830,20 +1998,6 @@
         </tr>
     </table>
     <table style="margin-top: 208px; margin-left: 150px; width: 50%; text-transform: uppercase;">
-        {{-- <tr>
-            <td style="text-align: center">
-                <img style="width: 30px; height: 30px;" src="{{ public_path('storage/'. $dataLk->KeraKiper->gambar) }}"
-                    alt="">
-            </td>
-            <td>{{ $dataLk->KeraKiper->jenis_kera }}</td>
-        </tr>
-        <tr>
-            <td style="text-align: center">
-                <img style="width: 30px; height: 30px;"
-                    src="{{ public_path('storage/' . $dataLk->LenganKiper->gambar) }}" alt="">
-            </td>
-            <td>{{ $dataLk->LenganKiper->jenis_kera }}</td>
-        </tr> --}}
     </table>
     <table style="margin-left: -20px; margin-top: 10px; width: 100%">
         <tr>
@@ -1885,8 +2039,7 @@
     </table>
     @endif
 
-    @if ($dataLk->file_celana_pelatih)
-    {{-- celana pelatih --}}
+    @if ($dataLk->Gambar->file_celana_pelatih)
     <h3 style="text-align: center; margin-top: 110px;page-break-before: always;"></h3>
     <h4 style="display: flex; margin-top: -210px; text-transform: uppercase;">DISINER : {{ $dataLk->Users->name }}
     </h4>
@@ -1941,20 +2094,6 @@
         </tr>
     </table>
     <table style="margin-top: 208px; margin-left: 150px; width: 50%; text-transform: uppercase;">
-        {{-- <tr>
-            <td style="text-align: center">
-                <img style="width: 30px; height: 30px;" src="{{ public_path('storage/'. $dataLk->KeraKiper->gambar) }}"
-                    alt="">
-            </td>
-            <td>{{ $dataLk->KeraKiper->jenis_kera }}</td>
-        </tr>
-        <tr>
-            <td style="text-align: center">
-                <img style="width: 30px; height: 30px;"
-                    src="{{ public_path('storage/' . $dataLk->LenganKiper->gambar) }}" alt="">
-            </td>
-            <td>{{ $dataLk->LenganKiper->jenis_kera }}</td>
-        </tr> --}}
     </table>
     <table style="margin-left: -20px; margin-top: 10px; width: 100%">
         <tr>
@@ -2007,7 +2146,7 @@
             {!! $dataLk->keterangan_lengkap !!}
         </h1>
     </div>
-    @elseif ($dataLk->file_baju_player)
+    @elseif ($dataLk->Gambar->file_baju_player)
     <h3 style="text-align: center; margin-top: -30px;">LEMBARAN KERJA</h3>
     <h4 style="display: flex; margin-top: -210px; text-transform: uppercase;">DISINER : {{ $dataLk->Users->name }}
     </h4>
@@ -2112,8 +2251,7 @@
         </tr>
     </table>
 
-    @if ($dataLk->file_celana_player)
-    {{-- celana pelayer --}}
+    @if ($dataLk->Gambar->file_celana_player)
     <h3 style="text-align: center; margin-top: 110px;"></h3>
     <h4 style="display: flex; margin-top: -210px; text-transform: uppercase;">DISINER : {{ $dataLk->Users->name }}
     </h4>
@@ -2168,20 +2306,6 @@
         </tr>
     </table>
     <table style="margin-top: 208px; margin-left: 150px; width: 50%; text-transform: uppercase;">
-        {{-- <tr>
-            <td style="text-align: center">
-                <img style="width: 30px; height: 30px;" src="{{ public_path('storage/'. $dataLk->KeraKiper->gambar) }}"
-                    alt="">
-            </td>
-            <td>{{ $dataLk->KeraKiper->jenis_kera }}</td>
-        </tr>
-        <tr>
-            <td style="text-align: center">
-                <img style="width: 30px; height: 30px;"
-                    src="{{ public_path('storage/' . $dataLk->LenganKiper->gambar) }}" alt="">
-            </td>
-            <td>{{ $dataLk->LenganKiper->jenis_kera }}</td>
-        </tr> --}}
     </table>
     <table style="margin-left: -20px; margin-top: 10px; width: 100%">
         <tr>
@@ -2211,6 +2335,7 @@
         </tr>
     </table>
     <table style="margin-top: 10px; margin-left: -20px; text-transform: uppercase;">
+
         <tr>
             <td>KET.WARNA KAIN PLAYER</td>
             <td>{{ $dataLk->ket_warna_kain_celana_player }}</td>
@@ -2233,7 +2358,7 @@
             {!! $dataLk->keterangan_lengkap !!}
         </h1>
     </div>
-    @endif
+    @endif --}}
 </body>
 
 </html>

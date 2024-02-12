@@ -114,12 +114,13 @@ class CostumerServicesController extends Controller
                 ->count();
             $userCounts[$userId] = $barangMasukCount;
         }
-        $oderCs = BarangMasukCostumerServices::with('BarangMasukDisainer', 'Users', 'UsersOrder')->find($id);
+        $oderCs = BarangMasukCostumerServices::with('BarangMasukDisainer', 'Gambar', 'Users', 'UsersOrder')->find($id);
 
         $kera = KeraBaju::all();
         $lengan = PolaLengan::all();
         $celana = PolaCeleana::all();
 
+        // return response()->json($oderCs);
         return view('component.Cs.costumer-service-order-pegawai.create', compact('oderCs', 'users', 'userCounts', 'kera', 'lengan', 'celana'));
     }
 
@@ -323,6 +324,12 @@ class CostumerServicesController extends Controller
             }
         }
 
+        if ($total_hari >= 1 && $total_hari <= 8) {
+            $keterangan = "Express";
+        } else {
+            $keterangan = "Normal";
+        }
+
         $lk->update([
             'tanggal_jahit' => $request->tanggal_jahit,
             'nama_penjahit' => $request->nama_penjahit,
@@ -333,9 +340,10 @@ class CostumerServicesController extends Controller
             'jenis_produksi' => $request->jenis_produksi,
             'pola' => $request->pola,
             'deadline' => $request->deadline,
-            'total' => $total_hari,
+            'ket_hari' => $keterangan,
 
             // baju player
+            'total_baju_player' => $request->total_baju_player,
             'jenis_sablon_baju_player' => $request->jenis_sablon_baju_player,
             'kera_baju_player_id' => $request->kera_baju_player_id,
             'pola_lengan_player_id' => $request->pola_lengan_player_id,
@@ -347,7 +355,7 @@ class CostumerServicesController extends Controller
             'keterangan_baju_pelayer' => $request->keterangan_baju_pelayer,
 
             // baju pelatih
-            'jenis_sablon_baju_pelatih' => $request->jenis_sablon_baju_pelatih,
+            'total_baju_pelatih' => $request->total_baju_pelatih,
             'kerah_baju_pelatih_id' => $request->kerah_baju_pelatih_id,
             'pola_lengan_pelatih_id' => $request->pola_lengan_pelatih_id,
             'jenis_kain_baju_pelatih' => $request->jenis_kain_baju_pelatih,
@@ -358,7 +366,7 @@ class CostumerServicesController extends Controller
             'keterangan_baju_pelatih' => $request->keterangan_baju_pelatih,
 
             // baju kiper
-            'jenis_sablon_baju_kiper' => $request->jenis_sablon_baju_kiper,
+            'total_baju_kiper' => $request->total_baju_kiper,
             'kerah_baju_kiper_id' => $request->kerah_baju_kiper_id,
             'pola_lengan_kiper_id' => $request->pola_lengan_kiper_id,
             'jenis_kain_baju_kiper' => $request->jenis_kain_baju_kiper,
@@ -369,7 +377,7 @@ class CostumerServicesController extends Controller
             'keterangan_baju_kiper' => $request->keterangan_baju_kiper,
 
             // baju player 1
-            'jenis_sablon_baju_1' => $request->jenis_sablon_baju_1,
+            'total_baju_1' => $request->total_baju_1,
             'kerah_baju_1_id' => $request->kerah_baju_1_id,
             'pola_lengan_1_id' => $request->pola_lengan_1_id,
             'jenis_kain_baju_1' => $request->jenis_kain_baju_1,
@@ -380,6 +388,7 @@ class CostumerServicesController extends Controller
             'keterangan_baju_1' => $request->keterangan_baju_1,
 
             // celana player
+            'total_celana_player' => $request->total_celana_player,
             'jenis_sablon_celana_player' => $request->jenis_sablon_celana_player,
             'pola_celana_player_id' => $request->pola_celana_player_id,
             'kain_celana_player' => $request->kain_celana_player,
@@ -389,6 +398,7 @@ class CostumerServicesController extends Controller
             'keterangan_celana_pelayer' => $request->keterangan_celana_pelayer,
 
             // celana pelatih
+            'total_celana_pelatih' => $request->total_celana_pelatih,
             'jenis_sablon_celana_pelatih' => $request->jenis_sablon_celana_pelatih,
             'pola_celana_pelatih_id' => $request->pola_celana_pelatih_id,
             'jenis_kain_celana_pelatih' => $request->jenis_kain_celana_pelatih,
@@ -398,6 +408,7 @@ class CostumerServicesController extends Controller
             'keterangan_celana_pelatih' => $request->keterangan_celana_pelatih,
 
             // celana kiper
+            'total_celana_kiper' => $request->total_celana_kiper,
             'jenis_sablon_celana_kiper' => $request->jenis_sablon_celana_kiper,
             'pola_celana_kiper_id' => $request->pola_celana_kiper_id,
             'jenis_kain_celana_kiper' => $request->jenis_kain_celana_kiper,
@@ -407,6 +418,7 @@ class CostumerServicesController extends Controller
             'keterangan_celana_kiper' => $request->keterangan_celana_kiper,
 
             // celana 1
+            'total_celana_1' => $request->total_celana_1,
             'jenis_sablon_celana_1' => $request->jenis_sablon_celana_1,
             'pola_celana_1_id' => $request->pola_celana_1_id,
             'jenis_kain_celana_1' => $request->jenis_kain_celana_1,
@@ -1676,14 +1688,14 @@ class CostumerServicesController extends Controller
             'CelanaKiper',
             'Kera1',
             'Lengan1',
-            'Celana1'
+            'Celana1',
+            'Gambar'
         )->findOrFail($id);
 
-        // return response()->json($dataLk);
         view()->share('dataLk', $dataLk->BarangMasukDisainer->nama_tim);
 
         $pdf = PDF::loadview('component.Cs.costumer-service-lk-pegawai.export-data-baju', compact('dataLk'));
-        $pdf->setPaper('F4', 'portrait');
+        $pdf->setPaper('A4', 'landscape');
 
         return $pdf->stream('Data-LK.pdf');
     }

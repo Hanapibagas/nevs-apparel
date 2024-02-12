@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\BarangMasukCostumerServices;
 use App\Models\BarangMasukDisainer;
 use App\Models\BarangMasukMesin;
+use App\Models\Gambar;
 use App\Models\MesinAtexco;
 use App\Models\MesinMimaki;
 use App\Models\User;
@@ -136,6 +137,13 @@ class DisainerController extends Controller
             'disainer_id' => $user->id,
             'cs_id' => $request->cs_id,
             'jenis_mesin' => $request->jenis_mesin,
+
+            'file_corel_disainer' => $fileCorelDisainer,
+            'tanggal_masuk' => Carbon::now(),
+        ]);
+
+        Gambar::create([
+            'barang_masuk_costumer_services_id' => $barangMasuk->id,
             'file_baju_player' => $filebajuplayer,
             'file_baju_pelatih' => $filebajupelatih,
             'file_baju_kiper' => $filebajukiper,
@@ -144,8 +152,6 @@ class DisainerController extends Controller
             'file_celana_pelatih' => $fileCelanapelatih,
             'file_celana_kiper' => $fileCelanakiper,
             'file_celana_1' => $fileCelana1,
-            'file_corel_disainer' => $fileCorelDisainer,
-            'tanggal_masuk' => Carbon::now(),
         ]);
 
         $update = BarangMasukDisainer::where('nama_tim', $nama_tim)->first();

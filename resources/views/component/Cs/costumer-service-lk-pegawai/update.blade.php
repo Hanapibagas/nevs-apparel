@@ -44,16 +44,6 @@
                                                     id="lastName" value="{{ $oderCs->jenis_mesin }}" readonly />
                                             </div>
                                             <div class="mb-3 col-md-6">
-                                                <label for="lastName" class="form-label">Tanggal Jahit</label>
-                                                <input class="form-control" type="date" name="tanggal_jahit"
-                                                    id="lastName" value="{{ $oderCs->tanggal_jahit }}" />
-                                            </div>
-                                            <div class="mb-3 col-md-6">
-                                                <label for="lastName" class="form-label">Nama Penjahit</label>
-                                                <input class="form-control" type="text" name="nama_penjahit"
-                                                    id="lastName" value="{{ $oderCs->nama_penjahit }}" />
-                                            </div>
-                                            <div class="mb-3 col-md-6">
                                                 <label for="lastName" class="form-label">No. Nota</label>
                                                 <input class="form-control" type="text" name="no_nota" id="lastName"
                                                     value="{{ $oderCs->no_nota }}" />
@@ -136,7 +126,7 @@
                                             </div>
                                             <div class="card mb-4">
                                                 <div class="card-body">
-                                                    @if ($oderCs->file_baju_1)
+                                                    @if ($oderCs->Gambar->file_baju_1)
                                                     <h4 class="fw-bold py-3 mb-4">Keterangan Baju Player</h4>
                                                     <hr>
                                                     <div class="row">
@@ -207,6 +197,12 @@
                                                                 name="ket_kumis_baju_player"
                                                                 value="{{ $oderCs->ket_kumis_baju_player }}"
                                                                 autofocus />
+                                                        </div>
+                                                        <div class="mb-3 col-md-6">
+                                                            <label for="firstName" class="form-label">total baju</label>
+                                                            <input class="form-control" type="text" id="firstName"
+                                                                name="total_baju_player"
+                                                                value="{{ $oderCs->total_baju_player }}" autofocus />
                                                         </div>
                                                         <div class="mb-3 col-md-6">
                                                             <label for="firstName" class="form-label">Ket.
@@ -300,6 +296,12 @@
                                                                 <option value="Benzema">Benzema</option>
                                                                 <option value="Embosh">Embosh</option>
                                                             </select>
+                                                        </div>
+                                                        <div class="mb-3 col-md-6">
+                                                            <label for="firstName" class="form-label">total baju</label>
+                                                            <input class="form-control" type="text" id="firstName"
+                                                                name="total_baju_pelatih"
+                                                                value="{{ $oderCs->total_baju_pelatih }}" autofocus />
                                                         </div>
                                                         <div class="mb-3 col-md-6">
                                                             <label for="firstName" class="form-label">Ket. Kumis</label>
@@ -398,6 +400,12 @@
                                                                 <option value="Benzema">Benzema</option>
                                                                 <option value="Embosh">Embosh</option>
                                                             </select>
+                                                        </div>
+                                                        <div class="mb-3 col-md-6">
+                                                            <label for="firstName" class="form-label">total baju</label>
+                                                            <input class="form-control" type="text" id="firstName"
+                                                                name="total_baju_kiper"
+                                                                value="{{ $oderCs->total_baju_kiper }}" autofocus />
                                                         </div>
                                                         <div class="mb-3 col-md-6">
                                                             <label for="firstName" class="form-label">Ket. Kumis</label>
@@ -497,6 +505,12 @@
                                                             </select>
                                                         </div>
                                                         <div class="mb-3 col-md-6">
+                                                            <label for="firstName" class="form-label">total baju</label>
+                                                            <input class="form-control" type="text" id="firstName"
+                                                                name="total_baju_1" value="{{ $oderCs->total_baju_1 }}"
+                                                                autofocus />
+                                                        </div>
+                                                        <div class="mb-3 col-md-6">
                                                             <label for="firstName" class="form-label">Ket. Kumis</label>
                                                             <input class="form-control" type="text" id="firstName"
                                                                 name="ket_kumis_baju_1"
@@ -530,7 +544,7 @@
                                                                 name="keterangan_baju_1">{{ $orderCs->keterangan_baju_1 }}</textarea>
                                                         </div>
                                                     </div>
-                                                    @elseif ($oderCs->file_baju_kiper)
+                                                    @elseif ($oderCs->Gambar->file_baju_kiper)
                                                     <h4 class="fw-bold py-3 mb-4">Keterangan Baju Player</h4>
                                                     <hr>
                                                     <div class="row">
@@ -601,6 +615,12 @@
                                                                 name="ket_kumis_baju_player"
                                                                 value="{{ $oderCs->ket_kumis_baju_player }}"
                                                                 autofocus />
+                                                        </div>
+                                                        <div class="mb-3 col-md-6">
+                                                            <label for="firstName" class="form-label">Total baju</label>
+                                                            <input class="form-control" type="text" id="firstName"
+                                                                name="total_baju_player"
+                                                                value="{{ $oderCs->total_baju_player }}" autofocus />
                                                         </div>
                                                         <div class="mb-3 col-md-6">
                                                             <label for="firstName" class="form-label">Ket.
@@ -701,6 +721,12 @@
                                                                 name="ket_kumis_baju_pelatih"
                                                                 value="{{ $oderCs->ket_kumis_baju_pelatih }}"
                                                                 autofocus />
+                                                        </div>
+                                                        <div class="mb-3 col-md-6">
+                                                            <label for="firstName" class="form-label">total baju</label>
+                                                            <input class="form-control" type="text" id="firstName"
+                                                                name="total_baju_pelatih"
+                                                                value="{{ $oderCs->total_baju_pelatih }}" autofocus />
                                                         </div>
                                                         <div class="mb-3 col-md-6">
                                                             <label for="firstName" class="form-label">Ket.
@@ -800,6 +826,12 @@
                                                                 value="{{ $oderCs->ket_kumis_baju_kiper }}" autofocus />
                                                         </div>
                                                         <div class="mb-3 col-md-6">
+                                                            <label for="firstName" class="form-label">total baju</label>
+                                                            <input class="form-control" type="text" id="firstName"
+                                                                name="total_baju_kiper"
+                                                                value="{{ $oderCs->total_baju_kiper }}" autofocus />
+                                                        </div>
+                                                        <div class="mb-3 col-md-6">
                                                             <label for="firstName" class="form-label">Ket.
                                                                 Bantalan</label>
                                                             <input class="form-control" type="text" id="firstName"
@@ -828,7 +860,7 @@
                                                                 name="keterangan_baju_kiper">{{ $oderCs->keterangan_baju_kiper }}</textarea>
                                                         </div>
                                                     </div>
-                                                    @elseif ($oderCs->file_baju_pelatih)
+                                                    @elseif ($oderCs->Gambar->file_baju_pelatih)
                                                     <h4 class="fw-bold py-3 mb-4">Keterangan Baju Player</h4>
                                                     <hr>
                                                     <div class="row">
@@ -899,6 +931,12 @@
                                                                 name="ket_kumis_baju_player"
                                                                 value="{{ $oderCs->ket_kumis_baju_player }}"
                                                                 autofocus />
+                                                        </div>
+                                                        <div class="mb-3 col-md-6">
+                                                            <label for="firstName" class="form-label">total baju</label>
+                                                            <input class="form-control" type="text" id="firstName"
+                                                                name="total_baju_player"
+                                                                value="{{ $oderCs->total_baju_player }}" autofocus />
                                                         </div>
                                                         <div class="mb-3 col-md-6">
                                                             <label for="firstName" class="form-label">Ket.
@@ -1001,6 +1039,12 @@
                                                                 autofocus />
                                                         </div>
                                                         <div class="mb-3 col-md-6">
+                                                            <label for="firstName" class="form-label">total baju</label>
+                                                            <input class="form-control" type="text" id="firstName"
+                                                                name="total_baju_pelatih"
+                                                                value="{{ $oderCs->total_baju_pelatih }}" autofocus />
+                                                        </div>
+                                                        <div class="mb-3 col-md-6">
                                                             <label for="firstName" class="form-label">Ket.
                                                                 Bantalan</label>
                                                             <input class="form-control" type="text" id="firstName"
@@ -1028,7 +1072,7 @@
                                                                 name="keterangan_baju_pelatih">{{ $oderCs->keterangan_baju_pelatih }}</textarea>
                                                         </div>
                                                     </div>
-                                                    @elseif ($oderCs->file_baju_player)
+                                                    @elseif ($oderCs->Gambar->file_baju_player)
                                                     <h4 class="fw-bold py-3 mb-4">Keterangan Baju Player</h4>
                                                     <hr>
                                                     <div class="row">
@@ -1101,6 +1145,12 @@
                                                                 autofocus />
                                                         </div>
                                                         <div class="mb-3 col-md-6">
+                                                            <label for="firstName" class="form-label">total baju</label>
+                                                            <input class="form-control" type="text" id="firstName"
+                                                                name="total_baju_player"
+                                                                value="{{ $oderCs->total_baju_player }}" autofocus />
+                                                        </div>
+                                                        <div class="mb-3 col-md-6">
                                                             <label for="firstName" class="form-label">Ket.
                                                                 Bantalan</label>
                                                             <input class="form-control" type="text" id="firstName"
@@ -1134,7 +1184,7 @@
                                             </div>
                                             <div class="card mb-4">
                                                 <div class="card-body">
-                                                    @if ($oderCs->file_celana_1)
+                                                    @if ($oderCs->Gambar->file_celana_1)
                                                     <h4 class="fw-bold py-3 mb-4">Keterangan Celana Player</h4>
                                                     <hr>
                                                     <div class="row">
@@ -1192,6 +1242,13 @@
                                                                 name="ket_warna_kain_celana_player"
                                                                 value="{{ $oderCs->ket_warna_kain_celana_player }}"
                                                                 autofocus />
+                                                        </div>
+                                                        <div class="mb-3 col-md-6">
+                                                            <label for="firstName" class="form-label">total
+                                                                celana</label>
+                                                            <input class="form-control" type="text" id="firstName"
+                                                                name="total_celana_player"
+                                                                value="{{ $oderCs->total_celana_player }}" autofocus />
                                                         </div>
                                                         <div class="mb-3 col-md-6">
                                                             <label for="firstName" class="form-label">Ket. Bis
@@ -1264,6 +1321,13 @@
                                                                 <option value="Benzema">Benzema</option>
                                                                 <option value="Embosh">Embosh</option>
                                                             </select>
+                                                        </div>
+                                                        <div class="mb-3 col-md-6">
+                                                            <label for="firstName" class="form-label">total
+                                                                celana</label>
+                                                            <input class="form-control" type="text" id="firstName"
+                                                                name="total_celana_pelatih"
+                                                                value="{{ $oderCs->total_celana_pelatih }}" autofocus />
                                                         </div>
                                                         <div class="mb-3 col-md-6">
                                                             <label for="firstName" class="form-label">Ket. Warna
@@ -1344,6 +1408,13 @@
                                                                 <option value="Benzema">Benzema</option>
                                                                 <option value="Embosh">Embosh</option>
                                                             </select>
+                                                        </div>
+                                                        <div class="mb-3 col-md-6">
+                                                            <label for="firstName" class="form-label">total
+                                                                celana</label>
+                                                            <input class="form-control" type="text" id="firstName"
+                                                                name="total_celana_kiper"
+                                                                value="{{ $oderCs->total_celana_kiper }}" autofocus />
                                                         </div>
                                                         <div class="mb-3 col-md-6">
                                                             <label for="firstName" class="form-label">Ket. Warna
@@ -1423,6 +1494,13 @@
                                                             </select>
                                                         </div>
                                                         <div class="mb-3 col-md-6">
+                                                            <label for="firstName" class="form-label">total
+                                                                celana</label>
+                                                            <input class="form-control" type="text" id="firstName"
+                                                                name="total_celana_1"
+                                                                value="{{ $oderCs->total_celana_1 }}" autofocus />
+                                                        </div>
+                                                        <div class="mb-3 col-md-6">
                                                             <label for="firstName" class="form-label">Ket. Warna
                                                                 Kain player 1</label>
                                                             <input class="form-control" type="text" id="firstName"
@@ -1452,7 +1530,7 @@
                                                                 name="keterangan_celana_1">{{ $oderCs->keterangan_celana_1 }}</textarea>
                                                         </div>
                                                     </div>
-                                                    @elseif ($oderCs->file_celana_kiper)
+                                                    @elseif ($oderCs->Gambar->file_celana_kiper)
                                                     <h4 class="fw-bold py-3 mb-4">Keterangan Celana Player</h4>
                                                     <hr>
                                                     <div class="row">
@@ -1502,6 +1580,13 @@
                                                                 <option value="Benzema">Benzema</option>
                                                                 <option value="Embosh">Embosh</option>
                                                             </select>
+                                                        </div>
+                                                        <div class="mb-3 col-md-6">
+                                                            <label for="firstName" class="form-label">total
+                                                                celana</label>
+                                                            <input class="form-control" type="text" id="firstName"
+                                                                name="total_celana_player"
+                                                                value="{{ $oderCs->total_celana_player }}" autofocus />
                                                         </div>
                                                         <div class="mb-3 col-md-6">
                                                             <label for="firstName" class="form-label">Ket. Warna
@@ -1582,6 +1667,13 @@
                                                                 <option value="Benzema">Benzema</option>
                                                                 <option value="Embosh">Embosh</option>
                                                             </select>
+                                                        </div>
+                                                        <div class="mb-3 col-md-6">
+                                                            <label for="firstName" class="form-label">total
+                                                                celana</label>
+                                                            <input class="form-control" type="text" id="firstName"
+                                                                name="total_celana_pelatih"
+                                                                value="{{ $oderCs->total_celana_pelatih }}" autofocus />
                                                         </div>
                                                         <div class="mb-3 col-md-6">
                                                             <label for="firstName" class="form-label">Ket. Warna
@@ -1664,6 +1756,13 @@
                                                             </select>
                                                         </div>
                                                         <div class="mb-3 col-md-6">
+                                                            <label for="firstName" class="form-label">total
+                                                                celana</label>
+                                                            <input class="form-control" type="text" id="firstName"
+                                                                name="total_celana_kiper"
+                                                                value="{{ $oderCs->total_celana_kiper }}" autofocus />
+                                                        </div>
+                                                        <div class="mb-3 col-md-6">
                                                             <label for="firstName" class="form-label">Ket. Warna
                                                                 Kain kiper</label>
                                                             <input class="form-control" type="text" id="firstName"
@@ -1692,7 +1791,7 @@
                                                                 name="keterangan_celana_kiper">{{ $oderCs->keterangan_celana_kiper }}</textarea>
                                                         </div>
                                                     </div>
-                                                    @elseif ($oderCs->file_celana_pelatih)
+                                                    @elseif ($oderCs->Gambar->file_celana_pelatih)
                                                     <h4 class="fw-bold py-3 mb-4">Keterangan Celana Player</h4>
                                                     <hr>
                                                     <div class="row">
@@ -1742,6 +1841,13 @@
                                                                 <option value="Benzema">Benzema</option>
                                                                 <option value="Embosh">Embosh</option>
                                                             </select>
+                                                        </div>
+                                                        <div class="mb-3 col-md-6">
+                                                            <label for="firstName" class="form-label">total
+                                                                celana</label>
+                                                            <input class="form-control" type="text" id="firstName"
+                                                                name="total_celana_player"
+                                                                value="{{ $oderCs->total_celana_player }}" autofocus />
                                                         </div>
                                                         <div class="mb-3 col-md-6">
                                                             <label for="firstName" class="form-label">Ket. Warna
@@ -1824,6 +1930,13 @@
                                                             </select>
                                                         </div>
                                                         <div class="mb-3 col-md-6">
+                                                            <label for="firstName" class="form-label">total
+                                                                celana</label>
+                                                            <input class="form-control" type="text" id="firstName"
+                                                                name="total_celana_pelatih"
+                                                                value="{{ $oderCs->total_celana_pelatih }}" autofocus />
+                                                        </div>
+                                                        <div class="mb-3 col-md-6">
                                                             <label for="firstName" class="form-label">Ket. Warna
                                                                 Kain pelatih</label>
                                                             <input class="form-control" type="text" id="firstName"
@@ -1853,7 +1966,7 @@
                                                                     $oderCs->keterangan_celana_pelatih }}</textarea>
                                                         </div>
                                                     </div>
-                                                    @elseif ($oderCs->file_celana_player)
+                                                    @elseif ($oderCs->Gambar->file_celana_player)
                                                     <h4 class="fw-bold py-3 mb-4">Keterangan Celana Player</h4>
                                                     <hr>
                                                     <div class="row">
@@ -1903,6 +2016,13 @@
                                                                 <option value="Benzema">Benzema</option>
                                                                 <option value="Embosh">Embosh</option>
                                                             </select>
+                                                        </div>
+                                                        <div class="mb-3 col-md-6">
+                                                            <label for="firstName" class="form-label">total
+                                                                celana</label>
+                                                            <input class="form-control" type="text" id="firstName"
+                                                                name="total_celana_player"
+                                                                value="{{ $oderCs->total_celana_player }}" autofocus />
                                                         </div>
                                                         <div class="mb-3 col-md-6">
                                                             <label for="firstName" class="form-label">Ket. Warna

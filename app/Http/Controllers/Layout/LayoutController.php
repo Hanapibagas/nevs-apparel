@@ -7,6 +7,7 @@ use App\Models\BarangMasukCostumerServices;
 use App\Models\BarangMasukDatalayout;
 use App\Models\Laporan;
 use App\Models\LaporanLkLayout;
+use App\Models\PembagianKomisi;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -141,6 +142,7 @@ class LayoutController extends Controller
 
     public function putLaporanLs(Request $request, $id)
     {
+        $user = Auth::user();
         $dataLk = BarangMasukDatalayout::with('BarangMasukCsLK')->find($id);
         if ($request->file('file_corel_layout')) {
             $uploadFile = $request->file('file_corel_layout');
@@ -154,6 +156,56 @@ class LayoutController extends Controller
             'file_corel_layout' => $filebajuplayer,
             'tanda_telah_mengerjakan' => 1,
         ]);
+
+        $dataBajuPlayer = $dataLk->BarangMasukCsLK->total_baju_player;
+        $dataBajuPelatih = $dataLk->BarangMasukCsLK->total_baju_pelatih;
+        $dataBajuKiper = $dataLk->BarangMasukCsLK->total_baju_kiper;
+        $dataBaju1 = $dataLk->BarangMasukCsLK->total_baju_1;
+        $dataCelanaPlayer = $dataLk->BarangMasukCsLK->total_celana_player;
+        $dataCelanaPelatih = $dataLk->BarangMasukCsLK->total_celana_pelatih;
+        $dataCelanaKiper = $dataLk->BarangMasukCsLK->total_celana_kiper;
+        $dataCelana1 = $dataLk->BarangMasukCsLK->total_celana_1;
+
+        $deadline = Carbon::parse($dataLk->deadline);
+        $selesai = Carbon::parse($dataLk->selesai);
+
+        if ($selesai->lt($deadline)) {
+            $selisihHari = $selesai->diffInDaysFiltered(function (Carbon $date) use ($deadline) {
+                return $date->lte($deadline);
+            });
+            $totalBarang = $dataBajuPlayer + $dataBajuPelatih + $dataBajuKiper + $dataBaju1 +
+                $dataCelanaPlayer + $dataCelanaPelatih + $dataCelanaKiper + $dataCelana1;
+            $hargaPerBarang = 750;
+            $totalHarga = $totalBarang * $hargaPerBarang;
+            $keterangan = "- $selisihHari";
+        } else {
+            $selisihHari = $selesai->diffInDays($deadline);
+            if ($selisihHari == 0) {
+                $totalBarang = $dataBajuPlayer + $dataBajuPelatih + $dataBajuKiper + $dataBaju1 +
+                    $dataCelanaPlayer + $dataCelanaPelatih + $dataCelanaKiper + $dataCelana1;
+                $hargaPerBarang = 750;
+                $totalHarga = $totalBarang * $hargaPerBarang;
+                $keterangan = "- $selisihHari";
+            } else {
+                $keterangan = "+ $selisihHari";
+            }
+        }
+
+        if ($keterangan == '-') {
+            PembagianKomisi::create([
+                'user_id' => $user->id,
+                'layout_id' => $dataLk->id,
+                'tanggal' => Carbon::now(),
+                'jumlah_komisi' => $totalHarga,
+            ]);
+        } else {
+            PembagianKomisi::create([
+                'user_id' => $user->id,
+                'layout_id' => $dataLk->id,
+                'tanggal' => Carbon::now(),
+                'jumlah_komisi' => "0",
+            ]);
+        }
 
         if ($dataLk->BarangMasukCsLK->jenis_mesin == 'mimaki') {
             $laporan = Laporan::where('barang_masuk_layout_id', $dataLk->id)->first();
