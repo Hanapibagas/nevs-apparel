@@ -13,6 +13,7 @@ use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class DisainerController extends Controller
 {
@@ -40,9 +41,7 @@ class DisainerController extends Controller
         $user = Auth::user();
 
         if ($request->file('file')) {
-            $uploadFile = $request->file('file');
-            $originalFileName = $uploadFile->getClientOriginalName();
-            $file = $uploadFile->storeAs('file-dari-disainer', $originalFileName, 'public');
+            $file = $request->file('file')->store('data-tes-mesin', 'public');
         }
 
         BarangMasukMesin::create([
@@ -56,6 +55,38 @@ class DisainerController extends Controller
         $update = BarangMasukDisainer::where('nama_tim', $nama_tim)->first();
         $update->update([
             'aksi' => '1'
+        ]);
+
+        return redirect()->route('getIndexDisainerPegawai')->with('success', 'Selamat data yang anda input telah terkirim!');
+    }
+
+    public function getUpdateToTeamMesin($id)
+    {
+        $disainer = BarangMasukMesin::find($id);
+
+        return view('component.Disainer.disainer-pegawai.update', compact('disainer'));
+    }
+
+    public function putUpdateToTeamMesin(Request $request, $id)
+    {
+        $disainer = BarangMasukMesin::find($id);
+
+        if ($request->file('file')) {
+            $file = $request->file('file')->store('data-tes-mesin', 'public');
+            if ($disainer->file && file_exists(storage_path('app/public/' . $disainer->file))) {
+                Storage::delete('public/' . $disainer->file);
+                $file = $request->file('file')->store('data-tes-mesin', 'public');
+            }
+        }
+
+        if ($request->file('file') === null) {
+            $file = $disainer->file;
+        }
+
+        $disainer->update([
+            'nama_mesin' => $request->nama_mesin,
+            'file' => $file,
+            'keterangan' => $request->keterangan
         ]);
 
         return redirect()->route('getIndexDisainerPegawai')->with('success', 'Selamat data yang anda input telah terkirim!');

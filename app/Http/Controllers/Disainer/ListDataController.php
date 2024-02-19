@@ -90,10 +90,16 @@ class ListDataController extends Controller
     {
         $update = KeraBaju::find($id);
 
-        $filebaju = $update->gambar;
-
         if ($request->file('gambar')) {
             $filebaju = $request->file('gambar')->store('data-jenis-kera', 'public');
+            if ($update->gambar && file_exists(storage_path('app/public/' . $update->gambar))) {
+                Storage::delete('public/' . $update->gambar);
+                $filebaju = $request->file('gambar')->store('data-jenis-kera', 'public');
+            }
+        }
+
+        if ($request->file('gambar') === null) {
+            $filebaju = $update->gambar;
         }
 
         $update->update([
@@ -108,10 +114,16 @@ class ListDataController extends Controller
     {
         $update = PolaLengan::find($id);
 
-        $filebaju = $update->gambar;
-
         if ($request->file('gambar')) {
             $filebaju = $request->file('gambar')->store('data-jenis-lengan', 'public');
+            if ($update->gambar && file_exists(storage_path('app/public/' . $update->gambar))) {
+                Storage::delete('public/' . $update->gambar);
+                $filebaju = $request->file('gambar')->store('data-jenis-lengan', 'public');
+            }
+        }
+
+        if ($request->file('gambar') === null) {
+            $filebaju = $update->gambar;
         }
 
         $update->update([
@@ -126,11 +138,18 @@ class ListDataController extends Controller
     {
         $update = PolaCeleana::find($id);
 
-        $filebaju = $update->gambar;
-
         if ($request->file('gambar')) {
             $filebaju = $request->file('gambar')->store('data-jenis-celana', 'public');
+            if ($update->gambar && file_exists(storage_path('app/public/' . $update->gambar))) {
+                Storage::delete('public/' . $update->gambar);
+                $filebaju = $request->file('gambar')->store('data-jenis-celana', 'public');
+            }
         }
+
+        if ($request->file('gambar') === null) {
+            $filebaju = $update->gambar;
+        }
+
 
         $update->update([
             'jenis_kera' => $request->jenis_kera,

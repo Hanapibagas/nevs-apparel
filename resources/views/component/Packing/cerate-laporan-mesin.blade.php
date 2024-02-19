@@ -9,7 +9,7 @@
             <div class="card">
                 <div class="container-xxl flex-grow-1 container-p-y">
                     <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Input </span>data laporan</h4>
-                    <form action="{{ route('putLaporan', $dataMasuk->id) }}" method="POST"
+                    <form action="{{ route('putLaporanPacking', $dataMasuk->id) }}" method="POST"
                         enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
@@ -33,7 +33,7 @@
                             <i class="menu-icon tf-icons bx bx-send"></i>
                             Input Laporan Packing
                         </button>
-                        <a href="{{ route('getIndex') }}" class="btn btn-outline-secondary"><i
+                        <a href="{{ route('getIndexPacking') }}" class="btn btn-outline-secondary"><i
                                 class="menu-icon tf-icons bx bx-undo"></i>Kembali</a>
                     </form>
                 </div>

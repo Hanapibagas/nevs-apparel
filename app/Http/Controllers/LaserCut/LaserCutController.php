@@ -85,7 +85,7 @@ class LaserCutController extends Controller
             }
         }
 
-        return redirect()->route('getIndexFix')->with('success', 'Selamat data yang anda input telah terkirim!');
+        return redirect()->route('getIndexFixLaserCut')->with('success', 'Selamat data yang anda input telah terkirim!');
     }
 
     public function getIndexFix()

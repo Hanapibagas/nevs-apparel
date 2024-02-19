@@ -2,14 +2,14 @@
 
 @section('content')
 <div class="container-xxl flex-grow-1 container-p-y">
-    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Tables /</span> Input data laporan Laser Cut
+    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Tables /</span> Input data laporan Manual Cut
     </h4>
     <div class="row">
         <div class="col-12">
             <div class="card">
                 <div class="container-xxl flex-grow-1 container-p-y">
                     <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Input </span>data laporan</h4>
-                    <form action="{{ route('putLaporan', $dataMasuk->id) }}" method="POST"
+                    <form action="{{ route('putLaporanManualCut', $dataMasuk->id) }}" method="POST"
                         enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
@@ -31,9 +31,9 @@
                         </div>
                         <button type="submit" class="btn btn-primary">
                             <i class="menu-icon tf-icons bx bx-send"></i>
-                            Input Laporan Laser Cut
+                            Input Laporan Manual Cut
                         </button>
-                        <a href="{{ route('getIndex') }}" class="btn btn-outline-secondary"><i
+                        <a href="{{ route('getIndexManualCut') }}" class="btn btn-outline-secondary"><i
                                 class="menu-icon tf-icons bx bx-undo"></i>Kembali</a>
                     </form>
                 </div>

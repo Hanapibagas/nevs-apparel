@@ -87,7 +87,7 @@ class SortirController extends Controller
             }
         }
 
-        return redirect()->route('getIndexFix')->with('success', 'Selamat data yang anda input telah terkirim!');
+        return redirect()->route('getIndexFixSortir')->with('success', 'Selamat data yang anda input telah terkirim!');
     }
 
     public function getIndexFix()
@@ -99,6 +99,6 @@ class SortirController extends Controller
             })
             ->get();
 
-        return view('component.Laser-Cut.index-fix', compact('dataMasuk'));
+        return view('component.Sortir.index-fix', compact('dataMasuk'));
     }
 }

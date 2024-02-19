@@ -66,6 +66,8 @@ Route::middleware(['auth', 'checkroll:disainer'])->group(function () {
     // route pegawai disainer
     Route::get('/disainer', [DisainerController::class, 'getIndexUserDisainer'])->name('getIndexDisainerPegawai');
     Route::get('/disainer/create/{nama_tim}', [DisainerController::class, 'getCreateToTeamMesin'])->name('getCreateToTeamMesinPegawai');
+    Route::get('/disainer/update/{id}', [DisainerController::class, 'getUpdateToTeamMesin'])->name('getUpdateToTeamMesin');
+    Route::put('/disainer/update-data-mesin/{id}', [DisainerController::class, 'putUpdateToTeamMesin'])->name('putUpdateToTeamMesin');
     Route::get('/disainer/create-Cs/{nama_tim}', [DisainerController::class, 'getCreateToTeamCs'])->name('getCreateToTeamCsPegawai');
     Route::post('/disainer/post-tim-mesin/{nama_tim}', [DisainerController::class, 'postToTeamMesin'])->name('postToTeamMesinPegawai');
     Route::post('/disainer/post-Cs/{nama_tim}', [DisainerController::class, 'postToCustomerServices'])->name('postToCsPegawai');
@@ -95,7 +97,7 @@ Route::middleware(['auth', 'checkroll:disainer'])->group(function () {
 Route::middleware(['auth', 'checkroll:atexco'])->group(function () {
     Route::get('/mesin-atexco', [AtexcoController::class, 'getIndexAtexco'])->name('getIndexMesinAtexcoPegawai');
     Route::get('/data-masuk-mesin-atexco', [AtexcoController::class, 'getIndexDataMasukAtexco'])->name('getIndexDataMasukMesinAtexco');
-    Route::get('/data-masuk-mesin-atexco/{id}', [AtexcoController::class, 'getInputLaporan'])->name('getInputLaporan');
+    Route::get('/data-masuk-mesin-atexco/{id}', [AtexcoController::class, 'getInputLaporan'])->name('getInputLaporanAtxco');
     Route::put('/data-masuk-mesin-atexco/{id}', [AtexcoController::class, 'putLaporanMesin'])->name('putLaporanMesin');
     Route::get('/data-masuk-mesin-atexco-fix', [AtexcoController::class, 'getIndexDataMasukAtexcoFix'])->name('getIndexDataMasukAtexcoFix');
 
@@ -105,7 +107,7 @@ Route::middleware(['auth', 'checkroll:atexco'])->group(function () {
 Route::middleware(['auth', 'checkroll:mimaki'])->group(function () {
     Route::get('/mesin-mimaki', [MimakiController::class, 'getIndexMimaki'])->name('getIndexMesinMimakiPegawai');
     Route::get('/data-masuk-mesin-mimaki', [MimakiController::class, 'getIndexDataMasukMimaki'])->name('getIndexDataMasukMimaki');
-    Route::get('/data-masuk-mesin-mimaki/{id}', [MimakiController::class, 'getInputLaporan'])->name('getInputLaporan');
+    Route::get('/data-masuk-mesin-mimaki/{id}', [MimakiController::class, 'getInputLaporan'])->name('getInputLaporanMimaki');
     Route::put('/data-masuk-mesin-mimaki/{id}', [MimakiController::class, 'putLaporanMesin'])->name('putLaporanMesin');
     Route::get('/data-masuk-mesin-mimaki-fix', [MimakiController::class, 'getIndexDataMasukMimakiFix'])->name('getIndexDataMasukMimakiFix');
 
@@ -118,65 +120,63 @@ Route::middleware(['auth', 'checkroll:layout'])->group(function () {
 
     Route::get('/laporan-Lk-Layout', [LayoutController::class, 'getIndexLaporanLk'])->name('getIndexLaporanLk');
     Route::put('/kirim-laporan-lk/{id}', [LayoutController::class, 'putLaporanLs'])->name('putLaporanLs');
-
-
     Route::get('cetak-data-lk-fix/{id}', [LayoutController::class, 'cetakDataLk'])->name('getCetakDataLkLayout');
 });
 
 Route::middleware(['auth', 'checkroll:pres_kain'])->group(function () {
     Route::get('/data-masuk-press-kain', [PressKainController::class, 'getindexDataMasukPress'])->name('getindexDataMasukPress');
-    Route::get('/data-masuk-press-kain/{id}', [PressKainController::class, 'getInputLaporan'])->name('getInputLaporan');
-    Route::put('/data-masuk-press-kain/{id}', [PressKainController::class, 'putLaporan'])->name('putLaporan');
+    Route::get('/data-masuk-press-kain/{id}', [PressKainController::class, 'getInputLaporan'])->name('getInputLaporanPresKain');
+    Route::put('/data-masuk-press-kain/{id}', [PressKainController::class, 'putLaporan'])->name('putLaporanPreskain');
     Route::get('/data-masuk-press-kain-fix', [PressKainController::class, 'getindexDataMasukPressFix'])->name('getindexDataMasukPressFix');
 });
 
 Route::middleware(['auth', 'checkroll:laser_cut'])->group(function () {
-    Route::get('/data-masuk-laser-cut', [LaserCutController::class, 'getIndex'])->name('getIndex');
-    Route::get('/data-masuk-laser-cut/{id}', [LaserCutController::class, 'getInputLaporan'])->name('getInputLaporan');
-    Route::put('/data-masuk-laser-cut/{id}', [LaserCutController::class, 'putLaporan'])->name('putLaporan');
-    Route::get('/data-masuk-laser-cut-fix', [LaserCutController::class, 'getIndexFix'])->name('getIndexFix');
+    Route::get('/data-masuk-laser-cut', [LaserCutController::class, 'getIndex'])->name('getIndexLaserCut');
+    Route::get('/data-masuk-laser-cut/{id}', [LaserCutController::class, 'getInputLaporan'])->name('getInputLaporanLaserCut');
+    Route::put('/data-masuk-laser-cut/{id}', [LaserCutController::class, 'putLaporan'])->name('putLaporanLaserCut');
+    Route::get('/data-masuk-laser-cut-fix', [LaserCutController::class, 'getIndexFix'])->name('getIndexFixLaserCut');
 });
 
 Route::middleware(['auth', 'checkroll:manual_cut'])->group(function () {
-    Route::get('/data-masuk-manual-cut', [ManualCutController::class, 'getIndex'])->name('getIndex');
-    Route::get('/data-masuk-manual-cut/{id}', [ManualCutController::class, 'getInputLaporan'])->name('getInputLaporan');
-    Route::put('/data-masuk-manual-cut/{id}', [ManualCutController::class, 'putLaporan'])->name('putLaporan');
-    Route::get('/data-masuk-manual-cut-fix', [ManualCutController::class, 'getIndexFix'])->name('getIndexFix');
+    Route::get('/data-masuk-manual-cut', [ManualCutController::class, 'getIndex'])->name('getIndexManualCut');
+    Route::get('/data-masuk-manual-cut/{id}', [ManualCutController::class, 'getInputLaporan'])->name('getInputLaporanManualCut');
+    Route::put('/data-masuk-manual-cut/{id}', [ManualCutController::class, 'putLaporan'])->name('putLaporanManualCut');
+    Route::get('/data-masuk-manual-cut-fix', [ManualCutController::class, 'getIndexFix'])->name('getIndexFixManualCut');
 });
 
 Route::middleware(['auth', 'checkroll:sortir'])->group(function () {
-    Route::get('/data-masuk-sortir', [SortirController::class, 'getIndex'])->name('getIndex');
-    Route::get('/data-masuk-sortir/{id}', [SortirController::class, 'getInputLaporan'])->name('getInputLaporan');
-    Route::put('/data-masuk-sortir/{id}', [SortirController::class, 'putLaporan'])->name('putLaporan');
-    Route::get('/data-masuk-sortir-fix', [SortirController::class, 'getIndexFix'])->name('getIndexFix');
+    Route::get('/data-masuk-sortir', [SortirController::class, 'getIndex'])->name('getIndexSortir');
+    Route::get('/data-masuk-sortir/{id}', [SortirController::class, 'getInputLaporan'])->name('getInputLaporanSortir');
+    Route::put('/data-masuk-sortir/{id}', [SortirController::class, 'putLaporan'])->name('putLaporanSortir');
+    Route::get('/data-masuk-sortir-fix', [SortirController::class, 'getIndexFix'])->name('getIndexFixSortir');
 });
 
 Route::middleware(['auth', 'checkroll:jahit_baju'])->group(function () {
-    Route::get('/data-masuk-jahit-baju', [JahitBajuController::class, 'getIndex'])->name('getIndex');
-    Route::get('/data-masuk-jahit-baju/{id}', [JahitBajuController::class, 'getInputLaporan'])->name('getInputLaporan');
-    Route::put('/data-masuk-jahit-baju/{id}', [JahitBajuController::class, 'putLaporan'])->name('putLaporan');
-    Route::get('/data-masuk-jahit-baju-fix', [JahitBajuController::class, 'getIndexFix'])->name('getIndexFix');
+    Route::get('/data-masuk-jahit-baju', [JahitBajuController::class, 'getIndex'])->name('getIndexJahitBaju');
+    Route::get('/data-masuk-jahit-baju/{id}', [JahitBajuController::class, 'getInputLaporan'])->name('getInputLaporanJahitBaju');
+    Route::put('/data-masuk-jahit-baju/{id}', [JahitBajuController::class, 'putLaporan'])->name('putLaporanJahitBaju');
+    Route::get('/data-masuk-jahit-baju-fix', [JahitBajuController::class, 'getIndexFix'])->name('getIndexFixJahitBaju');
 });
 
 Route::middleware(['auth', 'checkroll:jahit_celana'])->group(function () {
-    Route::get('/data-masuk-jahit-celana', [JahitCelanaController::class, 'getIndex'])->name('getIndex');
-    Route::get('/data-masuk-jahit-celana/{id}', [JahitCelanaController::class, 'getInputLaporan'])->name('getInputLaporan');
-    Route::put('/data-masuk-jahit-celana/{id}', [JahitCelanaController::class, 'putLaporan'])->name('putLaporan');
-    Route::get('/data-masuk-jahit-celana-fix', [JahitCelanaController::class, 'getIndexFix'])->name('getIndexFix');
+    Route::get('/data-masuk-jahit-celana', [JahitCelanaController::class, 'getIndex'])->name('getIndexJahitCelana');
+    Route::get('/data-masuk-jahit-celana/{id}', [JahitCelanaController::class, 'getInputLaporan'])->name('getInputLaporanJahitCelana');
+    Route::put('/data-masuk-jahit-celana/{id}', [JahitCelanaController::class, 'putLaporan'])->name('putLaporanJahitCelana');
+    Route::get('/data-masuk-jahit-celana-fix', [JahitCelanaController::class, 'getIndexFix'])->name('getIndexFixJahitCelana');
 });
 
 Route::middleware(['auth', 'checkroll:press_tag'])->group(function () {
-    Route::get('/data-masuk-press-tag', [PressTagController::class, 'getIndex'])->name('getIndex');
-    Route::get('/data-masuk-press-tag/{id}', [PressTagController::class, 'getInputLaporan'])->name('getInputLaporan');
-    Route::put('/data-masuk-press-tag/{id}', [PressTagController::class, 'putLaporan'])->name('putLaporan');
-    Route::get('/data-masuk-press-tag-fix', [PressTagController::class, 'getIndexFix'])->name('getIndexFix');
+    Route::get('/data-masuk-press-tag', [PressTagController::class, 'getIndex'])->name('getIndexPressTag');
+    Route::get('/data-masuk-press-tag/{id}', [PressTagController::class, 'getInputLaporan'])->name('getInputLaporanPressTag');
+    Route::put('/data-masuk-press-tag/{id}', [PressTagController::class, 'putLaporan'])->name('putLaporanPressTag');
+    Route::get('/data-masuk-press-tag-fix', [PressTagController::class, 'getIndexFix'])->name('getIndexFixPressTag');
 });
 
 Route::middleware(['auth', 'checkroll:packing'])->group(function () {
-    Route::get('/data-masuk-packing', [PackingController::class, 'getIndex'])->name('getIndex');
-    Route::get('/data-masuk-packing/{id}', [PackingController::class, 'getInputLaporan'])->name('getInputLaporan');
-    Route::put('/data-masuk-packing/{id}', [PackingController::class, 'putLaporan'])->name('putLaporan');
-    Route::get('/data-masuk-packing-fix', [PackingController::class, 'getIndexFix'])->name('getIndexFix');
+    Route::get('/data-masuk-packing', [PackingController::class, 'getIndex'])->name('getIndexPacking');
+    Route::get('/data-masuk-packing/{id}', [PackingController::class, 'getInputLaporan'])->name('getInputLaporanPacking');
+    Route::put('/data-masuk-packing/{id}', [PackingController::class, 'putLaporan'])->name('putLaporanPacking');
+    Route::get('/data-masuk-packing-fix', [PackingController::class, 'getIndexFix'])->name('getIndexFixPacking');
 });
 
 Auth::routes();

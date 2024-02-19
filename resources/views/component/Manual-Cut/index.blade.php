@@ -27,7 +27,7 @@
 
 <div class="content-wrapper">
     <div class="container-xxl flex-grow-1 container-p-y">
-        <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Tables /</span> Laser Cut</h4>
+        <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Tables /</span> Manual Cut</h4>
 
         <div class="card">
             <h5 class="card-header">Data masuk</h5>
@@ -64,7 +64,8 @@
                                     </script>
                                 </td>
                                 <td>
-                                    <a href="{{ route('getInputLaporan' , $mesins->id) }}" class="btn btn-info">
+                                    <a href="{{ route('getInputLaporanManualCut' , $mesins->id) }}"
+                                        class="btn btn-info">
                                         <i class="menu-icon tf-icons bx bxs-inbox"></i>Input Laporan</a>
                                 </td>
                             </tr>

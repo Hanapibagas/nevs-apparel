@@ -13,14 +13,15 @@
                     <h5 class="mb-0">Form untuk mengirim ke tim mesin</h5>
                 </div>
                 <div class="card-body">
-                    <form action="{{ route('postToTeamMesinPegawai', $disainer->nama_tim) }}" method="POST"
+                    <form action="{{ route('putUpdateToTeamMesin', $disainer->id) }}" method="POST"
                         enctype="multipart/form-data">
                         @csrf
+                        @method('PUT')
                         <div class="row mb-3">
                             <label class="col-sm-2 col-form-label" for="basic-default-name">nama tim</label>
                             <div class="col-sm-10">
                                 <input type="text" class="form-control" id="basic-default-name"
-                                    value="{{ $disainer->nama_tim }}" readonly />
+                                    value="{{ $disainer->BarangMasukDisainer->nama_tim }}" readonly />
                                 <input type="hidden" class="form-control" name="barang_masuk_disainer_id"
                                     id="basic-default-name" value="{{ $disainer->id }}" readonly />
                             </div>
@@ -29,7 +30,7 @@
                             <label class="col-sm-2 col-form-label" for="basic-default-company">Nama mesin</label>
                             <div class="col-sm-10">
                                 <select name="nama_mesin" class="form-control">
-                                    <option selected>-- Silahkan Pilih Mesin --</option>
+                                    <option>-- Silahkan Pilih Mesin --</option>
                                     <option style="text-transform: uppercase" value="atexco">atexco</option>
                                     <option style="text-transform: uppercase" value="mimaki">mimaki</option>
                                 </select>

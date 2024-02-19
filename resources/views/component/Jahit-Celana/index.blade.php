@@ -64,7 +64,8 @@
                                     </script>
                                 </td>
                                 <td>
-                                    <a href="{{ route('getInputLaporan' , $mesins->id) }}" class="btn btn-info">
+                                    <a href="{{ route('getInputLaporanJahitCelana' , $mesins->id) }}"
+                                        class="btn btn-info">
                                         <i class="menu-icon tf-icons bx bxs-inbox"></i>Input Laporan</a>
                                 </td>
                             </tr>

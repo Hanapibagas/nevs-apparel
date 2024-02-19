@@ -166,31 +166,20 @@ class CostumerServicesController extends Controller
     {
         $lk = BarangMasukCostumerServices::find($id);
 
-        $totalUkuranBaju = $request->ukuran_s_player_baju + $request->ukuran_m_player_baju + $request->ukuran_l_player_baju +
-            $request->ukuran_xl_player_baju + $request->ukuran_xs_player_baju + $request->ukuran_2xl_player_baju +
-            $request->ukuran_3xl_player_baju + $request->ukuran_4xl_player_baju + $request->ukuran_5xl_player_baju +
-            $request->ukuran_s_pelatih_baju + $request->ukuran_m_pelatih_baju + $request->ukuran_l_pelatih_baju +
-            $request->ukuran_xl_pelatih_baju + $request->ukuran_xs_pelatih_baju + $request->ukuran_2xl_pelatih_baju +
-            $request->ukuran_3xl_pelatih_baju + $request->ukuran_4xl_pelatih_baju + $request->ukuran_5xl_pelatih_baju +
-            $request->ukuran_s_kiper_baju + $request->ukuran_m_kiper_baju + $request->ukuran_l_kiper_baju +
-            $request->ukuran_xl_kiper_baju + $request->ukuran_xs_kiper_baju + $request->ukuran_2xl_kiper_baju +
-            $request->ukuran_3xl_kiper_baju + $request->ukuran_4xl_kiper_baju + $request->ukuran_5xl_kiper_baju +
-            $request->ukuran_s_1_baju + $request->ukuran_m_1_baju + $request->ukuran_l_1_baju +
-            $request->ukuran_xl_1_baju + $request->ukuran_xs_1_baju + $request->ukuran_2xl_1_baju +
-            $request->ukuran_3xl_1_baju + $request->ukuran_4xl_1_baju + $request->ukuran_5xl_1_baju;
+        $tanggal_masuk = \Carbon\Carbon::parse($lk->tanggal_masuk);
+        $deadline = \Carbon\Carbon::parse($request->deadline);
+        $total_hari = $tanggal_masuk->diffInDays($deadline);
+        for ($date = clone $tanggal_masuk; $date->lte($deadline); $date->addDay()) {
+            if ($date->dayOfWeek === Carbon::SUNDAY) {
+                $total_hari--;
+            }
+        }
 
-        $totalUkuranCelana = $request->ukuran_s_player_celana + $request->ukuran_m_player_celana + $request->ukuran_l_player_celana +
-            $request->ukuran_xl_player_celana + $request->ukuran_xs_player_celana + $request->ukuran_2xl_player_celana +
-            $request->ukuran_3xl_player_celana + $request->ukuran_4xl_player_celana + $request->ukuran_5xl_player_celana +
-            $request->ukuran_s_pelatih_celana + $request->ukuran_m_pelatih_celana + $request->ukuran_l_pelatih_celana +
-            $request->ukuran_xl_pelatih_celana + $request->ukuran_xs_pelatih_celana + $request->ukuran_2xl_pelatih_celana +
-            $request->ukuran_3xl_pelatih_celana + $request->ukuran_4xl_pelatih_celana + $request->ukuran_5xl_pelatih_celana +
-            $request->ukuran_s_kiper_celana + $request->ukuran_m_kiper_celana + $request->ukuran_l_kiper_celana +
-            $request->ukuran_xl_kiper_celana + $request->ukuran_xs_kiper_celana + $request->ukuran_2xl_kiper_celana +
-            $request->ukuran_3xl_kiper_celana + $request->ukuran_4xl_kiper_celana + $request->ukuran_5xl_kiper_celana +
-            $request->ukuran_s_1_celana + $request->ukuran_m_1_celana + $request->ukuran_l_1_celana +
-            $request->ukuran_xl_1_celana + $request->ukuran_xs_1_celana + $request->ukuran_2xl_1_celana +
-            $request->ukuran_3xl_1_celana + $request->ukuran_4xl_1_celana + $request->ukuran_5xl_1_celana;
+        if ($total_hari >= 1 && $total_hari <= 8) {
+            $keterangan = "Express";
+        } else {
+            $keterangan = "Normal";
+        }
 
         $lk->update([
             'tanggal_jahit' => $request->tanggal_jahit,
@@ -202,112 +191,1333 @@ class CostumerServicesController extends Controller
             'jenis_produksi' => $request->jenis_produksi,
             'pola' => $request->pola,
             'deadline' => $request->deadline,
+            'ket_hari' => $keterangan,
 
-            'jenis_sablon_baju' => $request->jenis_sablon_baju,
-            'jenis_kerah_baju_id' => $request->jenis_kerah_baju_id,
-            'jenis_pola_lengan_id' => $request->jenis_pola_lengan_id,
-            'jenis_kain_baju' => $request->jenis_kain_baju,
-            'ket_kumis_baju' => $request->ket_kumis_baju,
-            'ket_bantalan_baju' => $request->ket_bantalan_baju,
-            'ket_celana' => $request->ket_celana,
-            'ket_tambahan_baju' => $request->ket_tambahan_baju,
             // baju player
-            'ukuran_s_player_baju' => $request->ukuran_s_player_baju,
-            'ukuran_m_player_baju' => $request->ukuran_m_player_baju,
-            'ukuran_l_player_baju' => $request->ukuran_l_player_baju,
-            'ukuran_xl_player_baju' => $request->ukuran_xl_player_baju,
-            'ukuran_xs_player_baju' => $request->ukuran_xs_player_baju,
-            'ukuran_2xl_player_baju' => $request->ukuran_2xl_player_baju,
-            'ukuran_3xl_player_baju' => $request->ukuran_3xl_player_baju,
-            'ukuran_4xl_player_baju' => $request->ukuran_4xl_player_baju,
-            'ukuran_5xl_player_baju' => $request->ukuran_5xl_player_baju,
-            // baju pelatih
-            'ukuran_s_pelatih_baju' => $request->ukuran_s_pelatih_baju,
-            'ukuran_m_pelatih_baju' => $request->ukuran_m_pelatih_baju,
-            'ukuran_l_pelatih_baju' => $request->ukuran_l_pelatih_baju,
-            'ukuran_xl_pelatih_baju' => $request->ukuran_xl_pelatih_baju,
-            'ukuran_xs_pelatih_baju' => $request->ukuran_xs_pelatih_baju,
-            'ukuran_2xl_pelatih_baju' => $request->ukuran_2xl_pelatih_baju,
-            'ukuran_3xl_pelatih_baju' => $request->ukuran_3xl_pelatih_baju,
-            'ukuran_4xl_pelatih_baju' => $request->ukuran_4xl_pelatih_baju,
-            'ukuran_5xl_pelatih_baju' => $request->ukuran_5xl_pelatih_baju,
-            // baju kiper
-            'ukuran_s_kiper_baju' => $request->ukuran_s_kiper_baju,
-            'ukuran_m_kiper_baju' => $request->ukuran_m_kiper_baju,
-            'ukuran_l_kiper_baju' => $request->ukuran_l_kiper_baju,
-            'ukuran_xl_kiper_baju' => $request->ukuran_xl_kiper_baju,
-            'ukuran_xs_kiper_baju' => $request->ukuran_xs_kiper_baju,
-            'ukuran_2xl_kiper_baju' => $request->ukuran_2xl_kiper_baju,
-            'ukuran_3xl_kiper_baju' => $request->ukuran_3xl_kiper_baju,
-            'ukuran_4xl_kiper_baju' => $request->ukuran_4xl_kiper_baju,
-            'ukuran_5xl_kiper_baju' => $request->ukuran_5xl_kiper_baju,
-            // baju 1
-            'ukuran_s_1_baju' => $request->ukuran_s_1_baju,
-            'ukuran_m_1_baju' => $request->ukuran_m_1_baju,
-            'ukuran_l_1_baju' => $request->ukuran_l_1_baju,
-            'ukuran_xl_1_baju' => $request->ukuran_xl_1_baju,
-            'ukuran_xs_1_baju' => $request->ukuran_xs_1_baju,
-            'ukuran_2xl_1_baju' => $request->ukuran_2xl_1_baju,
-            'ukuran_3xl_1_baju' => $request->ukuran_3xl_1_baju,
-            'ukuran_4xl_1_baju' => $request->ukuran_4xl_1_baju,
-            'ukuran_5xl_1_baju' => $request->ukuran_5xl_1_baju,
-            'total_baju' => $totalUkuranBaju,
+            'total_baju_player' => $request->total_baju_player,
+            'jenis_sablon_baju_player' => $request->jenis_sablon_baju_player,
+            'kera_baju_player_id' => $request->kera_baju_player_id,
+            'pola_lengan_player_id' => $request->pola_lengan_player_id,
+            'jenis_kain_baju_player' => $request->jenis_kain_baju_player,
+            'ket_kumis_baju_player' => $request->ket_kumis_baju_player,
+            'ket_bantalan_baju_player' => $request->ket_bantalan_baju_player,
+            'ket_celana_player' => $request->ket_celana_player,
+            'ket_tambahan_baju_player' => $request->ket_tambahan_baju_player,
+            'keterangan_baju_pelayer' => $request->keterangan_baju_pelayer,
 
-            'jenis_sablon_celana' => $request->jenis_sablon_celana,
-            'jenis_pola_celana_id' => $request->jenis_pola_celana_id,
-            'jenis_kain_celana' => $request->jenis_kain_celana,
-            'ket_warna_kain_celana' => $request->ket_warna_kain_celana,
-            'ket_bis_celana_celana' => $request->ket_bis_celana_celana,
-            'ket_tambahan_celana' => $request->ket_tambahan_celana,
+            // baju pelatih
+            'total_baju_pelatih' => $request->total_baju_pelatih,
+            'kerah_baju_pelatih_id' => $request->kerah_baju_pelatih_id,
+            'pola_lengan_pelatih_id' => $request->pola_lengan_pelatih_id,
+            'jenis_kain_baju_pelatih' => $request->jenis_kain_baju_pelatih,
+            'ket_kumis_baju_pelatih' => $request->ket_kumis_baju_pelatih,
+            'ket_bantalan_baju_pelatih' => $request->ket_bantalan_baju_pelatih,
+            'ket_celana_pelatih' => $request->ket_celana_pelatih,
+            'ket_tambahan_baju_pelatih' => $request->ket_tambahan_baju_pelatih,
+            'keterangan_baju_pelatih' => $request->keterangan_baju_pelatih,
+
+            // baju kiper
+            'total_baju_kiper' => $request->total_baju_kiper,
+            'kerah_baju_kiper_id' => $request->kerah_baju_kiper_id,
+            'pola_lengan_kiper_id' => $request->pola_lengan_kiper_id,
+            'jenis_kain_baju_kiper' => $request->jenis_kain_baju_kiper,
+            'ket_kumis_baju_kiper' => $request->ket_kumis_baju_kiper,
+            'ket_bantalan_baju_kiper' => $request->ket_bantalan_baju_kiper,
+            'ket_celana_kiper' => $request->ket_celana_kiper,
+            'ket_tambahan_baju_kiper' => $request->ket_tambahan_baju_kiper,
+            'keterangan_baju_kiper' => $request->keterangan_baju_kiper,
+
+            // baju player 1
+            'total_baju_1' => $request->total_baju_1,
+            'kerah_baju_1_id' => $request->kerah_baju_1_id,
+            'pola_lengan_1_id' => $request->pola_lengan_1_id,
+            'jenis_kain_baju_1' => $request->jenis_kain_baju_1,
+            'ket_kumis_baju_1' => $request->ket_kumis_baju_1,
+            'ket_bantalan_baju_1' => $request->ket_bantalan_baju_1,
+            'ket_celana_1' => $request->ket_celana_1,
+            'ket_tambahan_baju_1' => $request->ket_tambahan_baju_1,
+            'keterangan_baju_1' => $request->keterangan_baju_1,
+
             // celana player
-            'ukuran_s_player_celana' => $request->ukuran_s_player_celana,
-            'ukuran_m_player_celana' => $request->ukuran_m_player_celana,
-            'ukuran_l_player_celana' => $request->ukuran_l_player_celana,
-            'ukuran_xl_player_celana' => $request->ukuran_xl_player_celana,
-            'ukuran_xs_player_celana' => $request->ukuran_xs_player_celana,
-            'ukuran_2xl_player_celana' => $request->ukuran_2xl_player_celana,
-            'ukuran_3xl_player_celana' => $request->ukuran_3xl_player_celana,
-            'ukuran_4xl_player_celana' => $request->ukuran_4xl_player_celana,
-            'ukuran_5xl_player_celana' => $request->ukuran_5xl_player_celana,
+            'total_celana_player' => $request->total_celana_player,
+            'jenis_sablon_celana_player' => $request->jenis_sablon_celana_player,
+            'pola_celana_player_id' => $request->pola_celana_player_id,
+            'kain_celana_player' => $request->kain_celana_player,
+            'ket_warna_kain_celana_player' => $request->ket_warna_kain_celana_player,
+            'ket_bis_celana_celana_player' => $request->ket_bis_celana_celana_player,
+            'ket_tambahan_celana_player' => $request->ket_tambahan_celana_player,
+            'keterangan_celana_pelayer' => $request->keterangan_celana_pelayer,
+
             // celana pelatih
-            'ukuran_s_pelatih_celana' => $request->ukuran_s_pelatih_celana,
-            'ukuran_m_pelatih_celana' => $request->ukuran_m_pelatih_celana,
-            'ukuran_l_pelatih_celana' => $request->ukuran_l_pelatih_celana,
-            'ukuran_xl_pelatih_celana' => $request->ukuran_xl_pelatih_celana,
-            'ukuran_xs_pelatih_celana' => $request->ukuran_xs_pelatih_celana,
-            'ukuran_2xl_pelatih_celana' => $request->ukuran_2xl_pelatih_celana,
-            'ukuran_3xl_pelatih_celana' => $request->ukuran_3xl_pelatih_celana,
-            'ukuran_4xl_pelatih_celana' => $request->ukuran_4xl_pelatih_celana,
-            'ukuran_5xl_pelatih_celana' => $request->ukuran_5xl_pelatih_celana,
+            'total_celana_pelatih' => $request->total_celana_pelatih,
+            'jenis_sablon_celana_pelatih' => $request->jenis_sablon_celana_pelatih,
+            'pola_celana_pelatih_id' => $request->pola_celana_pelatih_id,
+            'jenis_kain_celana_pelatih' => $request->jenis_kain_celana_pelatih,
+            'ket_warna_kain_celana_pelatih' => $request->ket_warna_kain_celana_pelatih,
+            'ket_bis_celana_celana_pelatih' => $request->ket_bis_celana_celana_pelatih,
+            'ket_tambahan_celana_pelatih' => $request->ket_tambahan_celana_pelatih,
+            'keterangan_celana_pelatih' => $request->keterangan_celana_pelatih,
+
             // celana kiper
-            'ukuran_s_kiper_celana' => $request->ukuran_s_kiper_celana,
-            'ukuran_m_kiper_celana' => $request->ukuran_m_kiper_celana,
-            'ukuran_l_kiper_celana' => $request->ukuran_l_kiper_celana,
-            'ukuran_xl_kiper_celana' => $request->ukuran_xl_kiper_celana,
-            'ukuran_xs_kiper_celana' => $request->ukuran_xs_kiper_celana,
-            'ukuran_2xl_kiper_celana' => $request->ukuran_2xl_kiper_celana,
-            'ukuran_3xl_kiper_celana' => $request->ukuran_3xl_kiper_celana,
-            'ukuran_4xl_kiper_celana' => $request->ukuran_4xl_kiper_celana,
-            'ukuran_5xl_kiper_celana' => $request->ukuran_5xl_kiper_celana,
-            // celana1
-            'ukuran_xs_1_celana' => $request->ukuran_xs_1_celana,
-            'ukuran_s_1_celana' => $request->ukuran_s_1_celana,
-            'ukuran_m_1_celana' => $request->ukuran_m_1_celana,
-            'ukuran_l_1_celana' => $request->ukuran_l_1_celana,
-            'ukuran_xl_1_celana' => $request->ukuran_xl_1_celana,
-            'ukuran_2xl_1_celana' => $request->ukuran_2xl_1_celana,
-            'ukuran_3xl_1_celana' => $request->ukuran_3xl_1_celana,
-            'ukuran_4xl_1_celana' => $request->ukuran_4xl_1_celana,
-            'ukuran_5xl_1_celana' => $request->ukuran_5xl_1_celana,
+            'total_celana_kiper' => $request->total_celana_kiper,
+            'jenis_sablon_celana_kiper' => $request->jenis_sablon_celana_kiper,
+            'pola_celana_kiper_id' => $request->pola_celana_kiper_id,
+            'jenis_kain_celana_kiper' => $request->jenis_kain_celana_kiper,
+            'ket_warna_kain_celana_kiper' => $request->ket_warna_kain_celana_kiper,
+            'ket_bis_celana_celana_kiper' => $request->ket_bis_celana_celana_kiper,
+            'ket_tambahan_celana_kiper' => $request->ket_tambahan_celana_kiper,
+            'keterangan_celana_kiper' => $request->keterangan_celana_kiper,
+
+            // celana 1
+            'total_celana_1' => $request->total_celana_1,
+            'jenis_sablon_celana_1' => $request->jenis_sablon_celana_1,
+            'pola_celana_1_id' => $request->pola_celana_1_id,
+            'jenis_kain_celana_1' => $request->jenis_kain_celana_1,
+            'ket_warna_kain_celana_1' => $request->ket_warna_kain_celana_1,
+            'ket_bis_celana_celana_1' => $request->ket_bis_celana_celana_1,
+            'ket_tambahan_celana_1' => $request->ket_tambahan_celana_1,
+            'keterangan_celana_1' => $request->keterangan_celana_1,
 
             'keterangan_lengkap' => $request->keterangan_lengkap,
-            'total_celana' => $totalUkuranCelana,
 
             'aksi' => '1',
             'tanda_telah_mengerjakan' => '1',
         ]);
 
-        return response()->json($lk);
+        $createDate = clone $tanggal_masuk;
+        if ($tanggal_masuk->dayOfWeek === Carbon::SATURDAY) {
+            $createDate->addDay(2);
+        } elseif ($tanggal_masuk->dayOfWeek >= Carbon::MONDAY && $tanggal_masuk->dayOfWeek <= Carbon::FRIDAY) {
+            $createDate->addDay();
+        }
+        $createDate2 = clone $tanggal_masuk;
+        if ($tanggal_masuk->dayOfWeek === Carbon::MONDAY) {
+            $createDate2->addDay(2);
+        } elseif ($tanggal_masuk->dayOfWeek === Carbon::TUESDAY) {
+            $createDate2->addDay(2);
+        } elseif ($tanggal_masuk->dayOfWeek === Carbon::WEDNESDAY) {
+            $createDate2->addDay(2);
+        } elseif ($tanggal_masuk->dayOfWeek === Carbon::THURSDAY) {
+            $createDate2->addDay(2);
+        } elseif ($tanggal_masuk->dayOfWeek === Carbon::FRIDAY) {
+            $createDate2->addDay(3);
+        } elseif ($tanggal_masuk->dayOfWeek === Carbon::SATURDAY) {
+            $createDate2->addDay(3);
+        }
+        $createDate3 = clone $tanggal_masuk;
+        if ($tanggal_masuk->dayOfWeek === Carbon::MONDAY) {
+            $createDate3->addDay(3);
+        } elseif ($tanggal_masuk->dayOfWeek === Carbon::TUESDAY) {
+            $createDate3->addDay(3);
+        } elseif ($tanggal_masuk->dayOfWeek === Carbon::WEDNESDAY) {
+            $createDate3->addDay(3);
+        } elseif ($tanggal_masuk->dayOfWeek === Carbon::THURSDAY) {
+            $createDate3->addDay(4);
+        } elseif ($tanggal_masuk->dayOfWeek === Carbon::FRIDAY) {
+            $createDate3->addDay(4);
+        } elseif ($tanggal_masuk->dayOfWeek === Carbon::SATURDAY) {
+            $createDate3->addDay(4);
+        }
+        $createDate4 = clone $tanggal_masuk;
+        if ($tanggal_masuk->dayOfWeek === Carbon::MONDAY) {
+            $createDate4->addDay(4);
+        } elseif ($tanggal_masuk->dayOfWeek === Carbon::TUESDAY) {
+            $createDate4->addDay(4);
+        } elseif ($tanggal_masuk->dayOfWeek === Carbon::WEDNESDAY) {
+            $createDate4->addDay(5);
+        } elseif ($tanggal_masuk->dayOfWeek === Carbon::THURSDAY) {
+            $createDate4->addDay(5);
+        } elseif ($tanggal_masuk->dayOfWeek === Carbon::FRIDAY) {
+            $createDate4->addDay(5);
+        } elseif ($tanggal_masuk->dayOfWeek === Carbon::SATURDAY) {
+            $createDate4->addDay(5);
+        }
+        $createDate5 = clone $tanggal_masuk;
+        if ($tanggal_masuk->dayOfWeek === Carbon::MONDAY) {
+            $createDate5->addDay(5);
+        } elseif ($tanggal_masuk->dayOfWeek === Carbon::TUESDAY) {
+            $createDate5->addDay(6);
+        } elseif ($tanggal_masuk->dayOfWeek === Carbon::WEDNESDAY) {
+            $createDate5->addDay(6);
+        } elseif ($tanggal_masuk->dayOfWeek === Carbon::THURSDAY) {
+            $createDate5->addDay(6);
+        } elseif ($tanggal_masuk->dayOfWeek === Carbon::FRIDAY) {
+            $createDate5->addDay(6);
+        } elseif ($tanggal_masuk->dayOfWeek === Carbon::SATURDAY) {
+            $createDate5->addDay(6);
+        }
+        $createDate6 = clone $tanggal_masuk;
+        if ($tanggal_masuk->dayOfWeek === Carbon::MONDAY) {
+            $createDate6->addDay(7);
+        } elseif ($tanggal_masuk->dayOfWeek === Carbon::TUESDAY) {
+            $createDate6->addDay(7);
+        } elseif ($tanggal_masuk->dayOfWeek === Carbon::WEDNESDAY) {
+            $createDate6->addDay(7);
+        } elseif ($tanggal_masuk->dayOfWeek === Carbon::THURSDAY) {
+            $createDate6->addDay(7);
+        } elseif ($tanggal_masuk->dayOfWeek === Carbon::FRIDAY) {
+            $createDate6->addDay(7);
+        } elseif ($tanggal_masuk->dayOfWeek === Carbon::SATURDAY) {
+            $createDate6->addDay(7);
+        }
+        $createDate7 = clone $tanggal_masuk;
+        if ($tanggal_masuk->dayOfWeek === Carbon::MONDAY) {
+            $createDate7->addDay(8);
+        } elseif ($tanggal_masuk->dayOfWeek === Carbon::TUESDAY) {
+            $createDate7->addDay(8);
+        } elseif ($tanggal_masuk->dayOfWeek === Carbon::WEDNESDAY) {
+            $createDate7->addDay(8);
+        } elseif ($tanggal_masuk->dayOfWeek === Carbon::THURSDAY) {
+            $createDate7->addDay(8);
+        } elseif ($tanggal_masuk->dayOfWeek === Carbon::FRIDAY) {
+            $createDate7->addDay(8);
+        } elseif ($tanggal_masuk->dayOfWeek === Carbon::SATURDAY) {
+            $createDate7->addDay(9);
+        }
+        $createDate8 = clone $tanggal_masuk;
+        if ($tanggal_masuk->dayOfWeek === Carbon::MONDAY) {
+            $createDate8->addDay(9);
+        } elseif ($tanggal_masuk->dayOfWeek === Carbon::TUESDAY) {
+            $createDate8->addDay(9);
+        } elseif ($tanggal_masuk->dayOfWeek === Carbon::WEDNESDAY) {
+            $createDate8->addDay(9);
+        } elseif ($tanggal_masuk->dayOfWeek === Carbon::THURSDAY) {
+            $createDate8->addDay(9);
+        } elseif ($tanggal_masuk->dayOfWeek === Carbon::FRIDAY) {
+            $createDate8->addDay(10);
+        } elseif ($tanggal_masuk->dayOfWeek === Carbon::SATURDAY) {
+            $createDate8->addDay(10);
+        }
+
+        $createDate9 = clone $tanggal_masuk;
+        if ($tanggal_masuk->dayOfWeek === Carbon::MONDAY) {
+            $createDate9->addDay(10);
+        } elseif ($tanggal_masuk->dayOfWeek === Carbon::TUESDAY) {
+            $createDate9->addDay(10);
+        } elseif ($tanggal_masuk->dayOfWeek === Carbon::WEDNESDAY) {
+            $createDate9->addDay(10);
+        } elseif ($tanggal_masuk->dayOfWeek === Carbon::THURSDAY) {
+            $createDate9->addDay(11);
+        } elseif ($tanggal_masuk->dayOfWeek === Carbon::FRIDAY) {
+            $createDate9->addDay(11);
+        } elseif ($tanggal_masuk->dayOfWeek === Carbon::SATURDAY) {
+            $createDate9->addDay(11);
+        }
+
+        $createDate10 = clone $tanggal_masuk;
+        if ($tanggal_masuk->dayOfWeek === Carbon::MONDAY) {
+            $createDate10->addDay(11);
+        } elseif ($tanggal_masuk->dayOfWeek === Carbon::TUESDAY) {
+            $createDate10->addDay(11);
+        } elseif ($tanggal_masuk->dayOfWeek === Carbon::WEDNESDAY) {
+            $createDate10->addDay(12);
+        } elseif ($tanggal_masuk->dayOfWeek === Carbon::THURSDAY) {
+            $createDate10->addDay(12);
+        } elseif ($tanggal_masuk->dayOfWeek === Carbon::FRIDAY) {
+            $createDate10->addDay(12);
+        } elseif ($tanggal_masuk->dayOfWeek === Carbon::SATURDAY) {
+            $createDate10->addDay(12);
+        }
+
+        $createDate11 = clone $tanggal_masuk;
+        if ($tanggal_masuk->dayOfWeek === Carbon::MONDAY) {
+            $createDate11->addDay(12);
+        } elseif ($tanggal_masuk->dayOfWeek === Carbon::TUESDAY) {
+            $createDate11->addDay(13);
+        } elseif ($tanggal_masuk->dayOfWeek === Carbon::WEDNESDAY) {
+            $createDate11->addDay(13);
+        } elseif ($tanggal_masuk->dayOfWeek === Carbon::THURSDAY) {
+            $createDate11->addDay(13);
+        } elseif ($tanggal_masuk->dayOfWeek === Carbon::FRIDAY) {
+            $createDate11->addDay(13);
+        } elseif ($tanggal_masuk->dayOfWeek === Carbon::SATURDAY) {
+            $createDate11->addDay(13);
+        }
+
+        $createDate12 = clone $tanggal_masuk;
+        if ($tanggal_masuk->dayOfWeek === Carbon::MONDAY) {
+            $createDate12->addDay(14);
+        } elseif ($tanggal_masuk->dayOfWeek === Carbon::TUESDAY) {
+            $createDate12->addDay(14);
+        } elseif ($tanggal_masuk->dayOfWeek === Carbon::WEDNESDAY) {
+            $createDate12->addDay(14);
+        } elseif ($tanggal_masuk->dayOfWeek === Carbon::THURSDAY) {
+            $createDate12->addDay(14);
+        } elseif ($tanggal_masuk->dayOfWeek === Carbon::FRIDAY) {
+            $createDate12->addDay(14);
+        } elseif ($tanggal_masuk->dayOfWeek === Carbon::SATURDAY) {
+            $createDate12->addDay(14);
+        }
+
+        if ($total_hari == 1) {
+            $barangMasukDataLayout = BarangMasukDatalayout::create([
+                'users_layout_id' => $lk->layout_id,
+                'no_order_id' => $lk->id,
+                'deadline' => $createDate->format('Y-m-d'),
+            ]);
+            $mesinAtexco = null;
+            $mesinMimaki = null;
+            if ($lk->jenis_mesin == 'atexco') {
+                $mesinAtexco = MesinAtexco::create([
+                    'no_order_id' => $lk->id,
+                    'barang_masuk_layout_id' => $barangMasukDataLayout->id,
+                    'nama_mesin' => $lk->jenis_mesin,
+                    'deadline' => $createDate->format('Y-m-d'),
+                ]);
+            } elseif ($lk->jenis_mesin == 'mimaki') {
+                $mesinMimaki = MesinMimaki::create([
+                    'no_order_id' => $lk->id,
+                    'barang_masuk_layout_id' => $barangMasukDataLayout->id,
+                    'nama_mesin' => $lk->jenis_mesin,
+                    'deadline' => $createDate->format('Y-m-d'),
+                ]);
+            }
+            if ($lk->jenis_mesin == 'atexco') {
+                $dataPressKain = DataPressKain::create([
+                    'no_order_id' => $lk->id,
+                    'mesin_atexco_id' => $mesinAtexco->id,
+                    'deadline' => $createDate->format('Y-m-d'),
+                ]);
+            } elseif ($lk->jenis_mesin == 'mimaki') {
+                $dataPressKain = DataPressKain::create([
+                    'no_order_id' => $lk->id,
+                    'mesin_mimaki_id' => $mesinMimaki->id,
+                    'deadline' => $createDate->format('Y-m-d'),
+                ]);
+            }
+            $dataLaseCut = DataLaserCut::create([
+                'no_order_id' => $lk->id,
+                'press_kain_id' => $dataPressKain->id,
+                'deadline' => $createDate->format('Y-m-d'),
+            ]);
+            $dataManualCut = DataManualCut::create([
+                'no_order_id' => $lk->id,
+                'laser_cut_id' => $dataLaseCut->id,
+                'deadline' => $createDate->format('Y-m-d'),
+            ]);
+            $dataSortit = DataSortir::create([
+                'no_order_id' => $lk->id,
+                'manual_cut_id' => $dataManualCut->id,
+                'deadline' => $createDate->format('Y-m-d'),
+            ]);
+            $dataJahitBaju = DataJahitBaju::create([
+                'no_order_id' => $lk->id,
+                'sortir_id' => $dataSortit->id,
+                'deadline' => $createDate->format('Y-m-d'),
+            ]);
+            $dataJahitCelana = DataJahitCelana::create([
+                'no_order_id' => $lk->id,
+                'sortir_id' => $dataSortit->id,
+                'deadline' => $createDate->format('Y-m-d'),
+            ]);
+            $dataPressSize = DataPressTagSize::create([
+                'no_order_id' => $lk->id,
+                'jahit_baju_id' => $dataJahitBaju->id,
+                'jahit_celana_id' => $dataJahitCelana->id,
+                'deadline' => $createDate->format('Y-m-d'),
+            ]);
+            $dataPacking = DataPacking::create([
+                'no_order_id' => $lk->id,
+                'prass_id' => $dataPressSize->id,
+                'deadline' => $createDate->format('Y-m-d'),
+            ]);
+            if ($mesinAtexco || $mesinMimaki) {
+                Laporan::create([
+                    'barang_masuk_costumer_services_id' => $lk->id,
+                    'barang_masuk_layout_id' => $barangMasukDataLayout->id,
+                    'barang_masuk_mesin_atexco_id' => $mesinAtexco ? $mesinAtexco->id : null,
+                    'barang_masuk_mesin_mimaki_id' => $mesinMimaki ? $mesinMimaki->id : null,
+                    'barang_masuk_presskain_id' => $dataPressKain->id,
+                    'barang_masuk_lasercut_id' => $dataLaseCut->id,
+                    'barang_masuk_manualcut_id' => $dataManualCut->id,
+                    'barang_masuk_sortir_id' => $dataSortit->id,
+                    'barang_masuk_jahit_baju_id' => $dataJahitBaju->id,
+                    'barang_masuk_jahit_celana_id' => $dataJahitCelana->id,
+                    'barang_masuk_pressTagSize_id' => $dataPressSize->id,
+                    'barang_masuk_packing_id' => $dataPacking->id,
+                ]);
+            }
+        } elseif ($total_hari == 2) {
+            $barangMasukDataLayout = BarangMasukDatalayout::create([
+                'users_layout_id' => $lk->layout_id,
+                'no_order_id' => $lk->id,
+                'deadline' => $createDate->format('Y-m-d'),
+            ]);
+
+            $mesinAtexco = null;
+            $mesinMimaki = null;
+            if ($lk->jenis_mesin == 'atexco') {
+                $mesinAtexco = MesinAtexco::create([
+                    'no_order_id' => $lk->id,
+                    'barang_masuk_layout_id' => $barangMasukDataLayout->id,
+                    'nama_mesin' => $lk->jenis_mesin,
+                    'deadline' => $createDate->format('Y-m-d'),
+                ]);
+            } elseif ($lk->jenis_mesin == 'mimaki') {
+                $mesinMimaki = MesinMimaki::create([
+                    'no_order_id' => $lk->id,
+                    'barang_masuk_layout_id' => $barangMasukDataLayout->id,
+                    'nama_mesin' => $lk->jenis_mesin,
+                    'deadline' => $createDate->format('Y-m-d'),
+                ]);
+            }
+            if ($lk->jenis_mesin == 'atexco') {
+                $dataPressKain = DataPressKain::create([
+                    'no_order_id' => $lk->id,
+                    'mesin_atexco_id' => $mesinAtexco->id,
+                    'deadline' => $createDate->format('Y-m-d'),
+                ]);
+            } elseif ($lk->jenis_mesin == 'mimaki') {
+                $dataPressKain = DataPressKain::create([
+                    'no_order_id' => $lk->id,
+                    'mesin_mimaki_id' => $mesinMimaki->id,
+                    'deadline' => $createDate->format('Y-m-d'),
+                ]);
+            }
+            $dataLaseCut = DataLaserCut::create([
+                'no_order_id' => $lk->id,
+                'press_kain_id' => $dataPressKain->id,
+                'deadline' => $createDate->format('Y-m-d'),
+            ]);
+            $dataManualCut = DataManualCut::create([
+                'no_order_id' => $lk->id,
+                'laser_cut_id' => $dataLaseCut->id,
+                'deadline' => $createDate->format('Y-m-d'),
+            ]);
+            $dataSortit = DataSortir::create([
+                'no_order_id' => $lk->id,
+                'manual_cut_id' => $dataManualCut->id,
+                'deadline' => $createDate2->format('Y-m-d'),
+            ]);
+            $dataJahitBaju = DataJahitBaju::create([
+                'no_order_id' => $lk->id,
+                'sortir_id' => $dataSortit->id,
+                'deadline' => $createDate2->format('Y-m-d'),
+            ]);
+            $dataJahitCelana = DataJahitCelana::create([
+                'no_order_id' => $lk->id,
+                'sortir_id' => $dataSortit->id,
+                'deadline' => $createDate2->format('Y-m-d'),
+            ]);
+            $dataPressSize = DataPressTagSize::create([
+                'no_order_id' => $lk->id,
+                'jahit_baju_id' => $dataJahitBaju->id,
+                'jahit_celana_id' => $dataJahitCelana->id,
+                'deadline' => $createDate2->format('Y-m-d'),
+            ]);
+            $dataPacking = DataPacking::create([
+                'no_order_id' => $lk->id,
+                'prass_id' => $dataPressSize->id,
+                'deadline' => $createDate2->format('Y-m-d'),
+            ]);
+            if ($mesinAtexco || $mesinMimaki) {
+                Laporan::create([
+                    'barang_masuk_costumer_services_id' => $lk->id,
+                    'barang_masuk_layout_id' => $barangMasukDataLayout->id,
+                    'barang_masuk_mesin_atexco_id' => $mesinAtexco ? $mesinAtexco->id : null,
+                    'barang_masuk_mesin_mimaki_id' => $mesinMimaki ? $mesinMimaki->id : null,
+                    'barang_masuk_presskain_id' => $dataPressKain->id,
+                    'barang_masuk_lasercut_id' => $dataLaseCut->id,
+                    'barang_masuk_manualcut_id' => $dataManualCut->id,
+                    'barang_masuk_sortir_id' => $dataSortit->id,
+                    'barang_masuk_jahit_baju_id' => $dataJahitBaju->id,
+                    'barang_masuk_jahit_celana_id' => $dataJahitCelana->id,
+                    'barang_masuk_pressTagSize_id' => $dataPressSize->id,
+                    'barang_masuk_packing_id' => $dataPacking->id,
+                ]);
+            }
+        } elseif ($total_hari == 3) {
+            $barangMasukDataLayout = BarangMasukDatalayout::create([
+                'users_layout_id' => $lk->layout_id,
+                'no_order_id' => $lk->id,
+                'deadline' => $createDate->format('Y-m-d'),
+            ]);
+
+            $mesinAtexco = null;
+            $mesinMimaki = null;
+            if ($lk->jenis_mesin == 'atexco') {
+                $mesinAtexco = MesinAtexco::create([
+                    'no_order_id' => $lk->id,
+                    'barang_masuk_layout_id' => $barangMasukDataLayout->id,
+                    'nama_mesin' => $lk->jenis_mesin,
+                    'deadline' => $createDate2->format('Y-m-d'),
+                ]);
+            } elseif ($lk->jenis_mesin == 'mimaki') {
+                $mesinMimaki = MesinMimaki::create([
+                    'no_order_id' => $lk->id,
+                    'barang_masuk_layout_id' => $barangMasukDataLayout->id,
+                    'nama_mesin' => $lk->jenis_mesin,
+                    'deadline' => $createDate2->format('Y-m-d'),
+                ]);
+            }
+            if ($lk->jenis_mesin == 'atexco') {
+                $dataPressKain = DataPressKain::create([
+                    'no_order_id' => $lk->id,
+                    'mesin_atexco_id' => $mesinAtexco->id,
+                    'deadline' => $createDate->format('Y-m-d'),
+                ]);
+            } elseif ($lk->jenis_mesin == 'mimaki') {
+                $dataPressKain = DataPressKain::create([
+                    'no_order_id' => $lk->id,
+                    'mesin_mimaki_id' => $mesinMimaki->id,
+                    'deadline' => $createDate->format('Y-m-d'),
+                ]);
+            }
+            $dataLaseCut = DataLaserCut::create([
+                'no_order_id' => $lk->id,
+                'press_kain_id' => $dataPressKain->id,
+                'deadline' => $createDate2->format('Y-m-d'),
+            ]);
+            $dataManualCut = DataManualCut::create([
+                'no_order_id' => $lk->id,
+                'laser_cut_id' => $dataLaseCut->id,
+                'deadline' => $createDate2->format('Y-m-d'),
+            ]);
+            $dataSortit = DataSortir::create([
+                'no_order_id' => $lk->id,
+                'manual_cut_id' => $dataManualCut->id,
+                'deadline' => $createDate3->format('Y-m-d'),
+            ]);
+            $dataJahitBaju = DataJahitBaju::create([
+                'no_order_id' => $lk->id,
+                'sortir_id' => $dataSortit->id,
+                'deadline' => $createDate3->format('Y-m-d'),
+            ]);
+            $dataJahitCelana = DataJahitCelana::create([
+                'no_order_id' => $lk->id,
+                'sortir_id' => $dataSortit->id,
+                'deadline' => $createDate3->format('Y-m-d'),
+            ]);
+            $dataPressSize = DataPressTagSize::create([
+                'no_order_id' => $lk->id,
+                'jahit_baju_id' => $dataJahitBaju->id,
+                'jahit_celana_id' => $dataJahitCelana->id,
+                'deadline' => $createDate3->format('Y-m-d'),
+            ]);
+            $dataPacking = DataPacking::create([
+                'no_order_id' => $lk->id,
+                'prass_id' => $dataPressSize->id,
+                'deadline' => $createDate3->format('Y-m-d'),
+            ]);
+            if ($mesinAtexco || $mesinMimaki) {
+                Laporan::create([
+                    'barang_masuk_costumer_services_id' => $lk->id,
+                    'barang_masuk_layout_id' => $barangMasukDataLayout->id,
+                    'barang_masuk_mesin_atexco_id' => $mesinAtexco ? $mesinAtexco->id : null,
+                    'barang_masuk_mesin_mimaki_id' => $mesinMimaki ? $mesinMimaki->id : null,
+                    'barang_masuk_presskain_id' => $dataPressKain->id,
+                    'barang_masuk_lasercut_id' => $dataLaseCut->id,
+                    'barang_masuk_manualcut_id' => $dataManualCut->id,
+                    'barang_masuk_sortir_id' => $dataSortit->id,
+                    'barang_masuk_jahit_baju_id' => $dataJahitBaju->id,
+                    'barang_masuk_jahit_celana_id' => $dataJahitCelana->id,
+                    'barang_masuk_pressTagSize_id' => $dataPressSize->id,
+                    'barang_masuk_packing_id' => $dataPacking->id,
+                ]);
+            }
+        } elseif ($total_hari == 4) {
+            $barangMasukDataLayout = BarangMasukDatalayout::create([
+                'users_layout_id' => $lk->layout_id,
+                'no_order_id' => $lk->id,
+                'deadline' => $createDate->format('Y-m-d'),
+            ]);
+
+            $mesinAtexco = null;
+            $mesinMimaki = null;
+            if ($lk->jenis_mesin == 'atexco') {
+                $mesinAtexco = MesinAtexco::create([
+                    'no_order_id' => $lk->id,
+                    'barang_masuk_layout_id' => $barangMasukDataLayout->id,
+                    'nama_mesin' => $lk->jenis_mesin,
+                    'deadline' => $createDate2->format('Y-m-d'),
+                ]);
+            } elseif ($lk->jenis_mesin == 'mimaki') {
+                $mesinMimaki = MesinMimaki::create([
+                    'no_order_id' => $lk->id,
+                    'barang_masuk_layout_id' => $barangMasukDataLayout->id,
+                    'nama_mesin' => $lk->jenis_mesin,
+                    'deadline' => $createDate2->format('Y-m-d'),
+                ]);
+            }
+            if ($lk->jenis_mesin == 'atexco') {
+                $dataPressKain = DataPressKain::create([
+                    'no_order_id' => $lk->id,
+                    'mesin_atexco_id' => $mesinAtexco->id,
+                    'deadline' => $createDate->format('Y-m-d'),
+                ]);
+            } elseif ($lk->jenis_mesin == 'mimaki') {
+                $dataPressKain = DataPressKain::create([
+                    'no_order_id' => $lk->id,
+                    'mesin_mimaki_id' => $mesinMimaki->id,
+                    'deadline' => $createDate->format('Y-m-d'),
+                ]);
+            }
+            $dataLaseCut = DataLaserCut::create([
+                'no_order_id' => $lk->id,
+                'press_kain_id' => $dataPressKain->id,
+                'deadline' => $createDate3->format('Y-m-d'),
+            ]);
+            $dataManualCut = DataManualCut::create([
+                'no_order_id' => $lk->id,
+                'laser_cut_id' => $dataLaseCut->id,
+                'deadline' => $createDate3->format('Y-m-d'),
+            ]);
+            $dataSortit = DataSortir::create([
+                'no_order_id' => $lk->id,
+                'manual_cut_id' => $dataManualCut->id,
+                'deadline' => $createDate3->format('Y-m-d'),
+            ]);
+            $dataJahitBaju = DataJahitBaju::create([
+                'no_order_id' => $lk->id,
+                'sortir_id' => $dataSortit->id,
+                'deadline' => $createDate4->format('Y-m-d'),
+            ]);
+            $dataJahitCelana = DataJahitCelana::create([
+                'no_order_id' => $lk->id,
+                'sortir_id' => $dataSortit->id,
+                'deadline' => $createDate4->format('Y-m-d'),
+            ]);
+            $dataPressSize = DataPressTagSize::create([
+                'no_order_id' => $lk->id,
+                'jahit_baju_id' => $dataJahitBaju->id,
+                'jahit_celana_id' => $dataJahitCelana->id,
+                'deadline' => $createDate4->format('Y-m-d'),
+            ]);
+            $dataPacking = DataPacking::create([
+                'no_order_id' => $lk->id,
+                'prass_id' => $dataPressSize->id,
+                'deadline' => $createDate4->format('Y-m-d'),
+            ]);
+            if ($mesinAtexco || $mesinMimaki) {
+                Laporan::create([
+                    'barang_masuk_costumer_services_id' => $lk->id,
+                    'barang_masuk_layout_id' => $barangMasukDataLayout->id,
+                    'barang_masuk_mesin_atexco_id' => $mesinAtexco ? $mesinAtexco->id : null,
+                    'barang_masuk_mesin_mimaki_id' => $mesinMimaki ? $mesinMimaki->id : null,
+                    'barang_masuk_presskain_id' => $dataPressKain->id,
+                    'barang_masuk_lasercut_id' => $dataLaseCut->id,
+                    'barang_masuk_manualcut_id' => $dataManualCut->id,
+                    'barang_masuk_sortir_id' => $dataSortit->id,
+                    'barang_masuk_jahit_baju_id' => $dataJahitBaju->id,
+                    'barang_masuk_jahit_celana_id' => $dataJahitCelana->id,
+                    'barang_masuk_pressTagSize_id' => $dataPressSize->id,
+                    'barang_masuk_packing_id' => $dataPacking->id,
+                ]);
+            }
+        } elseif ($total_hari == 5) {
+            $barangMasukDataLayout = BarangMasukDatalayout::create([
+                'users_layout_id' => $lk->layout_id,
+                'no_order_id' => $lk->id,
+                'deadline' => $createDate->format('Y-m-d'),
+            ]);
+
+            $mesinAtexco = null;
+            $mesinMimaki = null;
+            if ($lk->jenis_mesin == 'atexco') {
+                $mesinAtexco = MesinAtexco::create([
+                    'no_order_id' => $lk->id,
+                    'barang_masuk_layout_id' => $barangMasukDataLayout->id,
+                    'nama_mesin' => $lk->jenis_mesin,
+                    'deadline' => $createDate2->format('Y-m-d'),
+                ]);
+            } elseif ($lk->jenis_mesin == 'mimaki') {
+                $mesinMimaki = MesinMimaki::create([
+                    'no_order_id' => $lk->id,
+                    'barang_masuk_layout_id' => $barangMasukDataLayout->id,
+                    'nama_mesin' => $lk->jenis_mesin,
+                    'deadline' => $createDate2->format('Y-m-d'),
+                ]);
+            }
+            if ($lk->jenis_mesin == 'atexco') {
+                $dataPressKain = DataPressKain::create([
+                    'no_order_id' => $lk->id,
+                    'mesin_atexco_id' => $mesinAtexco->id,
+                    'deadline' => $createDate->format('Y-m-d'),
+                ]);
+            } elseif ($lk->jenis_mesin == 'mimaki') {
+                $dataPressKain = DataPressKain::create([
+                    'no_order_id' => $lk->id,
+                    'mesin_mimaki_id' => $mesinMimaki->id,
+                    'deadline' => $createDate->format('Y-m-d'),
+                ]);
+            }
+            $dataLaseCut = DataLaserCut::create([
+                'no_order_id' => $lk->id,
+                'press_kain_id' => $dataPressKain->id,
+                'deadline' => $createDate3->format('Y-m-d'),
+            ]);
+            $dataManualCut = DataManualCut::create([
+                'no_order_id' => $lk->id,
+                'laser_cut_id' => $dataLaseCut->id,
+                'deadline' => $createDate3->format('Y-m-d'),
+            ]);
+            $dataSortit = DataSortir::create([
+                'no_order_id' => $lk->id,
+                'manual_cut_id' => $dataManualCut->id,
+                'deadline' => $createDate4->format('Y-m-d'),
+            ]);
+            $dataJahitBaju = DataJahitBaju::create([
+                'no_order_id' => $lk->id,
+                'sortir_id' => $dataSortit->id,
+                'deadline' => $createDate5->format('Y-m-d'),
+            ]);
+            $dataJahitCelana = DataJahitCelana::create([
+                'no_order_id' => $lk->id,
+                'sortir_id' => $dataSortit->id,
+                'deadline' => $createDate5->format('Y-m-d'),
+            ]);
+            $dataPressSize = DataPressTagSize::create([
+                'no_order_id' => $lk->id,
+                'jahit_baju_id' => $dataJahitBaju->id,
+                'jahit_celana_id' => $dataJahitCelana->id,
+                'deadline' => $createDate5->format('Y-m-d'),
+            ]);
+            $dataPacking = DataPacking::create([
+                'no_order_id' => $lk->id,
+                'prass_id' => $dataPressSize->id,
+                'deadline' => $createDate5->format('Y-m-d'),
+            ]);
+            if ($mesinAtexco || $mesinMimaki) {
+                Laporan::create([
+                    'barang_masuk_costumer_services_id' => $lk->id,
+                    'barang_masuk_layout_id' => $barangMasukDataLayout->id,
+                    'barang_masuk_mesin_atexco_id' => $mesinAtexco ? $mesinAtexco->id : null,
+                    'barang_masuk_mesin_mimaki_id' => $mesinMimaki ? $mesinMimaki->id : null,
+                    'barang_masuk_presskain_id' => $dataPressKain->id,
+                    'barang_masuk_lasercut_id' => $dataLaseCut->id,
+                    'barang_masuk_manualcut_id' => $dataManualCut->id,
+                    'barang_masuk_sortir_id' => $dataSortit->id,
+                    'barang_masuk_jahit_baju_id' => $dataJahitBaju->id,
+                    'barang_masuk_jahit_celana_id' => $dataJahitCelana->id,
+                    'barang_masuk_pressTagSize_id' => $dataPressSize->id,
+                    'barang_masuk_packing_id' => $dataPacking->id,
+                ]);
+            }
+        } elseif ($total_hari == 6) {
+            $barangMasukDataLayout = BarangMasukDatalayout::create([
+                'users_layout_id' => $lk->layout_id,
+                'no_order_id' => $lk->id,
+                'deadline' => $createDate->format('Y-m-d'),
+            ]);
+
+            $mesinAtexco = null;
+            $mesinMimaki = null;
+            if ($lk->jenis_mesin == 'atexco') {
+                $mesinAtexco = MesinAtexco::create([
+                    'no_order_id' => $lk->id,
+                    'barang_masuk_layout_id' => $barangMasukDataLayout->id,
+                    'nama_mesin' => $lk->jenis_mesin,
+                    'deadline' => $createDate2->format('Y-m-d'),
+                ]);
+            } elseif ($lk->jenis_mesin == 'mimaki') {
+                $mesinMimaki = MesinMimaki::create([
+                    'no_order_id' => $lk->id,
+                    'barang_masuk_layout_id' => $barangMasukDataLayout->id,
+                    'nama_mesin' => $lk->jenis_mesin,
+                    'deadline' => $createDate2->format('Y-m-d'),
+                ]);
+            }
+            if ($lk->jenis_mesin == 'atexco') {
+                $dataPressKain = DataPressKain::create([
+                    'no_order_id' => $lk->id,
+                    'mesin_atexco_id' => $mesinAtexco->id,
+                    'deadline' => $createDate->format('Y-m-d'),
+                ]);
+            } elseif ($lk->jenis_mesin == 'mimaki') {
+                $dataPressKain = DataPressKain::create([
+                    'no_order_id' => $lk->id,
+                    'mesin_mimaki_id' => $mesinMimaki->id,
+                    'deadline' => $createDate->format('Y-m-d'),
+                ]);
+            }
+            $dataLaseCut = DataLaserCut::create([
+                'no_order_id' => $lk->id,
+                'press_kain_id' => $dataPressKain->id,
+                'deadline' => $createDate3->format('Y-m-d'),
+            ]);
+            $dataManualCut = DataManualCut::create([
+                'no_order_id' => $lk->id,
+                'laser_cut_id' => $dataLaseCut->id,
+                'deadline' => $createDate3->format('Y-m-d'),
+            ]);
+            $dataSortit = DataSortir::create([
+                'no_order_id' => $lk->id,
+                'manual_cut_id' => $dataManualCut->id,
+                'deadline' => $createDate5->format('Y-m-d'),
+            ]);
+            $dataJahitBaju = DataJahitBaju::create([
+                'no_order_id' => $lk->id,
+                'sortir_id' => $dataSortit->id,
+                'deadline' => $createDate6->format('Y-m-d'),
+            ]);
+            $dataJahitCelana = DataJahitCelana::create([
+                'no_order_id' => $lk->id,
+                'sortir_id' => $dataSortit->id,
+                'deadline' => $createDate6->format('Y-m-d'),
+            ]);
+            $dataPressSize = DataPressTagSize::create([
+                'no_order_id' => $lk->id,
+                'jahit_baju_id' => $dataJahitBaju->id,
+                'jahit_celana_id' => $dataJahitCelana->id,
+                'deadline' => $createDate6->format('Y-m-d'),
+            ]);
+            $dataPacking = DataPacking::create([
+                'no_order_id' => $lk->id,
+                'prass_id' => $dataPressSize->id,
+                'deadline' => $createDate6->format('Y-m-d'),
+            ]);
+            if ($mesinAtexco || $mesinMimaki) {
+                Laporan::create([
+                    'barang_masuk_costumer_services_id' => $lk->id,
+                    'barang_masuk_layout_id' => $barangMasukDataLayout->id,
+                    'barang_masuk_mesin_atexco_id' => $mesinAtexco ? $mesinAtexco->id : null,
+                    'barang_masuk_mesin_mimaki_id' => $mesinMimaki ? $mesinMimaki->id : null,
+                    'barang_masuk_presskain_id' => $dataPressKain->id,
+                    'barang_masuk_lasercut_id' => $dataLaseCut->id,
+                    'barang_masuk_manualcut_id' => $dataManualCut->id,
+                    'barang_masuk_sortir_id' => $dataSortit->id,
+                    'barang_masuk_jahit_baju_id' => $dataJahitBaju->id,
+                    'barang_masuk_jahit_celana_id' => $dataJahitCelana->id,
+                    'barang_masuk_pressTagSize_id' => $dataPressSize->id,
+                    'barang_masuk_packing_id' => $dataPacking->id,
+                ]);
+            }
+        } elseif ($total_hari == 7) {
+            $barangMasukDataLayout = BarangMasukDatalayout::create([
+                'users_layout_id' => $lk->layout_id,
+                'no_order_id' => $lk->id,
+                'deadline' => $createDate->format('Y-m-d'),
+            ]);
+
+            $mesinAtexco = null;
+            $mesinMimaki = null;
+            if ($lk->jenis_mesin == 'atexco') {
+                $mesinAtexco = MesinAtexco::create([
+                    'no_order_id' => $lk->id,
+                    'barang_masuk_layout_id' => $barangMasukDataLayout->id,
+                    'nama_mesin' => $lk->jenis_mesin,
+                    'deadline' => $createDate2->format('Y-m-d'),
+                ]);
+            } elseif ($lk->jenis_mesin == 'mimaki') {
+                $mesinMimaki = MesinMimaki::create([
+                    'no_order_id' => $lk->id,
+                    'barang_masuk_layout_id' => $barangMasukDataLayout->id,
+                    'nama_mesin' => $lk->jenis_mesin,
+                    'deadline' => $createDate2->format('Y-m-d'),
+                ]);
+            }
+            if ($lk->jenis_mesin == 'atexco') {
+                $dataPressKain = DataPressKain::create([
+                    'no_order_id' => $lk->id,
+                    'mesin_atexco_id' => $mesinAtexco->id,
+                    'deadline' => $createDate->format('Y-m-d'),
+                ]);
+            } elseif ($lk->jenis_mesin == 'mimaki') {
+                $dataPressKain = DataPressKain::create([
+                    'no_order_id' => $lk->id,
+                    'mesin_mimaki_id' => $mesinMimaki->id,
+                    'deadline' => $createDate->format('Y-m-d'),
+                ]);
+            }
+            $dataLaseCut = DataLaserCut::create([
+                'no_order_id' => $lk->id,
+                'press_kain_id' => $dataPressKain->id,
+                'deadline' => $createDate4->format('Y-m-d'),
+            ]);
+            $dataManualCut = DataManualCut::create([
+                'no_order_id' => $lk->id,
+                'laser_cut_id' => $dataLaseCut->id,
+                'deadline' => $createDate4->format('Y-m-d'),
+            ]);
+            $dataSortit = DataSortir::create([
+                'no_order_id' => $lk->id,
+                'manual_cut_id' => $dataManualCut->id,
+                'deadline' => $createDate5->format('Y-m-d'),
+            ]);
+            $dataJahitBaju = DataJahitBaju::create([
+                'no_order_id' => $lk->id,
+                'sortir_id' => $dataSortit->id,
+                'deadline' => $createDate7->format('Y-m-d'),
+            ]);
+            $dataJahitCelana = DataJahitCelana::create([
+                'no_order_id' => $lk->id,
+                'sortir_id' => $dataSortit->id,
+                'deadline' => $createDate7->format('Y-m-d'),
+            ]);
+            $dataPressSize = DataPressTagSize::create([
+                'no_order_id' => $lk->id,
+                'jahit_baju_id' => $dataJahitBaju->id,
+                'jahit_celana_id' => $dataJahitCelana->id,
+                'deadline' => $createDate7->format('Y-m-d'),
+            ]);
+            $dataPacking = DataPacking::create([
+                'no_order_id' => $lk->id,
+                'prass_id' => $dataPressSize->id,
+                'deadline' => $createDate7->format('Y-m-d'),
+            ]);
+            if ($mesinAtexco || $mesinMimaki) {
+                Laporan::create([
+                    'barang_masuk_costumer_services_id' => $lk->id,
+                    'barang_masuk_layout_id' => $barangMasukDataLayout->id,
+                    'barang_masuk_mesin_atexco_id' => $mesinAtexco ? $mesinAtexco->id : null,
+                    'barang_masuk_mesin_mimaki_id' => $mesinMimaki ? $mesinMimaki->id : null,
+                    'barang_masuk_presskain_id' => $dataPressKain->id,
+                    'barang_masuk_lasercut_id' => $dataLaseCut->id,
+                    'barang_masuk_manualcut_id' => $dataManualCut->id,
+                    'barang_masuk_sortir_id' => $dataSortit->id,
+                    'barang_masuk_jahit_baju_id' => $dataJahitBaju->id,
+                    'barang_masuk_jahit_celana_id' => $dataJahitCelana->id,
+                    'barang_masuk_pressTagSize_id' => $dataPressSize->id,
+                    'barang_masuk_packing_id' => $dataPacking->id,
+                ]);
+            }
+        } elseif ($total_hari == 8) {
+            $barangMasukDataLayout = BarangMasukDatalayout::create([
+                'users_layout_id' => $lk->layout_id,
+                'no_order_id' => $lk->id,
+                'deadline' => $createDate2->format('Y-m-d'),
+            ]);
+
+            $mesinAtexco = null;
+            $mesinMimaki = null;
+            if ($lk->jenis_mesin == 'atexco') {
+                $mesinAtexco = MesinAtexco::create([
+                    'no_order_id' => $lk->id,
+                    'barang_masuk_layout_id' => $barangMasukDataLayout->id,
+                    'nama_mesin' => $lk->jenis_mesin,
+                    'deadline' => $createDate3->format('Y-m-d'),
+                ]);
+            } elseif ($lk->jenis_mesin == 'mimaki') {
+                $mesinMimaki = MesinMimaki::create([
+                    'no_order_id' => $lk->id,
+                    'barang_masuk_layout_id' => $barangMasukDataLayout->id,
+                    'nama_mesin' => $lk->jenis_mesin,
+                    'deadline' => $createDate3->format('Y-m-d'),
+                ]);
+            }
+            if ($lk->jenis_mesin == 'atexco') {
+                $dataPressKain = DataPressKain::create([
+                    'no_order_id' => $lk->id,
+                    'mesin_atexco_id' => $mesinAtexco->id,
+                    'deadline' => $createDate->format('Y-m-d'),
+                ]);
+            } elseif ($lk->jenis_mesin == 'mimaki') {
+                $dataPressKain = DataPressKain::create([
+                    'no_order_id' => $lk->id,
+                    'mesin_mimaki_id' => $mesinMimaki->id,
+                    'deadline' => $createDate->format('Y-m-d'),
+                ]);
+            }
+            $dataLaseCut = DataLaserCut::create([
+                'no_order_id' => $lk->id,
+                'press_kain_id' => $dataPressKain->id,
+                'deadline' => $createDate5->format('Y-m-d'),
+            ]);
+            $dataManualCut = DataManualCut::create([
+                'no_order_id' => $lk->id,
+                'laser_cut_id' => $dataLaseCut->id,
+                'deadline' => $createDate5->format('Y-m-d'),
+            ]);
+            $dataSortit = DataSortir::create([
+                'no_order_id' => $lk->id,
+                'manual_cut_id' => $dataManualCut->id,
+                'deadline' => $createDate6->format('Y-m-d'),
+            ]);
+            $dataJahitBaju = DataJahitBaju::create([
+                'no_order_id' => $lk->id,
+                'sortir_id' => $dataSortit->id,
+                'deadline' => $createDate8->format('Y-m-d'),
+            ]);
+            $dataJahitCelana = DataJahitCelana::create([
+                'no_order_id' => $lk->id,
+                'sortir_id' => $dataSortit->id,
+                'deadline' => $createDate8->format('Y-m-d'),
+            ]);
+            $dataPressSize = DataPressTagSize::create([
+                'no_order_id' => $lk->id,
+                'jahit_baju_id' => $dataJahitBaju->id,
+                'jahit_celana_id' => $dataJahitCelana->id,
+                'deadline' => $createDate8->format('Y-m-d'),
+            ]);
+            $dataPacking = DataPacking::create([
+                'no_order_id' => $lk->id,
+                'prass_id' => $dataPressSize->id,
+                'deadline' => $createDate8->format('Y-m-d'),
+            ]);
+            if ($mesinAtexco || $mesinMimaki) {
+                Laporan::create([
+                    'barang_masuk_costumer_services_id' => $lk->id,
+                    'barang_masuk_layout_id' => $barangMasukDataLayout->id,
+                    'barang_masuk_mesin_atexco_id' => $mesinAtexco ? $mesinAtexco->id : null,
+                    'barang_masuk_mesin_mimaki_id' => $mesinMimaki ? $mesinMimaki->id : null,
+                    'barang_masuk_presskain_id' => $dataPressKain->id,
+                    'barang_masuk_lasercut_id' => $dataLaseCut->id,
+                    'barang_masuk_manualcut_id' => $dataManualCut->id,
+                    'barang_masuk_sortir_id' => $dataSortit->id,
+                    'barang_masuk_jahit_baju_id' => $dataJahitBaju->id,
+                    'barang_masuk_jahit_celana_id' => $dataJahitCelana->id,
+                    'barang_masuk_pressTagSize_id' => $dataPressSize->id,
+                    'barang_masuk_packing_id' => $dataPacking->id,
+                ]);
+            }
+        } elseif ($total_hari == 9) {
+            $barangMasukDataLayout = BarangMasukDatalayout::create([
+                'users_layout_id' => $lk->layout_id,
+                'no_order_id' => $lk->id,
+                'deadline' => $createDate2->format('Y-m-d'),
+            ]);
+
+            $mesinAtexco = null;
+            $mesinMimaki = null;
+            if ($lk->jenis_mesin == 'atexco') {
+                $mesinAtexco = MesinAtexco::create([
+                    'no_order_id' => $lk->id,
+                    'barang_masuk_layout_id' => $barangMasukDataLayout->id,
+                    'nama_mesin' => $lk->jenis_mesin,
+                    'deadline' => $createDate3->format('Y-m-d'),
+                ]);
+            } elseif ($lk->jenis_mesin == 'mimaki') {
+                $mesinMimaki = MesinMimaki::create([
+                    'no_order_id' => $lk->id,
+                    'barang_masuk_layout_id' => $barangMasukDataLayout->id,
+                    'nama_mesin' => $lk->jenis_mesin,
+                    'deadline' => $createDate3->format('Y-m-d'),
+                ]);
+            }
+            if ($lk->jenis_mesin == 'atexco') {
+                $dataPressKain = DataPressKain::create([
+                    'no_order_id' => $lk->id,
+                    'mesin_atexco_id' => $mesinAtexco->id,
+                    'deadline' => $createDate->format('Y-m-d'),
+                ]);
+            } elseif ($lk->jenis_mesin == 'mimaki') {
+                $dataPressKain = DataPressKain::create([
+                    'no_order_id' => $lk->id,
+                    'mesin_mimaki_id' => $mesinMimaki->id,
+                    'deadline' => $createDate->format('Y-m-d'),
+                ]);
+            }
+            $dataLaseCut = DataLaserCut::create([
+                'no_order_id' => $lk->id,
+                'press_kain_id' => $dataPressKain->id,
+                'deadline' => $createDate5->format('Y-m-d'),
+            ]);
+            $dataManualCut = DataManualCut::create([
+                'no_order_id' => $lk->id,
+                'laser_cut_id' => $dataLaseCut->id,
+                'deadline' => $createDate5->format('Y-m-d'),
+            ]);
+            $dataSortit = DataSortir::create([
+                'no_order_id' => $lk->id,
+                'manual_cut_id' => $dataManualCut->id,
+                'deadline' => $createDate6->format('Y-m-d'),
+            ]);
+            $dataJahitBaju = DataJahitBaju::create([
+                'no_order_id' => $lk->id,
+                'sortir_id' => $dataSortit->id,
+                'deadline' => $createDate8->format('Y-m-d'),
+            ]);
+            $dataJahitCelana = DataJahitCelana::create([
+                'no_order_id' => $lk->id,
+                'sortir_id' => $dataSortit->id,
+                'deadline' => $createDate8->format('Y-m-d'),
+            ]);
+            $dataPressSize = DataPressTagSize::create([
+                'no_order_id' => $lk->id,
+                'jahit_baju_id' => $dataJahitBaju->id,
+                'jahit_celana_id' => $dataJahitCelana->id,
+                'deadline' => $createDate9->format('Y-m-d'),
+            ]);
+            $dataPacking = DataPacking::create([
+                'no_order_id' => $lk->id,
+                'prass_id' => $dataPressSize->id,
+                'deadline' => $createDate9->format('Y-m-d'),
+            ]);
+            if ($mesinAtexco || $mesinMimaki) {
+                Laporan::create([
+                    'barang_masuk_costumer_services_id' => $lk->id,
+                    'barang_masuk_layout_id' => $barangMasukDataLayout->id,
+                    'barang_masuk_mesin_atexco_id' => $mesinAtexco ? $mesinAtexco->id : null,
+                    'barang_masuk_mesin_mimaki_id' => $mesinMimaki ? $mesinMimaki->id : null,
+                    'barang_masuk_presskain_id' => $dataPressKain->id,
+                    'barang_masuk_lasercut_id' => $dataLaseCut->id,
+                    'barang_masuk_manualcut_id' => $dataManualCut->id,
+                    'barang_masuk_sortir_id' => $dataSortit->id,
+                    'barang_masuk_jahit_baju_id' => $dataJahitBaju->id,
+                    'barang_masuk_jahit_celana_id' => $dataJahitCelana->id,
+                    'barang_masuk_pressTagSize_id' => $dataPressSize->id,
+                    'barang_masuk_packing_id' => $dataPacking->id,
+                ]);
+            }
+        } elseif ($total_hari == 10) {
+            $barangMasukDataLayout = BarangMasukDatalayout::create([
+                'users_layout_id' => $lk->layout_id,
+                'no_order_id' => $lk->id,
+                'deadline' => $createDate2->format('Y-m-d'),
+            ]);
+
+            $mesinAtexco = null;
+            $mesinMimaki = null;
+            if ($lk->jenis_mesin == 'atexco') {
+                $mesinAtexco = MesinAtexco::create([
+                    'no_order_id' => $lk->id,
+                    'barang_masuk_layout_id' => $barangMasukDataLayout->id,
+                    'nama_mesin' => $lk->jenis_mesin,
+                    'deadline' => $createDate3->format('Y-m-d'),
+                ]);
+            } elseif ($lk->jenis_mesin == 'mimaki') {
+                $mesinMimaki = MesinMimaki::create([
+                    'no_order_id' => $lk->id,
+                    'barang_masuk_layout_id' => $barangMasukDataLayout->id,
+                    'nama_mesin' => $lk->jenis_mesin,
+                    'deadline' => $createDate3->format('Y-m-d'),
+                ]);
+            }
+            if ($lk->jenis_mesin == 'atexco') {
+                $dataPressKain = DataPressKain::create([
+                    'no_order_id' => $lk->id,
+                    'mesin_atexco_id' => $mesinAtexco->id,
+                    'deadline' => $createDate->format('Y-m-d'),
+                ]);
+            } elseif ($lk->jenis_mesin == 'mimaki') {
+                $dataPressKain = DataPressKain::create([
+                    'no_order_id' => $lk->id,
+                    'mesin_mimaki_id' => $mesinMimaki->id,
+                    'deadline' => $createDate->format('Y-m-d'),
+                ]);
+            }
+            $dataLaseCut = DataLaserCut::create([
+                'no_order_id' => $lk->id,
+                'press_kain_id' => $dataPressKain->id,
+                'deadline' => $createDate5->format('Y-m-d'),
+            ]);
+            $dataManualCut = DataManualCut::create([
+                'no_order_id' => $lk->id,
+                'laser_cut_id' => $dataLaseCut->id,
+                'deadline' => $createDate5->format('Y-m-d'),
+            ]);
+            $dataSortit = DataSortir::create([
+                'no_order_id' => $lk->id,
+                'manual_cut_id' => $dataManualCut->id,
+                'deadline' => $createDate6->format('Y-m-d'),
+            ]);
+            $dataJahitBaju = DataJahitBaju::create([
+                'no_order_id' => $lk->id,
+                'sortir_id' => $dataSortit->id,
+                'deadline' => $createDate9->format('Y-m-d'),
+            ]);
+            $dataJahitCelana = DataJahitCelana::create([
+                'no_order_id' => $lk->id,
+                'sortir_id' => $dataSortit->id,
+                'deadline' => $createDate9->format('Y-m-d'),
+            ]);
+            $dataPressSize = DataPressTagSize::create([
+                'no_order_id' => $lk->id,
+                'jahit_baju_id' => $dataJahitBaju->id,
+                'jahit_celana_id' => $dataJahitCelana->id,
+                'deadline' => $createDate10->format('Y-m-d'),
+            ]);
+            $dataPacking = DataPacking::create([
+                'no_order_id' => $lk->id,
+                'prass_id' => $dataPressSize->id,
+                'deadline' => $createDate10->format('Y-m-d'),
+            ]);
+            if ($mesinAtexco || $mesinMimaki) {
+                Laporan::create([
+                    'barang_masuk_costumer_services_id' => $lk->id,
+                    'barang_masuk_layout_id' => $barangMasukDataLayout->id,
+                    'barang_masuk_mesin_atexco_id' => $mesinAtexco ? $mesinAtexco->id : null,
+                    'barang_masuk_mesin_mimaki_id' => $mesinMimaki ? $mesinMimaki->id : null,
+                    'barang_masuk_presskain_id' => $dataPressKain->id,
+                    'barang_masuk_lasercut_id' => $dataLaseCut->id,
+                    'barang_masuk_manualcut_id' => $dataManualCut->id,
+                    'barang_masuk_sortir_id' => $dataSortit->id,
+                    'barang_masuk_jahit_baju_id' => $dataJahitBaju->id,
+                    'barang_masuk_jahit_celana_id' => $dataJahitCelana->id,
+                    'barang_masuk_pressTagSize_id' => $dataPressSize->id,
+                    'barang_masuk_packing_id' => $dataPacking->id,
+                ]);
+            }
+        } elseif ($total_hari == 11) {
+            $barangMasukDataLayout = BarangMasukDatalayout::create([
+                'users_layout_id' => $lk->layout_id,
+                'no_order_id' => $lk->id,
+                'deadline' => $createDate3->format('Y-m-d'),
+            ]);
+
+            $mesinAtexco = null;
+            $mesinMimaki = null;
+            if ($lk->jenis_mesin == 'atexco') {
+                $mesinAtexco = MesinAtexco::create([
+                    'no_order_id' => $lk->id,
+                    'barang_masuk_layout_id' => $barangMasukDataLayout->id,
+                    'nama_mesin' => $lk->jenis_mesin,
+                    'deadline' => $createDate4->format('Y-m-d'),
+                ]);
+            } elseif ($lk->jenis_mesin == 'mimaki') {
+                $mesinMimaki = MesinMimaki::create([
+                    'no_order_id' => $lk->id,
+                    'barang_masuk_layout_id' => $barangMasukDataLayout->id,
+                    'nama_mesin' => $lk->jenis_mesin,
+                    'deadline' => $createDate4->format('Y-m-d'),
+                ]);
+            }
+            if ($lk->jenis_mesin == 'atexco') {
+                $dataPressKain = DataPressKain::create([
+                    'no_order_id' => $lk->id,
+                    'mesin_atexco_id' => $mesinAtexco->id,
+                    'deadline' => $createDate->format('Y-m-d'),
+                ]);
+            } elseif ($lk->jenis_mesin == 'mimaki') {
+                $dataPressKain = DataPressKain::create([
+                    'no_order_id' => $lk->id,
+                    'mesin_mimaki_id' => $mesinMimaki->id,
+                    'deadline' => $createDate->format('Y-m-d'),
+                ]);
+            }
+            $dataLaseCut = DataLaserCut::create([
+                'no_order_id' => $lk->id,
+                'press_kain_id' => $dataPressKain->id,
+                'deadline' => $createDate6->format('Y-m-d'),
+            ]);
+            $dataManualCut = DataManualCut::create([
+                'no_order_id' => $lk->id,
+                'laser_cut_id' => $dataLaseCut->id,
+                'deadline' => $createDate6->format('Y-m-d'),
+            ]);
+            $dataSortit = DataSortir::create([
+                'no_order_id' => $lk->id,
+                'manual_cut_id' => $dataManualCut->id,
+                'deadline' => $createDate7->format('Y-m-d'),
+            ]);
+            $dataJahitBaju = DataJahitBaju::create([
+                'no_order_id' => $lk->id,
+                'sortir_id' => $dataSortit->id,
+                'deadline' => $createDate10->format('Y-m-d'),
+            ]);
+            $dataJahitCelana = DataJahitCelana::create([
+                'no_order_id' => $lk->id,
+                'sortir_id' => $dataSortit->id,
+                'deadline' => $createDate10->format('Y-m-d'),
+            ]);
+            $dataPressSize = DataPressTagSize::create([
+                'no_order_id' => $lk->id,
+                'jahit_baju_id' => $dataJahitBaju->id,
+                'jahit_celana_id' => $dataJahitCelana->id,
+                'deadline' => $createDate11->format('Y-m-d'),
+            ]);
+            $dataPacking = DataPacking::create([
+                'no_order_id' => $lk->id,
+                'prass_id' => $dataPressSize->id,
+                'deadline' => $createDate11->format('Y-m-d'),
+            ]);
+            if ($mesinAtexco || $mesinMimaki) {
+                Laporan::create([
+                    'barang_masuk_costumer_services_id' => $lk->id,
+                    'barang_masuk_layout_id' => $barangMasukDataLayout->id,
+                    'barang_masuk_mesin_atexco_id' => $mesinAtexco ? $mesinAtexco->id : null,
+                    'barang_masuk_mesin_mimaki_id' => $mesinMimaki ? $mesinMimaki->id : null,
+                    'barang_masuk_presskain_id' => $dataPressKain->id,
+                    'barang_masuk_lasercut_id' => $dataLaseCut->id,
+                    'barang_masuk_manualcut_id' => $dataManualCut->id,
+                    'barang_masuk_sortir_id' => $dataSortit->id,
+                    'barang_masuk_jahit_baju_id' => $dataJahitBaju->id,
+                    'barang_masuk_jahit_celana_id' => $dataJahitCelana->id,
+                    'barang_masuk_pressTagSize_id' => $dataPressSize->id,
+                    'barang_masuk_packing_id' => $dataPacking->id,
+                ]);
+            }
+        } elseif ($total_hari >= 12 && $total_hari <= 32) {
+            $barangMasukDataLayout = BarangMasukDatalayout::create([
+                'users_layout_id' => $lk->layout_id,
+                'no_order_id' => $lk->id,
+                'deadline' => $createDate3->format('Y-m-d'),
+            ]);
+
+            $mesinAtexco = null;
+            $mesinMimaki = null;
+            if ($lk->jenis_mesin == 'atexco') {
+                $mesinAtexco = MesinAtexco::create([
+                    'no_order_id' => $lk->id,
+                    'barang_masuk_layout_id' => $barangMasukDataLayout->id,
+                    'nama_mesin' => $lk->jenis_mesin,
+                    'deadline' => $createDate4->format('Y-m-d'),
+                ]);
+            } elseif ($lk->jenis_mesin == 'mimaki') {
+                $mesinMimaki = MesinMimaki::create([
+                    'no_order_id' => $lk->id,
+                    'barang_masuk_layout_id' => $barangMasukDataLayout->id,
+                    'nama_mesin' => $lk->jenis_mesin,
+                    'deadline' => $createDate4->format('Y-m-d'),
+                ]);
+            }
+            if ($lk->jenis_mesin == 'atexco') {
+                $dataPressKain = DataPressKain::create([
+                    'no_order_id' => $lk->id,
+                    'mesin_atexco_id' => $mesinAtexco->id,
+                    'deadline' => $createDate->format('Y-m-d'),
+                ]);
+            } elseif ($lk->jenis_mesin == 'mimaki') {
+                $dataPressKain = DataPressKain::create([
+                    'no_order_id' => $lk->id,
+                    'mesin_mimaki_id' => $mesinMimaki->id,
+                    'deadline' => $createDate->format('Y-m-d'),
+                ]);
+            }
+            $dataLaseCut = DataLaserCut::create([
+                'no_order_id' => $lk->id,
+                'press_kain_id' => $dataPressKain->id,
+                'deadline' => $createDate6->format('Y-m-d'),
+            ]);
+            $dataManualCut = DataManualCut::create([
+                'no_order_id' => $lk->id,
+                'laser_cut_id' => $dataLaseCut->id,
+                'deadline' => $createDate6->format('Y-m-d'),
+            ]);
+            $dataSortit = DataSortir::create([
+                'no_order_id' => $lk->id,
+                'manual_cut_id' => $dataManualCut->id,
+                'deadline' => $createDate7->format('Y-m-d'),
+            ]);
+            $dataJahitBaju = DataJahitBaju::create([
+                'no_order_id' => $lk->id,
+                'sortir_id' => $dataSortit->id,
+                'deadline' => $createDate10->format('Y-m-d'),
+            ]);
+            $dataJahitCelana = DataJahitCelana::create([
+                'no_order_id' => $lk->id,
+                'sortir_id' => $dataSortit->id,
+                'deadline' => $createDate10->format('Y-m-d'),
+            ]);
+            $dataPressSize = DataPressTagSize::create([
+                'no_order_id' => $lk->id,
+                'jahit_baju_id' => $dataJahitBaju->id,
+                'jahit_celana_id' => $dataJahitCelana->id,
+                'deadline' => $createDate12->format('Y-m-d'),
+            ]);
+            $dataPacking = DataPacking::create([
+                'no_order_id' => $lk->id,
+                'prass_id' => $dataPressSize->id,
+                'deadline' => $createDate12->format('Y-m-d'),
+            ]);
+            if ($mesinAtexco || $mesinMimaki) {
+                Laporan::create([
+                    'barang_masuk_costumer_services_id' => $lk->id,
+                    'barang_masuk_layout_id' => $barangMasukDataLayout->id,
+                    'barang_masuk_mesin_atexco_id' => $mesinAtexco ? $mesinAtexco->id : null,
+                    'barang_masuk_mesin_mimaki_id' => $mesinMimaki ? $mesinMimaki->id : null,
+                    'barang_masuk_presskain_id' => $dataPressKain->id,
+                    'barang_masuk_lasercut_id' => $dataLaseCut->id,
+                    'barang_masuk_manualcut_id' => $dataManualCut->id,
+                    'barang_masuk_sortir_id' => $dataSortit->id,
+                    'barang_masuk_jahit_baju_id' => $dataJahitBaju->id,
+                    'barang_masuk_jahit_celana_id' => $dataJahitCelana->id,
+                    'barang_masuk_pressTagSize_id' => $dataPressSize->id,
+                    'barang_masuk_packing_id' => $dataPacking->id,
+                ]);
+            }
+        }
+
         return redirect()->route('getIndexOrderCsPegawai')->with('success', 'Selamat data yang input berhasil!');
     }
 
