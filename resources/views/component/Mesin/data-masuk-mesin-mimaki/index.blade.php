@@ -66,6 +66,10 @@
                                     </script>
                                 </td>
                                 <td>
+                                    <a target="_blank"
+                                        href="storage/{{ $mesins->BarangMasukLayout->file_corel_layout }}"
+                                        class="btn btn-success">
+                                        <i class="menu-icon tf-icons bx bxs-download"></i>Download File RAR</a>
                                     <a href="{{ route('getInputLaporanMimaki' , $mesins->id) }}" class="btn btn-info">
                                         <i class="menu-icon tf-icons bx bxs-inbox"></i>Input Laporan</a>
                                 </td>

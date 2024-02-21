@@ -31,6 +31,6 @@ class MesinMimaki extends Model
 
     public function BarangMasukLayout()
     {
-        return $this->hasMany(BarangMasukDatalayout::class, 'no_order_id');
+        return $this->belongsTo(BarangMasukDatalayout::class, 'no_order_id');
     }
 }

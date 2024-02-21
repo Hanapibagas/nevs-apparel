@@ -98,7 +98,7 @@ Route::middleware(['auth', 'checkroll:atexco'])->group(function () {
     Route::get('/mesin-atexco', [AtexcoController::class, 'getIndexAtexco'])->name('getIndexMesinAtexcoPegawai');
     Route::get('/data-masuk-mesin-atexco', [AtexcoController::class, 'getIndexDataMasukAtexco'])->name('getIndexDataMasukMesinAtexco');
     Route::get('/data-masuk-mesin-atexco/{id}', [AtexcoController::class, 'getInputLaporan'])->name('getInputLaporanAtxco');
-    Route::put('/data-masuk-mesin-atexco/{id}', [AtexcoController::class, 'putLaporanMesin'])->name('putLaporanMesin');
+    Route::put('/data-masuk-mesin-atexco/{id}', [AtexcoController::class, 'putLaporanMesin'])->name('putLaporanMesinAtexco');
     Route::get('/data-masuk-mesin-atexco-fix', [AtexcoController::class, 'getIndexDataMasukAtexcoFix'])->name('getIndexDataMasukAtexcoFix');
 
     Route::put('/mesin-atxco/{id}', [AtexcoController::class, 'putFeedBackToDisainer'])->name('putFeedbackByAtexcoPegawai');
