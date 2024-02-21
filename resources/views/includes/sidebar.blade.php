@@ -11,13 +11,16 @@ $isActive = request()->routeIs('getSortir') ||
 $isActive = request()->routeIs('getJahitBaju') ||
 $isActive = request()->routeIs('getJahitCelana') ||
 $isActive = request()->routeIs('getPressTag') ||
-$isActive = request()->routeIs('getIndexListDataJenisKerah') ||
-$isActive = request()->routeIs('getIndexListDataJenisLengan') ||
-$isActive = request()->routeIs('getIndexListDataJenisCelana') ||
 $isActive = request()->routeIs('getPacking')
 ;
+$listData = request()->routeIs('getIndexListDataJenisKerah') ||
+$listData = request()->routeIs('getIndexListDataJenisLengan') ||
+$listData = request()->routeIs('getIndexListDataJenisCelana');
+
 $activeClass = $isActive ? 'open' : '';
 $active = $isActive ? 'active' : '';
+$activeClassList = $listData ? 'open' : '';
+$activeList = $listData ? 'active' : '';
 @endphp
 <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
     <div class="app-brand demo">
@@ -127,7 +130,7 @@ $active = $isActive ? 'active' : '';
                 </li>
             </ul>
         </li>
-        <li class="menu-item {{ $activeClass }} {{ $active }}">
+        <li class="menu-item {{ $activeClassList }} {{ $activeList }}">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-dock-top"></i>
                 <div data-i18n="Account Settings">Lis Data Bahan</div>

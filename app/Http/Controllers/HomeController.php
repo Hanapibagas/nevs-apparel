@@ -146,7 +146,6 @@ class HomeController extends Controller
         return view('component.Admin.packing-admin.index', compact('userPacking'));
     }
 
-
     public function postPegawaiCs(Request $request)
     {
         $email = $request->input('email');
@@ -156,6 +155,7 @@ class HomeController extends Controller
 
         User::create([
             'name' => $request->input('name'),
+            'asal_kota' => $request->input('asal_kota'),
             'email' => $email,
             'roles' => $request->input('roles'),
             'password' => bcrypt('12345678')
@@ -173,6 +173,7 @@ class HomeController extends Controller
 
         User::create([
             'name' => $request->input('name'),
+            'asal_kota' => $request->input('asal_kota'),
             'email' => $email,
             'roles' => $request->input('roles'),
             'password' => bcrypt('12345678')
@@ -190,6 +191,7 @@ class HomeController extends Controller
 
         User::create([
             'name' => $request->input('name'),
+            'asal_kota' => $request->input('asal_kota'),
             'email' => $email,
             'roles' => $request->input('roles'),
             'password' => bcrypt('12345678')

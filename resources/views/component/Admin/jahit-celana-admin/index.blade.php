@@ -49,6 +49,18 @@
                             </div>
                             <div class="row">
                                 <div class="col mb-3">
+                                    <label for="nameWithTitle" class="form-label">Asal Kota Pegawai</label>
+                                    <select id="country" name="asal_kota" class="select2 form-select">
+                                        <option value="">-- Kota Produksi --</option>
+                                        <option value="makassar">Makassar</option>
+                                        <option value="jakarta">Jakarta</option>
+                                        <option value="surabaya">Surabaya</option>
+                                        <option value="bandung">Bandung</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col mb-3">
                                     <label for="nameWithTitle" class="form-label">Email Pegawai</label>
                                     <input name="email" type="text" id="nameWithTitle" class="form-control"
                                         placeholder="Silahkan masukkan email ..." />
@@ -77,6 +89,7 @@
                         <thead>
                             <tr>
                                 <th class="text-nowrap">Nama pegawai</th>
+                                <th class="text-nowrap">Asal pegawai</th>
                                 <th class="text-nowrap text-center">Edit</th>
                                 <th class="text-nowrap text-center">Hapus</th>
                                 <th class="text-nowrap text-center">Updload</th>
@@ -89,6 +102,7 @@
                                 @foreach ($userJahitCelana as $user)
                                 <tr>
                                     <td class="text-nowrap">{{ $user->name }}</td>
+                                    <td class="text-nowrap">{{ $user->asal_kota }}</td>
                                     <td>
                                         <div class="form-check d-flex justify-content-center">
                                             <input type="hidden" name="permission_edit[{{ $user->id }}]" value="off">
