@@ -38,7 +38,7 @@
                             <tr>
                                 <th>No</th>
                                 <th>no.order</th>
-                                <th>nama Cs</th>
+                                <th>nama Layout</th>
                                 <th>status</th>
                             </tr>
                             </tr>

@@ -151,7 +151,8 @@
                 } elseif ($selesai < $deadline) { echo "<p>Kurang dari Deadline: -{$selisihHari} hari</p>" ; } else {
                     echo "<p>Selesai tepat pada Deadline</p>" ; } } else { echo "" ; } @endphp <p>Nama layout: {{
                     strtoupper($laporan->BarangMasukLayout->UserLayout->name) }}</p>
-                    <p>Panjang kertas: {{ $laporan->BarangMasukLayout->panjang_kertas }}</p>
+                    <p>Panjang kertas: {{ $laporan->BarangMasukLayout->panjang_kertas }} Meter</p>
+                    <p>Panjang Poly / DTF : {{ $laporan->BarangMasukLayout->poly }} Meter</p>
                     <hr>
 
                     @if(isset($laporan->BarangMasukMesinAtexco))

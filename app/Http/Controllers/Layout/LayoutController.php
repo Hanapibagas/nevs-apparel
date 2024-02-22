@@ -153,6 +153,7 @@ class LayoutController extends Controller
         $dataLk->update([
             'selesai' => Carbon::now(),
             'panjang_kertas' => $request->panjang_kertas,
+            'poly' => $request->poly,
             'file_corel_layout' => $filebajuplayer,
             'tanda_telah_mengerjakan' => 1,
         ]);

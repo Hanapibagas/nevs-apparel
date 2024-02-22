@@ -29,8 +29,12 @@
                                                     id="lastName" />
                                             </div>
                                             <div class="mb-3 col-md-6">
+                                                <label for="lastName" class="form-label">Panjang Poly / DTF </label>
+                                                <input class="form-control" type="text" name="poly" id="lastName" />
+                                            </div>
+                                            <div class="mb-3 col-md-6">
                                                 <label for="lastName" class="form-label">File Corel Layout</label>
-                                                <input class="form-control" type="file" accept=".cdr"
+                                                <input class="form-control" type="file" accept=".rar"
                                                     name="file_corel_layout" id="lastName" />
                                             </div>
                                         </div>
