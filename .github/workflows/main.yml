@@ -45,13 +45,3 @@ jobs:
         server: ${{ secrets.FTP_SERVER }}
         username: ${{ secrets.FTP_USERNAME }}
         password: ${{ secrets.FTP_PASSWORD }}
-        exclude: |
-          */.git
-          */.git/**
-          */vendor/*
-          */public/uploads/**
-          */public/vendor/**
-          */public/data/**
-          */vendor
-          */resources
-          .env
