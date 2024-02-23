@@ -41,7 +41,7 @@
                                     src="{{ asset('assets/assets/img/LogoNevs.png') }}" alt="">
                             </a>
                         </div>
-                        <h4 class="mb-2">Selamat datang di Nevs Apparel</h4>
+                        <h4 class="mb-2">Selamat datang di Nevs Apparel test</h4>
 
                         <form id="formAuthentication" class="mb-3" method="POST" action="{{ route('login') }}">
                             @csrf
