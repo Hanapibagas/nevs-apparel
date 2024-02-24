@@ -37,6 +37,7 @@
                         <thead>
                             <tr>
                                 <th>no.order</th>
+                                <th>nama tim</th>
                                 <th>sisa waktu produksi</th>
                             </tr>
                         </thead>
@@ -45,6 +46,11 @@
                             <tr>
                                 <td>
                                     <strong style="text-transform: uppercase">{{ $mesins->BarangMasukCs->no_order
+                                        }}</strong>
+                                </td>
+                                <td>
+                                    <strong style="text-transform: uppercase">{{
+                                        $mesins->BarangMasukCs->BarangMasukDisainer->nama_tim
                                         }}</strong>
                                 </td>
                                 <td>

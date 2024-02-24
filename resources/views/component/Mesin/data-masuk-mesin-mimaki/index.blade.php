@@ -37,6 +37,7 @@
                         <thead>
                             <tr>
                                 <th></th>
+                                <th>nama tim</th>
                                 <th>no.order</th>
                                 <th>sisa waktu produksi</th>
                                 <th>aksi</th>
@@ -46,6 +47,11 @@
                             @foreach ( $dataMasuk as $key => $mesins )
                             <tr>
                                 <td></td>
+                                <td>
+                                    <strong style="text-transform: uppercase">{{
+                                        $mesins->BarangMasukCs->BarangMasukDisainer->nama_tim
+                                        }}</strong>
+                                </td>
                                 <td>
                                     <strong style="text-transform: uppercase">{{ $mesins->BarangMasukCs->no_order
                                         }}</strong>

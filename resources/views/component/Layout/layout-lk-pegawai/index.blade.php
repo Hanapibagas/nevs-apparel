@@ -37,6 +37,7 @@
                             <tr>
                                 <th></th>
                                 <th>no.order</th>
+                                <th>nama tim</th>
                                 <th>nama Cs</th>
                                 <th>sisa waktu produksi</th>
                                 <th>aksi</th>
@@ -48,6 +49,11 @@
                                 <td></td>
                                 <td>
                                     <strong style="text-transform: uppercase">{{ $disainers->BarangMasukCsLK->no_order
+                                        }}</strong>
+                                </td>
+                                <td>
+                                    <strong style="text-transform: uppercase">{{
+                                        $disainers->BarangMasukCsLK->BarangMasukDisainer->nama_tim
                                         }}</strong>
                                 </td>
                                 <td>

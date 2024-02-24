@@ -19,7 +19,7 @@ class LayoutController extends Controller
     {
         $user = Auth::user();
         if ($user->asal_kota == 'makassar') {
-            $oderCs = BarangMasukDatalayout::with('UserLayout', 'BarangMasukCsLK', 'BarangMasukCsLK.UsersOrder')
+            $oderCs = BarangMasukDatalayout::with('UserLayout', 'BarangMasukCsLK', 'BarangMasukCsLK.UsersOrder', 'BarangMasukCsLK.BarangMasukDisainer')
                 ->where('users_layout_id', $user->id)
                 ->where('tanda_telah_mengerjakan', 0)
                 ->whereHas('BarangMasukCsLK', function ($query) use ($user) {
@@ -28,7 +28,7 @@ class LayoutController extends Controller
                 ->orderBy('created_at', 'desc')
                 ->get();
         } elseif ($user->asal_kota == 'jakarta') {
-            $oderCs = BarangMasukDatalayout::with('UserLayout', 'BarangMasukCsLK')
+            $oderCs = BarangMasukDatalayout::with('UserLayout', 'BarangMasukCsLK', 'BarangMasukCsLK.UsersOrder', 'BarangMasukCsLK.BarangMasukDisainer')
                 ->where('users_layout_id', $user->id)
                 ->where('tanda_telah_mengerjakan', 0)
                 ->whereHas('BarangMasukCsLK', function ($query) use ($user) {
@@ -37,7 +37,7 @@ class LayoutController extends Controller
                 ->orderBy('created_at', 'desc')
                 ->get();
         } elseif ($user->asal_kota == 'bandung') {
-            $oderCs = BarangMasukDatalayout::with('UserLayout', 'BarangMasukCsLK')
+            $oderCs = BarangMasukDatalayout::with('UserLayout', 'BarangMasukCsLK', 'BarangMasukCsLK.UsersOrder', 'BarangMasukCsLK.BarangMasukDisainer')
                 ->where('users_layout_id', $user->id)
                 ->where('tanda_telah_mengerjakan', 0)
                 ->whereHas('BarangMasukCsLK', function ($query) use ($user) {
@@ -46,7 +46,7 @@ class LayoutController extends Controller
                 ->orderBy('created_at', 'desc')
                 ->get();
         } else {
-            $oderCs = BarangMasukDatalayout::with('UserLayout', 'BarangMasukCsLK')
+            $oderCs = BarangMasukDatalayout::with('UserLayout', 'BarangMasukCsLK', 'BarangMasukCsLK.UsersOrder', 'BarangMasukCsLK.BarangMasukDisainer')
                 ->where('users_layout_id', $user->id)
                 ->where('tanda_telah_mengerjakan', 0)
                 ->whereHas('BarangMasukCsLK', function ($query) use ($user) {
@@ -56,6 +56,7 @@ class LayoutController extends Controller
                 ->get();
         }
 
+        // return response()->json($oderCs);
         return view('component.Layout.layout-lk-pegawai.index', compact('oderCs'));
     }
 
@@ -63,7 +64,7 @@ class LayoutController extends Controller
     {
         $user = Auth::user();
         if ($user->asal_kota == 'makassar') {
-            $oderCs = BarangMasukDatalayout::with('UserLayout', 'BarangMasukCsLK')
+            $oderCs = BarangMasukDatalayout::with('UserLayout', 'BarangMasukCsLK', 'BarangMasukCsLK.UsersOrder', 'BarangMasukCsLK.BarangMasukDisainer')
                 ->where('users_layout_id', $user->id)
                 ->where('tanda_telah_mengerjakan', 1)
                 ->whereHas('BarangMasukCsLK', function ($query) use ($user) {
@@ -72,7 +73,7 @@ class LayoutController extends Controller
                 ->orderBy('created_at', 'desc')
                 ->get();
         } elseif ($user->asal_kota == 'jakarta') {
-            $oderCs = BarangMasukDatalayout::with('UserLayout', 'BarangMasukCsLK')
+            $oderCs = BarangMasukDatalayout::with('UserLayout', 'BarangMasukCsLK', 'BarangMasukCsLK.UsersOrder', 'BarangMasukCsLK.BarangMasukDisainer')
                 ->where('users_layout_id', $user->id)
                 ->where('tanda_telah_mengerjakan', 1)
                 ->whereHas('BarangMasukCsLK', function ($query) use ($user) {
@@ -81,7 +82,7 @@ class LayoutController extends Controller
                 ->orderBy('created_at', 'desc')
                 ->get();
         } elseif ($user->asal_kota == 'bandung') {
-            $oderCs = BarangMasukDatalayout::with('UserLayout', 'BarangMasukCsLK')
+            $oderCs = BarangMasukDatalayout::with('UserLayout', 'BarangMasukCsLK', 'BarangMasukCsLK.UsersOrder', 'BarangMasukCsLK.BarangMasukDisainer')
                 ->where('users_layout_id', $user->id)
                 ->where('tanda_telah_mengerjakan', 1)
                 ->whereHas('BarangMasukCsLK', function ($query) use ($user) {
@@ -90,7 +91,7 @@ class LayoutController extends Controller
                 ->orderBy('created_at', 'desc')
                 ->get();
         } else {
-            $oderCs = BarangMasukDatalayout::with('UserLayout', 'BarangMasukCsLK')
+            $oderCs = BarangMasukDatalayout::with('UserLayout', 'BarangMasukCsLK', 'BarangMasukCsLK.UsersOrder', 'BarangMasukCsLK.BarangMasukDisainer')
                 ->where('users_layout_id', $user->id)
                 ->where('tanda_telah_mengerjakan', 1)
                 ->whereHas('BarangMasukCsLK', function ($query) use ($user) {

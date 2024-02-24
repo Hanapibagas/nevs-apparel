@@ -36,6 +36,7 @@
                     <table id="atexco" class="table">
                         <thead>
                             <tr>
+                                <th>nama timr</th>
                                 <th>no.order</th>
                                 <th>Selesai</th>
                             </tr>
@@ -43,6 +44,11 @@
                         <tbody>
                             @foreach ( $dataMasuk as $key => $mesins )
                             <tr>
+                                <td>
+                                    <strong style="text-transform: uppercase">{{
+                                        $mesins->BarangMasukCs->BarangMasukDisainer->nama_tim
+                                        }}</strong>
+                                </td>
                                 <td>
                                     <strong style="text-transform: uppercase">{{ $mesins->BarangMasukCs->no_order
                                         }}</strong>

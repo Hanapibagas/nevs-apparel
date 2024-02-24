@@ -38,6 +38,7 @@
                             <tr>
                                 <th>No</th>
                                 <th>no.order</th>
+                                <th>nama tim</th>
                                 <th>nama Layout</th>
                                 <th>status</th>
                             </tr>
@@ -49,6 +50,11 @@
                                 <td>{{ $key+1 }}</td>
                                 <td>
                                     <strong style="text-transform: uppercase">{{ $disainers->BarangMasukCsLK->no_order
+                                        }}</strong>
+                                </td>
+                                <td>
+                                    <strong style="text-transform: uppercase">{{
+                                        $disainers->BarangMasukCsLK->BarangMasukDisainer->nama_tim
                                         }}</strong>
                                 </td>
                                 <td>

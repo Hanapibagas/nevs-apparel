@@ -41,7 +41,7 @@ class AtexcoController extends Controller
     {
         $user = Auth::user();
         if ($user->asal_kota == 'makassar') {
-            $dataMasuk = MesinAtexco::with('BarangMasukCs', 'BarangMasukLayout')
+            $dataMasuk = MesinAtexco::with('BarangMasukCs', 'BarangMasukLayout', 'BarangMasukCs.BarangMasukDisainer')
                 ->where('tanda_telah_mengerjakan', 0)
                 ->whereHas('BarangMasukCs', function ($query) use ($user) {
                     $query->where('kota_produksi', 'Makassar');
@@ -51,7 +51,7 @@ class AtexcoController extends Controller
                 })
                 ->get();
         } elseif ($user->asal_kota == 'jakarta') {
-            $dataMasuk = MesinAtexco::with('BarangMasukCs', 'BarangMasukLayout')
+            $dataMasuk = MesinAtexco::with('BarangMasukCs', 'BarangMasukLayout', 'BarangMasukCs.BarangMasukDisainer')
                 ->where('tanda_telah_mengerjakan', 0)
                 ->whereHas('BarangMasukCs', function ($query) use ($user) {
                     $query->where('kota_produksi', 'Jakarta');
@@ -61,7 +61,7 @@ class AtexcoController extends Controller
                 })
                 ->get();
         } elseif ($user->asal_kota == 'bandung') {
-            $dataMasuk = MesinAtexco::with('BarangMasukCs', 'BarangMasukLayout')
+            $dataMasuk = MesinAtexco::with('BarangMasukCs', 'BarangMasukLayout', 'BarangMasukCs.BarangMasukDisainer')
                 ->where('tanda_telah_mengerjakan', 0)
                 ->whereHas('BarangMasukCs', function ($query) use ($user) {
                     $query->where('kota_produksi', 'Bandung');
@@ -71,7 +71,7 @@ class AtexcoController extends Controller
                 })
                 ->get();
         } else {
-            $dataMasuk = MesinAtexco::with('BarangMasukCs', 'BarangMasukLayout')
+            $dataMasuk = MesinAtexco::with('BarangMasukCs', 'BarangMasukLayout', 'BarangMasukCs.BarangMasukDisainer')
                 ->where('tanda_telah_mengerjakan', 0)
                 ->whereHas('BarangMasukCs', function ($query) use ($user) {
                     $query->where('kota_produksi', 'Surabaya');
@@ -116,12 +116,48 @@ class AtexcoController extends Controller
 
     public function getIndexDataMasukAtexcoFix()
     {
-        $dataMasuk = MesinAtexco::with('BarangMasukCs', 'BarangMasukLayout')
-            ->where('tanda_telah_mengerjakan', 1)
-            ->whereHas('BarangMasukLayout', function ($query) {
-                $query->whereNotNull('selesai');
-            })
-            ->get();
+        $user = Auth::user();
+        if ($user->asal_kota == 'makassar') {
+            $dataMasuk = MesinAtexco::with('BarangMasukCs', 'BarangMasukLayout', 'BarangMasukCs.BarangMasukDisainer')
+                ->where('tanda_telah_mengerjakan', 1)
+                ->whereHas('BarangMasukCs', function ($query) use ($user) {
+                    $query->where('kota_produksi', 'Makassar');
+                })
+                ->whereHas('BarangMasukLayout', function ($query) {
+                    $query->whereNotNull('selesai');
+                })
+                ->get();
+        } elseif ($user->asal_kota == 'jakarta') {
+            $dataMasuk = MesinAtexco::with('BarangMasukCs', 'BarangMasukLayout', 'BarangMasukCs.BarangMasukDisainer')
+                ->where('tanda_telah_mengerjakan', 1)
+                ->whereHas('BarangMasukCs', function ($query) use ($user) {
+                    $query->where('kota_produksi', 'Jakarta');
+                })
+                ->whereHas('BarangMasukLayout', function ($query) {
+                    $query->whereNotNull('selesai');
+                })
+                ->get();
+        } elseif ($user->asal_kota == 'bandung') {
+            $dataMasuk = MesinAtexco::with('BarangMasukCs', 'BarangMasukLayout', 'BarangMasukCs.BarangMasukDisainer')
+                ->where('tanda_telah_mengerjakan', 1)
+                ->whereHas('BarangMasukCs', function ($query) use ($user) {
+                    $query->where('kota_produksi', 'Bandung');
+                })
+                ->whereHas('BarangMasukLayout', function ($query) {
+                    $query->whereNotNull('selesai');
+                })
+                ->get();
+        } else {
+            $dataMasuk = MesinAtexco::with('BarangMasukCs', 'BarangMasukLayout', 'BarangMasukCs.BarangMasukDisainer')
+                ->where('tanda_telah_mengerjakan', 1)
+                ->whereHas('BarangMasukCs', function ($query) use ($user) {
+                    $query->where('kota_produksi', 'Surabaya');
+                })
+                ->whereHas('BarangMasukLayout', function ($query) {
+                    $query->whereNotNull('selesai');
+                })
+                ->get();
+        }
 
         return view('component.Mesin.data-masuk-mesin-fix-atexco.index', compact('dataMasuk'));
     }

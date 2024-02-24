@@ -15,7 +15,7 @@ class PressKainController extends Controller
     {
         $user = Auth::user();
         if ($user->asal_kota == 'makassar') {
-            $dataMasuk = DataPressKain::with('BarangMasukCs', 'MesinAtexco', 'MesinMimaki')
+            $dataMasuk = DataPressKain::with('BarangMasukCs', 'MesinAtexco', 'MesinMimaki', 'BarangMasukCs.BarangMasukDisainer')
                 ->where(function ($query) {
                     $query->whereHas('MesinAtexco', function ($subquery) {
                         $subquery->whereNotNull('selesai');
@@ -30,7 +30,7 @@ class PressKainController extends Controller
                 ->where('tanda_telah_mengerjakan', 0)
                 ->get();
         } elseif ($user->asal_kota == 'jakarta') {
-            $dataMasuk = DataPressKain::with('BarangMasukCs', 'MesinAtexco', 'MesinMimaki')
+            $dataMasuk = DataPressKain::with('BarangMasukCs', 'MesinAtexco', 'MesinMimaki', 'BarangMasukCs.BarangMasukDisainer')
                 ->where(function ($query) {
                     $query->whereHas('MesinAtexco', function ($subquery) {
                         $subquery->whereNotNull('selesai');
@@ -45,7 +45,7 @@ class PressKainController extends Controller
                 ->where('tanda_telah_mengerjakan', 0)
                 ->get();
         } elseif ($user->asal_kota == 'bandung') {
-            $dataMasuk = DataPressKain::with('BarangMasukCs', 'MesinAtexco', 'MesinMimaki')
+            $dataMasuk = DataPressKain::with('BarangMasukCs', 'MesinAtexco', 'MesinMimaki', 'BarangMasukCs.BarangMasukDisainer')
                 ->where(function ($query) {
                     $query->whereHas('MesinAtexco', function ($subquery) {
                         $subquery->whereNotNull('selesai');
@@ -60,7 +60,7 @@ class PressKainController extends Controller
                 ->where('tanda_telah_mengerjakan', 0)
                 ->get();
         } else {
-            $dataMasuk = DataPressKain::with('BarangMasukCs', 'MesinAtexco', 'MesinMimaki')
+            $dataMasuk = DataPressKain::with('BarangMasukCs', 'MesinAtexco', 'MesinMimaki', 'BarangMasukCs.BarangMasukDisainer')
                 ->where(function ($query) {
                     $query->whereHas('MesinAtexco', function ($subquery) {
                         $subquery->whereNotNull('selesai');
@@ -112,17 +112,68 @@ class PressKainController extends Controller
 
     public function getindexDataMasukPressFix()
     {
-        $dataMasuk = DataPressKain::with('BarangMasukCs', 'MesinAtexco', 'MesinMimaki')
-            ->where(function ($query) {
-                $query->whereHas('MesinAtexco', function ($subquery) {
-                    $subquery->whereNotNull('selesai');
+        $user = Auth::user();
+        if ($user->asal_kota == 'makassar') {
+            $dataMasuk = DataPressKain::with('BarangMasukCs', 'MesinAtexco', 'MesinMimaki', 'BarangMasukCs.BarangMasukDisainer')
+                ->where(function ($query) {
+                    $query->whereHas('MesinAtexco', function ($subquery) {
+                        $subquery->whereNotNull('selesai');
+                    })
+                        ->orWhereHas('MesinMimaki', function ($query) {
+                            $query->whereNotNull('selesai');
+                        });
                 })
-                    ->orWhereHas('MesinMimaki', function ($query) {
-                        $query->whereNotNull('selesai');
-                    });
-            })
-            ->where('tanda_telah_mengerjakan', 1)
-            ->get();
+                ->whereHas('BarangMasukCs', function ($query) use ($user) {
+                    $query->where('kota_produksi', 'Makassar');
+                })
+                ->where('tanda_telah_mengerjakan', 1)
+                ->get();
+        } elseif ($user->asal_kota == 'jakarta') {
+            $dataMasuk = DataPressKain::with('BarangMasukCs', 'MesinAtexco', 'MesinMimaki', 'BarangMasukCs.BarangMasukDisainer')
+                ->where(function ($query) {
+                    $query->whereHas('MesinAtexco', function ($subquery) {
+                        $subquery->whereNotNull('selesai');
+                    })
+                        ->orWhereHas('MesinMimaki', function ($query) {
+                            $query->whereNotNull('selesai');
+                        });
+                })
+                ->whereHas('BarangMasukCs', function ($query) use ($user) {
+                    $query->where('kota_produksi', 'Jakarta');
+                })
+                ->where('tanda_telah_mengerjakan', 1)
+                ->get();
+        } elseif ($user->asal_kota == 'bandung') {
+            $dataMasuk = DataPressKain::with('BarangMasukCs', 'MesinAtexco', 'MesinMimaki', 'BarangMasukCs.BarangMasukDisainer')
+                ->where(function ($query) {
+                    $query->whereHas('MesinAtexco', function ($subquery) {
+                        $subquery->whereNotNull('selesai');
+                    })
+                        ->orWhereHas('MesinMimaki', function ($query) {
+                            $query->whereNotNull('selesai');
+                        });
+                })
+                ->whereHas('BarangMasukCs', function ($query) use ($user) {
+                    $query->where('kota_produksi', 'Bandung');
+                })
+                ->where('tanda_telah_mengerjakan', 1)
+                ->get();
+        } else {
+            $dataMasuk = DataPressKain::with('BarangMasukCs', 'MesinAtexco', 'MesinMimaki', 'BarangMasukCs.BarangMasukDisainer')
+                ->where(function ($query) {
+                    $query->whereHas('MesinAtexco', function ($subquery) {
+                        $subquery->whereNotNull('selesai');
+                    })
+                        ->orWhereHas('MesinMimaki', function ($query) {
+                            $query->whereNotNull('selesai');
+                        });
+                })
+                ->whereHas('BarangMasukCs', function ($query) use ($user) {
+                    $query->where('kota_produksi', 'Surabaya');
+                })
+                ->where('tanda_telah_mengerjakan', 1)
+                ->get();
+        }
 
         return view('component.Press-Kain.index-fix', compact('dataMasuk'));
     }

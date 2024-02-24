@@ -15,7 +15,7 @@ class SortirController extends Controller
     {
         $user = Auth::user();
         if ($user->asal_kota == 'makassar') {
-            $dataMasuk = DataSortir::with('BarangMasukCs', 'BarangMasukManualCut')
+            $dataMasuk = DataSortir::with('BarangMasukCs', 'BarangMasukManualCut', 'BarangMasukCs.BarangMasukDisainer')
                 ->where('tanda_telah_mengerjakan', 0)
                 ->whereHas('BarangMasukManualCut', function ($query) {
                     $query->whereNotNull('selesai');
@@ -25,7 +25,7 @@ class SortirController extends Controller
                 })
                 ->get();
         } elseif ($user->asal_kota == 'jakarta') {
-            $dataMasuk = DataSortir::with('BarangMasukCs', 'BarangMasukManualCut')
+            $dataMasuk = DataSortir::with('BarangMasukCs', 'BarangMasukManualCut', 'BarangMasukCs.BarangMasukDisainer')
                 ->where('tanda_telah_mengerjakan', 0)
                 ->whereHas('BarangMasukManualCut', function ($query) {
                     $query->whereNotNull('selesai');
@@ -35,7 +35,7 @@ class SortirController extends Controller
                 })
                 ->get();
         } elseif ($user->asal_kota == 'bandung') {
-            $dataMasuk = DataSortir::with('BarangMasukCs', 'BarangMasukManualCut')
+            $dataMasuk = DataSortir::with('BarangMasukCs', 'BarangMasukManualCut', 'BarangMasukCs.BarangMasukDisainer')
                 ->where('tanda_telah_mengerjakan', 0)
                 ->whereHas('BarangMasukManualCut', function ($query) {
                     $query->whereNotNull('selesai');
@@ -45,7 +45,7 @@ class SortirController extends Controller
                 })
                 ->get();
         } else {
-            $dataMasuk = DataSortir::with('BarangMasukCs', 'BarangMasukManualCut')
+            $dataMasuk = DataSortir::with('BarangMasukCs', 'BarangMasukManualCut', 'BarangMasukCs.BarangMasukDisainer')
                 ->where('tanda_telah_mengerjakan', 0)
                 ->whereHas('BarangMasukManualCut', function ($query) {
                     $query->whereNotNull('selesai');
@@ -92,12 +92,48 @@ class SortirController extends Controller
 
     public function getIndexFix()
     {
-        $dataMasuk = DataSortir::with('BarangMasukCs', 'BarangMasukManualCut')
-            ->where('tanda_telah_mengerjakan', 1)
-            ->whereHas('BarangMasukManualCut', function ($query) {
-                $query->whereNotNull('selesai');
-            })
-            ->get();
+        $user = Auth::user();
+        if ($user->asal_kota == 'makassar') {
+            $dataMasuk = DataSortir::with('BarangMasukCs', 'BarangMasukManualCut', 'BarangMasukCs.BarangMasukDisainer')
+                ->where('tanda_telah_mengerjakan', 1)
+                ->whereHas('BarangMasukManualCut', function ($query) {
+                    $query->whereNotNull('selesai');
+                })
+                ->whereHas('BarangMasukCs', function ($query) use ($user) {
+                    $query->where('kota_produksi', 'Makassar');
+                })
+                ->get();
+        } elseif ($user->asal_kota == 'jakarta') {
+            $dataMasuk = DataSortir::with('BarangMasukCs', 'BarangMasukManualCut', 'BarangMasukCs.BarangMasukDisainer')
+                ->where('tanda_telah_mengerjakan', 1)
+                ->whereHas('BarangMasukManualCut', function ($query) {
+                    $query->whereNotNull('selesai');
+                })
+                ->whereHas('BarangMasukCs', function ($query) use ($user) {
+                    $query->where('kota_produksi', 'Jakarta');
+                })
+                ->get();
+        } elseif ($user->asal_kota == 'bandung') {
+            $dataMasuk = DataSortir::with('BarangMasukCs', 'BarangMasukManualCut', 'BarangMasukCs.BarangMasukDisainer')
+                ->where('tanda_telah_mengerjakan', 1)
+                ->whereHas('BarangMasukManualCut', function ($query) {
+                    $query->whereNotNull('selesai');
+                })
+                ->whereHas('BarangMasukCs', function ($query) use ($user) {
+                    $query->where('kota_produksi', 'Bandung');
+                })
+                ->get();
+        } else {
+            $dataMasuk = DataSortir::with('BarangMasukCs', 'BarangMasukManualCut', 'BarangMasukCs.BarangMasukDisainer')
+                ->where('tanda_telah_mengerjakan', 1)
+                ->whereHas('BarangMasukManualCut', function ($query) {
+                    $query->whereNotNull('selesai');
+                })
+                ->whereHas('BarangMasukCs', function ($query) use ($user) {
+                    $query->where('kota_produksi', 'Surabaya');
+                })
+                ->get();
+        }
 
         return view('component.Sortir.index-fix', compact('dataMasuk'));
     }

@@ -15,7 +15,7 @@ class PressTagController extends Controller
     {
         $user = Auth::user();
         if ($user->asal_kota == 'makassar') {
-            $dataMasuk = DataPressTagSize::with('BarangMasukCs', 'BarangMasukJahitCelana')
+            $dataMasuk = DataPressTagSize::with('BarangMasukCs', 'BarangMasukJahitCelana', 'BarangMasukCs.BarangMasukDisainer')
                 ->where('tanda_telah_mengerjakan', 0)
                 ->whereHas('BarangMasukJahitCelana', function ($query) {
                     $query->whereNotNull('selesai');
@@ -25,7 +25,7 @@ class PressTagController extends Controller
                 })
                 ->get();
         } elseif ($user->asal_kota == 'jakarta') {
-            $dataMasuk = DataPressTagSize::with('BarangMasukCs', 'BarangMasukJahitCelana')
+            $dataMasuk = DataPressTagSize::with('BarangMasukCs', 'BarangMasukJahitCelana', 'BarangMasukCs.BarangMasukDisainer')
                 ->where('tanda_telah_mengerjakan', 0)
                 ->whereHas('BarangMasukJahitCelana', function ($query) {
                     $query->whereNotNull('selesai');
@@ -35,7 +35,7 @@ class PressTagController extends Controller
                 })
                 ->get();
         } elseif ($user->asal_kota == 'bandung') {
-            $dataMasuk = DataPressTagSize::with('BarangMasukCs', 'BarangMasukJahitCelana')
+            $dataMasuk = DataPressTagSize::with('BarangMasukCs', 'BarangMasukJahitCelana', 'BarangMasukCs.BarangMasukDisainer')
                 ->where('tanda_telah_mengerjakan', 0)
                 ->whereHas('BarangMasukJahitCelana', function ($query) {
                     $query->whereNotNull('selesai');
@@ -45,7 +45,7 @@ class PressTagController extends Controller
                 })
                 ->get();
         } else {
-            $dataMasuk = DataPressTagSize::with('BarangMasukCs', 'BarangMasukJahitCelana')
+            $dataMasuk = DataPressTagSize::with('BarangMasukCs', 'BarangMasukJahitCelana', 'BarangMasukCs.BarangMasukDisainer')
                 ->where('tanda_telah_mengerjakan', 0)
                 ->whereHas('BarangMasukJahitCelana', function ($query) {
                     $query->whereNotNull('selesai');
@@ -90,12 +90,49 @@ class PressTagController extends Controller
 
     public function getIndexFix()
     {
-        $dataMasuk = DataPressTagSize::with('BarangMasukCs', 'BarangMasukJahitCelana')
-            ->where('tanda_telah_mengerjakan', 1)
-            ->whereHas('BarangMasukJahitCelana', function ($query) {
-                $query->whereNotNull('selesai');
-            })
-            ->get();
+        $user = Auth::user();
+        if ($user->asal_kota == 'makassar') {
+            $dataMasuk = DataPressTagSize::with('BarangMasukCs', 'BarangMasukJahitCelana', 'BarangMasukCs.BarangMasukDisainer')
+                ->where('tanda_telah_mengerjakan', 1)
+                ->whereHas('BarangMasukJahitCelana', function ($query) {
+                    $query->whereNotNull('selesai');
+                })
+                ->whereHas('BarangMasukCs', function ($query) use ($user) {
+                    $query->where('kota_produksi', 'Makassar');
+                })
+                ->get();
+        } elseif ($user->asal_kota == 'jakarta') {
+            $dataMasuk = DataPressTagSize::with('BarangMasukCs', 'BarangMasukJahitCelana', 'BarangMasukCs.BarangMasukDisainer')
+                ->where('tanda_telah_mengerjakan', 1)
+                ->whereHas('BarangMasukJahitCelana', function ($query) {
+                    $query->whereNotNull('selesai');
+                })
+                ->whereHas('BarangMasukCs', function ($query) use ($user) {
+                    $query->where('kota_produksi', 'Jakarta');
+                })
+                ->get();
+        } elseif ($user->asal_kota == 'bandung') {
+            $dataMasuk = DataPressTagSize::with('BarangMasukCs', 'BarangMasukJahitCelana', 'BarangMasukCs.BarangMasukDisainer')
+                ->where('tanda_telah_mengerjakan', 1)
+                ->whereHas('BarangMasukJahitCelana', function ($query) {
+                    $query->whereNotNull('selesai');
+                })
+                ->whereHas('BarangMasukCs', function ($query) use ($user) {
+                    $query->where('kota_produksi', 'Bandung');
+                })
+                ->get();
+        } else {
+            $dataMasuk = DataPressTagSize::with('BarangMasukCs', 'BarangMasukJahitCelana', 'BarangMasukCs.BarangMasukDisainer')
+                ->where('tanda_telah_mengerjakan', 1)
+                ->whereHas('BarangMasukJahitCelana', function ($query) {
+                    $query->whereNotNull('selesai');
+                })
+                ->whereHas('BarangMasukCs', function ($query) use ($user) {
+                    $query->where('kota_produksi', 'Surabaya');
+                })
+                ->get();
+        }
+
 
         return view('component.Press-Tag.index-fix', compact('dataMasuk'));
     }

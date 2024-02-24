@@ -15,7 +15,7 @@ class JahitBajuController extends Controller
     {
         $user = Auth::user();
         if ($user->asal_kota == 'makassar') {
-            $dataMasuk = DataJahitBaju::with('BarangMasukCs', 'BarangMasukSortir')
+            $dataMasuk = DataJahitBaju::with('BarangMasukCs', 'BarangMasukSortir', 'BarangMasukCs.BarangMasukDisainer')
                 ->where('tanda_telah_mengerjakan', 0)
                 ->whereHas('BarangMasukSortir', function ($query) {
                     $query->whereNotNull('selesai');
@@ -25,7 +25,7 @@ class JahitBajuController extends Controller
                 })
                 ->get();
         } elseif ($user->asal_kota == 'jakarta') {
-            $dataMasuk = DataJahitBaju::with('BarangMasukCs', 'BarangMasukSortir')
+            $dataMasuk = DataJahitBaju::with('BarangMasukCs', 'BarangMasukSortir', 'BarangMasukCs.BarangMasukDisainer')
                 ->where('tanda_telah_mengerjakan', 0)
                 ->whereHas('BarangMasukSortir', function ($query) {
                     $query->whereNotNull('selesai');
@@ -35,7 +35,7 @@ class JahitBajuController extends Controller
                 })
                 ->get();
         } elseif ($user->asal_kota == 'bandung') {
-            $dataMasuk = DataJahitBaju::with('BarangMasukCs', 'BarangMasukSortir')
+            $dataMasuk = DataJahitBaju::with('BarangMasukCs', 'BarangMasukSortir', 'BarangMasukCs.BarangMasukDisainer')
                 ->where('tanda_telah_mengerjakan', 0)
                 ->whereHas('BarangMasukSortir', function ($query) {
                     $query->whereNotNull('selesai');
@@ -45,7 +45,7 @@ class JahitBajuController extends Controller
                 })
                 ->get();
         } else {
-            $dataMasuk = DataJahitBaju::with('BarangMasukCs', 'BarangMasukSortir')
+            $dataMasuk = DataJahitBaju::with('BarangMasukCs', 'BarangMasukSortir', 'BarangMasukCs.BarangMasukDisainer')
                 ->where('tanda_telah_mengerjakan', 0)
                 ->whereHas('BarangMasukSortir', function ($query) {
                     $query->whereNotNull('selesai');
@@ -92,13 +92,48 @@ class JahitBajuController extends Controller
 
     public function getIndexFix()
     {
-        $dataMasuk = DataJahitBaju::with('BarangMasukCs', 'BarangMasukSortir')
-            ->where('tanda_telah_mengerjakan', 1)
-            ->whereHas('BarangMasukSortir', function ($query) {
-                $query->whereNotNull('selesai');
-            })
-            ->get();
-
+        $user = Auth::user();
+        if ($user->asal_kota == 'makassar') {
+            $dataMasuk = DataJahitBaju::with('BarangMasukCs', 'BarangMasukSortir', 'BarangMasukCs.BarangMasukDisainer')
+                ->where('tanda_telah_mengerjakan', 1)
+                ->whereHas('BarangMasukSortir', function ($query) {
+                    $query->whereNotNull('selesai');
+                })
+                ->whereHas('BarangMasukCs', function ($query) use ($user) {
+                    $query->where('kota_produksi', 'Makassar');
+                })
+                ->get();
+        } elseif ($user->asal_kota == 'jakarta') {
+            $dataMasuk = DataJahitBaju::with('BarangMasukCs', 'BarangMasukSortir', 'BarangMasukCs.BarangMasukDisainer')
+                ->where('tanda_telah_mengerjakan', 1)
+                ->whereHas('BarangMasukSortir', function ($query) {
+                    $query->whereNotNull('selesai');
+                })
+                ->whereHas('BarangMasukCs', function ($query) use ($user) {
+                    $query->where('kota_produksi', 'Jakarta');
+                })
+                ->get();
+        } elseif ($user->asal_kota == 'bandung') {
+            $dataMasuk = DataJahitBaju::with('BarangMasukCs', 'BarangMasukSortir', 'BarangMasukCs.BarangMasukDisainer')
+                ->where('tanda_telah_mengerjakan', 1)
+                ->whereHas('BarangMasukSortir', function ($query) {
+                    $query->whereNotNull('selesai');
+                })
+                ->whereHas('BarangMasukCs', function ($query) use ($user) {
+                    $query->where('kota_produksi', 'Bandung');
+                })
+                ->get();
+        } else {
+            $dataMasuk = DataJahitBaju::with('BarangMasukCs', 'BarangMasukSortir', 'BarangMasukCs.BarangMasukDisainer')
+                ->where('tanda_telah_mengerjakan', 1)
+                ->whereHas('BarangMasukSortir', function ($query) {
+                    $query->whereNotNull('selesai');
+                })
+                ->whereHas('BarangMasukCs', function ($query) use ($user) {
+                    $query->where('kota_produksi', 'Surabaya');
+                })
+                ->get();
+        }
         return view('component.Jahit-Baju.index-fix', compact('dataMasuk'));
     }
 }

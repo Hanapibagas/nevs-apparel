@@ -15,7 +15,7 @@ class LaserCutController extends Controller
     {
         $user = Auth::user();
         if ($user->asal_kota == 'makassar') {
-            $dataMasuk = DataLaserCut::with('BarangMasukCs', 'BarangMasukPresKain')
+            $dataMasuk = DataLaserCut::with('BarangMasukCs', 'BarangMasukPresKain', 'BarangMasukCs.BarangMasukDisainer')
                 ->where('tanda_telah_mengerjakan', 0)
                 ->whereHas('BarangMasukPresKain', function ($query) {
                     $query->whereNotNull('selesai');
@@ -25,7 +25,7 @@ class LaserCutController extends Controller
                 })
                 ->get();
         } elseif ($user->asal_kota == 'jakarta') {
-            $dataMasuk = DataLaserCut::with('BarangMasukCs', 'BarangMasukPresKain')
+            $dataMasuk = DataLaserCut::with('BarangMasukCs', 'BarangMasukPresKain', 'BarangMasukCs.BarangMasukDisainer')
                 ->where('tanda_telah_mengerjakan', 0)
                 ->whereHas('BarangMasukPresKain', function ($query) {
                     $query->whereNotNull('selesai');
@@ -35,7 +35,7 @@ class LaserCutController extends Controller
                 })
                 ->get();
         } elseif ($user->asal_kota == 'bandung') {
-            $dataMasuk = DataLaserCut::with('BarangMasukCs', 'BarangMasukPresKain')
+            $dataMasuk = DataLaserCut::with('BarangMasukCs', 'BarangMasukPresKain', 'BarangMasukCs.BarangMasukDisainer')
                 ->where('tanda_telah_mengerjakan', 0)
                 ->whereHas('BarangMasukPresKain', function ($query) {
                     $query->whereNotNull('selesai');
@@ -45,7 +45,7 @@ class LaserCutController extends Controller
                 })
                 ->get();
         } else {
-            $dataMasuk = DataLaserCut::with('BarangMasukCs', 'BarangMasukPresKain')
+            $dataMasuk = DataLaserCut::with('BarangMasukCs', 'BarangMasukPresKain', 'BarangMasukCs.BarangMasukDisainer')
                 ->where('tanda_telah_mengerjakan', 0)
                 ->whereHas('BarangMasukPresKain', function ($query) {
                     $query->whereNotNull('selesai');
@@ -90,12 +90,48 @@ class LaserCutController extends Controller
 
     public function getIndexFix()
     {
-        $dataMasuk = DataLaserCut::with('BarangMasukCs', 'BarangMasukPresKain')
-            ->where('tanda_telah_mengerjakan', 1)
-            ->whereHas('BarangMasukPresKain', function ($query) {
-                $query->whereNotNull('selesai');
-            })
-            ->get();
+        $user = Auth::user();
+        if ($user->asal_kota == 'makassar') {
+            $dataMasuk = DataLaserCut::with('BarangMasukCs', 'BarangMasukPresKain', 'BarangMasukCs.BarangMasukDisainer')
+                ->where('tanda_telah_mengerjakan', 1)
+                ->whereHas('BarangMasukPresKain', function ($query) {
+                    $query->whereNotNull('selesai');
+                })
+                ->whereHas('BarangMasukCs', function ($query) use ($user) {
+                    $query->where('kota_produksi', 'Makassar');
+                })
+                ->get();
+        } elseif ($user->asal_kota == 'jakarta') {
+            $dataMasuk = DataLaserCut::with('BarangMasukCs', 'BarangMasukPresKain', 'BarangMasukCs.BarangMasukDisainer')
+                ->where('tanda_telah_mengerjakan', 1)
+                ->whereHas('BarangMasukPresKain', function ($query) {
+                    $query->whereNotNull('selesai');
+                })
+                ->whereHas('BarangMasukCs', function ($query) use ($user) {
+                    $query->where('kota_produksi', 'Jakarta');
+                })
+                ->get();
+        } elseif ($user->asal_kota == 'bandung') {
+            $dataMasuk = DataLaserCut::with('BarangMasukCs', 'BarangMasukPresKain', 'BarangMasukCs.BarangMasukDisainer')
+                ->where('tanda_telah_mengerjakan', 1)
+                ->whereHas('BarangMasukPresKain', function ($query) {
+                    $query->whereNotNull('selesai');
+                })
+                ->whereHas('BarangMasukCs', function ($query) use ($user) {
+                    $query->where('kota_produksi', 'Bandung');
+                })
+                ->get();
+        } else {
+            $dataMasuk = DataLaserCut::with('BarangMasukCs', 'BarangMasukPresKain', 'BarangMasukCs.BarangMasukDisainer')
+                ->where('tanda_telah_mengerjakan', 1)
+                ->whereHas('BarangMasukPresKain', function ($query) {
+                    $query->whereNotNull('selesai');
+                })
+                ->whereHas('BarangMasukCs', function ($query) use ($user) {
+                    $query->where('kota_produksi', 'Surabaya');
+                })
+                ->get();
+        }
 
         return view('component.Laser-Cut.index-fix', compact('dataMasuk'));
     }
