@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('selesai')->nullable();
             $table->string('kain')->nullable();
             $table->string('berat')->nullable();
+            $table->string('gambar')->nullable();
             $table->string('tanda_telah_mengerjakan')->default('0');
             $table->timestamps();
         });

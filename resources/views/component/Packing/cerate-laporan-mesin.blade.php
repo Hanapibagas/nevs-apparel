@@ -9,7 +9,7 @@
             <div class="card">
                 <div class="container-xxl flex-grow-1 container-p-y">
                     <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Input </span>data laporan</h4>
-                    <form action="{{ route('putLaporanPacking', $dataMasuk->id) }}" method="POST"
+                    <form id="submissionForm" action="{{ route('putLaporanPacking', $dataMasuk->id) }}" method="POST"
                         enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
@@ -29,8 +29,8 @@
                                 </div>
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-primary">
-                            <i class="menu-icon tf-icons bx bx-send"></i>
+                        <button id="submitButton" type="submit" class="btn btn-primary">
+                            <i id="submitIcon" class="menu-icon tf-icons bx bx-send"></i>
                             Input Laporan Packing
                         </button>
                         <a href="{{ route('getIndexPacking') }}" class="btn btn-outline-secondary"><i
@@ -44,5 +44,12 @@
 @endsection
 
 @push('js')
-
+<script>
+    document.getElementById('submissionForm').addEventListener('submit', function () {
+        document.getElementById('submitButton').setAttribute('disabled', 'true');
+        var icon = document.getElementById('submitIcon');
+        icon.classList.remove('bx-send');
+        icon.classList.add('bx-loader');
+    });
+</script>
 @endpush

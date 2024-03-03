@@ -9,7 +9,7 @@
             <div class="card">
                 <div class="container-xxl flex-grow-1 container-p-y">
                     <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Input </span>data laporan</h4>
-                    <form action="{{ route('putLaporanJahitBaju', $dataMasuk->id) }}" method="POST"
+                    <form id="submissionForm" action="{{ route('putLaporanJahitBaju', $dataMasuk->id) }}" method="POST"
                         enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
@@ -26,12 +26,12 @@
                                             </div>
                                             <div class="mb-3 col-md-6">
                                                 <label for="firstName" class="form-label">Leher</label>
-                                                <input class="form-control" type="text" id="firstName" name="leher"
+                                                <input required class="form-control" type="text" id="firstName" name="leher"
                                                     autofocus />
                                             </div>
                                             <div class="mb-3 col-md-6">
                                                 <label for="firstName" class="form-label">Pola Badan</label>
-                                                <input class="form-control" type="text" id="firstName" name="pola_badan"
+                                                <input required class="form-control" type="text" id="firstName" name="pola_badan"
                                                     autofocus />
                                             </div>
                                         </div>
@@ -39,8 +39,8 @@
                                 </div>
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-primary">
-                            <i class="menu-icon tf-icons bx bx-send"></i>
+                        <button id="submitButton" type="submit" class="btn btn-primary">
+                            <i id="submitIcon" class="menu-icon tf-icons bx bx-send"></i>
                             Input Laporan Jahit Baju
                         </button>
                         <a href="{{ route('getIndexJahitBaju') }}" class="btn btn-outline-secondary"><i
@@ -54,5 +54,12 @@
 @endsection
 
 @push('js')
-
+<script>
+    document.getElementById('submissionForm').addEventListener('submit', function () {
+        document.getElementById('submitButton').setAttribute('disabled', 'true');
+        var icon = document.getElementById('submitIcon');
+        icon.classList.remove('bx-send');
+        icon.classList.add('bx-loader');
+    });
+</script>
 @endpush

@@ -77,6 +77,12 @@
                 </div>
             </div>
         </div>
+        <div class="text-center" id="loadingSpinner" style="display: none;">
+            <div class="spinner-border" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+            <p>Loading...</p>
+        </div>
         <div class="card">
             <h5 class="card-header">Data untuk tim disainer </h5>
             <div class="card-body">
@@ -121,5 +127,15 @@
 @push('js')
 <script>
     new DataTable('#desain');
+</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('form').submit(function () {
+            $('#modalCenter').modal('hide');
+            $('#loadingSpinner').show();
+            $('button[type="submit"]').prop('disabled', true);
+        });
+    });
 </script>
 @endpush

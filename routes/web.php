@@ -74,6 +74,7 @@ Route::middleware(['auth', 'checkroll:cs'])->group(function () {
     Route::post('costumer-service/todisainer', [CostumerServicesController::class, 'postToTimDisainer'])->name('postKeTimDisainerPegawai');
     Route::get('/data-order-disainer/LK/{id}', [CostumerServicesController::class, 'createLK'])->name('getCreateToLkPegawai');
     Route::put('/data-lk/update/{id}', [CostumerServicesController::class, 'putDataLkFix'])->name('putDataLkPegawai');
+    Route::put('/data-lk/updateLK/{id}', [CostumerServicesController::class, 'putDataLk'])->name('putDataLkSajaPegawai');
 
     Route::get('cetak-data-lk/{id}', [CostumerServicesController::class, 'cetakDataLk'])->name('getCetakDataLk');
 });

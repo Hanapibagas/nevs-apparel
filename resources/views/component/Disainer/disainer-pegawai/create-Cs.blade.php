@@ -22,7 +22,7 @@
                     <h5 class="mb-0">Form untuk mengirim ke Costumer Services</h5>
                 </div>
                 <div class="card-body">
-                    <form action="{{ route('postToCsPegawai', $disainer->nama_tim) }}" method="POST"
+                    <form id="submissionForm" action="{{ route('postToCsPegawai', $disainer->nama_tim) }}" method="POST"
                         enctype="multipart/form-data">
                         @csrf
                         <div class="row mb-3">
@@ -54,70 +54,14 @@
                             </div>
                         </div>
                         <div class="row mb-3">
-                            <label class="col-sm-2 col-form-label" for="basic-default-company">File Baju Pelayer</label>
+                            <label class="col-sm-2 col-form-label" for="basic-default-company">Upload Gambar</label>
                             <div class="col-sm-10">
-                                <input type="file" class="form-control" id="basic-default-company"
-                                    name="file_baju_player" accept=".jpg, .png" />
-                            </div>
-                        </div>
-                        <div class="row mb-3">
-                            <label class="col-sm-2 col-form-label" for="basic-default-company">File Baju Pelatih</label>
-                            <div class="col-sm-10">
-                                <input type="file" class="form-control" id="basic-default-company"
-                                    name="file_baju_pelatih" accept=".jpg, .png" />
-                                <span style="font-size: 13px;"><i>*kosong saja jika tidak ada</i></span>
-                            </div>
-                        </div>
-                        <div class="row mb-3">
-                            <label class="col-sm-2 col-form-label" for="basic-default-company">File Baju Kiper</label>
-                            <div class="col-sm-10">
-                                <input type="file" class="form-control" id="basic-default-company"
-                                    name="file_baju_kiper" accept=".jpg, .png" />
-                                <span style="font-size: 13px;"><i>*kosong saja jika tidak ada</i></span>
-                            </div>
-                        </div>
-                        <div class="row mb-3">
-                            <label class="col-sm-2 col-form-label" for="basic-default-company">File Baju 1</label>
-                            <div class="col-sm-10">
-                                <input type="file" class="form-control" id="basic-default-company" name="file_baju_1"
-                                    accept=".jpg, .png" />
-                                <span style="font-size: 13px;"><i>*kosong saja jika tidak ada</i></span>
-                            </div>
-                        </div>
-                        <div class="row mb-3">
-                            <label class="col-sm-2 col-form-label" for="basic-default-company">File Celana
-                                player</label>
-                            <div class="col-sm-10">
-                                <input type="file" class="form-control" id="basic-default-company"
-                                    name="file_celana_player" accept=".jpg, .png" />
-                                <span style="font-size: 13px;"><i>*kosong saja jika tidak ada</i></span>
-                            </div>
-                        </div>
-                        <div class="row mb-3">
-                            <label class="col-sm-2 col-form-label" for="basic-default-company">File Celana
-                                pelatih</label>
-                            <div class="col-sm-10">
-                                <input type="file" class="form-control" id="basic-default-company"
-                                    name="file_celana_pelatih" accept=".jpg, .png" />
-                                <span style="font-size: 13px;"><i>*kosong saja jika tidak ada</i></span>
-                            </div>
-                        </div>
-                        <div class="row mb-3">
-                            <label class="col-sm-2 col-form-label" for="basic-default-company">File Celana
-                                kiper</label>
-                            <div class="col-sm-10">
-                                <input type="file" class="form-control" id="basic-default-company"
-                                    name="file_celana_kiper" accept=".jpg, .png" />
-                                <span style="font-size: 13px;"><i>*kosong saja jika tidak ada</i></span>
-                            </div>
-                        </div>
-                        <div class="row mb-3">
-                            <label class="col-sm-2 col-form-label" for="basic-default-company">File Celana
-                                1</label>
-                            <div class="col-sm-10">
-                                <input type="file" class="form-control" id="basic-default-company" name="file_celana_1"
-                                    accept=".jpg, .png" />
-                                <span style="font-size: 13px;"><i>*kosong saja jika tidak ada</i></span>
+                                <div id="imageUploads">
+                                    <input type="file" class="form-control mb-2" name="file_baju_player"
+                                        accept=".jpg, .png" />
+                                </div>
+                                <button type="button" class="btn btn-sm btn-success" onclick="addImageUpload()">Tambah
+                                    Upload</button>
                             </div>
                         </div>
                         <div class="row mb-3">
@@ -129,8 +73,8 @@
                         </div>
                         <div class="row justify-content-end">
                             <div class="col-sm-10">
-                                <button type="submit" class="btn btn-primary">
-                                    <i class="menu-icon tf-icons bx bx-send"></i>
+                                <button id="submitButton" type="submit" class="btn btn-primary">
+                                    <i id="submitIcon" class="menu-icon tf-icons bx bx-send"></i>
                                     kirim
                                 </button>
                                 <a href="{{ route('getIndexDisainerPegawai') }}" class="btn btn-outline-secondary"><i
@@ -144,3 +88,62 @@
     </div>
 </div>
 @endsection
+
+@push('js')
+<script>
+    document.getElementById('submissionForm').addEventListener('submit', function () {
+        document.getElementById('submitButton').setAttribute('disabled', 'true');
+        var icon = document.getElementById('submitIcon');
+        icon.classList.remove('bx-send');
+        icon.classList.add('bx-loader');
+    });
+</script>
+<script>
+    var maxUploads = 8;
+    var uploadCount = 0;
+
+    function addImageUpload() {
+        var container = document.getElementById('imageUploads');
+        var inputs = container.querySelectorAll('input[type="file"]');
+        if (inputs.length < maxUploads) {
+            uploadCount++;
+            var input = document.createElement('input');
+            input.type = 'file';
+            input.className = 'form-control mb-2';
+            switch(uploadCount) {
+                case 1:
+                    input.name = 'file_celana_player';
+                    break;
+                case 2:
+                    input.name = 'file_baju_kiper';
+                    break;
+                case 3:
+                    input.name = 'file_celana_kiper';
+                    break;
+                case 4:
+                    input.name = 'file_baju_pelatih';
+                    break;
+                case 5:
+                    input.name = 'file_celana_pelatih';
+                    break;
+                case 6:
+                    input.name = 'file_baju_1';
+                    break;
+                case 7:
+                    input.name = 'file_celana_1';
+                    break;
+                default:
+                    input.name = 'file_additional_' + (uploadCount - 6);
+                    break;
+            }
+            input.accept = '.jpg, .png';
+            container.appendChild(input);
+        } else {
+            alert('Maximum uploads limit reached!');
+        }
+    }
+</script>
+
+
+
+@endpush

@@ -13,8 +13,8 @@
                     <h5 class="mb-0">Form untuk mengirim ke tim mesin</h5>
                 </div>
                 <div class="card-body">
-                    <form action="{{ route('postToTeamMesinPegawai', $disainer->nama_tim) }}" method="POST"
-                        enctype="multipart/form-data">
+                    <form id="submissionForm" action="{{ route('postToTeamMesinPegawai', $disainer->nama_tim) }}"
+                        method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="row mb-3">
                             <label class="col-sm-2 col-form-label" for="basic-default-name">nama tim</label>
@@ -52,8 +52,8 @@
                         </div>
                         <div class="row justify-content-end">
                             <div class="col-sm-10">
-                                <button type="submit" class="btn btn-primary">
-                                    <i class="menu-icon tf-icons bx bx-send"></i>
+                                <button id="submitButton" type="submit" class="btn btn-primary">
+                                    <i id="submitIcon" class="menu-icon tf-icons bx bx-send"></i>
                                     kirim
                                 </button>
                                 <a href="{{ route('getIndexDisainerPegawai') }}" class="btn btn-outline-secondary"><i
@@ -67,3 +67,14 @@
     </div>
 </div>
 @endsection
+
+@push('js')
+<script>
+    document.getElementById('submissionForm').addEventListener('submit', function () {
+        document.getElementById('submitButton').setAttribute('disabled', 'true');
+        var icon = document.getElementById('submitIcon');
+        icon.classList.remove('bx-send');
+        icon.classList.add('bx-loader');
+    });
+</script>
+@endpush

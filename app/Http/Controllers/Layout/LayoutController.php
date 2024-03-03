@@ -9,9 +9,12 @@ use App\Models\Laporan;
 use App\Models\LaporanLkLayout;
 use App\Models\PembagianKomisi;
 use Carbon\Carbon;
+use Dotenv\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use PDF;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator as FacadesValidator;
 
 class LayoutController extends Controller
 {
@@ -145,10 +148,25 @@ class LayoutController extends Controller
     {
         $user = Auth::user();
         $dataLk = BarangMasukDatalayout::with('BarangMasukCsLK')->find($id);
+
+        $validator = FacadesValidator::make($request->all(), [
+            'file_corel_layout' => 'required|file',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()->with('error', 'File Corel Disainer harus diisi!');
+        }
+
         if ($request->file('file_corel_layout')) {
-            $uploadFile = $request->file('file_corel_layout');
-            $originalFileName = $uploadFile->getClientOriginalName();
-            $filebajuplayer = $uploadFile->storeAs('file-dari-layout', $originalFileName, 'public');
+            $filebajuplayer = $request->file('file_corel_layout')->store('file-dari-layout', 'public');
+            if ($dataLk->file_corel_layout && file_exists(storage_path('app/public/' . $dataLk->file_corel_layout))) {
+                Storage::delete('public/' . $dataLk->file_corel_layout);
+                $filebajuplayer = $request->file('file_corel_layout')->store('file-dari-layout', 'public');
+            }
+        }
+
+        if ($request->file('file_corel_layout') === null) {
+            $filebajuplayer = $dataLk->file_corel_layout;
         }
 
         $dataLk->update([

@@ -18,6 +18,7 @@ class DataPressKain extends Model
         'selesai',
         'kain',
         'berat',
+        'gambar',
         'tanda_telah_mengerjakan',
     ];
 

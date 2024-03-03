@@ -8,6 +8,7 @@ use App\Models\Laporan;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class PressKainController extends Controller
 {
@@ -90,11 +91,24 @@ class PressKainController extends Controller
         $user = Auth::user();
         $dataMasuk = DataPressKain::with('BarangMasukCs')->find($id);
 
+        if ($request->file('gambar')) {
+            $fileGambar = $request->file('gambar')->store('press-kain', 'public');
+            if ($dataMasuk->gambar && file_exists(storage_path('app/public/' . $dataMasuk->gambar))) {
+                Storage::delete('public/' . $dataMasuk->gambar);
+                $fileGambar = $request->file('gambar')->store('press-kain', 'public');
+            }
+        }
+
+        if ($request->file('gambar') === null) {
+            $fileGambar = $dataMasuk->gambar;
+        }
+
         $dataMasuk->update([
             'penanggung_jawab_id' => $user->id,
             'selesai' => Carbon::now(),
             'kain' => $request->kain,
             'berat' => $request->berat,
+            'gambar' => $fileGambar,
             'tanda_telah_mengerjakan' => 1
         ]);
 

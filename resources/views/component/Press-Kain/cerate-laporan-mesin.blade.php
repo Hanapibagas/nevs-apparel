@@ -9,7 +9,7 @@
             <div class="card">
                 <div class="container-xxl flex-grow-1 container-p-y">
                     <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Input </span>data laporan</h4>
-                    <form action="{{ route('putLaporanPreskain', $dataMasuk->id) }}" method="POST"
+                    <form id="submissionForm" action="{{ route('putLaporanPreskain', $dataMasuk->id) }}" method="POST"
                         enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
@@ -26,20 +26,26 @@
                                             </div>
                                             <div class="mb-3 col-md-6">
                                                 <label for="firstName" class="form-label">Kain</label>
-                                                <input class="form-control" type="text" id="firstName" name="kain" />
+                                                <input required placeholder="Contoh: ABCD" class="form-control"
+                                                    type="text" id="firstName" name="kain" />
                                             </div>
                                             <div class="mb-3 col-md-6">
                                                 <label for="firstName" class="form-label">Berat</label>
-                                                <input class="form-control" type="text" id="firstName" name="berat"
-                                                    autofocus />
+                                                <input required class="form-control" placeholder="Contoh: 1 Kg"
+                                                    type="text" id="firstName" name="berat" autofocus />
+                                            </div>
+                                            <div class="mb-3 col-md-6">
+                                                <label for="firstName" class="form-label">Foto</label>
+                                                <input required class="form-control" type="file" id="firstName"
+                                                    name="gambar" autofocus />
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-primary">
-                            <i class="menu-icon tf-icons bx bx-send"></i>
+                        <button id="submitButton" type="submit" class="btn btn-primary">
+                            <i id="submitIcon" class="menu-icon tf-icons bx bx-send"></i>
                             Input Laporan Press Kain
                         </button>
                         <a href="{{ route('getIndexDataMasukMesinAtexco') }}" class="btn btn-outline-secondary"><i
@@ -53,5 +59,12 @@
 @endsection
 
 @push('js')
-
+<script>
+    document.getElementById('submissionForm').addEventListener('submit', function () {
+        document.getElementById('submitButton').setAttribute('disabled', 'true');
+        var icon = document.getElementById('submitIcon');
+        icon.classList.remove('bx-send');
+        icon.classList.add('bx-loader');
+    });
+</script>
 @endpush
