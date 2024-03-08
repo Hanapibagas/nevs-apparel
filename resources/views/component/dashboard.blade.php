@@ -3,14 +3,14 @@
 @section('content')
 <div class="container-xxl flex-grow-1 container-p-y">
     @if (Auth::user()->roles == 'super_admin')
-    <div class="container">
+    {{-- <div class="container">
         <canvas id="myChart"></canvas>
-    </div>
+    </div> --}}
     @endif
     @if (Auth::user()->roles == 'cs')
-    <div class="container">
+    {{-- <div class="container">
         <canvas id="myBarChart"></canvas>
-    </div>
+    </div> --}}
     @endif
 </div>
 @endsection

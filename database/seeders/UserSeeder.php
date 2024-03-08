@@ -67,7 +67,7 @@ class UserSeeder extends Seeder
             'password' => bcrypt('12345678')
         ]);
         User::create([
-            'name' => 'atexco',
+            'name' => 'atexco makassar',
             'email' => 'atexco@gmail.com',
             'roles' => 'atexco',
             'gambar' => 'atexco.jpg',
@@ -79,7 +79,7 @@ class UserSeeder extends Seeder
             'password' => bcrypt('12345678')
         ]);
         User::create([
-            'name' => 'mimaki',
+            'name' => 'mimaki makassar',
             'email' => 'mimaki@gmail.com',
             'roles' => 'mimaki',
             'gambar' => 'mimaki.jpg',
@@ -187,17 +187,17 @@ class UserSeeder extends Seeder
             'password' => bcrypt('12345678')
         ]);
 
-        KeraBaju::create([
-            'jenis_kera' => 'Kerah Narrow PSM',
-            'gambar' => 'data-jenis-kera/0R4b65U9sl9AfbxBjqTVhkVCNtjVw776EFUh6O3n.jpg'
-        ]);
-        PolaLengan::create([
-            'jenis_kera' => 'Kerah Narrow PSM',
-            'gambar' => 'data-jenis-lengan/DH71I45dnvvJyBenCL1D5r2uIiUtmUvoZDta9vtE.jpg'
-        ]);
-        PolaCeleana::create([
-            'jenis_kera' => 'Lama',
-            'gambar' => 'data-jenis-celana/g8oeidt7ABUAtDSX8BYvpb8cC6n9zLWscuF8L0UT.jpg'
-        ]);
+        // KeraBaju::create([
+        //     'jenis_kera' => 'Kerah Narrow PSM',
+        //     'gambar' => 'data-jenis-kera/0R4b65U9sl9AfbxBjqTVhkVCNtjVw776EFUh6O3n.jpg'
+        // ]);
+        // PolaLengan::create([
+        //     'jenis_kera' => 'Kerah Narrow PSM',
+        //     'gambar' => 'data-jenis-lengan/DH71I45dnvvJyBenCL1D5r2uIiUtmUvoZDta9vtE.jpg'
+        // ]);
+        // PolaCeleana::create([
+        //     'jenis_kera' => 'Lama',
+        //     'gambar' => 'data-jenis-celana/g8oeidt7ABUAtDSX8BYvpb8cC6n9zLWscuF8L0UT.jpg'
+        // ]);
     }
 }

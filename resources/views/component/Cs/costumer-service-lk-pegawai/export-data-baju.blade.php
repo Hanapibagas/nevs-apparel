@@ -21,8 +21,189 @@
 </head>
 
 <body>
+    <h4 style="text-transform: uppercase; margin-top: -40px">{{ $dataLk->kota_produksi }}</h4><br>
+    <h3 style="text-transform: uppercase; text-align: center; margin-top: -60px">
+        {{$dataLk->BarangMasukDisainer->nama_tim }} <br> {{ $dataLk->no_order }}</h3><br>
+    <h4 style="text-transform: uppercase; margin-left: 541px; margin-top: -80px">
+        @if ($dataLk->ket_hari == 'Express')
+        <span style="color: red">DEADLINE Express <br> </span> <span style="color: red;margin-left: 40px;">{{
+            $dataLk->deadline
+            }}</span>
+        @elseif ($dataLk->ket_hari == 'Normal')
+        DEADLINE Normal <br> <span style="margin-left: 40px;">{{
+            $dataLk->deadline
+            }}</span>
+        @endif
+    </h4><br>
+
+    <table style="width: 110%; margin-left: -35px; text-transform: uppercase; margin-top: -50px;">
+        <tr>
+            <style>
+                .gambar1 {
+                    max-width: 630px;
+                    min-width: 630px;
+                    margin-left: 70px;
+                }
+            </style>
+            <td colspan="2">
+                <img class="gambar1" src="{{ public_path('storage/'. $dataLk->Gambar->file_baju_player)}}">
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align: center">
+                <p style="margin-top: -10px; font-weight: bold">Produksi</p>
+                <img style="width: 100px" src="{{ public_path('storage/'. $dataLk->LenganPlayer->gambar) }}" alt="">
+            </td>
+            <td style="text-align: center">
+                <p style="margin-top: -10px; font-weight: bold">Model</p>
+                <img style="width: 100px" src="{{ public_path('storage/'. $dataLk->KeraPlayer->gambar) }}" alt="">
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align: center; font-weight: bold">{{ $dataLk->ket_tambahan_baju_player }} </td>
+            <td style="text-align: center; font-weight: bold">TOTAL {{ $dataLk->total_baju_player }} PCS </td>
+        </tr>
+    </table>
+
+    <style>
+        .container {
+            border: 1px solid black;
+            padding: 5px;
+            width: 760px;
+            margin-left: -35px;
+            text-transform: uppercase;
+            margin-top: 10px;
+        }
+
+        .container p {
+            font-weight: bold
+        }
+
+        .container1 {
+            border: 1px solid black;
+            padding: 5px;
+            width: 760px;
+            margin-left: -35px;
+            text-transform: uppercase;
+            margin-top: 10px;
+        }
+    </style>
+
+    <div class="container">
+        <p>Admin : {{ $dataLk->UsersOrder->name }}</p> <br>
+        <p style="margin-top: -56px; margin-left: 400px">Disainer : {{ $dataLk->Users->name }}</p> <br>
+        <p style="margin-top: -40px;">Mesin Print : {{ $dataLk->jenis_mesin }}</p><br>
+        <p style="margin-left: 400px; margin-top: -60px;">Layout : {{ $dataLk->UsersLk->name }}</p> <br>
+        <p style="margin-top: -45px;">Jenis Sablon : {{ $dataLk->jenis_sablon_baju_player }}</p> <br>
+        <p style="margin-left: 400px; margin-top: -65px;">Jenis Bahan : {{ $dataLk->jenis_kain_baju_player }}</p>
+    </div>
+
+    <div class="container1">
+        <p style="font-weight: bold">Keterangan : <br>
+            {!! $dataLk->keterangan_baju_pelayer !!}
+        </p>
+    </div>
+
+    {{-- celana --}}
+
+    <table
+        style="width: 110%; margin-left: -35px; text-transform: uppercase; margin-top: -30px; page-break-before: always;"">
+        <tr>
+            <style>
+                .gambarcelana {
+                    max-width: 530px;
+                    min-width: 530px;
+                    margin-left: 110px;
+                }
+            </style>
+            <td colspan=" 2">
+        <img class="gambarcelana" src="{{ public_path('storage/'. $dataLk->Gambar->file_celana_player)}}">
+        </td>
+        </tr>
+        <tr>
+            <td colspan="2" style="text-align: center">
+                <p style="margin-top: -10px; font-weight: bold">Model</p>
+                <img style="width: 100px" src="{{ public_path('storage/'. $dataLk->CelanaPlayer->gambar) }}" alt="">
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align: center; font-weight: bold">{{ $dataLk->ket_tambahan_celana_player }} </td>
+            <td style="text-align: center; font-weight: bold">TOTAL {{ $dataLk->total_celana_player }} PCS </td>
+        </tr>
+    </table>
+
+    <style>
+        .container {
+            border: 1px solid black;
+            padding: 5px;
+            width: 760px;
+            margin-left: -35px;
+            text-transform: uppercase;
+            margin-top: 10px;
+        }
+
+        .container p {
+            font-weight: bold
+        }
+
+        .container1 {
+            border: 1px solid black;
+            padding: 5px;
+            width: 760px;
+            margin-left: -35px;
+            text-transform: uppercase;
+            margin-top: 10px;
+        }
+    </style>
+
+    <div class="container">
+        <p>Admin : {{ $dataLk->UsersOrder->name }}</p> <br>
+        <p style="margin-top: -56px; margin-left: 400px">Disainer : {{ $dataLk->Users->name }}</p> <br>
+        <p style="margin-top: -40px;">Mesin Print : {{ $dataLk->jenis_mesin }}</p><br>
+        <p style="margin-left: 400px; margin-top: -60px;">Layout : {{ $dataLk->UsersLk->name }}</p> <br>
+        <p style="margin-top: -45px;">Jenis Sablon : {{ $dataLk->jenis_sablon_celana_player }}</p> <br>
+        <p style="margin-left: 400px; margin-top: -65px;">Jenis Kain : {{ $dataLk->jenis_kain_celana_player }}</p>
+    </div>
+
+    <div class="container1">
+        <p style="font-weight: bold">Keterangan : <br>
+            {!! $dataLk->keterangan_celana_pelayer !!}
+        </p>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    {{-- <table style="width: 110%; margin-left: -35px; text-transform: uppercase; margin-top: 10px;">
+        <tr>
+            <td colspan="2" style="text-align: center">{!! $dataLk->ket_tambahan_baju_player !!} </td>
+        </tr>
+    </table> --}}
     {{-- player --}}
-    <h3 style="text-align: center; margin-top: -30px; text-transform: uppercase;">{{
+    {{-- <h3 style="text-align: center; margin-top: -30px; text-transform: uppercase;">{{
         $dataLk->BarangMasukDisainer->nama_tim }}</h3><br>
     <h4 style="margin-top: -40px; text-align: center; text-transform: uppercase;">{{ $dataLk->no_order }}</h4><br>
     <h4 style="margin-top: -80px; text-transform: uppercase;">{{ $dataLk->kota_produksi }}</h4>
@@ -268,7 +449,7 @@
         <tr>
             <td colspan="2">{{ $dataLk->ket_bis_celana_celana_player }}</td>
         </tr>
-    </table>
+    </table> --}}
 
     {{-- @if ($dataLk->Gambar->file_baju_1)
     <h4 style="display: flex; margin-top: -210px; text-transform: uppercase;">DISINER : {{ $dataLk->Users->name }}

@@ -132,9 +132,9 @@ class LayoutController extends Controller
         view()->share('dataLk', $dataLk->BarangMasukDisainer->nama_tim);
 
         $pdf = PDF::loadview('component.Cs.costumer-service-lk-pegawai.export-data-baju', compact('dataLk'));
-        $pdf->setPaper('F4', 'portrait');
+        $pdf->setPaper('A4', 'potrait');
 
-        return $pdf->stream('Data-LK.pdf');
+        return $pdf->stream($dataLk->BarangMasukDisainer->nama_tim);
     }
 
     public function createLaporanLk($id)

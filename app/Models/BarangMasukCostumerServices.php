@@ -141,7 +141,7 @@ class BarangMasukCostumerServices extends Model
     }
     public function CelanaPlayer()
     {
-        return $this->belongsTo(PolaCeleana::class, 'pola_celana_player_id');
+        return $this->belongsTo(PolaLengan::class, 'pola_celana_player_id');
     }
 
     // pelatih

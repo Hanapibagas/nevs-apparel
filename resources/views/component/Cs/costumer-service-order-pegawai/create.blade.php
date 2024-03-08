@@ -79,11 +79,6 @@
                                                     <option value="Bandung">Bandung</option>
                                                 </select>
                                             </div>
-                                            {{-- <div class="mb-3 col-md-6">
-                                                <label for="lastName" class="form-label">No. Nota</label>
-                                                <input class="form-control" required type="text" name="no_nota"
-                                                    id="lastName" placeholder="No. nota" />
-                                            </div> --}}
                                         </div>
                                     </div>
                                 </div>

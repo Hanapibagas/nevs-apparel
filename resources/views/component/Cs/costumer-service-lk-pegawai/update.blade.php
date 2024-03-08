@@ -83,12 +83,6 @@
                                                     <option value="Bandung">Bandung</option>
                                                 </select>
                                             </div>
-                                            {{-- <div class="mb-3 col-md-6">
-                                                <label for="lastName" class="form-label">No. Nota</label>
-                                                <input class="form-control" required type="text" name="no_nota"
-                                                    id="lastName" placeholder="No. nota"
-                                                    value="{{ $oderCs->no_nota }}" />
-                                            </div> --}}
                                         </div>
                                     </div>
                                 </div>
@@ -1718,8 +1712,8 @@
                                                         <label class="form-label" for="country">Produksi</label>
                                                         <select id="country" required name="pola_celana_player_id"
                                                             class="select2 form-select">
-                                                            <option value="{{ $oderCs->CelanaPlayer->id }}">{{
-                                                                $oderCs->CelanaPlayer->jenis_kera }}
+                                                            <option value="{{ $oderCs->LenganPlayer->id }}">{{
+                                                                $oderCs->LenganPlayer->jenis_kera }}
                                                             </option>
                                                             <option value="">-- Jenis Produksi --</option>
                                                             @foreach ( $lengan as $lengans )

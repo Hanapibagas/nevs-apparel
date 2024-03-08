@@ -64,7 +64,7 @@
                                     <label for="nameWithTitle" class="form-label">Email Pegawai</label>
                                     <input name="email" type="text" id="nameWithTitle" class="form-control"
                                         placeholder="Silahkan masukkan email ..." />
-                                    <input type="hidden" name="roles" value="disainer">
+                                    <input type="hidden" name="roles" value="manual_cut">
                                 </div>
                             </div>
                         </div>

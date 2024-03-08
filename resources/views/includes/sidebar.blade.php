@@ -138,19 +138,19 @@ $activeList = $listData ? 'active' : '';
             <ul class="menu-sub">
                 <li class="menu-item {{ request()->is('list-data-jenis-kerah') ? 'active' : '' }}">
                     <a href="{{ route('getIndexListDataJenisKerah') }}" class="menu-link">
-                        <div data-i18n="Account">Jenis kerah</div>
+                        <div data-i18n="Account">Model</div>
                     </a>
                 </li>
                 <li class="menu-item {{ request()->is('list-data-jenis-lengan') ? 'active' : '' }}">
                     <a href="{{ route('getIndexListDataJenisLengan') }}" class="menu-link">
-                        <div data-i18n="Notifications">Pola lengan</div>
+                        <div data-i18n="Notifications">Produksi</div>
                     </a>
                 </li>
-                <li class="menu-item {{ request()->is('list-data-jenis-celana') ? 'active' : '' }}">
+                {{-- <li class="menu-item {{ request()->is('list-data-jenis-celana') ? 'active' : '' }}">
                     <a href="{{ route('getIndexListDataJenisCelana') }}" class="menu-link">
                         <div data-i18n="Connections">Pola celana</div>
                     </a>
-                </li>
+                </li> --}}
             </ul>
         </li>
         @endif
