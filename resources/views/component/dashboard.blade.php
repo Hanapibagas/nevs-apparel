@@ -10,21 +10,23 @@
     <div class="content-wrapper">
         <div class="container-xxl flex-grow-1 container-p-y">
             <div class="card">
-                <h5 class="card-header">Silahkan pilih tahun, bulan dan kota untuk melihat jumlah jahit </h5>
-                <form action="{{ route('getFilterPembagianKomisi') }}" method="GET">
+                <h5 class="card-header">Silahkan pilih tahun, bulan dan tanggal untuk melihat jumlah jahit </h5>
+                <form action="{{ route('indexHome') }}" method="get">
                     <div class="card-header row">
                         <div class="mb-3 col-md-3">
+                            <label>Tahun</label>
                             @php
                             $year = date('Y');
                             @endphp
-                            <select id="timeZones" class="select2 form-select" name="tahun">
+                            <select id="timeZones" class="select2 form-select" name="tahun" required>
                                 <option value="">-- silahkan pilih tahun --</option>
                                 @for ($i=2023; $i <= $year; $i++) <option value="{{ $i }}">{{ $i }}</option>
                                     @endfor
                             </select>
                         </div>
                         <div class="mb-3 col-md-3">
-                            <select id="timeZones" class="select2 form-select" name="bulan">
+                            <label for="">Bulan</label>
+                            <select id="timeZones" class="select2 form-select" name="bulan" required>
                                 <option value="">-- silahkan pilih bulan --</option>
                                 <option value="01">Januari</option>
                                 <option value="02">Febuari</option>
@@ -41,23 +43,34 @@
                             </select>
                         </div>
                         <div class="mb-3 col-md-3">
-                            <select id="kotaProduksi" class="select2 form-select" name="kotaProduksi">
-                                <option value="">-- silahkan pilih kota --</option>
-                                <option value="Makassar">Makassar</option>
-                                <option value="Jakarta">Jakarta</option>
-                                <option value="Bandung">Bandung</option>
-                                <option value="Surabaya">Surabaya</option>
-                            </select>
+                            <label for="">Tanggal</label>
+                            <input required class="form-control" type="number" name="tanggal" />
                         </div>
                         <div class="mb-3 col-md-3">
-                            <button type="submit" class="btn btn-primary form-control">Filter laporan komisi</button>
+                            <button type="submit" class="btn btn-primary form-control">Kirim</button>
                         </div>
                     </div>
                 </form>
             </div>
+
+            <div class="row" style="margin-top: 20px;">
+                <div class="col-md-6 col-lg-4 col-xl-4 order-0 mb-4">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <div class="d-flex flex-column align-items-center gap-1">
+                                    <h2 class="mb-2">{{ $total_semua }}</h2>
+                                    <span>Total Orders</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     @endif
+
     @if (Auth::user()->roles == 'cs')
     <div class="container">
         <canvas id="myBarChart"></canvas>
@@ -112,6 +125,38 @@
 @endsection
 
 @push('js')
+{{-- <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        document.querySelector("form").addEventListener("submit", function(event) {
+            event.preventDefault(); // Menghentikan perilaku default dari formulir (reload halaman)
+
+            // Ambil nilai tahun, bulan, dan tanggal dari formulir
+            var tahun = document.querySelector("select[name='tahun']").value;
+            var bulan = document.querySelector("select[name='bulan']").value;
+            var tanggal = document.querySelector("input[name='tanggal']").value;
+
+            // Lakukan pengiriman data formulir dengan AJAX atau perintah lainnya di sini
+            console.log("Tahun: " + tahun + ", Bulan: " + bulan + ", Tanggal: " + tanggal);
+
+            // Contoh penggunaan AJAX dengan jQuery
+            $.ajax({
+                url: "{{ route('indexHome') }}",
+                method: "GET",
+                data: {
+                    tahun: tahun,
+                    bulan: bulan,
+                    tanggal: tanggal
+                },
+                success: function(response) {
+                    console.log(response);
+                },
+                error: function(xhr, status, error) {
+                    console.error(error);
+                }
+            });
+        });
+    });
+</script> --}}
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
     var dashboardMakassar = {!! $dashboardMakassar !!};

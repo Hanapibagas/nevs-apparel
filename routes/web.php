@@ -26,6 +26,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware(['auth', 'checkroll:super_admin,jahit,finis,cut,disainer,layout,cs,atexco,mimaki,pres_kain,laser_cut,manual_cut,sortir,jahit_baju,jahit_celana,press_tag,packing'])->group(function () {
     Route::get('/', [HomeController::class, 'index'])->name('indexHome');
+    Route::post('/filtering-ahit', [HomeController::class, 'fiterTotaljahit'])->name('fiterTotaljahit');
+
     // route admin cs
     Route::get('/laporan', [HomeController::class, 'getLaporan'])->name('getIndexLaporan');
     Route::get('/pemabagain-komisi', [HomeController::class, 'getPembagianKomisi'])->name('getPembagianKomisi');

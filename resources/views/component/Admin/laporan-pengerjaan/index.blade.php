@@ -239,7 +239,7 @@
                                             @elseif($selesai < $deadline) - {{ $selisihHari }} hari @else Selesai tepat
                                                 pada Deadline @endif </td>
                                         <td>
-                                            {{ $laporan->BarangMasukMesinAtexco->UserMesinAtexco->name }}
+                                            {{ isset($laporan->BarangMasukMesinAtexco->UserMesinAtexco->name) }}
                                         </td>
                                     </tr>
                                 </tbody>
@@ -294,7 +294,7 @@
                                             @elseif($selesai < $deadline) - {{ $selisihHari }} hari @else Selesai tepat
                                                 pada Deadline @endif </td>
                                         <td>
-                                            {{ $laporan->BarangMasukMesinMimaki->UserMesinAtexco->name }}
+                                            {{ isset($laporan->BarangMasukMesinMimaki->UserMesinAtexco->name) }}
                                         </td>
                                     </tr>
                                 </tbody>

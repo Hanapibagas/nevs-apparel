@@ -21,7 +21,7 @@ use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         // admin
         $dashboardMakassar = Laporan::whereHas('BarangMasukCs', function ($query) {
@@ -87,6 +87,36 @@ class HomeController extends Controller
 
         // return response()->json($dataMasukAtexco);
 
+        $tahun = $request->input('tahun');
+        $bulan = $request->input('bulan');
+        $tanggal = $request->input('tanggal');
+
+        $jahits = Jahit::whereYear('deadline', $tahun)
+            ->whereMonth('deadline', $bulan)
+            ->whereDay('deadline', $tanggal)
+            ->get();
+
+        $total_semua = 0;
+
+        foreach ($jahits as $jahit) {
+            $barangMasuk = $jahit->barangMasukCs()->first();
+
+            if ($barangMasuk) {
+                $total_baju_player = $barangMasuk->total_baju_player ?? 0;
+                $total_baju_pelatih = $barangMasuk->total_baju_pelatih ?? 0;
+                $total_baju_kiper = $barangMasuk->total_baju_kiper ?? 0;
+                $total_baju_1 = $barangMasuk->total_baju_1 ?? 0;
+                $total_celana_player = $barangMasuk->total_celana_player ?? 0;
+                $total_celana_pelatih = $barangMasuk->total_celana_pelatih ?? 0;
+                $total_celana_kiper = $barangMasuk->total_celana_kiper ?? 0;
+                $total_celana_1 = $barangMasuk->total_celana_1 ?? 0;
+
+                $total_semua += $total_baju_player + $total_baju_pelatih + $total_baju_kiper +
+                    $total_baju_1 + $total_celana_player + $total_celana_pelatih +
+                    $total_celana_kiper + $total_celana_1;
+            }
+        }
+
 
         return view('component.dashboard', compact(
             'dashboardMakassar',
@@ -103,7 +133,43 @@ class HomeController extends Controller
             'dataMasukSortir',
             'dataMasukjahit',
             'dataMasukFinis',
+            'total_semua',
         ));
+    }
+
+    public function fiterTotaljahit(Request $request)
+    {
+        $tahun = $request->input('tahun');
+        $bulan = $request->input('bulan');
+        $tanggal = $request->input('tanggal');
+
+        $jahits = Jahit::whereYear('deadline', $tahun)
+            ->whereMonth('deadline', $bulan)
+            ->whereDay('deadline', $tanggal)
+            ->get();
+
+        $total_semua = 0;
+
+        foreach ($jahits as $jahit) {
+            $barangMasuk = $jahit->barangMasukCs()->first();
+
+            if ($barangMasuk) {
+                $total_baju_player = $barangMasuk->total_baju_player ?? 0;
+                $total_baju_pelatih = $barangMasuk->total_baju_pelatih ?? 0;
+                $total_baju_kiper = $barangMasuk->total_baju_kiper ?? 0;
+                $total_baju_1 = $barangMasuk->total_baju_1 ?? 0;
+                $total_celana_player = $barangMasuk->total_celana_player ?? 0;
+                $total_celana_pelatih = $barangMasuk->total_celana_pelatih ?? 0;
+                $total_celana_kiper = $barangMasuk->total_celana_kiper ?? 0;
+                $total_celana_1 = $barangMasuk->total_celana_1 ?? 0;
+
+                $total_semua += $total_baju_player + $total_baju_pelatih + $total_baju_kiper +
+                    $total_baju_1 + $total_celana_player + $total_celana_pelatih +
+                    $total_celana_kiper + $total_celana_1;
+            }
+        }
+
+        return redirect()->route('indexHome');
     }
 
     public function getCostumerSevices()
