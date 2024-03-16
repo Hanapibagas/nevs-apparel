@@ -132,327 +132,715 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <h3>Laporan Layout</h3>
+                <div class="card">
+                    <h5 class="card-header">Laporan Layout</h5>
+                    <div class="card-body">
+                        <div class="table-responsive text-nowrap">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Deadline</th>
+                                        <th>Selesai</th>
+                                        <th>
+                                            @php
+                                            $deadline = \Carbon\Carbon::parse($laporan->BarangMasukLayout->deadline);
+                                            $selesai = $laporan->BarangMasukLayout->selesai ?
+                                            \Carbon\Carbon::parse($laporan->BarangMasukLayout->selesai) : null;
+                                            if ($selesai) {
+                                            $selisihHari = $selesai->diffInDays($deadline);
+                                            if ($selesai > $deadline) {
+                                            echo "<p>Lebih dari Deadline:</p>";
+                                            } elseif ($selesai < $deadline) { echo "<p>Kurang dari Deadline</p>" ; }
+                                                else { echo "<p>Selesai tepat pada Deadline</p>" ; } } else { echo "" ;
+                                                } @endphp </th>
+                                        <th>Nama layout</th>
+                                        <th>Panjang kertas</th>
+                                        <th>Panjang poly/DTF</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            {{ \Carbon\Carbon::parse($laporan->BarangMasukLayout->deadline)->format('d F
+                                            Y') }}
+                                        </td>
+                                        <td>
+                                            @if($laporan->BarangMasukLayout->selesai)
+                                            {{ \Carbon\Carbon::parse($laporan->BarangMasukLayout->selesai)->format('d F
+                                            Y') }}
+                                            @else
+                                            @endif
+                                        </td>
+                                        <td>
+                                            @if ($selesai > $deadline)
+                                            +{{ $selisihHari }} hari
+                                            @elseif($selesai < $deadline) - {{ $selisihHari }} hari @else Selesai tepat
+                                                pada Deadline @endif </td>
+                                        <td>
+                                            {{ strtoupper($laporan->BarangMasukLayout->UserLayout->name) }}
+                                        </td>
+                                        <td>
+                                            {{ $laporan->BarangMasukLayout->panjang_kertas }} Meter
+                                        </td>
+                                        <td>
+                                            {{ $laporan->BarangMasukLayout->poly }} Meter
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div> <br>
 
-                <p>Deadline: {{ \Carbon\Carbon::parse($laporan->BarangMasukLayout->deadline)->format('d F Y') }}
-                </p>
-                <p>Selesai:
-                    @if($laporan->BarangMasukLayout->selesai)
-                    {{ \Carbon\Carbon::parse($laporan->BarangMasukLayout->selesai)->format('d F Y') }}
-                    @else
-                    @endif
-                </p>
-                @php
-                $deadline = \Carbon\Carbon::parse($laporan->BarangMasukLayout->deadline);
-                $selesai = $laporan->BarangMasukLayout->selesai ?
-                \Carbon\Carbon::parse($laporan->BarangMasukLayout->selesai) : null;
-                if ($selesai) {
-                $selisihHari = $selesai->diffInDays($deadline);
-                if ($selesai > $deadline) {
-                echo "<p>Lebih dari Deadline: +{$selisihHari} hari</p>";
-                } elseif ($selesai < $deadline) { echo "<p>Kurang dari Deadline: -{$selisihHari} hari</p>" ; } else {
-                    echo "<p>Selesai tepat pada Deadline</p>" ; } } else { echo "" ; } @endphp <p>Nama
-                    layout: {{
-                    strtoupper($laporan->BarangMasukLayout->UserLayout->name) }}</p>
-                    <p>Panjang kertas: {{ $laporan->BarangMasukLayout->panjang_kertas }} Meter</p>
-                    <p>Panjang Poly / DTF : {{ $laporan->BarangMasukLayout->poly }} Meter</p>
-                    <hr>
+                @if(isset($laporan->BarangMasukMesinAtexco))
+                <div class="card">
+                    <h5 class="card-header">Laporan Atexco</h5>
+                    <div class="card-body">
+                        <div class="table-responsive text-nowrap">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Deadline</th>
+                                        <th>Selesai</th>
+                                        <th>
+                                            @php
+                                            $deadline =
+                                            \Carbon\Carbon::parse($laporan->BarangMasukMesinAtexco->deadline);
+                                            $selesai = $laporan->BarangMasukMesinAtexco->selesai ?
+                                            \Carbon\Carbon::parse($laporan->BarangMasukMesinAtexco->selesai) : null;
+                                            if ($selesai) {
+                                            $selisihHari = $selesai->diffInDays($deadline);
+                                            if ($selesai > $deadline) {
+                                            echo "<p>Lebih dari Deadline:</p>";
+                                            } elseif ($selesai < $deadline) { echo "<p>Kurang dari Deadline</p>" ; }
+                                                else { echo "<p>Selesai tepat pada Deadline</p>" ; } } else { echo "" ;
+                                                } @endphp </th>
+                                        <th>Nama penanggung jawab</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            {{
+                                            \Carbon\Carbon::parse($laporan->BarangMasukMesinAtexco->deadline)->format('d
+                                            F Y') }}
+                                        </td>
+                                        <td>
+                                            @if ($laporan->BarangMasukMesinAtexco->selesai)
+                                            {{
+                                            \Carbon\Carbon::parse($laporan->BarangMasukMesinAtexco->selesai)->format('d
+                                            F Y') }}
+                                            @else
+                                            @endif
+                                        </td>
+                                        <td>
+                                            @if ($selesai > $deadline)
+                                            +{{ $selisihHari }} hari
+                                            @elseif($selesai < $deadline) - {{ $selisihHari }} hari @else Selesai tepat
+                                                pada Deadline @endif </td>
+                                        <td>
+                                            {{ $laporan->BarangMasukMesinAtexco->UserMesinAtexco->name }}
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div><br>
+                @elseif(isset($laporan->BarangMasukMesinMimaki))
+                <div class="card">
+                    <h5 class="card-header">Laporan Mimaki</h5>
+                    <div class="card-body">
+                        <div class="table-responsive text-nowrap">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Deadline</th>
+                                        <th>Selesai</th>
+                                        <th>
+                                            @php
+                                            $deadline =
+                                            \Carbon\Carbon::parse($laporan->BarangMasukMesinMimaki->deadline);
+                                            $selesai = $laporan->BarangMasukMesinMimaki->selesai ?
+                                            \Carbon\Carbon::parse($laporan->BarangMasukMesinMimaki->selesai) : null;
+                                            if ($selesai) {
+                                            $selisihHari = $selesai->diffInDays($deadline);
+                                            if ($selesai > $deadline) {
+                                            echo "<p>Lebih dari Deadline:</p>";
+                                            } elseif ($selesai < $deadline) { echo "<p>Kurang dari Deadline</p>" ; }
+                                                else { echo "<p>Selesai tepat pada Deadline</p>" ; } } else { echo "" ;
+                                                } @endphp </th>
+                                        <th>Nama penanggung jawab</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            {{
+                                            \Carbon\Carbon::parse($laporan->BarangMasukMesinMimaki->deadline)->format('d
+                                            F Y') }}
+                                        </td>
+                                        <td>
+                                            @if ($laporan->BarangMasukMesinMimaki->selesai)
+                                            {{
+                                            \Carbon\Carbon::parse($laporan->BarangMasukMesinMimaki->selesai)->format('d
+                                            F Y') }}
+                                            @else
+                                            @endif
+                                        </td>
+                                        <td>
+                                            @if ($selesai > $deadline)
+                                            +{{ $selisihHari }} hari
+                                            @elseif($selesai < $deadline) - {{ $selisihHari }} hari @else Selesai tepat
+                                                pada Deadline @endif </td>
+                                        <td>
+                                            {{ $laporan->BarangMasukMesinMimaki->UserMesinAtexco->name }}
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div><br>
+                @endif
 
-                    @if(isset($laporan->BarangMasukMesinAtexco))
-                    <h3>Laporan Mesin Atexco</h3>
-                    <p>Deadline: {{ \Carbon\Carbon::parse($laporan->BarangMasukMesinAtexco->deadline)->format('d
-                        F Y')
-                        }}
-                    </p>
-                    <p>Selesai:
-                        @if ($laporan->BarangMasukMesinAtexco->selesai)
-                        {{ \Carbon\Carbon::parse($laporan->BarangMasukMesinAtexco->selesai)->format('d F Y') }}
-                        @else
-                        @endif
-                    </p>
-                    @php
-                    $deadline = \Carbon\Carbon::parse($laporan->BarangMasukMesinAtexco->deadline);
-                    $selesai = $laporan->BarangMasukMesinAtexco->selesai ?
-                    \Carbon\Carbon::parse($laporan->BarangMasukMesinAtexco->selesai) : null;
-                    if ($selesai) {
-                    $selisihHari = $selesai->diffInDays($deadline);
-                    if ($selesai > $deadline) {
-                    echo "<p>Lebih dari Deadline: +{$selisihHari} hari</p>";
-                    } elseif ($selesai < $deadline) { echo "<p>Kurang dari Deadline: -{$selisihHari} hari</p>" ; } else
-                        { echo "<p>Selesai tepat pada Deadline</p>" ; } } else { echo "" ; } @endphp <p>
-                        Nama penanggung
-                        jawab: {{ $laporan->BarangMasukMesinAtexco->penanggung_jawab_id }}</p>
-                        <hr>
-                        @elseif(isset($laporan->BarangMasukMesinMimaki))
-                        <h3>Laporan Mesin Mimaki</h3>
-                        <p>Deadline: {{
-                            \Carbon\Carbon::parse($laporan->BarangMasukMesinMimaki->deadline)->format('d F
-                            Y')
-                            }}
-                        </p>
-                        <p>Selesai:
-                            @if ($laporan->BarangMasukMesinMimaki->selesai)
-                            {{ \Carbon\Carbon::parse($laporan->BarangMasukMesinMimaki->selesai)->format('d F Y')
-                            }}
-                            @else
-                            @endif
-                        </p>
-                        @php
-                        $deadline = \Carbon\Carbon::parse($laporan->BarangMasukMesinMimaki->deadline);
-                        $selesai = $laporan->BarangMasukMesinMimaki->selesai ?
-                        \Carbon\Carbon::parse($laporan->BarangMasukMesinMimaki->selesai) : null;
-                        if ($selesai) {
-                        $selisihHari = $selesai->diffInDays($deadline);
-                        if ($selesai > $deadline) {
-                        echo "<p>Lebih dari Deadline: +{$selisihHari} hari</p>";
-                        } elseif ($selesai < $deadline) { echo "<p>Kurang dari Deadline: -{$selisihHari} hari</p>" ; }
-                            else { echo "<p>Selesai tepat pada Deadline</p>" ; } } else { echo "" ; } @endphp <p>Nama
-                            penanggung jawab: {{ $laporan->BarangMasukMesinMimaki->penanggung_jawab_id }}</p>
-                            <hr>
-                            @endif
-
-                            <h3>Laporan Press Kain</h3>
-                            <p>Deadline: {{
-                                \Carbon\Carbon::parse($laporan->BarangMasukPressKain->deadline)->format('d F
-                                Y')
-                                }}
-                            </p>
-                            <p>Selesai:
-                                @if ($laporan->BarangMasukPressKain->selesai)
-                                {{ \Carbon\Carbon::parse($laporan->BarangMasukPressKain->selesai)->format('d F
-                                Y') }}
-                                @else
-                                @endif
-                            </p>
-                            @php
-                            $deadline = \Carbon\Carbon::parse($laporan->BarangMasukPressKain->deadline);
-                            $selesai = $laporan->BarangMasukPressKain->selesai ?
-                            \Carbon\Carbon::parse($laporan->BarangMasukPressKain->selesai) : null;
-                            if ($selesai) {
-                            $selisihHari = $selesai->diffInDays($deadline);
-                            if ($selesai > $deadline) {
-                            echo "<p>Lebih dari Deadline: +{$selisihHari} hari</p>";
-                            } elseif ($selesai < $deadline) { echo "<p>Kurang dari Deadline: -{$selisihHari} hari</p>" ;
-                                } else { echo "<p>Selesai tepat pada Deadline</p>" ; } } else { echo "" ; } @endphp <p>
-                                Kain: {{ $laporan->BarangMasukPressKain->kain }}</p>
-                                <p>Berat: {{ $laporan->BarangMasukPressKain->berat }}</p>
-                                <p>Foto: <img style="height: 200px; width: 200px"
-                                        src="{{ Storage::url($laporan->BarangMasukPressKain->gambar) }}" alt=""
-                                        srcset=""></p>
-                                <hr>
-
-                                <h3>Laporan Laser Cut</h3>
-                                <p>Deadline: {{
-                                    \Carbon\Carbon::parse($laporan->BarangMasukLaserCut->deadline)->format('d F
-                                    Y')
-                                    }}
-                                </p>
-                                <p>Selesai:
-                                    @if ($laporan->BarangMasukLaserCut->selesai)
-                                    {{ \Carbon\Carbon::parse($laporan->BarangMasukLaserCut->selesai)->format('d
-                                    F Y') }}
-                                    @else
+                <div class="card">
+                    <h5 class="card-header">Laporan Press Kain</h5>
+                    <div class="card-body">
+                        <div class="table-responsive text-nowrap">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Deadline</th>
+                                        <th>Selesai</th>
+                                        <th>
+                                            @php
+                                            $deadline = \Carbon\Carbon::parse($laporan->BarangMasukPressKain->deadline);
+                                            $selesai = $laporan->BarangMasukPressKain->selesai ?
+                                            \Carbon\Carbon::parse($laporan->BarangMasukPressKain->selesai) : null;
+                                            if ($selesai) {
+                                            $selisihHari = $selesai->diffInDays($deadline);
+                                            if ($selesai > $deadline) {
+                                            echo "<p>Lebih dari Deadline:</p>";
+                                            } elseif ($selesai < $deadline) { echo "<p>Kurang dari Deadline</p>" ; }
+                                                else { echo "<p>Selesai tepat pada Deadline</p>" ; } } else { echo "" ;
+                                                } @endphp </th>
+                                        <th>kain</th>
+                                        <th>Berat</th>
+                                        <th>Foto</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if ($laporan->BarangMasukCs->Gambar->file_baju_player)
+                                    <tr>
+                                        <td>
+                                            {{
+                                            \Carbon\Carbon::parse($laporan->BarangMasukPressKain->deadline)->format('d F
+                                            Y') }}
+                                        </td>
+                                        <td>
+                                            @if ($laporan->BarangMasukPressKain->selesai)
+                                            {{ \Carbon\Carbon::parse($laporan->BarangMasukPressKain->selesai)->format('d
+                                            F Y') }}
+                                            @else
+                                            @endif
+                                        </td>
+                                        <td>
+                                            @if ($selesai > $deadline)
+                                            +{{ $selisihHari }} hari
+                                            @elseif($selesai < $deadline) - {{ $selisihHari }} hari @else Selesai tepat
+                                                pada Deadline @endif </td>
+                                        <td>
+                                            {{ $laporan->BarangMasukPressKain->kain }}
+                                        </td>
+                                        <td>
+                                            {{ $laporan->BarangMasukPressKain->berat }} Kg
+                                        </td>
+                                        <td>
+                                            <img style="height: 200px; width: 200px"
+                                                src="{{ Storage::url($laporan->BarangMasukPressKain->gambar) }}" alt=""
+                                                srcset="">
+                                        </td>
+                                    </tr>
                                     @endif
-                                </p>
-                                @php
-                                $deadline = \Carbon\Carbon::parse($laporan->BarangMasukLaserCut->deadline);
-                                $selesai = $laporan->BarangMasukLaserCut->selesai ?
-                                \Carbon\Carbon::parse($laporan->BarangMasukLaserCut->selesai) : null;
-                                if ($selesai) {
-                                $selisihHari = $selesai->diffInDays($deadline);
-                                if ($selesai > $deadline) {
-                                echo "<p>Lebih dari Deadline: +{$selisihHari} hari</p>";
-                                } elseif ($selesai < $deadline) {
-                                    echo "<p>Kurang dari Deadline: -{$selisihHari} hari</p>" ; } else {
-                                    echo "<p>Selesai tepat pada Deadline</p>" ; } } else { echo "" ; } @endphp <hr>
+                                    @if ($laporan->BarangMasukCs->Gambar->file_baju_pelatih)
+                                    <tr>
+                                        <td>
+                                            {{
+                                            \Carbon\Carbon::parse($laporan->BarangMasukPressKain->deadline)->format('d F
+                                            Y') }}
+                                        </td>
+                                        <td>
+                                            @if ($laporan->BarangMasukPressKain->selesai)
+                                            {{ \Carbon\Carbon::parse($laporan->BarangMasukPressKain->selesai)->format('d
+                                            F Y') }}
+                                            @else
+                                            @endif
+                                        </td>
+                                        <td>
+                                            @if ($selesai > $deadline)
+                                            +{{ $selisihHari }} hari
+                                            @elseif($selesai < $deadline) - {{ $selisihHari }} hari @else Selesai tepat
+                                                pada Deadline @endif </td>
+                                        <td>
+                                            {{ $laporan->BarangMasukPressKain->kain_pelatih }}
+                                        </td>
+                                        <td>
+                                            {{ $laporan->BarangMasukPressKain->kain_pelatih }} Kg
+                                        </td>
+                                        <td>
+                                            <img style="height: 200px; width: 200px"
+                                                src="{{ Storage::url($laporan->BarangMasukPressKain->gambar_pelatih) }}"
+                                                alt="" srcset="">
+                                        </td>
+                                    </tr>
+                                    @endif
+                                    @if ($laporan->BarangMasukCs->Gambar->file_baju_kiper)
+                                    <tr>
+                                        <td>
+                                            {{
+                                            \Carbon\Carbon::parse($laporan->BarangMasukPressKain->deadline)->format('d F
+                                            Y') }}
+                                        </td>
+                                        <td>
+                                            @if ($laporan->BarangMasukPressKain->selesai)
+                                            {{ \Carbon\Carbon::parse($laporan->BarangMasukPressKain->selesai)->format('d
+                                            F Y') }}
+                                            @else
+                                            @endif
+                                        </td>
+                                        <td>
+                                            @if ($selesai > $deadline)
+                                            +{{ $selisihHari }} hari
+                                            @elseif($selesai < $deadline) - {{ $selisihHari }} hari @else Selesai tepat
+                                                pada Deadline @endif </td>
+                                        <td>
+                                            {{ $laporan->BarangMasukPressKain->kain_kiper }}
+                                        </td>
+                                        <td>
+                                            {{ $laporan->BarangMasukPressKain->berat_kiper }} Kg
+                                        </td>
+                                        <td>
+                                            <img style="height: 200px; width: 200px"
+                                                src="{{ Storage::url($laporan->BarangMasukPressKain->gambar_kiper) }}"
+                                                alt="" srcset="">
+                                        </td>
+                                    </tr>
+                                    @endif
+                                    @if ($laporan->BarangMasukCs->Gambar->file_baju_1)
+                                    <tr>
+                                        <td>
+                                            {{
+                                            \Carbon\Carbon::parse($laporan->BarangMasukPressKain->deadline)->format('d F
+                                            Y') }}
+                                        </td>
+                                        <td>
+                                            @if ($laporan->BarangMasukPressKain->selesai)
+                                            {{ \Carbon\Carbon::parse($laporan->BarangMasukPressKain->selesai)->format('d
+                                            F Y') }}
+                                            @else
+                                            @endif
+                                        </td>
+                                        <td>
+                                            @if ($selesai > $deadline)
+                                            +{{ $selisihHari }} hari
+                                            @elseif($selesai < $deadline) - {{ $selisihHari }} hari @else Selesai tepat
+                                                pada Deadline @endif </td>
+                                        <td>
+                                            {{ $laporan->BarangMasukPressKain->kain_1 }}
+                                        </td>
+                                        <td>
+                                            {{ $laporan->BarangMasukPressKain->berat_1 }} Kg
+                                        </td>
+                                        <td>
+                                            <img style="height: 200px; width: 200px"
+                                                src="{{ Storage::url($laporan->BarangMasukPressKain->gambar_1) }}"
+                                                alt="" srcset="">
+                                        </td>
+                                    </tr>
+                                    @endif
+                                    @if ($laporan->BarangMasukCs->Gambar->file_celana_player)
+                                    <tr>
+                                        <td>
+                                            {{
+                                            \Carbon\Carbon::parse($laporan->BarangMasukPressKain->deadline)->format('d F
+                                            Y') }}
+                                        </td>
+                                        <td>
+                                            @if ($laporan->BarangMasukPressKain->selesai)
+                                            {{ \Carbon\Carbon::parse($laporan->BarangMasukPressKain->selesai)->format('d
+                                            F Y') }}
+                                            @else
+                                            @endif
+                                        </td>
+                                        <td>
+                                            @if ($selesai > $deadline)
+                                            +{{ $selisihHari }} hari
+                                            @elseif($selesai < $deadline) - {{ $selisihHari }} hari @else Selesai tepat
+                                                pada Deadline @endif </td>
+                                        <td>
+                                            {{ $laporan->BarangMasukPressKain->kain_celana_player }}
+                                        </td>
+                                        <td>
+                                            {{ $laporan->BarangMasukPressKain->berat_celana_player }} Kg
+                                        </td>
+                                        <td>
+                                            <img style="height: 200px; width: 200px"
+                                                src="{{ Storage::url($laporan->BarangMasukPressKain->gambar_celana_player) }}"
+                                                alt="" srcset="">
+                                        </td>
+                                    </tr>
+                                    @endif
+                                    @if ($laporan->BarangMasukCs->Gambar->file_celana_pelatih)
+                                    <tr>
+                                        <td>
+                                            {{
+                                            \Carbon\Carbon::parse($laporan->BarangMasukPressKain->deadline)->format('d F
+                                            Y') }}
+                                        </td>
+                                        <td>
+                                            @if ($laporan->BarangMasukPressKain->selesai)
+                                            {{ \Carbon\Carbon::parse($laporan->BarangMasukPressKain->selesai)->format('d
+                                            F Y') }}
+                                            @else
+                                            @endif
+                                        </td>
+                                        <td>
+                                            @if ($selesai > $deadline)
+                                            +{{ $selisihHari }} hari
+                                            @elseif($selesai < $deadline) - {{ $selisihHari }} hari @else Selesai tepat
+                                                pada Deadline @endif </td>
+                                        <td>
+                                            {{ $laporan->BarangMasukPressKain->kain_celana_pelatih }}
+                                        </td>
+                                        <td>
+                                            {{ $laporan->BarangMasukPressKain->berat_celana_pelatih }} Kg
+                                        </td>
+                                        <td>
+                                            <img style="height: 200px; width: 200px"
+                                                src="{{ Storage::url($laporan->BarangMasukPressKain->gambar_celana_pelatih) }}"
+                                                alt="" srcset="">
+                                        </td>
+                                    </tr>
+                                    @endif
+                                    @if ($laporan->BarangMasukCs->Gambar->file_celana_kiper)
+                                    <tr>
+                                        <td>
+                                            {{
+                                            \Carbon\Carbon::parse($laporan->BarangMasukPressKain->deadline)->format('d F
+                                            Y') }}
+                                        </td>
+                                        <td>
+                                            @if ($laporan->BarangMasukPressKain->selesai)
+                                            {{ \Carbon\Carbon::parse($laporan->BarangMasukPressKain->selesai)->format('d
+                                            F Y') }}
+                                            @else
+                                            @endif
+                                        </td>
+                                        <td>
+                                            @if ($selesai > $deadline)
+                                            +{{ $selisihHari }} hari
+                                            @elseif($selesai < $deadline) - {{ $selisihHari }} hari @else Selesai tepat
+                                                pada Deadline @endif </td>
+                                        <td>
+                                            {{ $laporan->BarangMasukPressKain->kain_celana_kiper }}
+                                        </td>
+                                        <td>
+                                            {{ $laporan->BarangMasukPressKain->berat_celana_kiper }} Kg
+                                        </td>
+                                        <td>
+                                            <img style="height: 200px; width: 200px"
+                                                src="{{ Storage::url($laporan->BarangMasukPressKain->gambar_celana_kiper) }}"
+                                                alt="" srcset="">
+                                        </td>
+                                    </tr>
+                                    @endif
+                                    @if ($laporan->BarangMasukCs->Gambar->file_celana_1)
+                                    <tr>
+                                        <td>
+                                            {{
+                                            \Carbon\Carbon::parse($laporan->BarangMasukPressKain->deadline)->format('d F
+                                            Y') }}
+                                        </td>
+                                        <td>
+                                            @if ($laporan->BarangMasukPressKain->selesai)
+                                            {{ \Carbon\Carbon::parse($laporan->BarangMasukPressKain->selesai)->format('d
+                                            F Y') }}
+                                            @else
+                                            @endif
+                                        </td>
+                                        <td>
+                                            @if ($selesai > $deadline)
+                                            +{{ $selisihHari }} hari
+                                            @elseif($selesai < $deadline) - {{ $selisihHari }} hari @else Selesai tepat
+                                                pada Deadline @endif </td>
+                                        <td>
+                                            {{ $laporan->BarangMasukPressKain->kain_celana_1 }}
+                                        </td>
+                                        <td>
+                                            {{ $laporan->BarangMasukPressKain->berat_celana_1 }} Kg
+                                        </td>
+                                        <td>
+                                            <img style="height: 200px; width: 200px"
+                                                src="{{ Storage::url($laporan->BarangMasukPressKain->gambar_celana_1) }}"
+                                                alt="" srcset="">
+                                        </td>
+                                    </tr>
+                                    @endif
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div><br>
 
-                                    <h3>Laporan Manual Cut</h3>
-                                    <p>Deadline: {{
-                                        \Carbon\Carbon::parse($laporan->BarangMasukManualcut->deadline)->format('d
-                                        F
-                                        Y')
-                                        }}
-                                    </p>
-                                    <p>Selesai:
-                                        @if ($laporan->BarangMasukManualcut->selesai)
-                                        {{
-                                        \Carbon\Carbon::parse($laporan->BarangMasukManualcut->selesai)->format('d
-                                        F
-                                        Y') }}
-                                        @else
-                                        @endif
-                                    </p>
-                                    @php
-                                    $deadline = \Carbon\Carbon::parse($laporan->BarangMasukManualcut->deadline);
-                                    $selesai = $laporan->BarangMasukManualcut->selesai ?
-                                    \Carbon\Carbon::parse($laporan->BarangMasukManualcut->selesai) : null;
-                                    if ($selesai) {
-                                    $selisihHari = $selesai->diffInDays($deadline);
-                                    if ($selesai > $deadline) {
-                                    echo "<p>Lebih dari Deadline: +{$selisihHari} hari</p>";
-                                    } elseif ($selesai < $deadline) {
-                                        echo "<p>Kurang dari Deadline: -{$selisihHari} hari</p>" ; } else {
-                                        echo "<p>Selesai tepat pada Deadline</p>" ; } } else { echo "" ; } @endphp <hr>
-
-                                        <h3>Laporan Sortir</h3>
-                                        <p>Deadline: {{
-                                            \Carbon\Carbon::parse($laporan->BarangMasukSortir->deadline)->format('d
+                <div class="card">
+                    <h5 class="card-header">Laporan Cut</h5>
+                    <div class="card-body">
+                        <div class="table-responsive text-nowrap">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Deadline</th>
+                                        <th>Selesai</th>
+                                        <th>
+                                            @php
+                                            $deadline = \Carbon\Carbon::parse($laporan->BarangMasukLaserCut->deadline);
+                                            $selesai = $laporan->BarangMasukLaserCut->selesai ?
+                                            \Carbon\Carbon::parse($laporan->BarangMasukLaserCut->selesai) : null;
+                                            if ($selesai) {
+                                            $selisihHari = $selesai->diffInDays($deadline);
+                                            if ($selesai > $deadline) {
+                                            echo "<p>Lebih dari Deadline:</p>";
+                                            } elseif ($selesai < $deadline) { echo "<p>Kurang dari Deadline</p>" ; }
+                                                else { echo "<p>Selesai tepat pada Deadline</p>" ; } } else { echo "" ;
+                                                } @endphp </th>
+                                        <th>Foto</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            {{ \Carbon\Carbon::parse($laporan->BarangMasukLaserCut->deadline)->format('d
                                             F
                                             Y') }}
-                                        </p>
-                                        <p>Selesai:
-                                            @if ($laporan->BarangMasukSortir->selesai)
-                                            {{
-                                            \Carbon\Carbon::parse($laporan->BarangMasukSortir->selesai)->format('d
+                                        </td>
+                                        <td>
+                                            @if($laporan->BarangMasukLaserCut->selesai)
+                                            {{ \Carbon\Carbon::parse($laporan->BarangMasukLaserCut->selesai)->format('d
                                             F
                                             Y') }}
                                             @else
                                             @endif
-                                        </p>
-                                        @php
-                                        $deadline =
-                                        \Carbon\Carbon::parse($laporan->BarangMasukSortir->deadline);
-                                        $selesai = $laporan->BarangMasukSortir->selesai ?
-                                        \Carbon\Carbon::parse($laporan->BarangMasukSortir->selesai) : null;
-                                        if ($selesai) {
-                                        $selisihHari = $selesai->diffInDays($deadline);
-                                        if ($selesai > $deadline) {
-                                        echo "<p>Lebih dari Deadline: +{$selisihHari} hari</p>";
-                                        } elseif ($selesai < $deadline) {
-                                            echo "<p>Kurang dari Deadline: -{$selisihHari} hari</p>" ; } else {
-                                            echo "<p>Selesai tepat pada Deadline</p>" ; } } else { echo "" ; } @endphp
-                                            <p>No error: {{ $laporan->BarangMasukSortir->no_error }}</p>
-                                            <p>Panjang kertas: {{ $laporan->BarangMasukSortir->panjang_kertas }}
-                                            </p>
-                                            <hr>
+                                        </td>
+                                        <td>
+                                            @if ($selesai > $deadline)
+                                            +{{ $selisihHari }} hari
+                                            @elseif($selesai < $deadline) - {{ $selisihHari }} hari @else Selesai tepat
+                                                pada Deadline @endif </td>
+                                        <td>
+                                            <img style="height: 200px; width: 200px"
+                                                src="{{ Storage::url($laporan->BarangMasukLaserCut->foto) }}" alt=""
+                                                srcset="">
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div><br>
 
-                                            <h3>Laporan Jahit Baju</h3>
-                                            <p>Deadline: {{
-                                                \Carbon\Carbon::parse($laporan->BarangMasukJahitBaju->deadline)->format('d
-                                                F
-                                                Y')
-                                                }}
-                                            </p>
-                                            <p>Selesai:
-                                                @if ($laporan->BarangMasukJahitBaju->selesai)
-                                                {{
-                                                \Carbon\Carbon::parse($laporan->BarangMasukJahitBaju->selesai)->format('d
-                                                F Y') }}
-                                                @else
-                                                @endif
-                                            </p>
+                <div class="card">
+                    <h5 class="card-header">Laporan Sortir</h5>
+                    <div class="card-body">
+                        <div class="table-responsive text-nowrap">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Deadline</th>
+                                        <th>Selesai</th>
+                                        <th>
                                             @php
-                                            $deadline =
-                                            \Carbon\Carbon::parse($laporan->BarangMasukJahitBaju->deadline);
-                                            $selesai = $laporan->BarangMasukJahitBaju->selesai ?
-                                            \Carbon\Carbon::parse($laporan->BarangMasukJahitBaju->selesai) :
-                                            null;
+                                            $deadline = \Carbon\Carbon::parse($laporan->BarangMasukSortir->deadline);
+                                            $selesai = $laporan->BarangMasukSortir->selesai ?
+                                            \Carbon\Carbon::parse($laporan->BarangMasukSortir->selesai) : null;
                                             if ($selesai) {
                                             $selisihHari = $selesai->diffInDays($deadline);
                                             if ($selesai > $deadline) {
-                                            echo "<p>Lebih dari Deadline: +{$selisihHari} hari</p>";
-                                            } elseif ($selesai < $deadline) {
-                                                echo "<p>Kurang dari Deadline: -{$selisihHari} hari</p>" ; } else {
-                                                echo "<p>Selesai tepat pada Deadline</p>" ; } } else { echo "" ; }
-                                                @endphp <p>Leher: {{
-                                                $laporan->BarangMasukJahitBaju->lehere }}</p>
-                                                <p>Pola badan: {{ $laporan->BarangMasukJahitBaju->pola_badan }}
-                                                </p>
-                                                <hr>
+                                            echo "<p>Lebih dari Deadline:</p>";
+                                            } elseif ($selesai < $deadline) { echo "<p>Kurang dari Deadline</p>" ; }
+                                                else { echo "<p>Selesai tepat pada Deadline</p>" ; } } else { echo "" ;
+                                                } @endphp </th>
+                                        <th>No eror</th>
+                                        <th>Panjang kertas</th>
+                                        <th>Berat</th>
+                                        <th>Bahan</th>
+                                        <th>foto</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            {{ \Carbon\Carbon::parse($laporan->BarangMasukSortir->deadline)->format('d F
+                                            Y') }}
+                                        </td>
+                                        <td>
+                                            @if($laporan->BarangMasukSortir->selesai)
+                                            {{ \Carbon\Carbon::parse($laporan->BarangMasukSortir->selesai)->format('d F
+                                            Y') }}
+                                            @else
+                                            @endif
+                                        </td>
+                                        <td>
+                                            @if ($selesai > $deadline)
+                                            +{{ $selisihHari }} hari
+                                            @elseif($selesai < $deadline) - {{ $selisihHari }} hari @else Selesai tepat
+                                                pada Deadline @endif </td>
+                                        <td>
+                                            {{ $laporan->BarangMasukSortir->no_error }}
+                                        </td>
+                                        <td>
+                                            {{ $laporan->BarangMasukSortir->panjang_kertas }} Meter
+                                        </td>
+                                        <td>
+                                            {{ $laporan->BarangMasukSortir->berat }} Meter
+                                        </td>
+                                        <td>
+                                            {{ $laporan->BarangMasukSortir->bahan }} Meter
+                                        </td>
+                                        <td>
+                                            <img style="height: 200px; width: 200px"
+                                                src="{{ Storage::url($laporan->BarangMasukSortir->foto) }}" alt=""
+                                                srcset="">
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div><br>
 
-                                                <h3>Laporan Jahit Celana</h3>
-                                                <p>Deadline: {{
-                                                    \Carbon\Carbon::parse($laporan->BarangMasukJahitCelana->deadline)->format('d
-                                                    F
-                                                    Y')
-                                                    }}
-                                                </p>
-                                                <p>Selesai:
-                                                    @if ($laporan->BarangMasukJahitCelana->selesai)
-                                                    {{
-                                                    \Carbon\Carbon::parse($laporan->BarangMasukJahitCelana->selesai)->format('d
-                                                    F Y') }}
-                                                    @else
-                                                    @endif
-                                                </p>
-                                                @php
-                                                $deadline =
-                                                \Carbon\Carbon::parse($laporan->BarangMasukJahitCelana->deadline);
-                                                $selesai = $laporan->BarangMasukJahitCelana->selesai ?
-                                                \Carbon\Carbon::parse($laporan->BarangMasukJahitCelana->selesai)
-                                                : null;
-                                                if ($selesai) {
-                                                $selisihHari = $selesai->diffInDays($deadline);
-                                                if ($selesai > $deadline) {
-                                                echo "<p>Lebih dari Deadline: +{$selisihHari} hari</p>";
-                                                } elseif ($selesai < $deadline) {
-                                                    echo "<p>Kurang dari Deadline: -{$selisihHari} hari</p>" ; } else {
-                                                    echo "<p>Selesai tepat pada Deadline</p>" ; } } else { echo "" ; }
-                                                    @endphp <p>Pola celana: {{
-                                                    $laporan->BarangMasukJahitCelana->pola_celana }}</p>
-                                                    <hr>
+                <div class="card">
+                    <h5 class="card-header">Laporan Jahit</h5>
+                    <div class="card-body">
+                        <div class="table-responsive text-nowrap">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Deadline</th>
+                                        <th>Selesai</th>
+                                        <th>
+                                            @php
+                                            $deadline = \Carbon\Carbon::parse($laporan->BarangMasukJahitBaju->deadline);
+                                            $selesai = $laporan->BarangMasukJahitBaju->selesai ?
+                                            \Carbon\Carbon::parse($laporan->BarangMasukJahitBaju->selesai) : null;
+                                            if ($selesai) {
+                                            $selisihHari = $selesai->diffInDays($deadline);
+                                            if ($selesai > $deadline) {
+                                            echo "<p>Lebih dari Deadline:</p>";
+                                            } elseif ($selesai < $deadline) { echo "<p>Kurang dari Deadline</p>" ; }
+                                                else { echo "<p>Selesai tepat pada Deadline</p>" ; } } else { echo "" ;
+                                                } @endphp </th>
+                                        <th>Nama Penjahit</th>
+                                        <th>Foto serah</th>
+                                        <th>Foto terima</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            {{
+                                            \Carbon\Carbon::parse($laporan->BarangMasukJahitBaju->deadline)->format('d F
+                                            Y') }}
+                                        </td>
+                                        <td>
+                                            @if($laporan->BarangMasukJahitBaju->selesai)
+                                            {{ \Carbon\Carbon::parse($laporan->BarangMasukJahitBaju->selesai)->format('d
+                                            F
+                                            Y') }}
+                                            @else
+                                            @endif
+                                        </td>
+                                        <td>
+                                            @if ($selesai > $deadline)
+                                            +{{ $selisihHari }} hari
+                                            @elseif($selesai < $deadline) - {{ $selisihHari }} hari @else Selesai tepat
+                                                pada Deadline @endif </td>
+                                        <td>
+                                            {{ strtoupper($laporan->BarangMasukJahitBaju->leher) }}
+                                        </td>
+                                        <td>
+                                            <img style="height: 200px; width: 200px"
+                                                src="{{ Storage::url($laporan->BarangMasukJahitBaju->pola_badan) }}"
+                                                alt="" srcset="">
+                                        </td>
+                                        <td>
+                                            <img style="height: 200px; width: 200px"
+                                                src="{{ Storage::url($laporan->BarangMasukJahitBaju->foto) }}"
+                                                alt="Belum melakukan terima barang" srcset="">
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div><br>
 
-                                                    <h3>Laporan Pres Tag Size</h3>
-                                                    <p>Deadline: {{
-                                                        \Carbon\Carbon::parse($laporan->BarangMasukPressTag->deadline)->format('d
-                                                        F
-                                                        Y')
-                                                        }}
-                                                    </p>
-                                                    <p>Selesai:
-                                                        @if ($laporan->BarangMasukPressTag->selesai)
-                                                        {{
-                                                        \Carbon\Carbon::parse($laporan->BarangMasukPressTag->selesai)->format('d
-                                                        F Y') }}
-                                                        @else
-                                                        @endif
-                                                    </p>
-                                                    @php
-                                                    $deadline =
-                                                    \Carbon\Carbon::parse($laporan->BarangMasukPressTag->deadline);
-                                                    $selesai = $laporan->BarangMasukPressTag->selesai ?
-                                                    \Carbon\Carbon::parse($laporan->BarangMasukPressTag->selesai)
-                                                    :
-                                                    null;
-                                                    if ($selesai) {
-                                                    $selisihHari = $selesai->diffInDays($deadline);
-                                                    if ($selesai > $deadline) {
-                                                    echo "<p>Lebih dari Deadline: +{$selisihHari} hari</p>";
-                                                    } elseif ($selesai < $deadline) {
-                                                        echo "<p>Kurang dari Deadline: -{$selisihHari} hari</p>" ; }
-                                                        else { echo "<p>Selesai tepat pada Deadline</p>" ; } } else {
-                                                        echo "" ; } @endphp <hr>
+                <div class="card">
+                    <h5 class="card-header">Laporan Finis</h5>
+                    <div class="card-body">
+                        <div class="table-responsive text-nowrap">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Deadline</th>
+                                        <th>Selesai</th>
+                                        <th>
+                                            @php
+                                            $deadline = \Carbon\Carbon::parse($laporan->BarangMasukPressTag->deadline);
+                                            $selesai = $laporan->BarangMasukPressTag->selesai ?
+                                            \Carbon\Carbon::parse($laporan->BarangMasukPressTag->selesai) : null;
+                                            if ($selesai) {
+                                            $selisihHari = $selesai->diffInDays($deadline);
+                                            if ($selesai > $deadline) {
+                                            echo "<p>Lebih dari Deadline:</p>";
+                                            } elseif ($selesai < $deadline) { echo "<p>Kurang dari Deadline</p>" ; }
+                                                else { echo "<p>Selesai tepat pada Deadline</p>" ; } } else { echo "" ;
+                                                } @endphp </th>
+                                        <th>foto</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            {{ \Carbon\Carbon::parse($laporan->BarangMasukPressTag->deadline)->format('d
+                                            F
+                                            Y') }}
+                                        </td>
+                                        <td>
+                                            @if($laporan->BarangMasukPressTag->selesai)
+                                            {{ \Carbon\Carbon::parse($laporan->BarangMasukPressTag->selesai)->format('d
+                                            F
+                                            Y') }}
+                                            @else
+                                            @endif
+                                        </td>
+                                        <td>
+                                            @if ($selesai > $deadline)
+                                            +{{ $selisihHari }} hari
+                                            @elseif($selesai < $deadline) - {{ $selisihHari }} hari @else Selesai tepat
+                                                pada Deadline @endif </td>
+                                        <td>
+                                            <img style="height: 200px; width: 200px"
+                                                src="{{ Storage::url($laporan->BarangMasukPressTag->foto) }}" alt=""
+                                                srcset="">
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div><br>
 
-                                                        <h3>Laporan Packing</h3>
-                                                        <p>Deadline: {{
-                                                            \Carbon\Carbon::parse($laporan->BarangMasukPacking->deadline)->format('d
-                                                            F
-                                                            Y')
-                                                            }}
-                                                        </p>
-                                                        <p>Selesai:
-                                                            @if ($laporan->BarangMasukPacking->selesai)
-                                                            {{
-                                                            \Carbon\Carbon::parse($laporan->BarangMasukPacking->selesai)->format('d
-                                                            F Y') }}
-                                                            @else
-                                                            @endif
-                                                        </p>
-                                                        @php
-                                                        $deadline =
-                                                        \Carbon\Carbon::parse($laporan->BarangMasukPacking->deadline);
-                                                        $selesai = $laporan->BarangMasukPacking->selesai ?
-                                                        \Carbon\Carbon::parse($laporan->BarangMasukPacking->selesai)
-                                                        :
-                                                        null;
-                                                        if ($selesai) {
-                                                        $selisihHari = $selesai->diffInDays($deadline);
-                                                        if ($selesai > $deadline) {
-                                                        echo "<p>Lebih dari Deadline: +{$selisihHari} hari</p>";
-                                                        } elseif ($selesai < $deadline) {
-                                                            echo "<p>Kurang dari Deadline: -{$selisihHari} hari</p>" ; }
-                                                            else { echo "<p>Selesai tepat pada Deadline</p>" ; } } else
-                                                            { echo "" ; } @endphp <hr>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">

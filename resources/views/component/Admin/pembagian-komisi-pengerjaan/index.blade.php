@@ -56,7 +56,8 @@
                                         }}</strong>
                                 </td>
                                 <td>
-                                    <strong style="text-transform: uppercase">{{ $totalKomisiPerUser[$laporan->user_id]
+                                    <strong style="text-transform: uppercase">Rp.{{
+                                        number_format($totalKomisiPerUser[$laporan->user_id], 0,',','.')
                                         }}</strong>
                                 </td>
                             </tr>

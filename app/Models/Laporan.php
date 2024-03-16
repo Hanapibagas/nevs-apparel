@@ -49,7 +49,7 @@ class Laporan extends Model
 
     public function BarangMasukLaserCut()
     {
-        return $this->belongsTo(DataLaserCut::class, 'barang_masuk_lasercut_id');
+        return $this->belongsTo(Cut::class, 'cut_id');
     }
 
     public function BarangMasukManualcut()
@@ -64,7 +64,7 @@ class Laporan extends Model
 
     public function BarangMasukJahitBaju()
     {
-        return $this->belongsTo(DataJahitBaju::class, 'barang_masuk_jahit_baju_id');
+        return $this->belongsTo(Jahit::class, 'jahit_id');
     }
 
     public function BarangMasukJahitCelana()
@@ -74,7 +74,7 @@ class Laporan extends Model
 
     public function BarangMasukPressTag()
     {
-        return $this->belongsTo(DataPressKain::class, 'barang_masuk_pressTagSize_id');
+        return $this->belongsTo(Finish::class, 'finis_id');
     }
 
     public function BarangMasukPacking()
