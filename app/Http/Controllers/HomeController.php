@@ -4,7 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Models\BarangMasukCostumerServices;
 use App\Models\BarangMasukDatalayout;
+use App\Models\BarangMasukDisainer;
+use App\Models\Cut;
+use App\Models\DataPressKain;
+use App\Models\DataSortir;
+use App\Models\Finish;
+use App\Models\Jahit;
 use App\Models\Laporan;
+use App\Models\MesinAtexco;
+use App\Models\MesinMimaki;
 use App\Models\PembagianKomisi;
 use App\Models\User;
 use Carbon\Carbon;
@@ -43,16 +51,59 @@ class HomeController extends Controller
 
         // cs
         $user = Auth::user();
-
         $dataMasuk = BarangMasukCostumerServices::where('cs_id', $user->id)
             ->selectRaw('count(*) as total, MONTH(created_at) as month')
             ->groupByRaw('MONTH(created_at)')
             ->get();
+        $dataMasukDisainer = BarangMasukDisainer::where('users_id', $user->id)
+            ->selectRaw('count(*) as total, MONTH(created_at) as month')
+            ->groupByRaw('MONTH(created_at)')
+            ->get();
+        $dataMasuklayout = BarangMasukDatalayout::where('users_layout_id', $user->id)
+            ->selectRaw('count(*) as total, MONTH(created_at) as month')
+            ->groupByRaw('MONTH(created_at)')
+            ->get();
+        $dataMasukAtexco = MesinAtexco::selectRaw('count(*) as total, MONTH(created_at) as month')
+            ->groupByRaw('MONTH(created_at)')
+            ->get();
+        $dataMasukMimaki = MesinMimaki::selectRaw('count(*) as total, MONTH(created_at) as month')
+            ->groupByRaw('MONTH(created_at)')
+            ->get();
+        $dataMasukPressKain = DataPressKain::selectRaw('count(*) as total, MONTH(created_at) as month')
+            ->groupByRaw('MONTH(created_at)')
+            ->get();
+        $dataMasukCut = Cut::selectRaw('count(*) as total, MONTH(created_at) as month')
+            ->groupByRaw('MONTH(created_at)')
+            ->get();
+        $dataMasukSortir = DataSortir::selectRaw('count(*) as total, MONTH(created_at) as month')
+            ->groupByRaw('MONTH(created_at)')
+            ->get();
+        $dataMasukjahit = Jahit::selectRaw('count(*) as total, MONTH(created_at) as month')
+            ->groupByRaw('MONTH(created_at)')
+            ->get();
+        $dataMasukFinis = Finish::selectRaw('count(*) as total, MONTH(created_at) as month')
+            ->groupByRaw('MONTH(created_at)')
+            ->get();
 
-        // return response()->json($dataMasuk);
+        // return response()->json($dataMasukAtexco);
 
 
-        return view('component.dashboard', compact('dashboardMakassar', 'dashboardBandung', 'dashboardSurabaya', 'dashboardJakarta', 'dataMasuk'));
+        return view('component.dashboard', compact(
+            'dashboardMakassar',
+            'dashboardBandung',
+            'dashboardSurabaya',
+            'dashboardJakarta',
+            'dataMasuk',
+            'dataMasukDisainer',
+            'dataMasuklayout',
+            'dataMasukAtexco',
+            'dataMasukMimaki',
+            'dataMasukPressKain',
+            'dataMasukCut',
+            'dataMasukSortir',
+            'dataMasukjahit',
+            'dataMasukFinis',
+        ));
     }
 
     public function getCostumerSevices()
