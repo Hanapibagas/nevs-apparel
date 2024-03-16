@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\BarangMasukCostumerServices;
 use App\Models\BarangMasukDatalayout;
 use App\Models\BarangMasukDisainer;
+use App\Models\Cut;
 use App\Models\DataJahitBaju;
 use App\Models\DataJahitCelana;
 use App\Models\DataLaserCut;
@@ -14,6 +15,8 @@ use App\Models\DataPacking;
 use App\Models\DataPressKain;
 use App\Models\DataPressTagSize;
 use App\Models\DataSortir;
+use App\Models\Finish;
+use App\Models\Jahit;
 use App\Models\KeraBaju;
 use App\Models\Laporan;
 use App\Models\MesinAtexco;
@@ -28,6 +31,7 @@ use Carbon\Carbon;
 use DateInterval;
 use DateTime;
 use DateTimeZone;
+use Illuminate\Support\Facades\Storage;
 
 class CostumerServicesController extends Controller
 {
@@ -93,6 +97,7 @@ class CostumerServicesController extends Controller
 
     public function postToTimDisainer(Request $request)
     {
+
         $user = Auth::user();
         BarangMasukDisainer::create([
             'nama_cs' => $user->id,
@@ -116,8 +121,8 @@ class CostumerServicesController extends Controller
         }
         $oderCs = BarangMasukCostumerServices::with('BarangMasukDisainer', 'Gambar', 'Users', 'UsersOrder')->find($id);
 
-        $kera = KeraBaju::all();
-        $lengan = PolaLengan::all();
+        $kera = KeraBaju::where('id', '>', 1)->get();
+        $lengan = PolaLengan::where('id', '>', 1)->get();
         $celana = PolaCeleana::all();
 
         // return response()->json($oderCs);
@@ -154,11 +159,9 @@ class CostumerServicesController extends Controller
             'Celana1'
         )->find($id);
 
-        // return response()->json($oderCs);
-        $kera = KeraBaju::all();
-
-        // kedua model ini akan menjadi 1 model
-        $lengan = PolaLengan::all();
+        $kera = KeraBaju::where('id', '>', 1)->get();
+        $lengan = PolaLengan::where('id', '>', 1)->get();
+        // return response()->json($lengan);
         $celana = PolaCeleana::all();
 
         return view('component.Cs.costumer-service-lk-pegawai.update', compact('oderCs', 'users', 'userCounts', 'kera', 'lengan', 'celana'));
@@ -242,6 +245,7 @@ class CostumerServicesController extends Controller
 
             // celana player
             'total_celana_player' => $request->total_celana_player,
+            'kerah_celana_player_id' => $request->kerah_celana_player_id,
             'jenis_sablon_celana_player' => $request->jenis_sablon_celana_player,
             'jenis_kain_celana_player' => $request->jenis_kain_celana_player,
             'pola_celana_player_id' => $request->pola_celana_player_id,
@@ -253,6 +257,7 @@ class CostumerServicesController extends Controller
 
             // celana pelatih
             'total_celana_pelatih' => $request->total_celana_pelatih,
+            'kerah_celana_pelatih_id' => $request->kerah_celana_pelatih_id,
             'jenis_sablon_celana_pelatih' => $request->jenis_sablon_celana_pelatih,
             'pola_celana_pelatih_id' => $request->pola_celana_pelatih_id,
             'jenis_kain_celana_pelatih' => $request->jenis_kain_celana_pelatih,
@@ -263,6 +268,7 @@ class CostumerServicesController extends Controller
 
             // celana kiper
             'total_celana_kiper' => $request->total_celana_kiper,
+            'kerah_celana_kiper_id' => $request->kerah_celana_kiper_id,
             'jenis_sablon_celana_kiper' => $request->jenis_sablon_celana_kiper,
             'pola_celana_kiper_id' => $request->pola_celana_kiper_id,
             'jenis_kain_celana_kiper' => $request->jenis_kain_celana_kiper,
@@ -273,6 +279,7 @@ class CostumerServicesController extends Controller
 
             // celana 1
             'total_celana_1' => $request->total_celana_1,
+            'kerah_celana_1_id' => $request->kerah_celana_1_id,
             'jenis_sablon_celana_1' => $request->jenis_sablon_celana_1,
             'pola_celana_1_id' => $request->pola_celana_1_id,
             'jenis_kain_celana_1' => $request->jenis_kain_celana_1,
@@ -336,6 +343,7 @@ class CostumerServicesController extends Controller
             // baju pelatih
             'total_baju_pelatih' => $request->total_baju_pelatih,
             'kerah_baju_pelatih_id' => $request->kerah_baju_pelatih_id,
+            'jenis_sablon_baju_pelatih' => $request->jenis_sablon_baju_pelatih,
             'pola_lengan_pelatih_id' => $request->pola_lengan_pelatih_id,
             'jenis_kain_baju_pelatih' => $request->jenis_kain_baju_pelatih,
             'ket_kumis_baju_pelatih' => $request->ket_kumis_baju_pelatih,
@@ -349,6 +357,7 @@ class CostumerServicesController extends Controller
             'kerah_baju_kiper_id' => $request->kerah_baju_kiper_id,
             'pola_lengan_kiper_id' => $request->pola_lengan_kiper_id,
             'jenis_kain_baju_kiper' => $request->jenis_kain_baju_kiper,
+            'jenis_sablon_baju_kiper' => $request->jenis_sablon_baju_kiper,
             'ket_kumis_baju_kiper' => $request->ket_kumis_baju_kiper,
             'ket_bantalan_baju_kiper' => $request->ket_bantalan_baju_kiper,
             'ket_celana_kiper' => $request->ket_celana_kiper,
@@ -360,6 +369,7 @@ class CostumerServicesController extends Controller
             'kerah_baju_1_id' => $request->kerah_baju_1_id,
             'pola_lengan_1_id' => $request->pola_lengan_1_id,
             'jenis_kain_baju_1' => $request->jenis_kain_baju_1,
+            'jenis_sablon_baju_1' => $request->jenis_sablon_baju_1,
             'ket_kumis_baju_1' => $request->ket_kumis_baju_1,
             'ket_bantalan_baju_1' => $request->ket_bantalan_baju_1,
             'ket_celana_1' => $request->ket_celana_1,
@@ -368,6 +378,7 @@ class CostumerServicesController extends Controller
 
             // celana player
             'total_celana_player' => $request->total_celana_player,
+            'kerah_celana_player_id' => $request->kerah_celana_player_id,
             'jenis_sablon_celana_player' => $request->jenis_sablon_celana_player,
             'jenis_kain_celana_player' => $request->jenis_kain_celana_player,
             'pola_celana_player_id' => $request->pola_celana_player_id,
@@ -379,6 +390,7 @@ class CostumerServicesController extends Controller
 
             // celana pelatih
             'total_celana_pelatih' => $request->total_celana_pelatih,
+            'kerah_celana_pelatih_id' => $request->kerah_celana_pelatih_id,
             'jenis_sablon_celana_pelatih' => $request->jenis_sablon_celana_pelatih,
             'pola_celana_pelatih_id' => $request->pola_celana_pelatih_id,
             'jenis_kain_celana_pelatih' => $request->jenis_kain_celana_pelatih,
@@ -389,6 +401,7 @@ class CostumerServicesController extends Controller
 
             // celana kiper
             'total_celana_kiper' => $request->total_celana_kiper,
+            'kerah_celana_kiper_id' => $request->kerah_celana_kiper_id,
             'jenis_sablon_celana_kiper' => $request->jenis_sablon_celana_kiper,
             'pola_celana_kiper_id' => $request->pola_celana_kiper_id,
             'jenis_kain_celana_kiper' => $request->jenis_kain_celana_kiper,
@@ -399,6 +412,7 @@ class CostumerServicesController extends Controller
 
             // celana 1
             'total_celana_1' => $request->total_celana_1,
+            'kerah_celana_1_id' => $request->kerah_celana_1_id,
             'jenis_sablon_celana_1' => $request->jenis_sablon_celana_1,
             'pola_celana_1_id' => $request->pola_celana_1_id,
             'jenis_kain_celana_1' => $request->jenis_kain_celana_1,
@@ -413,12 +427,15 @@ class CostumerServicesController extends Controller
             'tanda_telah_mengerjakan' => '1',
         ]);
 
+        // return response()->json($lk);
+
         $createDate = clone $tanggal_masuk;
         if ($tanggal_masuk->dayOfWeek === Carbon::SATURDAY) {
             $createDate->addDay(2);
         } elseif ($tanggal_masuk->dayOfWeek >= Carbon::MONDAY && $tanggal_masuk->dayOfWeek <= Carbon::FRIDAY) {
             $createDate->addDay();
         }
+
         $createDate2 = clone $tanggal_masuk;
         if ($tanggal_masuk->dayOfWeek === Carbon::MONDAY) {
             $createDate2->addDay(2);
@@ -433,6 +450,7 @@ class CostumerServicesController extends Controller
         } elseif ($tanggal_masuk->dayOfWeek === Carbon::SATURDAY) {
             $createDate2->addDay(3);
         }
+
         $createDate3 = clone $tanggal_masuk;
         if ($tanggal_masuk->dayOfWeek === Carbon::MONDAY) {
             $createDate3->addDay(3);
@@ -447,6 +465,7 @@ class CostumerServicesController extends Controller
         } elseif ($tanggal_masuk->dayOfWeek === Carbon::SATURDAY) {
             $createDate3->addDay(4);
         }
+
         $createDate4 = clone $tanggal_masuk;
         if ($tanggal_masuk->dayOfWeek === Carbon::MONDAY) {
             $createDate4->addDay(4);
@@ -461,6 +480,7 @@ class CostumerServicesController extends Controller
         } elseif ($tanggal_masuk->dayOfWeek === Carbon::SATURDAY) {
             $createDate4->addDay(5);
         }
+
         $createDate5 = clone $tanggal_masuk;
         if ($tanggal_masuk->dayOfWeek === Carbon::MONDAY) {
             $createDate5->addDay(5);
@@ -475,6 +495,7 @@ class CostumerServicesController extends Controller
         } elseif ($tanggal_masuk->dayOfWeek === Carbon::SATURDAY) {
             $createDate5->addDay(6);
         }
+
         $createDate6 = clone $tanggal_masuk;
         if ($tanggal_masuk->dayOfWeek === Carbon::MONDAY) {
             $createDate6->addDay(7);
@@ -489,6 +510,7 @@ class CostumerServicesController extends Controller
         } elseif ($tanggal_masuk->dayOfWeek === Carbon::SATURDAY) {
             $createDate6->addDay(7);
         }
+
         $createDate7 = clone $tanggal_masuk;
         if ($tanggal_masuk->dayOfWeek === Carbon::MONDAY) {
             $createDate7->addDay(8);
@@ -503,6 +525,7 @@ class CostumerServicesController extends Controller
         } elseif ($tanggal_masuk->dayOfWeek === Carbon::SATURDAY) {
             $createDate7->addDay(9);
         }
+
         $createDate8 = clone $tanggal_masuk;
         if ($tanggal_masuk->dayOfWeek === Carbon::MONDAY) {
             $createDate8->addDay(9);
@@ -614,40 +637,24 @@ class CostumerServicesController extends Controller
                     'deadline' => $createDate->format('Y-m-d'),
                 ]);
             }
-            $dataLaseCut = DataLaserCut::create([
+            $dataCut = Cut::create([
                 'no_order_id' => $lk->id,
                 'press_kain_id' => $dataPressKain->id,
                 'deadline' => $createDate->format('Y-m-d'),
             ]);
-            $dataManualCut = DataManualCut::create([
-                'no_order_id' => $lk->id,
-                'laser_cut_id' => $dataLaseCut->id,
-                'deadline' => $createDate->format('Y-m-d'),
-            ]);
             $dataSortit = DataSortir::create([
                 'no_order_id' => $lk->id,
-                'manual_cut_id' => $dataManualCut->id,
+                'manual_cut_id' => $dataCut->id,
                 'deadline' => $createDate->format('Y-m-d'),
             ]);
-            $dataJahitBaju = DataJahitBaju::create([
+            $dataJahit = Jahit::create([
                 'no_order_id' => $lk->id,
                 'sortir_id' => $dataSortit->id,
                 'deadline' => $createDate->format('Y-m-d'),
             ]);
-            $dataJahitCelana = DataJahitCelana::create([
+            $dataFinis = Finish::create([
                 'no_order_id' => $lk->id,
-                'sortir_id' => $dataSortit->id,
-                'deadline' => $createDate->format('Y-m-d'),
-            ]);
-            $dataPressSize = DataPressTagSize::create([
-                'no_order_id' => $lk->id,
-                'jahit_baju_id' => $dataJahitBaju->id,
-                'jahit_celana_id' => $dataJahitCelana->id,
-                'deadline' => $createDate->format('Y-m-d'),
-            ]);
-            $dataPacking = DataPacking::create([
-                'no_order_id' => $lk->id,
-                'prass_id' => $dataPressSize->id,
+                'jahit_baju_id' => $dataJahit->id,
                 'deadline' => $createDate->format('Y-m-d'),
             ]);
             if ($mesinAtexco || $mesinMimaki) {
@@ -657,13 +664,10 @@ class CostumerServicesController extends Controller
                     'barang_masuk_mesin_atexco_id' => $mesinAtexco ? $mesinAtexco->id : null,
                     'barang_masuk_mesin_mimaki_id' => $mesinMimaki ? $mesinMimaki->id : null,
                     'barang_masuk_presskain_id' => $dataPressKain->id,
-                    'barang_masuk_lasercut_id' => $dataLaseCut->id,
-                    'barang_masuk_manualcut_id' => $dataManualCut->id,
+                    'cut_id' => $dataCut->id,
                     'barang_masuk_sortir_id' => $dataSortit->id,
-                    'barang_masuk_jahit_baju_id' => $dataJahitBaju->id,
-                    'barang_masuk_jahit_celana_id' => $dataJahitCelana->id,
-                    'barang_masuk_pressTagSize_id' => $dataPressSize->id,
-                    'barang_masuk_packing_id' => $dataPacking->id,
+                    'jahit_id' => $dataJahit->id,
+                    'finis_id' => $dataFinis->id,
                 ]);
             }
         } elseif ($total_hari == 2) {
@@ -672,7 +676,6 @@ class CostumerServicesController extends Controller
                 'no_order_id' => $lk->id,
                 'deadline' => $createDate->format('Y-m-d'),
             ]);
-
             $mesinAtexco = null;
             $mesinMimaki = null;
             if ($lk->jenis_mesin == 'atexco') {
@@ -703,40 +706,24 @@ class CostumerServicesController extends Controller
                     'deadline' => $createDate->format('Y-m-d'),
                 ]);
             }
-            $dataLaseCut = DataLaserCut::create([
+            $dataCut = Cut::create([
                 'no_order_id' => $lk->id,
                 'press_kain_id' => $dataPressKain->id,
                 'deadline' => $createDate->format('Y-m-d'),
             ]);
-            $dataManualCut = DataManualCut::create([
-                'no_order_id' => $lk->id,
-                'laser_cut_id' => $dataLaseCut->id,
-                'deadline' => $createDate->format('Y-m-d'),
-            ]);
             $dataSortit = DataSortir::create([
                 'no_order_id' => $lk->id,
-                'manual_cut_id' => $dataManualCut->id,
+                'manual_cut_id' => $dataCut->id,
                 'deadline' => $createDate2->format('Y-m-d'),
             ]);
-            $dataJahitBaju = DataJahitBaju::create([
+            $dataJahit = Jahit::create([
                 'no_order_id' => $lk->id,
                 'sortir_id' => $dataSortit->id,
                 'deadline' => $createDate2->format('Y-m-d'),
             ]);
-            $dataJahitCelana = DataJahitCelana::create([
+            $dataFinis = Finish::create([
                 'no_order_id' => $lk->id,
-                'sortir_id' => $dataSortit->id,
-                'deadline' => $createDate2->format('Y-m-d'),
-            ]);
-            $dataPressSize = DataPressTagSize::create([
-                'no_order_id' => $lk->id,
-                'jahit_baju_id' => $dataJahitBaju->id,
-                'jahit_celana_id' => $dataJahitCelana->id,
-                'deadline' => $createDate2->format('Y-m-d'),
-            ]);
-            $dataPacking = DataPacking::create([
-                'no_order_id' => $lk->id,
-                'prass_id' => $dataPressSize->id,
+                'jahit_baju_id' => $dataJahit->id,
                 'deadline' => $createDate2->format('Y-m-d'),
             ]);
             if ($mesinAtexco || $mesinMimaki) {
@@ -746,13 +733,10 @@ class CostumerServicesController extends Controller
                     'barang_masuk_mesin_atexco_id' => $mesinAtexco ? $mesinAtexco->id : null,
                     'barang_masuk_mesin_mimaki_id' => $mesinMimaki ? $mesinMimaki->id : null,
                     'barang_masuk_presskain_id' => $dataPressKain->id,
-                    'barang_masuk_lasercut_id' => $dataLaseCut->id,
-                    'barang_masuk_manualcut_id' => $dataManualCut->id,
+                    'cut_id' => $dataCut->id,
                     'barang_masuk_sortir_id' => $dataSortit->id,
-                    'barang_masuk_jahit_baju_id' => $dataJahitBaju->id,
-                    'barang_masuk_jahit_celana_id' => $dataJahitCelana->id,
-                    'barang_masuk_pressTagSize_id' => $dataPressSize->id,
-                    'barang_masuk_packing_id' => $dataPacking->id,
+                    'jahit_id' => $dataJahit->id,
+                    'finis_id' => $dataFinis->id,
                 ]);
             }
         } elseif ($total_hari == 3) {
@@ -761,7 +745,6 @@ class CostumerServicesController extends Controller
                 'no_order_id' => $lk->id,
                 'deadline' => $createDate->format('Y-m-d'),
             ]);
-
             $mesinAtexco = null;
             $mesinMimaki = null;
             if ($lk->jenis_mesin == 'atexco') {
@@ -792,40 +775,24 @@ class CostumerServicesController extends Controller
                     'deadline' => $createDate->format('Y-m-d'),
                 ]);
             }
-            $dataLaseCut = DataLaserCut::create([
+            $dataCut = Cut::create([
                 'no_order_id' => $lk->id,
                 'press_kain_id' => $dataPressKain->id,
                 'deadline' => $createDate2->format('Y-m-d'),
             ]);
-            $dataManualCut = DataManualCut::create([
-                'no_order_id' => $lk->id,
-                'laser_cut_id' => $dataLaseCut->id,
-                'deadline' => $createDate2->format('Y-m-d'),
-            ]);
             $dataSortit = DataSortir::create([
                 'no_order_id' => $lk->id,
-                'manual_cut_id' => $dataManualCut->id,
+                'manual_cut_id' => $dataCut->id,
                 'deadline' => $createDate3->format('Y-m-d'),
             ]);
-            $dataJahitBaju = DataJahitBaju::create([
+            $dataJahit = Jahit::create([
                 'no_order_id' => $lk->id,
                 'sortir_id' => $dataSortit->id,
                 'deadline' => $createDate3->format('Y-m-d'),
             ]);
-            $dataJahitCelana = DataJahitCelana::create([
+            $dataFinis = Finish::create([
                 'no_order_id' => $lk->id,
-                'sortir_id' => $dataSortit->id,
-                'deadline' => $createDate3->format('Y-m-d'),
-            ]);
-            $dataPressSize = DataPressTagSize::create([
-                'no_order_id' => $lk->id,
-                'jahit_baju_id' => $dataJahitBaju->id,
-                'jahit_celana_id' => $dataJahitCelana->id,
-                'deadline' => $createDate3->format('Y-m-d'),
-            ]);
-            $dataPacking = DataPacking::create([
-                'no_order_id' => $lk->id,
-                'prass_id' => $dataPressSize->id,
+                'jahit_baju_id' => $dataJahit->id,
                 'deadline' => $createDate3->format('Y-m-d'),
             ]);
             if ($mesinAtexco || $mesinMimaki) {
@@ -835,13 +802,10 @@ class CostumerServicesController extends Controller
                     'barang_masuk_mesin_atexco_id' => $mesinAtexco ? $mesinAtexco->id : null,
                     'barang_masuk_mesin_mimaki_id' => $mesinMimaki ? $mesinMimaki->id : null,
                     'barang_masuk_presskain_id' => $dataPressKain->id,
-                    'barang_masuk_lasercut_id' => $dataLaseCut->id,
-                    'barang_masuk_manualcut_id' => $dataManualCut->id,
+                    'cut_id' => $dataCut->id,
                     'barang_masuk_sortir_id' => $dataSortit->id,
-                    'barang_masuk_jahit_baju_id' => $dataJahitBaju->id,
-                    'barang_masuk_jahit_celana_id' => $dataJahitCelana->id,
-                    'barang_masuk_pressTagSize_id' => $dataPressSize->id,
-                    'barang_masuk_packing_id' => $dataPacking->id,
+                    'jahit_id' => $dataJahit->id,
+                    'finis_id' => $dataFinis->id,
                 ]);
             }
         } elseif ($total_hari == 4) {
@@ -881,40 +845,24 @@ class CostumerServicesController extends Controller
                     'deadline' => $createDate->format('Y-m-d'),
                 ]);
             }
-            $dataLaseCut = DataLaserCut::create([
+            $dataCut = Cut::create([
                 'no_order_id' => $lk->id,
                 'press_kain_id' => $dataPressKain->id,
                 'deadline' => $createDate3->format('Y-m-d'),
             ]);
-            $dataManualCut = DataManualCut::create([
-                'no_order_id' => $lk->id,
-                'laser_cut_id' => $dataLaseCut->id,
-                'deadline' => $createDate3->format('Y-m-d'),
-            ]);
             $dataSortit = DataSortir::create([
                 'no_order_id' => $lk->id,
-                'manual_cut_id' => $dataManualCut->id,
+                'manual_cut_id' => $dataCut->id,
                 'deadline' => $createDate3->format('Y-m-d'),
             ]);
-            $dataJahitBaju = DataJahitBaju::create([
+            $dataJahit = Jahit::create([
                 'no_order_id' => $lk->id,
                 'sortir_id' => $dataSortit->id,
                 'deadline' => $createDate4->format('Y-m-d'),
             ]);
-            $dataJahitCelana = DataJahitCelana::create([
+            $dataFinis = Finish::create([
                 'no_order_id' => $lk->id,
-                'sortir_id' => $dataSortit->id,
-                'deadline' => $createDate4->format('Y-m-d'),
-            ]);
-            $dataPressSize = DataPressTagSize::create([
-                'no_order_id' => $lk->id,
-                'jahit_baju_id' => $dataJahitBaju->id,
-                'jahit_celana_id' => $dataJahitCelana->id,
-                'deadline' => $createDate4->format('Y-m-d'),
-            ]);
-            $dataPacking = DataPacking::create([
-                'no_order_id' => $lk->id,
-                'prass_id' => $dataPressSize->id,
+                'jahit_baju_id' => $dataJahit->id,
                 'deadline' => $createDate4->format('Y-m-d'),
             ]);
             if ($mesinAtexco || $mesinMimaki) {
@@ -924,13 +872,10 @@ class CostumerServicesController extends Controller
                     'barang_masuk_mesin_atexco_id' => $mesinAtexco ? $mesinAtexco->id : null,
                     'barang_masuk_mesin_mimaki_id' => $mesinMimaki ? $mesinMimaki->id : null,
                     'barang_masuk_presskain_id' => $dataPressKain->id,
-                    'barang_masuk_lasercut_id' => $dataLaseCut->id,
-                    'barang_masuk_manualcut_id' => $dataManualCut->id,
+                    'cut_id' => $dataCut->id,
                     'barang_masuk_sortir_id' => $dataSortit->id,
-                    'barang_masuk_jahit_baju_id' => $dataJahitBaju->id,
-                    'barang_masuk_jahit_celana_id' => $dataJahitCelana->id,
-                    'barang_masuk_pressTagSize_id' => $dataPressSize->id,
-                    'barang_masuk_packing_id' => $dataPacking->id,
+                    'jahit_id' => $dataJahit->id,
+                    'finis_id' => $dataFinis->id,
                 ]);
             }
         } elseif ($total_hari == 5) {
@@ -939,7 +884,6 @@ class CostumerServicesController extends Controller
                 'no_order_id' => $lk->id,
                 'deadline' => $createDate->format('Y-m-d'),
             ]);
-
             $mesinAtexco = null;
             $mesinMimaki = null;
             if ($lk->jenis_mesin == 'atexco') {
@@ -970,40 +914,24 @@ class CostumerServicesController extends Controller
                     'deadline' => $createDate->format('Y-m-d'),
                 ]);
             }
-            $dataLaseCut = DataLaserCut::create([
+            $dataCut = Cut::create([
                 'no_order_id' => $lk->id,
                 'press_kain_id' => $dataPressKain->id,
                 'deadline' => $createDate3->format('Y-m-d'),
             ]);
-            $dataManualCut = DataManualCut::create([
-                'no_order_id' => $lk->id,
-                'laser_cut_id' => $dataLaseCut->id,
-                'deadline' => $createDate3->format('Y-m-d'),
-            ]);
             $dataSortit = DataSortir::create([
                 'no_order_id' => $lk->id,
-                'manual_cut_id' => $dataManualCut->id,
+                'manual_cut_id' => $dataCut->id,
                 'deadline' => $createDate4->format('Y-m-d'),
             ]);
-            $dataJahitBaju = DataJahitBaju::create([
+            $dataJahit = Jahit::create([
                 'no_order_id' => $lk->id,
                 'sortir_id' => $dataSortit->id,
                 'deadline' => $createDate5->format('Y-m-d'),
             ]);
-            $dataJahitCelana = DataJahitCelana::create([
+            $dataFinis = Finish::create([
                 'no_order_id' => $lk->id,
-                'sortir_id' => $dataSortit->id,
-                'deadline' => $createDate5->format('Y-m-d'),
-            ]);
-            $dataPressSize = DataPressTagSize::create([
-                'no_order_id' => $lk->id,
-                'jahit_baju_id' => $dataJahitBaju->id,
-                'jahit_celana_id' => $dataJahitCelana->id,
-                'deadline' => $createDate5->format('Y-m-d'),
-            ]);
-            $dataPacking = DataPacking::create([
-                'no_order_id' => $lk->id,
-                'prass_id' => $dataPressSize->id,
+                'jahit_baju_id' => $dataJahit->id,
                 'deadline' => $createDate5->format('Y-m-d'),
             ]);
             if ($mesinAtexco || $mesinMimaki) {
@@ -1013,13 +941,10 @@ class CostumerServicesController extends Controller
                     'barang_masuk_mesin_atexco_id' => $mesinAtexco ? $mesinAtexco->id : null,
                     'barang_masuk_mesin_mimaki_id' => $mesinMimaki ? $mesinMimaki->id : null,
                     'barang_masuk_presskain_id' => $dataPressKain->id,
-                    'barang_masuk_lasercut_id' => $dataLaseCut->id,
-                    'barang_masuk_manualcut_id' => $dataManualCut->id,
+                    'cut_id' => $dataCut->id,
                     'barang_masuk_sortir_id' => $dataSortit->id,
-                    'barang_masuk_jahit_baju_id' => $dataJahitBaju->id,
-                    'barang_masuk_jahit_celana_id' => $dataJahitCelana->id,
-                    'barang_masuk_pressTagSize_id' => $dataPressSize->id,
-                    'barang_masuk_packing_id' => $dataPacking->id,
+                    'jahit_id' => $dataJahit->id,
+                    'finis_id' => $dataFinis->id,
                 ]);
             }
         } elseif ($total_hari == 6) {
@@ -1028,7 +953,6 @@ class CostumerServicesController extends Controller
                 'no_order_id' => $lk->id,
                 'deadline' => $createDate->format('Y-m-d'),
             ]);
-
             $mesinAtexco = null;
             $mesinMimaki = null;
             if ($lk->jenis_mesin == 'atexco') {
@@ -1059,40 +983,24 @@ class CostumerServicesController extends Controller
                     'deadline' => $createDate->format('Y-m-d'),
                 ]);
             }
-            $dataLaseCut = DataLaserCut::create([
+            $dataCut = Cut::create([
                 'no_order_id' => $lk->id,
                 'press_kain_id' => $dataPressKain->id,
                 'deadline' => $createDate3->format('Y-m-d'),
             ]);
-            $dataManualCut = DataManualCut::create([
-                'no_order_id' => $lk->id,
-                'laser_cut_id' => $dataLaseCut->id,
-                'deadline' => $createDate3->format('Y-m-d'),
-            ]);
             $dataSortit = DataSortir::create([
                 'no_order_id' => $lk->id,
-                'manual_cut_id' => $dataManualCut->id,
+                'manual_cut_id' => $dataCut->id,
                 'deadline' => $createDate5->format('Y-m-d'),
             ]);
-            $dataJahitBaju = DataJahitBaju::create([
+            $dataJahit = Jahit::create([
                 'no_order_id' => $lk->id,
                 'sortir_id' => $dataSortit->id,
                 'deadline' => $createDate6->format('Y-m-d'),
             ]);
-            $dataJahitCelana = DataJahitCelana::create([
+            $dataFinis = Finish::create([
                 'no_order_id' => $lk->id,
-                'sortir_id' => $dataSortit->id,
-                'deadline' => $createDate6->format('Y-m-d'),
-            ]);
-            $dataPressSize = DataPressTagSize::create([
-                'no_order_id' => $lk->id,
-                'jahit_baju_id' => $dataJahitBaju->id,
-                'jahit_celana_id' => $dataJahitCelana->id,
-                'deadline' => $createDate6->format('Y-m-d'),
-            ]);
-            $dataPacking = DataPacking::create([
-                'no_order_id' => $lk->id,
-                'prass_id' => $dataPressSize->id,
+                'jahit_baju_id' => $dataJahit->id,
                 'deadline' => $createDate6->format('Y-m-d'),
             ]);
             if ($mesinAtexco || $mesinMimaki) {
@@ -1102,13 +1010,10 @@ class CostumerServicesController extends Controller
                     'barang_masuk_mesin_atexco_id' => $mesinAtexco ? $mesinAtexco->id : null,
                     'barang_masuk_mesin_mimaki_id' => $mesinMimaki ? $mesinMimaki->id : null,
                     'barang_masuk_presskain_id' => $dataPressKain->id,
-                    'barang_masuk_lasercut_id' => $dataLaseCut->id,
-                    'barang_masuk_manualcut_id' => $dataManualCut->id,
+                    'cut_id' => $dataCut->id,
                     'barang_masuk_sortir_id' => $dataSortit->id,
-                    'barang_masuk_jahit_baju_id' => $dataJahitBaju->id,
-                    'barang_masuk_jahit_celana_id' => $dataJahitCelana->id,
-                    'barang_masuk_pressTagSize_id' => $dataPressSize->id,
-                    'barang_masuk_packing_id' => $dataPacking->id,
+                    'jahit_id' => $dataJahit->id,
+                    'finis_id' => $dataFinis->id,
                 ]);
             }
         } elseif ($total_hari == 7) {
@@ -1148,40 +1053,24 @@ class CostumerServicesController extends Controller
                     'deadline' => $createDate->format('Y-m-d'),
                 ]);
             }
-            $dataLaseCut = DataLaserCut::create([
+            $dataCut = Cut::create([
                 'no_order_id' => $lk->id,
                 'press_kain_id' => $dataPressKain->id,
                 'deadline' => $createDate4->format('Y-m-d'),
             ]);
-            $dataManualCut = DataManualCut::create([
-                'no_order_id' => $lk->id,
-                'laser_cut_id' => $dataLaseCut->id,
-                'deadline' => $createDate4->format('Y-m-d'),
-            ]);
             $dataSortit = DataSortir::create([
                 'no_order_id' => $lk->id,
-                'manual_cut_id' => $dataManualCut->id,
+                'manual_cut_id' => $dataCut->id,
                 'deadline' => $createDate5->format('Y-m-d'),
             ]);
-            $dataJahitBaju = DataJahitBaju::create([
+            $dataJahit = Jahit::create([
                 'no_order_id' => $lk->id,
                 'sortir_id' => $dataSortit->id,
                 'deadline' => $createDate7->format('Y-m-d'),
             ]);
-            $dataJahitCelana = DataJahitCelana::create([
+            $dataFinis = Finish::create([
                 'no_order_id' => $lk->id,
-                'sortir_id' => $dataSortit->id,
-                'deadline' => $createDate7->format('Y-m-d'),
-            ]);
-            $dataPressSize = DataPressTagSize::create([
-                'no_order_id' => $lk->id,
-                'jahit_baju_id' => $dataJahitBaju->id,
-                'jahit_celana_id' => $dataJahitCelana->id,
-                'deadline' => $createDate7->format('Y-m-d'),
-            ]);
-            $dataPacking = DataPacking::create([
-                'no_order_id' => $lk->id,
-                'prass_id' => $dataPressSize->id,
+                'jahit_baju_id' => $dataJahit->id,
                 'deadline' => $createDate7->format('Y-m-d'),
             ]);
             if ($mesinAtexco || $mesinMimaki) {
@@ -1191,13 +1080,10 @@ class CostumerServicesController extends Controller
                     'barang_masuk_mesin_atexco_id' => $mesinAtexco ? $mesinAtexco->id : null,
                     'barang_masuk_mesin_mimaki_id' => $mesinMimaki ? $mesinMimaki->id : null,
                     'barang_masuk_presskain_id' => $dataPressKain->id,
-                    'barang_masuk_lasercut_id' => $dataLaseCut->id,
-                    'barang_masuk_manualcut_id' => $dataManualCut->id,
+                    'cut_id' => $dataCut->id,
                     'barang_masuk_sortir_id' => $dataSortit->id,
-                    'barang_masuk_jahit_baju_id' => $dataJahitBaju->id,
-                    'barang_masuk_jahit_celana_id' => $dataJahitCelana->id,
-                    'barang_masuk_pressTagSize_id' => $dataPressSize->id,
-                    'barang_masuk_packing_id' => $dataPacking->id,
+                    'jahit_id' => $dataJahit->id,
+                    'finis_id' => $dataFinis->id,
                 ]);
             }
         } elseif ($total_hari == 8) {
@@ -1206,7 +1092,6 @@ class CostumerServicesController extends Controller
                 'no_order_id' => $lk->id,
                 'deadline' => $createDate2->format('Y-m-d'),
             ]);
-
             $mesinAtexco = null;
             $mesinMimaki = null;
             if ($lk->jenis_mesin == 'atexco') {
@@ -1237,40 +1122,24 @@ class CostumerServicesController extends Controller
                     'deadline' => $createDate->format('Y-m-d'),
                 ]);
             }
-            $dataLaseCut = DataLaserCut::create([
+            $dataCut = Cut::create([
                 'no_order_id' => $lk->id,
                 'press_kain_id' => $dataPressKain->id,
                 'deadline' => $createDate5->format('Y-m-d'),
             ]);
-            $dataManualCut = DataManualCut::create([
-                'no_order_id' => $lk->id,
-                'laser_cut_id' => $dataLaseCut->id,
-                'deadline' => $createDate5->format('Y-m-d'),
-            ]);
             $dataSortit = DataSortir::create([
                 'no_order_id' => $lk->id,
-                'manual_cut_id' => $dataManualCut->id,
+                'manual_cut_id' => $dataCut->id,
                 'deadline' => $createDate6->format('Y-m-d'),
             ]);
-            $dataJahitBaju = DataJahitBaju::create([
+            $dataJahit = Jahit::create([
                 'no_order_id' => $lk->id,
                 'sortir_id' => $dataSortit->id,
                 'deadline' => $createDate8->format('Y-m-d'),
             ]);
-            $dataJahitCelana = DataJahitCelana::create([
+            $dataFinis = Finish::create([
                 'no_order_id' => $lk->id,
-                'sortir_id' => $dataSortit->id,
-                'deadline' => $createDate8->format('Y-m-d'),
-            ]);
-            $dataPressSize = DataPressTagSize::create([
-                'no_order_id' => $lk->id,
-                'jahit_baju_id' => $dataJahitBaju->id,
-                'jahit_celana_id' => $dataJahitCelana->id,
-                'deadline' => $createDate8->format('Y-m-d'),
-            ]);
-            $dataPacking = DataPacking::create([
-                'no_order_id' => $lk->id,
-                'prass_id' => $dataPressSize->id,
+                'jahit_baju_id' => $dataJahit->id,
                 'deadline' => $createDate8->format('Y-m-d'),
             ]);
             if ($mesinAtexco || $mesinMimaki) {
@@ -1280,13 +1149,10 @@ class CostumerServicesController extends Controller
                     'barang_masuk_mesin_atexco_id' => $mesinAtexco ? $mesinAtexco->id : null,
                     'barang_masuk_mesin_mimaki_id' => $mesinMimaki ? $mesinMimaki->id : null,
                     'barang_masuk_presskain_id' => $dataPressKain->id,
-                    'barang_masuk_lasercut_id' => $dataLaseCut->id,
-                    'barang_masuk_manualcut_id' => $dataManualCut->id,
+                    'cut_id' => $dataCut->id,
                     'barang_masuk_sortir_id' => $dataSortit->id,
-                    'barang_masuk_jahit_baju_id' => $dataJahitBaju->id,
-                    'barang_masuk_jahit_celana_id' => $dataJahitCelana->id,
-                    'barang_masuk_pressTagSize_id' => $dataPressSize->id,
-                    'barang_masuk_packing_id' => $dataPacking->id,
+                    'jahit_id' => $dataJahit->id,
+                    'finis_id' => $dataFinis->id,
                 ]);
             }
         } elseif ($total_hari == 9) {
@@ -1326,40 +1192,24 @@ class CostumerServicesController extends Controller
                     'deadline' => $createDate->format('Y-m-d'),
                 ]);
             }
-            $dataLaseCut = DataLaserCut::create([
+            $dataCut = Cut::create([
                 'no_order_id' => $lk->id,
                 'press_kain_id' => $dataPressKain->id,
                 'deadline' => $createDate5->format('Y-m-d'),
             ]);
-            $dataManualCut = DataManualCut::create([
-                'no_order_id' => $lk->id,
-                'laser_cut_id' => $dataLaseCut->id,
-                'deadline' => $createDate5->format('Y-m-d'),
-            ]);
             $dataSortit = DataSortir::create([
                 'no_order_id' => $lk->id,
-                'manual_cut_id' => $dataManualCut->id,
+                'manual_cut_id' => $dataCut->id,
                 'deadline' => $createDate6->format('Y-m-d'),
             ]);
-            $dataJahitBaju = DataJahitBaju::create([
+            $dataJahit = Jahit::create([
                 'no_order_id' => $lk->id,
                 'sortir_id' => $dataSortit->id,
                 'deadline' => $createDate8->format('Y-m-d'),
             ]);
-            $dataJahitCelana = DataJahitCelana::create([
+            $dataFinis = Finish::create([
                 'no_order_id' => $lk->id,
-                'sortir_id' => $dataSortit->id,
-                'deadline' => $createDate8->format('Y-m-d'),
-            ]);
-            $dataPressSize = DataPressTagSize::create([
-                'no_order_id' => $lk->id,
-                'jahit_baju_id' => $dataJahitBaju->id,
-                'jahit_celana_id' => $dataJahitCelana->id,
-                'deadline' => $createDate9->format('Y-m-d'),
-            ]);
-            $dataPacking = DataPacking::create([
-                'no_order_id' => $lk->id,
-                'prass_id' => $dataPressSize->id,
+                'jahit_baju_id' => $dataJahit->id,
                 'deadline' => $createDate9->format('Y-m-d'),
             ]);
             if ($mesinAtexco || $mesinMimaki) {
@@ -1369,13 +1219,10 @@ class CostumerServicesController extends Controller
                     'barang_masuk_mesin_atexco_id' => $mesinAtexco ? $mesinAtexco->id : null,
                     'barang_masuk_mesin_mimaki_id' => $mesinMimaki ? $mesinMimaki->id : null,
                     'barang_masuk_presskain_id' => $dataPressKain->id,
-                    'barang_masuk_lasercut_id' => $dataLaseCut->id,
-                    'barang_masuk_manualcut_id' => $dataManualCut->id,
+                    'cut_id' => $dataCut->id,
                     'barang_masuk_sortir_id' => $dataSortit->id,
-                    'barang_masuk_jahit_baju_id' => $dataJahitBaju->id,
-                    'barang_masuk_jahit_celana_id' => $dataJahitCelana->id,
-                    'barang_masuk_pressTagSize_id' => $dataPressSize->id,
-                    'barang_masuk_packing_id' => $dataPacking->id,
+                    'jahit_id' => $dataJahit->id,
+                    'finis_id' => $dataFinis->id,
                 ]);
             }
         } elseif ($total_hari == 10) {
@@ -1384,7 +1231,6 @@ class CostumerServicesController extends Controller
                 'no_order_id' => $lk->id,
                 'deadline' => $createDate2->format('Y-m-d'),
             ]);
-
             $mesinAtexco = null;
             $mesinMimaki = null;
             if ($lk->jenis_mesin == 'atexco') {
@@ -1415,40 +1261,24 @@ class CostumerServicesController extends Controller
                     'deadline' => $createDate->format('Y-m-d'),
                 ]);
             }
-            $dataLaseCut = DataLaserCut::create([
+            $dataCut = Cut::create([
                 'no_order_id' => $lk->id,
                 'press_kain_id' => $dataPressKain->id,
                 'deadline' => $createDate5->format('Y-m-d'),
             ]);
-            $dataManualCut = DataManualCut::create([
-                'no_order_id' => $lk->id,
-                'laser_cut_id' => $dataLaseCut->id,
-                'deadline' => $createDate5->format('Y-m-d'),
-            ]);
             $dataSortit = DataSortir::create([
                 'no_order_id' => $lk->id,
-                'manual_cut_id' => $dataManualCut->id,
+                'manual_cut_id' => $dataCut->id,
                 'deadline' => $createDate6->format('Y-m-d'),
             ]);
-            $dataJahitBaju = DataJahitBaju::create([
+            $dataJahit = Jahit::create([
                 'no_order_id' => $lk->id,
                 'sortir_id' => $dataSortit->id,
                 'deadline' => $createDate9->format('Y-m-d'),
             ]);
-            $dataJahitCelana = DataJahitCelana::create([
+            $dataFinis = Finish::create([
                 'no_order_id' => $lk->id,
-                'sortir_id' => $dataSortit->id,
-                'deadline' => $createDate9->format('Y-m-d'),
-            ]);
-            $dataPressSize = DataPressTagSize::create([
-                'no_order_id' => $lk->id,
-                'jahit_baju_id' => $dataJahitBaju->id,
-                'jahit_celana_id' => $dataJahitCelana->id,
-                'deadline' => $createDate10->format('Y-m-d'),
-            ]);
-            $dataPacking = DataPacking::create([
-                'no_order_id' => $lk->id,
-                'prass_id' => $dataPressSize->id,
+                'jahit_baju_id' => $dataJahit->id,
                 'deadline' => $createDate10->format('Y-m-d'),
             ]);
             if ($mesinAtexco || $mesinMimaki) {
@@ -1458,13 +1288,10 @@ class CostumerServicesController extends Controller
                     'barang_masuk_mesin_atexco_id' => $mesinAtexco ? $mesinAtexco->id : null,
                     'barang_masuk_mesin_mimaki_id' => $mesinMimaki ? $mesinMimaki->id : null,
                     'barang_masuk_presskain_id' => $dataPressKain->id,
-                    'barang_masuk_lasercut_id' => $dataLaseCut->id,
-                    'barang_masuk_manualcut_id' => $dataManualCut->id,
+                    'cut_id' => $dataCut->id,
                     'barang_masuk_sortir_id' => $dataSortit->id,
-                    'barang_masuk_jahit_baju_id' => $dataJahitBaju->id,
-                    'barang_masuk_jahit_celana_id' => $dataJahitCelana->id,
-                    'barang_masuk_pressTagSize_id' => $dataPressSize->id,
-                    'barang_masuk_packing_id' => $dataPacking->id,
+                    'jahit_id' => $dataJahit->id,
+                    'finis_id' => $dataFinis->id,
                 ]);
             }
         } elseif ($total_hari == 11) {
@@ -1504,40 +1331,24 @@ class CostumerServicesController extends Controller
                     'deadline' => $createDate->format('Y-m-d'),
                 ]);
             }
-            $dataLaseCut = DataLaserCut::create([
+            $dataCut = Cut::create([
                 'no_order_id' => $lk->id,
                 'press_kain_id' => $dataPressKain->id,
                 'deadline' => $createDate6->format('Y-m-d'),
             ]);
-            $dataManualCut = DataManualCut::create([
-                'no_order_id' => $lk->id,
-                'laser_cut_id' => $dataLaseCut->id,
-                'deadline' => $createDate6->format('Y-m-d'),
-            ]);
             $dataSortit = DataSortir::create([
                 'no_order_id' => $lk->id,
-                'manual_cut_id' => $dataManualCut->id,
+                'manual_cut_id' => $dataCut->id,
                 'deadline' => $createDate7->format('Y-m-d'),
             ]);
-            $dataJahitBaju = DataJahitBaju::create([
+            $dataJahit = Jahit::create([
                 'no_order_id' => $lk->id,
                 'sortir_id' => $dataSortit->id,
                 'deadline' => $createDate10->format('Y-m-d'),
             ]);
-            $dataJahitCelana = DataJahitCelana::create([
+            $dataFinis = Finish::create([
                 'no_order_id' => $lk->id,
-                'sortir_id' => $dataSortit->id,
-                'deadline' => $createDate10->format('Y-m-d'),
-            ]);
-            $dataPressSize = DataPressTagSize::create([
-                'no_order_id' => $lk->id,
-                'jahit_baju_id' => $dataJahitBaju->id,
-                'jahit_celana_id' => $dataJahitCelana->id,
-                'deadline' => $createDate11->format('Y-m-d'),
-            ]);
-            $dataPacking = DataPacking::create([
-                'no_order_id' => $lk->id,
-                'prass_id' => $dataPressSize->id,
+                'jahit_baju_id' => $dataJahit->id,
                 'deadline' => $createDate11->format('Y-m-d'),
             ]);
             if ($mesinAtexco || $mesinMimaki) {
@@ -1547,22 +1358,18 @@ class CostumerServicesController extends Controller
                     'barang_masuk_mesin_atexco_id' => $mesinAtexco ? $mesinAtexco->id : null,
                     'barang_masuk_mesin_mimaki_id' => $mesinMimaki ? $mesinMimaki->id : null,
                     'barang_masuk_presskain_id' => $dataPressKain->id,
-                    'barang_masuk_lasercut_id' => $dataLaseCut->id,
-                    'barang_masuk_manualcut_id' => $dataManualCut->id,
+                    'cut_id' => $dataCut->id,
                     'barang_masuk_sortir_id' => $dataSortit->id,
-                    'barang_masuk_jahit_baju_id' => $dataJahitBaju->id,
-                    'barang_masuk_jahit_celana_id' => $dataJahitCelana->id,
-                    'barang_masuk_pressTagSize_id' => $dataPressSize->id,
-                    'barang_masuk_packing_id' => $dataPacking->id,
+                    'jahit_id' => $dataJahit->id,
+                    'finis_id' => $dataFinis->id,
                 ]);
             }
-        } elseif ($total_hari >= 12 && $total_hari <= 32) {
+        } elseif ($total_hari >= 12 && $total_hari <= 9999) {
             $barangMasukDataLayout = BarangMasukDatalayout::create([
                 'users_layout_id' => $lk->layout_id,
                 'no_order_id' => $lk->id,
                 'deadline' => $createDate3->format('Y-m-d'),
             ]);
-
             $mesinAtexco = null;
             $mesinMimaki = null;
             if ($lk->jenis_mesin == 'atexco') {
@@ -1593,40 +1400,24 @@ class CostumerServicesController extends Controller
                     'deadline' => $createDate->format('Y-m-d'),
                 ]);
             }
-            $dataLaseCut = DataLaserCut::create([
+            $dataCut = Cut::create([
                 'no_order_id' => $lk->id,
                 'press_kain_id' => $dataPressKain->id,
                 'deadline' => $createDate6->format('Y-m-d'),
             ]);
-            $dataManualCut = DataManualCut::create([
-                'no_order_id' => $lk->id,
-                'laser_cut_id' => $dataLaseCut->id,
-                'deadline' => $createDate6->format('Y-m-d'),
-            ]);
             $dataSortit = DataSortir::create([
                 'no_order_id' => $lk->id,
-                'manual_cut_id' => $dataManualCut->id,
+                'manual_cut_id' => $dataCut->id,
                 'deadline' => $createDate7->format('Y-m-d'),
             ]);
-            $dataJahitBaju = DataJahitBaju::create([
+            $dataJahit = Jahit::create([
                 'no_order_id' => $lk->id,
                 'sortir_id' => $dataSortit->id,
                 'deadline' => $createDate10->format('Y-m-d'),
             ]);
-            $dataJahitCelana = DataJahitCelana::create([
+            $dataFinis = Finish::create([
                 'no_order_id' => $lk->id,
-                'sortir_id' => $dataSortit->id,
-                'deadline' => $createDate10->format('Y-m-d'),
-            ]);
-            $dataPressSize = DataPressTagSize::create([
-                'no_order_id' => $lk->id,
-                'jahit_baju_id' => $dataJahitBaju->id,
-                'jahit_celana_id' => $dataJahitCelana->id,
-                'deadline' => $createDate12->format('Y-m-d'),
-            ]);
-            $dataPacking = DataPacking::create([
-                'no_order_id' => $lk->id,
-                'prass_id' => $dataPressSize->id,
+                'jahit_baju_id' => $dataJahit->id,
                 'deadline' => $createDate12->format('Y-m-d'),
             ]);
             if ($mesinAtexco || $mesinMimaki) {
@@ -1636,13 +1427,10 @@ class CostumerServicesController extends Controller
                     'barang_masuk_mesin_atexco_id' => $mesinAtexco ? $mesinAtexco->id : null,
                     'barang_masuk_mesin_mimaki_id' => $mesinMimaki ? $mesinMimaki->id : null,
                     'barang_masuk_presskain_id' => $dataPressKain->id,
-                    'barang_masuk_lasercut_id' => $dataLaseCut->id,
-                    'barang_masuk_manualcut_id' => $dataManualCut->id,
+                    'cut_id' => $dataCut->id,
                     'barang_masuk_sortir_id' => $dataSortit->id,
-                    'barang_masuk_jahit_baju_id' => $dataJahitBaju->id,
-                    'barang_masuk_jahit_celana_id' => $dataJahitCelana->id,
-                    'barang_masuk_pressTagSize_id' => $dataPressSize->id,
-                    'barang_masuk_packing_id' => $dataPacking->id,
+                    'jahit_id' => $dataJahit->id,
+                    'finis_id' => $dataFinis->id,
                 ]);
             }
         }
@@ -1679,6 +1467,7 @@ class CostumerServicesController extends Controller
         // $pdf->setPaper('A4', 'landscape');
         $pdf->setPaper('A4', 'potrait');
 
-        return $pdf->stream($dataLk->BarangMasukDisainer->nama_tim);
+        $namaTimClean = preg_replace('/[^A-Za-z0-9\-]/', '', $dataLk->BarangMasukDisainer->nama_tim);
+        return $pdf->stream($namaTimClean . '.pdf');
     }
 }

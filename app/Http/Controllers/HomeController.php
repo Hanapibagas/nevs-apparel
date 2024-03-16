@@ -106,7 +106,7 @@ class HomeController extends Controller
 
     public function getManualut()
     {
-        $userManuakCut = User::where('roles', 'manual_cut')->get();
+        $userManuakCut = User::where('roles', 'cut')->get();
 
         return view('component.Admin.manual-cut-admin.index', compact('userManuakCut'));
     }
@@ -120,7 +120,7 @@ class HomeController extends Controller
 
     public function getJahitBaju()
     {
-        $userJahitBaju = User::where('roles', 'jahit_baju')->get();
+        $userJahitBaju = User::where('roles', 'jahit')->get();
 
         return view('component.Admin.jahit-baju-admin.index', compact('userJahitBaju'));
     }
@@ -134,7 +134,7 @@ class HomeController extends Controller
 
     public function getPressTag()
     {
-        $userPressTag = User::where('roles', 'press_tag')->get();
+        $userPressTag = User::where('roles', 'finis')->get();
 
         return view('component.Admin.pres-tag-admin.index', compact('userPressTag'));
     }

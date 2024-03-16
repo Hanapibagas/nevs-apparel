@@ -9,12 +9,14 @@ use App\Models\MesinMimaki;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class MimakiController extends Controller
 {
     public function getIndexMimaki()
     {
-        $mesin = BarangMasukMesin::where('nama_mesin', 'mimaki')
+        $user = Auth::user();
+        $mesin = BarangMasukMesin::where('nama_mesin_id',  $user->id)
             ->with('Users', 'BarangMasukDisainer')
             ->orderBy('created_at', 'desc')
             ->get();
@@ -95,9 +97,22 @@ class MimakiController extends Controller
         $user = Auth::user();
         $dataMasuk = MesinMimaki::with('BarangMasukCs')->find($id);
 
+        if ($request->file('file_foto')) {
+            $fileTangkapLayar = $request->file('file_foto')->store('file-laporan-mimaki', 'public');
+            if ($dataMasuk->file_foto && file_exists(storage_path('app/public/' . $dataMasuk->file_foto))) {
+                Storage::delete('public/' . $dataMasuk->file_foto);
+                $fileTangkapLayar = $request->file('file_foto')->store('file-laporan-mimaki', 'public');
+            }
+        }
+
+        if ($request->file('file_foto') === null) {
+            $fileTangkapLayar = $dataMasuk->file_foto;
+        }
+
         $dataMasuk->update([
             'penanggung_jawab_id' => $user->id,
             'selesai' => Carbon::now(),
+            'file_foto' => $fileTangkapLayar,
             'tanda_telah_mengerjakan' => 1
         ]);
 
@@ -159,5 +174,40 @@ class MimakiController extends Controller
         }
 
         return view('component.Mesin.data-masuk-mesin-fix-mimaki.index', compact('dataMasuk'));
+    }
+
+    public function cetakDataLk($id)
+    {
+        $dataLk = BarangMasukCostumerServices::with(
+            'BarangMasukDisainer',
+            'Users',
+            'UsersOrder',
+            'UsersLk',
+            'KeraPlayer',
+            'LenganPlayer',
+            'CelanaPlayer',
+            'KeraPelatih',
+            'LenganPelatih',
+            'CelanaPelatih',
+            'KeraKiper',
+            'LenganKiper',
+            'CelanaKiper',
+            'Kera1',
+            'Lengan1',
+            'Celana1'
+        )->findOrFail($id);
+
+        $layout = BarangMasukDatalayout::where('no_order_id', $dataLk->id)->first();
+
+        // return response()->json($layout);
+        view()->share('dataLk', $dataLk->BarangMasukDisainer->nama_tim);
+
+        $pdf = PDF::loadview('component.Mesin.export-data-baju', compact('dataLk', 'layout'));
+        $pdf->setPaper('A4', 'potrait');
+
+        // return $pdf->stream('data-baju.pdf');
+        $namaTimClean = preg_replace('/[^A-Za-z0-9\-]/', '', $dataLk->BarangMasukDisainer->nama_tim);
+        return $pdf->stream($namaTimClean . '.pdf');
+
     }
 }

@@ -24,6 +24,11 @@
                                                     value="{{ $dataMasuk->BarangMasukCs->no_order }}" readonly
                                                     autofocus />
                                             </div>
+                                            <div class="mb-3 col-md-6">
+                                                <label for="firstName" class="form-label">File foto</label>
+                                                <input class="form-control" name="file_foto" type="file" id="firstName"
+                                                    required />
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

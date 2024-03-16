@@ -16,6 +16,7 @@ class MesinMimaki extends Model
         'nama_mesin',
         'deadline',
         'selesai',
+        'file_foto',
         'tanda_telah_mengerjakan',
     ];
 

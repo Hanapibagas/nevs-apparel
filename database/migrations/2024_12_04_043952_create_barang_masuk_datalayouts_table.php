@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('panjang_kertas')->nullable();
             $table->string('poly')->nullable();
             $table->string('file_corel_layout')->nullable();
+            $table->string('file_tangkap_layar')->nullable();
             $table->string('tanda_telah_mengerjakan')->default('0');
             $table->timestamps();
         });

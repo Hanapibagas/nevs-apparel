@@ -23,18 +23,18 @@
 
 <div class="container-xxl flex-grow-1 container-p-y">
     <h4 class="fw-bold py-3 mb-4">
-        <span class="text-muted fw-light">Account Settings /</span> Pegawai Press Tag
+        <span class="text-muted fw-light">Account Settings /</span> Pegawai Finish
     </h4>
 
     <h4 class="fw-bold py-3 mb-4">
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalCenter">
-            Tambah Pengawai Press Tag
+            Tambah Pengawai Finish
         </button>
         <div class="modal fade" id="modalCenter" tabindex="-1" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="modalCenterTitle">Form penambahan pegawai press tag</h5>
+                        <h5 class="modal-title" id="modalCenterTitle">Form penambahan pegawai Finish</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <form action="{{ route('postCreateDesainer') }}" method="POST">
@@ -64,7 +64,7 @@
                                     <label for="nameWithTitle" class="form-label">Email Pegawai</label>
                                     <input name="email" type="text" id="nameWithTitle" class="form-control"
                                         placeholder="Silahkan masukkan email ..." />
-                                    <input type="hidden" name="roles" value="press_tag">
+                                    <input type="hidden" name="roles" value="finis">
                                 </div>
                             </div>
                         </div>

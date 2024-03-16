@@ -93,14 +93,9 @@ $activeList = $listData ? 'active' : '';
                         <div data-i18n="Connections">Press Kain</div>
                     </a>
                 </li>
-                <li class="menu-item {{ request()->is('laser-cut-admin')  ? 'active' : '' }}">
-                    <a href="{{ route('getLaserCut') }}" class="menu-link">
-                        <div data-i18n="Connections">Laser Cut</div>
-                    </a>
-                </li>
                 <li class="menu-item {{ request()->is('manual-cut-admin')  ? 'active' : '' }}">
                     <a href="{{ route('getManualut') }}" class="menu-link">
-                        <div data-i18n="Connections">Manual Cut</div>
+                        <div data-i18n="Connections">Cut</div>
                     </a>
                 </li>
                 <li class="menu-item {{ request()->is('sortir-admin')  ? 'active' : '' }}">
@@ -110,22 +105,12 @@ $activeList = $listData ? 'active' : '';
                 </li>
                 <li class="menu-item {{ request()->is('jahit-baju-admin')  ? 'active' : '' }}">
                     <a href="{{ route('getJahitBaju') }}" class="menu-link">
-                        <div data-i18n="Connections">Jahit Baju</div>
-                    </a>
-                </li>
-                <li class="menu-item {{ request()->is('jahit-celana-admin')  ? 'active' : '' }}">
-                    <a href="{{ route('getJahitCelana') }}" class="menu-link">
-                        <div data-i18n="Connections">Jahit Celana</div>
+                        <div data-i18n="Connections">Jahit</div>
                     </a>
                 </li>
                 <li class="menu-item {{ request()->is('press-tag-admin')  ? 'active' : '' }}">
                     <a href="{{ route('getPressTag') }}" class="menu-link">
-                        <div data-i18n="Connections">Press Tag</div>
-                    </a>
-                </li>
-                <li class="menu-item {{ request()->is('packing-admin')  ? 'active' : '' }}">
-                    <a href="{{ route('getPacking') }}" class="menu-link">
-                        <div data-i18n="Connections">Packing</div>
+                        <div data-i18n="Connections">Finish</div>
                     </a>
                 </li>
             </ul>
@@ -236,7 +221,7 @@ $activeList = $listData ? 'active' : '';
         @if ( Auth::user()->roles == 'atexco')
         @php
         $user = Auth::user();
-        $dataMasuktest = App\Models\BarangMasukMesin::where('status', 0)->where('nama_mesin', 'atexco')->count();
+        $dataMasuktest = App\Models\BarangMasukMesin::where('status', 0)->where('nama_mesin_id', $user->id)->count();
         $dataMasuk = App\Models\MesinAtexco::where('tanda_telah_mengerjakan', 0)->count();
         $dataMasukFix = App\Models\MesinAtexco::where('tanda_telah_mengerjakan', 1)->count();
         @endphp
@@ -256,7 +241,8 @@ $activeList = $listData ? 'active' : '';
             <a href="{{ route('getIndexMesinAtexcoPegawai') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-cog"></i>
                 <div data-i18n="Analytics">Data Tes Disainer</div>
-                <span style="margin-left: 10px; margin-bottom: 20px;" class="badge bg-label-warning">{{ $dataMasuktest
+                <span style="margin-left: 10px; margin-bottom: 20px;" class="badge bg-label-warning">{{
+                    $dataMasuktest
                     }}</span>
             </a>
         </li>
@@ -264,7 +250,8 @@ $activeList = $listData ? 'active' : '';
             <a href="{{ route('getIndexDataMasukAtexcoFix') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-cog"></i>
                 <div data-i18n="Analytics">Data Masuk Fix Mesin</div>
-                <span style="margin-left: 10px; margin-bottom: 20px;" class="badge bg-label-success">{{ $dataMasukFix
+                <span style="margin-left: 10px; margin-bottom: 20px;" class="badge bg-label-success">{{
+                    $dataMasukFix
                     }}</span>
             </a>
         </li>
@@ -273,7 +260,7 @@ $activeList = $listData ? 'active' : '';
         @if ( Auth::user()->roles == 'mimaki')
         @php
         $user = Auth::user();
-        $dataMasuktest = App\Models\BarangMasukMesin::where('status', 0)->where('nama_mesin', 'mimaki')->count();
+        $dataMasuktest = App\Models\BarangMasukMesin::where('status', 0)->where('nama_mesin_id', $user->id)->count();
         $dataMasuk = App\Models\MesinMimaki::where('tanda_telah_mengerjakan', 0)->count();
         $dataMasukFix = App\Models\MesinMimaki::where('tanda_telah_mengerjakan', 1)->count();
         @endphp
@@ -301,7 +288,8 @@ $activeList = $listData ? 'active' : '';
             <a href="{{ route('getIndexDataMasukMimakiFix') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-detail"></i>
                 <div data-i18n="Analytics">Data Masuk Fix Mesin</div>
-                <span style="margin-left: 10px; margin-bottom: 20px;" class="badge bg-label-success">{{ $dataMasukFix
+                <span style="margin-left: 10px; margin-bottom: 20px;" class="badge bg-label-success">{{
+                    $dataMasukFix
                     }}</span>
             </a>
         </li>
@@ -366,7 +354,37 @@ $activeList = $listData ? 'active' : '';
         </li>
         @endif
 
-        @if ( Auth::user()->roles == 'laser_cut')
+        @if ( Auth::user()->roles == 'cut')
+        @php
+        $user = Auth::user();
+        $dataMasuk = App\Models\Cut::where('tanda_telah_mengerjakan', 0)->count();
+        $dataMasukFix = App\Models\Cut::where('tanda_telah_mengerjakan', 1)->count();
+        @endphp
+        <li class="menu-header small text-uppercase">
+            <span class="menu-header-text">Cut</span>
+        </li>
+        <li
+            class="menu-item {{ request()->is('data-masuk-cut') || request()->is('data-masuk-cut/*') ? 'active' : '' }}">
+            <a href="{{ route('getindexDataMasukCut') }}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-file"></i>
+                <div data-i18n="Analytics">Data Masuk</div>
+                <span style="margin-left: 10px; margin-bottom: 20px;" class="badge bg-label-danger">{{ $dataMasuk
+                    }}</span>
+            </a>
+        </li>
+        <li class="menu-item {{ request()->is('data-masuk-cut-fix') ? 'active' : '' }}">
+            <a href="{{ route('getindexDataMasukCutFix') }}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-file"></i>
+                <div data-i18n="Analytics">Data Fix</div>
+                <span style="margin-left: 10px; margin-bottom: 20px;" class="badge bg-label-success">{{
+                    $dataMasukFix
+                    }}</span>
+            </a>
+        </li>
+        @endif
+
+
+        {{-- @if ( Auth::user()->roles == 'laser_cut')
         @php
         $user = Auth::user();
         $dataMasuk = App\Models\DataLaserCut::where('tanda_telah_mengerjakan', 0)->count();
@@ -422,7 +440,7 @@ $activeList = $listData ? 'active' : '';
                     }}</span>
             </a>
         </li>
-        @endif
+        @endif --}}
 
         @if ( Auth::user()->roles == 'sortir')
         @php
@@ -453,7 +471,65 @@ $activeList = $listData ? 'active' : '';
         </li>
         @endif
 
-        @if ( Auth::user()->roles == 'jahit_baju')
+
+        @if ( Auth::user()->roles == 'jahit')
+        @php
+        $user = Auth::user();
+        $dataMasuk = App\Models\Jahit::where('tanda_telah_mengerjakan', 0)->count();
+        $dataMasukFix = App\Models\Jahit::where('tanda_telah_mengerjakan', 1)->count();
+        @endphp
+        <li class="menu-header small text-uppercase">
+            <span class="menu-header-text">Jahit</span>
+        </li>
+        <li
+            class="menu-item {{ request()->is('data-masuk-jahit') || request()->is('data-masuk-jahit-serah/*') || request()->is('data-masuk-jahit-terima/*') ? 'active' : '' }}">
+            <a href="{{ route('getIndexJahit') }}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-file"></i>
+                <div data-i18n="Analytics">Data Masuk</div>
+                <span style="margin-left: 10px; margin-bottom: 20px;" class="badge bg-label-danger">{{ $dataMasuk
+                    }}</span>
+            </a>
+        </li>
+        <li class="menu-item {{ request()->is('data-masuk-jahit-fix') ? 'active' : '' }}">
+            <a href="{{ route('getIndexFixJahit') }}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-file"></i>
+                <div data-i18n="Analytics">Data Fix</div>
+                <span style="margin-left: 10px; margin-bottom: 20px;" class="badge bg-label-success">{{
+                    $dataMasukFix
+                    }}</span>
+            </a>
+        </li>
+        @endif
+
+        @if ( Auth::user()->roles == 'finis')
+        @php
+        $user = Auth::user();
+        $dataMasuk = App\Models\Finish::where('tanda_telah_mengerjakan', 0)->count();
+        $dataMasukFix = App\Models\Finish::where('tanda_telah_mengerjakan', 1)->count();
+        @endphp
+        <li class="menu-header small text-uppercase">
+            <span class="menu-header-text">Finish</span>
+        </li>
+        <li
+            class="menu-item {{ request()->is('data-masuk-finis') || request()->is('data-masuk-finis/*') ? 'active' : '' }}">
+            <a href="{{ route('getIndexFinis') }}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-file"></i>
+                <div data-i18n="Analytics">Data Masuk</div>
+                <span style="margin-left: 10px; margin-bottom: 20px;" class="badge bg-label-danger">{{ $dataMasuk
+                    }}</span>
+            </a>
+        </li>
+        <li class="menu-item {{ request()->is('data-masuk-finis-fix') ? 'active' : '' }}">
+            <a href="{{ route('getIndexFixFinis') }}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-file"></i>
+                <div data-i18n="Analytics">Data Fix</div>
+                <span style="margin-left: 10px; margin-bottom: 20px;" class="badge bg-label-success">{{
+                    $dataMasukFix
+                    }}</span>
+            </a>
+        </li>
+        @endif
+        {{-- @if ( Auth::user()->roles == 'jahit_baju')
         @php
         $user = Auth::user();
         $dataMasuk = App\Models\DataJahitBaju::where('tanda_telah_mengerjakan', 0)->count();
@@ -567,6 +643,6 @@ $activeList = $listData ? 'active' : '';
                     }}</span>
             </a>
         </li>
-        @endif
+        @endif --}}
     </ul>
 </aside>

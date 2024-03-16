@@ -23,16 +23,16 @@
 
 <div class="content-wrapper">
     <div class="container-xxl flex-grow-1 container-p-y">
-        <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Tables /</span> Jenis lengan</h4>
+        <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Tables /</span> Produksi</h4>
         <button style="margin-bottom: 20px;" type="button" class="btn btn-primary" data-bs-toggle="modal"
             data-bs-target="#modalCenter">
-            Tambah data jenis lengan
+            Tambah data Produksi
         </button>
         <div class="modal fade" id="modalCenter" tabindex="-1" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="modalCenterTitle">Form tambah data jenis data</h5>
+                        <h5 class="modal-title" id="modalCenterTitle">Form tambah data Produksi</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <form action="{{ route('getCreateistDataJenisLengan') }}" method="POST"
@@ -41,15 +41,26 @@
                         <div class="modal-body">
                             <div class="row">
                                 <div class="col mb-3">
-                                    <label for="nameWithTitle" class="form-label">Nama jenis lengan</label>
-                                    <input name="jenis_kera" type="text" id="nameWithTitle" class="form-control"
-                                        placeholder="Silahkan masukkan nama tim ..." />
+                                    <label for="nameWithTitle" class="form-label">Nama Produksi</label>
+                                    <input required name="jenis_kera" type="text" id="nameWithTitle"
+                                        class="form-control" placeholder="Silahkan masukkan nama tim ..." />
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col mb-3">
-                                    <label for="nameWithTitle" class="form-label">file jenis lengan</label>
-                                    <input name="gambar" type="file" id="nameWithTitle" class="form-control"
+                                    <label for="nameWithTitle" class="form-label">Aktifkan Komisi</label>
+                                    <select required class="form-control" name="status" id="">
+                                        <option value="-- Silahkan Pilih Aktifkan Komisi --">-- Silahkan Pilih Aktifkan
+                                            Komisi --</option>
+                                        <option value="0">Tidak Aktif</option>
+                                        <option value="1">Aktif</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col mb-3">
+                                    <label for="nameWithTitle" class="form-label">file Produksi</label>
+                                    <input required name="gambar" type="file" id="nameWithTitle" class="form-control"
                                         placeholder="Silahkan masukkan nama tim ..." />
                                 </div>
                             </div>
@@ -65,15 +76,16 @@
             </div>
         </div>
         <div class="card">
-            <h5 class="card-header">Data pola lengan</h5>
+            <h5 class="card-header">Data Produksi</h5>
             <div class="card-body">
                 <div class="table-responsive text-nowrap">
                     <table id="ds" class="table">
                         <thead>
                             <tr>
                                 <th>No</th>
-                                <th>Nama lengan</th>
-                                <th>Gambar lengan</th>
+                                <th>Nama Produksi</th>
+                                <th>Status Komisi</th>
+                                <th>Gambar Produksi</th>
                                 <th>aksi</th>
                             </tr>
                         </thead>
@@ -85,6 +97,11 @@
                                     <strong>
                                         {{ $jenisKerahs->jenis_kera }}
                                     </strong>
+                                </td>
+                                <td>
+                                    <span class="badge bg-label-{{ $jenisKerahs->status == 1 ? 'success' : 'warning'}}">
+                                        {{ $jenisKerahs->status == 1 ? 'Aktif' : 'Tidak Aktif'}}
+                                    </span>
                                 </td>
                                 <td>
                                     <img style="width: 100px;" src="{{ Storage::url($jenisKerahs->gambar) }}" alt="">
@@ -109,7 +126,7 @@
                                 <div class="modal-dialog modal-dialog-centered" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title" id="modalCenterTitle">Form tambah data jenis data
+                                            <h5 class="modal-title" id="modalCenterTitle">Form tambah data Produksi
                                             </h5>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                 aria-label="Close"></button>
@@ -121,17 +138,33 @@
                                             <div class="modal-body">
                                                 <div class="row">
                                                     <div class="col mb-3">
-                                                        <label for="nameWithTitle" class="form-label">Nama jenis
-                                                            lengan</label>
-                                                        <input name="jenis_kera" type="text" id="nameWithTitle"
+                                                        <label for="nameWithTitle" class="form-label">Nama
+                                                            Produksi</label>
+                                                        <input required name="jenis_kera" type="text" id="nameWithTitle"
                                                             class="form-control" value="{{ $jenisKerahs->jenis_kera }}">
                                                     </div>
                                                 </div>
                                                 <div class="row">
                                                     <div class="col mb-3">
-                                                        <label for="nameWithTitle" class="form-label">file jenis
-                                                            lengan</label>
-                                                        <input name="gambar" type="file" id="nameWithTitle"
+                                                        <label for="nameWithTitle" class="form-label">Aktifkan
+                                                            Komisi</label>
+                                                        <select required class="form-control" name="status" id="">
+                                                            <option value="{{ $jenisKerahs->status }}"> {{
+                                                                $jenisKerahs->status == 1 ? 'Aktif' : 'Tidak Aktif'}}
+                                                            </option>
+                                                            <option value="-- Silahkan Pilih Aktifkan Komisi --">--
+                                                                Silahkan Pilih Aktifkan
+                                                                Komisi --</option>
+                                                            <option value="0">Tidak Aktif</option>
+                                                            <option value="1">Aktif</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col mb-3">
+                                                        <label for="nameWithTitle" class="form-label">file
+                                                            Produksi</label>
+                                                        <input required name="gambar" type="file" id="nameWithTitle"
                                                             class="form-control"
                                                             placeholder="Silahkan masukkan nama tim ..." />
                                                     </div>

@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('barang_masuk_disainer_id')->constrained('barang_masuk_disainers')->onUpdate('cascade')->onDelete('cascade');
             $table->foreignId('users_id')->constrained('users')->onUpdate('cascade')->onDelete('cascade');
-            $table->string('nama_mesin');
+            $table->foreignId('nama_mesin_id')->constrained('users')->onUpdate('cascade')->onDelete('cascade');
             $table->foreignId('nama_penanggung_jawab_mesin_ACC')->nullable()->constrained('users')->onUpdate('cascade')->onDelete('cascade');;
             $table->string('file');
             $table->string('status')->default('0');

@@ -15,13 +15,10 @@ class Laporan extends Model
         'barang_masuk_mesin_atexco_id',
         'barang_masuk_mesin_mimaki_id',
         'barang_masuk_presskain_id',
-        'barang_masuk_lasercut_id',
-        'barang_masuk_manualcut_id',
+        'cut_id',
         'barang_masuk_sortir_id',
-        'barang_masuk_jahit_baju_id',
-        'barang_masuk_jahit_celana_id',
-        'barang_masuk_pressTagSize_id',
-        'barang_masuk_packing_id',
+        'jahit_id',
+        'finis_id',
         'status'
     ];
 

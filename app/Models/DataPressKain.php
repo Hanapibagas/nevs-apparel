@@ -19,6 +19,35 @@ class DataPressKain extends Model
         'kain',
         'berat',
         'gambar',
+
+        'kain_pelatih',
+        'berat_pelatih',
+        'gambar_pelatih',
+
+        'kain_kiper',
+        'berat_kiper',
+        'gambar_kiper',
+
+        'kain_1',
+        'berat_1',
+        'gambar_1',
+
+        'kain_celana_player',
+        'berat_celana_player',
+        'gambar_celana_player',
+
+        'kain_celana_pelatih',
+        'berat_celana_pelatih',
+        'gambar_celana_pelatih',
+
+        'kain_celana_kiper',
+        'berat_celana_kiper',
+        'gambar_celana_kiper',
+
+        'kain_celana_1',
+        'berat_celana_1',
+        'gambar_celana_1',
+
         'tanda_telah_mengerjakan',
     ];
 

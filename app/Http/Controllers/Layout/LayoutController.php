@@ -151,6 +151,7 @@ class LayoutController extends Controller
 
         $validator = FacadesValidator::make($request->all(), [
             'file_corel_layout' => 'required|file',
+            'file_tangkap_layar' => 'required|file',
         ]);
 
         if ($validator->fails()) {
@@ -164,6 +165,17 @@ class LayoutController extends Controller
                 $filebajuplayer = $request->file('file_corel_layout')->store('file-dari-layout', 'public');
             }
         }
+        if ($request->file('file_tangkap_layar')) {
+            $fileTangkapLayar = $request->file('file_tangkap_layar')->store('file-tangkap-layout', 'public');
+            if ($dataLk->file_tangkap_layar && file_exists(storage_path('app/public/' . $dataLk->file_tangkap_layar))) {
+                Storage::delete('public/' . $dataLk->file_tangkap_layar);
+                $fileTangkapLayar = $request->file('file_tangkap_layar')->store('file-tangkap-layout', 'public');
+            }
+        }
+
+        if ($request->file('file_tangkap_layar') === null) {
+            $fileTangkapLayar = $dataLk->file_tangkap_layar;
+        }
 
         if ($request->file('file_corel_layout') === null) {
             $filebajuplayer = $dataLk->file_corel_layout;
@@ -174,17 +186,146 @@ class LayoutController extends Controller
             'panjang_kertas' => $request->panjang_kertas,
             'poly' => $request->poly,
             'file_corel_layout' => $filebajuplayer,
+            'file_tangkap_layar' => $fileTangkapLayar,
             'tanda_telah_mengerjakan' => 1,
         ]);
 
-        $dataBajuPlayer = $dataLk->BarangMasukCsLK->total_baju_player;
-        $dataBajuPelatih = $dataLk->BarangMasukCsLK->total_baju_pelatih;
-        $dataBajuKiper = $dataLk->BarangMasukCsLK->total_baju_kiper;
-        $dataBaju1 = $dataLk->BarangMasukCsLK->total_baju_1;
-        $dataCelanaPlayer = $dataLk->BarangMasukCsLK->total_celana_player;
-        $dataCelanaPelatih = $dataLk->BarangMasukCsLK->total_celana_pelatih;
-        $dataCelanaKiper = $dataLk->BarangMasukCsLK->total_celana_kiper;
-        $dataCelana1 = $dataLk->BarangMasukCsLK->total_celana_1;
+
+        if ($dataLk !== null &&
+            isset($dataLk->BarangMasukCsLK) &&
+            $dataLk->BarangMasukCsLK !== null &&
+            isset($dataLk->BarangMasukCsLK->LenganPlayer) &&
+            $dataLk->BarangMasukCsLK->LenganPlayer !== null &&
+            isset($dataLk->BarangMasukCsLK->LenganPlayer->status)) {
+            $dataKomisi1 = $dataLk->BarangMasukCsLK->LenganPlayer->status == 1;
+        } else {
+            $dataKomisi1 = false;
+        }
+
+        if ($dataLk !== null &&
+        isset($dataLk->BarangMasukCsLK) &&
+        $dataLk->BarangMasukCsLK !== null &&
+        isset($dataLk->BarangMasukCsLK->LenganPelatih) &&
+        $dataLk->BarangMasukCsLK->LenganPelatih !== null &&
+        isset($dataLk->BarangMasukCsLK->LenganPelatih->status)) {
+        $dataKomisi2 = $dataLk->BarangMasukCsLK->LenganPelatih->status == 1;
+        } else {
+            $dataKomisi2 = false;
+        }
+
+        if ($dataLk !== null &&
+        isset($dataLk->BarangMasukCsLK) &&
+        $dataLk->BarangMasukCsLK !== null &&
+        isset($dataLk->BarangMasukCsLK->LenganKiper) &&
+        $dataLk->BarangMasukCsLK->LenganKiper !== null &&
+        isset($dataLk->BarangMasukCsLK->LenganKiper->status)) {
+        $dataKomisi3 = $dataLk->BarangMasukCsLK->LenganKiper->status == 1;
+        } else {
+            $dataKomisi3 = false;
+        }
+
+        if ($dataLk !== null &&
+        isset($dataLk->BarangMasukCsLK) &&
+        $dataLk->BarangMasukCsLK !== null &&
+        isset($dataLk->BarangMasukCsLK->Lengan1) &&
+        $dataLk->BarangMasukCsLK->Lengan1 !== null &&
+        isset($dataLk->BarangMasukCsLK->Lengan1->status)) {
+        $dataKomisi4 = $dataLk->BarangMasukCsLK->Lengan1->status == 1;
+        } else {
+            $dataKomisi4 = false;
+        }
+
+        if ($dataLk !== null &&
+        isset($dataLk->BarangMasukCsLK) &&
+        $dataLk->BarangMasukCsLK !== null &&
+        isset($dataLk->BarangMasukCsLK->CelanaPlayer) &&
+        $dataLk->BarangMasukCsLK->CelanaPlayer !== null &&
+        isset($dataLk->BarangMasukCsLK->CelanaPlayer->status)) {
+        $dataKomisi5 = $dataLk->BarangMasukCsLK->CelanaPlayer->status == 1;
+        } else {
+            $dataKomisi5 = false;
+        }
+
+        if ($dataLk !== null &&
+        isset($dataLk->BarangMasukCsLK) &&
+        $dataLk->BarangMasukCsLK !== null &&
+        isset($dataLk->BarangMasukCsLK->CelanaPelatih) &&
+        $dataLk->BarangMasukCsLK->CelanaPelatih !== null &&
+        isset($dataLk->BarangMasukCsLK->CelanaPelatih->status)) {
+        $dataKomisi6 = $dataLk->BarangMasukCsLK->CelanaPelatih->status == 1;
+        } else {
+            $dataKomisi6 = false;
+        }
+
+        if ($dataLk !== null &&
+        isset($dataLk->BarangMasukCsLK) &&
+        $dataLk->BarangMasukCsLK !== null &&
+        isset($dataLk->BarangMasukCsLK->CelanaKiper) &&
+        $dataLk->BarangMasukCsLK->CelanaKiper !== null &&
+        isset($dataLk->BarangMasukCsLK->CelanaKiper->status)) {
+        $dataKomisi7 = $dataLk->BarangMasukCsLK->CelanaKiper->status == 1;
+        } else {
+            $dataKomisi7 = false;
+        }
+
+        if ($dataLk !== null &&
+        isset($dataLk->BarangMasukCsLK) &&
+        $dataLk->BarangMasukCsLK !== null &&
+        isset($dataLk->BarangMasukCsLK->Celana1) &&
+        $dataLk->BarangMasukCsLK->Celana1 !== null &&
+        isset($dataLk->BarangMasukCsLK->Celana1->status)) {
+        $dataKomisi8 = $dataLk->BarangMasukCsLK->Celana1->status == 1;
+        } else {
+            $dataKomisi8 = false;
+        }
+
+        if ($dataKomisi1 == 1) {
+            $dataBajuPlayer = $dataLk->BarangMasukCsLK->total_baju_player;
+        } elseif ($dataKomisi1 == 0) {
+            $dataBajuPlayer = 0;
+        }
+
+        if ($dataKomisi2 == 1) {
+            $dataBajuPelatih = $dataLk->BarangMasukCsLK->total_baju_pelatih;
+        } elseif ($dataKomisi2 == 0) {
+            $dataBajuPelatih = 0;
+        }
+
+        if ($dataKomisi3 == 1) {
+            $dataBajuKiper = $dataLk->BarangMasukCsLK->total_baju_kiper;
+        } elseif ($dataKomisi3 == 0) {
+            $dataBajuKiper = 0;
+        }
+
+        if ($dataKomisi4 == 1) {
+            $dataBaju1 = $dataLk->BarangMasukCsLK->total_baju_1;
+        } elseif ($dataKomisi4 == 0) {
+            $dataBaju1 = 0;
+        }
+
+        if ($dataKomisi5 == 1) {
+            $dataCelanaPlayer = $dataLk->BarangMasukCsLK->total_celana_player;
+        } elseif ($dataKomisi5 == 0) {
+            $dataCelanaPlayer = 0;
+        }
+
+        if ($dataKomisi6 == 1) {
+            $dataCelanaPelatih = $dataLk->BarangMasukCsLK->total_celana_pelatih;
+        } elseif ($dataKomisi6 == 0) {
+            $dataCelanaPelatih = 0;
+        }
+
+        if ($dataKomisi7 == 1) {
+            $dataCelanaKiper = $dataLk->BarangMasukCsLK->total_celana_kiper;
+        } elseif ($dataKomisi7 == 0) {
+            $dataCelanaKiper = 0;
+        }
+
+        if ($dataKomisi8 == 1) {
+            $dataCelana1 = $dataLk->BarangMasukCsLK->total_celana_1;
+        } elseif ($dataKomisi8 == 0) {
+            $dataCelana1 = 0;
+        }
 
         $deadline = Carbon::parse($dataLk->deadline);
         $selesai = Carbon::parse($dataLk->selesai);
@@ -211,7 +352,6 @@ class LayoutController extends Controller
             }
         }
 
-        // return response()->json($totalHarga);
 
         if ($keterangan == "- $selisihHari") {
             PembagianKomisi::create([

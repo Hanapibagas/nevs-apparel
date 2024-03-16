@@ -20,7 +20,7 @@ class ListDataController extends Controller
 
     public function getIndexLisDataJenisLengan()
     {
-        $jenisKerah = PolaLengan::all();
+        $jenisKerah = PolaLengan::where('id', '>', 1)->get();
 
         return view('component.Disainer.list-data-jenis-lengan-disainer-pegawai.index', compact('jenisKerah'));
     }
@@ -44,6 +44,7 @@ class ListDataController extends Controller
 
         KeraBaju::create([
             'jenis_kera' => $request->jenis_kera,
+            'status' => $request->status,
             'gambar' => $filebaju
         ]);
 
@@ -80,6 +81,7 @@ class ListDataController extends Controller
 
         PolaLengan::create([
             'jenis_kera' => $request->jenis_kera,
+            'status' => $request->status,
             'gambar' => $filebaju
         ]);
 
@@ -104,6 +106,7 @@ class ListDataController extends Controller
 
         $update->update([
             'jenis_kera' => $request->jenis_kera,
+            'status' => $request->status,
             'gambar' => $filebaju
         ]);
 
@@ -128,6 +131,7 @@ class ListDataController extends Controller
 
         $update->update([
             'jenis_kera' => $request->jenis_kera,
+            'status' => $request->status,
             'gambar' => $filebaju
         ]);
 

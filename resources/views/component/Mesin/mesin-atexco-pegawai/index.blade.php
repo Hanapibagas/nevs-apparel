@@ -37,7 +37,6 @@
                         <thead>
                             <tr>
                                 <th>No</th>
-                                <th>Nama Mesin</th>
                                 <th>Nama Desainer</th>
                                 <th>Status</th>
                                 <th>aksi</th>
@@ -47,11 +46,6 @@
                             @foreach ( $mesin as $key => $mesins )
                             <tr>
                                 <td>{{ $key+1 }}</td>
-                                <td>
-                                    <strong style="text-transform: uppercase">
-                                        {{ $mesins->nama_mesin }}
-                                    </strong>
-                                </td>
                                 <td>
                                     <strong style="text-transform: uppercase">
                                         {{ $mesins->Users->name }}

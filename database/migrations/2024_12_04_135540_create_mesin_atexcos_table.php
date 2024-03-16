@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('deadline')->nullable();
             $table->string('selesai')->nullable();
             $table->string('nama_mesin')->nullable();
+            $table->string('file_foto')->nullable();
             $table->string('tanda_telah_mengerjakan')->default('0');
             $table->timestamps();
         });

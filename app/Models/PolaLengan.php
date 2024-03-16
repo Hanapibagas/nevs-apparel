@@ -11,6 +11,7 @@ class PolaLengan extends Model
 
     protected $fillable = [
         'jenis_kera',
+        'status',
         'gambar',
     ];
 

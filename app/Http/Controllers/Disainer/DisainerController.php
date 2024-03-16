@@ -32,8 +32,9 @@ class DisainerController extends Controller
     public function getCreateToTeamMesin($nama_tim)
     {
         $disainer = BarangMasukDisainer::where('nama_tim', $nama_tim)->first();
+        $user = User::where('roles', 'atexco')->orWhere('roles', 'mimaki')->get();
 
-        return view('component.Disainer.disainer-pegawai.create', compact('disainer'));
+        return view('component.Disainer.disainer-pegawai.create', compact('disainer', 'user'));
     }
 
     public function postToTeamMesin(Request $request, $nama_tim)
@@ -47,7 +48,7 @@ class DisainerController extends Controller
         BarangMasukMesin::create([
             'barang_masuk_disainer_id' => $request->barang_masuk_disainer_id,
             'users_id' => $user->id,
-            'nama_mesin' => $request->nama_mesin,
+            'nama_mesin_id' => $request->nama_mesin_id,
             'file' => $file,
             'keterangan' => $request->keterangan
         ]);

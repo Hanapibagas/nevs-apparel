@@ -26,13 +26,28 @@
                                             </div>
                                             <div class="mb-3 col-md-6">
                                                 <label for="firstName" class="form-label">No. Error</label>
-                                                <input required class="form-control" type="text" id="firstName" name="no_error"
-                                                    autofocus />
+                                                <input required class="form-control" type="number" id="firstName"
+                                                    name="no_error" autofocus required placeholder="Contoh:123456" />
                                             </div>
                                             <div class="mb-3 col-md-6">
-                                                <label for="firstName" class="form-label">Panjang Kertas</label>
+                                                <label for="firstName" class="form-label">Panjang Kertas (M)</label>
+                                                <input required class="form-control" type="number" id="firstName"
+                                                    name="panjang_kertas" autofocus required placeholder="Contoh: 1" />
+                                            </div>
+                                            <div class="mb-3 col-md-6">
+                                                <label for="firstName" class="form-label">Berat Kain (Kg)</label>
+                                                <input required class="form-control" type="number" id="firstName"
+                                                    name="berat" autofocus required placeholder="Contoh: 1" />
+                                            </div>
+                                            <div class="mb-3 col-md-6">
+                                                <label for="firstName" class="form-label">nama bahan</label>
                                                 <input required class="form-control" type="text" id="firstName"
-                                                    name="panjang_kertas" autofocus />
+                                                    name="bahan" autofocus required placeholder="Contoh: Bahan A" />
+                                            </div>
+                                            <div class="mb-3 col-md-6">
+                                                <label for="firstName" class="form-label">file foto</label>
+                                                <input required class="form-control" type="file" id="firstName"
+                                                    name="foto" autofocus required />
                                             </div>
                                         </div>
                                     </div>

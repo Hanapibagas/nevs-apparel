@@ -46,7 +46,7 @@
                             <div class="row">
                                 <div class="col mb-3">
                                     <label for="nameWithTitle" class="form-label">Nama Tim</label>
-                                    <input name="nama_tim" type="text" id="nameWithTitle" class="form-control"
+                                    <input required name="nama_tim" type="text" id="nameWithTitle" class="form-control"
                                         placeholder="Silahkan masukkan nama tim ..." />
                                 </div>
                             </div>
@@ -57,7 +57,7 @@
                                         id="exampleFormControlSelect1" class="form-select">
                                         <option selected>-- Silahkan Pilih Disainer --</option>
                                         @foreach ( $users as $user )
-                                        <option value="{{ $user->id }}">
+                                        <option required value="{{ $user->id }}">
                                             {{ $user->name }} sedang menangani desain {{
                                             isset($userCounts[$user->id]) ? $userCounts[$user->id]
                                             : 0 }}

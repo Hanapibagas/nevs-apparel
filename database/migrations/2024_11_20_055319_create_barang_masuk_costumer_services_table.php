@@ -68,14 +68,16 @@ return new class extends Migration
 
             // ukuran player
             $table->foreignId('pola_celana_player_id')->nullable()->constrained('pola_lengans')->onUpdate('cascade')->onDelete('cascade');
-            $table->string('total_celana_player')->nullable();
+            $table->foreignId('kerah_celana_player_id')->nullable()->constrained('kera_bajus')->onUpdate('cascade')->onDelete('cascade');
             $table->string('jenis_sablon_celana_player')->nullable();
             $table->string('jenis_kain_celana_player')->nullable();
+            $table->string('total_celana_player')->nullable();
             $table->string('ket_tambahan_celana_player')->nullable();
             $table->longText('keterangan_celana_pelayer')->nullable();
 
             //  ukuran pelatih
             $table->foreignId('pola_celana_pelatih_id')->nullable()->constrained('pola_lengans')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('kerah_celana_pelatih_id')->nullable()->constrained('kera_bajus')->onUpdate('cascade')->onDelete('cascade');
             $table->string('total_celana_pelatih')->nullable();
             $table->string('jenis_sablon_celana_pelatih')->nullable();
             $table->string('jenis_kain_celana_pelatih')->nullable();
@@ -84,6 +86,7 @@ return new class extends Migration
 
             // ukuran kiper
             $table->foreignId('pola_celana_kiper_id')->nullable()->constrained('pola_lengans')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('kerah_celana_kiper_id')->nullable()->constrained('kera_bajus')->onUpdate('cascade')->onDelete('cascade');
             $table->string('total_celana_kiper')->nullable();
             $table->string('jenis_sablon_celana_kiper')->nullable();
             $table->string('jenis_kain_celana_kiper')->nullable();
@@ -92,6 +95,7 @@ return new class extends Migration
 
             // ukuran 1
             $table->foreignId('pola_celana_1_id')->nullable()->constrained('pola_lengans')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('kerah_celana_1_id')->nullable()->constrained('kera_bajus')->onUpdate('cascade')->onDelete('cascade');
             $table->string('total_celana_1')->nullable();
             $table->string('jenis_sablon_celana_1')->nullable();
             $table->string('jenis_kain_celana_1')->nullable();

@@ -26,12 +26,15 @@
                             </div>
                         </div>
                         <div class="row mb-3">
-                            <label class="col-sm-2 col-form-label" for="basic-default-company">Nama mesin</label>
+                            <label class="col-sm-2 col-form-label" for="basic-default-company">Nama oprator
+                                mesin</label>
                             <div class="col-sm-10">
-                                <select name="nama_mesin" class="form-control">
-                                    <option selected>-- Silahkan Pilih Mesin --</option>
-                                    <option style="text-transform: uppercase" value="atexco">atexco</option>
-                                    <option style="text-transform: uppercase" value="mimaki">mimaki</option>
+                                <select name="nama_mesin_id" class="form-control">
+                                    <option selected>-- Silahkan Pilih Nama Oprator Mesin --</option>
+                                    @foreach ( $user as $users )
+                                    <option style="text-transform: uppercase" value="{{ $users->id }}">{{ $users->name
+                                        }}</option>
+                                    @endforeach
                                 </select>
                             </div>
                         </div>

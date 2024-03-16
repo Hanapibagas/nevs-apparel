@@ -15,6 +15,9 @@ class DataSortir extends Model
         'manual_cut_id',
         'no_error',
         'panjang_kertas',
+        'berat',
+        'bahan',
+        'foto',
         'selesai',
         'tanda_telah_mengerjakan',
         'deadline'
@@ -27,7 +30,7 @@ class DataSortir extends Model
 
     public function BarangMasukManualCut()
     {
-        return $this->belongsTo(DataManualCut::class, 'manual_cut_id');
+        return $this->belongsTo(Cut::class, 'manual_cut_id');
     }
 
     public function UserSortir()

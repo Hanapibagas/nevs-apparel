@@ -103,22 +103,10 @@ class UserSeeder extends Seeder
             'password' => bcrypt('12345678')
         ]);
         User::create([
-            'name' => 'lasercut',
-            'email' => 'lasercut@gmail.com',
-            'roles' => 'laser_cut',
-            'gambar' => 'lasercut.jpg',
-            'permission_edit' => 1,
-            'permission_hapus' => 1,
-            'permission_hapus' => 1,
-            'permission_show' => 1,
-            'asal_kota' => "makassar",
-            'password' => bcrypt('12345678')
-        ]);
-        User::create([
-            'name' => 'manualcut',
-            'email' => 'manualcut@gmail.com',
-            'roles' => 'manual_cut',
-            'gambar' => 'manualcut.jpg',
+            'name' => 'cut',
+            'email' => 'cut@gmail.com',
+            'roles' => 'cut',
+            'gambar' => 'cut.jpg',
             'permission_edit' => 1,
             'permission_hapus' => 1,
             'permission_hapus' => 1,
@@ -140,8 +128,8 @@ class UserSeeder extends Seeder
         ]);
         User::create([
             'name' => 'jahitbaju',
-            'email' => 'jahitbaju@gmail.com',
-            'roles' => 'jahit_baju',
+            'email' => 'jahit@gmail.com',
+            'roles' => 'jahit',
             'gambar' => 'jahitbaju.jpg',
             'permission_edit' => 1,
             'permission_hapus' => 1,
@@ -151,34 +139,10 @@ class UserSeeder extends Seeder
             'password' => bcrypt('12345678')
         ]);
         User::create([
-            'name' => 'jahitcelana',
-            'email' => 'jahitcelana@gmail.com',
-            'roles' => 'jahit_celana',
-            'gambar' => 'jahitcelana.jpg',
-            'permission_edit' => 1,
-            'permission_hapus' => 1,
-            'permission_hapus' => 1,
-            'permission_show' => 1,
-            'asal_kota' => "makassar",
-            'password' => bcrypt('12345678')
-        ]);
-        User::create([
-            'name' => 'presstag',
-            'email' => 'presstag@gmail.com',
-            'roles' => 'press_tag',
-            'gambar' => 'presstag.jpg',
-            'permission_edit' => 1,
-            'permission_hapus' => 1,
-            'permission_hapus' => 1,
-            'permission_show' => 1,
-            'asal_kota' => "makassar",
-            'password' => bcrypt('12345678')
-        ]);
-        User::create([
-            'name' => 'packing',
-            'email' => 'packing@gmail.com',
-            'roles' => 'packing',
-            'gambar' => 'packing.jpg',
+            'name' => 'finish',
+            'email' => 'finish@gmail.com',
+            'roles' => 'finis',
+            'gambar' => 'finish.jpg',
             'permission_edit' => 1,
             'permission_hapus' => 1,
             'permission_hapus' => 1,
@@ -187,14 +151,24 @@ class UserSeeder extends Seeder
             'password' => bcrypt('12345678')
         ]);
 
-        // KeraBaju::create([
-        //     'jenis_kera' => 'Kerah Narrow PSM',
-        //     'gambar' => 'data-jenis-kera/0R4b65U9sl9AfbxBjqTVhkVCNtjVw776EFUh6O3n.jpg'
-        // ]);
-        // PolaLengan::create([
-        //     'jenis_kera' => 'Kerah Narrow PSM',
-        //     'gambar' => 'data-jenis-lengan/DH71I45dnvvJyBenCL1D5r2uIiUtmUvoZDta9vtE.jpg'
-        // ]);
+        KeraBaju::create([
+            'jenis_kera' => 'opsional',
+            'gambar' => 'data-jenis-kera/0R4b65U9sl9AfbxBjqTVhkVCNtjVw776EFUh6O3n.jpg'
+        ]);
+        KeraBaju::create([
+            'jenis_kera' => 'Lama bis samping',
+            'gambar' => 'data-jenis-kera/0R4b65U9sl9AfbxBjqTVhkVCNtjVw776EFUh6O3n.jpg'
+        ]);
+        PolaLengan::create([
+            'jenis_kera' => 'opsional',
+            'status' => '1',
+            'gambar' => 'data-jenis-lengan/DH71I45dnvvJyBenCL1D5r2uIiUtmUvoZDta9vtE.jpg'
+        ]);
+        PolaLengan::create([
+            'jenis_kera' => 'Kerah Narrow PSM',
+            'status' => '1',
+            'gambar' => 'data-jenis-lengan/DH71I45dnvvJyBenCL1D5r2uIiUtmUvoZDta9vtE.jpg'
+        ]);
         // PolaCeleana::create([
         //     'jenis_kera' => 'Lama',
         //     'gambar' => 'data-jenis-celana/g8oeidt7ABUAtDSX8BYvpb8cC6n9zLWscuF8L0UT.jpg'

@@ -65,6 +65,7 @@ class BarangMasukCostumerServices extends Model
 
         // celana player
         'pola_celana_player_id',
+        'kerah_celana_player_id',
         'total_celana_player',
         'jenis_sablon_celana_player',
         'jenis_kain_celana_player',
@@ -73,6 +74,7 @@ class BarangMasukCostumerServices extends Model
 
         // celana pelatih
         'pola_celana_pelatih_id',
+        'kerah_celana_pelatih_id',
         'total_celana_pelatih',
         'jenis_sablon_celana_pelatih',
         'jenis_kain_celana_pelatih',
@@ -81,6 +83,7 @@ class BarangMasukCostumerServices extends Model
 
         // celana kiper
         'pola_celana_kiper_id',
+        'kerah_celana_kiper_id',
         'total_celana_kiper',
         'jenis_sablon_celana_kiper',
         'jenis_kain_celana_kiper',
@@ -89,10 +92,12 @@ class BarangMasukCostumerServices extends Model
 
         // celana 1
         'pola_celana_1_id',
+        'kerah_celana_1_id',
         'total_celana_1',
         'jenis_sablon_celana_1',
         'jenis_kain_celana_1',
         'keterangan_celana_1',
+        'ket_tambahan_celana_1',
 
         'file_corel_disainer',
         'keterangan_lengkap',
@@ -155,7 +160,7 @@ class BarangMasukCostumerServices extends Model
     }
     public function CelanaPelatih()
     {
-        return $this->belongsTo(PolaCeleana::class, 'pola_celana_pelatih_id');
+        return $this->belongsTo(PolaLengan::class, 'pola_celana_pelatih_id');
     }
 
     // kiper
@@ -169,7 +174,7 @@ class BarangMasukCostumerServices extends Model
     }
     public function CelanaKiper()
     {
-        return $this->belongsTo(PolaCeleana::class, 'pola_celana_kiper_id');
+        return $this->belongsTo(PolaLengan::class, 'pola_celana_kiper_id');
     }
 
     // 1
@@ -183,6 +188,6 @@ class BarangMasukCostumerServices extends Model
     }
     public function Celana1()
     {
-        return $this->belongsTo(PolaCeleana::class, 'pola_celana_1_id');
+        return $this->belongsTo(PolaLengan::class, 'pola_celana_1_id');
     }
 }

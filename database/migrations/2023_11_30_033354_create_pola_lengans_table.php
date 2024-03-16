@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('pola_lengans', function (Blueprint $table) {
             $table->id();
             $table->string('jenis_kera');
+            $table->string('status');
             $table->string('gambar');
             $table->timestamps();
         });

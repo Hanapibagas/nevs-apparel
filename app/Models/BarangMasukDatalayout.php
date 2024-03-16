@@ -18,6 +18,7 @@ class BarangMasukDatalayout extends Model
         'selesai',
         'tanda_telah_mengerjakan',
         'file_corel_layout',
+        'file_tangkap_layar',
     ];
 
     public function UserLayout()

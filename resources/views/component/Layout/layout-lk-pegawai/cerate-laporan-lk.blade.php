@@ -35,19 +35,28 @@
                                                     autofocus />
                                             </div>
                                             <div class="mb-3 col-md-6">
-                                                <label for="lastName" class="form-label">Panjang Kertas</label>
-                                                <input required class="form-control" type="text" name="panjang_kertas"
-                                                    id="lastName" placeholder="Contoh: 10 meter" />
+                                                <label for="lastName" class="form-label">Panjang Kertas (Meter)</label>
+                                                <input required class="form-control" type="number" name="panjang_kertas"
+                                                    id="lastName" pattern="[0-9]+(\.[0-9]+)?"
+                                                    placeholder="Contoh: 10 meter" />
                                             </div>
                                             <div class="mb-3 col-md-6">
-                                                <label for="lastName" class="form-label">Panjang Poly / DTF </label>
-                                                <input required class="form-control" type="text" name="poly"
-                                                    id="lastName" placeholder="Contoh: 10 meter" />
+                                                <label for="lastName" class="form-label">Panjang Poly / DTF
+                                                    (Meter)</label>
+                                                <input required class="form-control" type="number" name="poly"
+                                                    id="lastName" pattern="[0-9]+(\.[0-9]+)?"
+                                                    placeholder="Contoh: 10 meter" />
                                             </div>
                                             <div class="mb-3 col-md-6">
                                                 <label for="lastName" class="form-label">File Corel Layout</label>
                                                 <input required class="form-control" type="file" accept=".rar"
                                                     name="file_corel_layout" id="lastName" />
+                                            </div>
+                                            <div class="mb-3 col-md-6">
+                                                <label for="lastName" class="form-label">File Tangkap Laar</label>
+                                                <input required class="form-control" type="file"
+                                                    accept=".jpg, .png, .jepg" name="file_tangkap_layar"
+                                                    id="lastName" />
                                             </div>
                                         </div>
                                     </div>

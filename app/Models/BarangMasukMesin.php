@@ -11,8 +11,8 @@ class BarangMasukMesin extends Model
 
     protected $fillable = [
         'barang_masuk_disainer_id',
+        'nama_mesin_id',
         'users_id',
-        'nama_mesin',
         'nama_penanggung_jawab_mesin_ACC',
         'file',
         'status',

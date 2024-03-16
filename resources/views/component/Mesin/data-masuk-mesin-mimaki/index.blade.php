@@ -73,6 +73,10 @@
                                 </td>
                                 <td>
                                     <a target="_blank"
+                                        href="{{ route('getCetakDataLkMimaki', $mesins->BarangMasukLayout->id) }}"
+                                        class="btn btn-danger">
+                                        <i class="menu-icon tf-icons bx bxs-file-pdf"></i>Show LK</a>
+                                    <a target="_blank"
                                         href="storage/{{ $mesins->BarangMasukLayout->file_corel_layout }}"
                                         class="btn btn-success">
                                         <i class="menu-icon tf-icons bx bxs-download"></i>Download File RAR</a>

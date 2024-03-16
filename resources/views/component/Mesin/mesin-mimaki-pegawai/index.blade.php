@@ -37,7 +37,6 @@
                         <thead>
                             <tr>
                                 <th>No</th>
-                                <th>Nama Mesin</th>
                                 <th>Nama Desainer</th>
                                 <th>Status</th>
                                 <th>aksi</th>
@@ -48,11 +47,8 @@
                             <tr>
                                 <td>{{ $key+1 }}</td>
                                 <td>
-                                    <strong style="text-transform: uppercase">
-                                        {{ $mesins->nama_mesin }}
-                                    </strong>
+                                    <strong style="text-transform: uppercase">{{ $mesins->Users->name }}</strong>
                                 </td>
-                                <td><strong style="text-transform: uppercase">{{ $mesins->Users->name }}</strong></td>
                                 <td>
                                     <span class="badge bg-label-{{ $mesins->status == 1 ? 'success' : 'warning'}}">
                                         {{ $mesins->status == 1 ? 'Selesai' : 'Pending'}}
