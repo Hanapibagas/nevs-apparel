@@ -48,7 +48,7 @@
                                 <td>{{ $key+1 }}</td>
                                 <td>
                                     <strong style="text-transform: uppercase">
-                                        {{ $mesins->nama_mesin }}
+                                        {{ $mesins->User->name }}
                                     </strong>
                                 </td>
                                 <td><strong style="text-transform: uppercase">{{ $mesins->Users->name }}</strong></td>

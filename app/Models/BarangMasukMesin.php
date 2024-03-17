@@ -28,4 +28,8 @@ class BarangMasukMesin extends Model
     {
         return $this->belongsTo(User::class, 'users_id');
     }
+    public function User()
+    {
+        return $this->belongsTo(User::class, 'nama_mesin_id');
+    }
 }
