@@ -25,6 +25,7 @@ return new class extends Migration
             $table->string('pola_celana')->nullable();
             $table->string('foto')->nullable();
             $table->string('tanda_telah_mengerjakan')->default('0');
+            $table->string('serah_terima')->default('0');
             $table->timestamps();
         });
     }
