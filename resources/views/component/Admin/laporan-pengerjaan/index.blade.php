@@ -69,19 +69,13 @@
                                     <span class="badge bg-warning">Berada di {{ $laporan->status }}</span>
                                     @elseif ($laporan->status == 'Press Kain')
                                     <span class="badge bg-warning">Berada di {{ $laporan->status }}</span>
-                                    @elseif ($laporan->status == 'Laser Cut')
-                                    <span class="badge bg-warning">Berada di {{ $laporan->status }}</span>
-                                    @elseif ($laporan->status == 'Manual Cut')
+                                    @elseif ($laporan->status == 'Cut')
                                     <span class="badge bg-warning">Berada di {{ $laporan->status }}</span>
                                     @elseif ($laporan->status == 'Sortir')
                                     <span class="badge bg-warning">Berada di {{ $laporan->status }}</span>
-                                    @elseif ($laporan->status == 'Jahit Baju')
+                                    @elseif ($laporan->status == 'Jahit')
                                     <span class="badge bg-warning">Berada di {{ $laporan->status }}</span>
-                                    @elseif ($laporan->status == 'Jahit Celana')
-                                    <span class="badge bg-warning">Berada di {{ $laporan->status }}</span>
-                                    @elseif ($laporan->status == 'Press Tag')
-                                    <span class="badge bg-warning">Berada di {{ $laporan->status }}</span>
-                                    @elseif ($laporan->status == 'Packing')
+                                    @elseif ($laporan->status == 'Selesai')
                                     <span class="badge bg-warning">Berada di {{ $laporan->status }}</span>
                                     @endif
                                 </td>
@@ -358,8 +352,8 @@
                                         </td>
                                         <td>
                                             <img style="height: 200px; width: 200px"
-                                                src="{{ Storage::url($laporan->BarangMasukPressKain->gambar) }}" alt=""
-                                                srcset="">
+                                                src="{{ asset('storage/'.$laporan->BarangMasukPressKain->gambar) }}"
+                                                alt="" srcset="">
                                         </td>
                                     </tr>
                                     @endif
@@ -390,7 +384,7 @@
                                         </td>
                                         <td>
                                             <img style="height: 200px; width: 200px"
-                                                src="{{ Storage::url($laporan->BarangMasukPressKain->gambar_pelatih) }}"
+                                                src="{{ asset('storage/'.$laporan->BarangMasukPressKain->gambar_pelatih) }}"
                                                 alt="" srcset="">
                                         </td>
                                     </tr>
@@ -422,7 +416,7 @@
                                         </td>
                                         <td>
                                             <img style="height: 200px; width: 200px"
-                                                src="{{ Storage::url($laporan->BarangMasukPressKain->gambar_kiper) }}"
+                                                src="{{ asset('storage/'.$laporan->BarangMasukPressKain->gambar_kiper) }}"
                                                 alt="" srcset="">
                                         </td>
                                     </tr>
@@ -454,7 +448,7 @@
                                         </td>
                                         <td>
                                             <img style="height: 200px; width: 200px"
-                                                src="{{ Storage::url($laporan->BarangMasukPressKain->gambar_1) }}"
+                                                src="{{ asset('storage/'.$laporan->BarangMasukPressKain->gambar_1) }}"
                                                 alt="" srcset="">
                                         </td>
                                     </tr>
@@ -486,7 +480,7 @@
                                         </td>
                                         <td>
                                             <img style="height: 200px; width: 200px"
-                                                src="{{ Storage::url($laporan->BarangMasukPressKain->gambar_celana_player) }}"
+                                                src="{{ asset('storage/'.$laporan->BarangMasukPressKain->gambar_celana_player) }}"
                                                 alt="" srcset="">
                                         </td>
                                     </tr>

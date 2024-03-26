@@ -104,7 +104,8 @@
                                     </span>
                                 </td>
                                 <td>
-                                    <img style="width: 100px;" src="{{ Storage::url($jenisKerahs->gambar) }}" alt="">
+                                    <img style="width: 100px;" src="{{ asset('storage/'.$jenisKerahs->gambar) }}"
+                                        alt="">
                                 </td>
                                 <td>
                                     <button data-bs-toggle="modal" data-bs-target="#modalCenter{{ $jenisKerahs->id }}"

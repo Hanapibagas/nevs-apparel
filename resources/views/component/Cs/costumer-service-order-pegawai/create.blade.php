@@ -162,7 +162,7 @@
                                                             </div>
                                                             <div class="modal-body">
                                                                 <div class="row">
-                                                                    <img src="{{ Storage::url($oderCs->gambar->file_baju_player) }}"
+                                                                    <img src="{{ asset('storage/'.$oderCs->gambar->file_baju_player) }}"
                                                                         alt="">
                                                                 </div>
                                                             </div>
@@ -251,7 +251,7 @@
                                                             </div>
                                                             <div class="modal-body">
                                                                 <div class="row">
-                                                                    <img src="{{ Storage::url($oderCs->gambar->file_baju_pelatih) }}"
+                                                                    <img src="{{ asset('storage/'.$oderCs->gambar->file_baju_pelatih) }}"
                                                                         alt="">
                                                                 </div>
                                                             </div>
@@ -340,7 +340,7 @@
                                                             </div>
                                                             <div class="modal-body">
                                                                 <div class="row">
-                                                                    <img src="{{ Storage::url($oderCs->gambar->file_baju_kiper) }}"
+                                                                    <img src="{{ asset('storage/'.$oderCs->gambar->file_baju_kiper) }}"
                                                                         alt="">
                                                                 </div>
                                                             </div>
@@ -429,7 +429,7 @@
                                                             </div>
                                                             <div class="modal-body">
                                                                 <div class="row">
-                                                                    <img src="{{ Storage::url($oderCs->gambar->file_baju_1) }}"
+                                                                    <img src="{{ asset('storage/'.$oderCs->gambar->file_baju_1) }}"
                                                                         alt="">
                                                                 </div>
                                                             </div>
@@ -520,7 +520,7 @@
                                                             </div>
                                                             <div class="modal-body">
                                                                 <div class="row">
-                                                                    <img src="{{ Storage::url($oderCs->gambar->file_celana_player) }}"
+                                                                    <img src="{{ asset('storage/'.$oderCs->gambar->file_celana_player) }}"
                                                                         alt="">
                                                                 </div>
                                                             </div>
@@ -611,7 +611,7 @@
                                                             </div>
                                                             <div class="modal-body">
                                                                 <div class="row">
-                                                                    <img src="{{ Storage::url($oderCs->gambar->file_celana_pelatih) }}"
+                                                                    <img src="{{ asset('storage/'.$oderCs->gambar->file_celana_pelatih) }}"
                                                                         alt="">
                                                                 </div>
                                                             </div>
@@ -701,7 +701,7 @@
                                                             </div>
                                                             <div class="modal-body">
                                                                 <div class="row">
-                                                                    <img src="{{ Storage::url($oderCs->gambar->file_celana_kiper) }}"
+                                                                    <img src="{{ asset('storage/'.$oderCs->gambar->file_celana_kiper) }}"
                                                                         alt="">
                                                                 </div>
                                                             </div>
@@ -791,7 +791,7 @@
                                                             </div>
                                                             <div class="modal-body">
                                                                 <div class="row">
-                                                                    <img src="{{ Storage::url($oderCs->gambar->file_celana_1) }}"
+                                                                    <img src="{{ asset('storage/'.$oderCs->gambar->file_celana_1) }}"
                                                                         alt="">
                                                                 </div>
                                                             </div>

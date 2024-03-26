@@ -116,7 +116,7 @@
                                                         <label for="nameWithTitle" class="form-label">file
                                                             disain</label><br>
                                                         <img style="width: 100%;"
-                                                            src="{{ Storage::url($mesins->file) }}" alt=""
+                                                            src="{{ asset('storage/'.$mesins->file) }}" alt=""
                                                             srcset=""><br><br>
                                                         <a href="storage/{{ $mesins->file }}" download=""
                                                             class="btn rounded-pill btn-secondary">Download</a>
