@@ -19,9 +19,14 @@ use App\Http\Controllers\Jahit\JahitController;
 use App\Http\Controllers\Finis\FinisController;
 use App\Http\Controllers\PressTag\PressTagController;
 use App\Http\Controllers\Sortir\SortirController;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
+Route::get('/migrate-fresh-seed', function () {
+    Artisan::call('migrate:freshandseed');
+    return 'Database migrated fresh and seeded successfully!';
+});
 
 
 Route::middleware(['auth', 'checkroll:super_admin,jahit,finis,cut,disainer,layout,cs,atexco,mimaki,pres_kain,laser_cut,manual_cut,sortir,jahit_baju,jahit_celana,press_tag,packing'])->group(function () {
