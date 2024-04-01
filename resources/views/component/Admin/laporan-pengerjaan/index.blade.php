@@ -75,8 +75,8 @@
                                     <span class="badge bg-warning">Berada di {{ $laporan->status }}</span>
                                     @elseif ($laporan->status == 'Jahit')
                                     <span class="badge bg-warning">Berada di {{ $laporan->status }}</span>
-                                    @elseif ($laporan->status == 'Selesai')
-                                    <span class="badge bg-warning">Berada di {{ $laporan->status }}</span>
+                                    {{-- @elseif ($laporan->status == 'Selesai')
+                                    <span class="badge bg-warning">Berada di {{ $laporan->status }}</span> --}}
                                     @endif
                                 </td>
                                 <td><strong style="text-transform: uppercase">{{
