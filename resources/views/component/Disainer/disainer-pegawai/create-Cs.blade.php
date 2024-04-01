@@ -68,7 +68,7 @@
                             <label class="col-sm-2 col-form-label" for="basic-default-company">File Corel</label>
                             <div class="col-sm-10">
                                 <input type="file" class="form-control" id="basic-default-company"
-                                    name="file_corel_disainer" accept=".cdr" />
+                                    name="file_corel_disainer" accept=".cdr" required />
                             </div>
                         </div>
                         <div class="row justify-content-end">
