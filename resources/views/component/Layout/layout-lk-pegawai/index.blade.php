@@ -81,9 +81,8 @@
                                         href="{{ route('getCetakDataLkLayout', $disainers->BarangMasukCsLK->id) }}"
                                         class="btn btn-danger">
                                         <i class="menu-icon tf-icons bx bxs-file-pdf"></i>Download LK</a>
-                                    <a target="_blank"
-                                        href="storage/{{ $disainers->BarangMasukCsLK->file_corel_disainer }}"
-                                        class="btn btn-success">
+                                    <a href="storage/{{ $disainers->BarangMasukCsLK->file_corel_disainer }}"
+                                        class="btn btn-success" download>
                                         <i class="menu-icon tf-icons bx bxs-download"></i>Download File Corel</a>
                                     <a href="{{ route('getCreateLaporanLkLayout' , $disainers->id) }}"
                                         class="btn btn-info">

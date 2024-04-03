@@ -191,90 +191,106 @@ class LayoutController extends Controller
         ]);
 
 
-        if ($dataLk !== null &&
+        if (
+            $dataLk !== null &&
             isset($dataLk->BarangMasukCsLK) &&
             $dataLk->BarangMasukCsLK !== null &&
             isset($dataLk->BarangMasukCsLK->LenganPlayer) &&
             $dataLk->BarangMasukCsLK->LenganPlayer !== null &&
-            isset($dataLk->BarangMasukCsLK->LenganPlayer->status)) {
+            isset($dataLk->BarangMasukCsLK->LenganPlayer->status)
+        ) {
             $dataKomisi1 = $dataLk->BarangMasukCsLK->LenganPlayer->status == 1;
         } else {
             $dataKomisi1 = false;
         }
 
-        if ($dataLk !== null &&
-        isset($dataLk->BarangMasukCsLK) &&
-        $dataLk->BarangMasukCsLK !== null &&
-        isset($dataLk->BarangMasukCsLK->LenganPelatih) &&
-        $dataLk->BarangMasukCsLK->LenganPelatih !== null &&
-        isset($dataLk->BarangMasukCsLK->LenganPelatih->status)) {
-        $dataKomisi2 = $dataLk->BarangMasukCsLK->LenganPelatih->status == 1;
+        if (
+            $dataLk !== null &&
+            isset($dataLk->BarangMasukCsLK) &&
+            $dataLk->BarangMasukCsLK !== null &&
+            isset($dataLk->BarangMasukCsLK->LenganPelatih) &&
+            $dataLk->BarangMasukCsLK->LenganPelatih !== null &&
+            isset($dataLk->BarangMasukCsLK->LenganPelatih->status)
+        ) {
+            $dataKomisi2 = $dataLk->BarangMasukCsLK->LenganPelatih->status == 1;
         } else {
             $dataKomisi2 = false;
         }
 
-        if ($dataLk !== null &&
-        isset($dataLk->BarangMasukCsLK) &&
-        $dataLk->BarangMasukCsLK !== null &&
-        isset($dataLk->BarangMasukCsLK->LenganKiper) &&
-        $dataLk->BarangMasukCsLK->LenganKiper !== null &&
-        isset($dataLk->BarangMasukCsLK->LenganKiper->status)) {
-        $dataKomisi3 = $dataLk->BarangMasukCsLK->LenganKiper->status == 1;
+        if (
+            $dataLk !== null &&
+            isset($dataLk->BarangMasukCsLK) &&
+            $dataLk->BarangMasukCsLK !== null &&
+            isset($dataLk->BarangMasukCsLK->LenganKiper) &&
+            $dataLk->BarangMasukCsLK->LenganKiper !== null &&
+            isset($dataLk->BarangMasukCsLK->LenganKiper->status)
+        ) {
+            $dataKomisi3 = $dataLk->BarangMasukCsLK->LenganKiper->status == 1;
         } else {
             $dataKomisi3 = false;
         }
 
-        if ($dataLk !== null &&
-        isset($dataLk->BarangMasukCsLK) &&
-        $dataLk->BarangMasukCsLK !== null &&
-        isset($dataLk->BarangMasukCsLK->Lengan1) &&
-        $dataLk->BarangMasukCsLK->Lengan1 !== null &&
-        isset($dataLk->BarangMasukCsLK->Lengan1->status)) {
-        $dataKomisi4 = $dataLk->BarangMasukCsLK->Lengan1->status == 1;
+        if (
+            $dataLk !== null &&
+            isset($dataLk->BarangMasukCsLK) &&
+            $dataLk->BarangMasukCsLK !== null &&
+            isset($dataLk->BarangMasukCsLK->Lengan1) &&
+            $dataLk->BarangMasukCsLK->Lengan1 !== null &&
+            isset($dataLk->BarangMasukCsLK->Lengan1->status)
+        ) {
+            $dataKomisi4 = $dataLk->BarangMasukCsLK->Lengan1->status == 1;
         } else {
             $dataKomisi4 = false;
         }
 
-        if ($dataLk !== null &&
-        isset($dataLk->BarangMasukCsLK) &&
-        $dataLk->BarangMasukCsLK !== null &&
-        isset($dataLk->BarangMasukCsLK->CelanaPlayer) &&
-        $dataLk->BarangMasukCsLK->CelanaPlayer !== null &&
-        isset($dataLk->BarangMasukCsLK->CelanaPlayer->status)) {
-        $dataKomisi5 = $dataLk->BarangMasukCsLK->CelanaPlayer->status == 1;
+        if (
+            $dataLk !== null &&
+            isset($dataLk->BarangMasukCsLK) &&
+            $dataLk->BarangMasukCsLK !== null &&
+            isset($dataLk->BarangMasukCsLK->CelanaPlayer) &&
+            $dataLk->BarangMasukCsLK->CelanaPlayer !== null &&
+            isset($dataLk->BarangMasukCsLK->CelanaPlayer->status)
+        ) {
+            $dataKomisi5 = $dataLk->BarangMasukCsLK->CelanaPlayer->status == 1;
         } else {
             $dataKomisi5 = false;
         }
 
-        if ($dataLk !== null &&
-        isset($dataLk->BarangMasukCsLK) &&
-        $dataLk->BarangMasukCsLK !== null &&
-        isset($dataLk->BarangMasukCsLK->CelanaPelatih) &&
-        $dataLk->BarangMasukCsLK->CelanaPelatih !== null &&
-        isset($dataLk->BarangMasukCsLK->CelanaPelatih->status)) {
-        $dataKomisi6 = $dataLk->BarangMasukCsLK->CelanaPelatih->status == 1;
+        if (
+            $dataLk !== null &&
+            isset($dataLk->BarangMasukCsLK) &&
+            $dataLk->BarangMasukCsLK !== null &&
+            isset($dataLk->BarangMasukCsLK->CelanaPelatih) &&
+            $dataLk->BarangMasukCsLK->CelanaPelatih !== null &&
+            isset($dataLk->BarangMasukCsLK->CelanaPelatih->status)
+        ) {
+            $dataKomisi6 = $dataLk->BarangMasukCsLK->CelanaPelatih->status == 1;
         } else {
             $dataKomisi6 = false;
         }
 
-        if ($dataLk !== null &&
-        isset($dataLk->BarangMasukCsLK) &&
-        $dataLk->BarangMasukCsLK !== null &&
-        isset($dataLk->BarangMasukCsLK->CelanaKiper) &&
-        $dataLk->BarangMasukCsLK->CelanaKiper !== null &&
-        isset($dataLk->BarangMasukCsLK->CelanaKiper->status)) {
-        $dataKomisi7 = $dataLk->BarangMasukCsLK->CelanaKiper->status == 1;
+        if (
+            $dataLk !== null &&
+            isset($dataLk->BarangMasukCsLK) &&
+            $dataLk->BarangMasukCsLK !== null &&
+            isset($dataLk->BarangMasukCsLK->CelanaKiper) &&
+            $dataLk->BarangMasukCsLK->CelanaKiper !== null &&
+            isset($dataLk->BarangMasukCsLK->CelanaKiper->status)
+        ) {
+            $dataKomisi7 = $dataLk->BarangMasukCsLK->CelanaKiper->status == 1;
         } else {
             $dataKomisi7 = false;
         }
 
-        if ($dataLk !== null &&
-        isset($dataLk->BarangMasukCsLK) &&
-        $dataLk->BarangMasukCsLK !== null &&
-        isset($dataLk->BarangMasukCsLK->Celana1) &&
-        $dataLk->BarangMasukCsLK->Celana1 !== null &&
-        isset($dataLk->BarangMasukCsLK->Celana1->status)) {
-        $dataKomisi8 = $dataLk->BarangMasukCsLK->Celana1->status == 1;
+        if (
+            $dataLk !== null &&
+            isset($dataLk->BarangMasukCsLK) &&
+            $dataLk->BarangMasukCsLK !== null &&
+            isset($dataLk->BarangMasukCsLK->Celana1) &&
+            $dataLk->BarangMasukCsLK->Celana1 !== null &&
+            isset($dataLk->BarangMasukCsLK->Celana1->status)
+        ) {
+            $dataKomisi8 = $dataLk->BarangMasukCsLK->Celana1->status == 1;
         } else {
             $dataKomisi8 = false;
         }
