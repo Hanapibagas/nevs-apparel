@@ -21,8 +21,8 @@ class CutController extends Controller
         if ($user->asal_kota == 'makassar') {
             $dataMasuk = Cut::with('BarangMasukCs', 'BarangMasukPresKain', 'UserLaserCut')
                 ->whereHas('BarangMasukPresKain', function ($query) {
-                        $query->whereNotNull('selesai');
-                    })
+                    $query->whereNotNull('selesai');
+                })
                 ->whereHas('BarangMasukCs', function ($query) use ($user) {
                     $query->where('kota_produksi', 'Makassar');
                 })
@@ -31,8 +31,8 @@ class CutController extends Controller
         } elseif ($user->asal_kota == 'jakarta') {
             $dataMasuk = Cut::with('BarangMasukCs', 'BarangMasukPresKain', 'UserLaserCut')
                 ->whereHas('BarangMasukPresKain', function ($query) {
-                        $query->whereNotNull('selesai');
-                    })
+                    $query->whereNotNull('selesai');
+                })
                 ->whereHas('BarangMasukCs', function ($query) use ($user) {
                     $query->where('kota_produksi', 'Jakarta');
                 })
@@ -41,8 +41,8 @@ class CutController extends Controller
         } elseif ($user->asal_kota == 'bandung') {
             $dataMasuk = Cut::with('BarangMasukCs', 'BarangMasukPresKain', 'UserLaserCut')
                 ->whereHas('BarangMasukPresKain', function ($query) {
-                        $query->whereNotNull('selesai');
-                    })
+                    $query->whereNotNull('selesai');
+                })
                 ->whereHas('BarangMasukCs', function ($query) use ($user) {
                     $query->where('kota_produksi', 'Bandung');
                 })
@@ -51,8 +51,8 @@ class CutController extends Controller
         } else {
             $dataMasuk = Cut::with('BarangMasukCs', 'BarangMasukPresKain', 'UserLaserCut')
                 ->whereHas('BarangMasukPresKain', function ($query) {
-                        $query->whereNotNull('selesai');
-                    })
+                    $query->whereNotNull('selesai');
+                })
                 ->whereHas('BarangMasukCs', function ($query) use ($user) {
                     $query->where('kota_produksi', 'Surabaya');
                 })
@@ -104,7 +104,7 @@ class CutController extends Controller
             }
         }
 
-        return redirect()->route('putLaporanCut')->with('success', 'Selamat data yang anda input telah terkirim!');
+        return redirect()->route('getindexDataMasukCutFix')->with('success', 'Selamat data yang anda input telah terkirim!');
     }
 
     public function getindexDataMasukPressFix()
@@ -131,7 +131,7 @@ class CutController extends Controller
                 ->where('tanda_telah_mengerjakan', 1)
                 ->get();
         } elseif ($user->asal_kota == 'bandung') {
-            $dataMasuk = Cut::with('BarangMasukCs','BarangMasukPresKain', 'UserLaserCut')
+            $dataMasuk = Cut::with('BarangMasukCs', 'BarangMasukPresKain', 'UserLaserCut')
                 ->whereHas('BarangMasukPresKain', function ($query) {
                     $query->whereNotNull('selesai');
                 })
@@ -187,6 +187,5 @@ class CutController extends Controller
         // return $pdf->stream('data-baju.pdf');
         $namaTimClean = preg_replace('/[^A-Za-z0-9\-]/', '', $dataLk->BarangMasukDisainer->nama_tim);
         return $pdf->stream($namaTimClean . '.pdf');
-
     }
 }
