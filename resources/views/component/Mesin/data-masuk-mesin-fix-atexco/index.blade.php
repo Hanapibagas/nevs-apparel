@@ -30,7 +30,7 @@
         <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Tables /</span> Mesin Atexco</h4>
 
         <div class="card">
-            <h5 class="card-header">Data masuk dari Disainer</h5>
+            <h5 class="card-header">Data masuk atexco</h5>
             <div class="card-body">
                 <div class="table-responsive text-nowrap">
                     <table id="atexco" class="table">

@@ -36,12 +36,12 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="app-brand justify-content-center">
-                            <a href="index.html" class="app-brand-link gap-2">
+                            <a class="app-brand-link gap-2">
                                 <img style="width: 80%; margin-left: 35px;"
                                     src="{{ asset('assets/assets/img/LogoNevs.png') }}" alt="">
                             </a>
                         </div>
-                        <h4 class="mb-2">Selamat datang di Nevs Apparel test</h4>
+                        <h4 class="mb-2">Selamat datang di Nevs Apparel</h4>
 
                         <form id="formAuthentication" class="mb-3" method="POST" action="{{ route('login') }}">
                             @csrf

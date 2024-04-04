@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Mesin;
 
 use App\Http\Controllers\Controller;
+use App\Models\BarangMasukCostumerServices;
+use App\Models\BarangMasukDatalayout;
 use App\Models\BarangMasukMesin;
 use App\Models\Laporan;
 use App\Models\MesinMimaki;
@@ -10,6 +12,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use PDF;
 
 class MimakiController extends Controller
 {
@@ -208,6 +211,5 @@ class MimakiController extends Controller
         // return $pdf->stream('data-baju.pdf');
         $namaTimClean = preg_replace('/[^A-Za-z0-9\-]/', '', $dataLk->BarangMasukDisainer->nama_tim);
         return $pdf->stream($namaTimClean . '.pdf');
-
     }
 }

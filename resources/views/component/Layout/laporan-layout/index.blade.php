@@ -27,9 +27,9 @@
 
 <div class="content-wrapper">
     <div class="container-xxl flex-grow-1 container-p-y">
-        <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Tables /</span> Costumer Service</h4>
+        <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Tables /</span> Layout</h4>
         <div class="card">
-            <h5 class="card-header">Data LK </h5>
+            <h5 class="card-header">Data laporan LK </h5>
             <div class="card-body">
                 <div class="table-responsive text-nowrap">
                     <table id="cs" class="table">

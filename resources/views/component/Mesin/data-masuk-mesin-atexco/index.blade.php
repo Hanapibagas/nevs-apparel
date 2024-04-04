@@ -30,7 +30,7 @@
         <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Tables /</span> Mesin Atexco</h4>
 
         <div class="card">
-            <h5 class="card-header">Data masuk dari Disainer</h5>
+            <h5 class="card-header">Data masuk dari Layout</h5>
             <div class="card-body">
                 <div class="table-responsive text-nowrap">
                     <table id="atexco" class="table">
@@ -76,9 +76,8 @@
                                         href="{{ route('getCetakDataLkAtxco', $mesins->BarangMasukLayout->id) }}"
                                         class="btn btn-danger">
                                         <i class="menu-icon tf-icons bx bxs-file-pdf"></i>Show LK</a>
-                                    <a target="_blank"
-                                        href="storage/{{ $mesins->BarangMasukLayout->file_corel_layout }}"
-                                        class="btn btn-success">
+                                    <a href="storage/{{ $mesins->BarangMasukLayout->file_corel_layout }}"
+                                        class="btn btn-success" download>
                                         <i class="menu-icon tf-icons bx bxs-download"></i>Download File RAR</a>
                                     <a href="{{ route('getInputLaporanAtxco' , $mesins->id) }}" class="btn btn-info">
                                         <i class="menu-icon tf-icons bx bxs-inbox"></i>Input Laporan</a>
