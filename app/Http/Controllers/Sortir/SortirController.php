@@ -584,9 +584,9 @@ class SortirController extends Controller
         if ($user->asal_kota == 'makassar') {
             $dataMasuk = DataSortir::with('BarangMasukCs', 'BarangMasukManualCut', 'BarangMasukCs.BarangMasukDisainer')
                 ->where('tanda_telah_mengerjakan', 1)
-                ->whereHas('BarangMasukManualCut', function ($query) {
-                    $query->whereNotNull('selesai');
-                })
+                // ->whereHas('BarangMasukManualCut', function ($query) {
+                //     $query->whereNotNull('selesai');
+                // })
                 ->whereHas('BarangMasukCs', function ($query) use ($user) {
                     $query->where('kota_produksi', 'Makassar');
                 })
@@ -599,9 +599,9 @@ class SortirController extends Controller
         } elseif ($user->asal_kota == 'jakarta') {
             $dataMasuk = DataSortir::with('BarangMasukCs', 'BarangMasukManualCut', 'BarangMasukCs.BarangMasukDisainer')
                 ->where('tanda_telah_mengerjakan', 1)
-                ->whereHas('BarangMasukManualCut', function ($query) {
-                    $query->whereNotNull('selesai');
-                })
+                // ->whereHas('BarangMasukManualCut', function ($query) {
+                //     $query->whereNotNull('selesai');
+                // })
                 ->whereHas('BarangMasukCs', function ($query) use ($user) {
                     $query->where('kota_produksi', 'Jakarta');
                 })
@@ -614,9 +614,9 @@ class SortirController extends Controller
         } elseif ($user->asal_kota == 'bandung') {
             $dataMasuk = DataSortir::with('BarangMasukCs', 'BarangMasukManualCut', 'BarangMasukCs.BarangMasukDisainer')
                 ->where('tanda_telah_mengerjakan', 1)
-                ->whereHas('BarangMasukManualCut', function ($query) {
-                    $query->whereNotNull('selesai');
-                })
+                // ->whereHas('BarangMasukManualCut', function ($query) {
+                //     $query->whereNotNull('selesai');
+                // })
                 ->whereHas('BarangMasukCs', function ($query) use ($user) {
                     $query->where('kota_produksi', 'Bandung');
                 })
@@ -629,9 +629,9 @@ class SortirController extends Controller
         } else {
             $dataMasuk = DataSortir::with('BarangMasukCs', 'BarangMasukManualCut', 'BarangMasukCs.BarangMasukDisainer')
                 ->where('tanda_telah_mengerjakan', 1)
-                ->whereHas('BarangMasukManualCut', function ($query) {
-                    $query->whereNotNull('selesai');
-                })
+                // ->whereHas('BarangMasukManualCut', function ($query) {
+                //     $query->whereNotNull('selesai');
+                // })
                 ->whereHas('BarangMasukCs', function ($query) use ($user) {
                     $query->where('kota_produksi', 'Surabaya');
                 })
