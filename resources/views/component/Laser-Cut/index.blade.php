@@ -70,8 +70,15 @@
                                     </script>
                                 </td>
                                 <td>
-                                    <a href="{{ route('getInputLaporanLaserCut' , $mesins->id) }}" class="btn btn-info">
+                                    <a target="_blank"
+                                        href="{{ route('getCetakDataLklaserCut', $mesins->BarangMasukCs->id) }}"
+                                        class="btn btn-danger">
+                                        <i class="menu-icon tf-icons bx bxs-file-pdf"></i>Show LK</a>
+                                    @if (Auth::user()->permission_create == 1)
+                                    <a href="{{ route('getInputLaporanLaserCut' , $mesins->no_order_id) }}"
+                                        class="btn btn-info">
                                         <i class="menu-icon tf-icons bx bxs-inbox"></i>Input Laporan</a>
+                                    @endif
                                 </td>
                             </tr>
                             @endforeach

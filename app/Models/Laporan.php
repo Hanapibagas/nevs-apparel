@@ -13,9 +13,11 @@ class Laporan extends Model
         'barang_masuk_costumer_services_id',
         'barang_masuk_layout_id',
         'barang_masuk_mesin_atexco_id',
-        'barang_masuk_mesin_mimaki_id',
+        // 'barang_masuk_mesin_mimaki_id',
         'barang_masuk_presskain_id',
-        'cut_id',
+        // 'cut_id',
+        'barang_masuk_lasercut_id',
+        'barang_masuk_manualcut_id',
         'barang_masuk_sortir_id',
         'jahit_id',
         'finis_id',
@@ -34,7 +36,7 @@ class Laporan extends Model
 
     public function BarangMasukMesinAtexco()
     {
-        return $this->belongsTo(MesinAtexco::class, 'barang_masuk_mesin_atexco_id');
+        return $this->belongsTo(DataPress::class, 'barang_masuk_mesin_atexco_id');
     }
 
     public function BarangMasukMesinMimaki()
@@ -49,7 +51,7 @@ class Laporan extends Model
 
     public function BarangMasukLaserCut()
     {
-        return $this->belongsTo(Cut::class, 'cut_id');
+        return $this->belongsTo(DataLaserCut::class, 'barang_masuk_lasercut_id');
     }
 
     public function BarangMasukManualcut()

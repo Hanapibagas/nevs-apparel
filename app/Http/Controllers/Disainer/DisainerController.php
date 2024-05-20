@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Disainer;
 
 use App\Http\Controllers\Controller;
 use App\Models\BarangMasukCostumerServices;
+use App\Models\BarangMasukDatalayout;
 use App\Models\BarangMasukDisainer;
 use App\Models\BarangMasukMesin;
 use App\Models\Gambar;
@@ -13,7 +14,10 @@ use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
+use PDO;
+use PDOException;
 
 class DisainerController extends Controller
 {
@@ -32,9 +36,21 @@ class DisainerController extends Controller
     public function getCreateToTeamMesin($nama_tim)
     {
         $disainer = BarangMasukDisainer::where('nama_tim', $nama_tim)->first();
-        $user = User::where('roles', 'atexco')->orWhere('roles', 'mimaki')->get();
+        $mesin = User::where('roles', 'atexco')->where('non_aktif', '1')->get();
+        $user = User::where('roles', 'atexco')->get();
 
-        return view('component.Disainer.disainer-pegawai.create', compact('disainer', 'user'));
+        $userCounts = [];
+        foreach ($mesin as $v) {
+            $userId = $v->id;
+            $barangMasukCount = BarangMasukMesin::where('nama_mesin_id', $userId)
+                ->where('status', 0)
+                ->count();
+            $userCounts[$userId] = $barangMasukCount;
+        }
+
+        // return response()->json($userCounts);
+
+        return view('component.Disainer.disainer-pegawai.create', compact('disainer', 'userCounts', 'mesin'));
     }
 
     public function postToTeamMesin(Request $request, $nama_tim)
@@ -64,8 +80,19 @@ class DisainerController extends Controller
     public function getUpdateToTeamMesin($id)
     {
         $disainer = BarangMasukMesin::find($id);
+        $mesin = User::whereIn('roles', ['atexco'])->where('non_aktif', '1')->get();
+        $userCounts = [];
+        foreach ($mesin as $v) {
+            $userId = $v->id;
+            $barangMasukCount = BarangMasukMesin::where('nama_mesin_id', $userId)
+                ->where('status', 0)
+                ->count();
+            $userCounts[$userId] = $barangMasukCount;
+        }
 
-        return view('component.Disainer.disainer-pegawai.update', compact('disainer'));
+        // return response()->json($disainer);
+
+        return view('component.Disainer.disainer-pegawai.update', compact('disainer', 'mesin', 'userCounts'));
     }
 
     public function putUpdateToTeamMesin(Request $request, $id)
@@ -85,7 +112,7 @@ class DisainerController extends Controller
         }
 
         $disainer->update([
-            'nama_mesin' => $request->nama_mesin,
+            'nama_mesin_id' => $request->nama_mesin_id,
             'file' => $file,
             'keterangan' => $request->keterangan
         ]);
@@ -95,15 +122,37 @@ class DisainerController extends Controller
 
     public function getCreateToTeamCs($nama_tim)
     {
-        $disainer = BarangMasukDisainer::where('nama_tim', $nama_tim)->first();
+        $disainer = BarangMasukDisainer::with('DataMesinCs.User')->where('nama_tim', $nama_tim)->first();
 
-        return view('component.Disainer.disainer-pegawai.create-Cs', compact('disainer'));
+        $mesin = User::whereIn('roles', ['atexco'])->get();
+        $userCounts = [];
+        foreach ($mesin as $v) {
+            $userId = $v->id;
+            $barangMasukCount = BarangMasukMesin::where('nama_mesin_id', $userId)
+                ->where('status', 0)
+                ->count();
+            $userCounts[$userId] = $barangMasukCount;
+        }
+
+
+        return view('component.Disainer.disainer-pegawai.create-Cs', compact('disainer', 'userCounts', 'mesin'));
     }
 
     public function postToCustomerServices(Request $request, $nama_tim)
     {
         $user = Auth::user();
-        $no_order = '#10-12' . str_pad(mt_rand(1, 999), 3, '0', STR_PAD_LEFT);
+        $bulan_sekarang = date('m');
+        $tahun_sekarang = substr(date('Y'), -2);
+
+        $last_order_number = BarangMasukCostumerServices::latest()->value('no_order');
+        if ($last_order_number) {
+            $last_sequence = substr($last_order_number, -3);
+            $next_sequence = intval($last_sequence) + 1;
+        } else {
+            $next_sequence = 1;
+        }
+
+        $new_order_number = '#' . $bulan_sekarang . '-' . $tahun_sekarang . str_pad($next_sequence, 3, '0', STR_PAD_LEFT);
 
         $filebajuplayer = null;
         $filebajupelatih = null;
@@ -164,7 +213,7 @@ class DisainerController extends Controller
         }
 
         $barangMasuk = BarangMasukCostumerServices::create([
-            'no_order' => $no_order,
+            'no_order' => $new_order_number,
             'barang_masuk_disainer_id' => $request->barang_masuk_disainer_id,
             'disainer_id' => $user->id,
             'cs_id' => $request->cs_id,
@@ -204,5 +253,32 @@ class DisainerController extends Controller
             ->get();
 
         return view('component.Disainer.data-fix-disainer-pegawai.index', compact('disainer'));
+    }
+
+    public function getUpdatePassword()
+    {
+        $users = User::findOrFail(Auth::user()->id);
+        // return response()->json($users);
+
+        return view('component.update-passsword.index', compact('users'));
+    }
+
+    public function postUpdatePassword(Request $request)
+    {
+        // return response()->json($request->all());
+        $this->validate($request, [
+            'password' => 'required|confirmed',
+            'password_confirmation' => 'required',
+        ]);
+
+        $user = Auth::user();
+
+
+        $user->password = Hash::make($request->password);
+        // return response()->json($user);
+
+        $user->save();
+
+        return redirect()->back()->with('success', 'Permission telah diperbarui.');
     }
 }

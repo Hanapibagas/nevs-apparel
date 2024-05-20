@@ -61,6 +61,7 @@
                             </div>
                             <div class="row">
                                 <div class="col mb-3">
+                                    <input type="hidden" name="password" value="12345678">
                                     <label for="nameWithTitle" class="form-label">Email Pegawai</label>
                                     <input name="email" type="text" id="nameWithTitle" class="form-control"
                                         placeholder="Silahkan masukkan email ..." />
@@ -89,11 +90,14 @@
                         <thead>
                             <tr>
                                 <th class="text-nowrap">Nama pegawai</th>
+                                <th class="text-nowrap">Email pegawai</th>
                                 <th class="text-nowrap">Asal pegawai</th>
+                                <th class="text-nowrap">Password pegawai</th>
                                 <th class="text-nowrap text-center">Edit</th>
                                 <th class="text-nowrap text-center">Hapus</th>
                                 <th class="text-nowrap text-center">Updload</th>
                                 <th class="text-nowrap text-center">Show</th>
+                                <th class="text-nowrap text-center">Non aktif</th>
                             </tr>
                         </thead>
                         <form method="POST" action="{{ route('postPirmission') }}">
@@ -102,7 +106,13 @@
                                 @foreach ($userLaytout as $user)
                                 <tr>
                                     <td class="text-nowrap">{{ $user->name }}</td>
+                                    <td class="text-nowrap">{{ $user->email }}</td>
                                     <td class="text-nowrap">{{ $user->asal_kota }}</td>
+                                    <td class="text-nowrap">
+                                        @foreach ($user->PasswordUser as $passwordUser)
+                                        {{ $passwordUser->password }}
+                                        @endforeach
+                                    </td>
                                     <td>
                                         <div class="form-check d-flex justify-content-center">
                                             <input type="hidden" name="permission_edit[{{ $user->id }}]" value="off">
@@ -134,6 +144,15 @@
                                             <input type="hidden" name="permission_show[{{ $user->id }}]" value="off">
                                             <input class="form-check-input" type="checkbox" id="defaultCheck3"
                                                 name="permission_show[{{ $user->id }}]" {{ $user->permission_show ==
+                                            1 ?
+                                            'checked' : '' }} />
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="form-check d-flex justify-content-center">
+                                            <input type="hidden" name="non_aktif[{{ $user->id }}]" value="off">
+                                            <input class="form-check-input" type="checkbox" id="defaultCheck3"
+                                                name="non_aktif[{{ $user->id }}]" {{ $user->non_aktif ==
                                             1 ?
                                             'checked' : '' }} />
                                         </div>

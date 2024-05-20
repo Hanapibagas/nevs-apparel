@@ -87,21 +87,22 @@
                                     </strong>
                                 </td>
                                 <td>
-                                    <img style="width: 100px;" src="{{ asset('storage/'.$jenisKerahs->gambar) }}" alt="">
+                                    <img style="width: 100px;" src="{{ asset('storage/'.$jenisKerahs->gambar) }}"
+                                        alt="">
                                 </td>
                                 <td>
                                     <button data-bs-toggle="modal" data-bs-target="#modalCenter{{ $jenisKerahs->id }}"
                                         class="btn btn-primary">
                                         <i class="menu-icon tf-icons bx bx-pencil"></i>
                                         Edit</button>
-                                    <form method="POST"
+                                    {{-- <form method="POST"
                                         action="{{ route('deleteListDataJenisKerah', ['id' => $jenisKerahs->id]) }}">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-danger">
                                             <i class="menu-icon tf-icons bx bx-trash"></i> Hapus
                                         </button>
-                                    </form>
+                                    </form> --}}
                                 </td>
                             </tr>
                             <div class="modal fade" id="modalCenter{{ $jenisKerahs->id }}" tabindex="-1"

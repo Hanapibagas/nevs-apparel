@@ -7,10 +7,10 @@
         <canvas id="barChart" width="800" height="400"></canvas>
     </div>
 
-    <div class="content-wrapper">
+    {{-- <div class="content-wrapper">
         <div class="container-xxl flex-grow-1 container-p-y">
             <div class="card">
-                <h5 class="card-header">Silahkan pilih tahun, bulan dan tanggal untuk melihat jumlah jahit </h5>
+                <h5 class="card-header">Silahkan pilih tahun dan bulan untuk melihat jumlah jahit </h5>
                 <form action="{{ route('indexHome') }}" method="get">
                     <div class="card-header row">
                         <div class="mb-3 col-md-3">
@@ -43,32 +43,25 @@
                             </select>
                         </div>
                         <div class="mb-3 col-md-3">
-                            <label for="">Tanggal</label>
-                            <input required class="form-control" type="number" name="tanggal" />
-                        </div>
-                        <div class="mb-3 col-md-3">
-                            <button type="submit" class="btn btn-primary form-control">Kirim</button>
+                            <button type="submit" style="margin-top: 20px"
+                                class="btn btn-primary form-control">Kirim</button>
                         </div>
                     </div>
                 </form>
             </div>
 
+
             <div class="row" style="margin-top: 20px;">
-                <div class="col-md-6 col-lg-4 col-xl-4 order-0 mb-4">
+                <div class="col-md-12 col-lg-12 col-xl-12 order-0 mb-4">
                     <div class="card h-100">
                         <div class="card-body">
-                            <div class="d-flex justify-content-between align-items-center mb-3">
-                                <div class="d-flex flex-column align-items-center gap-1">
-                                    <h2 class="mb-2">{{ $total_semua }}</h2>
-                                    <span>Total Orders</span>
-                                </div>
-                            </div>
+                            <canvas id="myChart"></canvas>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
     @endif
 
     @if (Auth::user()->roles == 'cs')
@@ -125,39 +118,71 @@
 @endsection
 
 @push('js')
-{{-- <script>
-    document.addEventListener("DOMContentLoaded", function() {
-        document.querySelector("form").addEventListener("submit", function(event) {
-            event.preventDefault(); // Menghentikan perilaku default dari formulir (reload halaman)
-
-            // Ambil nilai tahun, bulan, dan tanggal dari formulir
-            var tahun = document.querySelector("select[name='tahun']").value;
-            var bulan = document.querySelector("select[name='bulan']").value;
-            var tanggal = document.querySelector("input[name='tanggal']").value;
-
-            // Lakukan pengiriman data formulir dengan AJAX atau perintah lainnya di sini
-            console.log("Tahun: " + tahun + ", Bulan: " + bulan + ", Tanggal: " + tanggal);
-
-            // Contoh penggunaan AJAX dengan jQuery
-            $.ajax({
-                url: "{{ route('indexHome') }}",
-                method: "GET",
-                data: {
-                    tahun: tahun,
-                    bulan: bulan,
-                    tanggal: tanggal
-                },
-                success: function(response) {
-                    console.log(response);
-                },
-                error: function(xhr, status, error) {
-                    console.error(error);
-                }
-            });
-        });
-    });
-</script> --}}
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    var dates = {!! json_encode($dates) !!};
+    var totals = {!! json_encode($totals) !!};
+
+    var ctx = document.getElementById('myChart').getContext('2d');
+
+    function isSunday(date) {
+        return date.getDay() === 0;
+    }
+
+    var myChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: dates,
+            datasets: [{
+                label: 'Total Jahit',
+                label: 'Total Jahit',
+                data: totals,
+                backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                borderColor: 'rgba(54, 162, 235, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            },
+            plugins: {
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            var label = context.dataset.label || '';
+                            if (label) {
+                                label += ': ';
+                            }
+                            if (context.parsed.y !== null) {
+                                label += context.parsed.y;
+                            }
+                            return label;
+                        },
+                        labelColor: function(context) {
+                            if (isSunday(new Date(dates[context.dataIndex]))) {
+                                return {
+                                    borderColor: 'red',
+                                    backgroundColor: 'red'
+                                };
+                            } else {
+                                return {
+                                    borderColor: 'rgba(54, 162, 235, 1)',
+                                    backgroundColor: 'rgba(54, 162, 235, 0.2)'
+                                };
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    });
+</script>
+
+
+
 <script>
     var dashboardMakassar = {!! $dashboardMakassar !!};
     var dashboardBandung = {!! $dashboardBandung !!};
@@ -230,8 +255,6 @@
         options: options
     });
 </script>
-
-
 <script>
     var dataFromServer = <?php echo json_encode($dataMasuk); ?>;
     dataFromServer.sort(function(a, b) {
@@ -642,4 +665,5 @@
         }
     });
 </script>
+
 @endpush

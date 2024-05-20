@@ -27,7 +27,7 @@
 
 <div class="content-wrapper">
     <div class="container-xxl flex-grow-1 container-p-y">
-        <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Tables /</span> Mesin Atexco</h4>
+        <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Tables /</span> Mesin</h4>
 
         <div class="card">
             <h5 class="card-header">Data masuk dari Layout</h5>
@@ -73,14 +73,22 @@
                                 </td>
                                 <td>
                                     <a target="_blank"
-                                        href="{{ route('getCetakDataLkAtxco', $mesins->BarangMasukLayout->id) }}"
+                                        href="{{ route('getCetakDataLkAtxco', $mesins->BarangMasukLayout->barang_masuk_id) }}"
                                         class="btn btn-danger">
                                         <i class="menu-icon tf-icons bx bxs-file-pdf"></i>Show LK</a>
+                                    @if ($mesins->BarangMasukLayout->file_corel_layout)
                                     <a href="storage/{{ $mesins->BarangMasukLayout->file_corel_layout }}"
                                         class="btn btn-success" download>
                                         <i class="menu-icon tf-icons bx bxs-download"></i>Download File RAR</a>
-                                    <a href="{{ route('getInputLaporanAtxco' , $mesins->id) }}" class="btn btn-info">
+                                    @elseif ($mesins->BarangMasukLayout->keterangan1)
+                                    <a style="color: white" class="btn btn-success">
+                                        <i class="menu-icon tf-icons bx bxs-ban"></i>Tidak memiliki file corel</a>
+                                    @endif
+                                    @if (Auth::user()->permission_create == 1)
+                                    <a href="{{ route('getInputLaporanAtxco' , $mesins->no_order_id) }}"
+                                        class="btn btn-info">
                                         <i class="menu-icon tf-icons bx bxs-inbox"></i>Input Laporan</a>
+                                    @endif
                                 </td>
                             </tr>
                             @endforeach

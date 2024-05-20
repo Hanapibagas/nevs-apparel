@@ -13,10 +13,25 @@ class MesinAtexco extends Model
         'no_order_id',
         'barang_masuk_layout_id',
         'penanggung_jawab_id',
+        'lk_player_id',
+        'lk_pelatih_id',
+        'lk_kiper_id',
+        'lk_1_id',
+        'lk_celana_player_id',
+        'lk_celana_pelatih_id',
+        'lk_celana_kiper_id',
+        'lk_celana_1_id',
         'nama_mesin',
         'deadline',
         'selesai',
         'file_foto',
+        'file_foto_pelatih',
+        'file_foto_kiper',
+        'file_foto_1',
+        'file_foto_celana_player',
+        'file_foto_celana_pelatih',
+        'file_foto_celana_kiper',
+        'file_foto_celana_1',
         'tanda_telah_mengerjakan',
     ];
 
@@ -32,6 +47,6 @@ class MesinAtexco extends Model
 
     public function BarangMasukLayout()
     {
-        return $this->belongsTo(BarangMasukDatalayout::class, 'no_order_id');
+        return $this->belongsTo(BarangMasukDatalayout::class, 'barang_masuk_layout_id');
     }
 }

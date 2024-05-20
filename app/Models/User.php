@@ -26,6 +26,7 @@ class User extends Authenticatable
         'permission_hapus',
         'permission_create',
         'permission_show',
+        'non_aktif',
         'password',
     ];
 
@@ -47,6 +48,11 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function PasswordUser()
+    {
+        return $this->hasMany(PasswordUser::class, 'user');
+    }
 
     public function BarangMasukCostumerServices()
     {
