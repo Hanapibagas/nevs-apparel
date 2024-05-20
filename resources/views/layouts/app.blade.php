@@ -12,7 +12,7 @@
 
     <meta name="description" content="" />
 
-    <link rel="icon" href="/assets/logo.png" type="image/x-icon">
+    <link rel="icon" href="{{ asset('assets/Logo.png') }}" type="image/x-icon">
 
     @stack('css')
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
