@@ -122,10 +122,17 @@
                                         </p>
                                     </td>
                                     <td>
+                                        @if ($laporan->BarangMasukLayout)
                                         <a target="_blank"
                                             href="{{ route('getCetakDataLkSuperAdmin', $laporan->BarangMasukLayout->barang_masuk_id) }}"
                                             class="btn btn-danger">
                                             <i class="menu-icon tf-icons bx bxs-file-pdf"></i>Show LK</a>
+                                        @else
+                                        <a target="_blank"
+                                            href="{{ route('getCetakDataLkSuperAdmin', $laporan->BarangMasukCs->id) }}"
+                                            class="btn btn-danger">
+                                            <i class="menu-icon tf-icons bx bxs-file-pdf"></i>Show LK</a>
+                                        @endif
                                         <a class="btn btn-primary"
                                             href="{{ route('getDetailLaporan', $laporan->barang_masuk_costumer_services_id) }}"
                                             type="button" class="btn btn-warning">
