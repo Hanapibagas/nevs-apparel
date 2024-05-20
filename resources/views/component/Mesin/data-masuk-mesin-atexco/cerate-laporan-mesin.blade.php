@@ -23,8 +23,8 @@
                                                 <input type="hidden" id="playerId" name="player_id"
                                                     value="{{ $formattedData['player'][0]['id'] }}">
                                                 <label for="firstName" class="form-label">File foto</label>
-                                                <input class="form-control" name="file_foto" type="file" id="firstName"
-                                                    required />
+                                                <input class="form-control" name="file_foto" type="file"
+                                                    id="firstName" />
                                             </div>
                                             <div class="mb-3 col-md-6">
                                                 <label for="firstName" class="form-label">keterangan tambahan</label>
@@ -38,7 +38,7 @@
                                                     value="{{ $formattedData['pelatih'][0]['id'] }}">
                                                 <label for="firstName" class="form-label">File foto</label>
                                                 <input class="form-control" name="file_foto_pelatih" type="file"
-                                                    id="firstName" required />
+                                                    id="firstName" />
                                             </div>
                                             <div class="mb-3 col-md-6">
                                                 <label for="firstName" class="form-label">keterangan tambahan</label>
@@ -52,7 +52,7 @@
                                                     value="{{ $formattedData['kiper'][0]['id'] }}">
                                                 <label for="firstName" class="form-label">File foto</label>
                                                 <input class="form-control" name="file_foto_kiper" type="file"
-                                                    id="firstName" required />
+                                                    id="firstName" />
                                             </div>
                                             <div class="mb-3 col-md-6">
                                                 <label for="firstName" class="form-label">keterangan tambahan</label>
@@ -66,7 +66,7 @@
                                                     value="{{ $formattedData['lk_1'][0]['id'] }}">
                                                 <label for="firstName" class="form-label">File foto</label>
                                                 <input class="form-control" name="file_foto_1" type="file"
-                                                    id="firstName" required />
+                                                    id="firstName" />
                                             </div>
                                             <div class="mb-3 col-md-6">
                                                 <label for="firstName" class="form-label">keterangan tambahan</label>
@@ -80,7 +80,7 @@
                                                     value="{{ $formattedData['celana_player'][0]['id'] }}">
                                                 <label for="firstName" class="form-label">File foto</label>
                                                 <input class="form-control" name="file_foto_celana_player" type="file"
-                                                    id="firstName" required />
+                                                    id="firstName" />
                                             </div>
                                             <div class="mb-3 col-md-6">
                                                 <label for="firstName" class="form-label">keterangan tambahan</label>
@@ -94,7 +94,7 @@
                                                     value="{{ $formattedData['celana_pelatih'][0]['id'] }}">
                                                 <label for="firstName" class="form-label">File foto</label>
                                                 <input class="form-control" name="file_foto_celana_pelatih" type="file"
-                                                    id="firstName" required />
+                                                    id="firstName" />
                                             </div>
                                             <div class="mb-3 col-md-6">
                                                 <label for="firstName" class="form-label">keterangan tambahan</label>
@@ -108,7 +108,7 @@
                                                     value="{{ $formattedData['celana_kiper'][0]['id'] }}">
                                                 <label for="firstName" class="form-label">File foto</label>
                                                 <input class="form-control" name="file_foto_celana_kiper" type="file"
-                                                    id="firstName" required />
+                                                    id="firstName" />
                                             </div>
                                             <div class="mb-3 col-md-6">
                                                 <label for="firstName" class="form-label">keterangan tambahan</label>
@@ -122,7 +122,7 @@
                                                     value="{{ $formattedData['celana_1'][0]['id'] }}">
                                                 <label for="firstName" class="form-label">File foto</label>
                                                 <input class="form-control" name="file_foto_celana_1" type="file"
-                                                    id="firstName" required />
+                                                    id="firstName" />
                                             </div>
                                             <div class="mb-3 col-md-6">
                                                 <label for="firstName" class="form-label">keterangan tambahan</label>

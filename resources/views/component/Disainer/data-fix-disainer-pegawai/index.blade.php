@@ -35,7 +35,7 @@
                                 <th>No</th>
                                 <th>Nama Tim</th>
                                 <th>Nama CS</th>
-                                <th>Nama mesin</th>
+                                {{-- <th>Nama mesin</th> --}}
                                 <th>status</th>
                             </tr>
                         </thead>
@@ -50,14 +50,14 @@
                                 </td>
                                 <td><strong style="text-transform: uppercase">{{ $disainers->UsersCs->name }}</strong>
                                 </td>
-                                <td>
+                                {{-- <td>
                                     @if ($disainers->DataMesinFix->isNotEmpty())
                                     <strong style="text-transform: uppercase">{{
                                         $disainers->DataMesinFix->first()->nama_mesin }}</strong>
                                     @else
                                     No DataMesinFix available
                                     @endif
-                                </td>
+                                </td> --}}
                                 <td>
                                     <span
                                         class="badge bg-label-{{ $disainers->tanda_telah_mengerjakan == 1 ? 'success' : 'danger' }}">

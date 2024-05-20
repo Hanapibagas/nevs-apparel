@@ -42,6 +42,11 @@ class BarangMasukCostumerServices extends Model
         'tanda_telah_mengerjakan',
     ];
 
+    public function UserMesin()
+    {
+        return $this->belongsTo(User::class, 'jenis_mesin');
+    }
+
     public function Gambar()
     {
         return $this->belongsTo(Gambar::class, 'barang_masuk_disainer_id');

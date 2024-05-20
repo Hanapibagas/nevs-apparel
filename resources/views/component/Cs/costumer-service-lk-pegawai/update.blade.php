@@ -19,7 +19,8 @@
                                     <div class="card-body">
                                         <div class="row">
                                             <div class="mb-3 col-md-4">
-                                                <label for="lastName" class="form-label">No. Nota</label>
+                                                <label for="lastName" class="form-label">No. Nota <i class="text-danger"
+                                                        style="font-size: 15px;">*</i></label>
                                                 <input class="form-control" required type="text" name="no_nota"
                                                     value="{{ $oderCs->no_nota }}" id="lastName"
                                                     placeholder="No. nota" />
@@ -40,7 +41,8 @@
                                                     id="lastName" value="{{ $oderCs->UsersOrder->name }}" readonly />
                                             </div>
                                             <div class="mb-3 col-md-6">
-                                                <label for="lastName" class="form-label">Deadline</label>
+                                                <label for="lastName" class="form-label">Deadline <i class="text-danger"
+                                                        style="font-size: 15px;">*</i></label>
                                                 <input class="form-control" required type="date" name="deadline"
                                                     id="lastName" value="{{ $oderCs->deadline }}" />
                                             </div>
@@ -50,7 +52,8 @@
                                                     id="lastName" value="{{ $oderCs->Users->name }}" readonly />
                                             </div>
                                             <div class="mb-3 col-md-6">
-                                                <label class="form-label" for="country">Layout</label>
+                                                <label class="form-label" for="country">Layout <i class="text-danger"
+                                                        style="font-size: 15px;">*</i></label>
                                                 <select id="country" required name="layout_id"
                                                     class="select2 form-select">
                                                     <option value="{{ $oderCs->UsersLk->id }}">{{ $oderCs->UsersLk->name
@@ -66,12 +69,13 @@
                                                 </select>
                                             </div>
                                             <div class="mb-3 col-md-6">
-                                                <label for="lastName" class="form-label">Mesin Print</label>
+                                                <label for="lastName" class="form-label">Mesin Print </label>
                                                 <input class="form-control" type="text" name="costumer_service"
-                                                    id="lastName" value="{{ $oderCs->jenis_mesin }}" readonly />
+                                                    id="lastName" value="{{ $oderCs->UserMesin->name }}" readonly />
                                             </div>
                                             <div class="mb-3 col-md-6">
-                                                <label for="lastName" class="form-label">Kota</label>
+                                                <label for="lastName" class="form-label">Kota <i class="text-danger"
+                                                        style="font-size: 15px;">*</i></label>
                                                 <select id="country" required name="kota_produksi"
                                                     class="select2 form-select">
                                                     <option value="{{ $oderCs->kota_produksi }}">{{
@@ -99,7 +103,9 @@
                                                 <hr>
                                                 <div class="row">
                                                     <div class="mb-3 col-md-6">
-                                                        <label class="form-label" for="country">Status</label>
+                                                        <label class="form-label" for="country">Status <i
+                                                                class="text-danger"
+                                                                style="font-size: 15px;">*</i></label>
                                                         <select id="country" required name="status_player"
                                                             class="select2 form-select">
                                                             <option
@@ -114,7 +120,9 @@
                                                         </select>
                                                     </div>
                                                     <div class="mb-3 col-md-6">
-                                                        <label class="form-label" for="country">Produksi</label>
+                                                        <label class="form-label" for="country">Produksi <i
+                                                                class="text-danger"
+                                                                style="font-size: 15px;">*</i></label>
                                                         <select id="country" required name="pola_lengan_player_id"
                                                             class="select2 form-select">
                                                             {{-- <option
@@ -132,7 +140,9 @@
                                                         </select>
                                                     </div>
                                                     <div class="mb-3 col-md-6">
-                                                        <label class="form-label" for="country">model</label>
+                                                        <label class="form-label" for="country">model <i
+                                                                class="text-danger"
+                                                                style="font-size: 15px;">*</i></label>
                                                         <select id="country" required name="kera_baju_player_id"
                                                             class="select2 form-select">
                                                             {{-- <option value="{{ $oderCs->KeraPlayer->id }}">{{
@@ -148,34 +158,44 @@
                                                         </select>
                                                     </div>
                                                     <div class="mb-3 col-md-6">
-                                                        <label class="form-label" for="country">Jenis Sublim</label>
+                                                        <label class="form-label" for="country">Jenis Sublim <i
+                                                                class="text-danger"
+                                                                style="font-size: 15px;">*</i></label>
                                                         <input class="form-control" required type="text" id="firstName"
                                                             name="jenis_sablon_baju_player"
                                                             value="{{ $oderCs->BarangMasukCostumerServicesLkPlyer->first()->jenis_sablon_baju_player }}"
                                                             placeholder="Jenis Sublim" autofocus />
                                                     </div>
                                                     <div class="mb-3 col-md-6">
-                                                        <label for="firstName" class="form-label">Jenis Bahan</label>
+                                                        <label for="firstName" class="form-label">Jenis Bahan <i
+                                                                class="text-danger"
+                                                                style="font-size: 15px;">*</i></label>
                                                         <input class="form-control" required type="text" id="firstName"
                                                             name="jenis_kain_baju_player"
                                                             value="{{ $oderCs->BarangMasukCostumerServicesLkPlyer->first()->jenis_kain_baju_player }}"
                                                             placeholder="Jenis Bahan" autofocus />
                                                     </div>
                                                     <div class="mb-3 col-md-6">
-                                                        <label for="firstName" class="form-label">Jumlah</label>
+                                                        <label for="firstName" class="form-label">Jumlah <i
+                                                                class="text-danger"
+                                                                style="font-size: 15px;">*</i></label>
                                                         <input class="form-control" required type="number"
                                                             id="firstName" placeholder="Jumlah"
                                                             value="{{ $oderCs->BarangMasukCostumerServicesLkPlyer->first()->total_baju_player }}"
                                                             name="total_baju_player" autofocus />
                                                     </div>
                                                     <div class="mb-3 col-md-6">
-                                                        <label for="firstName" class="form-label">Ukuran</label>
+                                                        <label for="firstName" class="form-label">Ukuran <i
+                                                                class="text-danger"
+                                                                style="font-size: 15px;">*</i></label>
                                                         <textarea name="ket_tambahan_baju_player" required
                                                             class="form-control"
                                                             placeholder="Contoh: M 10, L 2, Xl 1">{{ $oderCs->BarangMasukCostumerServicesLkPlyer->first()->ket_tambahan_baju_player }}</textarea>
                                                     </div>
                                                     <div class="mb-3 col-md-12">
-                                                        <label class="form-label" for="country">Keterangan</label>
+                                                        <label class="form-label" for="country">Keterangan <i
+                                                                class="text-danger"
+                                                                style="font-size: 15px;">*</i></label>
                                                         <textarea required class="form-control"
                                                             name="keterangan_baju_pelayer">{!! $oderCs->BarangMasukCostumerServicesLkPlyer->first()->keterangan_baju_pelayer !!}</textarea>
                                                     </div>
@@ -213,7 +233,9 @@
                                                 <hr>
                                                 <div class="row">
                                                     <div class="mb-3 col-md-6">
-                                                        <label class="form-label" for="country">Status</label>
+                                                        <label class="form-label" for="country">Status <i
+                                                                class="text-danger"
+                                                                style="font-size: 15px;">*</i></label>
                                                         <select id="country" required name="status_pelatih"
                                                             class="select2 form-select">
                                                             <option
@@ -228,7 +250,9 @@
                                                         </select>
                                                     </div>
                                                     <div class="mb-3 col-md-6">
-                                                        <label class="form-label" for="country">Produksi</label>
+                                                        <label class="form-label" for="country">Produksi <i
+                                                                class="text-danger"
+                                                                style="font-size: 15px;">*</i></label>
                                                         <select id="country" required name="pola_lengan_pelatih_id"
                                                             class="select2 form-select">
                                                             <<option value="">Jenis produksi kosong apakah anda ingin
@@ -244,7 +268,9 @@
                                                         </select>
                                                     </div>
                                                     <div class="mb-3 col-md-6">
-                                                        <label class="form-label" for="country">model</label>
+                                                        <label class="form-label" for="country">model <i
+                                                                class="text-danger"
+                                                                style="font-size: 15px;">*</i></label>
                                                         <select id="country" required name="kerah_baju_pelatih_id"
                                                             class="select2 form-select">
                                                             <option value="">Jenis model kosong apakah anda ingin
@@ -258,34 +284,44 @@
                                                         </select>
                                                     </div>
                                                     <div class="mb-3 col-md-6">
-                                                        <label class="form-label" for="country">Jenis Sublim</label>
+                                                        <label class="form-label" for="country">Jenis Sublim <i
+                                                                class="text-danger"
+                                                                style="font-size: 15px;">*</i></label>
                                                         <input class="form-control" required type="text" id="firstName"
                                                             name="jenis_sablon_baju_pelatih"
                                                             value="{{ $oderCs->BarangMasukCostumerServicesLkPelatih->first()->jenis_sablon_baju_pelatih }}"
                                                             placeholder="Jenis Sublim" autofocus />
                                                     </div>
                                                     <div class="mb-3 col-md-6">
-                                                        <label for="firstName" class="form-label">Jenis Bahan</label>
+                                                        <label for="firstName" class="form-label">Jenis Bahan <i
+                                                                class="text-danger"
+                                                                style="font-size: 15px;">*</i></label>
                                                         <input class="form-control" required type="text" id="firstName"
                                                             name="jenis_kain_baju_pelatih"
                                                             value="{{ $oderCs->BarangMasukCostumerServicesLkPelatih->first()->jenis_kain_baju_pelatih }}"
                                                             placeholder="Jenis Bahan" autofocus />
                                                     </div>
                                                     <div class="mb-3 col-md-6">
-                                                        <label for="firstName" class="form-label">Jumlah</label>
+                                                        <label for="firstName" class="form-label">Jumlah <i
+                                                                class="text-danger"
+                                                                style="font-size: 15px;">*</i></label>
                                                         <input class="form-control" required type="number"
                                                             id="firstName" placeholder="Jumlah"
                                                             value="{{ $oderCs->BarangMasukCostumerServicesLkPelatih->first()->total_baju_pelatih }}"
                                                             name="total_baju_pelatih" autofocus />
                                                     </div>
                                                     <div class="mb-3 col-md-6">
-                                                        <label for="firstName" class="form-label">Ukuran</label>
+                                                        <label for="firstName" class="form-label">Ukuran <i
+                                                                class="text-danger"
+                                                                style="font-size: 15px;">*</i></label>
                                                         <textarea required name="ket_tambahan_baju_pelatih"
                                                             class="form-control"
                                                             placeholder="Contoh: M 10, L 2, Xl 1">{{ $oderCs->BarangMasukCostumerServicesLkPelatih->first()->ket_tambahan_baju_pelatih }}</textarea>
                                                     </div>
                                                     <div class="mb-3 col-md-12">
-                                                        <label class="form-label" for="country">Keterangan</label>
+                                                        <label class="form-label" for="country">Keterangan <i
+                                                                class="text-danger"
+                                                                style="font-size: 15px;">*</i></label>
                                                         <textarea required class="form-control"
                                                             name="keterangan_baju_pelatih">{!! $oderCs->BarangMasukCostumerServicesLkPelatih->first()->keterangan_baju_pelatih !!}</textarea>
                                                     </div>
@@ -323,7 +359,9 @@
                                                 <hr>
                                                 <div class="row">
                                                     <div class="mb-3 col-md-6">
-                                                        <label class="form-label" for="country">Status</label>
+                                                        <label class="form-label" for="country">Status <i
+                                                                class="text-danger"
+                                                                style="font-size: 15px;">*</i></label>
                                                         <select id="country" required name="status_kiper"
                                                             class="select2 form-select">
                                                             <option
@@ -338,7 +376,9 @@
                                                         </select>
                                                     </div>
                                                     <div class="mb-3 col-md-6">
-                                                        <label class="form-label" for="country">Produksi</label>
+                                                        <label class="form-label" for="country">Produksi <i
+                                                                class="text-danger"
+                                                                style="font-size: 15px;">*</i></label>
                                                         <select id="country" required name="pola_lengan_kiper_id"
                                                             class="select2 form-select">
                                                             <option value="">Jenis produksi kosong apakah anda ingin
@@ -353,7 +393,9 @@
                                                         </select>
                                                     </div>
                                                     <div class="mb-3 col-md-6">
-                                                        <label class="form-label" for="country">model</label>
+                                                        <label class="form-label" for="country">model <i
+                                                                class="text-danger"
+                                                                style="font-size: 15px;">*</i></label>
                                                         <select id="country" required name="kerah_baju_kiper_id"
                                                             class="select2 form-select">
                                                             <option value="">Jenis model kosong apakah anda ingin
@@ -367,34 +409,44 @@
                                                         </select>
                                                     </div>
                                                     <div class="mb-3 col-md-6">
-                                                        <label class="form-label" for="country">Jenis Sublim</label>
+                                                        <label class="form-label" for="country">Jenis Sublim <i
+                                                                class="text-danger"
+                                                                style="font-size: 15px;">*</i></label>
                                                         <input class="form-control" required type="text" id="firstName"
                                                             name="jenis_sablon_baju_kiper" placeholder="Jenis Sublim"
                                                             autofocus
                                                             value="{{ $oderCs->BarangMasukCostumerServicesLkKiper->first()->jenis_sablon_baju_kiper }}" />
                                                     </div>
                                                     <div class="mb-3 col-md-6">
-                                                        <label for="firstName" class="form-label">Jenis Bahan</label>
+                                                        <label for="firstName" class="form-label">Jenis Bahan <i
+                                                                class="text-danger"
+                                                                style="font-size: 15px;">*</i></label>
                                                         <input class="form-control" required type="text" id="firstName"
                                                             name="jenis_kain_baju_kiper"
                                                             value="{{ $oderCs->BarangMasukCostumerServicesLkKiper->first()->jenis_kain_baju_kiper }}"
                                                             placeholder="Jenis Bahan" autofocus />
                                                     </div>
                                                     <div class="mb-3 col-md-6">
-                                                        <label for="firstName" class="form-label">Jumlah</label>
+                                                        <label for="firstName" class="form-label">Jumlah <i
+                                                                class="text-danger"
+                                                                style="font-size: 15px;">*</i></label>
                                                         <input class="form-control" required type="number"
                                                             value="{{ $oderCs->BarangMasukCostumerServicesLkKiper->first()->total_baju_kiper }}"
                                                             id="firstName" placeholder="Jumlah" name="total_baju_kiper"
                                                             autofocus />
                                                     </div>
                                                     <div class="mb-3 col-md-6">
-                                                        <label for="firstName" class="form-label">Ukuran</label>
+                                                        <label for="firstName" class="form-label">Ukuran <i
+                                                                class="text-danger"
+                                                                style="font-size: 15px;">*</i></label>
                                                         <textarea required name="ket_tambahan_baju_kiper"
                                                             class="form-control"
                                                             placeholder="Contoh: M 10, L 2, Xl 1">{{ $oderCs->BarangMasukCostumerServicesLkKiper->first()->ket_tambahan_baju_kiper }}</textarea>
                                                     </div>
                                                     <div class="mb-3 col-md-12">
-                                                        <label class="form-label" for="country">Keterangan</label>
+                                                        <label class="form-label" for="country">Keterangan <i
+                                                                class="text-danger"
+                                                                style="font-size: 15px;">*</i></label>
                                                         <textarea required class="form-control"
                                                             name="keterangan_baju_kiper">{!! $oderCs->BarangMasukCostumerServicesLkKiper->first()->keterangan_baju_kiper !!}</textarea>
                                                     </div>
@@ -432,7 +484,9 @@
                                                 <hr>
                                                 <div class="row">
                                                     <div class="mb-3 col-md-6">
-                                                        <label class="form-label" for="country">Status</label>
+                                                        <label class="form-label" for="country">Status <i
+                                                                class="text-danger"
+                                                                style="font-size: 15px;">*</i></label>
                                                         <select id="country" required name="status_baju_1"
                                                             class="select2 form-select">
                                                             <option
@@ -447,7 +501,9 @@
                                                         </select>
                                                     </div>
                                                     <div class="mb-3 col-md-6">
-                                                        <label class="form-label" for="country">Produksi</label>
+                                                        <label class="form-label" for="country">Produksi <i
+                                                                class="text-danger"
+                                                                style="font-size: 15px;">*</i></label>
                                                         <select id="country" required name="pola_lengan_1_id"
                                                             class="select2 form-select">
                                                             <option value="">Jenis produksi kosong apakah anda ingin
@@ -462,7 +518,9 @@
                                                         </select>
                                                     </div>
                                                     <div class="mb-3 col-md-6">
-                                                        <label class="form-label" for="country">model</label>
+                                                        <label class="form-label" for="country">model <i
+                                                                class="text-danger"
+                                                                style="font-size: 15px;">*</i></label>
                                                         <select id="country" required name="kerah_baju_1_id"
                                                             class="select2 form-select">
                                                             <option value="">Jenis model kosong apakah anda ingin
@@ -476,34 +534,44 @@
                                                         </select>
                                                     </div>
                                                     <div class="mb-3 col-md-6">
-                                                        <label class="form-label" for="country">Jenis Sublim</label>
+                                                        <label class="form-label" for="country">Jenis Sublim <i
+                                                                class="text-danger"
+                                                                style="font-size: 15px;">*</i></label>
                                                         <input class="form-control" required type="text" id="firstName"
                                                             name="jenis_sablon_baju_1"
                                                             value="{{ $oderCs->BarangMasukCostumerServicesLk1->first()->jenis_sablon_baju_1 }}"
                                                             placeholder="Jenis Sublim" autofocus />
                                                     </div>
                                                     <div class="mb-3 col-md-6">
-                                                        <label for="firstName" class="form-label">Jenis Bahan</label>
+                                                        <label for="firstName" class="form-label">Jenis Bahan <i
+                                                                class="text-danger"
+                                                                style="font-size: 15px;">*</i></label>
                                                         <input class="form-control"
                                                             value="{{ $oderCs->BarangMasukCostumerServicesLk1->first()->jenis_kain_baju_1 }}"
                                                             required type="text" id="firstName" name="jenis_kain_baju_1"
                                                             placeholder="Jenis Bahan" autofocus />
                                                     </div>
                                                     <div class="mb-3 col-md-6">
-                                                        <label for="firstName" class="form-label">Jumlah</label>
+                                                        <label for="firstName" class="form-label">Jumlah <i
+                                                                class="text-danger"
+                                                                style="font-size: 15px;">*</i></label>
                                                         <input class="form-control" required type="number"
                                                             id="firstName" placeholder="Jumlah"
                                                             value="{{ $oderCs->BarangMasukCostumerServicesLk1->first()->total_baju_1 }}"
                                                             name="total_baju_1" autofocus />
                                                     </div>
                                                     <div class="mb-3 col-md-6">
-                                                        <label for="firstName" class="form-label">Ukuran</label>
+                                                        <label for="firstName" class="form-label">Ukuran <i
+                                                                class="text-danger"
+                                                                style="font-size: 15px;">*</i></label>
                                                         <textarea required name="ket_tambahan_baju_1"
                                                             class="form-control"
                                                             placeholder="Contoh: M 10, L 2, Xl 1">{{ $oderCs->BarangMasukCostumerServicesLk1->first()->ket_tambahan_baju_1 }}</textarea>
                                                     </div>
                                                     <div class="mb-3 col-md-12">
-                                                        <label class="form-label" for="country">Keterangan</label>
+                                                        <label class="form-label" for="country">Keterangan <i
+                                                                class="text-danger"
+                                                                style="font-size: 15px;">*</i></label>
                                                         <textarea required class="form-control"
                                                             name="keterangan_baju_1">{!! $oderCs->BarangMasukCostumerServicesLk1->first()->keterangan_baju_1 !!}</textarea>
                                                     </div>
@@ -542,7 +610,9 @@
                                                 <hr>
                                                 <div class="row">
                                                     <div class="mb-3 col-md-6">
-                                                        <label class="form-label" for="country">Status</label>
+                                                        <label class="form-label" for="country">Status <i
+                                                                class="text-danger"
+                                                                style="font-size: 15px;">*</i></label>
                                                         <select id="country" required name="status_celana_player"
                                                             class="select2 form-select">
                                                             <option
@@ -557,7 +627,9 @@
                                                         </select>
                                                     </div>
                                                     <div class="mb-3 col-md-6">
-                                                        <label class="form-label" for="country">Produksi</label>
+                                                        <label class="form-label" for="country">Produksi <i
+                                                                class="text-danger"
+                                                                style="font-size: 15px;">*</i></label>
                                                         <select id="country" required name="pola_celana_player_id"
                                                             class="select2 form-select">
                                                             <option value="">Jenis produksi kosong apakah anda ingin
@@ -572,7 +644,9 @@
                                                         </select>
                                                     </div>
                                                     <div class="mb-3 col-md-6">
-                                                        <label class="form-label" for="country">model</label>
+                                                        <label class="form-label" for="country">model <i
+                                                                class="text-danger"
+                                                                style="font-size: 15px;">*</i></label>
                                                         <select id="country" required name="kerah_celana_player_id"
                                                             class="select2 form-select">
                                                             <option value="">Jenis model kosong apakah anda ingin
@@ -586,34 +660,44 @@
                                                         </select>
                                                     </div>
                                                     <div class="mb-3 col-md-6">
-                                                        <label class="form-label" for="country">Jenis Sublim</label>
+                                                        <label class="form-label" for="country">Jenis Sublim <i
+                                                                class="text-danger"
+                                                                style="font-size: 15px;">*</i></label>
                                                         <input class="form-control" required type="text" id="firstName"
                                                             name="jenis_sablon_celana_player"
                                                             value="{{ $oderCs->BarangMasukCostumerServicesLkCelanaPlyer->first()->jenis_sablon_celana_player }}"
                                                             placeholder="Jenis Sublim" autofocus />
                                                     </div>
                                                     <div class="mb-3 col-md-6">
-                                                        <label for="firstName" class="form-label">Jenis Bahan</label>
+                                                        <label for="firstName" class="form-label">Jenis Bahan <i
+                                                                class="text-danger"
+                                                                style="font-size: 15px;">*</i></label>
                                                         <input class="form-control" required type="text" id="firstName"
                                                             name="jenis_kain_celana_player"
                                                             value="{{ $oderCs->BarangMasukCostumerServicesLkCelanaPlyer->first()->jenis_kain_celana_player }}"
                                                             placeholder="Jenis Bahan" autofocus />
                                                     </div>
                                                     <div class="mb-3 col-md-6">
-                                                        <label for="firstName" class="form-label">Jumlah</label>
+                                                        <label for="firstName" class="form-label">Jumlah <i
+                                                                class="text-danger"
+                                                                style="font-size: 15px;">*</i></label>
                                                         <input class="form-control" required type="number"
                                                             id="firstName" placeholder="Jumlah"
                                                             value="{{ $oderCs->BarangMasukCostumerServicesLkCelanaPlyer->first()->total_celana_player }}"
                                                             name="total_celana_player" autofocus />
                                                     </div>
                                                     <div class="mb-3 col-md-6">
-                                                        <label for="firstName" class="form-label">Ukuran</label>
+                                                        <label for="firstName" class="form-label">Ukuran <i
+                                                                class="text-danger"
+                                                                style="font-size: 15px;">*</i></label>
                                                         <textarea required name="ket_tambahan_celana_player"
                                                             class="form-control"
                                                             placeholder="Contoh: M 10, L 2, Xl 1">{{ $oderCs->BarangMasukCostumerServicesLkCelanaPlyer->first()->ket_tambahan_celana_player }}</textarea>
                                                     </div>
                                                     <div class="mb-3 col-md-12">
-                                                        <label class="form-label" for="country">Keterangan</label>
+                                                        <label class="form-label" for="country">Keterangan <i
+                                                                class="text-danger"
+                                                                style="font-size: 15px;">*</i></label>
                                                         <textarea required class="form-control"
                                                             name="keterangan_celana_pelayer">{!! $oderCs->BarangMasukCostumerServicesLkCelanaPlyer->first()->keterangan_celana_pelayer !!}</textarea>
                                                     </div>
@@ -652,7 +736,9 @@
                                                 <hr>
                                                 <div class="row">
                                                     <div class="mb-3 col-md-6">
-                                                        <label class="form-label" for="country">Status</label>
+                                                        <label class="form-label" for="country">Status <i
+                                                                class="text-danger"
+                                                                style="font-size: 15px;">*</i></label>
                                                         <select id="country" required name="status_celana_pelatih"
                                                             class="select2 form-select">
                                                             <option
@@ -667,7 +753,9 @@
                                                         </select>
                                                     </div>
                                                     <div class="mb-3 col-md-6">
-                                                        <label class="form-label" for="country">Produksi</label>
+                                                        <label class="form-label" for="country">Produksi <i
+                                                                class="text-danger"
+                                                                style="font-size: 15px;">*</i></label>
                                                         <select required id="country" name="pola_celana_pelatih_id"
                                                             class="select2 form-select">
                                                             <option value="">Jenis produksi kosong apakah anda ingin
@@ -682,7 +770,9 @@
                                                         </select>
                                                     </div>
                                                     <div class="mb-3 col-md-6">
-                                                        <label class="form-label" for="country">model</label>
+                                                        <label class="form-label" for="country">model <i
+                                                                class="text-danger"
+                                                                style="font-size: 15px;">*</i></label>
                                                         <select id="country" required name="kerah_celana_pelatih_id"
                                                             class="select2 form-select">
                                                             <option value="">Jenis model kosong apakah anda ingin
@@ -696,7 +786,9 @@
                                                         </select>
                                                     </div>
                                                     <div class="mb-3 col-md-6">
-                                                        <label class="form-label" for="country">Jenis Sublim</label>
+                                                        <label class="form-label" for="country">Jenis Sublim <i
+                                                                class="text-danger"
+                                                                style="font-size: 15px;">*</i></label>
                                                         <input required class="form-control" type="text" id="firstName"
                                                             name="jenis_sablon_celana_pelatih"
                                                             placeholder="Jenis Sublim"
@@ -704,27 +796,35 @@
                                                             autofocus />
                                                     </div>
                                                     <div class="mb-3 col-md-6">
-                                                        <label for="firstName" class="form-label">Jenis Bahan</label>
+                                                        <label for="firstName" class="form-label">Jenis Bahan <i
+                                                                class="text-danger"
+                                                                style="font-size: 15px;">*</i></label>
                                                         <input required class="form-control" type="text" id="firstName"
                                                             name="jenis_kain_celana_pelatih"
                                                             value="{{ $oderCs->BarangMasukCostumerServicesLkCelanaPelatih->first()->jenis_kain_celana_pelatih }}"
                                                             placeholder="Jenis Bahan" autofocus />
                                                     </div>
                                                     <div class="mb-3 col-md-6">
-                                                        <label for="firstName" class="form-label">Jumlah</label>
+                                                        <label for="firstName" class="form-label">Jumlah <i
+                                                                class="text-danger"
+                                                                style="font-size: 15px;">*</i></label>
                                                         <input required class="form-control" type="text" id="firstName"
                                                             placeholder="Jumlah"
                                                             value="{{ $oderCs->BarangMasukCostumerServicesLkCelanaPelatih->first()->total_celana_pelatih }}"
                                                             name="total_celana_pelatih" autofocus />
                                                     </div>
                                                     <div class="mb-3 col-md-6">
-                                                        <label for="firstName" class="form-label">Ukuran</label>
+                                                        <label for="firstName" class="form-label">Ukuran <i
+                                                                class="text-danger"
+                                                                style="font-size: 15px;">*</i></label>
                                                         <textarea required name="ket_tambahan_celana_pelatih"
                                                             class="form-control"
                                                             placeholder="Contoh: M 10, L 2, Xl 1">{{ $oderCs->BarangMasukCostumerServicesLkCelanaPelatih->first()->ket_tambahan_celana_pelatih }}</textarea>
                                                     </div>
                                                     <div class="mb-3 col-md-12">
-                                                        <label class="form-label" for="country">Keterangan</label>
+                                                        <label class="form-label" for="country">Keterangan <i
+                                                                class="text-danger"
+                                                                style="font-size: 15px;">*</i></label>
                                                         <textarea required class="form-control"
                                                             name="keterangan_celana_pelatih">{!! $oderCs->BarangMasukCostumerServicesLkCelanaPelatih->first()->keterangan_celana_pelatih !!}</textarea>
                                                     </div>
@@ -763,7 +863,9 @@
                                                 <hr>
                                                 <div class="row">
                                                     <div class="mb-3 col-md-6">
-                                                        <label class="form-label" for="country">Status</label>
+                                                        <label class="form-label" for="country">Status <i
+                                                                class="text-danger"
+                                                                style="font-size: 15px;">*</i></label>
                                                         <select id="country" required name="status_celana_kiper"
                                                             class="select2 form-select">
                                                             <option
@@ -778,7 +880,9 @@
                                                         </select>
                                                     </div>
                                                     <div class="mb-3 col-md-6">
-                                                        <label class="form-label" for="country">Produksi</label>
+                                                        <label class="form-label" for="country">Produksi <i
+                                                                class="text-danger"
+                                                                style="font-size: 15px;">*</i></label>
                                                         <select required id="country" name="pola_celana_kiper_id"
                                                             class="select2 form-select">
                                                             <option value="">Jenis produksi kosong apakah anda ingin
@@ -793,7 +897,9 @@
                                                         </select>
                                                     </div>
                                                     <div class="mb-3 col-md-6">
-                                                        <label class="form-label" for="country">model</label>
+                                                        <label class="form-label" for="country">model <i
+                                                                class="text-danger"
+                                                                style="font-size: 15px;">*</i></label>
                                                         <select id="country" required name="kerah_celana_kiper_id"
                                                             class="select2 form-select">
                                                             <option value="">Jenis model kosong apakah anda ingin
@@ -807,34 +913,44 @@
                                                         </select>
                                                     </div>
                                                     <div class="mb-3 col-md-6">
-                                                        <label class="form-label" for="country">Jenis Sublim</label>
+                                                        <label class="form-label" for="country">Jenis Sublim <i
+                                                                class="text-danger"
+                                                                style="font-size: 15px;">*</i></label>
                                                         <input required class="form-control" type="text" id="firstName"
                                                             name="jenis_sablon_celana_kiper"
                                                             value="{{ $oderCs->BarangMasukCostumerServicesLkCelanaKiper->first()->jenis_sablon_celana_kiper }}"
                                                             placeholder="Jenis Sublim" autofocus />
                                                     </div>
                                                     <div class="mb-3 col-md-6">
-                                                        <label for="firstName" class="form-label">Jenis Bahan</label>
+                                                        <label for="firstName" class="form-label">Jenis Bahan <i
+                                                                class="text-danger"
+                                                                style="font-size: 15px;">*</i></label>
                                                         <input required class="form-control" type="text" id="firstName"
                                                             name="jenis_kain_celana_kiper"
                                                             value="{{ $oderCs->BarangMasukCostumerServicesLkCelanaKiper->first()->jenis_kain_celana_kiper }}"
                                                             placeholder="Jenis Bahan" autofocus />
                                                     </div>
                                                     <div class="mb-3 col-md-6">
-                                                        <label for="firstName" class="form-label">Jumlah</label>
+                                                        <label for="firstName" class="form-label">Jumlah <i
+                                                                class="text-danger"
+                                                                style="font-size: 15px;">*</i></label>
                                                         <input required class="form-control" type="number"
                                                             id="firstName" placeholder="Jumlah"
                                                             value="{{ $oderCs->BarangMasukCostumerServicesLkCelanaKiper->first()->total_celana_kiper }}"
                                                             name="total_celana_kiper" autofocus />
                                                     </div>
                                                     <div class="mb-3 col-md-6">
-                                                        <label for="firstName" class="form-label">Ukuran</label>
+                                                        <label for="firstName" class="form-label">Ukuran <i
+                                                                class="text-danger"
+                                                                style="font-size: 15px;">*</i></label>
                                                         <textarea required name="ket_tambahan_celana_kiper"
                                                             class="form-control"
                                                             placeholder="Contoh: M 10, L 2, Xl 1">{{ $oderCs->BarangMasukCostumerServicesLkCelanaKiper->first()->ket_tambahan_celana_kiper }}</textarea>
                                                     </div>
                                                     <div class="mb-3 col-md-12">
-                                                        <label class="form-label" for="country">Keterangan</label>
+                                                        <label class="form-label" for="country">Keterangan <i
+                                                                class="text-danger"
+                                                                style="font-size: 15px;">*</i></label>
                                                         <textarea required class="form-control"
                                                             name="keterangan_celana_kiper">{!! $oderCs->BarangMasukCostumerServicesLkCelanaKiper->first()->keterangan_celana_kiper !!}</textarea>
                                                     </div>
@@ -873,7 +989,9 @@
                                                 <hr>
                                                 <div class="row">
                                                     <div class="mb-3 col-md-6">
-                                                        <label class="form-label" for="country">Status</label>
+                                                        <label class="form-label" for="country">Status <i
+                                                                class="text-danger"
+                                                                style="font-size: 15px;">*</i></label>
                                                         <select id="country" required name="status_celana_1"
                                                             class="select2 form-select">
                                                             <option
@@ -888,7 +1006,9 @@
                                                         </select>
                                                     </div>
                                                     <div class="mb-3 col-md-6">
-                                                        <label class="form-label" for="country">Produksi</label>
+                                                        <label class="form-label" for="country">Produksi <i
+                                                                class="text-danger"
+                                                                style="font-size: 15px;">*</i></label>
                                                         <select required id="country" name="pola_celana_1_id"
                                                             class="select2 form-select">
                                                             <option value="">Jenis produksi kosong apakah anda ingin
@@ -903,7 +1023,9 @@
                                                         </select>
                                                     </div>
                                                     <div class="mb-3 col-md-6">
-                                                        <label class="form-label" for="country">model</label>
+                                                        <label class="form-label" for="country">model <i
+                                                                class="text-danger"
+                                                                style="font-size: 15px;">*</i></label>
                                                         <select id="country" required name="kerah_celana_1_id"
                                                             class="select2 form-select">
                                                             <option value="">Jenis model kosong apakah anda ingin
@@ -917,34 +1039,44 @@
                                                         </select>
                                                     </div>
                                                     <div class="mb-3 col-md-6">
-                                                        <label class="form-label" for="country">Jenis Sublim</label>
+                                                        <label class="form-label" for="country">Jenis Sublim <i
+                                                                class="text-danger"
+                                                                style="font-size: 15px;">*</i></label>
                                                         <input required class="form-control" type="text" id="firstName"
                                                             name="jenis_sablon_celana_1"
                                                             value="{{ $oderCs->BarangMasukCostumerServicesLkCelana1->first()->jenis_sablon_celana_1 }}"
                                                             placeholder="Jenis Sublim" autofocus />
                                                     </div>
                                                     <div class="mb-3 col-md-6">
-                                                        <label for="firstName" class="form-label">Jenis Bahan</label>
+                                                        <label for="firstName" class="form-label">Jenis Bahan <i
+                                                                class="text-danger"
+                                                                style="font-size: 15px;">*</i></label>
                                                         <input required class="form-control" type="text" id="firstName"
                                                             name="jenis_kain_celana_1"
                                                             value="{{ $oderCs->BarangMasukCostumerServicesLkCelana1->first()->jenis_kain_celana_1 }}"
                                                             placeholder="Jenis Bahan" autofocus />
                                                     </div>
                                                     <div class="mb-3 col-md-6">
-                                                        <label for="firstName" class="form-label">Jumlah</label>
+                                                        <label for="firstName" class="form-label">Jumlah <i
+                                                                class="text-danger"
+                                                                style="font-size: 15px;">*</i></label>
                                                         <input required class="form-control" type="number"
                                                             id="firstName" placeholder="Jumlah"
                                                             value="{{ $oderCs->BarangMasukCostumerServicesLkCelana1->first()->total_celana_1 }}"
                                                             name="total_celana_1" autofocus />
                                                     </div>
                                                     <div class="mb-3 col-md-6">
-                                                        <label for="firstName" class="form-label">Ukuran</label>
+                                                        <label for="firstName" class="form-label">Ukuran <i
+                                                                class="text-danger"
+                                                                style="font-size: 15px;">*</i></label>
                                                         <textarea required name="ket_tambahan_celana_1"
                                                             class="form-control"
                                                             placeholder="Contoh: M 10, L 2, Xl 1">{{ $oderCs->BarangMasukCostumerServicesLkCelana1->first()->ket_tambahan_celana_1 }}</textarea>
                                                     </div>
                                                     <div class="mb-3 col-md-12">
-                                                        <label class="form-label" for="country">Keterangan</label>
+                                                        <label class="form-label" for="country">Keterangan <i
+                                                                class="text-danger"
+                                                                style="font-size: 15px;">*</i></label>
                                                         <textarea required class="form-control"
                                                             name="keterangan_celana_1">{!! $oderCs->BarangMasukCostumerServicesLkCelana1->first()->keterangan_celana_1 !!}</textarea>
                                                     </div>

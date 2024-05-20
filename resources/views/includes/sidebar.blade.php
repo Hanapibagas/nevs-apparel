@@ -248,15 +248,15 @@ $activeList = $listData ? 'active' : '';
         <li class="menu-item {{ request()->is('data-mesin-disainer-atexco') ? 'active' : '' }}">
             <a href="{{ route('getIndexDataMesinAtexcoPegawai') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-cog"></i>
-                <div data-i18n="Analytics">Data Disainer Mesin Atexco</div>
+                <div data-i18n="Analytics">Data Tes Print Mesin </div>
             </a>
         </li>
-        <li class="menu-item {{ request()->is('data-mesin-disainer-mimaki') ? 'active' : '' }}">
+        {{-- <li class="menu-item {{ request()->is('data-mesin-disainer-mimaki') ? 'active' : '' }}">
             <a href="{{ route('getIndexDataMesinMimakiPegawai') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-cog"></i>
                 <div data-i18n="Analytics">Data Disainer Mesin Mimaki</div>
             </a>
-        </li>
+        </li> --}}
         <li class="menu-item {{ request()->is('data-fix-disainer') ? 'active' : '' }}">
             <a href="{{ route('getDataFixDisainerPegawai') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-check-double"></i>

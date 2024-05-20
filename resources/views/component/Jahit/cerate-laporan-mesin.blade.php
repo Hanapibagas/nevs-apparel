@@ -22,7 +22,8 @@
                                     <div class="card-body">
                                         <div class="row">
                                             <div class="mb-3 col-md-6">
-                                                <label for="firstName" class="form-label">nama penjahit</label>
+                                                <label for="firstName" class="form-label">nama penjahit <i
+                                                        class="text-danger" style="font-size: 15px;">*</i></label>
                                                 <input required class="form-control" type="text" id="firstName"
                                                     name="leher" autofocus required placeholder="Contoh: Miya" />
                                             </div>
@@ -48,7 +49,8 @@
                                     <div class="card-body">
                                         <div class="row">
                                             <div class="mb-3 col-md-6">
-                                                <label for="firstName" class="form-label">nama penjahit</label>
+                                                <label for="firstName" class="form-label">nama penjahit <i
+                                                        class="text-danger" style="font-size: 15px;">*</i></label>
                                                 <input required class="form-control" type="text" id="firstName"
                                                     name="leher_pelatih" autofocus required
                                                     placeholder="Contoh: Miya" />
@@ -75,7 +77,8 @@
                                     <div class="card-body">
                                         <div class="row">
                                             <div class="mb-3 col-md-6">
-                                                <label for="firstName" class="form-label">nama penjahit</label>
+                                                <label for="firstName" class="form-label">nama penjahit <i
+                                                        class="text-danger" style="font-size: 15px;">*</i></label>
                                                 <input required class="form-control" type="text" id="firstName"
                                                     name="leher_kiper" autofocus required placeholder="Contoh: Miya" />
                                             </div>
@@ -100,7 +103,8 @@
                                     <div class="card-body">
                                         <div class="row">
                                             <div class="mb-3 col-md-6">
-                                                <label for="firstName" class="form-label">nama penjahit</label>
+                                                <label for="firstName" class="form-label">nama penjahit <i
+                                                        class="text-danger" style="font-size: 15px;">*</i></label>
                                                 <input required class="form-control" type="text" id="firstName"
                                                     name="leher_1" autofocus required placeholder="Contoh: Miya" />
                                             </div>
@@ -126,14 +130,15 @@
                                     <div class="card-body">
                                         <div class="row">
                                             <div class="mb-3 col-md-6">
-                                                <label for="firstName" class="form-label">nama penjahit</label>
+                                                <label for="firstName" class="form-label">nama penjahit <i
+                                                        class="text-danger" style="font-size: 15px;">*</i></label>
                                                 <input required class="form-control" type="text" id="firstName"
                                                     name="leher_celana_pelayer" autofocus required
                                                     placeholder="Contoh: Miya" />
                                             </div>
                                             <div class="mb-3 col-md-6">
                                                 <label for="firstName" class="form-label">foto serah</label>
-                                                <input  class="form-control" type="file" id="firstName"
+                                                <input class="form-control" type="file" id="firstName"
                                                     name="pola_badan_celana_pelayer" autofocus />
                                             </div>
                                             <div class="mb-3 col-md-6">
@@ -153,14 +158,15 @@
                                     <div class="card-body">
                                         <div class="row">
                                             <div class="mb-3 col-md-6">
-                                                <label for="firstName" class="form-label">nama penjahit</label>
+                                                <label for="firstName" class="form-label">nama penjahit <i
+                                                        class="text-danger" style="font-size: 15px;">*</i></label>
                                                 <input required class="form-control" type="text" id="firstName"
                                                     name="leher_celana_pelatih" autofocus required
                                                     placeholder="Contoh: Miya" />
                                             </div>
                                             <div class="mb-3 col-md-6">
                                                 <label for="firstName" class="form-label">foto serah</label>
-                                                <input  class="form-control" type="file" id="firstName"
+                                                <input class="form-control" type="file" id="firstName"
                                                     name="pola_badan_celana_pelatih" autofocus />
                                             </div>
                                             <div class="mb-3 col-md-6">
@@ -180,14 +186,15 @@
                                     <div class="card-body">
                                         <div class="row">
                                             <div class="mb-3 col-md-6">
-                                                <label for="firstName" class="form-label">nama penjahit</label>
+                                                <label for="firstName" class="form-label">nama penjahit <i
+                                                        class="text-danger" style="font-size: 15px;">*</i></label>
                                                 <input required class="form-control" type="text" id="firstName"
                                                     name="leher_celana_kiper" autofocus required
                                                     placeholder="Contoh: Miya" />
                                             </div>
                                             <div class="mb-3 col-md-6">
                                                 <label for="firstName" class="form-label">foto serah</label>
-                                                <input  class="form-control" type="file" id="firstName"
+                                                <input class="form-control" type="file" id="firstName"
                                                     name="pola_badan_celana_kiper" autofocus />
                                             </div>
                                             <div class="mb-3 col-md-6">
@@ -207,14 +214,15 @@
                                     <div class="card-body">
                                         <div class="row">
                                             <div class="mb-3 col-md-6">
-                                                <label for="firstName" class="form-label">nama penjahit</label>
+                                                <label for="firstName" class="form-label">nama penjahit <i
+                                                        class="text-danger" style="font-size: 15px;">*</i></label>
                                                 <input required class="form-control" type="text" id="firstName"
                                                     name="leher_celana_1" autofocus required
                                                     placeholder="Contoh: Miya" />
                                             </div>
                                             <div class="mb-3 col-md-6">
                                                 <label for="firstName" class="form-label">foto serah</label>
-                                                <input  class="form-control" type="file" id="firstName"
+                                                <input class="form-control" type="file" id="firstName"
                                                     name="pola_badan_celana_1" autofocus />
                                             </div>
                                             <div class="mb-3 col-md-6">

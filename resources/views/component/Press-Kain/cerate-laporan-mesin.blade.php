@@ -22,22 +22,25 @@
                                     <div class="card-body">
                                         <div class="row">
                                             <div class="mb-3 col-md-6">
-                                                <label for="firstName" class="form-label">Kain</label>
+                                                <label for="firstName" class="form-label">Kain <i class="text-danger"
+                                                        style="font-size: 15px;">*</i></label>
                                                 <input required placeholder="Contoh: ABCD" class="form-control"
                                                     type="text" id="firstName" name="kain" />
                                             </div>
                                             <div class="mb-3 col-md-6">
-                                                <label for="lastName" class="form-label">Nama kain</label>
+                                                <label for="lastName" class="form-label">Nama kain <i
+                                                        class="text-danger" style="font-size: 15px;">*</i></label>
                                                 <select id="country" required name="kain_id"
                                                     class="select2 form-select">
-                                                    <option value="">-- Pilih Nama Kertas --</option>
+                                                    <option value="">-- Pilih Nama Kain --</option>
                                                     @foreach ( $bahanKain as $bahan )
                                                     <option value="{{ $bahan->id }}">{{ $bahan->nama }}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
                                             <div class="mb-3 col-md-6">
-                                                <label for="firstName" class="form-label">Berat</label>
+                                                <label for="firstName" class="form-label">Berat <i class="text-danger"
+                                                        style="font-size: 15px;">*</i></label>
                                                 <input required class="form-control" placeholder="Contoh: 1 Kg"
                                                     type="text" id="firstName" name="berat" autofocus />
                                             </div>
@@ -65,22 +68,25 @@
                                     <div class="card-body">
                                         <div class="row">
                                             <div class="mb-3 col-md-6">
-                                                <label for="firstName" class="form-label">Kain</label>
+                                                <label for="firstName" class="form-label">Kain <i class="text-danger"
+                                                        style="font-size: 15px;">*</i></label>
                                                 <input required placeholder="Contoh: ABCD" class="form-control"
                                                     type="text" id="firstName" name="kain_pelatih" />
                                             </div>
                                             <div class="mb-3 col-md-6">
-                                                <label for="lastName" class="form-label">Nama kain</label>
+                                                <label for="lastName" class="form-label">Nama kain <i
+                                                        class="text-danger" style="font-size: 15px;">*</i></label>
                                                 <select id="country" required name="kain_id"
                                                     class="select2 form-select">
-                                                    <option value="">-- Pilih Nama Kertas --</option>
+                                                    <option value="">-- Pilih Nama Kain --</option>
                                                     @foreach ( $bahanKain as $bahan )
                                                     <option value="{{ $bahan->id }}">{{ $bahan->nama }}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
                                             <div class="mb-3 col-md-6">
-                                                <label for="firstName" class="form-label">Berat</label>
+                                                <label for="firstName" class="form-label">Berat <i class="text-danger"
+                                                        style="font-size: 15px;">*</i></label>
                                                 <input required class="form-control" placeholder="Contoh: 1 Kg"
                                                     type="text" id="firstName" name="berat_pelatih" autofocus />
                                             </div>
@@ -108,22 +114,25 @@
                                     <div class="card-body">
                                         <div class="row">
                                             <div class="mb-3 col-md-6">
-                                                <label for="firstName" class="form-label">Kain</label>
+                                                <label for="firstName" class="form-label">Kain <i class="text-danger"
+                                                        style="font-size: 15px;">*</i></label>
                                                 <input required placeholder="Contoh: ABCD" class="form-control"
                                                     type="text" id="firstName" name="kain_kiper" />
                                             </div>
                                             <div class="mb-3 col-md-6">
-                                                <label for="lastName" class="form-label">Nama kain</label>
+                                                <label for="lastName" class="form-label">Nama kain <i
+                                                        class="text-danger" style="font-size: 15px;">*</i></label>
                                                 <select id="country" required name="kain_id"
                                                     class="select2 form-select">
-                                                    <option value="">-- Pilih Nama Kertas --</option>
+                                                    <option value="">-- Pilih Nama Kain --</option>
                                                     @foreach ( $bahanKain as $bahan )
                                                     <option value="{{ $bahan->id }}">{{ $bahan->nama }}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
                                             <div class="mb-3 col-md-6">
-                                                <label for="firstName" class="form-label">Berat</label>
+                                                <label for="firstName" class="form-label">Berat <i class="text-danger"
+                                                        style="font-size: 15px;">*</i></label>
                                                 <input required class="form-control" placeholder="Contoh: 1 Kg"
                                                     type="text" id="firstName" name="berat_kiper" autofocus />
                                             </div>
@@ -150,22 +159,25 @@
                                     <div class="card-body">
                                         <div class="row">
                                             <div class="mb-3 col-md-6">
-                                                <label for="firstName" class="form-label">Kain</label>
+                                                <label for="firstName" class="form-label">Kain <i class="text-danger"
+                                                        style="font-size: 15px;">*</i></label>
                                                 <input required placeholder="Contoh: ABCD" class="form-control"
                                                     type="text" id="firstName" name="kain_1" />
                                             </div>
                                             <div class="mb-3 col-md-6">
-                                                <label for="lastName" class="form-label">Nama kain</label>
+                                                <label for="lastName" class="form-label">Nama kain <i
+                                                        class="text-danger" style="font-size: 15px;">*</i></label>
                                                 <select id="country" required name="kain_id"
                                                     class="select2 form-select">
-                                                    <option value="">-- Pilih Nama Kertas --</option>
+                                                    <option value="">-- Pilih Nama Kain --</option>
                                                     @foreach ( $bahanKain as $bahan )
                                                     <option value="{{ $bahan->id }}">{{ $bahan->nama }}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
                                             <div class="mb-3 col-md-6">
-                                                <label for="firstName" class="form-label">Berat</label>
+                                                <label for="firstName" class="form-label">Berat <i class="text-danger"
+                                                        style="font-size: 15px;">*</i></label>
                                                 <input required class="form-control" placeholder="Contoh: 1 Kg"
                                                     type="text" id="firstName" name="berat_1" autofocus />
                                             </div>
@@ -193,22 +205,25 @@
                                     <div class="card-body">
                                         <div class="row">
                                             <div class="mb-3 col-md-6">
-                                                <label for="firstName" class="form-label">Kain</label>
+                                                <label for="firstName" class="form-label">Kain <i class="text-danger"
+                                                        style="font-size: 15px;">*</i></label>
                                                 <input required placeholder="Contoh: ABCD" class="form-control"
                                                     type="text" id="firstName" name="kain_celana_player" />
                                             </div>
                                             <div class="mb-3 col-md-6">
-                                                <label for="lastName" class="form-label">Nama kain</label>
+                                                <label for="lastName" class="form-label">Nama kain <i
+                                                        class="text-danger" style="font-size: 15px;">*</i></label>
                                                 <select id="country" required name="kain_id"
                                                     class="select2 form-select">
-                                                    <option value="">-- Pilih Nama Kertas --</option>
+                                                    <option value="">-- Pilih Nama Kain --</option>
                                                     @foreach ( $bahanKain as $bahan )
                                                     <option value="{{ $bahan->id }}">{{ $bahan->nama }}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
                                             <div class="mb-3 col-md-6">
-                                                <label for="firstName" class="form-label">Berat</label>
+                                                <label for="firstName" class="form-label">Berat <i class="text-danger"
+                                                        style="font-size: 15px;">*</i></label>
                                                 <input required class="form-control" placeholder="Contoh: 1 Kg"
                                                     type="text" id="firstName" name="berat_celana_player" autofocus />
                                             </div>
@@ -236,22 +251,25 @@
                                     <div class="card-body">
                                         <div class="row">
                                             <div class="mb-3 col-md-6">
-                                                <label for="firstName" class="form-label">Kain</label>
+                                                <label for="firstName" class="form-label">Kain <i class="text-danger"
+                                                        style="font-size: 15px;">*</i></label>
                                                 <input required placeholder="Contoh: ABCD" class="form-control"
                                                     type="text" id="firstName" name="kain_celana_pelatih" />
                                             </div>
                                             <div class="mb-3 col-md-6">
-                                                <label for="lastName" class="form-label">Nama kain</label>
+                                                <label for="lastName" class="form-label">Nama kain <i
+                                                        class="text-danger" style="font-size: 15px;">*</i></label>
                                                 <select id="country" required name="kain_id"
                                                     class="select2 form-select">
-                                                    <option value="">-- Pilih Nama Kertas --</option>
+                                                    <option value="">-- Pilih Nama Kain --</option>
                                                     @foreach ( $bahanKain as $bahan )
                                                     <option value="{{ $bahan->id }}">{{ $bahan->nama }}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
                                             <div class="mb-3 col-md-6">
-                                                <label for="firstName" class="form-label">Berat</label>
+                                                <label for="firstName" class="form-label">Berat <i class="text-danger"
+                                                        style="font-size: 15px;">*</i></label>
                                                 <input required class="form-control" placeholder="Contoh: 1 Kg"
                                                     type="text" id="firstName" name="berat_celana_pelatih" autofocus />
                                             </div>
@@ -279,22 +297,25 @@
                                     <div class="card-body">
                                         <div class="row">
                                             <div class="mb-3 col-md-6">
-                                                <label for="firstName" class="form-label">Kain</label>
+                                                <label for="firstName" class="form-label">Kain <i class="text-danger"
+                                                        style="font-size: 15px;">*</i></label>
                                                 <input required placeholder="Contoh: ABCD" class="form-control"
                                                     type="text" id="firstName" name="kain_celana_kiper" />
                                             </div>
                                             <div class="mb-3 col-md-6">
-                                                <label for="lastName" class="form-label">Nama kain</label>
+                                                <label for="lastName" class="form-label">Nama kain <i
+                                                        class="text-danger" style="font-size: 15px;">*</i></label>
                                                 <select id="country" required name="kain_id"
                                                     class="select2 form-select">
-                                                    <option value="">-- Pilih Nama Kertas --</option>
+                                                    <option value="">-- Pilih Nama Kain --</option>
                                                     @foreach ( $bahanKain as $bahan )
                                                     <option value="{{ $bahan->id }}">{{ $bahan->nama }}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
                                             <div class="mb-3 col-md-6">
-                                                <label for="firstName" class="form-label">Berat</label>
+                                                <label for="firstName" class="form-label">Berat <i class="text-danger"
+                                                        style="font-size: 15px;">*</i></label>
                                                 <input required class="form-control" placeholder="Contoh: 1 Kg"
                                                     type="text" id="firstName" name="berat_celana_kiper" autofocus />
                                             </div>
@@ -322,22 +343,25 @@
                                     <div class="card-body">
                                         <div class="row">
                                             <div class="mb-3 col-md-6">
-                                                <label for="firstName" class="form-label">Kain</label>
+                                                <label for="firstName" class="form-label">Kain <i class="text-danger"
+                                                        style="font-size: 15px;">*</i></label>
                                                 <input required placeholder="Contoh: ABCD" class="form-control"
                                                     type="text" id="firstName" name="kain_celana_1" />
                                             </div>
                                             <div class="mb-3 col-md-6">
-                                                <label for="lastName" class="form-label">Nama kain</label>
+                                                <label for="lastName" class="form-label">Nama kain <i
+                                                        class="text-danger" style="font-size: 15px;">*</i></label>
                                                 <select id="country" required name="kain_id"
                                                     class="select2 form-select">
-                                                    <option value="">-- Pilih Nama Kertas --</option>
+                                                    <option value="">-- Pilih Nama Kain --</option>
                                                     @foreach ( $bahanKain as $bahan )
                                                     <option value="{{ $bahan->id }}">{{ $bahan->nama }}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
                                             <div class="mb-3 col-md-6">
-                                                <label for="firstName" class="form-label">Berat</label>
+                                                <label for="firstName" class="form-label">Berat <i class="text-danger"
+                                                        style="font-size: 15px;">*</i></label>
                                                 <input required class="form-control" placeholder="Contoh: 1 Kg"
                                                     type="text" id="firstName" name="berat_celana_1" autofocus />
                                             </div>

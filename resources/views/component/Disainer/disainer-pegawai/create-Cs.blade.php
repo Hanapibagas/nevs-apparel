@@ -54,7 +54,8 @@
                             </div>
                         </div>
                         <div class="row mb-3">
-                            <label class="col-sm-2 col-form-label" for="basic-default-company">Upload Gambar</label>
+                            <label class="col-sm-2 col-form-label" for="basic-default-company">Upload Gambar <i
+                                    class="text-danger" style="font-size: 15px;">*</i></label>
                             <div class="col-sm-10">
                                 <div id="imageUploads">
                                     <input type="file" class="form-control mb-2" name="file_baju_player"
@@ -65,7 +66,8 @@
                             </div>
                         </div>
                         <div class="row mb-3">
-                            <label class="col-sm-2 col-form-label" for="basic-default-company">File Corel</label>
+                            <label class="col-sm-2 col-form-label" for="basic-default-company">File Corel <i
+                                    class="text-danger" style="font-size: 15px;">*</i></label>
                             <div class="col-sm-10">
                                 <input type="file" class="form-control" id="basic-default-company"
                                     name="file_corel_disainer" accept=".cdr" required />

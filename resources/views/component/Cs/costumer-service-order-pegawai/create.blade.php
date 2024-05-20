@@ -20,7 +20,8 @@
                                     <div class="card-body">
                                         <div class="row">
                                             <div class="mb-3 col-md-4">
-                                                <label for="lastName" class="form-label">No. Nota</label>
+                                                <label for="lastName" class="form-label">No. Nota<i class="text-danger"
+                                                        style="font-size: 15px;">*</i></label>
                                                 <input class="form-control" required type="text" name="no_nota"
                                                     id="lastName" placeholder="No. nota" />
                                             </div>
@@ -40,7 +41,8 @@
                                                     id="lastName" value="{{ $oderCs->UsersOrder->name }}" readonly />
                                             </div>
                                             <div class="mb-3 col-md-6">
-                                                <label for="lastName" class="form-label">Deadline</label>
+                                                <label for="lastName" class="form-label">Deadline <i class="text-danger"
+                                                        style="font-size: 15px;">*</i></label>
                                                 <input class="form-control" required type="date" name="deadline"
                                                     id="lastName" value="" />
                                             </div>
@@ -50,7 +52,8 @@
                                                     id="lastName" value="{{ $oderCs->Users->name }}" readonly />
                                             </div>
                                             <div class="mb-3 col-md-6">
-                                                <label class="form-label" for="country">Layout</label>
+                                                <label class="form-label" for="country">Layout <i class="text-danger"
+                                                        style="font-size: 15px;">*</i></label>
                                                 <select id="country" required name="layout_id"
                                                     class="select2 form-select">
                                                     <option value="">-- Pilih Pembagian Layout --</option>
@@ -66,10 +69,11 @@
                                             <div class="mb-3 col-md-6">
                                                 <label for="lastName" class="form-label">Mesin Print</label>
                                                 <input class="form-control" type="text" name="costumer_service"
-                                                    id="lastName" value="{{ $oderCs->jenis_mesin }}" readonly />
+                                                    id="lastName" value="{{ $oderCs->UserMesin->name }}" readonly />
                                             </div>
                                             <div class="mb-3 col-md-6">
-                                                <label for="lastName" class="form-label">Kota</label>
+                                                <label for="lastName" class="form-label">Kota <i class="text-danger"
+                                                        style="font-size: 15px;">*</i></label>
                                                 <select id="country" required name="kota_produksi"
                                                     class="select2 form-select">
                                                     <option value="">-- Kota Produksi --</option>
@@ -94,7 +98,9 @@
                                                 <hr>
                                                 <div class="row">
                                                     <div class="mb-3 col-md-6">
-                                                        <label class="form-label" for="country">Status</label>
+                                                        <label class="form-label" for="country">Status <i
+                                                                class="text-danger"
+                                                                style="font-size: 15px;">*</i></label>
                                                         <select id="country" required name="status_player"
                                                             class="select2 form-select">
                                                             <option value="">-- Jenis Produksi --</option>
@@ -104,7 +110,9 @@
                                                         </select>
                                                     </div>
                                                     <div class="mb-3 col-md-6">
-                                                        <label class="form-label" for="country">Produksi</label>
+                                                        <label class="form-label" for="country">Produksi <i
+                                                                class="text-danger"
+                                                                style="font-size: 15px;">*</i></label>
                                                         <select id="country" required name="pola_lengan_player_id"
                                                             class="select2 form-select">
                                                             <option value="">-- Jenis Produksi --</option>
@@ -119,7 +127,8 @@
                                                         </select>
                                                     </div>
                                                     <div class="mb-3 col-md-6">
-                                                        <label class="form-label" for="country">model</label>
+                                                        <label class="form-label" for="country">model <i
+                                                            class="text-danger" style="font-size: 15px;">*</i></label>
                                                         <select id="country" required name="kera_baju_player_id"
                                                             class="select2 form-select">
                                                             <option value="">-- Jenis Model --</option>
@@ -132,30 +141,35 @@
                                                         </select>
                                                     </div>
                                                     <div class="mb-3 col-md-6">
-                                                        <label class="form-label" for="country">Jenis Sublim</label>
+                                                        <label class="form-label" for="country">Jenis Sublim <i
+                                                            class="text-danger" style="font-size: 15px;">*</i></label>
                                                         <input class="form-control" required type="text" id="firstName"
                                                             name="jenis_sablon_baju_player" placeholder="Jenis Sublim"
                                                             autofocus />
                                                     </div>
                                                     <div class="mb-3 col-md-6">
-                                                        <label for="firstName" class="form-label">Jenis Bahan</label>
+                                                        <label for="firstName" class="form-label">Jenis Bahan <i
+                                                            class="text-danger" style="font-size: 15px;">*</i></label>
                                                         <input class="form-control" required type="text" id="firstName"
                                                             name="jenis_kain_baju_player" placeholder="Jenis Bahan"
                                                             autofocus />
                                                     </div>
                                                     <div class="mb-3 col-md-6">
-                                                        <label for="firstName" class="form-label">Jumlah</label>
+                                                        <label for="firstName" class="form-label">Jumlah <i
+                                                            class="text-danger" style="font-size: 15px;">*</i></label>
                                                         <input class="form-control" required type="text" id="firstName"
                                                             placeholder="Jumlah" name="total_baju_player" autofocus />
                                                     </div>
                                                     <div class="mb-3 col-md-6">
-                                                        <label for="firstName" class="form-label">Ukuran</label>
+                                                        <label for="firstName" class="form-label">Ukuran <i
+                                                            class="text-danger" style="font-size: 15px;">*</i></label>
                                                         <textarea name="ket_tambahan_baju_player" required
                                                             class="form-control"
                                                             placeholder="Contoh: M 10, L 2, Xl 1"></textarea>
                                                     </div>
                                                     <div class="mb-3 col-md-12">
-                                                        <label class="form-label" for="country">Keterangan</label>
+                                                        <label class="form-label" for="country">Keterangan <i
+                                                            class="text-danger" style="font-size: 15px;">*</i></label>
                                                         <textarea required class="form-control"
                                                             name="keterangan_baju_pelayer"></textarea>
                                                     </div>
@@ -193,7 +207,8 @@
                                                 <hr>
                                                 <div class="row">
                                                     <div class="mb-3 col-md-6">
-                                                        <label class="form-label" for="country">Status</label>
+                                                        <label class="form-label" for="country">Status <i
+                                                            class="text-danger" style="font-size: 15px;">*</i></label>
                                                         <select id="country" required name="status_pelatih"
                                                             class="select2 form-select">
                                                             <option value="">-- Jenis Produksi --</option>
@@ -203,7 +218,8 @@
                                                         </select>
                                                     </div>
                                                     <div class="mb-3 col-md-6">
-                                                        <label class="form-label" for="country">Produksi</label>
+                                                        <label class="form-label" for="country">Produksi <i
+                                                            class="text-danger" style="font-size: 15px;">*</i></label>
                                                         <select id="country" required name="pola_lengan_pelatih_id"
                                                             class="select2 form-select">
                                                             <option value="">-- Jenis Produksi --</option>
@@ -218,7 +234,8 @@
                                                         </select>
                                                     </div>
                                                     <div class="mb-3 col-md-6">
-                                                        <label class="form-label" for="country">model</label>
+                                                        <label class="form-label" for="country">model <i
+                                                            class="text-danger" style="font-size: 15px;">*</i></label>
                                                         <select id="country" required name="kerah_baju_pelatih_id"
                                                             class="select2 form-select">
                                                             <option value="">-- Jenis Model --</option>
@@ -231,30 +248,35 @@
                                                         </select>
                                                     </div>
                                                     <div class="mb-3 col-md-6">
-                                                        <label class="form-label" for="country">Jenis Sublim</label>
+                                                        <label class="form-label" for="country">Jenis Sublim <i
+                                                            class="text-danger" style="font-size: 15px;">*</i></label>
                                                         <input class="form-control" required type="text" id="firstName"
                                                             name="jenis_sablon_baju_pelatih" placeholder="Jenis Sublim"
                                                             autofocus />
                                                     </div>
                                                     <div class="mb-3 col-md-6">
-                                                        <label for="firstName" class="form-label">Jenis Bahan</label>
+                                                        <label for="firstName" class="form-label">Jenis Bahan<i
+                                                        class="text-danger" style="font-size: 15px;">*</i></label>
                                                         <input class="form-control" required type="text" id="firstName"
                                                             name="jenis_kain_baju_pelatih" placeholder="Jenis Bahan"
                                                             autofocus />
                                                     </div>
                                                     <div class="mb-3 col-md-6">
-                                                        <label for="firstName" class="form-label">Jumlah</label>
+                                                        <label for="firstName" class="form-label">Jumlah<i
+                                                        class="text-danger" style="font-size: 15px;">*</i></label>
                                                         <input class="form-control" required type="text" id="firstName"
                                                             placeholder="Jumlah" name="total_baju_pelatih" autofocus />
                                                     </div>
                                                     <div class="mb-3 col-md-6">
-                                                        <label for="firstName" class="form-label">Ukuran</label>
+                                                        <label for="firstName" class="form-label">Ukuran<i
+                                                        class="text-danger" style="font-size: 15px;">*</i></label>
                                                         <textarea required name="ket_tambahan_baju_pelatih"
                                                             class="form-control"
                                                             placeholder="Contoh: M 10, L 2, Xl 1"></textarea>
                                                     </div>
                                                     <div class="mb-3 col-md-12">
-                                                        <label class="form-label" for="country">Keterangan</label>
+                                                        <label class="form-label" for="country">Keterangan<i
+                                                        class="text-danger" style="font-size: 15px;">*</i></label>
                                                         <textarea required class="form-control"
                                                             name="keterangan_baju_pelatih"></textarea>
                                                     </div>
@@ -292,7 +314,8 @@
                                                 <hr>
                                                 <div class="row">
                                                     <div class="mb-3 col-md-6">
-                                                        <label class="form-label" for="country">Status</label>
+                                                        <label class="form-label" for="country">Status<i
+                                                        class="text-danger" style="font-size: 15px;">*</i></label>
                                                         <select id="country" required name="status_kiper"
                                                             class="select2 form-select">
                                                             <option value="">-- Jenis Produksi --</option>
@@ -302,7 +325,8 @@
                                                         </select>
                                                     </div>
                                                     <div class="mb-3 col-md-6">
-                                                        <label class="form-label" for="country">Produksi</label>
+                                                        <label class="form-label" for="country">Produksi<i
+                                                        class="text-danger" style="font-size: 15px;">*</i></label>
                                                         <select id="country" required name="pola_lengan_kiper_id"
                                                             class="select2 form-select">
                                                             <option value="">-- Jenis Produksi --</option>
@@ -317,7 +341,8 @@
                                                         </select>
                                                     </div>
                                                     <div class="mb-3 col-md-6">
-                                                        <label class="form-label" for="country">model</label>
+                                                        <label class="form-label" for="country">model<i
+                                                        class="text-danger" style="font-size: 15px;">*</i></label>
                                                         <select id="country" required name="kerah_baju_kiper_id"
                                                             class="select2 form-select">
                                                             <option value="">-- Jenis Model --</option>
@@ -330,30 +355,35 @@
                                                         </select>
                                                     </div>
                                                     <div class="mb-3 col-md-6">
-                                                        <label class="form-label" for="country">Jenis Sublim</label>
+                                                        <label class="form-label" for="country">Jenis Sublim<i
+                                                        class="text-danger" style="font-size: 15px;">*</i></label>
                                                         <input class="form-control" required type="text" id="firstName"
                                                             name="jenis_sablon_baju_kiper" placeholder="Jenis Sublim"
                                                             autofocus />
                                                     </div>
                                                     <div class="mb-3 col-md-6">
-                                                        <label for="firstName" class="form-label">Jenis Bahan</label>
+                                                        <label for="firstName" class="form-label">Jenis Bahan<i
+                                                        class="text-danger" style="font-size: 15px;">*</i></label>
                                                         <input class="form-control" required type="text" id="firstName"
                                                             name="jenis_kain_baju_kiper" placeholder="Jenis Bahan"
                                                             autofocus />
                                                     </div>
                                                     <div class="mb-3 col-md-6">
-                                                        <label for="firstName" class="form-label">Jumlah</label>
+                                                        <label for="firstName" class="form-label">Jumlah<i
+                                                        class="text-danger" style="font-size: 15px;">*</i></label>
                                                         <input class="form-control" required type="text" id="firstName"
                                                             placeholder="Jumlah" name="total_baju_kiper" autofocus />
                                                     </div>
                                                     <div class="mb-3 col-md-6">
-                                                        <label for="firstName" class="form-label">Ukuran</label>
+                                                        <label for="firstName" class="form-label">Ukuran<i
+                                                        class="text-danger" style="font-size: 15px;">*</i></label>
                                                         <textarea required name="ket_tambahan_baju_kiper"
                                                             class="form-control"
                                                             placeholder="Contoh: M 10, L 2, Xl 1"></textarea>
                                                     </div>
                                                     <div class="mb-3 col-md-12">
-                                                        <label class="form-label" for="country">Keterangan</label>
+                                                        <label class="form-label" for="country">Keterangan<i
+                                                        class="text-danger" style="font-size: 15px;">*</i></label>
                                                         <textarea required class="form-control"
                                                             name="keterangan_baju_kiper"></textarea>
                                                     </div>
@@ -391,7 +421,8 @@
                                                 <hr>
                                                 <div class="row">
                                                     <div class="mb-3 col-md-6">
-                                                        <label class="form-label" for="country">Status</label>
+                                                        <label class="form-label" for="country">Status <i
+                                                        class="text-danger" style="font-size: 15px;">*</i></label>
                                                         <select id="country" required name="status_baju_1"
                                                             class="select2 form-select">
                                                             <option value="">-- Jenis Produksi --</option>
@@ -401,7 +432,8 @@
                                                         </select>
                                                     </div>
                                                     <div class="mb-3 col-md-6">
-                                                        <label class="form-label" for="country">Produksi</label>
+                                                        <label class="form-label" for="country">Produksi <i
+                                                        class="text-danger" style="font-size: 15px;">*</i></label>
                                                         <select id="country" required name="pola_lengan_1_id"
                                                             class="select2 form-select">
                                                             <option value="">-- Jenis Produksi --</option>
@@ -416,7 +448,8 @@
                                                         </select>
                                                     </div>
                                                     <div class="mb-3 col-md-6">
-                                                        <label class="form-label" for="country">model</label>
+                                                        <label class="form-label" for="country">model <i
+                                                        class="text-danger" style="font-size: 15px;">*</i></label>
                                                         <select id="country" required name="kerah_baju_1_id"
                                                             class="select2 form-select">
                                                             <option value="">-- Jenis Model --</option>
@@ -429,30 +462,35 @@
                                                         </select>
                                                     </div>
                                                     <div class="mb-3 col-md-6">
-                                                        <label class="form-label" for="country">Jenis Sublim</label>
+                                                        <label class="form-label" for="country">Jenis Sublim <i
+                                                        class="text-danger" style="font-size: 15px;">*</i></label>
                                                         <input class="form-control" required type="text" id="firstName"
                                                             name="jenis_sablon_baju_1" placeholder="Jenis Sublim"
                                                             autofocus />
                                                     </div>
                                                     <div class="mb-3 col-md-6">
-                                                        <label for="firstName" class="form-label">Jenis Bahan</label>
+                                                        <label for="firstName" class="form-label">Jenis Bahan <i
+                                                        class="text-danger" style="font-size: 15px;">*</i></label>
                                                         <input class="form-control" required type="text" id="firstName"
                                                             name="jenis_kain_baju_1" placeholder="Jenis Bahan"
                                                             autofocus />
                                                     </div>
                                                     <div class="mb-3 col-md-6">
-                                                        <label for="firstName" class="form-label">Jumlah</label>
+                                                        <label for="firstName" class="form-label">Jumlah <i
+                                                        class="text-danger" style="font-size: 15px;">*</i></label>
                                                         <input class="form-control" required type="text" id="firstName"
                                                             placeholder="Jumlah" name="total_baju_1" autofocus />
                                                     </div>
                                                     <div class="mb-3 col-md-6">
-                                                        <label for="firstName" class="form-label">Ukuran</label>
+                                                        <label for="firstName" class="form-label">Ukuran <i
+                                                        class="text-danger" style="font-size: 15px;">*</i></label>
                                                         <textarea required name="ket_tambahan_baju_1"
                                                             class="form-control"
                                                             placeholder="Contoh: M 10, L 2, Xl 1"></textarea>
                                                     </div>
                                                     <div class="mb-3 col-md-12">
-                                                        <label class="form-label" for="country">Keterangan</label>
+                                                        <label class="form-label" for="country">Keterangan <i
+                                                        class="text-danger" style="font-size: 15px;">*</i></label>
                                                         <textarea required class="form-control"
                                                             name="keterangan_baju_1"></textarea>
                                                     </div>
@@ -492,7 +530,8 @@
                                                 <hr>
                                                 <div class="row">
                                                     <div class="mb-3 col-md-6">
-                                                        <label class="form-label" for="country">Status</label>
+                                                        <label class="form-label" for="country">Status <i
+                                                        class="text-danger" style="font-size: 15px;">*</i></label>
                                                         <select id="country" required name="status_celana_player"
                                                             class="select2 form-select">
                                                             <option value="">-- Jenis Produksi --</option>
@@ -502,7 +541,8 @@
                                                         </select>
                                                     </div>
                                                     <div class="mb-3 col-md-6">
-                                                        <label class="form-label" for="country">Produksi</label>
+                                                        <label class="form-label" for="country">Produksi <i
+                                                        class="text-danger" style="font-size: 15px;">*</i></label>
                                                         <select id="country" required name="pola_celana_player_id"
                                                             class="select2 form-select">
                                                             <option value="">-- Jenis Produksi --</option>
@@ -517,7 +557,8 @@
                                                         </select>
                                                     </div>
                                                     <div class="mb-3 col-md-6">
-                                                        <label class="form-label" for="country">model</label>
+                                                        <label class="form-label" for="country">model <i
+                                                        class="text-danger" style="font-size: 15px;">*</i></label>
                                                         <select id="country" required name="kerah_celana_player_id"
                                                             class="select2 form-select">
                                                             <option value="">-- Jenis Model --</option>
@@ -530,30 +571,35 @@
                                                         </select>
                                                     </div>
                                                     <div class="mb-3 col-md-6">
-                                                        <label class="form-label" for="country">Jenis Sublim</label>
+                                                        <label class="form-label" for="country">Jenis Sublim <i
+                                                        class="text-danger" style="font-size: 15px;">*</i></label>
                                                         <input class="form-control" required type="text" id="firstName"
                                                             name="jenis_sablon_celana_player" placeholder="Jenis Sublim"
                                                             autofocus />
                                                     </div>
                                                     <div class="mb-3 col-md-6">
-                                                        <label for="firstName" class="form-label">Jenis Bahan</label>
+                                                        <label for="firstName" class="form-label">Jenis Bahan <i
+                                                        class="text-danger" style="font-size: 15px;">*</i></label>
                                                         <input class="form-control" required type="text" id="firstName"
                                                             name="jenis_kain_celana_player" placeholder="Jenis Bahan"
                                                             autofocus />
                                                     </div>
                                                     <div class="mb-3 col-md-6">
-                                                        <label for="firstName" class="form-label">Jumlah</label>
+                                                        <label for="firstName" class="form-label">Jumlah <i
+                                                        class="text-danger" style="font-size: 15px;">*</i></label>
                                                         <input class="form-control" required type="text" id="firstName"
                                                             placeholder="Jumlah" name="total_celana_player" autofocus />
                                                     </div>
                                                     <div class="mb-3 col-md-6">
-                                                        <label for="firstName" class="form-label">Ukuran</label>
+                                                        <label for="firstName" class="form-label">Ukuran <i
+                                                        class="text-danger" style="font-size: 15px;">*</i></label>
                                                         <textarea required name="ket_tambahan_celana_player"
                                                             class="form-control"
                                                             placeholder="Contoh: M 10, L 2, Xl 1"></textarea>
                                                     </div>
                                                     <div class="mb-3 col-md-12">
-                                                        <label class="form-label" for="country">Keterangan</label>
+                                                        <label class="form-label" for="country">Keterangan <i
+                                                        class="text-danger" style="font-size: 15px;">*</i></label>
                                                         <textarea required class="form-control"
                                                             name="keterangan_celana_pelayer"></textarea>
                                                     </div>
@@ -592,7 +638,8 @@
                                                 <hr>
                                                 <div class="row">
                                                     <div class="mb-3 col-md-6">
-                                                        <label class="form-label" for="country">Status</label>
+                                                        <label class="form-label" for="country">Status <i
+                                                        class="text-danger" style="font-size: 15px;">*</i></label>
                                                         <select id="country" required name="status_celana_pelatih"
                                                             class="select2 form-select">
                                                             <option value="">-- Jenis Produksi --</option>
@@ -602,7 +649,8 @@
                                                         </select>
                                                     </div>
                                                     <div class="mb-3 col-md-6">
-                                                        <label class="form-label" for="country">Produksi</label>
+                                                        <label class="form-label" for="country">Produksi <i
+                                                        class="text-danger" style="font-size: 15px;">*</i></label>
                                                         <select required id="country" name="pola_celana_pelatih_id"
                                                             class="select2 form-select">
                                                             <option value="">-- Jenis Produksi --</option>
@@ -617,7 +665,8 @@
                                                         </select>
                                                     </div>
                                                     <div class="mb-3 col-md-6">
-                                                        <label class="form-label" for="country">model</label>
+                                                        <label class="form-label" for="country">model <i
+                                                        class="text-danger" style="font-size: 15px;">*</i></label>
                                                         <select id="country" required name="kerah_celana_pelatih_id"
                                                             class="select2 form-select">
                                                             <option value="">-- Jenis Model --</option>
@@ -630,31 +679,36 @@
                                                         </select>
                                                     </div>
                                                     <div class="mb-3 col-md-6">
-                                                        <label class="form-label" for="country">Jenis Sublim</label>
+                                                        <label class="form-label" for="country">Jenis Sublim <i
+                                                        class="text-danger" style="font-size: 15px;">*</i></label>
                                                         <input required class="form-control" type="text" id="firstName"
                                                             name="jenis_sablon_celana_pelatih"
                                                             placeholder="Jenis Sublim" autofocus />
                                                     </div>
                                                     <div class="mb-3 col-md-6">
-                                                        <label for="firstName" class="form-label">Jenis Bahan</label>
+                                                        <label for="firstName" class="form-label">Jenis Bahan <i
+                                                        class="text-danger" style="font-size: 15px;">*</i></label>
                                                         <input required class="form-control" type="text" id="firstName"
                                                             name="jenis_kain_celana_pelatih" placeholder="Jenis Bahan"
                                                             autofocus />
                                                     </div>
                                                     <div class="mb-3 col-md-6">
-                                                        <label for="firstName" class="form-label">Jumlah</label>
+                                                        <label for="firstName" class="form-label">Jumlah <i
+                                                        class="text-danger" style="font-size: 15px;">*</i></label>
                                                         <input required class="form-control" type="text" id="firstName"
                                                             placeholder="Jumlah" name="total_celana_pelatih"
                                                             autofocus />
                                                     </div>
                                                     <div class="mb-3 col-md-6">
-                                                        <label for="firstName" class="form-label">Ukuran</label>
+                                                        <label for="firstName" class="form-label">Ukuran <i
+                                                        class="text-danger" style="font-size: 15px;">*</i></label>
                                                         <textarea required name="ket_tambahan_celana_pelatih"
                                                             class="form-control"
                                                             placeholder="Contoh: M 10, L 2, Xl 1"></textarea>
                                                     </div>
                                                     <div class="mb-3 col-md-12">
-                                                        <label class="form-label" for="country">Keterangan</label>
+                                                        <label class="form-label" for="country">Keterangan <i
+                                                        class="text-danger" style="font-size: 15px;">*</i></label>
                                                         <textarea required class="form-control"
                                                             name="keterangan_celana_pelatih"></textarea>
                                                     </div>
@@ -693,7 +747,8 @@
                                                 <hr>
                                                 <div class="row">
                                                     <div class="mb-3 col-md-6">
-                                                        <label class="form-label" for="country">Status</label>
+                                                        <label class="form-label" for="country">Status <i
+                                                        class="text-danger" style="font-size: 15px;">*</i></label>
                                                         <select id="country" required name="status_celana_kiper"
                                                             class="select2 form-select">
                                                             <option value="">-- Jenis Produksi --</option>
@@ -703,7 +758,8 @@
                                                         </select>
                                                     </div>
                                                     <div class="mb-3 col-md-6">
-                                                        <label class="form-label" for="country">Produksi</label>
+                                                        <label class="form-label" for="country">Produksi <i
+                                                        class="text-danger" style="font-size: 15px;">*</i></label>
                                                         <select required id="country" name="pola_celana_kiper_id"
                                                             class="select2 form-select">
                                                             <option value="">-- Jenis Produksi --</option>
@@ -718,7 +774,8 @@
                                                         </select>
                                                     </div>
                                                     <div class="mb-3 col-md-6">
-                                                        <label class="form-label" for="country">model</label>
+                                                        <label class="form-label" for="country">model <i
+                                                        class="text-danger" style="font-size: 15px;">*</i></label>
                                                         <select id="country" required name="kerah_celana_kiper_id"
                                                             class="select2 form-select">
                                                             <option value="">-- Jenis Model --</option>
@@ -731,30 +788,35 @@
                                                         </select>
                                                     </div>
                                                     <div class="mb-3 col-md-6">
-                                                        <label class="form-label" for="country">Jenis Sublim</label>
+                                                        <label class="form-label" for="country">Jenis Sublim <i
+                                                        class="text-danger" style="font-size: 15px;">*</i></label>
                                                         <input required class="form-control" type="text" id="firstName"
                                                             name="jenis_sablon_celana_kiper" placeholder="Jenis Sublim"
                                                             autofocus />
                                                     </div>
                                                     <div class="mb-3 col-md-6">
-                                                        <label for="firstName" class="form-label">Jenis Bahan</label>
+                                                        <label for="firstName" class="form-label">Jenis Bahan <i
+                                                        class="text-danger" style="font-size: 15px;">*</i></label>
                                                         <input required class="form-control" type="text" id="firstName"
                                                             name="jenis_kain_celana_kiper" placeholder="Jenis Bahan"
                                                             autofocus />
                                                     </div>
                                                     <div class="mb-3 col-md-6">
-                                                        <label for="firstName" class="form-label">Jumlah</label>
+                                                        <label for="firstName" class="form-label">Jumlah <i
+                                                        class="text-danger" style="font-size: 15px;">*</i></label>
                                                         <input required class="form-control" type="text" id="firstName"
                                                             placeholder="Jumlah" name="total_celana_kiper" autofocus />
                                                     </div>
                                                     <div class="mb-3 col-md-6">
-                                                        <label for="firstName" class="form-label">Ukuran</label>
+                                                        <label for="firstName" class="form-label">Ukuran <i
+                                                        class="text-danger" style="font-size: 15px;">*</i></label>
                                                         <textarea required name="ket_tambahan_celana_kiper"
                                                             class="form-control"
                                                             placeholder="Contoh: M 10, L 2, Xl 1"></textarea>
                                                     </div>
                                                     <div class="mb-3 col-md-12">
-                                                        <label class="form-label" for="country">Keterangan</label>
+                                                        <label class="form-label" for="country">Keterangan <i
+                                                        class="text-danger" style="font-size: 15px;">*</i></label>
                                                         <textarea required class="form-control"
                                                             name="keterangan_celana_kiper"></textarea>
                                                     </div>
@@ -793,7 +855,8 @@
                                                 <hr>
                                                 <div class="row">
                                                     <div class="mb-3 col-md-6">
-                                                        <label class="form-label" for="country">Status</label>
+                                                        <label class="form-label" for="country">Status <i
+                                                        class="text-danger" style="font-size: 15px;">*</i></label>
                                                         <select id="country" required name="status_celana_1"
                                                             class="select2 form-select">
                                                             <option value="">-- Jenis Produksi --</option>
@@ -803,7 +866,8 @@
                                                         </select>
                                                     </div>
                                                     <div class="mb-3 col-md-6">
-                                                        <label class="form-label" for="country">Produksi</label>
+                                                        <label class="form-label" for="country">Produksi <i
+                                                        class="text-danger" style="font-size: 15px;">*</i></label>
                                                         <select required id="country" name="pola_celana_1_id"
                                                             class="select2 form-select">
                                                             <option value="">-- Jenis Produksi --</option>
@@ -818,7 +882,8 @@
                                                         </select>
                                                     </div>
                                                     <div class="mb-3 col-md-6">
-                                                        <label class="form-label" for="country">model</label>
+                                                        <label class="form-label" for="country">model <i
+                                                        class="text-danger" style="font-size: 15px;">*</i></label>
                                                         <select id="country" required name="kerah_celana_1_id"
                                                             class="select2 form-select">
                                                             <option value="">-- Jenis Model --</option>
@@ -831,30 +896,35 @@
                                                         </select>
                                                     </div>
                                                     <div class="mb-3 col-md-6">
-                                                        <label class="form-label" for="country">Jenis Sublim</label>
+                                                        <label class="form-label" for="country">Jenis Sublim <i
+                                                        class="text-danger" style="font-size: 15px;">*</i></label>
                                                         <input required class="form-control" type="text" id="firstName"
                                                             name="jenis_sablon_celana_1" placeholder="Jenis Sublim"
                                                             autofocus />
                                                     </div>
                                                     <div class="mb-3 col-md-6">
-                                                        <label for="firstName" class="form-label">Jenis Bahan</label>
+                                                        <label for="firstName" class="form-label">Jenis Bahan <i
+                                                        class="text-danger" style="font-size: 15px;">*</i></label>
                                                         <input required class="form-control" type="text" id="firstName"
                                                             name="jenis_kain_celana_1" placeholder="Jenis Bahan"
                                                             autofocus />
                                                     </div>
                                                     <div class="mb-3 col-md-6">
-                                                        <label for="firstName" class="form-label">Jumlah</label>
+                                                        <label for="firstName" class="form-label">Jumlah <i
+                                                        class="text-danger" style="font-size: 15px;">*</i></label>
                                                         <input required class="form-control" type="text" id="firstName"
                                                             placeholder="Jumlah" name="total_celana_1" autofocus />
                                                     </div>
                                                     <div class="mb-3 col-md-6">
-                                                        <label for="firstName" class="form-label">Ukuran</label>
+                                                        <label for="firstName" class="form-label">Ukuran <i
+                                                        class="text-danger" style="font-size: 15px;">*</i></label>
                                                         <textarea required name="ket_tambahan_celana_1"
                                                             class="form-control"
                                                             placeholder="Contoh: M 10, L 2, Xl 1"></textarea>
                                                     </div>
                                                     <div class="mb-3 col-md-12">
-                                                        <label class="form-label" for="country">Keterangan</label>
+                                                        <label class="form-label" for="country">Keterangan <i
+                                                        class="text-danger" style="font-size: 15px;">*</i></label>
                                                         <textarea required class="form-control"
                                                             name="keterangan_celana_1"></textarea>
                                                     </div>

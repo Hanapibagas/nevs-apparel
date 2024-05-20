@@ -32,13 +32,15 @@
                                             <input type="hidden" id="playerId" name="player_id"
                                                 value="{{ $formattedData['player'][0]['id'] }}">
                                             <div class="mb-3 col-md-6">
-                                                <label for="lastName" class="form-label">Panjang Kertas (Meter)</label>
+                                                <label for="lastName" class="form-label">Panjang Kertas (Meter) <i
+                                                        class="text-danger" style="font-size: 15px;">*</i></label>
                                                 <input required class="form-control" type="number"
                                                     name="panjang_kertas_palayer" id="lastName"
                                                     pattern="[0-9]+(\.[0-9]+)?" placeholder="Contoh: 10 meter" />
                                             </div>
                                             <div class="mb-3 col-md-6">
-                                                <label for="lastName" class="form-label">Nama kertas</label>
+                                                <label for="lastName" class="form-label">Nama kertas <i
+                                                        class="text-danger" style="font-size: 15px;">*</i></label>
                                                 <select id="country" required name="kertas_id"
                                                     class="select2 form-select">
                                                     <option value="">-- Pilih Nama Kertas --</option>
@@ -49,15 +51,16 @@
                                             </div>
                                             <div class="mb-3 col-md-6">
                                                 <label for="lastName" class="form-label">Panjang Poly / DTF
-                                                    (Meter)</label>
+                                                    (Meter) <i class="text-danger"
+                                                        style="font-size: 15px;">*</i></label>
                                                 <input required class="form-control" type="number" name="poly_player"
                                                     id="lastName" pattern="[0-9]+(\.[0-9]+)?"
                                                     placeholder="Contoh: 10 meter" />
                                             </div>
                                             <div class="mb-3 col-md-6">
                                                 <label for="lastName" class="form-label">File Corel Layout</label>
-                                                <input class="form-control" type="file" accept=".rar"
-                                                    name="file_corel_layout" id="lastName" />
+                                                <input class="form-control" type="file" name="file_corel_layout"
+                                                    id="lastName" />
                                             </div>
                                             <div class="mb-3 col-md-6">
                                                 <label for="lastName" class="form-label">keterangan tambahan</label>
@@ -74,13 +77,15 @@
                                             <input type="hidden" id="pelatihId" name="pelatih_id"
                                                 value="{{ $formattedData['pelatih'][0]['id'] }}">
                                             <div class="mb-3 col-md-6">
-                                                <label for="lastName" class="form-label">Panjang Kertas (Meter)</label>
+                                                <label for="lastName" class="form-label">Panjang Kertas (Meter) <i
+                                                        class="text-danger" style="font-size: 15px;">*</i></label>
                                                 <input required class="form-control" type="number"
                                                     name="panjang_kertas_pelatih" id="lastName"
                                                     pattern="[0-9]+(\.[0-9]+)?" placeholder="Contoh: 10 meter" />
                                             </div>
                                             <div class="mb-3 col-md-6">
-                                                <label for="lastName" class="form-label">Nama kertas</label>
+                                                <label for="lastName" class="form-label">Nama kertas <i
+                                                        class="text-danger" style="font-size: 15px;">*</i></label>
                                                 <select id="country" required name="kertas_id"
                                                     class="select2 form-select">
                                                     <option value="">-- Pilih Nama Kertas --</option>
@@ -91,15 +96,16 @@
                                             </div>
                                             <div class="mb-3 col-md-6">
                                                 <label for="lastName" class="form-label">Panjang Poly / DTF
-                                                    (Meter)</label>
+                                                    (Meter) <i class="text-danger"
+                                                        style="font-size: 15px;">*</i></label>
                                                 <input required class="form-control" type="number" name="poly_pelatih"
                                                     id="lastName" pattern="[0-9]+(\.[0-9]+)?"
                                                     placeholder="Contoh: 10 meter" />
                                             </div>
                                             <div class="mb-3 col-md-6">
                                                 <label for="lastName" class="form-label">File Corel Layout</label>
-                                                <input class="form-control" type="file" accept=".rar"
-                                                    name="file_corel_layout2" id="lastName" />
+                                                <input class="form-control" type="file" name="file_corel_layout2"
+                                                    id="lastName" />
                                             </div>
                                             <div class="mb-3 col-md-6">
                                                 <label for="lastName" class="form-label">keterangan tambahan</label>
@@ -116,13 +122,15 @@
                                             <input type="hidden" id="kiperId" name="kiper_id"
                                                 value="{{ $formattedData['kiper'][0]['id'] }}">
                                             <div class="mb-3 col-md-6">
-                                                <label for="lastName" class="form-label">Panjang Kertas (Meter)</label>
+                                                <label for="lastName" class="form-label">Panjang Kertas (Meter) <i
+                                                        class="text-danger" style="font-size: 15px;">*</i></label>
                                                 <input required class="form-control" type="number"
                                                     name="panjang_kertas_kiper" id="lastName"
                                                     pattern="[0-9]+(\.[0-9]+)?" placeholder="Contoh: 10 meter" />
                                             </div>
                                             <div class="mb-3 col-md-6">
-                                                <label for="lastName" class="form-label">Nama kertas</label>
+                                                <label for="lastName" class="form-label">Nama kertas <i
+                                                        class="text-danger" style="font-size: 15px;">*</i></label>
                                                 <select id="country" required name="kertas_id"
                                                     class="select2 form-select">
                                                     <option value="">-- Pilih Nama Kertas --</option>
@@ -133,15 +141,16 @@
                                             </div>
                                             <div class="mb-3 col-md-6">
                                                 <label for="lastName" class="form-label">Panjang Poly / DTF
-                                                    (Meter)</label>
+                                                    (Meter) <i class="text-danger"
+                                                        style="font-size: 15px;">*</i></label>
                                                 <input required class="form-control" type="number" name="poly_kiper"
                                                     id="lastName" pattern="[0-9]+(\.[0-9]+)?"
                                                     placeholder="Contoh: 10 meter" />
                                             </div>
                                             <div class="mb-3 col-md-6">
                                                 <label for="lastName" class="form-label">File Corel Layout</label>
-                                                <input class="form-control" type="file" accept=".rar"
-                                                    name="file_corel_layou3" id="lastName" />
+                                                <input class="form-control" type="file" name="file_corel_layou3"
+                                                    id="lastName" />
                                             </div>
                                             <div class="mb-3 col-md-6">
                                                 <label for="lastName" class="form-label">keterangan tambahan</label>
@@ -158,13 +167,15 @@
                                             <input type="hidden" id="lk1Id" name="lk1_id"
                                                 value="{{ $formattedData['lk_1'][0]['id'] }}">
                                             <div class="mb-3 col-md-6">
-                                                <label for="lastName" class="form-label">Panjang Kertas (Meter)</label>
+                                                <label for="lastName" class="form-label">Panjang Kertas (Meter) <i
+                                                        class="text-danger" style="font-size: 15px;">*</i></label>
                                                 <input required class="form-control" type="number"
                                                     name="panjang_kertas_1" id="lastName" pattern="[0-9]+(\.[0-9]+)?"
                                                     placeholder="Contoh: 10 meter" />
                                             </div>
                                             <div class="mb-3 col-md-6">
-                                                <label for="lastName" class="form-label">Nama kertas</label>
+                                                <label for="lastName" class="form-label">Nama kertas <i
+                                                        class="text-danger" style="font-size: 15px;">*</i></label>
                                                 <select id="country" required name="kertas_id"
                                                     class="select2 form-select">
                                                     <option value="">-- Pilih Nama Kertas --</option>
@@ -175,15 +186,16 @@
                                             </div>
                                             <div class="mb-3 col-md-6">
                                                 <label for="lastName" class="form-label">Panjang Poly / DTF
-                                                    (Meter)</label>
+                                                    (Meter) <i class="text-danger"
+                                                        style="font-size: 15px;">*</i></label>
                                                 <input required class="form-control" type="number" name="poly_1"
                                                     id="lastName" pattern="[0-9]+(\.[0-9]+)?"
                                                     placeholder="Contoh: 10 meter" />
                                             </div>
                                             <div class="mb-3 col-md-6">
                                                 <label for="lastName" class="form-label">File Corel Layout</label>
-                                                <input class="form-control" type="file" accept=".rar"
-                                                    name="file_corel_layou4" id="lastName" />
+                                                <input class="form-control" type="file" name="file_corel_layou4"
+                                                    id="lastName" />
                                             </div>
                                             <div class="mb-3 col-md-6">
                                                 <label for="lastName" class="form-label">keterangan tambahan</label>
@@ -200,13 +212,15 @@
                                             <input type="hidden" id="celanaPlayerId" name="celana_player_id"
                                                 value="{{ $formattedData['celana_player'][0]['id'] }}">
                                             <div class="mb-3 col-md-6">
-                                                <label for="lastName" class="form-label">Panjang Kertas (Meter)</label>
+                                                <label for="lastName" class="form-label">Panjang Kertas (Meter) <i
+                                                        class="text-danger" style="font-size: 15px;">*</i></label>
                                                 <input required class="form-control" type="number"
                                                     name="panjang_kertas_celana_pelayer" id="lastName"
                                                     pattern="[0-9]+(\.[0-9]+)?" placeholder="Contoh: 10 meter" />
                                             </div>
                                             <div class="mb-3 col-md-6">
-                                                <label for="lastName" class="form-label">Nama kertas</label>
+                                                <label for="lastName" class="form-label">Nama kertas <i
+                                                        class="text-danger" style="font-size: 15px;">*</i></label>
                                                 <select id="country" required name="kertas_id"
                                                     class="select2 form-select">
                                                     <option value="">-- Pilih Nama Kertas --</option>
@@ -217,15 +231,16 @@
                                             </div>
                                             <div class="mb-3 col-md-6">
                                                 <label for="lastName" class="form-label">Panjang Poly / DTF
-                                                    (Meter)</label>
+                                                    (Meter) <i class="text-danger"
+                                                        style="font-size: 15px;">*</i></label>
                                                 <input required class="form-control" type="number"
                                                     name="poly_celana_pelayer" id="lastName" pattern="[0-9]+(\.[0-9]+)?"
                                                     placeholder="Contoh: 10 meter" />
                                             </div>
                                             <div class="mb-3 col-md-6">
                                                 <label for="lastName" class="form-label">File Corel Layout</label>
-                                                <input class="form-control" type="file" accept=".rar"
-                                                    name="file_corel_layou5" id="lastName" />
+                                                <input class="form-control" type="file" name="file_corel_layou5"
+                                                    id="lastName" />
                                             </div>
                                             <div class="mb-3 col-md-6">
                                                 <label for="lastName" class="form-label">keterangan tambahan</label>
@@ -242,13 +257,15 @@
                                             <input type="hidden" id="celanaPelatihId" name="celana_pelatih_id"
                                                 value="{{ $formattedData['celana_pelatih'][0]['id'] }}">
                                             <div class="mb-3 col-md-6">
-                                                <label for="lastName" class="form-label">Panjang Kertas (Meter)</label>
+                                                <label for="lastName" class="form-label">Panjang Kertas (Meter) <i
+                                                        class="text-danger" style="font-size: 15px;">*</i></label>
                                                 <input required class="form-control" type="number"
                                                     name="panjang_kertas_celana_pelatih" id="lastName"
                                                     pattern="[0-9]+(\.[0-9]+)?" placeholder="Contoh: 10 meter" />
                                             </div>
                                             <div class="mb-3 col-md-6">
-                                                <label for="lastName" class="form-label">Nama kertas</label>
+                                                <label for="lastName" class="form-label">Nama kertas <i
+                                                        class="text-danger" style="font-size: 15px;">*</i></label>
                                                 <select id="country" required name="kertas_id"
                                                     class="select2 form-select">
                                                     <option value="">-- Pilih Nama Kertas --</option>
@@ -259,15 +276,16 @@
                                             </div>
                                             <div class="mb-3 col-md-6">
                                                 <label for="lastName" class="form-label">Panjang Poly / DTF
-                                                    (Meter)</label>
+                                                    (Meter) <i class="text-danger"
+                                                        style="font-size: 15px;">*</i></label>
                                                 <input required class="form-control" type="number"
                                                     name="poly_celana_pelatih" id="lastName" pattern="[0-9]+(\.[0-9]+)?"
                                                     placeholder="Contoh: 10 meter" />
                                             </div>
                                             <div class="mb-3 col-md-6">
                                                 <label for="lastName" class="form-label">File Corel Layout</label>
-                                                <input class="form-control" type="file" accept=".rar"
-                                                    name="file_corel_layou6" id="lastName" />
+                                                <input class="form-control" type="file" name="file_corel_layou6"
+                                                    id="lastName" />
                                             </div>
                                             <div class="mb-3 col-md-6">
                                                 <label for="lastName" class="form-label">keterangan tambahan</label>
@@ -284,13 +302,15 @@
                                             <input type="hidden" id="celanaKiperId" name="celana_kiper_id"
                                                 value="{{ $formattedData['celana_kiper'][0]['id'] }}">
                                             <div class="mb-3 col-md-6">
-                                                <label for="lastName" class="form-label">Panjang Kertas (Meter)</label>
+                                                <label for="lastName" class="form-label">Panjang Kertas (Meter) <i
+                                                        class="text-danger" style="font-size: 15px;">*</i></label>
                                                 <input required class="form-control" type="number"
                                                     name="panjang_kertas_celana_kiper" id="lastName"
                                                     pattern="[0-9]+(\.[0-9]+)?" placeholder="Contoh: 10 meter" />
                                             </div>
                                             <div class="mb-3 col-md-6">
-                                                <label for="lastName" class="form-label">Nama kertas</label>
+                                                <label for="lastName" class="form-label">Nama kertas <i
+                                                        class="text-danger" style="font-size: 15px;">*</i></label>
                                                 <select id="country" required name="kertas_id"
                                                     class="select2 form-select">
                                                     <option value="">-- Pilih Nama Kertas --</option>
@@ -301,15 +321,16 @@
                                             </div>
                                             <div class="mb-3 col-md-6">
                                                 <label for="lastName" class="form-label">Panjang Poly / DTF
-                                                    (Meter)</label>
+                                                    (Meter) <i class="text-danger"
+                                                        style="font-size: 15px;">*</i></label>
                                                 <input required class="form-control" type="number"
                                                     name="poly_celana_kiper" id="lastName" pattern="[0-9]+(\.[0-9]+)?"
                                                     placeholder="Contoh: 10 meter" />
                                             </div>
                                             <div class="mb-3 col-md-6">
                                                 <label for="lastName" class="form-label">File Corel Layout</label>
-                                                <input class="form-control" type="file" accept=".rar"
-                                                    name="file_corel_layou7" id="lastName" />
+                                                <input class="form-control" type="file" name="file_corel_layou7"
+                                                    id="lastName" />
                                             </div>
                                             <div class="mb-3 col-md-6">
                                                 <label for="lastName" class="form-label">keterangan tambahan</label>
@@ -326,13 +347,15 @@
                                             <input type="hidden" id="celana1Id" name="celana_1_id"
                                                 value="{{ $formattedData['celana_1'][0]['id'] }}">
                                             <div class="mb-3 col-md-6">
-                                                <label for="lastName" class="form-label">Panjang Kertas (Meter)</label>
+                                                <label for="lastName" class="form-label">Panjang Kertas (Meter) <i
+                                                        class="text-danger" style="font-size: 15px;">*</i></label>
                                                 <input required class="form-control" type="number"
                                                     name="panjang_kertas_celana_1" id="lastName"
                                                     pattern="[0-9]+(\.[0-9]+)?" placeholder="Contoh: 10 meter" />
                                             </div>
                                             <div class="mb-3 col-md-6">
-                                                <label for="lastName" class="form-label">Nama kertas</label>
+                                                <label for="lastName" class="form-label">Nama kertas <i
+                                                        class="text-danger" style="font-size: 15px;">*</i></label>
                                                 <select id="country" required name="kertas_id"
                                                     class="select2 form-select">
                                                     <option value="">-- Pilih Nama Kertas --</option>
@@ -343,15 +366,16 @@
                                             </div>
                                             <div class="mb-3 col-md-6">
                                                 <label for="lastName" class="form-label">Panjang Poly / DTF
-                                                    (Meter)</label>
+                                                    (Meter) <i class="text-danger"
+                                                        style="font-size: 15px;">*</i></label>
                                                 <input required class="form-control" type="number" name="poly_celana_1"
                                                     id="lastName" pattern="[0-9]+(\.[0-9]+)?"
                                                     placeholder="Contoh: 10 meter" />
                                             </div>
                                             <div class="mb-3 col-md-6">
                                                 <label for="lastName" class="form-label">File Corel Layout</label>
-                                                <input class="form-control" type="file" accept=".rar"
-                                                    name="file_corel_layout8" id="lastName" />
+                                                <input class="form-control" type="file" name="file_corel_layout8"
+                                                    id="lastName" />
                                             </div>
                                             <div class="mb-3 col-md-6">
                                                 <label for="lastName" class="form-label">keterangan tambahan</label>

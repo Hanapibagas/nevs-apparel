@@ -21,10 +21,11 @@ class AtexcoController extends Controller
     {
         $user = Auth::user();
         $mesin = BarangMasukMesin::where('nama_mesin_id', $user->id)
-            ->with('Users', 'BarangMasukDisainer')
+            ->with('Users', 'BarangMasukDisainer', 'User')
             ->orderBy('created_at', 'desc')
             ->get();
 
+        // return response()->json($mesin);
         return view('component.Mesin.mesin-atexco-pegawai.index', compact('mesin'));
     }
 

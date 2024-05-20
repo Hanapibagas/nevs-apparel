@@ -131,7 +131,7 @@ class CostumerServicesController extends Controller
                 ->count();
             $userCounts[$userId] = $barangMasukCount;
         }
-        $oderCs = BarangMasukCostumerServices::with('BarangMasukDisainer', 'Gambar', 'Users', 'UsersOrder')->find($id);
+        $oderCs = BarangMasukCostumerServices::with('BarangMasukDisainer', 'Gambar', 'Users', 'UsersOrder', 'UserMesin')->find($id);
 
         $kera = KeraBaju::where('id', '>', 1)->get();
         $lengan = PolaLengan::where('id', '>', 1)->get();
@@ -157,6 +157,7 @@ class CostumerServicesController extends Controller
             'Users',
             'UsersOrder',
             'UsersLk',
+            'UserMesin',
             'BarangMasukCostumerServicesLkPlyer',
 
             'BarangMasukCostumerServicesLkPelatih',
@@ -174,7 +175,7 @@ class CostumerServicesController extends Controller
             'BarangMasukCostumerServicesLkCelana1',
         )->find($id);
 
-        // return response()->json($users);
+        // return response()->json($oderCs);
         $kera = KeraBaju::where('id', '>', 1)->get();
         $lengan = PolaLengan::where('id', '>', 1)->get();
         $celana = PolaCeleana::all();

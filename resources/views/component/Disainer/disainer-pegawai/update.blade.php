@@ -27,7 +27,8 @@
                             </div>
                         </div>
                         <div class="row mb-3">
-                            <label class="col-sm-2 col-form-label" for="basic-default-company">Nama mesin</label>
+                            <label class="col-sm-2 col-form-label" for="basic-default-company">Nama oprator mesin <i
+                                    class="text-danger" style="font-size: 15px;">*</i></label>
                             <div class="col-sm-10">
                                 <select id="country" required name="nama_mesin_id" class="select2 form-select">
                                     <option value="">-- Pilih Pembagian Mesin --</option>
@@ -42,7 +43,8 @@
                             </div>
                         </div>
                         <div class="row mb-3">
-                            <label class="col-sm-2 col-form-label" for="basic-default-company">File</label>
+                            <label class="col-sm-2 col-form-label" for="basic-default-company">File <i
+                                    class="text-danger" style="font-size: 15px;">*</i></label>
                             <div class="col-sm-10">
                                 <input type="file" class="form-control" accept=".jpg, .eps" id="basic-default-company"
                                     name="file" />

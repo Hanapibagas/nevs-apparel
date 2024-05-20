@@ -83,7 +83,7 @@
                                                     <div class="col mb-3">
                                                         <label for="nameWithTitle" class="form-label">nama mesin</label>
                                                         <input type="text" id="nameWithTitle" class="form-control"
-                                                            value="{{ $mesins->nama_mesin  }}" readonly />
+                                                            value="{{ $mesins->User->name  }}" readonly />
                                                     </div>
                                                 </div>
                                                 <div class="row">

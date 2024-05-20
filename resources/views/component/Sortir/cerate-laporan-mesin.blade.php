@@ -22,17 +22,20 @@
                                     <div class="card-body">
                                         <div class="row">
                                             <div class="mb-3 col-md-6">
-                                                <label for="firstName" class="form-label">No. Error</label>
+                                                <label for="firstName" class="form-label">No. Error <i
+                                                        class="text-danger" style="font-size: 15px;">*</i></label>
                                                 <input required class="form-control" type="number" id="firstName"
                                                     name="no_error" autofocus required placeholder="Contoh:123456" />
                                             </div>
                                             <div class="mb-3 col-md-6">
-                                                <label for="firstName" class="form-label">Panjang Kertas (M)</label>
+                                                <label for="firstName" class="form-label">Panjang Kertas (M) <i
+                                                        class="text-danger" style="font-size: 15px;">*</i></label>
                                                 <input required class="form-control" type="number" id="firstName"
                                                     name="panjang_kertas" autofocus required placeholder="Contoh: 1" />
                                             </div>
                                             <div class="mb-3 col-md-6">
-                                                <label for="lastName" class="form-label">Nama kertas</label>
+                                                <label for="lastName" class="form-label">Nama kertas <i
+                                                        class="text-danger" style="font-size: 15px;">*</i></label>
                                                 <select id="country" required name="kertas_id"
                                                     class="select2 form-select">
                                                     <option value="">-- Pilih Nama Kertas --</option>
@@ -42,12 +45,14 @@
                                                 </select>
                                             </div>
                                             <div class="mb-3 col-md-6">
-                                                <label for="firstName" class="form-label">Berat Kain (Kg)</label>
+                                                <label for="firstName" class="form-label">Berat Kain (Kg) <i
+                                                        class="text-danger" style="font-size: 15px;">*</i></label>
                                                 <input required class="form-control" type="number" id="firstName"
                                                     name="berat" autofocus required placeholder="Contoh: 1" />
                                             </div>
                                             <div class="mb-3 col-md-6">
-                                                <label for="lastName" class="form-label">Nama kain</label>
+                                                <label for="lastName" class="form-label">Nama kain <i
+                                                        class="text-danger" style="font-size: 15px;">*</i></label>
                                                 <select id="country" required name="kain_id"
                                                     class="select2 form-select">
                                                     <option value="">-- Pilih Nama Kertas --</option>
@@ -57,7 +62,8 @@
                                                 </select>
                                             </div>
                                             <div class="mb-3 col-md-6">
-                                                <label for="firstName" class="form-label">nama bahan</label>
+                                                <label for="firstName" class="form-label">nama bahan <i
+                                                        class="text-danger" style="font-size: 15px;">*</i></label>
                                                 <input required class="form-control" type="text" id="firstName"
                                                     name="bahan" autofocus required placeholder="Contoh: Bahan A" />
                                             </div>
@@ -83,19 +89,22 @@
                                     <div class="card-body">
                                         <div class="row">
                                             <div class="mb-3 col-md-6">
-                                                <label for="firstName" class="form-label">No. Error</label>
+                                                <label for="firstName" class="form-label">No. Error <i
+                                                        class="text-danger" style="font-size: 15px;">*</i></label>
                                                 <input required class="form-control" type="number" id="firstName"
                                                     name="no_error_pelatih" autofocus required
                                                     placeholder="Contoh:123456" />
                                             </div>
                                             <div class="mb-3 col-md-6">
-                                                <label for="firstName" class="form-label">Panjang Kertas (M)</label>
+                                                <label for="firstName" class="form-label">Panjang Kertas (M) <i
+                                                        class="text-danger" style="font-size: 15px;">*</i></label>
                                                 <input required class="form-control" type="number" id="firstName"
                                                     name="panjang_kertas_pelatih" autofocus required
                                                     placeholder="Contoh: 1" />
                                             </div>
                                             <div class="mb-3 col-md-6">
-                                                <label for="lastName" class="form-label">Nama kertas</label>
+                                                <label for="lastName" class="form-label">Nama kertas <i
+                                                        class="text-danger" style="font-size: 15px;">*</i></label>
                                                 <select id="country" required name="kertas_id"
                                                     class="select2 form-select">
                                                     <option value="">-- Pilih Nama Kertas --</option>
@@ -105,18 +114,21 @@
                                                 </select>
                                             </div>
                                             <div class="mb-3 col-md-6">
-                                                <label for="firstName" class="form-label">Berat Kain (Kg)</label>
+                                                <label for="firstName" class="form-label">Berat Kain (Kg) <i
+                                                        class="text-danger" style="font-size: 15px;">*</i></label>
                                                 <input required class="form-control" type="number" id="firstName"
                                                     name="berat_pelatih" autofocus required placeholder="Contoh: 1" />
                                             </div>
                                             <div class="mb-3 col-md-6">
-                                                <label for="firstName" class="form-label">nama bahan</label>
+                                                <label for="firstName" class="form-label">nama bahan <i
+                                                        class="text-danger" style="font-size: 15px;">*</i></label>
                                                 <input required class="form-control" type="text" id="firstName"
                                                     name="bahan_pelatih" autofocus required
                                                     placeholder="Contoh: Bahan A" />
                                             </div>
                                             <div class="mb-3 col-md-6">
-                                                <label for="lastName" class="form-label">Nama kain</label>
+                                                <label for="lastName" class="form-label">Nama kain <i
+                                                        class="text-danger" style="font-size: 15px;">*</i></label>
                                                 <select id="country" required name="kain_id"
                                                     class="select2 form-select">
                                                     <option value="">-- Pilih Nama Kertas --</option>
@@ -147,19 +159,22 @@
                                     <div class="card-body">
                                         <div class="row">
                                             <div class="mb-3 col-md-6">
-                                                <label for="firstName" class="form-label">No. Error</label>
+                                                <label for="firstName" class="form-label">No. Error <i
+                                                        class="text-danger" style="font-size: 15px;">*</i></label>
                                                 <input required class="form-control" type="number" id="firstName"
                                                     name="no_error_kiper" autofocus required
                                                     placeholder="Contoh:123456" />
                                             </div>
                                             <div class="mb-3 col-md-6">
-                                                <label for="firstName" class="form-label">Panjang Kertas (M)</label>
+                                                <label for="firstName" class="form-label">Panjang Kertas (M) <i
+                                                        class="text-danger" style="font-size: 15px;">*</i></label>
                                                 <input required class="form-control" type="number" id="firstName"
                                                     name="panjang_kertas_kiper" autofocus required
                                                     placeholder="Contoh: 1" />
                                             </div>
                                             <div class="mb-3 col-md-6">
-                                                <label for="lastName" class="form-label">Nama kertas</label>
+                                                <label for="lastName" class="form-label">Nama kertas <i
+                                                        class="text-danger" style="font-size: 15px;">*</i></label>
                                                 <select id="country" required name="kertas_id"
                                                     class="select2 form-select">
                                                     <option value="">-- Pilih Nama Kertas --</option>
@@ -169,12 +184,14 @@
                                                 </select>
                                             </div>
                                             <div class="mb-3 col-md-6">
-                                                <label for="firstName" class="form-label">Berat Kain (Kg)</label>
+                                                <label for="firstName" class="form-label">Berat Kain (Kg) <i
+                                                        class="text-danger" style="font-size: 15px;">*</i></label>
                                                 <input required class="form-control" type="number" id="firstName"
                                                     name="berat_kiper" autofocus required placeholder="Contoh: 1" />
                                             </div>
                                             <div class="mb-3 col-md-6">
-                                                <label for="lastName" class="form-label">Nama kain</label>
+                                                <label for="lastName" class="form-label">Nama kain <i
+                                                        class="text-danger" style="font-size: 15px;">*</i></label>
                                                 <select id="country" required name="kain_id"
                                                     class="select2 form-select">
                                                     <option value="">-- Pilih Nama Kertas --</option>
@@ -184,7 +201,8 @@
                                                 </select>
                                             </div>
                                             <div class="mb-3 col-md-6">
-                                                <label for="firstName" class="form-label">nama bahan</label>
+                                                <label for="firstName" class="form-label">nama bahan <i
+                                                        class="text-danger" style="font-size: 15px;">*</i></label>
                                                 <input required class="form-control" type="text" id="firstName"
                                                     name="bahan_kiper" autofocus required
                                                     placeholder="Contoh: Bahan A" />
@@ -210,18 +228,21 @@
                                     <div class="card-body">
                                         <div class="row">
                                             <div class="mb-3 col-md-6">
-                                                <label for="firstName" class="form-label">No. Error</label>
+                                                <label for="firstName" class="form-label">No. Error <i
+                                                        class="text-danger" style="font-size: 15px;">*</i></label>
                                                 <input required class="form-control" type="number" id="firstName"
                                                     name="no_error_1" autofocus required placeholder="Contoh:123456" />
                                             </div>
                                             <div class="mb-3 col-md-6">
-                                                <label for="firstName" class="form-label">Panjang Kertas (M)</label>
+                                                <label for="firstName" class="form-label">Panjang Kertas (M) <i
+                                                        class="text-danger" style="font-size: 15px;">*</i></label>
                                                 <input required class="form-control" type="number" id="firstName"
                                                     name="panjang_kertas_1" autofocus required
                                                     placeholder="Contoh: 1" />
                                             </div>
                                             <div class="mb-3 col-md-6">
-                                                <label for="lastName" class="form-label">Nama kertas</label>
+                                                <label for="lastName" class="form-label">Nama kertas <i
+                                                        class="text-danger" style="font-size: 15px;">*</i></label>
                                                 <select id="country" required name="kertas_id"
                                                     class="select2 form-select">
                                                     <option value="">-- Pilih Nama Kertas --</option>
@@ -231,12 +252,14 @@
                                                 </select>
                                             </div>
                                             <div class="mb-3 col-md-6">
-                                                <label for="firstName" class="form-label">Berat Kain (Kg)</label>
+                                                <label for="firstName" class="form-label">Berat Kain (Kg) <i
+                                                        class="text-danger" style="font-size: 15px;">*</i></label>
                                                 <input required class="form-control" type="number" id="firstName"
                                                     name="berat_1" autofocus required placeholder="Contoh: 1" />
                                             </div>
                                             <div class="mb-3 col-md-6">
-                                                <label for="lastName" class="form-label">Nama kain</label>
+                                                <label for="lastName" class="form-label">Nama kain <i
+                                                        class="text-danger" style="font-size: 15px;">*</i></label>
                                                 <select id="country" required name="kain_id"
                                                     class="select2 form-select">
                                                     <option value="">-- Pilih Nama Kertas --</option>
@@ -246,7 +269,8 @@
                                                 </select>
                                             </div>
                                             <div class="mb-3 col-md-6">
-                                                <label for="firstName" class="form-label">nama bahan</label>
+                                                <label for="firstName" class="form-label">nama bahan <i
+                                                        class="text-danger" style="font-size: 15px;">*</i></label>
                                                 <input required class="form-control" type="text" id="firstName"
                                                     name="bahan_1" autofocus required placeholder="Contoh: Bahan A" />
                                             </div>
@@ -272,19 +296,22 @@
                                     <div class="card-body">
                                         <div class="row">
                                             <div class="mb-3 col-md-6">
-                                                <label for="firstName" class="form-label">No. Error</label>
+                                                <label for="firstName" class="form-label">No. Error <i
+                                                        class="text-danger" style="font-size: 15px;">*</i></label>
                                                 <input required class="form-control" type="number" id="firstName"
                                                     name="no_error_celana_pelayer" autofocus required
                                                     placeholder="Contoh:123456" />
                                             </div>
                                             <div class="mb-3 col-md-6">
-                                                <label for="firstName" class="form-label">Panjang Kertas (M)</label>
+                                                <label for="firstName" class="form-label">Panjang Kertas (M) <i
+                                                        class="text-danger" style="font-size: 15px;">*</i></label>
                                                 <input required class="form-control" type="number" id="firstName"
                                                     name="panjang_kertas_celana_pelayer" autofocus required
                                                     placeholder="Contoh: 1" />
                                             </div>
                                             <div class="mb-3 col-md-6">
-                                                <label for="lastName" class="form-label">Nama kertas</label>
+                                                <label for="lastName" class="form-label">Nama kertas <i
+                                                        class="text-danger" style="font-size: 15px;">*</i></label>
                                                 <select id="country" required name="kertas_id"
                                                     class="select2 form-select">
                                                     <option value="">-- Pilih Nama Kertas --</option>
@@ -294,13 +321,15 @@
                                                 </select>
                                             </div>
                                             <div class="mb-3 col-md-6">
-                                                <label for="firstName" class="form-label">Berat Kain (Kg)</label>
+                                                <label for="firstName" class="form-label">Berat Kain (Kg) <i
+                                                        class="text-danger" style="font-size: 15px;">*</i></label>
                                                 <input required class="form-control" type="number" id="firstName"
                                                     name="berat_celana_pelayer" autofocus required
                                                     placeholder="Contoh: 1" />
                                             </div>
                                             <div class="mb-3 col-md-6">
-                                                <label for="lastName" class="form-label">Nama kain</label>
+                                                <label for="lastName" class="form-label">Nama kain <i
+                                                        class="text-danger" style="font-size: 15px;">*</i></label>
                                                 <select id="country" required name="kain_id"
                                                     class="select2 form-select">
                                                     <option value="">-- Pilih Nama Kertas --</option>
@@ -310,7 +339,8 @@
                                                 </select>
                                             </div>
                                             <div class="mb-3 col-md-6">
-                                                <label for="firstName" class="form-label">nama bahan</label>
+                                                <label for="firstName" class="form-label">nama bahan <i
+                                                        class="text-danger" style="font-size: 15px;">*</i></label>
                                                 <input required class="form-control" type="text" id="firstName"
                                                     name="bahan_celana_pelayer" autofocus required
                                                     placeholder="Contoh: Bahan A" />
@@ -337,19 +367,22 @@
                                     <div class="card-body">
                                         <div class="row">
                                             <div class="mb-3 col-md-6">
-                                                <label for="firstName" class="form-label">No. Error</label>
+                                                <label for="firstName" class="form-label">No. Error <i
+                                                        class="text-danger" style="font-size: 15px;">*</i></label>
                                                 <input required class="form-control" type="number" id="firstName"
                                                     name="no_error_celana_pelatih" autofocus required
                                                     placeholder="Contoh:123456" />
                                             </div>
                                             <div class="mb-3 col-md-6">
-                                                <label for="firstName" class="form-label">Panjang Kertas (M)</label>
+                                                <label for="firstName" class="form-label">Panjang Kertas (M) <i
+                                                        class="text-danger" style="font-size: 15px;">*</i></label>
                                                 <input required class="form-control" type="number" id="firstName"
                                                     name="panjang_kertas_celana_pelatih" autofocus required
                                                     placeholder="Contoh: 1" />
                                             </div>
                                             <div class="mb-3 col-md-6">
-                                                <label for="lastName" class="form-label">Nama kertas</label>
+                                                <label for="lastName" class="form-label">Nama kertas <i
+                                                        class="text-danger" style="font-size: 15px;">*</i></label>
                                                 <select id="country" required name="kertas_id"
                                                     class="select2 form-select">
                                                     <option value="">-- Pilih Nama Kertas --</option>
@@ -359,13 +392,15 @@
                                                 </select>
                                             </div>
                                             <div class="mb-3 col-md-6">
-                                                <label for="firstName" class="form-label">Berat Kain (Kg)</label>
+                                                <label for="firstName" class="form-label">Berat Kain (Kg) <i
+                                                        class="text-danger" style="font-size: 15px;">*</i></label>
                                                 <input required class="form-control" type="number" id="firstName"
                                                     name="berat_celana_pelatih" autofocus required
                                                     placeholder="Contoh: 1" />
                                             </div>
                                             <div class="mb-3 col-md-6">
-                                                <label for="lastName" class="form-label">Nama kain</label>
+                                                <label for="lastName" class="form-label">Nama kain <i
+                                                        class="text-danger" style="font-size: 15px;">*</i></label>
                                                 <select id="country" required name="kain_id"
                                                     class="select2 form-select">
                                                     <option value="">-- Pilih Nama Kertas --</option>
@@ -375,7 +410,8 @@
                                                 </select>
                                             </div>
                                             <div class="mb-3 col-md-6">
-                                                <label for="firstName" class="form-label">nama bahan</label>
+                                                <label for="firstName" class="form-label">nama bahan <i
+                                                        class="text-danger" style="font-size: 15px;">*</i></label>
                                                 <input required class="form-control" type="text" id="firstName"
                                                     name="bahan_celana_pelatih" autofocus required
                                                     placeholder="Contoh: Bahan A" />
@@ -402,19 +438,22 @@
                                     <div class="card-body">
                                         <div class="row">
                                             <div class="mb-3 col-md-6">
-                                                <label for="firstName" class="form-label">No. Error</label>
+                                                <label for="firstName" class="form-label">No. Error <i
+                                                        class="text-danger" style="font-size: 15px;">*</i></label>
                                                 <input required class="form-control" type="number" id="firstName"
                                                     name="no_error_celana_kiper" autofocus required
                                                     placeholder="Contoh:123456" />
                                             </div>
                                             <div class="mb-3 col-md-6">
-                                                <label for="firstName" class="form-label">Panjang Kertas (M)</label>
+                                                <label for="firstName" class="form-label">Panjang Kertas (M) <i
+                                                        class="text-danger" style="font-size: 15px;">*</i></label>
                                                 <input required class="form-control" type="number" id="firstName"
                                                     name="panjang_kertas_celana_kiper" autofocus required
                                                     placeholder="Contoh: 1" />
                                             </div>
                                             <div class="mb-3 col-md-6">
-                                                <label for="lastName" class="form-label">Nama kertas</label>
+                                                <label for="lastName" class="form-label">Nama kertas <i
+                                                        class="text-danger" style="font-size: 15px;">*</i></label>
                                                 <select id="country" required name="kertas_id"
                                                     class="select2 form-select">
                                                     <option value="">-- Pilih Nama Kertas --</option>
@@ -424,13 +463,15 @@
                                                 </select>
                                             </div>
                                             <div class="mb-3 col-md-6">
-                                                <label for="firstName" class="form-label">Berat Kain (Kg)</label>
+                                                <label for="firstName" class="form-label">Berat Kain (Kg) <i
+                                                        class="text-danger" style="font-size: 15px;">*</i></label>
                                                 <input required class="form-control" type="number" id="firstName"
                                                     name="berat_celana_kiper" autofocus required
                                                     placeholder="Contoh: 1" />
                                             </div>
                                             <div class="mb-3 col-md-6">
-                                                <label for="lastName" class="form-label">Nama kain</label>
+                                                <label for="lastName" class="form-label">Nama kain <i
+                                                        class="text-danger" style="font-size: 15px;">*</i></label>
                                                 <select id="country" required name="kain_id"
                                                     class="select2 form-select">
                                                     <option value="">-- Pilih Nama Kertas --</option>
@@ -440,7 +481,8 @@
                                                 </select>
                                             </div>
                                             <div class="mb-3 col-md-6">
-                                                <label for="firstName" class="form-label">nama bahan</label>
+                                                <label for="firstName" class="form-label">nama bahan <i
+                                                        class="text-danger" style="font-size: 15px;">*</i></label>
                                                 <input required class="form-control" type="text" id="firstName"
                                                     name="bahan_celana_kiper" autofocus required
                                                     placeholder="Contoh: Bahan A" />
@@ -467,19 +509,22 @@
                                     <div class="card-body">
                                         <div class="row">
                                             <div class="mb-3 col-md-6">
-                                                <label for="firstName" class="form-label">No. Error</label>
+                                                <label for="firstName" class="form-label">No. Error <i
+                                                        class="text-danger" style="font-size: 15px;">*</i></label>
                                                 <input required class="form-control" type="number" id="firstName"
                                                     name="no_error_celana_1" autofocus required
                                                     placeholder="Contoh:123456" />
                                             </div>
                                             <div class="mb-3 col-md-6">
-                                                <label for="firstName" class="form-label">Panjang Kertas (M)</label>
+                                                <label for="firstName" class="form-label">Panjang Kertas (M) <i
+                                                        class="text-danger" style="font-size: 15px;">*</i></label>
                                                 <input required class="form-control" type="number" id="firstName"
                                                     name="panjang_kertas_celana_1" autofocus required
                                                     placeholder="Contoh: 1" />
                                             </div>
                                             <div class="mb-3 col-md-6">
-                                                <label for="lastName" class="form-label">Nama kertas</label>
+                                                <label for="lastName" class="form-label">Nama kertas <i
+                                                        class="text-danger" style="font-size: 15px;">*</i></label>
                                                 <select id="country" required name="kertas_id"
                                                     class="select2 form-select">
                                                     <option value="">-- Pilih Nama Kertas --</option>
@@ -489,12 +534,14 @@
                                                 </select>
                                             </div>
                                             <div class="mb-3 col-md-6">
-                                                <label for="firstName" class="form-label">Berat Kain (Kg)</label>
+                                                <label for="firstName" class="form-label">Berat Kain (Kg) <i
+                                                        class="text-danger" style="font-size: 15px;">*</i></label>
                                                 <input required class="form-control" type="number" id="firstName"
                                                     name="berat_celana_1" autofocus required placeholder="Contoh: 1" />
                                             </div>
                                             <div class="mb-3 col-md-6">
-                                                <label for="lastName" class="form-label">Nama kain</label>
+                                                <label for="lastName" class="form-label">Nama kain <i
+                                                        class="text-danger" style="font-size: 15px;">*</i></label>
                                                 <select id="country" required name="kain_id"
                                                     class="select2 form-select">
                                                     <option value="">-- Pilih Nama Kertas --</option>
@@ -504,7 +551,8 @@
                                                 </select>
                                             </div>
                                             <div class="mb-3 col-md-6">
-                                                <label for="firstName" class="form-label">nama bahan</label>
+                                                <label for="firstName" class="form-label">nama bahan <i
+                                                        class="text-danger" style="font-size: 15px;">*</i></label>
                                                 <input required class="form-control" type="text" id="firstName"
                                                     name="bahan_celana_1" autofocus required
                                                     placeholder="Contoh: Bahan A" />

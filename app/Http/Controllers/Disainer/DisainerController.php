@@ -247,11 +247,12 @@ class DisainerController extends Controller
     {
         $user = Auth::user();
         $disainer = BarangMasukDisainer::where('users_id', $user->id)
-            ->with('UsersCs', 'DataMesinFix')
+            ->with('UsersCs', 'DataMesinFix', 'Users')
             ->where('tanda_telah_mengerjakan', 1)
             ->orderBy('updated_at', 'desc')
             ->get();
 
+        // return response()->json($disainer);
         return view('component.Disainer.data-fix-disainer-pegawai.index', compact('disainer'));
     }
 

@@ -23,16 +23,18 @@
                                                 <input type="hidden" id="playerId" name="player_id"
                                                     value="{{ $formattedData['player'][0]['id'] }}">
                                                 <label for="firstName" class="form-label">Foto</label>
-                                                <input required class="form-control" type="file" id="firstName"
-                                                    name="file_foto" autofocus />
+                                                <input class="form-control" type="file" id="firstName" name="file_foto"
+                                                    autofocus />
                                             </div>
                                             <div class="mb-3 col-md-6">
-                                                <label for="firstName" class="form-label">Berat</label>
+                                                <label for="firstName" class="form-label">Berat <i class="text-danger"
+                                                        style="font-size: 15px;">*</i></label>
                                                 <input required class="form-control" type="number" id="firstName"
                                                     name="kain" autofocus />
                                             </div>
                                             <div class="mb-3 col-md-6">
-                                                <label for="lastName" class="form-label">Nama kain</label>
+                                                <label for="lastName" class="form-label">Nama kain <i
+                                                        class="text-danger" style="font-size: 15px;">*</i> </label>
                                                 <select id="country" required name="kain_id"
                                                     class="select2 form-select">
                                                     <option value="">-- Pilih Nama Kertas --</option>
@@ -52,16 +54,18 @@
                                                 <input type="hidden" id="pelatihId" name="pelatih_id"
                                                     value="{{ $formattedData['pelatih'][0]['id'] }}">
                                                 <label for="firstName" class="form-label">Foto</label>
-                                                <input required class="form-control" type="file" id="firstName"
+                                                <input class="form-control" type="file" id="firstName"
                                                     name="file_foto_pelatih" autofocus />
                                             </div>
                                             <div class="mb-3 col-md-6">
-                                                <label for="firstName" class="form-label">Berat</label>
+                                                <label for="firstName" class="form-label">Berat <i class="text-danger"
+                                                        style="font-size: 15px;">*</i></label>
                                                 <input required class="form-control" type="number" id="firstName"
                                                     name="kain_pelatih" autofocus />
                                             </div>
                                             <div class="mb-3 col-md-6">
-                                                <label for="lastName" class="form-label">Nama kain</label>
+                                                <label for="lastName" class="form-label">Nama kain <i
+                                                        class="text-danger" style="font-size: 15px;">*</i></label>
                                                 <select id="country" required name="kain_id"
                                                     class="select2 form-select">
                                                     <option value="">-- Pilih Nama Kertas --</option>
@@ -81,16 +85,18 @@
                                                 <input type="hidden" id="kiperId" name="kiper_id"
                                                     value="{{ $formattedData['kiper'][0]['id'] }}">
                                                 <label for="firstName" class="form-label">Foto</label>
-                                                <input required class="form-control" type="file" id="firstName"
+                                                <input class="form-control" type="file" id="firstName"
                                                     name="file_foto_kiper" autofocus />
                                             </div>
                                             <div class="mb-3 col-md-6">
-                                                <label for="firstName" class="form-label">Berat</label>
+                                                <label for="firstName" class="form-label">Berat <i class="text-danger"
+                                                        style="font-size: 15px;">*</i></label>
                                                 <input required class="form-control" type="number" id="firstName"
                                                     name="kain_kiper" autofocus />
                                             </div>
                                             <div class="mb-3 col-md-6">
-                                                <label for="lastName" class="form-label">Nama kain</label>
+                                                <label for="lastName" class="form-label">Nama kain <i
+                                                        class="text-danger" style="font-size: 15px;">*</i></label>
                                                 <select id="country" required name="kain_id"
                                                     class="select2 form-select">
                                                     <option value="">-- Pilih Nama Kertas --</option>
@@ -110,16 +116,18 @@
                                                 <input type="hidden" id="lk1Id" name="lk1_id"
                                                     value="{{ $formattedData['lk_1'][0]['id'] }}">
                                                 <label for="firstName" class="form-label">Foto</label>
-                                                <input required class="form-control" type="file" id="firstName"
+                                                <input class="form-control" type="file" id="firstName"
                                                     name="file_foto_1" autofocus />
                                             </div>
                                             <div class="mb-3 col-md-6">
-                                                <label for="firstName" class="form-label">Berat</label>
+                                                <label for="firstName" class="form-label">Berat <i class="text-danger"
+                                                        style="font-size: 15px;">*</i></label>
                                                 <input required class="form-control" type="number" id="firstName"
                                                     name="kain_1" autofocus />
                                             </div>
                                             <div class="mb-3 col-md-6">
-                                                <label for="lastName" class="form-label">Nama kain</label>
+                                                <label for="lastName" class="form-label">Nama kain <i
+                                                        class="text-danger" style="font-size: 15px;">*</i></label>
                                                 <select id="country" required name="kain_id"
                                                     class="select2 form-select">
                                                     <option value="">-- Pilih Nama Kertas --</option>
@@ -139,16 +147,18 @@
                                                 <input type="hidden" id="celanaPlayerId" name="celana_player_id"
                                                     value="{{ $formattedData['celana_player'][0]['id'] }}">
                                                 <label for="firstName" class="form-label">Foto</label>
-                                                <input required class="form-control" type="file" id="firstName"
+                                                <input class="form-control" type="file" id="firstName"
                                                     name="file_foto_celana_player" autofocus />
                                             </div>
                                             <div class="mb-3 col-md-6">
-                                                <label for="firstName" class="form-label">Berat</label>
+                                                <label for="firstName" class="form-label">Berat <i class="text-danger"
+                                                        style="font-size: 15px;">*</i></label>
                                                 <input required class="form-control" type="number" id="firstName"
                                                     name="kain_celana_player" autofocus />
                                             </div>
                                             <div class="mb-3 col-md-6">
-                                                <label for="lastName" class="form-label">Nama kain</label>
+                                                <label for="lastName" class="form-label">Nama kain <i
+                                                        class="text-danger" style="font-size: 15px;">*</i></label>
                                                 <select id="country" required name="kain_id"
                                                     class="select2 form-select">
                                                     <option value="">-- Pilih Nama Kertas --</option>
@@ -168,16 +178,18 @@
                                                 <input type="hidden" id="celanaPelatihId" name="celana_pelatih_id"
                                                     value="{{ $formattedData['celana_pelatih'][0]['id'] }}">
                                                 <label for="firstName" class="form-label">Foto</label>
-                                                <input required class="form-control" type="file" id="firstName"
+                                                <input class="form-control" type="file" id="firstName"
                                                     name="file_foto_celana_pelatih" autofocus />
                                             </div>
                                             <div class="mb-3 col-md-6">
-                                                <label for="firstName" class="form-label">Berat</label>
+                                                <label for="firstName" class="form-label">Berat <i class="text-danger"
+                                                        style="font-size: 15px;">*</i></label>
                                                 <input required class="form-control" type="number" id="firstName"
                                                     name="kain_celana_pelatih" autofocus />
                                             </div>
                                             <div class="mb-3 col-md-6">
-                                                <label for="lastName" class="form-label">Nama kain</label>
+                                                <label for="lastName" class="form-label">Nama kain <i
+                                                        class="text-danger" style="font-size: 15px;">*</i></label>
                                                 <select id="country" required name="kain_id"
                                                     class="select2 form-select">
                                                     <option value="">-- Pilih Nama Kertas --</option>
@@ -197,16 +209,18 @@
                                                 <input type="hidden" id="celanaKiperId" name="celana_kiper_id"
                                                     value="{{ $formattedData['celana_kiper'][0]['id'] }}">
                                                 <label for="firstName" class="form-label">Foto</label>
-                                                <input required class="form-control" type="file" id="firstName"
+                                                <input class="form-control" type="file" id="firstName"
                                                     name="file_foto_celana_kiper" autofocus />
                                             </div>
                                             <div class="mb-3 col-md-6">
-                                                <label for="firstName" class="form-label">Berat</label>
+                                                <label for="firstName" class="form-label">Berat <i class="text-danger"
+                                                        style="font-size: 15px;">*</i></label>
                                                 <input required class="form-control" type="number" id="firstName"
                                                     name="kain_celana_kiper" autofocus />
                                             </div>
                                             <div class="mb-3 col-md-6">
-                                                <label for="lastName" class="form-label">Nama kain</label>
+                                                <label for="lastName" class="form-label">Nama kain <i
+                                                        class="text-danger" style="font-size: 15px;">*</i></label>
                                                 <select id="country" required name="kain_id"
                                                     class="select2 form-select">
                                                     <option value="">-- Pilih Nama Kertas --</option>
@@ -226,16 +240,18 @@
                                                 <input type="hidden" id="celana1Id" name="celana_1_id"
                                                     value="{{ $formattedData['celana_1'][0]['id'] }}">
                                                 <label for="firstName" class="form-label">Foto</label>
-                                                <input required class="form-control" type="file" id="firstName"
+                                                <input class="form-control" type="file" id="firstName"
                                                     name="file_foto_celana_1" autofocus />
                                             </div>
                                             <div class="mb-3 col-md-6">
-                                                <label for="firstName" class="form-label">Berat</label>
+                                                <label for="firstName" class="form-label">Berat <i class="text-danger"
+                                                        style="font-size: 15px;">*</i></label>
                                                 <input required class="form-control" type="number" id="firstName"
                                                     name="kain_celana_1" autofocus />
                                             </div>
                                             <div class="mb-3 col-md-6">
-                                                <label for="lastName" class="form-label">Nama kain</label>
+                                                <label for="lastName" class="form-label">Nama kain <i
+                                                        class="text-danger" style="font-size: 15px;">*</i></label>
                                                 <select id="country" required name="kain_id"
                                                     class="select2 form-select">
                                                     <option value="">-- Pilih Nama Kertas --</option>

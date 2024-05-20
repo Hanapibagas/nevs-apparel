@@ -47,14 +47,16 @@
                         <div class="modal-body">
                             <div class="row">
                                 <div class="col mb-3">
-                                    <label for="nameWithTitle" class="form-label">Nama Tim</label>
+                                    <label for="nameWithTitle" class="form-label">Nama Tim <i class="text-danger"
+                                            style="font-size: 15px;">*</i></label>
                                     <input required name="nama_tim" type="text" id="nameWithTitle" class="form-control"
                                         placeholder="Silahkan masukkan nama tim ..." />
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col mb-3">
-                                    <label for="nameWithTitle" class="form-label">Nama Disainer</label>
+                                    <label for="nameWithTitle" class="form-label">Nama Disainer <i class="text-danger"
+                                            style="font-size: 15px;">*</i></label>
                                     <select name="users_id" aria-label="Default select example"
                                         id="exampleFormControlSelect1" class="form-select">
                                         <option selected>-- Silahkan Pilih Disainer --</option>
