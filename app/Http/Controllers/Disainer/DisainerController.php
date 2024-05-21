@@ -114,6 +114,7 @@ class DisainerController extends Controller
 
         $disainer->update([
             'nama_mesin_id' => $request->nama_mesin_id,
+            'status' => '0',
             'file' => $file,
             'keterangan' => $request->keterangan
         ]);
