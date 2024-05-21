@@ -49,7 +49,7 @@ class BarangMasukCostumerServices extends Model
 
     public function Gambar()
     {
-        return $this->belongsTo(Gambar::class, 'barang_masuk_disainer_id');
+        return $this->hasMany(Gambar::class, 'barang_masuk_costumer_services_id');
     }
 
     public function BarangMasukDisainer()
