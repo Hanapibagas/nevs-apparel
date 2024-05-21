@@ -30,6 +30,7 @@ class DisainerController extends Controller
             ->orderBy('created_at', 'desc')
             ->get();
 
+        // return response()->json($disainer);
         return view('component.Disainer.disainer-pegawai.index', compact('disainer'));
     }
 
@@ -77,7 +78,7 @@ class DisainerController extends Controller
         return redirect()->route('getIndexDisainerPegawai')->with('success', 'Selamat data yang anda input telah terkirim!');
     }
 
-    public function getUpdateToTeamMesin($id)
+    public function getUpdateToTeamMesin(Request $request, $id)
     {
         $disainer = BarangMasukMesin::find($id);
         $mesin = User::whereIn('roles', ['atexco'])->where('non_aktif', '1')->get();

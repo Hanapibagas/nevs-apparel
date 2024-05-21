@@ -56,14 +56,18 @@
                                         <i class="menu-icon tf-icons bx bx-cog"></i>
                                         Kirim ke tim mesin</a>
                                     @elseif ($disainers->aksi == 1)
-                                    <a href="{{ route('getUpdateToTeamMesin', $disainers->id) }}"
+                                    @foreach ($disainers->DataMesin as $dataMesin)
+                                    <a href="{{ route('getUpdateToTeamMesin', $dataMesin->id) }}"
                                         class="btn btn-warning">
                                         <i class="menu-icon tf-icons bx bx-cog"></i>
-                                        Kirim ke tim mesin</a>
+                                        Kirim ke tim mesin
+                                    </a>
+                                    @endforeach
                                     <a href="{{ route('getCreateToTeamCsPegawai', $disainers->nama_tim) }}"
                                         class="btn btn-primary">
                                         <i class="menu-icon tf-icons bx bx-headphone"></i>
-                                        Kirim ke tim CS</a>
+                                        Kirim ke tim CS
+                                    </a>
                                     @endif
                                 </td>
                             </tr>
