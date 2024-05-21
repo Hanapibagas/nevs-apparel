@@ -25,7 +25,7 @@ class DisainerController extends Controller
     {
         $user = Auth::user();
         $disainer = BarangMasukDisainer::where('users_id', $user->id)
-            ->with('Users', 'DataMesin')
+            ->with('Users', 'DataMesin', 'UsersCs')
             ->where('tanda_telah_mengerjakan', 0)
             ->orderBy('created_at', 'desc')
             ->get();

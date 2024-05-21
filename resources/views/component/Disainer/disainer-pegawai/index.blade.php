@@ -47,7 +47,7 @@
                                         {{ $disainers->nama_tim }}
                                     </strong>
                                 </td>
-                                <td><strong style="text-transform: uppercase">{{ $disainers->Users->name }}</strong>
+                                <td><strong style="text-transform: uppercase">{{ $disainers->UsersCs->name }}</strong>
                                 </td>
                                 <td>
                                     @if ($disainers->aksi == 0)
