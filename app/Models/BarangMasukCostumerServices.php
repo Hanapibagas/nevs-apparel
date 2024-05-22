@@ -52,6 +52,11 @@ class BarangMasukCostumerServices extends Model
         return $this->hasMany(Gambar::class, 'barang_masuk_costumer_services_id');
     }
 
+    public function GambarCreateLK()
+    {
+        return $this->hasMany(Gambar::class, 'barang_masuk_costumer_services_id');
+    }
+
     public function BarangMasukDisainer()
     {
         return $this->belongsTo(BarangMasukDisainer::class, 'barang_masuk_disainer_id');

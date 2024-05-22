@@ -31890,8 +31890,10 @@ class CostumerServicesController extends Controller
 
     public function putDataLkFix(Request $request, $id)
     {
-        $lk = BarangMasukCostumerServices::with('BarangMasukDisainer.DataMesinCs.User')->find($id);
+        // return response()->json($request->all());
+        $lk = BarangMasukCostumerServices::with('BarangMasukDisainer.DataMesinCs.User', 'GambarCreateLK')->find($id);
 
+        // return response()->json($lk);
         // PENENTUAN TANGGAL
         $tanggal_masuk = \Carbon\Carbon::parse($lk->tanggal_masuk);
         $deadline = \Carbon\Carbon::parse($request->deadline);
@@ -31938,131 +31940,133 @@ class CostumerServicesController extends Controller
         // AKHIR UPDATE DATA
 
         // PEMBUATN LK
-        if ($lk->Gambar->file_baju_player) {
-            $LkPlayer = LkPlayer::create([
-                'barang_masuk_id' => $lk->id,
-                'total_baju_player' => $request->total_baju_player,
-                'jenis_sablon_baju_player' => $request->jenis_sablon_baju_player,
-                'kera_baju_player_id' => $request->kera_baju_player_id,
-                'pola_lengan_player_id' => $request->pola_lengan_player_id,
-                'status_player' => $request->status_player,
-                'jenis_kain_baju_player' => $request->jenis_kain_baju_player,
-                'ket_kumis_baju_player' => $request->ket_kumis_baju_player,
-                'ket_bantalan_baju_player' => $request->ket_bantalan_baju_player,
-                'ket_celana_player' => $request->ket_celana_player,
-                'ket_tambahan_baju_player' => $request->ket_tambahan_baju_player,
-                'keterangan_baju_pelayer' => $request->keterangan_baju_pelayer,
-            ]);
-        }
-        if ($lk->Gambar->file_baju_pelatih) {
-            $LkPelatih = LkPelatih::create([
-                'barang_masuk_id' => $lk->id,
-                'total_baju_pelatih' => $request->total_baju_pelatih,
-                'kerah_baju_pelatih_id' => $request->kerah_baju_pelatih_id,
-                'jenis_sablon_baju_pelatih' => $request->jenis_sablon_baju_pelatih,
-                'pola_lengan_pelatih_id' => $request->pola_lengan_pelatih_id,
-                'jenis_kain_baju_pelatih' => $request->jenis_kain_baju_pelatih,
-                'ket_kumis_baju_pelatih' => $request->ket_kumis_baju_pelatih,
-                'ket_bantalan_baju_pelatih' => $request->ket_bantalan_baju_pelatih,
-                'ket_celana_pelatih' => $request->ket_celana_pelatih,
-                'ket_tambahan_baju_pelatih' => $request->ket_tambahan_baju_pelatih,
-                'keterangan_baju_pelatih' => $request->keterangan_baju_pelatih,
-                'status_pelatih' => $request->status_pelatih,
-            ]);
-        }
-        if ($lk->Gambar->file_baju_kiper) {
-            $LkKiper = LkKiper::create([
-                'barang_masuk_id' => $lk->id,
-                'total_baju_kiper' => $request->total_baju_kiper,
-                'kerah_baju_kiper_id' => $request->kerah_baju_kiper_id,
-                'pola_lengan_kiper_id' => $request->pola_lengan_kiper_id,
-                'jenis_kain_baju_kiper' => $request->jenis_kain_baju_kiper,
-                'jenis_sablon_baju_kiper' => $request->jenis_sablon_baju_kiper,
-                'ket_kumis_baju_kiper' => $request->ket_kumis_baju_kiper,
-                'ket_bantalan_baju_kiper' => $request->ket_bantalan_baju_kiper,
-                'ket_celana_kiper' => $request->ket_celana_kiper,
-                'ket_tambahan_baju_kiper' => $request->ket_tambahan_baju_kiper,
-                'keterangan_baju_kiper' => $request->keterangan_baju_kiper,
-                'status_kiper' => $request->status_kiper,
-            ]);
-        }
-        if ($lk->Gambar->file_baju_1) {
-            $LkBaju1 = LkBaju1::create([
-                'barang_masuk_id' => $lk->id,
-                'total_baju_1' => $request->total_baju_1,
-                'kerah_baju_1_id' => $request->kerah_baju_1_id,
-                'pola_lengan_1_id' => $request->pola_lengan_1_id,
-                'jenis_kain_baju_1' => $request->jenis_kain_baju_1,
-                'jenis_sablon_baju_1' => $request->jenis_sablon_baju_1,
-                'ket_kumis_baju_1' => $request->ket_kumis_baju_1,
-                'ket_bantalan_baju_1' => $request->ket_bantalan_baju_1,
-                'ket_celana_1' => $request->ket_celana_1,
-                'ket_tambahan_baju_1' => $request->ket_tambahan_baju_1,
-                'keterangan_baju_1' => $request->keterangan_baju_1,
-                'status_baju_1' => $request->status_baju_1,
-            ]);
-        }
-        if ($lk->Gambar->file_celana_player) {
-            $LkCelanaPlayer = LkCelanaPlayer::create([
-                'barang_masuk_id' => $lk->id,
-                'total_celana_player' => $request->total_celana_player,
-                'kerah_celana_player_id' => $request->kerah_celana_player_id,
-                'jenis_sablon_celana_player' => $request->jenis_sablon_celana_player,
-                'jenis_kain_celana_player' => $request->jenis_kain_celana_player,
-                'pola_celana_player_id' => $request->pola_celana_player_id,
-                'kain_celana_player' => $request->kain_celana_player,
-                'ket_warna_kain_celana_player' => $request->ket_warna_kain_celana_player,
-                'ket_bis_celana_celana_player' => $request->ket_bis_celana_celana_player,
-                'ket_tambahan_celana_player' => $request->ket_tambahan_celana_player,
-                'keterangan_celana_pelayer' => $request->keterangan_celana_pelayer,
-                'status_celana_player' => $request->status_celana_player,
-            ]);
-        }
-        if ($lk->Gambar->file_celana_pelatih) {
-            $LkCelanaPelatih = LkCelanaPelatih::create([
-                'baraang_masuk_id' => $lk->id,
-                'total_celana_pelatih' => $request->total_celana_pelatih,
-                'kerah_celana_pelatih_id' => $request->kerah_celana_pelatih_id,
-                'jenis_sablon_celana_pelatih' => $request->jenis_sablon_celana_pelatih,
-                'pola_celana_pelatih_id' => $request->pola_celana_pelatih_id,
-                'jenis_kain_celana_pelatih' => $request->jenis_kain_celana_pelatih,
-                'ket_warna_kain_celana_pelatih' => $request->ket_warna_kain_celana_pelatih,
-                'ket_bis_celana_celana_pelatih' => $request->ket_bis_celana_celana_pelatih,
-                'ket_tambahan_celana_pelatih' => $request->ket_tambahan_celana_pelatih,
-                'keterangan_celana_pelatih' => $request->keterangan_celana_pelatih,
-                'status_celana_pelatih' => $request->status_celana_pelatih,
-            ]);
-        }
-        if ($lk->Gambar->file_celana_kiper) {
-            $LkCelanaKiper = LkCelanaKiper::create([
-                'barang_masuk_id' => $lk->id,
-                'total_celana_kiper' => $request->total_celana_kiper,
-                'kerah_celana_kiper_id' => $request->kerah_celana_kiper_id,
-                'jenis_sablon_celana_kiper' => $request->jenis_sablon_celana_kiper,
-                'pola_celana_kiper_id' => $request->pola_celana_kiper_id,
-                'jenis_kain_celana_kiper' => $request->jenis_kain_celana_kiper,
-                'ket_warna_kain_celana_kiper' => $request->ket_warna_kain_celana_kiper,
-                'ket_bis_celana_celana_kiper' => $request->ket_bis_celana_celana_kiper,
-                'ket_tambahan_celana_kiper' => $request->ket_tambahan_celana_kiper,
-                'keterangan_celana_kiper' => $request->keterangan_celana_kiper,
-                'status_celana_kiper' => $request->status_celana_kiper,
-            ]);
-        }
-        if ($lk->Gambar->file_celana_1) {
-            $LkCelana1 = LkCelana1::create([
-                'barang_masuk_id' => $lk->id,
-                'total_celana_1' => $request->total_celana_1,
-                'kerah_celana_1_id' => $request->kerah_celana_1_id,
-                'jenis_sablon_celana_1' => $request->jenis_sablon_celana_1,
-                'pola_celana_1_id' => $request->pola_celana_1_id,
-                'jenis_kain_celana_1' => $request->jenis_kain_celana_1,
-                'ket_warna_kain_celana_1' => $request->ket_warna_kain_celana_1,
-                'ket_bis_celana_celana_1' => $request->ket_bis_celana_celana_1,
-                'ket_tambahan_celana_1' => $request->ket_tambahan_celana_1,
-                'keterangan_celana_1' => $request->keterangan_celana_1,
-                'status_celana_1' => $request->status_celana_1,
-            ]);
-        }
+        foreach ($lk->GambarCreateLK as $gambar) {
+            if (isset($gambar->file_baju_player)) {
+                $LkPlayer = LkPlayer::create([
+                    'barang_masuk_id' => $lk->id,
+                    'total_baju_player' => $request->total_baju_player,
+                    'jenis_sablon_baju_player' => $request->jenis_sablon_baju_player,
+                    'kera_baju_player_id' => $request->kera_baju_player_id,
+                    'pola_lengan_player_id' => $request->pola_lengan_player_id,
+                    'status_player' => $request->status_player,
+                    'jenis_kain_baju_player' => $request->jenis_kain_baju_player,
+                    'ket_kumis_baju_player' => $request->ket_kumis_baju_player,
+                    'ket_bantalan_baju_player' => $request->ket_bantalan_baju_player,
+                    'ket_celana_player' => $request->ket_celana_player,
+                    'ket_tambahan_baju_player' => $request->ket_tambahan_baju_player,
+                    'keterangan_baju_pelayer' => $request->keterangan_baju_pelayer,
+                ]);
+            }
+            if (isset($gambar->file_baju_pelatih)) {
+                $LkPelatih = LkPelatih::create([
+                    'barang_masuk_id' => $lk->id,
+                    'total_baju_pelatih' => $request->total_baju_pelatih,
+                    'kerah_baju_pelatih_id' => $request->kerah_baju_pelatih_id,
+                    'jenis_sablon_baju_pelatih' => $request->jenis_sablon_baju_pelatih,
+                    'pola_lengan_pelatih_id' => $request->pola_lengan_pelatih_id,
+                    'jenis_kain_baju_pelatih' => $request->jenis_kain_baju_pelatih,
+                    'ket_kumis_baju_pelatih' => $request->ket_kumis_baju_pelatih,
+                    'ket_bantalan_baju_pelatih' => $request->ket_bantalan_baju_pelatih,
+                    'ket_celana_pelatih' => $request->ket_celana_pelatih,
+                    'ket_tambahan_baju_pelatih' => $request->ket_tambahan_baju_pelatih,
+                    'keterangan_baju_pelatih' => $request->keterangan_baju_pelatih,
+                    'status_pelatih' => $request->status_pelatih,
+                ]);
+            }
+            if (isset($gambar->file_baju_kiper)) {
+                $LkKiper = LkKiper::create([
+                    'barang_masuk_id' => $lk->id,
+                    'total_baju_kiper' => $request->total_baju_kiper,
+                    'kerah_baju_kiper_id' => $request->kerah_baju_kiper_id,
+                    'pola_lengan_kiper_id' => $request->pola_lengan_kiper_id,
+                    'jenis_kain_baju_kiper' => $request->jenis_kain_baju_kiper,
+                    'jenis_sablon_baju_kiper' => $request->jenis_sablon_baju_kiper,
+                    'ket_kumis_baju_kiper' => $request->ket_kumis_baju_kiper,
+                    'ket_bantalan_baju_kiper' => $request->ket_bantalan_baju_kiper,
+                    'ket_celana_kiper' => $request->ket_celana_kiper,
+                    'ket_tambahan_baju_kiper' => $request->ket_tambahan_baju_kiper,
+                    'keterangan_baju_kiper' => $request->keterangan_baju_kiper,
+                    'status_kiper' => $request->status_kiper,
+                ]);
+            }
+            if (isset($gambar->file_baju_1)) {
+                $LkBaju1 = LkBaju1::create([
+                    'barang_masuk_id' => $lk->id,
+                    'total_baju_1' => $request->total_baju_1,
+                    'kerah_baju_1_id' => $request->kerah_baju_1_id,
+                    'pola_lengan_1_id' => $request->pola_lengan_1_id,
+                    'jenis_kain_baju_1' => $request->jenis_kain_baju_1,
+                    'jenis_sablon_baju_1' => $request->jenis_sablon_baju_1,
+                    'ket_kumis_baju_1' => $request->ket_kumis_baju_1,
+                    'ket_bantalan_baju_1' => $request->ket_bantalan_baju_1,
+                    'ket_celana_1' => $request->ket_celana_1,
+                    'ket_tambahan_baju_1' => $request->ket_tambahan_baju_1,
+                    'keterangan_baju_1' => $request->keterangan_baju_1,
+                    'status_baju_1' => $request->status_baju_1,
+                ]);
+            }
+            if (isset($gambar->file_celana_player)) {
+                $LkCelanaPlayer = LkCelanaPlayer::create([
+                    'barang_masuk_id' => $lk->id,
+                    'total_celana_player' => $request->total_celana_player,
+                    'kerah_celana_player_id' => $request->kerah_celana_player_id,
+                    'jenis_sablon_celana_player' => $request->jenis_sablon_celana_player,
+                    'jenis_kain_celana_player' => $request->jenis_kain_celana_player,
+                    'pola_celana_player_id' => $request->pola_celana_player_id,
+                    'kain_celana_player' => $request->kain_celana_player,
+                    'ket_warna_kain_celana_player' => $request->ket_warna_kain_celana_player,
+                    'ket_bis_celana_celana_player' => $request->ket_bis_celana_celana_player,
+                    'ket_tambahan_celana_player' => $request->ket_tambahan_celana_player,
+                    'keterangan_celana_pelayer' => $request->keterangan_celana_pelayer,
+                    'status_celana_player' => $request->status_celana_player,
+                ]);
+            }
+            if (isset($gambar->file_celana_pelatih)) {
+                $LkCelanaPelatih = LkCelanaPelatih::create([
+                    'baraang_masuk_id' => $lk->id,
+                    'total_celana_pelatih' => $request->total_celana_pelatih,
+                    'kerah_celana_pelatih_id' => $request->kerah_celana_pelatih_id,
+                    'jenis_sablon_celana_pelatih' => $request->jenis_sablon_celana_pelatih,
+                    'pola_celana_pelatih_id' => $request->pola_celana_pelatih_id,
+                    'jenis_kain_celana_pelatih' => $request->jenis_kain_celana_pelatih,
+                    'ket_warna_kain_celana_pelatih' => $request->ket_warna_kain_celana_pelatih,
+                    'ket_bis_celana_celana_pelatih' => $request->ket_bis_celana_celana_pelatih,
+                    'ket_tambahan_celana_pelatih' => $request->ket_tambahan_celana_pelatih,
+                    'keterangan_celana_pelatih' => $request->keterangan_celana_pelatih,
+                    'status_celana_pelatih' => $request->status_celana_pelatih,
+                ]);
+            }
+            if (isset($gambar->file_celana_kiper)) {
+                $LkCelanaKiper = LkCelanaKiper::create([
+                    'barang_masuk_id' => $lk->id,
+                    'total_celana_kiper' => $request->total_celana_kiper,
+                    'kerah_celana_kiper_id' => $request->kerah_celana_kiper_id,
+                    'jenis_sablon_celana_kiper' => $request->jenis_sablon_celana_kiper,
+                    'pola_celana_kiper_id' => $request->pola_celana_kiper_id,
+                    'jenis_kain_celana_kiper' => $request->jenis_kain_celana_kiper,
+                    'ket_warna_kain_celana_kiper' => $request->ket_warna_kain_celana_kiper,
+                    'ket_bis_celana_celana_kiper' => $request->ket_bis_celana_celana_kiper,
+                    'ket_tambahan_celana_kiper' => $request->ket_tambahan_celana_kiper,
+                    'keterangan_celana_kiper' => $request->keterangan_celana_kiper,
+                    'status_celana_kiper' => $request->status_celana_kiper,
+                ]);
+            }
+            if (isset($gambar->file_celana_1)) {
+                $LkCelana1 = LkCelana1::create([
+                    'barang_masuk_id' => $lk->id,
+                    'total_celana_1' => $request->total_celana_1,
+                    'kerah_celana_1_id' => $request->kerah_celana_1_id,
+                    'jenis_sablon_celana_1' => $request->jenis_sablon_celana_1,
+                    'pola_celana_1_id' => $request->pola_celana_1_id,
+                    'jenis_kain_celana_1' => $request->jenis_kain_celana_1,
+                    'ket_warna_kain_celana_1' => $request->ket_warna_kain_celana_1,
+                    'ket_bis_celana_celana_1' => $request->ket_bis_celana_celana_1,
+                    'ket_tambahan_celana_1' => $request->ket_tambahan_celana_1,
+                    'keterangan_celana_1' => $request->keterangan_celana_1,
+                    'status_celana_1' => $request->status_celana_1,
+                ]);
+            }
+            }
         // AKHIR PEMBUATAN LK
 
         // KONDISI PEMBAGIAN WAKTU
@@ -32229,7 +32233,8 @@ class CostumerServicesController extends Controller
         // AKHIR KONDISI
 
         // CREATE LAPORAN
-        if ($lk->Gambar->file_baju_player) {
+        foreach ($lk->GambarCreateLK as $gambar) {
+        if (isset($gambar->file_baju_player)) {
             // FULL PRINT
             if ($LkPlayer->status_player == "Full print") {
                 if ($total_hari == 1) {
@@ -35464,7 +35469,7 @@ class CostumerServicesController extends Controller
             // AKHIR POLOS
         }
 
-        if ($lk->Gambar->file_baju_pelatih) {
+        if (isset($gambar->file_baju_pelatih)) {
             // FULL PRINT
             if ($LkPelatih->status_pelatih == "Full print") {
                 if ($total_hari == 1) {
@@ -38710,7 +38715,7 @@ class CostumerServicesController extends Controller
             // AKHIR POLOS
         }
 
-        if ($lk->Gambar->file_baju_kiper) {
+        if (isset($gambar->file_baju_kiper)) {
             // FULL PRINT
             if ($LkKiper->status_kiper == "Full print") {
                 if ($total_hari == 1) {
@@ -41958,7 +41963,7 @@ class CostumerServicesController extends Controller
             // AKHIR POLOS
         }
 
-        if ($lk->Gambar->file_baju_1) {
+        if (isset($gambar->file_baju_1)) {
             // FULL PRINT
             if ($LkBaju1->status_baju_1 == "Full print") {
                 if ($total_hari == 1) {
@@ -42674,7 +42679,7 @@ class CostumerServicesController extends Controller
                     $barangMasukDataLayout = BarangMasukDatalayout::create($barangMasukDataLayoutData);
                     // AKHIR LAYOUT
 
-// MESIN
+                    // MESIN
                     $barangPressMesin = [
                         'no_order_id' => $lk->id,
                         'penanggung_jawab_id' => optional($lk->BarangMasukDisainer->DataMesinCs->first())->User->id,
@@ -43638,7 +43643,7 @@ class CostumerServicesController extends Controller
                     // AKHIR MESIN
 
 
-// PRESS KAIN
+                    // PRESS KAIN
                         $barangMasukPressKainData = [
                             'no_order_id' => $lk->id,
                             'mesin_atexco_id' => $barangMasukPressMesin->id,
@@ -43931,7 +43936,7 @@ class CostumerServicesController extends Controller
                     $barangMasukFinis = Finish::create($barangMasukDataFinisData);
                     // AKHIR FINIS
 
- // LAPORAN
+                        // LAPORAN
                         Laporan::create([
                             'barang_masuk_costumer_services_id' => $lk->id,
                         'barang_masuk_layout_id' => $barangMasukDataLayout->id,
@@ -44415,7 +44420,7 @@ class CostumerServicesController extends Controller
                     // AKHIR MESIN
 
 
-// PRESS KAIN
+                    // PRESS KAIN
                         $barangMasukPressKainData = [
                             'no_order_id' => $lk->id,
                             'mesin_atexco_id' => $barangMasukPressMesin->id,
@@ -45206,7 +45211,7 @@ class CostumerServicesController extends Controller
             // AKHIR POLOS
         }
 
-        if ($lk->Gambar->file_celana_player) {
+        if (isset($gambar->file_celana_player)) {
             // FULL PRINT
             if ($LkCelanaPlayer->status_celana_player == "Full print") {
                 if ($total_hari == 1) {
@@ -48429,7 +48434,7 @@ class CostumerServicesController extends Controller
             // AKHIR POLOS
         }
 
-        if ($lk->Gambar->file_celana_pelatih) {
+        if (isset($gambar->file_celana_pelatih)) {
             // FULL PRINT
             if ($LkCelanaPelatih->status_celana_pelatih == "Full print") {
                 if ($total_hari == 1) {
@@ -51651,7 +51656,7 @@ class CostumerServicesController extends Controller
             // AKHIR POLOS
         }
 
-        if ($lk->Gambar->file_celana_kiper) {
+        if (isset($gambar->file_celana_kiper)) {
             // FULL PRINT
             if ($LkCelanaKiper->status_celana_kiper == "Full print") {
                 if ($total_hari == 1) {
@@ -52632,7 +52637,7 @@ class CostumerServicesController extends Controller
                     $barangMasukFinis = Finish::create($barangMasukDataFinisData);
                     // AKHIR FINIS
 
- // LAPORAN
+                        // LAPORAN
                         Laporan::create([
                             'barang_masuk_costumer_services_id' => $lk->id,
                             'barang_masuk_layout_id' => $barangMasukDataLayout->id,
@@ -54071,7 +54076,7 @@ class CostumerServicesController extends Controller
                     $barangMasukDataLayout = BarangMasukDatalayout::create($barangMasukDataLayoutData);
                     // AKHIR LAYOUT
 
-// MESIN
+                    // MESIN
                     $barangPressMesin = [
                         'no_order_id' => $lk->id,
                         'penanggung_jawab_id' => optional($lk->BarangMasukDisainer->DataMesinCs->first())->User->id,
@@ -54876,7 +54881,7 @@ class CostumerServicesController extends Controller
 
         // return response()->json($LkCelanaKiper->status_celana_kiper);
 
-        if ($lk->Gambar->file_celana_1) {
+        if (isset($gambar->file_celana_1)) {
             // FULL PRINT
             if ($LkCelana1->status_celana_1 == "Full print") {
                 if ($total_hari == 1) {
@@ -54966,7 +54971,7 @@ class CostumerServicesController extends Controller
                     $barangMasukFinis = Finish::create($barangMasukDataFinisData);
                     // AKHIR FINIS
 
- // LAPORAN
+                    // LAPORAN
                         Laporan::create([
                             'barang_masuk_costumer_services_id' => $lk->id,
                             'barang_masuk_layout_id' => $barangMasukDataLayout->id,
@@ -58098,6 +58103,7 @@ class CostumerServicesController extends Controller
                 }
             }
             // AKHIR POLOS
+        }
         }
         // CREATE LAPORAN
 
