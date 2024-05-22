@@ -21,7 +21,10 @@
 </head>
 
 <body>
-
+    @php
+    use Carbon\Carbon;
+    $formattedDari = Carbon::parse($dataLk->deadline)->translatedFormat('d F Y');
+    @endphp
     @foreach ( $dataLk->Gambar as $gambar )
     @if ($gambar->file_baju_player)
     <h4 style="text-transform: uppercase; margin-top: -40px">{{ $dataLk->kota_produksi }}</h4><br>
@@ -30,11 +33,11 @@
     <h4 style="text-transform: uppercase; margin-left: 541px; margin-top: -80px">
         @if ($dataLk->ket_hari == 'Express')
         <span style="color: red">DEADLINE Express <br> </span> <span style="color: red;margin-left: 40px;">{{
-            $dataLk->deadline
+            $formattedDari
             }}</span>
         @elseif ($dataLk->ket_hari == 'Normal')
         DEADLINE Normal <br> <span style="margin-left: 40px;">{{
-            $dataLk->deadline
+            $formattedDari
             }}</span>
         @endif
     </h4><br>
