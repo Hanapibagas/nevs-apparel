@@ -93,7 +93,8 @@
                                 <div class="row">
                                     <div class="col-md-12">
 
-                                        @if ($oderCs->Gambar->file_baju_player)
+                                        @foreach ( $oderCs->Gambar as $gambar )
+                                        @if ($gambar->file_baju_player)
                                         <div class="card mb-4">
                                             <div class="card-body">
                                                 <h4 class="fw-bold py-3 mb-4">Keterangan Produksi
@@ -212,7 +213,7 @@
                                                             </div>
                                                             <div class="modal-body">
                                                                 <div class="row">
-                                                                    <img src="{{ Storage::url($oderCs->gambar->file_baju_player) }}"
+                                                                    <img src="{{ Storage::url($gambar->file_baju_player) }}"
                                                                         alt="">
                                                                 </div>
                                                             </div>
@@ -223,7 +224,7 @@
                                         </div>
                                         @endif
 
-                                        @if ($oderCs->Gambar->file_baju_pelatih)
+                                        @if ($gambar->file_baju_pelatih)
                                         <div class="card mb-4">
                                             <div class="card-body">
                                                 <h4 class="fw-bold py-3 mb-4">Keterangan Produksi
@@ -338,7 +339,7 @@
                                                             </div>
                                                             <div class="modal-body">
                                                                 <div class="row">
-                                                                    <img src="{{ Storage::url($oderCs->gambar->file_baju_pelatih) }}"
+                                                                    <img src="{{ Storage::url($gambar->file_baju_pelatih) }}"
                                                                         alt="">
                                                                 </div>
                                                             </div>
@@ -349,7 +350,7 @@
                                         </div>
                                         @endif
 
-                                        @if ($oderCs->Gambar->file_baju_kiper)
+                                        @if ($gambar->file_baju_kiper)
                                         <div class="card mb-4">
                                             <div class="card-body">
                                                 <h4 class="fw-bold py-3 mb-4">Keterangan Produksi
@@ -463,7 +464,7 @@
                                                             </div>
                                                             <div class="modal-body">
                                                                 <div class="row">
-                                                                    <img src="{{ Storage::url($oderCs->gambar->file_baju_kiper) }}"
+                                                                    <img src="{{ Storage::url($gambar->file_baju_kiper) }}"
                                                                         alt="">
                                                                 </div>
                                                             </div>
@@ -474,7 +475,7 @@
                                         </div>
                                         @endif
 
-                                        @if ($oderCs->Gambar->file_baju_1)
+                                        @if ($gambar->file_baju_1)
                                         <div class="card mb-4">
                                             <div class="card-body">
                                                 <h4 class="fw-bold py-3 mb-4">Keterangan Produksi
@@ -588,7 +589,7 @@
                                                             </div>
                                                             <div class="modal-body">
                                                                 <div class="row">
-                                                                    <img src="{{ Storage::url($oderCs->gambar->file_baju_1) }}"
+                                                                    <img src="{{ Storage::url($gambar->file_baju_1) }}"
                                                                         alt="">
                                                                 </div>
                                                             </div>
@@ -599,7 +600,7 @@
                                         </div>
                                         @endif
 
-                                        @if ($oderCs->Gambar->file_celana_player)
+                                        @if ($gambar->file_celana_player)
                                         <div class="card mb-4">
                                             <div class="card-body">
                                                 <h4 class="fw-bold py-3 mb-4">Keterangan Produksi
@@ -714,7 +715,7 @@
                                                             </div>
                                                             <div class="modal-body">
                                                                 <div class="row">
-                                                                    <img src="{{ Storage::url($oderCs->gambar->file_celana_player) }}"
+                                                                    <img src="{{ Storage::url($gambar->file_celana_player) }}"
                                                                         alt="">
                                                                 </div>
                                                             </div>
@@ -725,7 +726,7 @@
                                         </div>
                                         @endif
 
-                                        @if ($oderCs->Gambar->file_celana_pelatih)
+                                        @if ($gambar->file_celana_pelatih)
                                         <div class="card mb-4">
                                             <div class="card-body">
                                                 <h4 class="fw-bold py-3 mb-4">Keterangan Produksi
@@ -841,7 +842,7 @@
                                                             </div>
                                                             <div class="modal-body">
                                                                 <div class="row">
-                                                                    <img src="{{ Storage::url($oderCs->gambar->file_celana_pelatih) }}"
+                                                                    <img src="{{ Storage::url($gambar->file_celana_pelatih) }}"
                                                                         alt="">
                                                                 </div>
                                                             </div>
@@ -852,7 +853,7 @@
                                         </div>
                                         @endif
 
-                                        @if ($oderCs->Gambar->file_celana_kiper)
+                                        @if ($gambar->file_celana_kiper)
                                         <div class="card mb-4">
                                             <div class="card-body">
                                                 <h4 class="fw-bold py-3 mb-4">Keterangan Produksi
@@ -967,7 +968,7 @@
                                                             </div>
                                                             <div class="modal-body">
                                                                 <div class="row">
-                                                                    <img src="{{ Storage::url($oderCs->gambar->file_celana_kiper) }}"
+                                                                    <img src="{{ Storage::url($gambar->file_celana_kiper) }}"
                                                                         alt="">
                                                                 </div>
                                                             </div>
@@ -978,7 +979,7 @@
                                         </div>
                                         @endif
 
-                                        @if ($oderCs->Gambar->file_celana_1)
+                                        @if ($gambar->file_celana_1)
                                         <div class="card mb-4">
                                             <div class="card-body">
                                                 <h4 class="fw-bold py-3 mb-4">Keterangan Produksi
@@ -1093,7 +1094,7 @@
                                                             </div>
                                                             <div class="modal-body">
                                                                 <div class="row">
-                                                                    <img src="{{ Storage::url($oderCs->gambar->file_celana_1) }}"
+                                                                    <img src="{{ Storage::url($gambar->file_celana_1) }}"
                                                                         alt="">
                                                                 </div>
                                                             </div>
@@ -1103,6 +1104,7 @@
                                             </div>
                                         </div>
                                         @endif
+                                        @endforeach
 
                                         <div class="card mb-4">
                                             <div class="card-body">

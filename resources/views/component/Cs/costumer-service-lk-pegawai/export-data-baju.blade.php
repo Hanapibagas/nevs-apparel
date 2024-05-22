@@ -800,6 +800,7 @@
             margin-left: -35px;
             height: 100%;
             text-transform: uppercase;
+            page-break-before: always;
         }
     </style>
     <div class="containerKeteranganLengkap">
