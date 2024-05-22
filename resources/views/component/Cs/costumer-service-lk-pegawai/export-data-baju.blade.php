@@ -25,6 +25,7 @@
     use Carbon\Carbon;
     $formattedDari = Carbon::parse($dataLk->deadline)->translatedFormat('d F Y');
     @endphp
+
     @foreach ( $dataLk->Gambar as $gambar )
     @if ($gambar->file_baju_player)
     <h4 style="text-transform: uppercase; margin-top: -40px">{{ $dataLk->kota_produksi }}</h4><br>
