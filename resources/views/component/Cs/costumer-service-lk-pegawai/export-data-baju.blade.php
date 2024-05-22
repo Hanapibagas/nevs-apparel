@@ -22,7 +22,8 @@
 
 <body>
 
-    @if ($dataLk->Gambar->file_baju_player)
+    @foreach ( $dataLk->Gambar as $gambar )
+    @if ($gambar->file_baju_player)
     <h4 style="text-transform: uppercase; margin-top: -40px">{{ $dataLk->kota_produksi }}</h4><br>
     <h3 style="text-transform: uppercase; text-align: center; margin-top: -60px">
         {{$dataLk->BarangMasukDisainer->nama_tim }} <br> {{ $dataLk->no_order }}</h3><br>
@@ -49,7 +50,7 @@
                 }
             </style>
             <td colspan="2">
-                <img class="gambarplayer" src="{{ public_path('storage/'. $dataLk->Gambar->file_baju_player)}}">
+                <img class="gambarplayer" src="{{ public_path('storage/'. $gambar->file_baju_player)}}">
             </td>
         </tr>
         <tr>
@@ -132,7 +133,7 @@
     @endif
 
 
-    @if ($dataLk->Gambar->file_baju_pelatih)
+    @if ($gambar->file_baju_pelatih)
     <table
         style="width: 110%; margin-left: -35px; text-transform: uppercase; margin-top: -30px;  page-break-before: always;">
         <tr>
@@ -146,7 +147,7 @@
                 }
             </style>
             <td colspan="2">
-                <img class="gambarpelatih" src="{{ public_path('storage/'. $dataLk->Gambar->file_baju_pelatih)}}">
+                <img class="gambarpelatih" src="{{ public_path('storage/'. $gambar->file_baju_pelatih)}}">
             </td>
         </tr>
         <tr>
@@ -226,7 +227,7 @@
     </div>
     @endif
 
-    @if ($dataLk->Gambar->file_baju_kiper)
+    @if ($gambar->file_baju_kiper)
     <table
         style="width: 110%; margin-left: -35px; text-transform: uppercase; margin-top: -30px;  page-break-before: always;">
         <tr>
@@ -240,7 +241,7 @@
                 }
             </style>
             <td colspan="2">
-                <img class="gambarkiper" src="{{ public_path('storage/'. $dataLk->Gambar->file_baju_kiper)}}">
+                <img class="gambarkiper" src="{{ public_path('storage/'. $gambar->file_baju_kiper)}}">
             </td>
         </tr>
         <tr>
@@ -320,7 +321,7 @@
     </div>
     @endif
 
-    @if ($dataLk->Gambar->file_baju_1)
+    @if ($gambar->file_baju_1)
     <table
         style="width: 110%; margin-left: -35px; text-transform: uppercase; margin-top: -30px;  page-break-before: always;">
         <tr>
@@ -334,7 +335,7 @@
                 }
             </style>
             <td colspan="2">
-                <img class="gambarbaju1" src="{{ public_path('storage/'. $dataLk->Gambar->file_baju_1)}}">
+                <img class="gambarbaju1" src="{{ public_path('storage/'. $gambar->file_baju_1)}}">
             </td>
         </tr>
         <tr>
@@ -414,7 +415,7 @@
     </div>
     @endif
 
-    @if ($dataLk->Gambar->file_celana_player)
+    @if ($gambar->file_celana_player)
     <table
         style="width: 110%; margin-left: -35px; text-transform: uppercase; margin-top: -30px;  page-break-before: always;">
         <tr>
@@ -428,7 +429,7 @@
                 }
             </style>
             <td colspan="2">
-                <img class="gambarcelanaplayer" src="{{ public_path('storage/'. $dataLk->Gambar->file_celana_player)}}">
+                <img class="gambarcelanaplayer" src="{{ public_path('storage/'. $gambar->file_celana_player)}}">
             </td>
         </tr>
         <tr>
@@ -508,7 +509,7 @@
     </div>
     @endif
 
-    @if ($dataLk->Gambar->file_celana_pelatih)
+    @if ($gambar->file_celana_pelatih)
     <table
         style="width: 110%; margin-left: -35px; text-transform: uppercase; margin-top: -30px;  page-break-before: always;">
         <tr>
@@ -522,8 +523,7 @@
                 }
             </style>
             <td colspan="2">
-                <img class="gambarcelanapelatih"
-                    src="{{ public_path('storage/'. $dataLk->Gambar->file_celana_pelatih)}}">
+                <img class="gambarcelanapelatih" src="{{ public_path('storage/'. $gambar->file_celana_pelatih)}}">
             </td>
         </tr>
         <tr>
@@ -603,7 +603,7 @@
     </div>
     @endif
 
-    @if ($dataLk->Gambar->file_celana_kiper)
+    @if ($gambar->file_celana_kiper)
     <table
         style="width: 110%; margin-left: -35px; text-transform: uppercase; margin-top: -30px;  page-break-before: always;">
         <tr>
@@ -617,7 +617,7 @@
                 }
             </style>
             <td colspan="2">
-                <img class="gambarcelanakiper" src="{{ public_path('storage/'. $dataLk->Gambar->file_celana_kiper)}}">
+                <img class="gambarcelanakiper" src="{{ public_path('storage/'. $gambar->file_celana_kiper)}}">
             </td>
         </tr>
         <tr>
@@ -697,7 +697,7 @@
     </div>
     @endif
 
-    @if ($dataLk->Gambar->file_celana_1)
+    @if ($gambar->file_celana_1)
     <table
         style="width: 110%; margin-left: -35px; text-transform: uppercase; margin-top: -30px;  page-break-before: always;">
         <tr>
@@ -711,7 +711,7 @@
                 }
             </style>
             <td colspan="2">
-                <img class="gambarcealana1" src="{{ public_path('storage/'. $dataLk->Gambar->file_celana_1)}}">
+                <img class="gambarcealana1" src="{{ public_path('storage/'. $gambar->file_celana_1)}}">
             </td>
         </tr>
         <tr>
@@ -790,6 +790,7 @@
         </p>
     </div>
     @endif
+    @endforeach
 
     <style>
         .containerKeteranganLengkap {

@@ -75,7 +75,7 @@
                                         : '<span class="badge bg-label-warning">Normal</span>' ; @endphp {!! $status !!}
                                         </td>
                                 <td>
-                                    @if (Auth::user()->permission_create == 1)
+                                    {{-- @if (Auth::user()->permission_create == 1)
                                     @if ($disainers->aksi == 0)
                                     <a href="{{ route('getCreateToLkPegawai', $disainers->id) }}"
                                         class="btn btn-primary">
@@ -87,7 +87,10 @@
                                         <i class="menu-icon tf-icons bx bx-pencil"></i>
                                         Edit LK</a>
                                     @endif
-                                    @endif
+                                    @endif --}}
+                                    <a target="_blank" class="btn btn-primary" style="color: white">
+                                        <i class="menu-icon tf-icons bx bx-pencil"></i>Fitur Edit Sementara
+                                        Perbaikan</a>
                                     <a target="_blank" href="{{ route('getCetakDataLk', $disainers->id) }}"
                                         class="btn btn-danger">
                                         <i class="menu-icon tf-icons bx bxs-file-pdf"></i>Download PDF LK</a>
