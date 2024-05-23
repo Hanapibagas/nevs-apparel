@@ -107,6 +107,10 @@ class DataSortir extends Model
     {
         return $this->belongsTo(DataManualCut::class, 'manual_cut_id');
     }
+    public function BarangMasukLaserCut()
+    {
+        return $this->belongsTo(DataLaserCut::class, 'laser_cut_id');
+    }
 
     public function UserSortir()
     {
