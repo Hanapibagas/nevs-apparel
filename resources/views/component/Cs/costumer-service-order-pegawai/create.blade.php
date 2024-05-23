@@ -162,8 +162,9 @@
                                                         <label for="firstName" class="form-label">Jumlah <i
                                                                 class="text-danger"
                                                                 style="font-size: 15px;">*</i></label>
-                                                        <input class="form-control" required type="text" id="firstName"
-                                                            placeholder="Jumlah" name="total_baju_player" autofocus />
+                                                        <input class="form-control" required type="number"
+                                                            id="firstName" placeholder="Jumlah" name="total_baju_player"
+                                                            autofocus />
                                                     </div>
                                                     <div class="mb-3 col-md-6">
                                                         <label for="firstName" class="form-label">Ukuran <i
@@ -277,8 +278,9 @@
                                                         <label for="firstName" class="form-label">Jumlah<i
                                                                 class="text-danger"
                                                                 style="font-size: 15px;">*</i></label>
-                                                        <input class="form-control" required type="text" id="firstName"
-                                                            placeholder="Jumlah" name="total_baju_pelatih" autofocus />
+                                                        <input class="form-control" required type="number"
+                                                            id="firstName" placeholder="Jumlah"
+                                                            name="total_baju_pelatih" autofocus />
                                                     </div>
                                                     <div class="mb-3 col-md-6">
                                                         <label for="firstName" class="form-label">Ukuran<i
@@ -392,8 +394,9 @@
                                                         <label for="firstName" class="form-label">Jumlah<i
                                                                 class="text-danger"
                                                                 style="font-size: 15px;">*</i></label>
-                                                        <input class="form-control" required type="text" id="firstName"
-                                                            placeholder="Jumlah" name="total_baju_kiper" autofocus />
+                                                        <input class="form-control" required type="number"
+                                                            id="firstName" placeholder="Jumlah" name="total_baju_kiper"
+                                                            autofocus />
                                                     </div>
                                                     <div class="mb-3 col-md-6">
                                                         <label for="firstName" class="form-label">Ukuran<i
@@ -507,8 +510,9 @@
                                                         <label for="firstName" class="form-label">Jumlah <i
                                                                 class="text-danger"
                                                                 style="font-size: 15px;">*</i></label>
-                                                        <input class="form-control" required type="text" id="firstName"
-                                                            placeholder="Jumlah" name="total_baju_1" autofocus />
+                                                        <input class="form-control" required type="number"
+                                                            id="firstName" placeholder="Jumlah" name="total_baju_1"
+                                                            autofocus />
                                                     </div>
                                                     <div class="mb-3 col-md-6">
                                                         <label for="firstName" class="form-label">Ukuran <i
@@ -624,8 +628,9 @@
                                                         <label for="firstName" class="form-label">Jumlah <i
                                                                 class="text-danger"
                                                                 style="font-size: 15px;">*</i></label>
-                                                        <input class="form-control" required type="text" id="firstName"
-                                                            placeholder="Jumlah" name="total_celana_player" autofocus />
+                                                        <input class="form-control" required type="number"
+                                                            id="firstName" placeholder="Jumlah"
+                                                            name="total_celana_player" autofocus />
                                                     </div>
                                                     <div class="mb-3 col-md-6">
                                                         <label for="firstName" class="form-label">Ukuran <i
@@ -740,9 +745,9 @@
                                                         <label for="firstName" class="form-label">Jumlah <i
                                                                 class="text-danger"
                                                                 style="font-size: 15px;">*</i></label>
-                                                        <input required class="form-control" type="text" id="firstName"
-                                                            placeholder="Jumlah" name="total_celana_pelatih"
-                                                            autofocus />
+                                                        <input required class="form-control" type="number"
+                                                            id="firstName" placeholder="Jumlah"
+                                                            name="total_celana_pelatih" autofocus />
                                                     </div>
                                                     <div class="mb-3 col-md-6">
                                                         <label for="firstName" class="form-label">Ukuran <i
@@ -857,8 +862,9 @@
                                                         <label for="firstName" class="form-label">Jumlah <i
                                                                 class="text-danger"
                                                                 style="font-size: 15px;">*</i></label>
-                                                        <input required class="form-control" type="text" id="firstName"
-                                                            placeholder="Jumlah" name="total_celana_kiper" autofocus />
+                                                        <input required class="form-control" type="number"
+                                                            id="firstName" placeholder="Jumlah"
+                                                            name="total_celana_kiper" autofocus />
                                                     </div>
                                                     <div class="mb-3 col-md-6">
                                                         <label for="firstName" class="form-label">Ukuran <i
@@ -973,8 +979,9 @@
                                                         <label for="firstName" class="form-label">Jumlah <i
                                                                 class="text-danger"
                                                                 style="font-size: 15px;">*</i></label>
-                                                        <input required class="form-control" type="text" id="firstName"
-                                                            placeholder="Jumlah" name="total_celana_1" autofocus />
+                                                        <input required class="form-control" type="number"
+                                                            id="firstName" placeholder="Jumlah" name="total_celana_1"
+                                                            autofocus />
                                                     </div>
                                                     <div class="mb-3 col-md-6">
                                                         <label for="firstName" class="form-label">Ukuran <i

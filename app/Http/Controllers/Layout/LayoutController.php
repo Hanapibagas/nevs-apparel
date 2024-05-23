@@ -811,6 +811,7 @@ class LayoutController extends Controller
         $deadline = Carbon::parse($dataPlayer->deadline);
         $selesai = Carbon::parse($dataPlayer->selesai);
 
+        // return response()->json($dataBajuPlayer);
         if ($selesai->lt($deadline)) {
             $selisihHari = $selesai->diffInDaysFiltered(function (Carbon $date) use ($deadline) {
                 return $date->lte($deadline);
