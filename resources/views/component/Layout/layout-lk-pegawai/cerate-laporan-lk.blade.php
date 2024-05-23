@@ -34,7 +34,7 @@
                                             <div class="mb-3 col-md-6">
                                                 <label for="lastName" class="form-label">Panjang Kertas (Meter) <i
                                                         class="text-danger" style="font-size: 15px;">*</i></label>
-                                                <input required class="form-control" type="number"
+                                                <input required class="form-control" type="text"
                                                     name="panjang_kertas_palayer" id="lastName"
                                                     placeholder="Contoh: 10 meter" />
                                             </div>
@@ -53,8 +53,7 @@
                                                 <label for="lastName" class="form-label">Panjang Poly / DTF
                                                     (Meter) <i class="text-danger"
                                                         style="font-size: 15px;">*</i></label>
-                                                <input required class="form-control" type="number" name="poly_player"
-                                                    id="lastName
+                                                <input required class="form-control" type="text" name="poly_player" id="lastName
                                                     placeholder=" Contoh: 10 meter" />
                                             </div>
                                             <div class="mb-3 col-md-6">
@@ -79,7 +78,7 @@
                                             <div class="mb-3 col-md-6">
                                                 <label for="lastName" class="form-label">Panjang Kertas (Meter) <i
                                                         class="text-danger" style="font-size: 15px;">*</i></label>
-                                                <input required class="form-control" type="number"
+                                                <input required class="form-control" type="text"
                                                     name="panjang_kertas_pelatih" id="lastName"
                                                     placeholder="Contoh: 10 meter" />
                                             </div>
@@ -98,8 +97,7 @@
                                                 <label for="lastName" class="form-label">Panjang Poly / DTF
                                                     (Meter) <i class="text-danger"
                                                         style="font-size: 15px;">*</i></label>
-                                                <input required class="form-control" type="number" name="poly_pelatih"
-                                                    id="lastName
+                                                <input required class="form-control" type="text" name="poly_pelatih" id="lastName
                                                     placeholder=" Contoh: 10 meter" />
                                             </div>
                                             <div class="mb-3 col-md-6">
@@ -124,7 +122,7 @@
                                             <div class="mb-3 col-md-6">
                                                 <label for="lastName" class="form-label">Panjang Kertas (Meter) <i
                                                         class="text-danger" style="font-size: 15px;">*</i></label>
-                                                <input required class="form-control" type="number"
+                                                <input required class="form-control" type="text"
                                                     name="panjang_kertas_kiper" id="lastName"
                                                     placeholder="Contoh: 10 meter" />
                                             </div>
@@ -143,7 +141,7 @@
                                                 <label for="lastName" class="form-label">Panjang Poly / DTF
                                                     (Meter) <i class="text-danger"
                                                         style="font-size: 15px;">*</i></label>
-                                                <input required class="form-control" type="number" name="poly_kiper" id="lastName
+                                                <input required class="form-control" type="text" name="poly_kiper" id="lastName
                                                     placeholder=" Contoh: 10 meter" />
                                             </div>
                                             <div class="mb-3 col-md-6">
@@ -168,8 +166,8 @@
                                             <div class="mb-3 col-md-6">
                                                 <label for="lastName" class="form-label">Panjang Kertas (Meter) <i
                                                         class="text-danger" style="font-size: 15px;">*</i></label>
-                                                <input required class="form-control" type="number"
-                                                    name="panjang_kertas_1" id="lastName
+                                                <input required class="form-control" type="text" name="panjang_kertas_1"
+                                                    id="lastName
                                                     placeholder=" Contoh: 10 meter" />
                                             </div>
                                             <div class="mb-3 col-md-6">
@@ -187,7 +185,7 @@
                                                 <label for="lastName" class="form-label">Panjang Poly / DTF
                                                     (Meter) <i class="text-danger"
                                                         style="font-size: 15px;">*</i></label>
-                                                <input required class="form-control" type="number" name="poly_1" id="lastName
+                                                <input required class="form-control" type="text" name="poly_1" id="lastName
                                                     placeholder=" Contoh: 10 meter" />
                                             </div>
                                             <div class="mb-3 col-md-6">
@@ -212,7 +210,7 @@
                                             <div class="mb-3 col-md-6">
                                                 <label for="lastName" class="form-label">Panjang Kertas (Meter) <i
                                                         class="text-danger" style="font-size: 15px;">*</i></label>
-                                                <input required class="form-control" type="number"
+                                                <input required class="form-control" type="text"
                                                     name="panjang_kertas_celana_pelayer" id="lastName"
                                                     placeholder="Contoh: 10 meter" />
                                             </div>
@@ -231,7 +229,7 @@
                                                 <label for="lastName" class="form-label">Panjang Poly / DTF
                                                     (Meter) <i class="text-danger"
                                                         style="font-size: 15px;">*</i></label>
-                                                <input required class="form-control" type="number"
+                                                <input required class="form-control" type="text"
                                                     name="poly_celana_pelayer" id="lastName
                                                     placeholder=" Contoh: 10 meter" />
                                             </div>
@@ -257,7 +255,7 @@
                                             <div class="mb-3 col-md-6">
                                                 <label for="lastName" class="form-label">Panjang Kertas (Meter) <i
                                                         class="text-danger" style="font-size: 15px;">*</i></label>
-                                                <input required class="form-control" type="number"
+                                                <input required class="form-control" type="text"
                                                     name="panjang_kertas_celana_pelatih" id="lastName"
                                                     placeholder="Contoh: 10 meter" />
                                             </div>
@@ -276,7 +274,7 @@
                                                 <label for="lastName" class="form-label">Panjang Poly / DTF
                                                     (Meter) <i class="text-danger"
                                                         style="font-size: 15px;">*</i></label>
-                                                <input required class="form-control" type="number"
+                                                <input required class="form-control" type="text"
                                                     name="poly_celana_pelatih" id="lastName
                                                     placeholder=" Contoh: 10 meter" />
                                             </div>
@@ -302,7 +300,7 @@
                                             <div class="mb-3 col-md-6">
                                                 <label for="lastName" class="form-label">Panjang Kertas (Meter) <i
                                                         class="text-danger" style="font-size: 15px;">*</i></label>
-                                                <input required class="form-control" type="number"
+                                                <input required class="form-control" type="text"
                                                     name="panjang_kertas_celana_kiper" id="lastName"
                                                     placeholder="Contoh: 10 meter" />
                                             </div>
@@ -321,7 +319,7 @@
                                                 <label for="lastName" class="form-label">Panjang Poly / DTF
                                                     (Meter) <i class="text-danger"
                                                         style="font-size: 15px;">*</i></label>
-                                                <input required class="form-control" type="number"
+                                                <input required class="form-control" type="text"
                                                     name="poly_celana_kiper" id="lastName
                                                     placeholder=" Contoh: 10 meter" />
                                             </div>
@@ -347,7 +345,7 @@
                                             <div class="mb-3 col-md-6">
                                                 <label for="lastName" class="form-label">Panjang Kertas (Meter) <i
                                                         class="text-danger" style="font-size: 15px;">*</i></label>
-                                                <input required class="form-control" type="number"
+                                                <input required class="form-control" type="text"
                                                     name="panjang_kertas_celana_1" id="lastName"
                                                     placeholder="Contoh: 10 meter" />
                                             </div>
@@ -366,7 +364,7 @@
                                                 <label for="lastName" class="form-label">Panjang Poly / DTF
                                                     (Meter) <i class="text-danger"
                                                         style="font-size: 15px;">*</i></label>
-                                                <input required class="form-control" type="number" name="poly_celana_1"
+                                                <input required class="form-control" type="text" name="poly_celana_1"
                                                     id="lastName
                                                     placeholder=" Contoh: 10 meter" />
                                             </div>
