@@ -105,8 +105,8 @@
                                                         <select id="country" required name="status_player"
                                                             class="select2 form-select">
                                                             <option value="">-- Jenis Produksi --</option>
-                                                            <option value="Full print">Full print</option>
-                                                            <option value="Half print">Half print</option>
+                                                            <option value="Full print">Printing</option>
+                                                            <option value="Half print">Printing & Polos</option>
                                                             <option value="Polos">Polos</option>
                                                         </select>
                                                     </div>
@@ -221,8 +221,8 @@
                                                         <select id="country" required name="status_pelatih"
                                                             class="select2 form-select">
                                                             <option value="">-- Jenis Produksi --</option>
-                                                            <option value="Full print">Full print</option>
-                                                            <option value="Half print">Half print</option>
+                                                            <option value="Full print">Printing</option>
+                                                            <option value="Half print">Printing & Polos</option>
                                                             <option value="Polos">Polos</option>
                                                         </select>
                                                     </div>
@@ -337,8 +337,8 @@
                                                         <select id="country" required name="status_kiper"
                                                             class="select2 form-select">
                                                             <option value="">-- Jenis Produksi --</option>
-                                                            <option value="Full print">Full print</option>
-                                                            <option value="Half print">Half print</option>
+                                                            <option value="Full print">Printing</option>
+                                                            <option value="Half print">Printing & Polos</option>
                                                             <option value="Polos">Polos</option>
                                                         </select>
                                                     </div>
@@ -453,8 +453,8 @@
                                                         <select id="country" required name="status_baju_1"
                                                             class="select2 form-select">
                                                             <option value="">-- Jenis Produksi --</option>
-                                                            <option value="Full print">Full print</option>
-                                                            <option value="Half print">Half print</option>
+                                                            <option value="Full print">Printing</option>
+                                                            <option value="Half print">Printing & Polos</option>
                                                             <option value="Polos">Polos</option>
                                                         </select>
                                                     </div>
@@ -571,8 +571,8 @@
                                                         <select id="country" required name="status_celana_player"
                                                             class="select2 form-select">
                                                             <option value="">-- Jenis Produksi --</option>
-                                                            <option value="Full print">Full print</option>
-                                                            <option value="Half print">Half print</option>
+                                                            <option value="Full print">Printing</option>
+                                                            <option value="Half print">Printing & Polos</option>
                                                             <option value="Polos">Polos</option>
                                                         </select>
                                                     </div>
@@ -688,8 +688,8 @@
                                                         <select id="country" required name="status_celana_pelatih"
                                                             class="select2 form-select">
                                                             <option value="">-- Jenis Produksi --</option>
-                                                            <option value="Full print">Full print</option>
-                                                            <option value="Half print">Half print</option>
+                                                            <option value="Full print">Printing</option>
+                                                            <option value="Half print">Printing & Polos</option>
                                                             <option value="Polos">Polos</option>
                                                         </select>
                                                     </div>
@@ -805,8 +805,8 @@
                                                         <select id="country" required name="status_celana_kiper"
                                                             class="select2 form-select">
                                                             <option value="">-- Jenis Produksi --</option>
-                                                            <option value="Full print">Full print</option>
-                                                            <option value="Half print">Half print</option>
+                                                            <option value="Full print">Printing</option>
+                                                            <option value="Half print">Printing & Polos</option>
                                                             <option value="Polos">Polos</option>
                                                         </select>
                                                     </div>
@@ -922,8 +922,8 @@
                                                         <select id="country" required name="status_celana_1"
                                                             class="select2 form-select">
                                                             <option value="">-- Jenis Produksi --</option>
-                                                            <option value="Full print">Full print</option>
-                                                            <option value="Half print">Half print</option>
+                                                            <option value="Full print">Printing</option>
+                                                            <option value="Half print">Printing & Polos</option>
                                                             <option value="Polos">Polos</option>
                                                         </select>
                                                     </div>
