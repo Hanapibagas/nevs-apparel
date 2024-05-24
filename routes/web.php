@@ -33,6 +33,10 @@ Route::post('/loginuser', [LoginController::class, 'loginuser'])->name('loginuse
 
 Route::middleware(['auth', 'checkroll:super_admin,jahit,finis,cut,disainer,layout,cs,atexco,mimaki,pres_kain,laser_cut,manual_cut,sortir,jahit_baju,jahit_celana,press_tag,packing,admin'])->group(function () {
     Route::get('/', [HomeController::class, 'index'])->name('indexHome');
+
+    Route::get('/data-semua-disainer', [HomeController::class, 'getDatadisainerSemua'])->name('getDatadisainerSemua');
+    Route::get('/pengembalian-data/{id}', [HomeController::class, 'pengembalianDataDisiner'])->name('pengembalianDataDisiner');
+
     Route::get('/filtering-ahit', [HomeController::class, 'fiterTotaljahit'])->name('fiterTotaljahit');
 
     Route::get('/show-data-lk-super-admin/{id}', [HomeController::class, 'cetakDataLk'])->name('getCetakDataLkSuperAdmin');

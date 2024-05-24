@@ -494,6 +494,15 @@ $activeList = $listData ? 'active' : '';
                 <div data-i18n="Analytics">Update Password</div>
             </a>
         </li>
+        <li class="menu-header small text-uppercase">
+            <span class="menu-header-text">Divisi Disainer</span>
+        </li>
+        <li class="menu-item {{ request()->is('data-semua-disainer')  ? 'active' : '' }}">
+            <a href="{{ route('getDatadisainerSemua') }}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-cloud-download"></i>
+                <div data-i18n="Analytics">Data Masuk Disainer</div>
+            </a>
+        </li>
         {{-- @if (Auth::user()->permission_show == 1)
         <li class="menu-header small text-uppercase">
             <span class="menu-header-text">Costumer Services</span>

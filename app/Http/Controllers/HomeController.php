@@ -29,6 +29,27 @@ use PDF;
 
 class HomeController extends Controller
 {
+    public function getDatadisainerSemua()
+    {
+        $disainer = BarangMasukDisainer::where('tanda_telah_mengerjakan', 1)->get();
+
+        return view('component.Admin.admin-admin.data-disainer', compact('disainer'));
+    }
+
+    public function pengembalianDataDisiner(Request $request, $id)
+    {
+        $disinerId = $request->input('disiner_id');
+        $disner = BarangMasukDisainer::find($disinerId);
+
+        $disner->update([
+            'tanda_telah_mengerjakan' => '0'
+        ]);
+
+        BarangMasukCostumerServices::where('barang_masuk_disainer_id', $disinerId)->delete();
+
+        return redirect()->back()->with('success', 'Selamat data telah dikembalikan!');
+    }
+
     public function index(Request $request)
     {
         // admin
