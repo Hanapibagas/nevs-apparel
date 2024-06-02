@@ -88,9 +88,10 @@
                                         Edit LK</a>
                                     @endif
                                     @endif --}}
-                                    <a target="_blank" class="btn btn-primary" style="color: white">
-                                        <i class="menu-icon tf-icons bx bx-pencil"></i>Fitur Edit Sementara
-                                        Perbaikan</a>
+                                    <a href="{{ route('getEditIndexLkCsPegawai', $disainers->id) }}"
+                                        class="btn btn-primary">
+                                        <i class="menu-icon tf-icons bx bx-pencil"></i>
+                                        Edit LK</a>
                                     <a target="_blank" href="{{ route('getCetakDataLk', $disainers->id) }}"
                                         class="btn btn-danger">
                                         <i class="menu-icon tf-icons bx bxs-file-pdf"></i>Download PDF LK</a>

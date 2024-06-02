@@ -114,10 +114,10 @@
                                                                 {{
                                                                 $oderCs->BarangMasukCostumerServicesLkPlyer->first()->status_player
                                                                 }}</option>
-                                                            <option value="">-- Jenis Produksi --</option>
-                                                            <option value="Full print">Full print</option>
-                                                            <option value="Half print">Half print</option>
-                                                            <option value="Polos">Polos</option>
+                                                              <option value="">-- Jenis Produksi --</option>
+                                                              <option value="Full print">Printing</option>
+                                                              <option value="Half print">Printing & Polos</option>
+                                                              <option value="Polos">Polos</option>
                                                         </select>
                                                     </div>
                                                     <div class="mb-3 col-md-6">
@@ -244,10 +244,10 @@
                                                                 {{
                                                                 $oderCs->BarangMasukCostumerServicesLkPelatih->first()->status_pelatih
                                                                 }}</option>
-                                                            <option value="">-- Jenis Produksi --</option>
-                                                            <option value="Full print">Full print</option>
-                                                            <option value="Half print">Half print</option>
-                                                            <option value="Polos">Polos</option>
+                                                              <option value="">-- Jenis Produksi --</option>
+                                                              <option value="Full print">Printing</option>
+                                                              <option value="Half print">Printing & Polos</option>
+                                                              <option value="Polos">Polos</option>
                                                         </select>
                                                     </div>
                                                     <div class="mb-3 col-md-6">
@@ -370,10 +370,10 @@
                                                                 {{
                                                                 $oderCs->BarangMasukCostumerServicesLkKiper->first()->status_kiper
                                                                 }}</option>
-                                                            <option value="">-- Jenis Produksi --</option>
-                                                            <option value="Full print">Full print</option>
-                                                            <option value="Half print">Half print</option>
-                                                            <option value="Polos">Polos</option>
+                                                              <option value="">-- Jenis Produksi --</option>
+                                                              <option value="Full print">Printing</option>
+                                                              <option value="Half print">Printing & Polos</option>
+                                                              <option value="Polos">Polos</option>
                                                         </select>
                                                     </div>
                                                     <div class="mb-3 col-md-6">
@@ -495,10 +495,10 @@
                                                                 {{
                                                                 $oderCs->BarangMasukCostumerServicesLkKiper->first()->status_kiper
                                                                 }}</option>
-                                                            <option value="">-- Jenis Produksi --</option>
-                                                            <option value="Full print">Full print</option>
-                                                            <option value="Half print">Half print</option>
-                                                            <option value="Polos">Polos</option>
+                                                              <option value="">-- Jenis Produksi --</option>
+                                                              <option value="Full print">Printing</option>
+                                                              <option value="Half print">Printing & Polos</option>
+                                                              <option value="Polos">Polos</option>
                                                         </select>
                                                     </div>
                                                     <div class="mb-3 col-md-6">
@@ -621,10 +621,10 @@
                                                                 {{
                                                                 $oderCs->BarangMasukCostumerServicesLkCelanaPlyer->first()->status_celana_player
                                                                 }}</option>
-                                                            <option value="">-- Jenis Produksi --</option>
-                                                            <option value="Full print">Full print</option>
-                                                            <option value="Half print">Half print</option>
-                                                            <option value="Polos">Polos</option>
+                                                              <option value="">-- Jenis Produksi --</option>
+                                                              <option value="Full print">Printing</option>
+                                                              <option value="Half print">Printing & Polos</option>
+                                                              <option value="Polos">Polos</option>
                                                         </select>
                                                     </div>
                                                     <div class="mb-3 col-md-6">
@@ -747,10 +747,10 @@
                                                                 {{
                                                                 $oderCs->BarangMasukCostumerServicesLkCelanaPelatih->first()->status_celana_pelatih
                                                                 }}</option>
-                                                            <option value="">-- Jenis Produksi --</option>
-                                                            <option value="Full print">Full print</option>
-                                                            <option value="Half print">Half print</option>
-                                                            <option value="Polos">Polos</option>
+                                                             <option value="">-- Jenis Produksi --</option>
+                                                             <option value="Full print">Printing</option>
+                                                             <option value="Half print">Printing & Polos</option>
+                                                             <option value="Polos">Polos</option>
                                                         </select>
                                                     </div>
                                                     <div class="mb-3 col-md-6">
@@ -874,10 +874,10 @@
                                                                 {{
                                                                 $oderCs->BarangMasukCostumerServicesLkCelanaKiper->first()->status_celana_kiper
                                                                 }}</option>
-                                                            <option value="">-- Jenis Produksi --</option>
-                                                            <option value="Full print">Full print</option>
-                                                            <option value="Half print">Half print</option>
-                                                            <option value="Polos">Polos</option>
+                                                              <option value="">-- Jenis Produksi --</option>
+                                                              <option value="Full print">Printing</option>
+                                                              <option value="Half print">Printing & Polos</option>
+                                                              <option value="Polos">Polos</option>
                                                         </select>
                                                     </div>
                                                     <div class="mb-3 col-md-6">
@@ -1000,10 +1000,10 @@
                                                                 {{
                                                                 $oderCs->BarangMasukCostumerServicesLkCelana1->first()->status_celana_1
                                                                 }}</option>
-                                                            <option value="">-- Jenis Produksi --</option>
-                                                            <option value="Full print">Full print</option>
-                                                            <option value="Half print">Half print</option>
-                                                            <option value="Polos">Polos</option>
+                                                              <option value="">-- Jenis Produksi --</option>
+                                                              <option value="Full print">Printing</option>
+                                                              <option value="Half print">Printing & Polos</option>
+                                                              <option value="Polos">Polos</option>
                                                         </select>
                                                     </div>
                                                     <div class="mb-3 col-md-6">
