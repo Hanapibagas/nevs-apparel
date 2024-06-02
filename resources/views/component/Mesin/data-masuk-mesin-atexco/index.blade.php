@@ -40,6 +40,7 @@
                                 <th>nama tim</th>
                                 <th>no.order</th>
                                 <th>sisa waktu produksi</th>
+                                <th>Keterangan</th>
                                 <th>aksi</th>
                             </tr>
                         </thead>
@@ -70,6 +71,10 @@
                                             document.write('<span class="badge bg-label-success">Sisa ' + remainingDays + ' hari</span>');
                                         }
                                     </script>
+                                </td>
+                                <td>
+                                    <strong style="text-transform: uppercase">{{ $mesins->BarangMasukLayout->keterangan1
+                                        }}</strong>
                                 </td>
                                 <td>
                                     <a target="_blank"

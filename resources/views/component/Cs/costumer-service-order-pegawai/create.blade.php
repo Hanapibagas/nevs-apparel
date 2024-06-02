@@ -1025,8 +1025,7 @@
 
                                         <div class="card mb-4">
                                             <div class="card-body">
-                                                <h4 class="fw-bold py-3 mb-4">Keterangan
-                                                    Tambahan</h4>
+                                                <h4 class="fw-bold py-3 mb-4">List Tim</h4>
                                                 <div class="row">
                                                     <div class="mb-3 col-md-12">
                                                         <textarea class="form-control" rows="7"

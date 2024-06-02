@@ -34824,6 +34824,7 @@ class CostumerServicesController extends Controller
                             'barang_masuk_sortir_id' => $barangMasukSortir->id,
                             'jahit_id' => $barangMasukJahit->id,
                             'finis_id' => $barangMasukFinis->id,
+                            'status' => "Manual Cut"
                         ]);
                         // AKHIR LAPORAN
                     } elseif ($total_hari == 2) {
@@ -34882,6 +34883,7 @@ class CostumerServicesController extends Controller
                             'barang_masuk_sortir_id' => $barangMasukSortir->id,
                             'jahit_id' => $barangMasukJahit->id,
                             'finis_id' => $barangMasukFinis->id,
+                            'status' => "Manual Cut"
                         ]);
                         // AKHIR LAPORAN
                     } elseif ($total_hari == 3) {
@@ -34940,6 +34942,7 @@ class CostumerServicesController extends Controller
                             'barang_masuk_sortir_id' => $barangMasukSortir->id,
                             'jahit_id' => $barangMasukJahit->id,
                             'finis_id' => $barangMasukFinis->id,
+                            'status' => "Manual Cut"
                         ]);
                         // AKHIR LAPORAN
                     } elseif ($total_hari == 4) {
@@ -34998,6 +35001,7 @@ class CostumerServicesController extends Controller
                             'barang_masuk_sortir_id' => $barangMasukSortir->id,
                             'jahit_id' => $barangMasukJahit->id,
                             'finis_id' => $barangMasukFinis->id,
+                             'status' => "Manual Cut"
                         ]);
                         // AKHIR LAPORAN
                     } elseif ($total_hari == 5) {
@@ -35056,6 +35060,7 @@ class CostumerServicesController extends Controller
                             'barang_masuk_sortir_id' => $barangMasukSortir->id,
                             'jahit_id' => $barangMasukJahit->id,
                             'finis_id' => $barangMasukFinis->id,
+                            'status' => "Manual Cut"
                         ]);
                         // AKHIR LAPORAN
                     } elseif ($total_hari == 6) {
@@ -35114,6 +35119,7 @@ class CostumerServicesController extends Controller
                             'barang_masuk_sortir_id' => $barangMasukSortir->id,
                             'jahit_id' => $barangMasukJahit->id,
                             'finis_id' => $barangMasukFinis->id,
+                            'status' => "Manual Cut"
                         ]);
                         // AKHIR LAPORAN
                     } elseif ($total_hari == 7) {
@@ -35172,6 +35178,7 @@ class CostumerServicesController extends Controller
                             'barang_masuk_sortir_id' => $barangMasukSortir->id,
                             'jahit_id' => $barangMasukJahit->id,
                             'finis_id' => $barangMasukFinis->id,
+                             'status' => "Manual Cut"
                         ]);
                         // AKHIR LAPORAN
                     } elseif ($total_hari == 8) {
@@ -35230,6 +35237,7 @@ class CostumerServicesController extends Controller
                             'barang_masuk_sortir_id' => $barangMasukSortir->id,
                             'jahit_id' => $barangMasukJahit->id,
                             'finis_id' => $barangMasukFinis->id,
+                             'status' => "Manual Cut"
                         ]);
                         // AKHIR LAPORAN
                     } elseif ($total_hari == 9) {
@@ -35288,6 +35296,7 @@ class CostumerServicesController extends Controller
                             'barang_masuk_sortir_id' => $barangMasukSortir->id,
                             'jahit_id' => $barangMasukJahit->id,
                             'finis_id' => $barangMasukFinis->id,
+                             'status' => "Manual Cut"
                         ]);
                         // AKHIR LAPORAN
                     } elseif ($total_hari == 10) {
@@ -35346,6 +35355,7 @@ class CostumerServicesController extends Controller
                             'barang_masuk_sortir_id' => $barangMasukSortir->id,
                             'jahit_id' => $barangMasukJahit->id,
                             'finis_id' => $barangMasukFinis->id,
+                             'status' => "Manual Cut"
                         ]);
                         // AKHIR LAPORAN
                     } elseif ($total_hari == 11) {
@@ -35404,6 +35414,7 @@ class CostumerServicesController extends Controller
                             'barang_masuk_sortir_id' => $barangMasukSortir->id,
                             'jahit_id' => $barangMasukJahit->id,
                             'finis_id' => $barangMasukFinis->id,
+                             'status' => "Manual Cut"
                         ]);
                         // AKHIR LAPORAN
                     } elseif ($total_hari >= 12 && $total_hari <= 9999) {
@@ -35462,6 +35473,7 @@ class CostumerServicesController extends Controller
                             'barang_masuk_sortir_id' => $barangMasukSortir->id,
                             'jahit_id' => $barangMasukJahit->id,
                             'finis_id' => $barangMasukFinis->id,
+                             'status' => "Manual Cut"
                         ]);
                         // AKHIR LAPORAN
                     }
@@ -38070,6 +38082,7 @@ class CostumerServicesController extends Controller
                             'barang_masuk_sortir_id' => $barangMasukSortir->id,
                             'jahit_id' => $barangMasukJahit->id,
                             'finis_id' => $barangMasukFinis->id,
+                             'status' => "Manual Cut"
                         ]);
                         // AKHIR LAPORAN
                     } elseif ($total_hari == 2) {
@@ -38128,6 +38141,7 @@ class CostumerServicesController extends Controller
                             'barang_masuk_sortir_id' => $barangMasukSortir->id,
                             'jahit_id' => $barangMasukJahit->id,
                             'finis_id' => $barangMasukFinis->id,
+                             'status' => "Manual Cut"
                         ]);
                         // AKHIR LAPORAN
                     } elseif ($total_hari == 3) {
@@ -38186,6 +38200,7 @@ class CostumerServicesController extends Controller
                             'barang_masuk_sortir_id' => $barangMasukSortir->id,
                             'jahit_id' => $barangMasukJahit->id,
                             'finis_id' => $barangMasukFinis->id,
+                             'status' => "Manual Cut"
                         ]);
                         // AKHIR LAPORAN
                     } elseif ($total_hari == 4) {
@@ -38244,6 +38259,7 @@ class CostumerServicesController extends Controller
                             'barang_masuk_sortir_id' => $barangMasukSortir->id,
                             'jahit_id' => $barangMasukJahit->id,
                             'finis_id' => $barangMasukFinis->id,
+                             'status' => "Manual Cut"
                         ]);
                         // AKHIR LAPORAN
                     } elseif ($total_hari == 5) {
@@ -38302,6 +38318,7 @@ class CostumerServicesController extends Controller
                             'barang_masuk_sortir_id' => $barangMasukSortir->id,
                             'jahit_id' => $barangMasukJahit->id,
                             'finis_id' => $barangMasukFinis->id,
+                             'status' => "Manual Cut"
                         ]);
                         // AKHIR LAPORAN
                     } elseif ($total_hari == 6) {
@@ -38360,6 +38377,7 @@ class CostumerServicesController extends Controller
                             'barang_masuk_sortir_id' => $barangMasukSortir->id,
                             'jahit_id' => $barangMasukJahit->id,
                             'finis_id' => $barangMasukFinis->id,
+                             'status' => "Manual Cut"
                         ]);
                         // AKHIR LAPORAN
                     } elseif ($total_hari == 7) {
@@ -38418,6 +38436,7 @@ class CostumerServicesController extends Controller
                             'barang_masuk_sortir_id' => $barangMasukSortir->id,
                             'jahit_id' => $barangMasukJahit->id,
                             'finis_id' => $barangMasukFinis->id,
+                             'status' => "Manual Cut"
                         ]);
                         // AKHIR LAPORAN
                     } elseif ($total_hari == 8) {
@@ -38476,6 +38495,7 @@ class CostumerServicesController extends Controller
                             'barang_masuk_sortir_id' => $barangMasukSortir->id,
                             'jahit_id' => $barangMasukJahit->id,
                             'finis_id' => $barangMasukFinis->id,
+                             'status' => "Manual Cut"
                         ]);
                         // AKHIR LAPORAN
                     } elseif ($total_hari == 9) {
@@ -38534,6 +38554,7 @@ class CostumerServicesController extends Controller
                             'barang_masuk_sortir_id' => $barangMasukSortir->id,
                             'jahit_id' => $barangMasukJahit->id,
                             'finis_id' => $barangMasukFinis->id,
+                             'status' => "Manual Cut"
                         ]);
                         // AKHIR LAPORAN
                     } elseif ($total_hari == 10) {
@@ -38592,6 +38613,7 @@ class CostumerServicesController extends Controller
                             'barang_masuk_sortir_id' => $barangMasukSortir->id,
                             'jahit_id' => $barangMasukJahit->id,
                             'finis_id' => $barangMasukFinis->id,
+                             'status' => "Manual Cut"
                         ]);
                         // AKHIR LAPORAN
                     } elseif ($total_hari == 11) {
@@ -38650,6 +38672,7 @@ class CostumerServicesController extends Controller
                             'barang_masuk_sortir_id' => $barangMasukSortir->id,
                             'jahit_id' => $barangMasukJahit->id,
                             'finis_id' => $barangMasukFinis->id,
+                             'status' => "Manual Cut"
                         ]);
                         // AKHIR LAPORAN
                     } elseif ($total_hari >= 12 && $total_hari <= 9999) {
@@ -38708,6 +38731,7 @@ class CostumerServicesController extends Controller
                             'barang_masuk_sortir_id' => $barangMasukSortir->id,
                             'jahit_id' => $barangMasukJahit->id,
                             'finis_id' => $barangMasukFinis->id,
+                             'status' => "Manual Cut"
                         ]);
                         // AKHIR LAPORAN
                     }
@@ -41376,6 +41400,7 @@ class CostumerServicesController extends Controller
                             'barang_masuk_sortir_id' => $barangMasukSortir->id,
                             'jahit_id' => $barangMasukJahit->id,
                             'finis_id' => $barangMasukFinis->id,
+                             'status' => "Manual Cut"
                         ]);
                         // AKHIR LAPORAN
                     } elseif ($total_hari == 3) {
@@ -41434,6 +41459,7 @@ class CostumerServicesController extends Controller
                             'barang_masuk_sortir_id' => $barangMasukSortir->id,
                             'jahit_id' => $barangMasukJahit->id,
                             'finis_id' => $barangMasukFinis->id,
+                             'status' => "Manual Cut"
                         ]);
                         // AKHIR LAPORAN
                     } elseif ($total_hari == 4) {
@@ -41492,6 +41518,7 @@ class CostumerServicesController extends Controller
                             'barang_masuk_sortir_id' => $barangMasukSortir->id,
                             'jahit_id' => $barangMasukJahit->id,
                             'finis_id' => $barangMasukFinis->id,
+                             'status' => "Manual Cut"
                         ]);
                         // AKHIR LAPORAN
                     } elseif ($total_hari == 5) {
@@ -41550,6 +41577,7 @@ class CostumerServicesController extends Controller
                             'barang_masuk_sortir_id' => $barangMasukSortir->id,
                             'jahit_id' => $barangMasukJahit->id,
                             'finis_id' => $barangMasukFinis->id,
+                             'status' => "Manual Cut"
                         ]);
                         // AKHIR LAPORAN
                     } elseif ($total_hari == 6) {
@@ -41608,6 +41636,7 @@ class CostumerServicesController extends Controller
                             'barang_masuk_sortir_id' => $barangMasukSortir->id,
                             'jahit_id' => $barangMasukJahit->id,
                             'finis_id' => $barangMasukFinis->id,
+                             'status' => "Manual Cut"
                         ]);
                         // AKHIR LAPORAN
                     } elseif ($total_hari == 7) {
@@ -41666,6 +41695,7 @@ class CostumerServicesController extends Controller
                             'barang_masuk_sortir_id' => $barangMasukSortir->id,
                             'jahit_id' => $barangMasukJahit->id,
                             'finis_id' => $barangMasukFinis->id,
+                             'status' => "Manual Cut"
                         ]);
                         // AKHIR LAPORAN
                     } elseif ($total_hari == 8) {
@@ -41724,6 +41754,7 @@ class CostumerServicesController extends Controller
                             'barang_masuk_sortir_id' => $barangMasukSortir->id,
                             'jahit_id' => $barangMasukJahit->id,
                             'finis_id' => $barangMasukFinis->id,
+                             'status' => "Manual Cut"
                         ]);
                         // AKHIR LAPORAN
                     } elseif ($total_hari == 9) {
@@ -41782,6 +41813,7 @@ class CostumerServicesController extends Controller
                             'barang_masuk_sortir_id' => $barangMasukSortir->id,
                             'jahit_id' => $barangMasukJahit->id,
                             'finis_id' => $barangMasukFinis->id,
+                             'status' => "Manual Cut"
                         ]);
                         // AKHIR LAPORAN
                     } elseif ($total_hari == 10) {
@@ -41840,6 +41872,7 @@ class CostumerServicesController extends Controller
                             'barang_masuk_sortir_id' => $barangMasukSortir->id,
                             'jahit_id' => $barangMasukJahit->id,
                             'finis_id' => $barangMasukFinis->id,
+                             'status' => "Manual Cut"
                         ]);
                         // AKHIR LAPORAN
                     } elseif ($total_hari == 11) {
@@ -41898,6 +41931,7 @@ class CostumerServicesController extends Controller
                             'barang_masuk_sortir_id' => $barangMasukSortir->id,
                             'jahit_id' => $barangMasukJahit->id,
                             'finis_id' => $barangMasukFinis->id,
+                             'status' => "Manual Cut"
                         ]);
                         // AKHIR LAPORAN
                     } elseif ($total_hari >= 12 && $total_hari <= 9999) {
@@ -41956,6 +41990,7 @@ class CostumerServicesController extends Controller
                             'barang_masuk_sortir_id' => $barangMasukSortir->id,
                             'jahit_id' => $barangMasukJahit->id,
                             'finis_id' => $barangMasukFinis->id,
+                             'status' => "Manual Cut"
                         ]);
                         // AKHIR LAPORAN
                     }
@@ -44566,6 +44601,7 @@ class CostumerServicesController extends Controller
                             'barang_masuk_sortir_id' => $barangMasukSortir->id,
                             'jahit_id' => $barangMasukJahit->id,
                             'finis_id' => $barangMasukFinis->id,
+                             'status' => "Manual Cut"
                         ]);
                         // AKHIR LAPORAN
                     } elseif ($total_hari == 2) {
@@ -44624,6 +44660,7 @@ class CostumerServicesController extends Controller
                             'barang_masuk_sortir_id' => $barangMasukSortir->id,
                             'jahit_id' => $barangMasukJahit->id,
                             'finis_id' => $barangMasukFinis->id,
+                             'status' => "Manual Cut"
                         ]);
                         // AKHIR LAPORAN
                     } elseif ($total_hari == 3) {
@@ -44682,6 +44719,7 @@ class CostumerServicesController extends Controller
                             'barang_masuk_sortir_id' => $barangMasukSortir->id,
                             'jahit_id' => $barangMasukJahit->id,
                             'finis_id' => $barangMasukFinis->id,
+                             'status' => "Manual Cut"
                         ]);
                         // AKHIR LAPORAN
                     } elseif ($total_hari == 4) {
@@ -44740,6 +44778,7 @@ class CostumerServicesController extends Controller
                             'barang_masuk_sortir_id' => $barangMasukSortir->id,
                             'jahit_id' => $barangMasukJahit->id,
                             'finis_id' => $barangMasukFinis->id,
+                             'status' => "Manual Cut"
                         ]);
                         // AKHIR LAPORAN
                     } elseif ($total_hari == 5) {
@@ -44798,6 +44837,7 @@ class CostumerServicesController extends Controller
                             'barang_masuk_sortir_id' => $barangMasukSortir->id,
                             'jahit_id' => $barangMasukJahit->id,
                             'finis_id' => $barangMasukFinis->id,
+                             'status' => "Manual Cut"
                         ]);
                         // AKHIR LAPORAN
                     } elseif ($total_hari == 6) {
@@ -44856,6 +44896,7 @@ class CostumerServicesController extends Controller
                             'barang_masuk_sortir_id' => $barangMasukSortir->id,
                             'jahit_id' => $barangMasukJahit->id,
                             'finis_id' => $barangMasukFinis->id,
+                             'status' => "Manual Cut"
                         ]);
                         // AKHIR LAPORAN
                     } elseif ($total_hari == 7) {
@@ -44914,6 +44955,7 @@ class CostumerServicesController extends Controller
                             'barang_masuk_sortir_id' => $barangMasukSortir->id,
                             'jahit_id' => $barangMasukJahit->id,
                             'finis_id' => $barangMasukFinis->id,
+                             'status' => "Manual Cut"
                         ]);
                         // AKHIR LAPORAN
                     } elseif ($total_hari == 8) {
@@ -44972,6 +45014,7 @@ class CostumerServicesController extends Controller
                             'barang_masuk_sortir_id' => $barangMasukSortir->id,
                             'jahit_id' => $barangMasukJahit->id,
                             'finis_id' => $barangMasukFinis->id,
+                             'status' => "Manual Cut"
                         ]);
                         // AKHIR LAPORAN
                     } elseif ($total_hari == 9) {
@@ -45030,6 +45073,7 @@ class CostumerServicesController extends Controller
                             'barang_masuk_sortir_id' => $barangMasukSortir->id,
                             'jahit_id' => $barangMasukJahit->id,
                             'finis_id' => $barangMasukFinis->id,
+                             'status' => "Manual Cut"
                         ]);
                         // AKHIR LAPORAN
                     } elseif ($total_hari == 10) {
@@ -45088,6 +45132,7 @@ class CostumerServicesController extends Controller
                             'barang_masuk_sortir_id' => $barangMasukSortir->id,
                             'jahit_id' => $barangMasukJahit->id,
                             'finis_id' => $barangMasukFinis->id,
+                             'status' => "Manual Cut"
                         ]);
                         // AKHIR LAPORAN
                     } elseif ($total_hari == 11) {
@@ -45146,6 +45191,7 @@ class CostumerServicesController extends Controller
                             'barang_masuk_sortir_id' => $barangMasukSortir->id,
                             'jahit_id' => $barangMasukJahit->id,
                             'finis_id' => $barangMasukFinis->id,
+                             'status' => "Manual Cut"
                         ]);
                         // AKHIR LAPORAN
                     } elseif ($total_hari >= 12 && $total_hari <= 9999) {
@@ -45204,6 +45250,7 @@ class CostumerServicesController extends Controller
                             'barang_masuk_sortir_id' => $barangMasukSortir->id,
                             'jahit_id' => $barangMasukJahit->id,
                             'finis_id' => $barangMasukFinis->id,
+                             'status' => "Manual Cut"
                         ]);
                         // AKHIR LAPORAN
                     }
@@ -47789,6 +47836,7 @@ class CostumerServicesController extends Controller
                             'barang_masuk_sortir_id' => $barangMasukSortir->id,
                             'jahit_id' => $barangMasukJahit->id,
                             'finis_id' => $barangMasukFinis->id,
+                             'status' => "Manual Cut"
                         ]);
                         // AKHIR LAPORAN
                     } elseif ($total_hari == 2) {
@@ -47847,6 +47895,7 @@ class CostumerServicesController extends Controller
                             'barang_masuk_sortir_id' => $barangMasukSortir->id,
                             'jahit_id' => $barangMasukJahit->id,
                             'finis_id' => $barangMasukFinis->id,
+                             'status' => "Manual Cut"
                         ]);
                         // AKHIR LAPORAN
                     } elseif ($total_hari == 3) {
@@ -47905,6 +47954,7 @@ class CostumerServicesController extends Controller
                             'barang_masuk_sortir_id' => $barangMasukSortir->id,
                             'jahit_id' => $barangMasukJahit->id,
                             'finis_id' => $barangMasukFinis->id,
+                             'status' => "Manual Cut"
                         ]);
                         // AKHIR LAPORAN
                     } elseif ($total_hari == 4) {
@@ -47963,6 +48013,7 @@ class CostumerServicesController extends Controller
                             'barang_masuk_sortir_id' => $barangMasukSortir->id,
                             'jahit_id' => $barangMasukJahit->id,
                             'finis_id' => $barangMasukFinis->id,
+                             'status' => "Manual Cut"
                         ]);
                         // AKHIR LAPORAN
                     } elseif ($total_hari == 5) {
@@ -48021,6 +48072,7 @@ class CostumerServicesController extends Controller
                             'barang_masuk_sortir_id' => $barangMasukSortir->id,
                             'jahit_id' => $barangMasukJahit->id,
                             'finis_id' => $barangMasukFinis->id,
+                             'status' => "Manual Cut"
                         ]);
                         // AKHIR LAPORAN
                     } elseif ($total_hari == 6) {
@@ -48079,6 +48131,7 @@ class CostumerServicesController extends Controller
                             'barang_masuk_sortir_id' => $barangMasukSortir->id,
                             'jahit_id' => $barangMasukJahit->id,
                             'finis_id' => $barangMasukFinis->id,
+                             'status' => "Manual Cut"
                         ]);
                         // AKHIR LAPORAN
                     } elseif ($total_hari == 7) {
@@ -48137,6 +48190,7 @@ class CostumerServicesController extends Controller
                             'barang_masuk_sortir_id' => $barangMasukSortir->id,
                             'jahit_id' => $barangMasukJahit->id,
                             'finis_id' => $barangMasukFinis->id,
+                             'status' => "Manual Cut"
                         ]);
                         // AKHIR LAPORAN
                     } elseif ($total_hari == 8) {
@@ -48195,6 +48249,7 @@ class CostumerServicesController extends Controller
                             'barang_masuk_sortir_id' => $barangMasukSortir->id,
                             'jahit_id' => $barangMasukJahit->id,
                             'finis_id' => $barangMasukFinis->id,
+                             'status' => "Manual Cut"
                         ]);
                         // AKHIR LAPORAN
                     } elseif ($total_hari == 9) {
@@ -48253,6 +48308,7 @@ class CostumerServicesController extends Controller
                             'barang_masuk_sortir_id' => $barangMasukSortir->id,
                             'jahit_id' => $barangMasukJahit->id,
                             'finis_id' => $barangMasukFinis->id,
+                             'status' => "Manual Cut"
                         ]);
                         // AKHIR LAPORAN
                     } elseif ($total_hari == 10) {
@@ -48311,6 +48367,7 @@ class CostumerServicesController extends Controller
                             'barang_masuk_sortir_id' => $barangMasukSortir->id,
                             'jahit_id' => $barangMasukJahit->id,
                             'finis_id' => $barangMasukFinis->id,
+                             'status' => "Manual Cut"
                         ]);
                         // AKHIR LAPORAN
                     } elseif ($total_hari == 11) {
@@ -48369,6 +48426,7 @@ class CostumerServicesController extends Controller
                             'barang_masuk_sortir_id' => $barangMasukSortir->id,
                             'jahit_id' => $barangMasukJahit->id,
                             'finis_id' => $barangMasukFinis->id,
+                             'status' => "Manual Cut"
                         ]);
                         // AKHIR LAPORAN
                     } elseif ($total_hari >= 12 && $total_hari <= 9999) {
@@ -48427,6 +48485,7 @@ class CostumerServicesController extends Controller
                             'barang_masuk_sortir_id' => $barangMasukSortir->id,
                             'jahit_id' => $barangMasukJahit->id,
                             'finis_id' => $barangMasukFinis->id,
+                             'status' => "Manual Cut"
                         ]);
                         // AKHIR LAPORAN
                     }
@@ -51011,6 +51070,7 @@ class CostumerServicesController extends Controller
                             'barang_masuk_sortir_id' => $barangMasukSortir->id,
                             'jahit_id' => $barangMasukJahit->id,
                             'finis_id' => $barangMasukFinis->id,
+                             'status' => "Manual Cut"
                         ]);
                         // AKHIR LAPORAN
                     } elseif ($total_hari == 2) {
@@ -51069,6 +51129,7 @@ class CostumerServicesController extends Controller
                             'barang_masuk_sortir_id' => $barangMasukSortir->id,
                             'jahit_id' => $barangMasukJahit->id,
                             'finis_id' => $barangMasukFinis->id,
+                             'status' => "Manual Cut"
                         ]);
                         // AKHIR LAPORAN
                     } elseif ($total_hari == 3) {
@@ -51127,6 +51188,7 @@ class CostumerServicesController extends Controller
                             'barang_masuk_sortir_id' => $barangMasukSortir->id,
                             'jahit_id' => $barangMasukJahit->id,
                             'finis_id' => $barangMasukFinis->id,
+                             'status' => "Manual Cut"
                         ]);
                         // AKHIR LAPORAN
                     } elseif ($total_hari == 4) {
@@ -51185,6 +51247,7 @@ class CostumerServicesController extends Controller
                             'barang_masuk_sortir_id' => $barangMasukSortir->id,
                             'jahit_id' => $barangMasukJahit->id,
                             'finis_id' => $barangMasukFinis->id,
+                             'status' => "Manual Cut"
                         ]);
                         // AKHIR LAPORAN
                     } elseif ($total_hari == 5) {
@@ -51243,6 +51306,7 @@ class CostumerServicesController extends Controller
                             'barang_masuk_sortir_id' => $barangMasukSortir->id,
                             'jahit_id' => $barangMasukJahit->id,
                             'finis_id' => $barangMasukFinis->id,
+                             'status' => "Manual Cut"
                         ]);
                         // AKHIR LAPORAN
                     } elseif ($total_hari == 6) {
@@ -51301,6 +51365,7 @@ class CostumerServicesController extends Controller
                             'barang_masuk_sortir_id' => $barangMasukSortir->id,
                             'jahit_id' => $barangMasukJahit->id,
                             'finis_id' => $barangMasukFinis->id,
+                             'status' => "Manual Cut"
                         ]);
                         // AKHIR LAPORAN
                     } elseif ($total_hari == 7) {
@@ -51359,6 +51424,7 @@ class CostumerServicesController extends Controller
                             'barang_masuk_sortir_id' => $barangMasukSortir->id,
                             'jahit_id' => $barangMasukJahit->id,
                             'finis_id' => $barangMasukFinis->id,
+                             'status' => "Manual Cut"
                         ]);
                         // AKHIR LAPORAN
                     } elseif ($total_hari == 8) {
@@ -51417,6 +51483,7 @@ class CostumerServicesController extends Controller
                             'barang_masuk_sortir_id' => $barangMasukSortir->id,
                             'jahit_id' => $barangMasukJahit->id,
                             'finis_id' => $barangMasukFinis->id,
+                             'status' => "Manual Cut"
                         ]);
                         // AKHIR LAPORAN
                     } elseif ($total_hari == 9) {
@@ -51475,6 +51542,7 @@ class CostumerServicesController extends Controller
                             'barang_masuk_sortir_id' => $barangMasukSortir->id,
                             'jahit_id' => $barangMasukJahit->id,
                             'finis_id' => $barangMasukFinis->id,
+                             'status' => "Manual Cut"
                         ]);
                         // AKHIR LAPORAN
                     } elseif ($total_hari == 10) {
@@ -51533,6 +51601,7 @@ class CostumerServicesController extends Controller
                             'barang_masuk_sortir_id' => $barangMasukSortir->id,
                             'jahit_id' => $barangMasukJahit->id,
                             'finis_id' => $barangMasukFinis->id,
+                             'status' => "Manual Cut"
                         ]);
                         // AKHIR LAPORAN
                     } elseif ($total_hari == 11) {
@@ -51591,6 +51660,7 @@ class CostumerServicesController extends Controller
                             'barang_masuk_sortir_id' => $barangMasukSortir->id,
                             'jahit_id' => $barangMasukJahit->id,
                             'finis_id' => $barangMasukFinis->id,
+                             'status' => "Manual Cut"
                         ]);
                         // AKHIR LAPORAN
                     } elseif ($total_hari >= 12 && $total_hari <= 9999) {
@@ -51649,6 +51719,7 @@ class CostumerServicesController extends Controller
                             'barang_masuk_sortir_id' => $barangMasukSortir->id,
                             'jahit_id' => $barangMasukJahit->id,
                             'finis_id' => $barangMasukFinis->id,
+                             'status' => "Manual Cut"
                         ]);
                         // AKHIR LAPORAN
                     }
@@ -54234,6 +54305,7 @@ class CostumerServicesController extends Controller
                             'barang_masuk_sortir_id' => $barangMasukSortir->id,
                             'jahit_id' => $barangMasukJahit->id,
                             'finis_id' => $barangMasukFinis->id,
+                             'status' => "Manual Cut"
                         ]);
                         // AKHIR LAPORAN
                     } elseif ($total_hari == 2) {
@@ -54292,6 +54364,7 @@ class CostumerServicesController extends Controller
                             'barang_masuk_sortir_id' => $barangMasukSortir->id,
                             'jahit_id' => $barangMasukJahit->id,
                             'finis_id' => $barangMasukFinis->id,
+                             'status' => "Manual Cut"
                         ]);
                         // AKHIR LAPORAN
                     } elseif ($total_hari == 3) {
@@ -54350,6 +54423,7 @@ class CostumerServicesController extends Controller
                             'barang_masuk_sortir_id' => $barangMasukSortir->id,
                             'jahit_id' => $barangMasukJahit->id,
                             'finis_id' => $barangMasukFinis->id,
+                             'status' => "Manual Cut"
                         ]);
                         // AKHIR LAPORAN
                     } elseif ($total_hari == 4) {
@@ -54408,6 +54482,7 @@ class CostumerServicesController extends Controller
                             'barang_masuk_sortir_id' => $barangMasukSortir->id,
                             'jahit_id' => $barangMasukJahit->id,
                             'finis_id' => $barangMasukFinis->id,
+                             'status' => "Manual Cut"
                         ]);
                         // AKHIR LAPORAN
                     } elseif ($total_hari == 5) {
@@ -54466,6 +54541,7 @@ class CostumerServicesController extends Controller
                             'barang_masuk_sortir_id' => $barangMasukSortir->id,
                             'jahit_id' => $barangMasukJahit->id,
                             'finis_id' => $barangMasukFinis->id,
+                             'status' => "Manual Cut"
                         ]);
                         // AKHIR LAPORAN
                     } elseif ($total_hari == 6) {
@@ -54524,6 +54600,7 @@ class CostumerServicesController extends Controller
                             'barang_masuk_sortir_id' => $barangMasukSortir->id,
                             'jahit_id' => $barangMasukJahit->id,
                             'finis_id' => $barangMasukFinis->id,
+                             'status' => "Manual Cut"
                         ]);
                         // AKHIR LAPORAN
                     } elseif ($total_hari == 7) {
@@ -54582,6 +54659,7 @@ class CostumerServicesController extends Controller
                             'barang_masuk_sortir_id' => $barangMasukSortir->id,
                             'jahit_id' => $barangMasukJahit->id,
                             'finis_id' => $barangMasukFinis->id,
+                             'status' => "Manual Cut"
                         ]);
                         // AKHIR LAPORAN
                     } elseif ($total_hari == 8) {
@@ -54640,6 +54718,7 @@ class CostumerServicesController extends Controller
                             'barang_masuk_sortir_id' => $barangMasukSortir->id,
                             'jahit_id' => $barangMasukJahit->id,
                             'finis_id' => $barangMasukFinis->id,
+                             'status' => "Manual Cut"
                         ]);
                         // AKHIR LAPORAN
                     } elseif ($total_hari == 9) {
@@ -54698,6 +54777,7 @@ class CostumerServicesController extends Controller
                             'barang_masuk_sortir_id' => $barangMasukSortir->id,
                             'jahit_id' => $barangMasukJahit->id,
                             'finis_id' => $barangMasukFinis->id,
+                             'status' => "Manual Cut"
                         ]);
                         // AKHIR LAPORAN
                     } elseif ($total_hari == 10) {
@@ -54756,6 +54836,7 @@ class CostumerServicesController extends Controller
                             'barang_masuk_sortir_id' => $barangMasukSortir->id,
                             'jahit_id' => $barangMasukJahit->id,
                             'finis_id' => $barangMasukFinis->id,
+                             'status' => "Manual Cut"
                         ]);
                         // AKHIR LAPORAN
                     } elseif ($total_hari == 11) {
@@ -54814,6 +54895,7 @@ class CostumerServicesController extends Controller
                             'barang_masuk_sortir_id' => $barangMasukSortir->id,
                             'jahit_id' => $barangMasukJahit->id,
                             'finis_id' => $barangMasukFinis->id,
+                             'status' => "Manual Cut"
                         ]);
                         // AKHIR LAPORAN
                     } elseif ($total_hari >= 12 && $total_hari <= 9999) {
@@ -54872,6 +54954,7 @@ class CostumerServicesController extends Controller
                             'barang_masuk_sortir_id' => $barangMasukSortir->id,
                             'jahit_id' => $barangMasukJahit->id,
                             'finis_id' => $barangMasukFinis->id,
+                             'status' => "Manual Cut"
                         ]);
                         // AKHIR LAPORAN
                     }
@@ -57460,6 +57543,7 @@ class CostumerServicesController extends Controller
                             'barang_masuk_sortir_id' => $barangMasukSortir->id,
                             'jahit_id' => $barangMasukJahit->id,
                             'finis_id' => $barangMasukFinis->id,
+                             'status' => "Manual Cut"
                         ]);
                         // AKHIR LAPORAN
                     } elseif ($total_hari == 2) {
@@ -57518,6 +57602,7 @@ class CostumerServicesController extends Controller
                             'barang_masuk_sortir_id' => $barangMasukSortir->id,
                             'jahit_id' => $barangMasukJahit->id,
                             'finis_id' => $barangMasukFinis->id,
+                             'status' => "Manual Cut"
                         ]);
                         // AKHIR LAPORAN
                     } elseif ($total_hari == 3) {
@@ -57576,6 +57661,7 @@ class CostumerServicesController extends Controller
                             'barang_masuk_sortir_id' => $barangMasukSortir->id,
                             'jahit_id' => $barangMasukJahit->id,
                             'finis_id' => $barangMasukFinis->id,
+                             'status' => "Manual Cut"
                         ]);
                         // AKHIR LAPORAN
                     } elseif ($total_hari == 4) {
@@ -57634,6 +57720,7 @@ class CostumerServicesController extends Controller
                             'barang_masuk_sortir_id' => $barangMasukSortir->id,
                             'jahit_id' => $barangMasukJahit->id,
                             'finis_id' => $barangMasukFinis->id,
+                             'status' => "Manual Cut"
                         ]);
                         // AKHIR LAPORAN
                     } elseif ($total_hari == 5) {
@@ -57692,6 +57779,7 @@ class CostumerServicesController extends Controller
                             'barang_masuk_sortir_id' => $barangMasukSortir->id,
                             'jahit_id' => $barangMasukJahit->id,
                             'finis_id' => $barangMasukFinis->id,
+                             'status' => "Manual Cut"
                         ]);
                         // AKHIR LAPORAN
                     } elseif ($total_hari == 6) {
@@ -57750,6 +57838,7 @@ class CostumerServicesController extends Controller
                             'barang_masuk_sortir_id' => $barangMasukSortir->id,
                             'jahit_id' => $barangMasukJahit->id,
                             'finis_id' => $barangMasukFinis->id,
+                             'status' => "Manual Cut"
                         ]);
                         // AKHIR LAPORAN
                     } elseif ($total_hari == 7) {
@@ -57808,6 +57897,7 @@ class CostumerServicesController extends Controller
                             'barang_masuk_sortir_id' => $barangMasukSortir->id,
                             'jahit_id' => $barangMasukJahit->id,
                             'finis_id' => $barangMasukFinis->id,
+                             'status' => "Manual Cut"
                         ]);
                         // AKHIR LAPORAN
                     } elseif ($total_hari == 8) {
@@ -57866,6 +57956,7 @@ class CostumerServicesController extends Controller
                             'barang_masuk_sortir_id' => $barangMasukSortir->id,
                             'jahit_id' => $barangMasukJahit->id,
                             'finis_id' => $barangMasukFinis->id,
+                             'status' => "Manual Cut"
                         ]);
                         // AKHIR LAPORAN
                     } elseif ($total_hari == 9) {
@@ -57924,6 +58015,7 @@ class CostumerServicesController extends Controller
                             'barang_masuk_sortir_id' => $barangMasukSortir->id,
                             'jahit_id' => $barangMasukJahit->id,
                             'finis_id' => $barangMasukFinis->id,
+                             'status' => "Manual Cut"
                         ]);
                         // AKHIR LAPORAN
                     } elseif ($total_hari == 10) {
@@ -57982,6 +58074,7 @@ class CostumerServicesController extends Controller
                             'barang_masuk_sortir_id' => $barangMasukSortir->id,
                             'jahit_id' => $barangMasukJahit->id,
                             'finis_id' => $barangMasukFinis->id,
+                             'status' => "Manual Cut"
                         ]);
                         // AKHIR LAPORAN
                     } elseif ($total_hari == 11) {
@@ -58040,6 +58133,7 @@ class CostumerServicesController extends Controller
                             'barang_masuk_sortir_id' => $barangMasukSortir->id,
                             'jahit_id' => $barangMasukJahit->id,
                             'finis_id' => $barangMasukFinis->id,
+                             'status' => "Manual Cut"
                         ]);
                         // AKHIR LAPORAN
                     } elseif ($total_hari >= 12 && $total_hari <= 9999) {
@@ -58098,6 +58192,7 @@ class CostumerServicesController extends Controller
                             'barang_masuk_sortir_id' => $barangMasukSortir->id,
                             'jahit_id' => $barangMasukJahit->id,
                             'finis_id' => $barangMasukFinis->id,
+                            'status' => "Manual Cut"
                         ]);
                         // AKHIR LAPORAN
                     }
@@ -58119,6 +58214,7 @@ class CostumerServicesController extends Controller
             'Users',
             'UsersOrder',
             'UsersLk',
+            'UserMesin',
             'Gambar',
 
             'BarangMasukCostumerServicesLkPlyer',
@@ -58153,9 +58249,6 @@ class CostumerServicesController extends Controller
             'BarangMasukCostumerServicesLkCelana1.KeraCealana1',
             'BarangMasukCostumerServicesLkCelana1.CelanaCelana1',
         )->findOrFail($id);
-
-
-        //  return response()->json($dataLk);
 
         view()->share('dataLk', $dataLk->BarangMasukDisainer->nama_tim);
 

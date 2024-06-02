@@ -48,7 +48,7 @@
                             <tr>
                                 <td>
                                     <strong style="text-transform: uppercase">{{
-                                        $laporan->BarangMasukCs->kota_produksi
+                                        $laporan->kota
                                         }}</strong>
                                 </td>
                                 <td>

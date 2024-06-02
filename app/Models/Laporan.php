@@ -21,6 +21,7 @@ class Laporan extends Model
         'barang_masuk_sortir_id',
         'jahit_id',
         'finis_id',
+        'keterangan',
         'status'
     ];
 

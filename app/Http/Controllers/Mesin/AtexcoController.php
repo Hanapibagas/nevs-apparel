@@ -62,6 +62,8 @@ class AtexcoController extends Controller
                     return $group->first();
                 });
             $dataMasuk = $dataMasuk->values()->all();
+
+            // return response()->json($dataMasuk);
         } elseif ($user->asal_kota == 'jakarta') {
             $dataMasuk = DataPress::with('BarangMasukCs', 'BarangMasukLayout', 'BarangMasukCs.BarangMasukDisainer')
                 ->where('tanda_telah_mengerjakan', 0)

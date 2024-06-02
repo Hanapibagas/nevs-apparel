@@ -158,6 +158,7 @@ class LayoutController extends Controller
             'UsersOrder',
             'UsersLk',
             'Gambar',
+            'UserMesin',
 
             'BarangMasukCostumerServicesLkPlyer',
             'BarangMasukCostumerServicesLkPlyer.LenganPlayer',
@@ -852,12 +853,77 @@ class LayoutController extends Controller
             ]);
         }
 
-        if ($dataPlayer->jenis_mesin == 'mimaki') {
+        // if ($dataPlayer->jenis_mesin == 'mimaki') {
+        //     if ($request->player_id) {
+        //         $laporanPlayer = Laporan::where('barang_masuk_layout_id', $request->player_id)->first();
+        //         if ($laporanPlayer) {
+        //             $laporanPlayer->update([
+        //                 'status' => 'Mesin Mimaki',
+        //             ]);
+        //         }
+        //     }
+        //     if ($request->pelatih_id) {
+        //         $laporanPelatih = Laporan::where('barang_masuk_layout_id', $request->pelatih_id)->first();
+        //         if ($laporanPelatih) {
+        //             $laporanPelatih->update([
+        //                 'status' => 'Mesin Mimaki',
+        //             ]);
+        //         }
+        //     }
+        //     if ($request->kiper_id) {
+        //         $laporanKiper = Laporan::where('barang_masuk_layout_id', $request->kiper_id)->first();
+        //         if ($laporanKiper) {
+        //             $laporanKiper->update([
+        //                 'status' => 'Mesin Mimaki',
+        //             ]);
+        //         }
+        //     }
+        //     if ($request->lk1_id) {
+        //         $laporan1 = Laporan::where('barang_masuk_layout_id', $request->lk1_id)->first();
+        //         if ($laporan1) {
+        //             $laporan1->update([
+        //                 'status' => 'Mesin Mimaki',
+        //             ]);
+        //         }
+        //     }
+        //     if ($request->celana_player_id) {
+        //         $laporanCealanaPlayer = Laporan::where('barang_masuk_layout_id', $request->celana_player_id)->first();
+        //         if ($laporanCealanaPlayer) {
+        //             $laporanCealanaPlayer->update([
+        //                 'status' => 'Mesin Mimaki',
+        //             ]);
+        //         }
+        //     }
+        //     if ($request->celana_pelatih_id) {
+        //         $laporanCelanaPelatih = Laporan::where('barang_masuk_layout_id', $request->celana_pelatih_id)->first();
+        //         if ($laporanCelanaPelatih) {
+        //             $laporanCelanaPelatih->update([
+        //                 'status' => 'Mesin Mimaki',
+        //             ]);
+        //         }
+        //     }
+        //     if ($request->celana_kiper_id) {
+        //         $laporanCelanaKiper = Laporan::where('barang_masuk_layout_id', $request->celana_kiper_id)->first();
+        //         if ($laporanCelanaKiper) {
+        //             $laporanCelanaKiper->update([
+        //                 'status' => 'Mesin Mimaki',
+        //             ]);
+        //         }
+        //     }
+        //     if ($request->celana_1_id) {
+        //         $laporanCelana1 = Laporan::where('barang_masuk_layout_id', $request->celana_1_id)->first();
+        //         if ($laporanCelana1) {
+        //             $laporanCelana1->update([
+        //                 'status' => 'Mesin Mimaki',
+        //             ]);
+        //         }
+        //     }
+        // } elseif ($dataPlayer->jenis_mesin == 'atexco') {
             if ($request->player_id) {
                 $laporanPlayer = Laporan::where('barang_masuk_layout_id', $request->player_id)->first();
                 if ($laporanPlayer) {
                     $laporanPlayer->update([
-                        'status' => 'Mesin Mimaki',
+                        'status' => 'Mesin Press',
                     ]);
                 }
             }
@@ -865,7 +931,7 @@ class LayoutController extends Controller
                 $laporanPelatih = Laporan::where('barang_masuk_layout_id', $request->pelatih_id)->first();
                 if ($laporanPelatih) {
                     $laporanPelatih->update([
-                        'status' => 'Mesin Mimaki',
+                        'status' => 'Mesin Press',
                     ]);
                 }
             }
@@ -873,7 +939,7 @@ class LayoutController extends Controller
                 $laporanKiper = Laporan::where('barang_masuk_layout_id', $request->kiper_id)->first();
                 if ($laporanKiper) {
                     $laporanKiper->update([
-                        'status' => 'Mesin Mimaki',
+                        'status' => 'Mesin Press',
                     ]);
                 }
             }
@@ -881,7 +947,7 @@ class LayoutController extends Controller
                 $laporan1 = Laporan::where('barang_masuk_layout_id', $request->lk1_id)->first();
                 if ($laporan1) {
                     $laporan1->update([
-                        'status' => 'Mesin Mimaki',
+                        'status' => 'Mesin Press',
                     ]);
                 }
             }
@@ -889,7 +955,7 @@ class LayoutController extends Controller
                 $laporanCealanaPlayer = Laporan::where('barang_masuk_layout_id', $request->celana_player_id)->first();
                 if ($laporanCealanaPlayer) {
                     $laporanCealanaPlayer->update([
-                        'status' => 'Mesin Mimaki',
+                        'status' => 'Mesin Press',
                     ]);
                 }
             }
@@ -897,7 +963,7 @@ class LayoutController extends Controller
                 $laporanCelanaPelatih = Laporan::where('barang_masuk_layout_id', $request->celana_pelatih_id)->first();
                 if ($laporanCelanaPelatih) {
                     $laporanCelanaPelatih->update([
-                        'status' => 'Mesin Mimaki',
+                        'status' => 'Mesin Press',
                     ]);
                 }
             }
@@ -905,7 +971,7 @@ class LayoutController extends Controller
                 $laporanCelanaKiper = Laporan::where('barang_masuk_layout_id', $request->celana_kiper_id)->first();
                 if ($laporanCelanaKiper) {
                     $laporanCelanaKiper->update([
-                        'status' => 'Mesin Mimaki',
+                        'status' => 'Mesin Press',
                     ]);
                 }
             }
@@ -913,76 +979,11 @@ class LayoutController extends Controller
                 $laporanCelana1 = Laporan::where('barang_masuk_layout_id', $request->celana_1_id)->first();
                 if ($laporanCelana1) {
                     $laporanCelana1->update([
-                        'status' => 'Mesin Mimaki',
+                        'status' => 'Mesin Press',
                     ]);
                 }
             }
-        } elseif ($dataPlayer->jenis_mesin == 'atexco') {
-            if ($request->player_id) {
-                $laporanPlayer = Laporan::where('barang_masuk_layout_id', $request->player_id)->first();
-                if ($laporanPlayer) {
-                    $laporanPlayer->update([
-                        'status' => 'Mesin Atexco',
-                    ]);
-                }
-            }
-            if ($request->pelatih_id) {
-                $laporanPelatih = Laporan::where('barang_masuk_layout_id', $request->pelatih_id)->first();
-                if ($laporanPelatih) {
-                    $laporanPelatih->update([
-                        'status' => 'Mesin Atexco',
-                    ]);
-                }
-            }
-            if ($request->kiper_id) {
-                $laporanKiper = Laporan::where('barang_masuk_layout_id', $request->kiper_id)->first();
-                if ($laporanKiper) {
-                    $laporanKiper->update([
-                        'status' => 'Mesin Atexco',
-                    ]);
-                }
-            }
-            if ($request->lk1_id) {
-                $laporan1 = Laporan::where('barang_masuk_layout_id', $request->lk1_id)->first();
-                if ($laporan1) {
-                    $laporan1->update([
-                        'status' => 'Mesin Atexco',
-                    ]);
-                }
-            }
-            if ($request->celana_player_id) {
-                $laporanCealanaPlayer = Laporan::where('barang_masuk_layout_id', $request->celana_player_id)->first();
-                if ($laporanCealanaPlayer) {
-                    $laporanCealanaPlayer->update([
-                        'status' => 'Mesin Atexco',
-                    ]);
-                }
-            }
-            if ($request->celana_pelatih_id) {
-                $laporanCelanaPelatih = Laporan::where('barang_masuk_layout_id', $request->celana_pelatih_id)->first();
-                if ($laporanCelanaPelatih) {
-                    $laporanCelanaPelatih->update([
-                        'status' => 'Mesin Atexco',
-                    ]);
-                }
-            }
-            if ($request->celana_kiper_id) {
-                $laporanCelanaKiper = Laporan::where('barang_masuk_layout_id', $request->celana_kiper_id)->first();
-                if ($laporanCelanaKiper) {
-                    $laporanCelanaKiper->update([
-                        'status' => 'Mesin Atexco',
-                    ]);
-                }
-            }
-            if ($request->celana_1_id) {
-                $laporanCelana1 = Laporan::where('barang_masuk_layout_id', $request->celana_1_id)->first();
-                if ($laporanCelana1) {
-                    $laporanCelana1->update([
-                        'status' => 'Mesin Atexco',
-                    ]);
-                }
-            }
-        }
+        // }
 
         return redirect()->route('getIndexLaporanLk')->with('success', 'Selamat data yang anda input telah terkirim!');
     }

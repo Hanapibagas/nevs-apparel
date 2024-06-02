@@ -122,7 +122,7 @@
     <div class="container">
         <p>Admin : {{ $dataLk->UsersOrder->name }}</p> <br>
         <p style="margin-top: -56px; margin-left: 400px">Disainer : {{ $dataLk->Users->name }}</p> <br>
-        <p style="margin-top: -40px;">Mesin Print : {{ $dataLk->jenis_mesin }}</p><br>
+        <p style="margin-top: -40px;">Mesin Print : {{ $dataLk->UserMesin->name }}</p><br>
         <p style="margin-left: 400px; margin-top: -60px;">Layout : {{ $dataLk->UsersLk->name }}</p> <br>
         <p style="margin-top: -45px;">Jenis Sablon : {{
             $dataLk->BarangMasukCostumerServicesLkPlyer->first()->jenis_sablon_baju_player }}</p> <br>
@@ -137,8 +137,22 @@
     @endif
 
     @if ($gambar->file_baju_pelatih)
+    <h4 style="text-transform: uppercase; margin-top: -40px;  page-break-before: always;">{{ $dataLk->kota_produksi }}</h4><br>
+    <h3 style="text-transform: uppercase; text-align: center; margin-top: -60px">
+        {{$dataLk->BarangMasukDisainer->nama_tim }} <br> {{ $dataLk->no_order }}</h3><br>
+    <h4 style="text-transform: uppercase; margin-left: 541px; margin-top: -80px">
+        @if ($dataLk->ket_hari == 'Express')
+        <span style="color: red">DEADLINE Express <br> </span> <span style="color: red;margin-left: 40px;">{{
+            $formattedDari
+            }}</span>
+        @elseif ($dataLk->ket_hari == 'Normal')
+        DEADLINE Normal <br> <span style="margin-left: 40px;">{{
+            $formattedDari
+            }}</span>
+        @endif
+    </h4><br>
     <table
-        style="width: 110%; margin-left: -35px; text-transform: uppercase; margin-top: -30px;  page-break-before: always;">
+        style="width: 110%; margin-left: -35px; text-transform: uppercase; margin-top: -50px;">
         <tr>
             <style>
                 .gambarpelatih {
@@ -216,7 +230,7 @@
     <div class="container">
         <p>Admin : {{ $dataLk->UsersOrder->name }}</p> <br>
         <p style="margin-top: -56px; margin-left: 400px">Disainer : {{ $dataLk->Users->name }}</p> <br>
-        <p style="margin-top: -40px;">Mesin Print : {{ $dataLk->jenis_mesin }}</p><br>
+        <p style="margin-top: -40px;">Mesin Print : {{ $dataLk->UserMesin->name }}</p><br>
         <p style="margin-left: 400px; margin-top: -60px;">Layout : {{ $dataLk->UsersLk->name }}</p> <br>
         <p style="margin-top: -45px;">Jenis Sablon : {{
             $dataLk->BarangMasukCostumerServicesLkPelatih->first()->jenis_sablon_baju_pelatih }}</p> <br>
@@ -231,8 +245,22 @@
     @endif
 
     @if ($gambar->file_baju_kiper)
+    <h4 style="text-transform: uppercase; margin-top: -40px;  page-break-before: always;">{{ $dataLk->kota_produksi }}</h4><br>
+    <h3 style="text-transform: uppercase; text-align: center; margin-top: -60px">
+        {{$dataLk->BarangMasukDisainer->nama_tim }} <br> {{ $dataLk->no_order }}</h3><br>
+    <h4 style="text-transform: uppercase; margin-left: 541px; margin-top: -80px">
+        @if ($dataLk->ket_hari == 'Express')
+        <span style="color: red">DEADLINE Express <br> </span> <span style="color: red;margin-left: 40px;">{{
+            $formattedDari
+            }}</span>
+        @elseif ($dataLk->ket_hari == 'Normal')
+        DEADLINE Normal <br> <span style="margin-left: 40px;">{{
+            $formattedDari
+            }}</span>
+        @endif
+    </h4><br>
     <table
-        style="width: 110%; margin-left: -35px; text-transform: uppercase; margin-top: -30px;  page-break-before: always;">
+        style="width: 110%; margin-left: -35px; text-transform: uppercase; margin-top: -50px;">
         <tr>
             <style>
                 .gambarkiper {
@@ -310,7 +338,7 @@
     <div class="container">
         <p>Admin : {{ $dataLk->UsersOrder->name }}</p> <br>
         <p style="margin-top: -56px; margin-left: 400px">Disainer : {{ $dataLk->Users->name }}</p> <br>
-        <p style="margin-top: -40px;">Mesin Print : {{ $dataLk->jenis_mesin }}</p><br>
+        <p style="margin-top: -40px;">Mesin Print : {{ $dataLk->UserMesin->name }}</p><br>
         <p style="margin-left: 400px; margin-top: -60px;">Layout : {{ $dataLk->UsersLk->name }}</p> <br>
         <p style="margin-top: -45px;">Jenis Sablon : {{
             $dataLk->BarangMasukCostumerServicesLkKiper->first()->jenis_sablon_baju_kiper }}</p> <br>
@@ -325,8 +353,22 @@
     @endif
 
     @if ($gambar->file_baju_1)
+    <h4 style="text-transform: uppercase; margin-top: -40px;  page-break-before: always;">{{ $dataLk->kota_produksi }}</h4><br>
+    <h3 style="text-transform: uppercase; text-align: center; margin-top: -60px">
+        {{$dataLk->BarangMasukDisainer->nama_tim }} <br> {{ $dataLk->no_order }}</h3><br>
+    <h4 style="text-transform: uppercase; margin-left: 541px; margin-top: -80px">
+        @if ($dataLk->ket_hari == 'Express')
+        <span style="color: red">DEADLINE Express <br> </span> <span style="color: red;margin-left: 40px;">{{
+            $formattedDari
+            }}</span>
+        @elseif ($dataLk->ket_hari == 'Normal')
+        DEADLINE Normal <br> <span style="margin-left: 40px;">{{
+            $formattedDari
+            }}</span>
+        @endif
+    </h4><br>
     <table
-        style="width: 110%; margin-left: -35px; text-transform: uppercase; margin-top: -30px;  page-break-before: always;">
+        style="width: 110%; margin-left: -35px; text-transform: uppercase; margin-top: -50px;">
         <tr>
             <style>
                 .gambarbaju1 {
@@ -404,7 +446,7 @@
     <div class="container">
         <p>Admin : {{ $dataLk->UsersOrder->name }}</p> <br>
         <p style="margin-top: -56px; margin-left: 400px">Disainer : {{ $dataLk->Users->name }}</p> <br>
-        <p style="margin-top: -40px;">Mesin Print : {{ $dataLk->jenis_mesin }}</p><br>
+        <p style="margin-top: -40px;">Mesin Print : {{ $dataLk->UserMesin->name }}</p><br>
         <p style="margin-left: 400px; margin-top: -60px;">Layout : {{ $dataLk->UsersLk->name }}</p> <br>
         <p style="margin-top: -45px;">Jenis Sablon : {{
             $dataLk->BarangMasukCostumerServicesLk1->first()->jenis_sablon_baju_1 }}</p> <br>
@@ -419,8 +461,22 @@
     @endif
 
     @if ($gambar->file_celana_player)
+    <h4 style="text-transform: uppercase; margin-top: -40px;  page-break-before: always;">{{ $dataLk->kota_produksi }}</h4><br>
+    <h3 style="text-transform: uppercase; text-align: center; margin-top: -60px">
+        {{$dataLk->BarangMasukDisainer->nama_tim }} <br> {{ $dataLk->no_order }}</h3><br>
+    <h4 style="text-transform: uppercase; margin-left: 541px; margin-top: -80px">
+        @if ($dataLk->ket_hari == 'Express')
+        <span style="color: red">DEADLINE Express <br> </span> <span style="color: red;margin-left: 40px;">{{
+            $formattedDari
+            }}</span>
+        @elseif ($dataLk->ket_hari == 'Normal')
+        DEADLINE Normal <br> <span style="margin-left: 40px;">{{
+            $formattedDari
+            }}</span>
+        @endif
+    </h4><br>
     <table
-        style="width: 110%; margin-left: -35px; text-transform: uppercase; margin-top: -30px;  page-break-before: always;">
+        style="width: 110%; margin-left: -35px; text-transform: uppercase; margin-top: -50px;">
         <tr>
             <style>
                 .gambarcelanaplayer {
@@ -498,7 +554,7 @@
     <div class="container">
         <p>Admin : {{ $dataLk->UsersOrder->name }}</p> <br>
         <p style="margin-top: -56px; margin-left: 400px">Disainer : {{ $dataLk->Users->name }}</p> <br>
-        <p style="margin-top: -40px;">Mesin Print : {{ $dataLk->jenis_mesin }}</p><br>
+        <p style="margin-top: -40px;">Mesin Print : {{ $dataLk->UserMesin->name }}</p><br>
         <p style="margin-left: 400px; margin-top: -60px;">Layout : {{ $dataLk->UsersLk->name }}</p> <br>
         <p style="margin-top: -45px;">Jenis Sablon : {{
             $dataLk->BarangMasukCostumerServicesLkCelanaPlyer->first()->jenis_sablon_celana_player }}</p> <br>
@@ -513,8 +569,22 @@
     @endif
 
     @if ($gambar->file_celana_pelatih)
+    <h4 style="text-transform: uppercase; margin-top: -40px;  page-break-before: always;">{{ $dataLk->kota_produksi }}</h4><br>
+    <h3 style="text-transform: uppercase; text-align: center; margin-top: -60px">
+        {{$dataLk->BarangMasukDisainer->nama_tim }} <br> {{ $dataLk->no_order }}</h3><br>
+    <h4 style="text-transform: uppercase; margin-left: 541px; margin-top: -80px">
+        @if ($dataLk->ket_hari == 'Express')
+        <span style="color: red">DEADLINE Express <br> </span> <span style="color: red;margin-left: 40px;">{{
+            $formattedDari
+            }}</span>
+        @elseif ($dataLk->ket_hari == 'Normal')
+        DEADLINE Normal <br> <span style="margin-left: 40px;">{{
+            $formattedDari
+            }}</span>
+        @endif
+    </h4><br>
     <table
-        style="width: 110%; margin-left: -35px; text-transform: uppercase; margin-top: -30px;  page-break-before: always;">
+        style="width: 110%; margin-left: -35px; text-transform: uppercase; margin-top: -50px;">
         <tr>
             <style>
                 .gambarcelanapelatih {
@@ -592,7 +662,7 @@
     <div class="container">
         <p>Admin : {{ $dataLk->UsersOrder->name }}</p> <br>
         <p style="margin-top: -56px; margin-left: 400px">Disainer : {{ $dataLk->Users->name }}</p> <br>
-        <p style="margin-top: -40px;">Mesin Print : {{ $dataLk->jenis_mesin }}</p><br>
+        <p style="margin-top: -40px;">Mesin Print : {{ $dataLk->UserMesin->name }}</p><br>
         <p style="margin-left: 400px; margin-top: -60px;">Layout : {{ $dataLk->UsersLk->name }}</p> <br>
         <p style="margin-top: -45px;">Jenis Sablon : {{
             $dataLk->BarangMasukCostumerServicesLkCelanaPelatih->first()->jenis_sablon_celana_pelatih }}</p> <br>
@@ -607,8 +677,22 @@
     @endif
 
     @if ($gambar->file_celana_kiper)
+    <h4 style="text-transform: uppercase; margin-top: -40px;  page-break-before: always;">{{ $dataLk->kota_produksi }}</h4><br>
+    <h3 style="text-transform: uppercase; text-align: center; margin-top: -60px">
+        {{$dataLk->BarangMasukDisainer->nama_tim }} <br> {{ $dataLk->no_order }}</h3><br>
+    <h4 style="text-transform: uppercase; margin-left: 541px; margin-top: -80px">
+        @if ($dataLk->ket_hari == 'Express')
+        <span style="color: red">DEADLINE Express <br> </span> <span style="color: red;margin-left: 40px;">{{
+            $formattedDari
+            }}</span>
+        @elseif ($dataLk->ket_hari == 'Normal')
+        DEADLINE Normal <br> <span style="margin-left: 40px;">{{
+            $formattedDari
+            }}</span>
+        @endif
+    </h4><br>
     <table
-        style="width: 110%; margin-left: -35px; text-transform: uppercase; margin-top: -30px;  page-break-before: always;">
+        style="width: 110%; margin-left: -35px; text-transform: uppercase; margin-top: -50px;">
         <tr>
             <style>
                 .gambarcelanakiper {
@@ -686,7 +770,7 @@
     <div class="container">
         <p>Admin : {{ $dataLk->UsersOrder->name }}</p> <br>
         <p style="margin-top: -56px; margin-left: 400px">Disainer : {{ $dataLk->Users->name }}</p> <br>
-        <p style="margin-top: -40px;">Mesin Print : {{ $dataLk->jenis_mesin }}</p><br>
+        <p style="margin-top: -40px;">Mesin Print : {{ $dataLk->UserMesin->name }}</p><br>
         <p style="margin-left: 400px; margin-top: -60px;">Layout : {{ $dataLk->UsersLk->name }}</p> <br>
         <p style="margin-top: -45px;">Jenis Sablon : {{
             $dataLk->BarangMasukCostumerServicesLkCelanaKiper->first()->jenis_sablon_celana_kiper }}</p> <br>
@@ -701,8 +785,22 @@
     @endif
 
     @if ($gambar->file_celana_1)
+    <h4 style="text-transform: uppercase; margin-top: -40px;  page-break-before: always;">{{ $dataLk->kota_produksi }}</h4><br>
+    <h3 style="text-transform: uppercase; text-align: center; margin-top: -60px">
+        {{$dataLk->BarangMasukDisainer->nama_tim }} <br> {{ $dataLk->no_order }}</h3><br>
+    <h4 style="text-transform: uppercase; margin-left: 541px; margin-top: -80px">
+        @if ($dataLk->ket_hari == 'Express')
+        <span style="color: red">DEADLINE Express <br> </span> <span style="color: red;margin-left: 40px;">{{
+            $formattedDari
+            }}</span>
+        @elseif ($dataLk->ket_hari == 'Normal')
+        DEADLINE Normal <br> <span style="margin-left: 40px;">{{
+            $formattedDari
+            }}</span>
+        @endif
+    </h4><br>
     <table
-        style="width: 110%; margin-left: -35px; text-transform: uppercase; margin-top: -30px;  page-break-before: always;">
+        style="width: 110%; margin-left: -35px; text-transform: uppercase; margin-top: -50px;">
         <tr>
             <style>
                 .gambarcealana1 {
@@ -780,7 +878,7 @@
     <div class="container">
         <p>Admin : {{ $dataLk->UsersOrder->name }}</p> <br>
         <p style="margin-top: -56px; margin-left: 400px">Disainer : {{ $dataLk->Users->name }}</p> <br>
-        <p style="margin-top: -40px;">Mesin Print : {{ $dataLk->jenis_mesin }}</p><br>
+        <p style="margin-top: -40px;">Mesin Print : {{ $dataLk->UserMesin->name }}</p><br>
         <p style="margin-left: 400px; margin-top: -60px;">Layout : {{ $dataLk->UsersLk->name }}</p> <br>
         <p style="margin-top: -45px;">Jenis Sablon : {{
             $dataLk->BarangMasukCostumerServicesLkCelana1->first()->jenis_sablon_celana_1 }}</p> <br>
