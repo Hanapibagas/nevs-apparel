@@ -215,9 +215,9 @@ class DisainerController extends Controller
             $fileCelana1 = $request->file('file_celana_1')->store('file-dari-disainer-to-Cs-celana', 'public');
         }
         if ($request->file('file_corel_disainer')) {
-            // $uploadFile = $request->file('file_corel_disainer');
-            // $originalFileName = $uploadFile->getClientOriginalName();
-            $fileCorelDisainer = $request->file('file_corel_disainer')->store('file-corel-disainer', 'public');
+            $uploadFile = $request->file('file_corel_disainer');
+            $originalFileName = $uploadFile->getClientOriginalName();
+            $fileCorelDisainer = $uploadFile->storeAs('file-corel-disainer', $originalFileName, 'public');
         } else {
             return redirect()->back()->with('error', 'File Corel Disainer harus diisi!');
         }

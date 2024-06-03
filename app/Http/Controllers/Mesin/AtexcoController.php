@@ -577,7 +577,8 @@ class AtexcoController extends Controller
             'BarangMasukCostumerServicesLkCelana1.CelanaCelana1',
         )->findOrFail($id);
 
-        $layout = BarangMasukDatalayout::with('GamarTangkaplayar')->where('barang_masuk_id', $dataLk->BarangMasukDisainer->id)->get();
+        $layout = BarangMasukDatalayout::with('GamarTangkaplayar')->where('barang_masuk_id', $id)->get();
+        // return response()->json($layout);
 
         view()->share('dataLk', $dataLk->BarangMasukDisainer->nama_tim);
 
