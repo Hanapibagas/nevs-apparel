@@ -177,7 +177,7 @@ class CostumerServicesController extends Controller
                 $total_hari--;
             }
         }
-        if ($total_hari >= 1 && $total_hari <= 8) {
+        if ($total_hari >= 1 && $total_hari <= 9) {
             $keterangan = "Express";
         } else {
             $keterangan = "Normal";
@@ -26773,7 +26773,7 @@ class CostumerServicesController extends Controller
                 $total_hari--;
             }
         }
-        if ($total_hari >= 1 && $total_hari <= 8) {
+        if ($total_hari >= 1 && $total_hari <= 9) {
             $keterangan = "Express";
         } else {
             $keterangan = "Normal";
@@ -26803,6 +26803,7 @@ class CostumerServicesController extends Controller
             'total_celana_1' => $request->total_celana_1,
 
             'keterangan_lengkap' => $request->keterangan_lengkap,
+            'tanggal_masuk' => Carbon::now(),
 
             'aksi' => '1',
             'tanda_telah_mengerjakan' => '1',

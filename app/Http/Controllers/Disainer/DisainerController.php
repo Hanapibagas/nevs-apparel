@@ -230,7 +230,7 @@ class DisainerController extends Controller
             'jenis_mesin' => $request->jenis_mesin,
 
             'file_corel_disainer' => $fileCorelDisainer,
-            'tanggal_masuk' => Carbon::now(),
+            // 'tanggal_masuk' => Carbon::now(),
         ]);
 
         Gambar::create([
