@@ -26763,7 +26763,10 @@ class CostumerServicesController extends Controller
         // return response()->json($request->all());
         $lk = BarangMasukCostumerServices::with('BarangMasukDisainer.DataMesinCs.User', 'GambarCreateLK')->find($id);
 
-        // return response()->json($lk);
+        $lk->update([
+            'tanggal_masuk' => Carbon::now(),
+        ]);
+
         // PENENTUAN TANGGAL
         $tanggal_masuk = \Carbon\Carbon::parse($lk->tanggal_masuk);
         $deadline = \Carbon\Carbon::parse($request->deadline);
@@ -26803,7 +26806,6 @@ class CostumerServicesController extends Controller
             'total_celana_1' => $request->total_celana_1,
 
             'keterangan_lengkap' => $request->keterangan_lengkap,
-            'tanggal_masuk' => Carbon::now(),
 
             'aksi' => '1',
             'tanda_telah_mengerjakan' => '1',
