@@ -43,21 +43,22 @@
                                 <th>aksi</th>
                             </tr>
                         </thead>
-                        @php
+                        {{-- @php
                         function calculateWorkingDays($startDate, $endDate) {
                         $start = new DateTime($startDate);
                         $end = new DateTime($endDate);
+                        $end->modify('+1 day');
                         $interval = DateInterval::createFromDateString('1 day');
                         $period = new DatePeriod($start, $interval, $end);
                         $workingDays = 0;
                         foreach ($period as $day) {
-                        if ($day->format('w') != 0) {
-                        $workingDays++;
-                        }
+                            if ($day->format('N') < 7) {
+                                $workingDays++;
+                            }
                         }
                         return $workingDays;
                         }
-                        @endphp
+                        @endphp --}}
                         <tbody>
                             @foreach ( $oderCs as $key => $disainers )
                             <tr>
@@ -66,13 +67,14 @@
                                 <td>{{ $disainers->BarangMasukDisainer->nama_tim }}</td>
                                 <td> {{ $disainers->UsersLk->name }} </td>
                                 <td>
-                                    {{
-                                    calculateWorkingDays($disainers->tanggal_masuk, $disainers->deadline) }} Hari
+                                    {{-- {{
+                                    calculateWorkingDays($disainers->tanggal_masuk, $disainers->deadline) }} Hari --}}
                                     @php
-                                    $totalDays = calculateWorkingDays($disainers->tanggal_masuk,
-                                    $disainers->deadline);
-                                    $status = ($totalDays < 10) ? '<span class="badge bg-label-danger">Express</span>'
-                                        : '<span class="badge bg-label-warning">Normal</span>' ; @endphp {!! $status !!}
+                                    // $totalDays = calculateWorkingDays($disainers->tanggal_masuk,
+                                    // $disainers->deadline);
+                                    $status = ($disainers->pola < 10) ? '<span class="badge bg-label-danger">Express</span>'
+                                        : '<span class="badge bg-label-warning">Normal</span>' ; @endphp
+                                        {{$disainers->pola}} Hari {!! $status !!}
                                         </td>
                                 <td>
                                     {{-- @if (Auth::user()->permission_create == 1)

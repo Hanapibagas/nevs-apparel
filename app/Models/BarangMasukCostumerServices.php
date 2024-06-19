@@ -18,6 +18,7 @@ class BarangMasukCostumerServices extends Model
         'disainer_id',
         'jenis_mesin',
         'no_nota',
+        'pola',
 
         // produksi
         'layout_id',

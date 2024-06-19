@@ -26792,7 +26792,7 @@ class CostumerServicesController extends Controller
 
             'layout_id' => $request->layout_id,
             'jenis_produksi' => $request->jenis_produksi,
-            'pola' => $request->pola,
+            'pola' => $total_hari,
             'deadline' => $request->deadline,
             'ket_hari' => $keterangan,
 
@@ -26812,6 +26812,7 @@ class CostumerServicesController extends Controller
         ]);
         // AKHIR UPDATE DATA
 
+        return response()->json($total_hari);
         // PEMBUATN LK
         foreach ($lk->GambarCreateLK as $gambar) {
             if (isset($gambar->file_baju_player)) {
