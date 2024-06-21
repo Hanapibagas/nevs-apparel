@@ -177,7 +177,11 @@ class CostumerServicesController extends Controller
                 $total_hari--;
             }
         }
-        if ($total_hari >= 1 && $total_hari <= 9) {
+
+        $pengurangan = 1;
+        $hasil_hari = $total_hari - $pengurangan;
+
+        if ($hasil_hari >= 1 && $hasil_hari <= 9) {
             $keterangan = "Express";
         } else {
             $keterangan = "Normal";
@@ -213,9 +217,8 @@ class CostumerServicesController extends Controller
         ]);
         // AKHIR UPDATE DATA
 
-
+        // PEMBUATN LK BARU
         if ($lk->deadline == $request->deadline) {
-            // PEMBUATN LK BARU
             foreach ($lk->GambarCreateLK as $gambar) {
                 if (isset($gambar->file_baju_player)) {
                     LkPlayer::where('barang_masuk_id', $lk->id)->delete();
