@@ -26812,7 +26812,6 @@ class CostumerServicesController extends Controller
         ]);
         // AKHIR UPDATE DATA
 
-        return response()->json($total_hari);
         // PEMBUATN LK
         foreach ($lk->GambarCreateLK as $gambar) {
             if (isset($gambar->file_baju_player)) {
