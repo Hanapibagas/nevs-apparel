@@ -134,6 +134,7 @@
             {!! $dataLk->BarangMasukCostumerServicesLkPlyer->first()->keterangan_baju_pelayer !!}
         </p>
     </div>
+    <p style="text-align: right">(1)</p>
     @endif
 
     @if ($gambar->file_baju_pelatih)
@@ -242,6 +243,7 @@
             {!! $dataLk->BarangMasukCostumerServicesLkPelatih->first()->keterangan_baju_pelatih !!}
         </p>
     </div>
+    <p style="text-align: right">(3)</p>
     @endif
 
     @if ($gambar->file_baju_kiper)
@@ -350,6 +352,7 @@
             {!! $dataLk->BarangMasukCostumerServicesLkKiper->first()->keterangan_baju_kiper !!}
         </p>
     </div>
+    <p style="text-align: right">(5)</p>
     @endif
 
     @if ($gambar->file_baju_1)
@@ -458,6 +461,7 @@
             {!! $dataLk->BarangMasukCostumerServicesLk1->first()->keterangan_baju_1 !!}
         </p>
     </div>
+    <p style="text-align: right">(7)</p>
     @endif
 
     @if ($gambar->file_celana_player)
@@ -566,6 +570,7 @@
             {!! $dataLk->BarangMasukCostumerServicesLkCelanaPlyer->first()->keterangan_celana_pelayer !!}
         </p>
     </div>
+    <p style="text-align: right">(2)</p>
     @endif
 
     @if ($gambar->file_celana_pelatih)
@@ -674,6 +679,7 @@
             {!! $dataLk->BarangMasukCostumerServicesLkCelanaPelatih->first()->keterangan_celana_pelatih !!}
         </p>
     </div>
+    <p style="text-align: right">(4)</p>
     @endif
 
     @if ($gambar->file_celana_kiper)
@@ -782,6 +788,7 @@
             {!! $dataLk->BarangMasukCostumerServicesLkCelanaKiper->first()->keterangan_celana_kiper !!}
         </p>
     </div>
+    <p style="text-align: right">(6)</p>
     @endif
 
     @if ($gambar->file_celana_1)
@@ -890,6 +897,7 @@
             {!! $dataLk->BarangMasukCostumerServicesLkCelana1->first()->keterangan_celana_1 !!}
         </p>
     </div>
+    <p style="text-align: right">(8)</p>
     @endif
     @endforeach
 

@@ -30,7 +30,7 @@
                                             <div class="mb-3 col-md-6">
                                                 <label for="firstName" class="form-label">Panjang Kertas (M) <i
                                                         class="text-danger" style="font-size: 15px;">*</i></label>
-                                                <input required class="form-control" type="number" id="firstName"
+                                                <input required class="form-control" type="text" id="firstName"
                                                     name="panjang_kertas" autofocus required placeholder="Contoh: 1" />
                                             </div>
                                             <div class="mb-3 col-md-6">
@@ -47,7 +47,7 @@
                                             <div class="mb-3 col-md-6">
                                                 <label for="firstName" class="form-label">Berat Kain (Kg) <i
                                                         class="text-danger" style="font-size: 15px;">*</i></label>
-                                                <input required class="form-control" type="number" id="firstName"
+                                                <input required class="form-control" type="text" id="firstName"
                                                     name="berat" autofocus required placeholder="Contoh: 1" />
                                             </div>
                                             <div class="mb-3 col-md-6">
@@ -98,7 +98,7 @@
                                             <div class="mb-3 col-md-6">
                                                 <label for="firstName" class="form-label">Panjang Kertas (M) <i
                                                         class="text-danger" style="font-size: 15px;">*</i></label>
-                                                <input required class="form-control" type="number" id="firstName"
+                                                <input required class="form-control" type="text" id="firstName"
                                                     name="panjang_kertas_pelatih" autofocus required
                                                     placeholder="Contoh: 1" />
                                             </div>
@@ -116,7 +116,7 @@
                                             <div class="mb-3 col-md-6">
                                                 <label for="firstName" class="form-label">Berat Kain (Kg) <i
                                                         class="text-danger" style="font-size: 15px;">*</i></label>
-                                                <input required class="form-control" type="number" id="firstName"
+                                                <input required class="form-control" type="text" id="firstName"
                                                     name="berat_pelatih" autofocus required placeholder="Contoh: 1" />
                                             </div>
                                             <div class="mb-3 col-md-6">
@@ -168,7 +168,7 @@
                                             <div class="mb-3 col-md-6">
                                                 <label for="firstName" class="form-label">Panjang Kertas (M) <i
                                                         class="text-danger" style="font-size: 15px;">*</i></label>
-                                                <input required class="form-control" type="number" id="firstName"
+                                                <input required class="form-control" type="text" id="firstName"
                                                     name="panjang_kertas_kiper" autofocus required
                                                     placeholder="Contoh: 1" />
                                             </div>
@@ -186,7 +186,7 @@
                                             <div class="mb-3 col-md-6">
                                                 <label for="firstName" class="form-label">Berat Kain (Kg) <i
                                                         class="text-danger" style="font-size: 15px;">*</i></label>
-                                                <input required class="form-control" type="number" id="firstName"
+                                                <input required class="form-control" type="text" id="firstName"
                                                     name="berat_kiper" autofocus required placeholder="Contoh: 1" />
                                             </div>
                                             <div class="mb-3 col-md-6">
@@ -236,7 +236,7 @@
                                             <div class="mb-3 col-md-6">
                                                 <label for="firstName" class="form-label">Panjang Kertas (M) <i
                                                         class="text-danger" style="font-size: 15px;">*</i></label>
-                                                <input required class="form-control" type="number" id="firstName"
+                                                <input required class="form-control" type="text" id="firstName"
                                                     name="panjang_kertas_1" autofocus required
                                                     placeholder="Contoh: 1" />
                                             </div>
@@ -254,7 +254,7 @@
                                             <div class="mb-3 col-md-6">
                                                 <label for="firstName" class="form-label">Berat Kain (Kg) <i
                                                         class="text-danger" style="font-size: 15px;">*</i></label>
-                                                <input required class="form-control" type="number" id="firstName"
+                                                <input required class="form-control" type="text" id="firstName"
                                                     name="berat_1" autofocus required placeholder="Contoh: 1" />
                                             </div>
                                             <div class="mb-3 col-md-6">
@@ -323,7 +323,7 @@
                                             <div class="mb-3 col-md-6">
                                                 <label for="firstName" class="form-label">Berat Kain (Kg) <i
                                                         class="text-danger" style="font-size: 15px;">*</i></label>
-                                                <input required class="form-control" type="number" id="firstName"
+                                                <input required class="form-control" type="text" id="firstName"
                                                     name="berat_celana_pelayer" autofocus required
                                                     placeholder="Contoh: 1" />
                                             </div>
@@ -376,7 +376,7 @@
                                             <div class="mb-3 col-md-6">
                                                 <label for="firstName" class="form-label">Panjang Kertas (M) <i
                                                         class="text-danger" style="font-size: 15px;">*</i></label>
-                                                <input required class="form-control" type="number" id="firstName"
+                                                <input required class="form-control" type="text" id="firstName"
                                                     name="panjang_kertas_celana_pelatih" autofocus required
                                                     placeholder="Contoh: 1" />
                                             </div>
@@ -394,7 +394,7 @@
                                             <div class="mb-3 col-md-6">
                                                 <label for="firstName" class="form-label">Berat Kain (Kg) <i
                                                         class="text-danger" style="font-size: 15px;">*</i></label>
-                                                <input required class="form-control" type="number" id="firstName"
+                                                <input required class="form-control" type="text" id="firstName"
                                                     name="berat_celana_pelatih" autofocus required
                                                     placeholder="Contoh: 1" />
                                             </div>
@@ -447,7 +447,7 @@
                                             <div class="mb-3 col-md-6">
                                                 <label for="firstName" class="form-label">Panjang Kertas (M) <i
                                                         class="text-danger" style="font-size: 15px;">*</i></label>
-                                                <input required class="form-control" type="number" id="firstName"
+                                                <input required class="form-control" type="text" id="firstName"
                                                     name="panjang_kertas_celana_kiper" autofocus required
                                                     placeholder="Contoh: 1" />
                                             </div>
@@ -465,7 +465,7 @@
                                             <div class="mb-3 col-md-6">
                                                 <label for="firstName" class="form-label">Berat Kain (Kg) <i
                                                         class="text-danger" style="font-size: 15px;">*</i></label>
-                                                <input required class="form-control" type="number" id="firstName"
+                                                <input required class="form-control" type="text" id="firstName"
                                                     name="berat_celana_kiper" autofocus required
                                                     placeholder="Contoh: 1" />
                                             </div>
@@ -518,7 +518,7 @@
                                             <div class="mb-3 col-md-6">
                                                 <label for="firstName" class="form-label">Panjang Kertas (M) <i
                                                         class="text-danger" style="font-size: 15px;">*</i></label>
-                                                <input required class="form-control" type="number" id="firstName"
+                                                <input required class="form-control" type="text" id="firstName"
                                                     name="panjang_kertas_celana_1" autofocus required
                                                     placeholder="Contoh: 1" />
                                             </div>
@@ -536,7 +536,7 @@
                                             <div class="mb-3 col-md-6">
                                                 <label for="firstName" class="form-label">Berat Kain (Kg) <i
                                                         class="text-danger" style="font-size: 15px;">*</i></label>
-                                                <input required class="form-control" type="number" id="firstName"
+                                                <input required class="form-control" type="text" id="firstName"
                                                     name="berat_celana_1" autofocus required placeholder="Contoh: 1" />
                                             </div>
                                             <div class="mb-3 col-md-6">
