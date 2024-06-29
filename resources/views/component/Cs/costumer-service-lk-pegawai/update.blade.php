@@ -87,6 +87,16 @@
                                                     <option value="Bandung">Bandung</option>
                                                 </select>
                                             </div>
+                                            <div class="mb-3 col-md-6">
+                                                <label for="lastName" class="form-label">Keterangan deadline <i class="text-danger"
+                                                        style="font-size: 15px;">*</i></label>
+                                                <select id="country" required name="keterangan"
+                                                    class="select2 form-select">
+                                                    <option value="">-- Keterangan deadline --</option>
+                                                    <option value="Express">Express</option>
+                                                    <option value="Normal">Normal</option>
+                                                </select>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
