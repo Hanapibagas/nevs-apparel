@@ -39,7 +39,7 @@
                                 <th>no.order</th>
                                 <th>nama tim</th>
                                 <th>nama layout</th>
-                                <th>waktu produksi</th>
+                                <th>sisa waktu produksi</th>
                                 <th>aksi</th>
                             </tr>
                         </thead>
@@ -67,15 +67,35 @@
                                 <td>{{ $disainers->BarangMasukDisainer->nama_tim }}</td>
                                 <td> {{ $disainers->UsersLk->name }} </td>
                                 <td>
-                                    {{-- {{
-                                    calculateWorkingDays($disainers->tanggal_masuk, $disainers->deadline) }} Hari --}}
-                                    @php
-                                    // $totalDays = calculateWorkingDays($disainers->tanggal_masuk,
-                                    // $disainers->deadline);
-                                    $status = ($disainers->pola < 10) ? '<span class="badge bg-label-danger">Express</span>'
-                                        : '<span class="badge bg-label-warning">Normal</span>' ; @endphp
-                                        {{$disainers->pola}} Hari {!! $status !!}
-                                        </td>
+                                    <script>
+                                        function getDaysBetweenDates(startDate, endDate) {
+                                            var count = 0;
+                                            var currentDate = new Date(startDate);
+                                            while (currentDate <= endDate) {
+                                                var dayOfWeek = currentDate.getDay();
+                                                if (dayOfWeek !== 0) { // 0 is Sunday
+                                                    count++;
+                                                }
+                                                currentDate.setDate(currentDate.getDate() + 1);
+                                            }
+                                            return count;
+                                        }
+
+                                        var deadlineDate = new Date("{{ $disainers->deadline }}");
+                                        var currentDate = new Date();
+
+                                        var elapsedDays = getDaysBetweenDates(deadlineDate, currentDate) - 1;
+
+                                        if (elapsedDays > 0) {
+                                            document.write('<span class="badge bg-label-danger">' + elapsedDays + ' hari terlewatkan</span>');
+                                        } else if (elapsedDays === 0) {
+                                            document.write('<span class="badge bg-label-danger">Hari ini adalah batas waktu</span>');
+                                        } else {
+                                            var remainingDays = getDaysBetweenDates(currentDate, deadlineDate);
+                                            document.write('<span class="badge bg-label-success">Sisa ' + remainingDays + ' hari</span>');
+                                        }
+                                    </script>
+                                </td>
                                 <td>
                                     {{-- @if (Auth::user()->permission_create == 1)
                                     @if ($disainers->aksi == 0)
@@ -112,6 +132,33 @@
 @push('js')
 <script>
     new DataTable('#cs');
+</script>
+<script>
+    // Mendapatkan tabel
+    var table = document.getElementById('cs');
+
+    // Mendapatkan baris pada tabel kecuali baris header
+    var rows = Array.from(table.querySelectorAll('tbody tr'));
+
+    // Mengurutkan baris berdasarkan sisa waktu produksi terendah ke tertinggi
+    rows.sort(function (a, b) {
+        var timeA = getTimeFromRow(a);
+        var timeB = getTimeFromRow(b);
+
+        return timeA - timeB;
+    });
+
+    // Menghapus baris yang ada di dalam tabel
+    rows.forEach(function (row) {
+        table.querySelector('tbody').appendChild(row);
+    });
+
+    // Fungsi untuk mendapatkan waktu dari sebuah baris
+    function getTimeFromRow(row) {
+        var timeText = row.querySelector('td:nth-child(4) span').innerText;
+        var time = parseInt(timeText.split(' ')[1]);
+        return time;
+    }
 </script>
 <script>
     document.addEventListener('DOMContentLoaded', function () {

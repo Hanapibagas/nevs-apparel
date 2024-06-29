@@ -26781,13 +26781,13 @@ class CostumerServicesController extends Controller
         }
 
         $pengurangan = 1;
-        $hasil_hari = $pengurangan - $total_hari;
+        $hasil_hari = $total_hari - $pengurangan;
 
-        if ($hasil_hari >= 1 && $hasil_hari <= 9) {
-            $keterangan = "Express";
-        } else {
-            $keterangan = "Normal";
-        }
+        // if ($hasil_hari >= 1 && $hasil_hari <= 9) {
+        //     $keterangan = "Express";
+        // } else {
+        //     $keterangan = "Normal";
+        // }
 
         // AKHIR PENENTUAN TANGGAL
 
@@ -26802,7 +26802,7 @@ class CostumerServicesController extends Controller
             'jenis_produksi' => $request->jenis_produksi,
             'pola' => $hasil_hari,
             'deadline' => $request->deadline,
-            'ket_hari' => $keterangan,
+            'ket_hari' => $request->keterangan,
 
             'total_baju_player' => $request->total_baju_player,
             'total_baju_pelatih' => $request->total_baju_pelatih,
@@ -26818,6 +26818,8 @@ class CostumerServicesController extends Controller
             'aksi' => '1',
             'tanda_telah_mengerjakan' => '1',
         ]);
+
+
         // AKHIR UPDATE DATA
 
         // PEMBUATN LK
