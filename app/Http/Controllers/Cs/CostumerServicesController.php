@@ -197,7 +197,7 @@ class CostumerServicesController extends Controller
 
             'layout_id' => $request->layout_id,
             'jenis_produksi' => $request->jenis_produksi,
-            'pola' => $total_hari,
+            'pola' => $hasil_hari,
             'deadline' => $request->deadline,
             'ket_hari' => $keterangan,
 
@@ -26779,11 +26779,16 @@ class CostumerServicesController extends Controller
                 $total_hari--;
             }
         }
-        if ($total_hari >= 1 && $total_hari <= 9) {
+
+        $pengurangan = 1;
+        $hasil_hari = $pengurangan - $total_hari;
+
+        if ($hasil_hari >= 1 && $hasil_hari <= 9) {
             $keterangan = "Express";
         } else {
             $keterangan = "Normal";
         }
+
         // AKHIR PENENTUAN TANGGAL
 
         // UPDATE DATA
@@ -26795,7 +26800,7 @@ class CostumerServicesController extends Controller
 
             'layout_id' => $request->layout_id,
             'jenis_produksi' => $request->jenis_produksi,
-            'pola' => $total_hari,
+            'pola' => $hasil_hari,
             'deadline' => $request->deadline,
             'ket_hari' => $keterangan,
 
