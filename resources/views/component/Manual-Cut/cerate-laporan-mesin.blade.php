@@ -29,7 +29,7 @@
                                             <div class="mb-3 col-md-6">
                                                 <label for="firstName" class="form-label">Berat <i class="text-danger"
                                                         style="font-size: 15px;">*</i></label>
-                                                <input required class="form-control" type="number" id="firstName"
+                                                <input required class="form-control" type="text" id="firstName"
                                                     name="kain" autofocus />
                                             </div>
                                             <div class="mb-3 col-md-6">
@@ -60,7 +60,7 @@
                                             <div class="mb-3 col-md-6">
                                                 <label for="firstName" class="form-label">Berat <i class="text-danger"
                                                         style="font-size: 15px;">*</i></label>
-                                                <input required class="form-control" type="number" id="firstName"
+                                                <input required class="form-control" type="text" id="firstName"
                                                     name="kain_pelatih" autofocus />
                                             </div>
                                             <div class="mb-3 col-md-6">
@@ -91,7 +91,7 @@
                                             <div class="mb-3 col-md-6">
                                                 <label for="firstName" class="form-label">Berat <i class="text-danger"
                                                         style="font-size: 15px;">*</i></label>
-                                                <input required class="form-control" type="number" id="firstName"
+                                                <input required class="form-control" type="text" id="firstName"
                                                     name="kain_kiper" autofocus />
                                             </div>
                                             <div class="mb-3 col-md-6">
@@ -122,7 +122,7 @@
                                             <div class="mb-3 col-md-6">
                                                 <label for="firstName" class="form-label">Berat <i class="text-danger"
                                                         style="font-size: 15px;">*</i></label>
-                                                <input required class="form-control" type="number" id="firstName"
+                                                <input required class="form-control" type="text" id="firstName"
                                                     name="kain_1" autofocus />
                                             </div>
                                             <div class="mb-3 col-md-6">
@@ -153,7 +153,7 @@
                                             <div class="mb-3 col-md-6">
                                                 <label for="firstName" class="form-label">Berat <i class="text-danger"
                                                         style="font-size: 15px;">*</i></label>
-                                                <input required class="form-control" type="number" id="firstName"
+                                                <input required class="form-control" type="text" id="firstName"
                                                     name="kain_celana_player" autofocus />
                                             </div>
                                             <div class="mb-3 col-md-6">
@@ -184,7 +184,7 @@
                                             <div class="mb-3 col-md-6">
                                                 <label for="firstName" class="form-label">Berat <i class="text-danger"
                                                         style="font-size: 15px;">*</i></label>
-                                                <input required class="form-control" type="number" id="firstName"
+                                                <input required class="form-control" type="text" id="firstName"
                                                     name="kain_celana_pelatih" autofocus />
                                             </div>
                                             <div class="mb-3 col-md-6">
@@ -215,7 +215,7 @@
                                             <div class="mb-3 col-md-6">
                                                 <label for="firstName" class="form-label">Berat <i class="text-danger"
                                                         style="font-size: 15px;">*</i></label>
-                                                <input required class="form-control" type="number" id="firstName"
+                                                <input required class="form-control" type="text" id="firstName"
                                                     name="kain_celana_kiper" autofocus />
                                             </div>
                                             <div class="mb-3 col-md-6">
@@ -246,7 +246,7 @@
                                             <div class="mb-3 col-md-6">
                                                 <label for="firstName" class="form-label">Berat <i class="text-danger"
                                                         style="font-size: 15px;">*</i></label>
-                                                <input required class="form-control" type="number" id="firstName"
+                                                <input required class="form-control" type="text" id="firstName"
                                                     name="kain_celana_1" autofocus />
                                             </div>
                                             <div class="mb-3 col-md-6">
