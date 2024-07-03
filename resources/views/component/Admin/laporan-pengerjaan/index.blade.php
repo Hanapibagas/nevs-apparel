@@ -99,7 +99,7 @@
                                             \Carbon\Carbon::parse($laporan->BarangMasukCs->deadline)->format('d F Y')
                                             }}</strong></td>
                                     <td>
-                                        @php
+                                        {{-- @php
                                         $tanggal_masuk = \Carbon\Carbon::parse($laporan->BarangMasukCs->tanggal_masuk);
                                         $deadline = \Carbon\Carbon::parse($laporan->BarangMasukCs->deadline);
 
@@ -114,13 +114,41 @@
                                         return !$date->isSunday();
                                         }, $deadline);
                                         }
-                                        @endphp
+                                        @endphp --}}
+                                        <script>
+                                            function getDaysBetweenDates(startDate, endDate) {
+                                                var count = 0;
+                                                var currentDate = new Date(startDate);
+                                                while (currentDate <= endDate) {
+                                                    var dayOfWeek = currentDate.getDay();
+                                                    if (dayOfWeek !== 0) { // 0 is Sunday
+                                                        count++;
+                                                    }
+                                                    currentDate.setDate(currentDate.getDate() + 1);
+                                                }
+                                                return count;
+                                            }
+
+                                            var deadlineDate = new Date("{{ $laporan->BarangMasukCs->deadline }}");
+                                            var currentDate = new Date();
+
+                                            var elapsedDays = getDaysBetweenDates(deadlineDate, currentDate) - 1;
+
+                                            if (elapsedDays > 0) {
+                                                document.write('<span class="badge bg-label-danger">' + elapsedDays + ' hari terlewatkan</span>');
+                                            } else if (elapsedDays === 0) {
+                                                document.write('<span class="badge bg-label-danger">Hari ini adalah batas waktu</span>');
+                                            } else {
+                                                var remainingDays = getDaysBetweenDates(currentDate, deadlineDate);
+                                                document.write('<span class="badge bg-label-success">Sisa ' + remainingDays + ' hari</span>');
+                                            }
+                                        </script>
                                         <p>
-                                            @if ($totalHari < 0) <span class="badge bg-danger">{{ $totalHari }}
+                                            {{-- @if ($totalHari < 0) <span class="badge bg-danger">{{ $totalHari }}
                                                 Hari</span>
                                                 @else
                                                 <span class="badge bg-success">{{ $totalHari }} Hari</span>
-                                                @endif
+                                                @endif --}}
                                         </p>
                                     </td>
                                     <td>
