@@ -524,7 +524,7 @@ class CostumerServicesController extends Controller
                 if (isset($gambar->file_baju_player)) {
                     // FULL PRINT
                     if ($LkPlayer->status_player == "Full print") {
-                        if ($total_hari == 1) {
+                        if ($total_hari == 0) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_player_id', $LkPlayer->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -609,7 +609,93 @@ class CostumerServicesController extends Controller
                                     'finis_id' => $barangMasukFinis->id,
                                 ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 2) {
+                        } elseif ($total_hari == 1) {
+                             // LAYOUT
+                             BarangMasukDatalayout::where('lk_player_id', $LkPlayer->id)->delete();
+                             $barangMasukDataLayoutData = [
+                                 'users_layout_id' => $lk->layout_id,
+                                 'barang_masuk_id' => $lk->id,
+                                 'deadline' => $createDate->format('Y-m-d'),
+                             ];
+                             if (isset($LkPlayer) && ($LkPlayer->status_player == "Full print")) {
+                                 $barangMasukDataLayoutData['lk_player_id'] = $LkPlayer->id;
+                             }
+                             $barangMasukDataLayout = BarangMasukDatalayout::create($barangMasukDataLayoutData);
+                             // AKHIR LAYOUT
+
+                             $barangMasukPressKainData = [
+                                 'no_order_id' => $lk->id,
+                                 'mesin_atexco_id' => $barangMasukPressMesin->id,
+                                 'deadline' => $createDate->format('Y-m-d'),
+                             ];
+                             if (isset($LkPlayer) && ($LkPlayer->status_player == "Full print")) {
+                                 $barangMasukPressKainData['lk_player_id'] = $LkPlayer->id;
+                             }
+                             $barangMasuPressKain = DataPressKain::create($barangMasukPressKainData);
+                             // AKHIR PRESS KAIN
+
+                             // CUT PRINT
+                             $barangMasukDataCutPrintData = [
+                                 'no_order_id' => $lk->id,
+                                 'press_kain_id' => $barangMasuPressKain->id,
+                                 'deadline' => $createDate->format('Y-m-d'),
+                             ];
+                             if (isset($LkPlayer) && ($LkPlayer->status_player == "Full print")) {
+                                 $barangMasukDataCutPrintData['lk_player_id'] = $LkPlayer->id;
+                             }
+                             $barangMasukCutPrin = DataLaserCut::create($barangMasukDataCutPrintData);
+                             // AHIR CUT PRINT
+
+                             // DATA SORTIR
+                             $barangMasukDataSortirData = [
+                                 'no_order_id' => $lk->id,
+                                 'laser_cut_id' => $barangMasukCutPrin->id,
+                                 'deadline' => $createDate->format('Y-m-d'),
+                             ];
+                             if (isset($LkPlayer) && ($LkPlayer->status_player == "Full print")) {
+                                 $barangMasukDataSortirData['lk_player_id'] = $LkPlayer->id;
+                             }
+                             $barangMasukSortir = DataSortir::create($barangMasukDataSortirData);
+                             // AKHIR DATA SORTIR
+
+                             // JAHIT
+                             $barangMasukDataJahitrData = [
+                                 'no_order_id' => $lk->id,
+                                 'sortir_id' => $barangMasukSortir->id,
+                                 'deadline' => $createDate->format('Y-m-d'),
+                             ];
+                             if (isset($LkPlayer) && ($LkPlayer->status_player == "Full print")) {
+                                 $barangMasukDataJahitrData['lk_player_id'] = $LkPlayer->id;
+                             }
+                             $barangMasukJahit = Jahit::create($barangMasukDataJahitrData);
+                             // AKHIR JAHIT
+
+                             // FINIS
+                             $barangMasukDataFinisData = [
+                                 'no_order_id' => $lk->id,
+                                 'jahit_baju_id' => $barangMasukJahit->id,
+                                 'deadline' => $createDate->format('Y-m-d'),
+                             ];
+                             if (isset($LkPlayer) && ($LkPlayer->status_player == "Full print")) {
+                                 $barangMasukDataFinisData['lk_player_id'] = $LkPlayer->id;
+                             }
+                             $barangMasukFinis = Finish::create($barangMasukDataFinisData);
+                             // AKHIR FINIS
+
+                             // LAPORAN
+                                 Laporan::create([
+                                     'barang_masuk_costumer_services_id' => $lk->id,
+                                     'barang_masuk_layout_id' => $barangMasukDataLayout->id,
+                                     'barang_masuk_mesin_atexco_id' => $barangMasukPressMesin->id ,
+                                     'barang_masuk_presskain_id' => $barangMasuPressKain->id,
+                                     'barang_masuk_lasercut_id' => $barangMasukCutPrin->id,
+                                     'barang_masuk_sortir_id' => $barangMasukSortir->id,
+                                     'jahit_id' => $barangMasukJahit->id,
+                                     'finis_id' => $barangMasukFinis->id,
+                                 ]);
+                             // AKHIR LAPORAN
+                        }
+                        elseif ($total_hari == 2) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_player_id', $LkPlayer->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -1716,7 +1802,7 @@ class CostumerServicesController extends Controller
 
                     // HALFT PRINT
                     if ($LkPlayer->status_player == "Half print") {
-                        if ($total_hari == 1) {
+                        if ($total_hari == 0) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_player_id', $LkPlayer->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -1826,7 +1912,118 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 2) {
+                        }elseif ($total_hari == 1) {
+                            // LAYOUT
+                            BarangMasukDatalayout::where('lk_player_id', $LkPlayer->id)->delete();
+                            $barangMasukDataLayoutData = [
+                                'users_layout_id' => $lk->layout_id,
+                                'barang_masuk_id' => $lk->id,
+                                'deadline' => $createDate->format('Y-m-d'),
+                            ];
+                            if (isset($LkPlayer) && ($LkPlayer->status_player == "Half print")) {
+                                $barangMasukDataLayoutData['lk_player_id'] = $LkPlayer->id;
+                            }
+                            $barangMasukDataLayout = BarangMasukDatalayout::create($barangMasukDataLayoutData);
+                            // AKHIR LAYOUT
+
+                            // MESIN
+                            $barangPressMesin = [
+                                'no_order_id' => $lk->id,
+                                'penanggung_jawab_id' => optional($lk->BarangMasukDisainer->DataMesinCs->first())->User->id,
+                                'barang_masuk_layout_id' => $barangMasukDataLayout->id,
+                                'deadline' => $createDate->format('Y-m-d'),
+                            ];
+                            if (isset($LkPlayer) && ($LkPlayer->status_player == "Half print")) {
+                                $barangPressMesin['lk_player_id'] = $LkPlayer->id;
+                            }
+                            $barangMasukPressMesin = DataPress::create($barangPressMesin);
+                            // AKHIR MESIN
+
+
+                            // PRESS KAIN
+                            $barangMasukPressKainData = [
+                                'no_order_id' => $lk->id,
+                                'mesin_atexco_id' => $barangMasukPressMesin->id,
+                                'deadline' => $createDate->format('Y-m-d'),
+                            ];
+                            if (isset($LkPlayer) && ($LkPlayer->status_player == "Half print")) {
+                                $barangMasukPressKainData['lk_player_id'] = $LkPlayer->id;
+                            }
+                            $barangMasuPressKain = DataPressKain::create($barangMasukPressKainData);
+                            // AKHIR PRESS KAIN
+
+                            // CUT PRINT
+                            $barangMasukDataCutPrintData = [
+                                'no_order_id' => $lk->id,
+                                'press_kain_id' => $barangMasuPressKain->id,
+                                'deadline' => $createDate->format('Y-m-d'),
+                            ];
+                            if (isset($LkPlayer) && ($LkPlayer->status_player == "Half print")) {
+                                $barangMasukDataCutPrintData['lk_player_id'] = $LkPlayer->id;
+                            }
+                            $barangMasukCutPrin = DataLaserCut::create($barangMasukDataCutPrintData);
+                            $barangMasukDataCutManualData = [
+                                'no_order_id' => $lk->id,
+                                'laser_cut_id' => $barangMasukCutPrin->id,
+                                'deadline' => $createDate->format('Y-m-d'),
+                            ];
+                            if (isset($LkPlayer) && ($LkPlayer->status_player == "Half print")) {
+                                $barangMasukDataCutManualData['lk_player_id'] = $LkPlayer->id;
+                            }
+                            $barangMasukCutManual = DataManualCut::create($barangMasukDataCutManualData);
+                            // AHIR CUT PRINT
+
+                            // DATA SORTIR
+                            $barangMasukDataSortirData = [
+                                'no_order_id' => $lk->id,
+                                'manual_cut_id' => $barangMasukCutManual->id,
+                                'laser_cut_id' => $barangMasukCutPrin->id,
+                                'deadline' => $createDate->format('Y-m-d'),
+                            ];
+                            if (isset($LkPlayer) && ($LkPlayer->status_player == "Half print")) {
+                                $barangMasukDataSortirData['lk_player_id'] = $LkPlayer->id;
+                            }
+                            $barangMasukSortir = DataSortir::create($barangMasukDataSortirData);
+                            // AKHIR DATA SORTIR
+
+                            // JAHIT
+                            $barangMasukDataJahitrData = [
+                                'no_order_id' => $lk->id,
+                                'sortir_id' => $barangMasukSortir->id,
+                                'deadline' => $createDate->format('Y-m-d'),
+                            ];
+                            if (isset($LkPlayer) && ($LkPlayer->status_player == "Half print")) {
+                                $barangMasukDataJahitrData['lk_player_id'] = $LkPlayer->id;
+                            }
+                            $barangMasukJahit = Jahit::create($barangMasukDataJahitrData);
+                            // AKHIR JAHIT
+
+                            // FINIS
+                            $barangMasukDataFinisData = [
+                                'no_order_id' => $lk->id,
+                                'jahit_baju_id' => $barangMasukJahit->id,
+                                'deadline' => $createDate->format('Y-m-d'),
+                            ];
+                            if (isset($LkPlayer) && ($LkPlayer->status_player == "Half print")) {
+                                $barangMasukDataFinisData['lk_player_id'] = $LkPlayer->id;
+                            }
+                            $barangMasukFinis = Finish::create($barangMasukDataFinisData);
+                            // AKHIR FINIS
+
+                            // LAPORAN
+                            Laporan::create([
+                                'barang_masuk_costumer_services_id' => $lk->id,
+                                'barang_masuk_layout_id' => $barangMasukDataLayout->id,
+                                'barang_masuk_mesin_atexco_id' => $barangMasukPressMesin->id ,
+                                'barang_masuk_presskain_id' => $barangMasuPressKain->id,
+                                'barang_masuk_lasercut_id' => $barangMasukCutPrin->id,
+                                'barang_masuk_sortir_id' => $barangMasukSortir->id,
+                                'jahit_id' => $barangMasukJahit->id,
+                                'finis_id' => $barangMasukFinis->id,
+                            ]);
+                            // AKHIR LAPORAN
+                        }
+                         elseif ($total_hari == 2) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_player_id', $LkPlayer->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -3065,7 +3262,7 @@ class CostumerServicesController extends Controller
 
                     // POLOS
                     if ($LkPlayer->status_player == "Polos") {
-                        if ($total_hari == 1) {
+                        if ($total_hari == 0) {
                             // CUT
                             BarangMasukDatalayout::where('lk_player_id', $LkPlayer->id)->delete();
                             DataManualCut::where('lk_player_id', $LkPlayer->id)->delete();
@@ -3125,7 +3322,68 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 2) {
+                        } elseif ($total_hari == 1) {
+                            // CUT
+                            BarangMasukDatalayout::where('lk_player_id', $LkPlayer->id)->delete();
+                            DataManualCut::where('lk_player_id', $LkPlayer->id)->delete();
+                            $barangMasukDataCutManualData = [
+                                'no_order_id' => $lk->id,
+                                'deadline' => $createDate->format('Y-m-d'),
+                            ];
+                            if (isset($LkPlayer) && ($LkPlayer->status_player == "Polos")) {
+                                $barangMasukDataCutManualData['lk_player_id'] = $LkPlayer->id;
+                            }
+                            $barangMasukCutManual = DataManualCut::create($barangMasukDataCutManualData);
+                            // AHIR CUT PRINT
+
+                            // DATA SORTIR
+                            $barangMasukDataSortirData = [
+                                'no_order_id' => $lk->id,
+                                'manual_cut_id' => $barangMasukCutManual->id,
+                                // 'laser_cut_id' => $barangMasukCutPrin->id,
+                                'deadline' => $createDate->format('Y-m-d'),
+                            ];
+                            if (isset($LkPlayer) && ($LkPlayer->status_player == "Polos")) {
+                                $barangMasukDataSortirData['lk_player_id'] = $LkPlayer->id;
+                            }
+                            $barangMasukSortir = DataSortir::create($barangMasukDataSortirData);
+                            // AKHIR DATA SORTIR
+
+                            // JAHIT
+                            $barangMasukDataJahitrData = [
+                                'no_order_id' => $lk->id,
+                                'sortir_id' => $barangMasukSortir->id,
+                                'deadline' => $createDate->format('Y-m-d'),
+                            ];
+                            if (isset($LkPlayer) && ($LkPlayer->status_player == "Polos")) {
+                                $barangMasukDataJahitrData['lk_player_id'] = $LkPlayer->id;
+                            }
+                            $barangMasukJahit = Jahit::create($barangMasukDataJahitrData);
+                            // AKHIR JAHIT
+
+                            // FINIS
+                            $barangMasukDataFinisData = [
+                                'no_order_id' => $lk->id,
+                                'jahit_baju_id' => $barangMasukJahit->id,
+                                'deadline' => $createDate->format('Y-m-d'),
+                            ];
+                            if (isset($LkPlayer) && ($LkPlayer->status_player == "Polos")) {
+                                $barangMasukDataFinisData['lk_player_id'] = $LkPlayer->id;
+                            }
+                            $barangMasukFinis = Finish::create($barangMasukDataFinisData);
+                            // AKHIR FINIS
+
+                            // LAPORAN
+                            Laporan::create([
+                                'barang_masuk_costumer_services_id' => $lk->id,
+                                'barang_masuk_manualcut_id' => $barangMasukCutManual->id,
+                                'barang_masuk_sortir_id' => $barangMasukSortir->id,
+                                'jahit_id' => $barangMasukJahit->id,
+                                'finis_id' => $barangMasukFinis->id,
+                            ]);
+                            // AKHIR LAPORAN
+                        }
+                        elseif ($total_hari == 2) {
                             // CUT PRINT
                             BarangMasukDatalayout::where('lk_player_id', $LkPlayer->id)->delete();
                             DataManualCut::where('lk_player_id', $LkPlayer->id)->delete();
@@ -3792,7 +4050,7 @@ class CostumerServicesController extends Controller
                 if (isset($gambar->file_baju_pelatih)) {
                     // FULL PRINT
                     if ($LkPelatih->status_pelatih == "Full print") {
-                        if ($total_hari == 1) {
+                        if ($total_hari == 0) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_pelatih_id', $LkPelatih->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -3893,7 +4151,109 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 2) {
+                        } elseif ($total_hari == 1) {
+                            // LAYOUT
+                            BarangMasukDatalayout::where('lk_pelatih_id', $LkPelatih->id)->delete();
+                            $barangMasukDataLayoutData = [
+                                'users_layout_id' => $lk->layout_id,
+                                'barang_masuk_id' => $lk->id,
+                                'deadline' => $createDate->format('Y-m-d'),
+                            ];
+                            if (isset($LkPelatih) && ($LkPelatih->status_pelatih == "Full print")) {
+                                $barangMasukDataLayoutData['lk_pelatih_id'] = $LkPelatih->id;
+                            }
+                            $barangMasukDataLayout = BarangMasukDatalayout::create($barangMasukDataLayoutData);
+                            // AKHIR LAYOUT
+
+                            // MESIN
+                            $barangPressMesin = [
+                                'no_order_id' => $lk->id,
+                                'penanggung_jawab_id' => optional($lk->BarangMasukDisainer->DataMesinCs->first())->User->id,
+                                'barang_masuk_layout_id' => $barangMasukDataLayout->id,
+                                'deadline' => $createDate->format('Y-m-d'),
+                            ];
+                            if (isset($LkPelatih) && ($LkPelatih->status_pelatih == "Full print")) {
+                                $barangPressMesin['lk_pelatih_id'] = $LkPelatih->id;
+                            }
+                            $barangMasukPressMesin = DataPress::create($barangPressMesin);
+                            // AKHIR MESIN
+
+
+                            // PRESS KAIN
+                            $barangMasukPressKainData = [
+                                'no_order_id' => $lk->id,
+                                'mesin_atexco_id' => $barangMasukPressMesin->id,
+                                'deadline' => $createDate->format('Y-m-d'),
+                            ];
+                            if (isset($LkPelatih) && ($LkPelatih->status_pelatih == "Full print")) {
+                                $barangMasukPressKainData['lk_pelatih_id'] = $LkPelatih->id;
+                            }
+                            $barangMasuPressKain = DataPressKain::create($barangMasukPressKainData);
+                            // AKHIR PRESS KAIN
+
+
+                            // CUT PRINT
+                            $barangMasukDataCutPrintData = [
+                                'no_order_id' => $lk->id,
+                                'press_kain_id' => $barangMasuPressKain->id,
+                                'deadline' => $createDate->format('Y-m-d'),
+                            ];
+                            if (isset($LkPelatih) && ($LkPelatih->status_pelatih == "Full print")) {
+                                $barangMasukDataCutPrintData['lk_pelatih_id'] = $LkPelatih->id;
+                            }
+                            $barangMasukCutPrin = DataLaserCut::create($barangMasukDataCutPrintData);
+                            // AHIR CUT PRINT
+
+                            // DATA SORTIR
+                            $barangMasukDataSortirData = [
+                                'no_order_id' => $lk->id,
+                                'laser_cut_id' => $barangMasukCutPrin->id,
+                                'deadline' => $createDate->format('Y-m-d'),
+                            ];
+                            if (isset($LkPelatih) && ($LkPelatih->status_pelatih == "Full print")) {
+                                $barangMasukDataSortirData['lk_pelatih_id'] = $LkPelatih->id;
+                            }
+                            $barangMasukSortir = DataSortir::create($barangMasukDataSortirData);
+                            // AKHIR DATA SORTIR
+
+                            // JAHIT
+                            $barangMasukDataJahitrData = [
+                                'no_order_id' => $lk->id,
+                                'sortir_id' => $barangMasukSortir->id,
+                                'deadline' => $createDate->format('Y-m-d'),
+                            ];
+                            if (isset($LkPelatih) && ($LkPelatih->status_pelatih == "Full print")) {
+                                $barangMasukDataJahitrData['lk_pelatih_id'] = $LkPelatih->id;
+                            }
+                            $barangMasukJahit = Jahit::create($barangMasukDataJahitrData);
+                            // AKHIR JAHIT
+
+                            // FINIS
+                            $barangMasukDataFinisData = [
+                                'no_order_id' => $lk->id,
+                                'jahit_baju_id' => $barangMasukJahit->id,
+                                'deadline' => $createDate->format('Y-m-d'),
+                            ];
+                            if (isset($LkPelatih) && ($LkPelatih->status_pelatih == "Full print")) {
+                                $barangMasukDataFinisData['lk_pelatih_id'] = $LkPelatih->id;
+                            }
+                            $barangMasukFinis = Finish::create($barangMasukDataFinisData);
+                            // AKHIR FINIS
+
+                            // LAPORAN
+                            Laporan::create([
+                                'barang_masuk_costumer_services_id' => $lk->id,
+                                'barang_masuk_layout_id' => $barangMasukDataLayout->id,
+                                'barang_masuk_mesin_atexco_id' => $barangMasukPressMesin->id ,
+                                'barang_masuk_presskain_id' => $barangMasuPressKain->id,
+                                'barang_masuk_lasercut_id' => $barangMasukCutPrin->id,
+                                'barang_masuk_sortir_id' => $barangMasukSortir->id,
+                                'jahit_id' => $barangMasukJahit->id,
+                                'finis_id' => $barangMasukFinis->id,
+                            ]);
+                            // AKHIR LAPORAN
+                        }
+                        elseif ($total_hari == 2) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_pelatih_id', $LkPelatih->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -5010,7 +5370,7 @@ class CostumerServicesController extends Controller
 
                     // HALFT PRINT
                     if ($LkPelatih->status_pelatih == "Half print") {
-                        if ($total_hari == 1) {
+                        if ($total_hari == 0) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_pelatih_id', $LkPelatih->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -5120,7 +5480,118 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 2) {
+                        }elseif ($total_hari == 1) {
+                             // LAYOUT
+                             BarangMasukDatalayout::where('lk_pelatih_id', $LkPelatih->id)->delete();
+                             $barangMasukDataLayoutData = [
+                                 'users_layout_id' => $lk->layout_id,
+                                 'barang_masuk_id' => $lk->id,
+                                 'deadline' => $createDate->format('Y-m-d'),
+                             ];
+                             if (isset($LkPelatih) && ($LkPelatih->status_pelatih == "Half print")) {
+                                 $barangMasukDataLayoutData['lk_pelatih_id'] = $LkPelatih->id;
+                             }
+                             $barangMasukDataLayout = BarangMasukDatalayout::create($barangMasukDataLayoutData);
+                             // AKHIR LAYOUT
+
+                             // MESIN
+                             $barangPressMesin = [
+                                 'no_order_id' => $lk->id,
+                                 'penanggung_jawab_id' => optional($lk->BarangMasukDisainer->DataMesinCs->first())->User->id,
+                                 'barang_masuk_layout_id' => $barangMasukDataLayout->id,
+                                 'deadline' => $createDate->format('Y-m-d'),
+                             ];
+                             if (isset($LkPelatih) && ($LkPelatih->status_pelatih == "Half print")) {
+                                 $barangPressMesin['lk_pelatih_id'] = $LkPelatih->id;
+                             }
+                             $barangMasukPressMesin = DataPress::create($barangPressMesin);
+                             // AKHIR MESIN
+
+                             // PRESS KAIN
+                             $barangMasukPressKainData = [
+                                 'no_order_id' => $lk->id,
+                                 'mesin_atexco_id' => $barangMasukPressMesin->id,
+                                 'deadline' => $createDate->format('Y-m-d'),
+                             ];
+                             if (isset($LkPelatih) && ($LkPelatih->status_pelatih == "Half print")) {
+                                 $barangMasukPressKainData['lk_pelatih_id'] = $LkPelatih->id;
+                             }
+                             $barangMasuPressKain = DataPressKain::create($barangMasukPressKainData);
+                             // AKHIR PRESS KAIN
+
+                             // CUT PRINT
+                             $barangMasukDataCutPrintData = [
+                                 'no_order_id' => $lk->id,
+                                 'press_kain_id' => $barangMasuPressKain->id,
+                                 'deadline' => $createDate->format('Y-m-d'),
+                             ];
+                             if (isset($LkPelatih) && ($LkPelatih->status_pelatih == "Half print")) {
+                                 $barangMasukDataCutPrintData['lk_pelatih_id'] = $LkPelatih->id;
+                             }
+                             $barangMasukCutPrin = DataLaserCut::create($barangMasukDataCutPrintData);
+                             $barangMasukDataCutManualData = [
+                                 'no_order_id' => $lk->id,
+                                 'laser_cut_id' => $barangMasukCutPrin->id,
+                                 'deadline' => $createDate->format('Y-m-d'),
+                             ];
+                             if (isset($LkPelatih) && ($LkPelatih->status_pelatih == "Half print")) {
+                                 $barangMasukDataCutManualData['lk_pelatih_id'] = $LkPelatih->id;
+                             }
+                             $barangMasukCutManual = DataManualCut::create($barangMasukDataCutManualData);
+                             // AHIR CUT PRINT
+
+                             // DATA SORTIR
+                             $barangMasukDataSortirData = [
+                                 'no_order_id' => $lk->id,
+                                 'manual_cut_id' => $barangMasukCutManual->id,
+                                 'laser_cut_id' => $barangMasukCutPrin->id,
+                                 'deadline' => $createDate->format('Y-m-d'),
+                             ];
+                             if (isset($LkPelatih) && ($LkPelatih->status_pelatih == "Half print")) {
+                                 $barangMasukDataSortirData['lk_pelatih_id'] = $LkPelatih->id;
+                             }
+                             $barangMasukSortir = DataSortir::create($barangMasukDataSortirData);
+                             // AKHIR DATA SORTIR
+
+                             // JAHIT
+                             $barangMasukDataJahitrData = [
+                                 'no_order_id' => $lk->id,
+                                 'sortir_id' => $barangMasukSortir->id,
+                                 'deadline' => $createDate->format('Y-m-d'),
+                             ];
+                             if (isset($LkPelatih) && ($LkPelatih->status_pelatih == "Half print")) {
+                                 $barangMasukDataJahitrData['lk_pelatih_id'] = $LkPelatih->id;
+                             }
+                             $barangMasukJahit = Jahit::create($barangMasukDataJahitrData);
+                             // AKHIR JAHIT
+
+                             // FINIS
+                             $barangMasukDataFinisData = [
+                                 'no_order_id' => $lk->id,
+                                 'jahit_baju_id' => $barangMasukJahit->id,
+                                 'deadline' => $createDate->format('Y-m-d'),
+                             ];
+                             if (isset($LkPelatih) && ($LkPelatih->status_pelatih == "Half print")) {
+                                 $barangMasukDataFinisData['lk_pelatih_id'] = $LkPelatih->id;
+                             }
+                             $barangMasukFinis = Finish::create($barangMasukDataFinisData);
+                             // AKHIR FINIS
+
+                             // LAPORAN
+                             Laporan::create([
+                                 'barang_masuk_costumer_services_id' => $lk->id,
+                                 'barang_masuk_layout_id' => $barangMasukDataLayout->id,
+                                 'barang_masuk_mesin_atexco_id' => $barangMasukPressMesin->id ,
+                                 'barang_masuk_presskain_id' => $barangMasuPressKain->id,
+                                 'barang_masuk_lasercut_id' => $barangMasukCutPrin->id,
+                                 'barang_masuk_manualcut_id' => $barangMasukCutManual->id,
+                                 'barang_masuk_sortir_id' => $barangMasukSortir->id,
+                                 'jahit_id' => $barangMasukJahit->id,
+                                 'finis_id' => $barangMasukFinis->id,
+                             ]);
+                             // AKHIR LAPORAN
+                        }
+                         elseif ($total_hari == 2) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_pelatih_id', $LkPelatih->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -6358,7 +6829,7 @@ class CostumerServicesController extends Controller
 
                     // POLOS
                     if ($LkPelatih->status_pelatih == "Polos") {
-                        if ($total_hari == 1) {
+                        if ($total_hari == 0) {
                             // CUT PRINT
                             BarangMasukDatalayout::where('lk_pelatih_id', $LkPelatih->id)->delete();
                             DataManualCut::where('lk_pelatih_id', $LkPelatih->id)->delete();
@@ -6418,7 +6889,68 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 2) {
+                        }elseif ($total_hari == 1) {
+                            // CUT PRINT
+                            BarangMasukDatalayout::where('lk_pelatih_id', $LkPelatih->id)->delete();
+                            DataManualCut::where('lk_pelatih_id', $LkPelatih->id)->delete();
+                            $barangMasukDataCutManualData = [
+                                'no_order_id' => $lk->id,
+                                'deadline' => $createDate->format('Y-m-d'),
+                            ];
+                            if (isset($LkPelatih) && ($LkPelatih->status_pelatih == "Polos")) {
+                                $barangMasukDataCutManualData['lk_pelatih_id'] = $LkPelatih->id;
+                            }
+                            $barangMasukCutManual = DataManualCut::create($barangMasukDataCutManualData);
+                            // AHIR CUT PRINT
+
+                            // DATA SORTIR
+                            $barangMasukDataSortirData = [
+                                'no_order_id' => $lk->id,
+                                'manual_cut_id' => $barangMasukCutManual->id,
+                                // 'laser_cut_id' => $barangMasukCutPrin->id,
+                                'deadline' => $createDate->format('Y-m-d'),
+                            ];
+                            if (isset($LkPelatih) && ($LkPelatih->status_pelatih == "Polos")) {
+                                $barangMasukDataSortirData['lk_pelatih_id'] = $LkPelatih->id;
+                            }
+                            $barangMasukSortir = DataSortir::create($barangMasukDataSortirData);
+                            // AKHIR DATA SORTIR
+
+                            // JAHIT
+                            $barangMasukDataJahitrData = [
+                                'no_order_id' => $lk->id,
+                                'sortir_id' => $barangMasukSortir->id,
+                                'deadline' => $createDate->format('Y-m-d'),
+                            ];
+                            if (isset($LkPelatih) && ($LkPelatih->status_pelatih == "Polos")) {
+                                $barangMasukDataJahitrData['lk_pelatih_id'] = $LkPelatih->id;
+                            }
+                            $barangMasukJahit = Jahit::create($barangMasukDataJahitrData);
+                            // AKHIR JAHIT
+
+                            // FINIS
+                            $barangMasukDataFinisData = [
+                                'no_order_id' => $lk->id,
+                                'jahit_baju_id' => $barangMasukJahit->id,
+                                'deadline' => $createDate->format('Y-m-d'),
+                            ];
+                            if (isset($LkPelatih) && ($LkPelatih->status_pelatih == "Polos")) {
+                                $barangMasukDataFinisData['lk_pelatih_id'] = $LkPelatih->id;
+                            }
+                            $barangMasukFinis = Finish::create($barangMasukDataFinisData);
+                            // AKHIR FINIS
+
+                            // LAPORAN
+                            Laporan::create([
+                                'barang_masuk_costumer_services_id' => $lk->id,
+                                'barang_masuk_manualcut_id' => $barangMasukCutManual->id,
+                                'barang_masuk_sortir_id' => $barangMasukSortir->id,
+                                'jahit_id' => $barangMasukJahit->id,
+                                'finis_id' => $barangMasukFinis->id,
+                            ]);
+                            // AKHIR LAPORAN
+                        }
+                         elseif ($total_hari == 2) {
                             // CUT PRINT
                             BarangMasukDatalayout::where('lk_pelatih_id', $LkPelatih->id)->delete();
                             DataManualCut::where('lk_pelatih_id', $LkPelatih->id)->delete();
@@ -7085,7 +7617,7 @@ class CostumerServicesController extends Controller
                 if (isset($gambar->file_baju_kiper)) {
                     // FULL PRINT
                     if ($LkKiper->status_kiper == "Full print") {
-                        if ($total_hari == 1) {
+                        if ($total_hari == 0) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_kiper_id', $LkKiper->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -7186,7 +7718,109 @@ class CostumerServicesController extends Controller
                                     'finis_id' => $barangMasukFinis->id,
                                 ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 2) {
+                        }elseif ($total_hari == 1) {
+                             // LAYOUT
+                             BarangMasukDatalayout::where('lk_kiper_id', $LkKiper->id)->delete();
+                             $barangMasukDataLayoutData = [
+                                 'users_layout_id' => $lk->layout_id,
+                                 'barang_masuk_id' => $lk->id,
+                                 'deadline' => $createDate->format('Y-m-d'),
+                             ];
+                             if (isset($LkKiper) && ($LkKiper->status_kiper == "Full print")) {
+                                 $barangMasukDataLayoutData['lk_kiper_id'] = $LkKiper->id;
+                             }
+                             $barangMasukDataLayout = BarangMasukDatalayout::create($barangMasukDataLayoutData);
+                             // AKHIR LAYOUT
+
+                             // MESIN
+                             $barangPressMesin = [
+                                 'no_order_id' => $lk->id,
+                                 'penanggung_jawab_id' => optional($lk->BarangMasukDisainer->DataMesinCs->first())->User->id,
+                                 'barang_masuk_layout_id' => $barangMasukDataLayout->id,
+                                 'deadline' => $createDate->format('Y-m-d'),
+                             ];
+                             if (isset($LkKiper) && ($LkKiper->status_kiper == "Full print")) {
+                                 $barangPressMesin['lk_kiper_id'] = $LkKiper->id;
+                             }
+                             $barangMasukPressMesin = DataPress::create($barangPressMesin);
+                             // AKHIR MESIN
+
+
+                             // PRESS KAIN
+                                 $barangMasukPressKainData = [
+                                     'no_order_id' => $lk->id,
+                                     'mesin_atexco_id' => $barangMasukPressMesin->id,
+                                     'deadline' => $createDate->format('Y-m-d'),
+                                 ];
+                                 if (isset($LkKiper) && ($LkKiper->status_kiper == "Full print")) {
+                                     $barangMasukPressKainData['lk_kiper_id'] = $LkKiper->id;
+                                 }
+                                 $barangMasuPressKain = DataPressKain::create($barangMasukPressKainData);
+                             // AKHIR PRESS KAIN
+
+
+                             // CUT PRINT
+                             $barangMasukDataCutPrintData = [
+                                 'no_order_id' => $lk->id,
+                                 'press_kain_id' => $barangMasuPressKain->id,
+                                 'deadline' => $createDate->format('Y-m-d'),
+                             ];
+                             if (isset($LkKiper) && ($LkKiper->status_kiper == "Full print")) {
+                                 $barangMasukDataCutPrintData['lk_kiper_id'] = $LkKiper->id;
+                             }
+                             $barangMasukCutPrin = DataLaserCut::create($barangMasukDataCutPrintData);
+                             // AHIR CUT PRINT
+
+                             // DATA SORTIR
+                             $barangMasukDataSortirData = [
+                                 'no_order_id' => $lk->id,
+                                 'laser_cut_id' => $barangMasukCutPrin->id,
+                                 'deadline' => $createDate->format('Y-m-d'),
+                             ];
+                             if (isset($LkKiper) && ($LkKiper->status_kiper == "Full print")) {
+                                 $barangMasukDataSortirData['lk_kiper_id'] = $LkKiper->id;
+                             }
+                             $barangMasukSortir = DataSortir::create($barangMasukDataSortirData);
+                             // AKHIR DATA SORTIR
+
+                             // JAHIT
+                             $barangMasukDataJahitrData = [
+                                 'no_order_id' => $lk->id,
+                                 'sortir_id' => $barangMasukSortir->id,
+                                 'deadline' => $createDate->format('Y-m-d'),
+                             ];
+                             if (isset($LkKiper) && ($LkKiper->status_kiper == "Full print")) {
+                                 $barangMasukDataJahitrData['lk_kiper_id'] = $LkKiper->id;
+                             }
+                             $barangMasukJahit = Jahit::create($barangMasukDataJahitrData);
+                             // AKHIR JAHIT
+
+                             // FINIS
+                             $barangMasukDataFinisData = [
+                                 'no_order_id' => $lk->id,
+                                 'jahit_baju_id' => $barangMasukJahit->id,
+                                 'deadline' => $createDate->format('Y-m-d'),
+                             ];
+                             if (isset($LkKiper) && ($LkKiper->status_kiper == "Full print")) {
+                                 $barangMasukDataFinisData['lk_kiper_id'] = $LkKiper->id;
+                             }
+                             $barangMasukFinis = Finish::create($barangMasukDataFinisData);
+                             // AKHIR FINIS
+
+                             // LAPORAN
+                                 Laporan::create([
+                                     'barang_masuk_costumer_services_id' => $lk->id,
+                                     'barang_masuk_layout_id' => $barangMasukDataLayout->id,
+                                     'barang_masuk_mesin_atexco_id' => $barangMasukPressMesin->id ,
+                                     'barang_masuk_presskain_id' => $barangMasuPressKain->id,
+                                     'barang_masuk_lasercut_id' => $barangMasukCutPrin->id,
+                                     'barang_masuk_sortir_id' => $barangMasukSortir->id,
+                                     'jahit_id' => $barangMasukJahit->id,
+                                     'finis_id' => $barangMasukFinis->id,
+                                 ]);
+                             // AKHIR LAPORAN
+                        }
+                         elseif ($total_hari == 2) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_kiper_id', $LkKiper->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -8303,7 +8937,7 @@ class CostumerServicesController extends Controller
 
                     // HALFT PRINT
                     if ($LkKiper->status_kiper == "Half print") {
-                        if ($total_hari == 1) {
+                        if ($total_hari == 0) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_kiper_id', $LkKiper->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -8415,7 +9049,120 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                                 ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 2) {
+                        }elseif ($total_hari == 1) {
+                             // LAYOUT
+                             BarangMasukDatalayout::where('lk_kiper_id', $LkKiper->id)->delete();
+                             $barangMasukDataLayoutData = [
+                                 'users_layout_id' => $lk->layout_id,
+                                 'barang_masuk_id' => $lk->id,
+                                 'deadline' => $createDate->format('Y-m-d'),
+                             ];
+                             if (isset($LkKiper) && ($LkKiper->status_kiper == "Half print")) {
+                                 $barangMasukDataLayoutData['lk_kiper_id'] = $LkKiper->id;
+                             }
+                             $barangMasukDataLayout = BarangMasukDatalayout::create($barangMasukDataLayoutData);
+                             // AKHIR LAYOUT
+
+                             // MESIN
+                             $barangPressMesin = [
+                                 'no_order_id' => $lk->id,
+                                 'penanggung_jawab_id' => optional($lk->BarangMasukDisainer->DataMesinCs->first())->User->id,
+                                 'barang_masuk_layout_id' => $barangMasukDataLayout->id,
+                                 'deadline' => $createDate->format('Y-m-d'),
+                             ];
+                             if (isset($LkKiper) && ($LkKiper->status_kiper == "Half print")) {
+                                 $barangPressMesin['lk_kiper_id'] = $LkKiper->id;
+                             }
+                             $barangMasukPressMesin = DataPress::create($barangPressMesin);
+                             // AKHIR MESIN
+
+
+                             // PRESS KAIN
+                                 $barangMasukPressKainData = [
+                                     'no_order_id' => $lk->id,
+                                     'mesin_atexco_id' => $barangMasukPressMesin->id,
+                                     'deadline' => $createDate->format('Y-m-d'),
+                                 ];
+                                 if (isset($LkKiper) && ($LkKiper->status_kiper == "Half print")) {
+                                     $barangMasukPressKainData['lk_kiper_id'] = $LkKiper->id;
+                                 }
+                                 $barangMasuPressKain = DataPressKain::create($barangMasukPressKainData);
+                             // AKHIR PRESS KAIN
+
+
+                             // CUT PRINT
+                             $barangMasukDataCutPrintData = [
+                                 'no_order_id' => $lk->id,
+                                 'press_kain_id' => $barangMasuPressKain->id,
+                                 'deadline' => $createDate->format('Y-m-d'),
+                             ];
+                             if (isset($LkKiper) && ($LkKiper->status_kiper == "Half print")) {
+                                 $barangMasukDataCutPrintData['lk_kiper_id'] = $LkKiper->id;
+                             }
+                             $barangMasukCutPrin = DataLaserCut::create($barangMasukDataCutPrintData);
+                             $barangMasukDataCutManualData = [
+                                 'no_order_id' => $lk->id,
+                                 'laser_cut_id' => $barangMasukCutPrin->id,
+                                 'deadline' => $createDate->format('Y-m-d'),
+                             ];
+                             if (isset($LkKiper) && ($LkKiper->status_kiper == "Half print")) {
+                                 $barangMasukDataCutManualData['lk_kiper_id'] = $LkKiper->id;
+                             }
+                             $barangMasukCutManual = DataManualCut::create($barangMasukDataCutManualData);
+                             // AHIR CUT PRINT
+
+                             // DATA SORTIR
+                             $barangMasukDataSortirData = [
+                                 'no_order_id' => $lk->id,
+                                 'manual_cut_id' => $barangMasukCutManual->id,
+                                 'laser_cut_id' => $barangMasukCutPrin->id,
+                                 'deadline' => $createDate->format('Y-m-d'),
+                             ];
+                             if (isset($LkKiper) && ($LkKiper->status_kiper == "Half print")) {
+                                 $barangMasukDataSortirData['lk_kiper_id'] = $LkKiper->id;
+                             }
+                             $barangMasukSortir = DataSortir::create($barangMasukDataSortirData);
+                             // AKHIR DATA SORTIR
+
+                             // JAHIT
+                             $barangMasukDataJahitrData = [
+                                 'no_order_id' => $lk->id,
+                                 'sortir_id' => $barangMasukSortir->id,
+                                 'deadline' => $createDate->format('Y-m-d'),
+                             ];
+                             if (isset($LkKiper) && ($LkKiper->status_kiper == "Half print")) {
+                                 $barangMasukDataJahitrData['lk_kiper_id'] = $LkKiper->id;
+                             }
+                             $barangMasukJahit = Jahit::create($barangMasukDataJahitrData);
+                             // AKHIR JAHIT
+
+                             // FINIS
+                             $barangMasukDataFinisData = [
+                                 'no_order_id' => $lk->id,
+                                 'jahit_baju_id' => $barangMasukJahit->id,
+                                 'deadline' => $createDate->format('Y-m-d'),
+                             ];
+                             if (isset($LkKiper) && ($LkKiper->status_kiper == "Half print")) {
+                                 $barangMasukDataFinisData['lk_kiper_id'] = $LkKiper->id;
+                             }
+                             $barangMasukFinis = Finish::create($barangMasukDataFinisData);
+                             // AKHIR FINIS
+
+                             // LAPORAN
+                                 Laporan::create([
+                                     'barang_masuk_costumer_services_id' => $lk->id,
+                                 'barang_masuk_layout_id' => $barangMasukDataLayout->id,
+                                 'barang_masuk_mesin_atexco_id' => $barangMasukPressMesin->id ,
+                                 'barang_masuk_presskain_id' => $barangMasuPressKain->id,
+                                 'barang_masuk_lasercut_id' => $barangMasukCutPrin->id,
+                                 'barang_masuk_manualcut_id' => $barangMasukCutManual->id,
+                                 'barang_masuk_sortir_id' => $barangMasukSortir->id,
+                                 'jahit_id' => $barangMasukJahit->id,
+                                 'finis_id' => $barangMasukFinis->id,
+                                 ]);
+                             // AKHIR LAPORAN
+                        }
+                         elseif ($total_hari == 2) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_kiper_id', $LkKiper->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -9653,7 +10400,7 @@ class CostumerServicesController extends Controller
 
                     // POLOS
                     if ($LkKiper->status_kiper == "Polos") {
-                        if ($total_hari == 1) {
+                        if ($total_hari == 0) {
                             // CUT PRINT
                             BarangMasukDatalayout::where('lk_kiper_id', $LkKiper->id)->delete();
                             DataManualCut::where('lk_kiper_id', $LkKiper->id)->delete();
@@ -9713,7 +10460,68 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 2) {
+                        }elseif ($total_hari == 1) {
+                             // CUT PRINT
+                             BarangMasukDatalayout::where('lk_kiper_id', $LkKiper->id)->delete();
+                             DataManualCut::where('lk_kiper_id', $LkKiper->id)->delete();
+                             $barangMasukDataCutManualData = [
+                                 'no_order_id' => $lk->id,
+                                 'deadline' => $createDate->format('Y-m-d'),
+                             ];
+                             if (isset($LkKiper) && ($LkKiper->status_kiper == "Polos")) {
+                                 $barangMasukDataCutManualData['lk_kiper_id'] = $LkKiper->id;
+                             }
+                             $barangMasukCutManual = DataManualCut::create($barangMasukDataCutManualData);
+                             // AHIR CUT PRINT
+
+                             // DATA SORTIR
+                             $barangMasukDataSortirData = [
+                                 'no_order_id' => $lk->id,
+                                 'manual_cut_id' => $barangMasukCutManual->id,
+                                 // 'laser_cut_id' => $barangMasukCutPrin->id,
+                                 'deadline' => $createDate->format('Y-m-d'),
+                             ];
+                             if (isset($LkKiper) && ($LkKiper->status_kiper == "Polos")) {
+                                 $barangMasukDataSortirData['lk_kiper_id'] = $LkKiper->id;
+                             }
+                             $barangMasukSortir = DataSortir::create($barangMasukDataSortirData);
+                             // AKHIR DATA SORTIR
+
+                             // JAHIT
+                             $barangMasukDataJahitrData = [
+                                 'no_order_id' => $lk->id,
+                                 'sortir_id' => $barangMasukSortir->id,
+                                 'deadline' => $createDate->format('Y-m-d'),
+                             ];
+                             if (isset($LkKiper) && ($LkKiper->status_kiper == "Polos")) {
+                                 $barangMasukDataJahitrData['lk_kiper_id'] = $LkKiper->id;
+                             }
+                             $barangMasukJahit = Jahit::create($barangMasukDataJahitrData);
+                             // AKHIR JAHIT
+
+                             // FINIS
+                             $barangMasukDataFinisData = [
+                                 'no_order_id' => $lk->id,
+                                 'jahit_baju_id' => $barangMasukJahit->id,
+                                 'deadline' => $createDate->format('Y-m-d'),
+                             ];
+                             if (isset($LkKiper) && ($LkKiper->status_kiper == "Polos")) {
+                                 $barangMasukDataFinisData['lk_kiper_id'] = $LkKiper->id;
+                             }
+                             $barangMasukFinis = Finish::create($barangMasukDataFinisData);
+                             // AKHIR FINIS
+
+                             // LAPORAN
+                             Laporan::create([
+                                 'barang_masuk_costumer_services_id' => $lk->id,
+                                 'barang_masuk_manualcut_id' => $barangMasukCutManual->id,
+                                 'barang_masuk_sortir_id' => $barangMasukSortir->id,
+                                 'jahit_id' => $barangMasukJahit->id,
+                                 'finis_id' => $barangMasukFinis->id,
+                             ]);
+                             // AKHIR LAPORAN
+                        }
+                         elseif ($total_hari == 2) {
                             // CUT PRINT
                             BarangMasukDatalayout::where('lk_kiper_id', $LkKiper->id)->delete();
                             DataManualCut::where('lk_kiper_id', $LkKiper->id)->delete();
@@ -10380,7 +11188,7 @@ class CostumerServicesController extends Controller
                 if (isset($gambar->file_baju_1)) {
                     // FULL PRINT
                     if ($LkBaju1->status_baju_1 == "Full print") {
-                        if ($total_hari == 1) {
+                        if ($total_hari == 0) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_1_id', $LkBaju1->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -10481,7 +11289,109 @@ class CostumerServicesController extends Controller
                                     'finis_id' => $barangMasukFinis->id,
                                 ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 2) {
+                        }elseif ($total_hari == 1) {
+                            // LAYOUT
+                            BarangMasukDatalayout::where('lk_1_id', $LkBaju1->id)->delete();
+                            $barangMasukDataLayoutData = [
+                                'users_layout_id' => $lk->layout_id,
+                                'barang_masuk_id' => $lk->id,
+                                'deadline' => $createDate->format('Y-m-d'),
+                            ];
+                            if (isset($LkBaju1) && ($LkBaju1->status_baju_1 == "Full print")) {
+                                $barangMasukDataLayoutData['lk_1_id'] = $LkBaju1->id;
+                            }
+                            $barangMasukDataLayout = BarangMasukDatalayout::create($barangMasukDataLayoutData);
+                            // AKHIR LAYOUT
+
+                            // MESIN
+                            $barangPressMesin = [
+                                'no_order_id' => $lk->id,
+                                'penanggung_jawab_id' => optional($lk->BarangMasukDisainer->DataMesinCs->first())->User->id,
+                                'barang_masuk_layout_id' => $barangMasukDataLayout->id,
+                                'deadline' => $createDate->format('Y-m-d'),
+                            ];
+                            if (isset($LkBaju1) && ($LkBaju1->status_baju_1 == "Full print")) {
+                                $barangPressMesin['lk_1_id'] = $LkBaju1->id;
+                            }
+                            $barangMasukPressMesin = DataPress::create($barangPressMesin);
+                            // AKHIR MESIN
+
+
+                            // PRESS KAIN
+                                $barangMasukPressKainData = [
+                                    'no_order_id' => $lk->id,
+                                    'mesin_atexco_id' => $barangMasukPressMesin->id,
+                                    'deadline' => $createDate->format('Y-m-d'),
+                                ];
+                                if (isset($LkBaju1) && ($LkBaju1->status_baju_1 == "Full print")) {
+                                    $barangMasukPressKainData['lk_1_id'] = $LkBaju1->id;
+                                }
+                                $barangMasuPressKain = DataPressKain::create($barangMasukPressKainData);
+                            // AKHIR PRESS KAIN
+
+
+                            // CUT PRINT
+                            $barangMasukDataCutPrintData = [
+                                'no_order_id' => $lk->id,
+                                'press_kain_id' => $barangMasuPressKain->id,
+                                'deadline' => $createDate->format('Y-m-d'),
+                            ];
+                            if (isset($LkBaju1) && ($LkBaju1->status_baju_1 == "Full print")) {
+                                $barangMasukDataCutPrintData['lk_1_id'] = $LkBaju1->id;
+                            }
+                            $barangMasukCutPrin = DataLaserCut::create($barangMasukDataCutPrintData);
+                            // AHIR CUT PRINT
+
+                            // DATA SORTIR
+                            $barangMasukDataSortirData = [
+                                'no_order_id' => $lk->id,
+                                'laser_cut_id' => $barangMasukCutPrin->id,
+                                'deadline' => $createDate->format('Y-m-d'),
+                            ];
+                            if (isset($LkBaju1) && ($LkBaju1->status_baju_1 == "Full print")) {
+                                $barangMasukDataSortirData['lk_1_id'] = $LkBaju1->id;
+                            }
+                            $barangMasukSortir = DataSortir::create($barangMasukDataSortirData);
+                            // AKHIR DATA SORTIR
+
+                            // JAHIT
+                            $barangMasukDataJahitrData = [
+                                'no_order_id' => $lk->id,
+                                'sortir_id' => $barangMasukSortir->id,
+                                'deadline' => $createDate->format('Y-m-d'),
+                            ];
+                            if (isset($LkBaju1) && ($LkBaju1->status_baju_1 == "Full print")) {
+                                $barangMasukDataJahitrData['lk_1_id'] = $LkBaju1->id;
+                            }
+                            $barangMasukJahit = Jahit::create($barangMasukDataJahitrData);
+                            // AKHIR JAHIT
+
+                            // FINIS
+                            $barangMasukDataFinisData = [
+                                'no_order_id' => $lk->id,
+                                'jahit_baju_id' => $barangMasukJahit->id,
+                                'deadline' => $createDate->format('Y-m-d'),
+                            ];
+                            if (isset($LkBaju1) && ($LkBaju1->status_baju_1 == "Full print")) {
+                                $barangMasukDataFinisData['lk_1_id'] = $LkBaju1->id;
+                            }
+                            $barangMasukFinis = Finish::create($barangMasukDataFinisData);
+                            // AKHIR FINIS
+
+                            // LAPORAN
+                                Laporan::create([
+                                    'barang_masuk_costumer_services_id' => $lk->id,
+                                    'barang_masuk_layout_id' => $barangMasukDataLayout->id,
+                                    'barang_masuk_mesin_atexco_id' => $barangMasukPressMesin->id ,
+                                    'barang_masuk_presskain_id' => $barangMasuPressKain->id,
+                                    'barang_masuk_lasercut_id' => $barangMasukCutPrin->id,
+                                    'barang_masuk_sortir_id' => $barangMasukSortir->id,
+                                    'jahit_id' => $barangMasukJahit->id,
+                                    'finis_id' => $barangMasukFinis->id,
+                                ]);
+                            // AKHIR LAPORAN
+                        }
+                         elseif ($total_hari == 2) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_1_id', $LkBaju1->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -11598,7 +12508,7 @@ class CostumerServicesController extends Controller
 
                     // HALFT PRINT
                     if ($LkBaju1->status_baju_1 == "Half print") {
-                        if ($total_hari == 1) {
+                        if ($total_hari == 0) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_1_id', $LkBaju1->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -11710,7 +12620,120 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                                 ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 2) {
+                        }elseif ($total_hari == 1) {
+                             // LAYOUT
+                             BarangMasukDatalayout::where('lk_1_id', $LkBaju1->id)->delete();
+                             $barangMasukDataLayoutData = [
+                                 'users_layout_id' => $lk->layout_id,
+                                 'barang_masuk_id' => $lk->id,
+                                 'deadline' => $createDate->format('Y-m-d'),
+                             ];
+                             if (isset($LkBaju1) && ($LkBaju1->status_baju_1 == "Half print")) {
+                                 $barangMasukDataLayoutData['lk_1_id'] = $LkBaju1->id;
+                             }
+                             $barangMasukDataLayout = BarangMasukDatalayout::create($barangMasukDataLayoutData);
+                             // AKHIR LAYOUT
+
+                             // MESIN
+                             $barangPressMesin = [
+                                 'no_order_id' => $lk->id,
+                                 'penanggung_jawab_id' => optional($lk->BarangMasukDisainer->DataMesinCs->first())->User->id,
+                                 'barang_masuk_layout_id' => $barangMasukDataLayout->id,
+                                 'deadline' => $createDate->format('Y-m-d'),
+                             ];
+                             if (isset($LkBaju1) && ($LkBaju1->status_baju_1 == "Half print")) {
+                                 $barangPressMesin['lk_1_id'] = $LkBaju1->id;
+                             }
+                             $barangMasukPressMesin = DataPress::create($barangPressMesin);
+                             // AKHIR MESIN
+
+
+                             // PRESS KAIN
+                                 $barangMasukPressKainData = [
+                                     'no_order_id' => $lk->id,
+                                     'mesin_atexco_id' => $barangMasukPressMesin->id,
+                                     'deadline' => $createDate->format('Y-m-d'),
+                                 ];
+                                 if (isset($LkBaju1) && ($LkBaju1->status_baju_1 == "Half print")) {
+                                     $barangMasukPressKainData['lk_1_id'] = $LkBaju1->id;
+                                 }
+                                 $barangMasuPressKain = DataPressKain::create($barangMasukPressKainData);
+                             // AKHIR PRESS KAIN
+
+
+                             // CUT PRINT
+                             $barangMasukDataCutPrintData = [
+                                 'no_order_id' => $lk->id,
+                                 'press_kain_id' => $barangMasuPressKain->id,
+                                 'deadline' => $createDate->format('Y-m-d'),
+                             ];
+                             if (isset($LkBaju1) && ($LkBaju1->status_baju_1 == "Half print")) {
+                                 $barangMasukDataCutPrintData['lk_1_id'] = $LkBaju1->id;
+                             }
+                             $barangMasukCutPrin = DataLaserCut::create($barangMasukDataCutPrintData);
+                             $barangMasukDataCutManualData = [
+                                 'no_order_id' => $lk->id,
+                                 'laser_cut_id' => $barangMasukCutPrin->id,
+                                 'deadline' => $createDate->format('Y-m-d'),
+                             ];
+                             if (isset($LkBaju1) && ($LkBaju1->status_baju_1 == "Half print")) {
+                                 $barangMasukDataCutManualData['lk_1_id'] = $LkBaju1->id;
+                             }
+                             $barangMasukCutManual = DataManualCut::create($barangMasukDataCutManualData);
+                             // AHIR CUT PRINT
+
+                             // DATA SORTIR
+                             $barangMasukDataSortirData = [
+                                 'no_order_id' => $lk->id,
+                                 'manual_cut_id' => $barangMasukCutManual->id,
+                                 'laser_cut_id' => $barangMasukCutPrin->id,
+                                 'deadline' => $createDate->format('Y-m-d'),
+                             ];
+                             if (isset($LkBaju1) && ($LkBaju1->status_baju_1 == "Half print")) {
+                                 $barangMasukDataSortirData['lk_1_id'] = $LkBaju1->id;
+                             }
+                             $barangMasukSortir = DataSortir::create($barangMasukDataSortirData);
+                             // AKHIR DATA SORTIR
+
+                             // JAHIT
+                             $barangMasukDataJahitrData = [
+                                 'no_order_id' => $lk->id,
+                                 'sortir_id' => $barangMasukSortir->id,
+                                 'deadline' => $createDate->format('Y-m-d'),
+                             ];
+                             if (isset($LkBaju1) && ($LkBaju1->status_baju_1 == "Half print")) {
+                                 $barangMasukDataJahitrData['lk_1_id'] = $LkBaju1->id;
+                             }
+                             $barangMasukJahit = Jahit::create($barangMasukDataJahitrData);
+                             // AKHIR JAHIT
+
+                             // FINIS
+                             $barangMasukDataFinisData = [
+                                 'no_order_id' => $lk->id,
+                                 'jahit_baju_id' => $barangMasukJahit->id,
+                                 'deadline' => $createDate->format('Y-m-d'),
+                             ];
+                             if (isset($LkBaju1) && ($LkBaju1->status_baju_1 == "Half print")) {
+                                 $barangMasukDataFinisData['lk_1_id'] = $LkBaju1->id;
+                             }
+                             $barangMasukFinis = Finish::create($barangMasukDataFinisData);
+                             // AKHIR FINIS
+
+                             // LAPORAN
+                                 Laporan::create([
+                                     'barang_masuk_costumer_services_id' => $lk->id,
+                                 'barang_masuk_layout_id' => $barangMasukDataLayout->id,
+                                 'barang_masuk_mesin_atexco_id' => $barangMasukPressMesin->id ,
+                                 'barang_masuk_presskain_id' => $barangMasuPressKain->id,
+                                 'barang_masuk_lasercut_id' => $barangMasukCutPrin->id,
+                                 'barang_masuk_manualcut_id' => $barangMasukCutManual->id,
+                                 'barang_masuk_sortir_id' => $barangMasukSortir->id,
+                                 'jahit_id' => $barangMasukJahit->id,
+                                 'finis_id' => $barangMasukFinis->id,
+                                 ]);
+                             // AKHIR LAPORAN
+                        }
+                         elseif ($total_hari == 2) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_1_id', $LkBaju1->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -12948,7 +13971,7 @@ class CostumerServicesController extends Controller
 
                     // POLOS
                     if ($LkBaju1->status_baju_1 == "Polos") {
-                        if ($total_hari == 1) {
+                        if ($total_hari == 0) {
                             // CUT
                             BarangMasukDatalayout::where('lk_1_id', $LkBaju1->id)->delete();
                             DataManualCut::where('lk_1_id', $LkBaju1->id)->delete();
@@ -13008,7 +14031,68 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 2) {
+                        }elseif ($total_hari == 1) {
+                            // CUT
+                            BarangMasukDatalayout::where('lk_1_id', $LkBaju1->id)->delete();
+                            DataManualCut::where('lk_1_id', $LkBaju1->id)->delete();
+                            $barangMasukDataCutManualData = [
+                                'no_order_id' => $lk->id,
+                                'deadline' => $createDate->format('Y-m-d'),
+                            ];
+                            if (isset($LkBaju1) && ($LkBaju1->status_baju_1 == "Polos")) {
+                                $barangMasukDataCutManualData['lk_1_id'] = $LkBaju1->id;
+                            }
+                            $barangMasukCutManual = DataManualCut::create($barangMasukDataCutManualData);
+                            // AHIR CUT PRINT
+
+                            // DATA SORTIR
+                            $barangMasukDataSortirData = [
+                                'no_order_id' => $lk->id,
+                                'manual_cut_id' => $barangMasukCutManual->id,
+                                // 'laser_cut_id' => $barangMasukCutPrin->id,
+                                'deadline' => $createDate->format('Y-m-d'),
+                            ];
+                            if (isset($LkBaju1) && ($LkBaju1->status_baju_1 == "Polos")) {
+                                $barangMasukDataSortirData['lk_1_id'] = $LkBaju1->id;
+                            }
+                            $barangMasukSortir = DataSortir::create($barangMasukDataSortirData);
+                            // AKHIR DATA SORTIR
+
+                            // JAHIT
+                            $barangMasukDataJahitrData = [
+                                'no_order_id' => $lk->id,
+                                'sortir_id' => $barangMasukSortir->id,
+                                'deadline' => $createDate->format('Y-m-d'),
+                            ];
+                            if (isset($LkBaju1) && ($LkBaju1->status_baju_1 == "Polos")) {
+                                $barangMasukDataJahitrData['lk_1_id'] = $LkBaju1->id;
+                            }
+                            $barangMasukJahit = Jahit::create($barangMasukDataJahitrData);
+                            // AKHIR JAHIT
+
+                            // FINIS
+                            $barangMasukDataFinisData = [
+                                'no_order_id' => $lk->id,
+                                'jahit_baju_id' => $barangMasukJahit->id,
+                                'deadline' => $createDate->format('Y-m-d'),
+                            ];
+                            if (isset($LkBaju1) && ($LkBaju1->status_baju_1 == "Polos")) {
+                                $barangMasukDataFinisData['lk_1_id'] = $LkBaju1->id;
+                            }
+                            $barangMasukFinis = Finish::create($barangMasukDataFinisData);
+                            // AKHIR FINIS
+
+                            // LAPORAN
+                            Laporan::create([
+                                'barang_masuk_costumer_services_id' => $lk->id,
+                                'barang_masuk_manualcut_id' => $barangMasukCutManual->id,
+                                'barang_masuk_sortir_id' => $barangMasukSortir->id,
+                                'jahit_id' => $barangMasukJahit->id,
+                                'finis_id' => $barangMasukFinis->id,
+                            ]);
+                            // AKHIR LAPORAN
+                        }
+                        elseif ($total_hari == 2) {
                             // CUT PRINT
                             BarangMasukDatalayout::where('lk_1_id', $LkBaju1->id)->delete();
                             DataManualCut::where('lk_1_id', $LkBaju1->id)->delete();
@@ -13675,7 +14759,7 @@ class CostumerServicesController extends Controller
                 if (isset($gambar->file_celana_player)) {
                     // FULL PRINT
                     if ($LkCelanaPlayer->status_celana_player == "Full print") {
-                        if ($total_hari == 1) {
+                        if ($total_hari == 0) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_celana_player_id', $LkCelanaPlayer->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -13775,7 +14859,108 @@ class CostumerServicesController extends Controller
                                     'finis_id' => $barangMasukFinis->id,
                                 ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 2) {
+                        }elseif ($total_hari == 1) {
+                             // LAYOUT
+                             BarangMasukDatalayout::where('lk_celana_player_id', $LkCelanaPlayer->id)->delete();
+                             $barangMasukDataLayoutData = [
+                                 'users_layout_id' => $lk->layout_id,
+                                 'barang_masuk_id' => $lk->id,
+                                 'deadline' => $createDate->format('Y-m-d'),
+                             ];
+                             if (isset($LkCelanaPlayer) && ($LkCelanaPlayer->status_celana_player == "Full print")) {
+                                 $barangMasukDataLayoutData['lk_celana_player_id'] = $LkCelanaPlayer->id;
+                             }
+                             $barangMasukDataLayout = BarangMasukDatalayout::create($barangMasukDataLayoutData);
+                             // AKHIR LAYOUT
+
+                             // MESIN
+                             $barangPressMesin = [
+                                 'no_order_id' => $lk->id,
+                                 'penanggung_jawab_id' => optional($lk->BarangMasukDisainer->DataMesinCs->first())->User->id,
+                                 'barang_masuk_layout_id' => $barangMasukDataLayout->id,
+                                 'deadline' => $createDate->format('Y-m-d'),
+                             ];
+                             if (isset($LkCelanaPlayer) && ($LkCelanaPlayer->status_celana_player == "Full print")) {
+                                 $barangPressMesin['lk_celana_player_id'] = $LkCelanaPlayer->id;
+                             }
+                             $barangMasukPressMesin = DataPress::create($barangPressMesin);
+                             // AKHIR MESIN
+
+
+                                 // PRESS KAIN
+                                 $barangMasukPressKainData = [
+                                     'no_order_id' => $lk->id,
+                                     'mesin_atexco_id' => $barangMasukPressMesin->id,
+                                     'deadline' => $createDate->format('Y-m-d'),
+                                 ];
+                                 if (isset($LkCelanaPlayer) && ($LkCelanaPlayer->status_celana_player == "Full print")) {
+                                     $barangMasukPressKainData['lk_celana_player_id'] = $LkCelanaPlayer->id;
+                                 }
+                                 $barangMasuPressKain = DataPressKain::create($barangMasukPressKainData);
+                             // AKHIR PRESS KAIN
+
+                                 // CUT PRINT
+                                 $barangMasukDataCutPrintData = [
+                                     'no_order_id' => $lk->id,
+                                     'press_kain_id' => $barangMasuPressKain->id,
+                                     'deadline' => $createDate->format('Y-m-d'),
+                                 ];
+                                 if (isset($LkCelanaPlayer) && ($LkCelanaPlayer->status_celana_player == "Full print")) {
+                                     $barangMasukDataCutPrintData['lk_celana_player_id'] = $LkCelanaPlayer->id;
+                                 }
+                                 $barangMasukCutPrin = DataLaserCut::create($barangMasukDataCutPrintData);
+                                 // AHIR CUT PRINT
+
+                                 // DATA SORTIR
+                                 $barangMasukDataSortirData = [
+                                     'no_order_id' => $lk->id,
+                                     'laser_cut_id' => $barangMasukCutPrin->id,
+                                     'deadline' => $createDate->format('Y-m-d'),
+                                 ];
+                                 if (isset($LkCelanaPlayer) && ($LkCelanaPlayer->status_celana_player == "Full print")) {
+                                     $barangMasukDataSortirData['lk_celana_player_id'] = $LkCelanaPlayer->id;
+                                 }
+                                 $barangMasukSortir = DataSortir::create($barangMasukDataSortirData);
+                                 // AKHIR DATA SORTIR
+
+                                 // JAHIT
+                                 $barangMasukDataJahitrData = [
+                                     'no_order_id' => $lk->id,
+                                     'sortir_id' => $barangMasukSortir->id,
+                                     'deadline' => $createDate->format('Y-m-d'),
+                                 ];
+                                 if (isset($LkCelanaPlayer) && ($LkCelanaPlayer->status_celana_player == "Full print")) {
+                                     $barangMasukDataJahitrData['lk_celana_player_id'] = $LkCelanaPlayer->id;
+                                 }
+                                 $barangMasukJahit = Jahit::create($barangMasukDataJahitrData);
+                                 // AKHIR JAHIT
+
+                                 // FINIS
+                                 $barangMasukDataFinisData = [
+                                     'no_order_id' => $lk->id,
+                                     'jahit_baju_id' => $barangMasukJahit->id,
+                                     'deadline' => $createDate->format('Y-m-d'),
+                                 ];
+                                 if (isset($LkCelanaPlayer) && ($LkCelanaPlayer->status_celana_player == "Full print")) {
+                                     $barangMasukDataFinisData['lk_celana_player_id'] = $LkCelanaPlayer->id;
+                                 }
+                                 $barangMasukFinis = Finish::create($barangMasukDataFinisData);
+                                 // AKHIR FINIS
+
+                                 // LAPORAN
+                                 Laporan::create([
+                                     'barang_masuk_costumer_services_id' => $lk->id,
+                                     'barang_masuk_layout_id' => $barangMasukDataLayout->id,
+                                     'barang_masuk_mesin_atexco_id' => $barangMasukPressMesin->id ,
+                                     'barang_masuk_presskain_id' => $barangMasuPressKain->id,
+                                     'barang_masuk_lasercut_id' => $barangMasukCutPrin->id,
+                                     'barang_masuk_sortir_id' => $barangMasukSortir->id,
+                                     'jahit_id' => $barangMasukJahit->id,
+                                     'finis_id' => $barangMasukFinis->id,
+                                 ]);
+                             // AKHIR LAPORAN
+                        }
+                         elseif ($total_hari == 2) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_celana_player_id', $LkCelanaPlayer->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -14880,7 +16065,7 @@ class CostumerServicesController extends Controller
 
                     // HALFT PRINT
                     if ($LkCelanaPlayer->status_celana_player == "Half print") {
-                        if ($total_hari == 1) {
+                        if ($total_hari == 0) {
                             // LAYOUT
                              BarangMasukDatalayout::where('lk_celana_player_id', $LkCelanaPlayer->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -14991,7 +16176,119 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                         // AKHIR LAPORAN
-                        } elseif ($total_hari == 2) {
+                        } elseif ($total_hari == 1) {
+                            // LAYOUT
+                            BarangMasukDatalayout::where('lk_celana_player_id', $LkCelanaPlayer->id)->delete();
+                            $barangMasukDataLayoutData = [
+                                'users_layout_id' => $lk->layout_id,
+                                'barang_masuk_id' => $lk->id,
+                                'deadline' => $createDate->format('Y-m-d'),
+                            ];
+                            if (isset($LkCelanaPlayer) && ($LkCelanaPlayer->status_celana_player == "Half print")) {
+                                $barangMasukDataLayoutData['lk_celana_player_id'] = $LkCelanaPlayer->id;
+                            }
+                            $barangMasukDataLayout = BarangMasukDatalayout::create($barangMasukDataLayoutData);
+                            // AKHIR LAYOUT
+
+                            // MESIN
+                            $barangPressMesin = [
+                                'no_order_id' => $lk->id,
+                                'penanggung_jawab_id' => optional($lk->BarangMasukDisainer->DataMesinCs->first())->User->id,
+                                'barang_masuk_layout_id' => $barangMasukDataLayout->id,
+                                'deadline' => $createDate->format('Y-m-d'),
+                            ];
+                            if (isset($LkCelanaPlayer) && ($LkCelanaPlayer->status_celana_player == "Half print")) {
+                                $barangPressMesin['lk_celana_player_id'] = $LkCelanaPlayer->id;
+                            }
+                            $barangMasukPressMesin = DataPress::create($barangPressMesin);
+                            // AKHIR MESIN
+
+
+                            // PRESS KAIN
+                            $barangMasukPressKainData = [
+                                'no_order_id' => $lk->id,
+                                'mesin_atexco_id' => $barangMasukPressMesin->id,
+                                'deadline' => $createDate->format('Y-m-d'),
+                            ];
+                            if (isset($LkCelanaPlayer) && ($LkCelanaPlayer->status_celana_player == "Half print")) {
+                                $barangMasukPressKainData['lk_celana_player_id'] = $LkCelanaPlayer->id;
+                            }
+                            $barangMasuPressKain = DataPressKain::create($barangMasukPressKainData);
+                            // AKHIR PRESS KAIN
+
+                            // CUT PRINT
+                            $barangMasukDataCutPrintData = [
+                                'no_order_id' => $lk->id,
+                                'press_kain_id' => $barangMasuPressKain->id,
+                                'deadline' => $createDate->format('Y-m-d'),
+                            ];
+                            if (isset($LkCelanaPlayer) && ($LkCelanaPlayer->status_celana_player == "Half print")) {
+                                $barangMasukDataCutPrintData['lk_celana_player_id'] = $LkCelanaPlayer->id;
+                            }
+                            $barangMasukCutPrin = DataLaserCut::create($barangMasukDataCutPrintData);
+                            $barangMasukDataCutManualData = [
+                                'no_order_id' => $lk->id,
+                                'laser_cut_id' => $barangMasukCutPrin->id,
+                                'deadline' => $createDate->format('Y-m-d'),
+                            ];
+                            if (isset($LkCelanaPlayer) && ($LkCelanaPlayer->status_celana_player == "Half print")) {
+                                $barangMasukDataCutManualData['lk_celana_player_id'] = $LkCelanaPlayer->id;
+                            }
+                            $barangMasukCutManual = DataManualCut::create($barangMasukDataCutManualData);
+                            // AHIR CUT PRINT
+
+                            // DATA SORTIR
+                            $barangMasukDataSortirData = [
+                                'no_order_id' => $lk->id,
+                                'manual_cut_id' => $barangMasukCutManual->id,
+                                'laser_cut_id' => $barangMasukCutPrin->id,
+                                'deadline' => $createDate->format('Y-m-d'),
+                            ];
+                            if (isset($LkCelanaPlayer) && ($LkCelanaPlayer->status_celana_player == "Half print")) {
+                                $barangMasukDataSortirData['lk_celana_player_id'] = $LkCelanaPlayer->id;
+                            }
+                            $barangMasukSortir = DataSortir::create($barangMasukDataSortirData);
+                            // AKHIR DATA SORTIR
+
+                            // JAHIT
+                            $barangMasukDataJahitrData = [
+                                'no_order_id' => $lk->id,
+                                'sortir_id' => $barangMasukSortir->id,
+                                'deadline' => $createDate->format('Y-m-d'),
+                            ];
+                            if (isset($LkCelanaPlayer) && ($LkCelanaPlayer->status_celana_player == "Half print")) {
+                                $barangMasukDataJahitrData['lk_celana_player_id'] = $LkCelanaPlayer->id;
+                            }
+                            $barangMasukJahit = Jahit::create($barangMasukDataJahitrData);
+                            // AKHIR JAHIT
+
+                            // FINIS
+                            $barangMasukDataFinisData = [
+                                'no_order_id' => $lk->id,
+                                'jahit_baju_id' => $barangMasukJahit->id,
+                                'deadline' => $createDate->format('Y-m-d'),
+                            ];
+                            if (isset($LkCelanaPlayer) && ($LkCelanaPlayer->status_celana_player == "Half print")) {
+                                $barangMasukDataFinisData['lk_celana_player_id'] = $LkCelanaPlayer->id;
+                            }
+                            $barangMasukFinis = Finish::create($barangMasukDataFinisData);
+                            // AKHIR FINIS
+
+                            // LAPORAN
+                            Laporan::create([
+                                'barang_masuk_costumer_services_id' => $lk->id,
+                                'barang_masuk_layout_id' => $barangMasukDataLayout->id,
+                                'barang_masuk_mesin_atexco_id' => $barangMasukPressMesin->id ,
+                                'barang_masuk_presskain_id' => $barangMasuPressKain->id,
+                                'barang_masuk_lasercut_id' => $barangMasukCutPrin->id,
+                                'barang_masuk_manualcut_id' => $barangMasukCutManual->id,
+                                'barang_masuk_sortir_id' => $barangMasukSortir->id,
+                                'jahit_id' => $barangMasukJahit->id,
+                                'finis_id' => $barangMasukFinis->id,
+                            ]);
+                        // AKHIR LAPORAN
+                        }
+                        elseif ($total_hari == 2) {
                             // LAYOUT
                              BarangMasukDatalayout::where('lk_celana_player_id', $LkCelanaPlayer->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -16218,7 +17515,7 @@ class CostumerServicesController extends Controller
 
                     // POLOS
                     if ($LkCelanaPlayer->status_celana_player == "Polos") {
-                        if ($total_hari == 1) {
+                        if ($total_hari == 0) {
                             // CUT PRINT
                             BarangMasukDatalayout::where('lk_celana_player_id', $LkCelanaPlayer->id)->delete();
                             DataManualCut::where('lk_celana_player_id', $LkCelanaPlayer->id)->delete();
@@ -16278,7 +17575,68 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 2) {
+                        }elseif ($total_hari == 1) {
+                            // CUT PRINT
+                            BarangMasukDatalayout::where('lk_celana_player_id', $LkCelanaPlayer->id)->delete();
+                            DataManualCut::where('lk_celana_player_id', $LkCelanaPlayer->id)->delete();
+                            $barangMasukDataCutManualData = [
+                                'no_order_id' => $lk->id,
+                                'deadline' => $createDate->format('Y-m-d'),
+                            ];
+                            if (isset($LkCelanaPlayer) && ($LkCelanaPlayer->status_celana_player == "Polos")) {
+                                $barangMasukDataCutManualData['lk_celana_player_id'] = $LkCelanaPlayer->id;
+                            }
+                            $barangMasukCutManual = DataManualCut::create($barangMasukDataCutManualData);
+                            // AHIR CUT PRINT
+
+                            // DATA SORTIR
+                            $barangMasukDataSortirData = [
+                                'no_order_id' => $lk->id,
+                                'manual_cut_id' => $barangMasukCutManual->id,
+                                // 'laser_cut_id' => $barangMasukCutPrin->id,
+                                'deadline' => $createDate->format('Y-m-d'),
+                            ];
+                            if (isset($LkCelanaPlayer) && ($LkCelanaPlayer->status_celana_player == "Polos")) {
+                                $barangMasukDataSortirData['lk_celana_player_id'] = $LkCelanaPlayer->id;
+                            }
+                            $barangMasukSortir = DataSortir::create($barangMasukDataSortirData);
+                            // AKHIR DATA SORTIR
+
+                            // JAHIT
+                            $barangMasukDataJahitrData = [
+                                'no_order_id' => $lk->id,
+                                'sortir_id' => $barangMasukSortir->id,
+                                'deadline' => $createDate->format('Y-m-d'),
+                            ];
+                            if (isset($LkCelanaPlayer) && ($LkCelanaPlayer->status_celana_player == "Polos")) {
+                                $barangMasukDataJahitrData['lk_celana_player_id'] = $LkCelanaPlayer->id;
+                            }
+                            $barangMasukJahit = Jahit::create($barangMasukDataJahitrData);
+                            // AKHIR JAHIT
+
+                            // FINIS
+                            $barangMasukDataFinisData = [
+                                'no_order_id' => $lk->id,
+                                'jahit_baju_id' => $barangMasukJahit->id,
+                                'deadline' => $createDate->format('Y-m-d'),
+                            ];
+                            if (isset($LkCelanaPlayer) && ($LkCelanaPlayer->status_celana_player == "Polos")) {
+                                $barangMasukDataFinisData['lk_celana_player_id'] = $LkCelanaPlayer->id;
+                            }
+                            $barangMasukFinis = Finish::create($barangMasukDataFinisData);
+                            // AKHIR FINIS
+
+                            // LAPORAN
+                            Laporan::create([
+                                'barang_masuk_costumer_services_id' => $lk->id,
+                                'barang_masuk_manualcut_id' => $barangMasukCutManual->id,
+                                'barang_masuk_sortir_id' => $barangMasukSortir->id,
+                                'jahit_id' => $barangMasukJahit->id,
+                                'finis_id' => $barangMasukFinis->id,
+                            ]);
+                            // AKHIR LAPORAN
+                        }
+                         elseif ($total_hari == 2) {
                             // CUT PRINT
                             BarangMasukDatalayout::where('lk_celana_player_id', $LkCelanaPlayer->id)->delete();
                             DataManualCut::where('lk_celana_player_id', $LkCelanaPlayer->id)->delete();
@@ -16945,7 +18303,7 @@ class CostumerServicesController extends Controller
                 if (isset($gambar->file_celana_pelatih)) {
                      // FULL PRINT
                     if ($LkCelanaPelatih->status_celana_pelatih == "Full print") {
-                        if ($total_hari == 1) {
+                        if ($total_hari == 0) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_celana_pelatih_id', $LkCelanaPelatih->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -17045,7 +18403,108 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                         // AKHIR LAPORAN
-                        } elseif ($total_hari == 2) {
+                        }elseif ($total_hari == 1) {
+                            // LAYOUT
+                            BarangMasukDatalayout::where('lk_celana_pelatih_id', $LkCelanaPelatih->id)->delete();
+                            $barangMasukDataLayoutData = [
+                                'users_layout_id' => $lk->layout_id,
+                                'barang_masuk_id' => $lk->id,
+                                'deadline' => $createDate->format('Y-m-d'),
+                            ];
+                            if (isset($LkCelanaPelatih) && ($LkCelanaPelatih->status_celana_pelatih == "Full print")) {
+                                $barangMasukDataLayoutData['lk_celana_pelatih_id'] = $LkCelanaPelatih->id;
+                            }
+                            $barangMasukDataLayout = BarangMasukDatalayout::create($barangMasukDataLayoutData);
+                            // AKHIR LAYOUT
+
+                            // MESIN
+                            $barangPressMesin = [
+                                'no_order_id' => $lk->id,
+                                'penanggung_jawab_id' => optional($lk->BarangMasukDisainer->DataMesinCs->first())->User->id,
+                                'barang_masuk_layout_id' => $barangMasukDataLayout->id,
+                                'deadline' => $createDate->format('Y-m-d'),
+                            ];
+                            if (isset($LkCelanaPelatih) && ($LkCelanaPelatih->status_celana_pelatih == "Full print")) {
+                                $barangPressMesin['lk_celana_pelatih_id'] = $LkCelanaPelatih->id;
+                            }
+                            $barangMasukPressMesin = DataPress::create($barangPressMesin);
+                            // AKHIR MESIN
+
+
+                            // PRESS KAIN
+                            $barangMasukPressKainData = [
+                                'no_order_id' => $lk->id,
+                                'mesin_atexco_id' => $barangMasukPressMesin->id,
+                                'deadline' => $createDate->format('Y-m-d'),
+                            ];
+                            if (isset($LkCelanaPelatih) && ($LkCelanaPelatih->status_celana_pelatih == "Full print")) {
+                                $barangMasukPressKainData['lk_celana_pelatih_id'] = $LkCelanaPelatih->id;
+                            }
+                            $barangMasuPressKain = DataPressKain::create($barangMasukPressKainData);
+                        // AKHIR PRESS KAIN
+
+                            // CUT PRINT
+                            $barangMasukDataCutPrintData = [
+                                'no_order_id' => $lk->id,
+                                'press_kain_id' => $barangMasuPressKain->id,
+                                'deadline' => $createDate->format('Y-m-d'),
+                            ];
+                            if (isset($LkCelanaPelatih) && ($LkCelanaPelatih->status_celana_pelatih == "Full print")) {
+                                $barangMasukDataCutPrintData['lk_celana_pelatih_id'] = $LkCelanaPelatih->id;
+                            }
+                            $barangMasukCutPrin = DataLaserCut::create($barangMasukDataCutPrintData);
+                            // AHIR CUT PRINT
+
+                            // DATA SORTIR
+                            $barangMasukDataSortirData = [
+                                'no_order_id' => $lk->id,
+                                'laser_cut_id' => $barangMasukCutPrin->id,
+                                'deadline' => $createDate->format('Y-m-d'),
+                            ];
+                            if (isset($LkCelanaPelatih) && ($LkCelanaPelatih->status_celana_pelatih == "Full print")) {
+                                $barangMasukDataSortirData['lk_celana_pelatih_id'] = $LkCelanaPelatih->id;
+                            }
+                            $barangMasukSortir = DataSortir::create($barangMasukDataSortirData);
+                            // AKHIR DATA SORTIR
+
+                            // JAHIT
+                            $barangMasukDataJahitrData = [
+                                'no_order_id' => $lk->id,
+                                'sortir_id' => $barangMasukSortir->id,
+                                'deadline' => $createDate->format('Y-m-d'),
+                            ];
+                            if (isset($LkCelanaPelatih) && ($LkCelanaPelatih->status_celana_pelatih == "Full print")) {
+                                $barangMasukDataJahitrData['lk_celana_pelatih_id'] = $LkCelanaPelatih->id;
+                            }
+                            $barangMasukJahit = Jahit::create($barangMasukDataJahitrData);
+                            // AKHIR JAHIT
+
+                            // FINIS
+                            $barangMasukDataFinisData = [
+                                'no_order_id' => $lk->id,
+                                'jahit_baju_id' => $barangMasukJahit->id,
+                                'deadline' => $createDate->format('Y-m-d'),
+                            ];
+                            if (isset($LkCelanaPelatih) && ($LkCelanaPelatih->status_celana_pelatih == "Full print")) {
+                                $barangMasukDataFinisData['lk_celana_pelatih_id'] = $LkCelanaPelatih->id;
+                            }
+                            $barangMasukFinis = Finish::create($barangMasukDataFinisData);
+                            // AKHIR FINIS
+
+                            // LAPORAN
+                            Laporan::create([
+                                'barang_masuk_costumer_services_id' => $lk->id,
+                                'barang_masuk_layout_id' => $barangMasukDataLayout->id,
+                                'barang_masuk_mesin_atexco_id' => $barangMasukPressMesin->id ,
+                                'barang_masuk_presskain_id' => $barangMasuPressKain->id,
+                                'barang_masuk_lasercut_id' => $barangMasukCutPrin->id,
+                                'barang_masuk_sortir_id' => $barangMasukSortir->id,
+                                'jahit_id' => $barangMasukJahit->id,
+                                'finis_id' => $barangMasukFinis->id,
+                            ]);
+                        // AKHIR LAPORAN
+                        }
+                         elseif ($total_hari == 2) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_celana_pelatih_id', $LkCelanaPelatih->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -18151,7 +19610,7 @@ class CostumerServicesController extends Controller
 
                     // HALFT PRINT
                     if ($LkCelanaPelatih->status_celana_pelatih == "Half print") {
-                        if ($total_hari == 1) {
+                        if ($total_hari == 0) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_celana_pelatih_id', $LkCelanaPelatih->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -18262,7 +19721,119 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                         // AKHIR LAPORAN
-                        } elseif ($total_hari == 2) {
+                        }elseif ($total_hari == 1) {
+                            // LAYOUT
+                            BarangMasukDatalayout::where('lk_celana_pelatih_id', $LkCelanaPelatih->id)->delete();
+                            $barangMasukDataLayoutData = [
+                                'users_layout_id' => $lk->layout_id,
+                                'barang_masuk_id' => $lk->id,
+                                'deadline' => $createDate->format('Y-m-d'),
+                            ];
+                            if (isset($LkCelanaPelatih) && ($LkCelanaPelatih->status_celana_pelatih == "Half print")) {
+                                $barangMasukDataLayoutData['lk_celana_pelatih_id'] = $LkCelanaPelatih->id;
+                            }
+                            $barangMasukDataLayout = BarangMasukDatalayout::create($barangMasukDataLayoutData);
+                            // AKHIR LAYOUT
+
+                            // MESIN
+                            $barangPressMesin = [
+                                'no_order_id' => $lk->id,
+                                'penanggung_jawab_id' => optional($lk->BarangMasukDisainer->DataMesinCs->first())->User->id,
+                                'barang_masuk_layout_id' => $barangMasukDataLayout->id,
+                                'deadline' => $createDate->format('Y-m-d'),
+                            ];
+                            if (isset($LkCelanaPelatih) && ($LkCelanaPelatih->status_celana_pelatih == "Half print")) {
+                                $barangPressMesin['lk_celana_pelatih_id'] = $LkCelanaPelatih->id;
+                            }
+                            $barangMasukPressMesin = DataPress::create($barangPressMesin);
+                            // AKHIR MESIN
+
+
+                            // PRESS KAIN
+                            $barangMasukPressKainData = [
+                                'no_order_id' => $lk->id,
+                                'mesin_atexco_id' => $barangMasukPressMesin->id,
+                                'deadline' => $createDate->format('Y-m-d'),
+                            ];
+                            if (isset($LkCelanaPelatih) && ($LkCelanaPelatih->status_celana_pelatih == "Half print")) {
+                                $barangMasukPressKainData['lk_celana_pelatih_id'] = $LkCelanaPelatih->id;
+                            }
+                            $barangMasuPressKain = DataPressKain::create($barangMasukPressKainData);
+                        // AKHIR PRESS KAIN
+
+                            // CUT PRINT
+                            $barangMasukDataCutPrintData = [
+                                'no_order_id' => $lk->id,
+                                'press_kain_id' => $barangMasuPressKain->id,
+                                'deadline' => $createDate->format('Y-m-d'),
+                            ];
+                            if (isset($LkCelanaPelatih) && ($LkCelanaPelatih->status_celana_pelatih == "Half print")) {
+                                $barangMasukDataCutPrintData['lk_celana_pelatih_id'] = $LkCelanaPelatih->id;
+                            }
+                            $barangMasukCutPrin = DataLaserCut::create($barangMasukDataCutPrintData);
+                            $barangMasukDataCutManualData = [
+                                'no_order_id' => $lk->id,
+                                'laser_cut_id' => $barangMasukCutPrin->id,
+                                'deadline' => $createDate->format('Y-m-d'),
+                            ];
+                            if (isset($LkCelanaPelatih) && ($LkCelanaPelatih->status_celana_pelatih == "Half print")) {
+                                $barangMasukDataCutManualData['lk_celana_pelatih_id'] = $LkCelanaPelatih->id;
+                            }
+                            $barangMasukCutManual = DataManualCut::create($barangMasukDataCutManualData);
+                            // AHIR CUT PRINT
+
+                            // DATA SORTIR
+                            $barangMasukDataSortirData = [
+                                'no_order_id' => $lk->id,
+                                'manual_cut_id' => $barangMasukCutManual->id,
+                                'laser_cut_id' => $barangMasukCutPrin->id,
+                                'deadline' => $createDate->format('Y-m-d'),
+                            ];
+                            if (isset($LkCelanaPelatih) && ($LkCelanaPelatih->status_celana_pelatih == "Half print")) {
+                                $barangMasukDataSortirData['lk_celana_pelatih_id'] = $LkCelanaPelatih->id;
+                            }
+                            $barangMasukSortir = DataSortir::create($barangMasukDataSortirData);
+                            // AKHIR DATA SORTIR
+
+                            // JAHIT
+                            $barangMasukDataJahitrData = [
+                                'no_order_id' => $lk->id,
+                                'sortir_id' => $barangMasukSortir->id,
+                                'deadline' => $createDate->format('Y-m-d'),
+                            ];
+                            if (isset($LkCelanaPelatih) && ($LkCelanaPelatih->status_celana_pelatih == "Half print")) {
+                                $barangMasukDataJahitrData['lk_celana_pelatih_id'] = $LkCelanaPelatih->id;
+                            }
+                            $barangMasukJahit = Jahit::create($barangMasukDataJahitrData);
+                            // AKHIR JAHIT
+
+                            // FINIS
+                            $barangMasukDataFinisData = [
+                                'no_order_id' => $lk->id,
+                                'jahit_baju_id' => $barangMasukJahit->id,
+                                'deadline' => $createDate->format('Y-m-d'),
+                            ];
+                            if (isset($LkCelanaPelatih) && ($LkCelanaPelatih->status_celana_pelatih == "Half print")) {
+                                $barangMasukDataFinisData['lk_celana_pelatih_id'] = $LkCelanaPelatih->id;
+                            }
+                            $barangMasukFinis = Finish::create($barangMasukDataFinisData);
+                            // AKHIR FINIS
+
+                            // LAPORAN
+                            Laporan::create([
+                                'barang_masuk_costumer_services_id' => $lk->id,
+                                'barang_masuk_layout_id' => $barangMasukDataLayout->id,
+                                'barang_masuk_mesin_atexco_id' => $barangMasukPressMesin->id ,
+                                'barang_masuk_presskain_id' => $barangMasuPressKain->id,
+                                'barang_masuk_lasercut_id' => $barangMasukCutPrin->id,
+                                'barang_masuk_manualcut_id' => $barangMasukCutManual->id,
+                                'barang_masuk_sortir_id' => $barangMasukSortir->id,
+                                'jahit_id' => $barangMasukJahit->id,
+                                'finis_id' => $barangMasukFinis->id,
+                            ]);
+                        // AKHIR LAPORAN
+                        }
+                         elseif ($total_hari == 2) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_celana_pelatih_id', $LkCelanaPelatih->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -19487,7 +21058,7 @@ class CostumerServicesController extends Controller
 
                     // POLOS
                     if ($LkCelanaPelatih->status_celana_pelatih == "Polos") {
-                        if ($total_hari == 1) {
+                        if ($total_hari == 0) {
                             // CUT PRINT
                             BarangMasukDatalayout::where('lk_celana_pelatih_id', $LkCelanaPelatih->id)->delete();
                             DataManualCut::where('lk_celana_pelatih_id', $LkCelanaPelatih->id)->delete();
@@ -19547,7 +21118,68 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 2) {
+                        }elseif ($total_hari == 1) {
+                            // CUT PRINT
+                            BarangMasukDatalayout::where('lk_celana_pelatih_id', $LkCelanaPelatih->id)->delete();
+                            DataManualCut::where('lk_celana_pelatih_id', $LkCelanaPelatih->id)->delete();
+                            $barangMasukDataCutManualData = [
+                                'no_order_id' => $lk->id,
+                                'deadline' => $createDate->format('Y-m-d'),
+                            ];
+                            if (isset($LkCelanaPelatih) && ($LkCelanaPelatih->status_celana_pelatih == "Polos")) {
+                                $barangMasukDataCutManualData['lk_celana_pelatih_id'] = $LkCelanaPelatih->id;
+                            }
+                            $barangMasukCutManual = DataManualCut::create($barangMasukDataCutManualData);
+                            // AHIR CUT PRINT
+
+                            // DATA SORTIR
+                            $barangMasukDataSortirData = [
+                                'no_order_id' => $lk->id,
+                                'manual_cut_id' => $barangMasukCutManual->id,
+                                // 'laser_cut_id' => $barangMasukCutPrin->id,
+                                'deadline' => $createDate->format('Y-m-d'),
+                            ];
+                            if (isset($LkCelanaPelatih) && ($LkCelanaPelatih->status_celana_pelatih == "Polos")) {
+                                $barangMasukDataSortirData['lk_celana_pelatih_id'] = $LkCelanaPelatih->id;
+                            }
+                            $barangMasukSortir = DataSortir::create($barangMasukDataSortirData);
+                            // AKHIR DATA SORTIR
+
+                            // JAHIT
+                            $barangMasukDataJahitrData = [
+                                'no_order_id' => $lk->id,
+                                'sortir_id' => $barangMasukSortir->id,
+                                'deadline' => $createDate->format('Y-m-d'),
+                            ];
+                            if (isset($LkCelanaPelatih) && ($LkCelanaPelatih->status_celana_pelatih == "Polos")) {
+                                $barangMasukDataJahitrData['lk_celana_pelatih_id'] = $LkCelanaPelatih->id;
+                            }
+                            $barangMasukJahit = Jahit::create($barangMasukDataJahitrData);
+                            // AKHIR JAHIT
+
+                            // FINIS
+                            $barangMasukDataFinisData = [
+                                'no_order_id' => $lk->id,
+                                'jahit_baju_id' => $barangMasukJahit->id,
+                                'deadline' => $createDate->format('Y-m-d'),
+                            ];
+                            if (isset($LkCelanaPelatih) && ($LkCelanaPelatih->status_celana_pelatih == "Polos")) {
+                                $barangMasukDataFinisData['lk_celana_pelatih_id'] = $LkCelanaPelatih->id;
+                            }
+                            $barangMasukFinis = Finish::create($barangMasukDataFinisData);
+                            // AKHIR FINIS
+
+                            // LAPORAN
+                            Laporan::create([
+                                'barang_masuk_costumer_services_id' => $lk->id,
+                                'barang_masuk_manualcut_id' => $barangMasukCutManual->id,
+                                'barang_masuk_sortir_id' => $barangMasukSortir->id,
+                                'jahit_id' => $barangMasukJahit->id,
+                                'finis_id' => $barangMasukFinis->id,
+                            ]);
+                            // AKHIR LAPORAN
+                        }
+                         elseif ($total_hari == 2) {
                             // CUT PRINT
                             BarangMasukDatalayout::where('lk_celana_pelatih_id', $LkCelanaPelatih->id)->delete();
                             DataManualCut::where('lk_celana_pelatih_id', $LkCelanaPelatih->id)->delete();
@@ -20214,7 +21846,7 @@ class CostumerServicesController extends Controller
                 if (isset($gambar->file_celana_kiper)) {
                     // FULL PRINT
                     if ($LkCelanaKiper->status_celana_kiper == "Full print") {
-                        if ($total_hari == 1) {
+                        if ($total_hari == 0) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_celana_pelatih_id', $LkCelanaPelatih->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -20314,7 +21946,108 @@ class CostumerServicesController extends Controller
                                     'finis_id' => $barangMasukFinis->id,
                                 ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 2) {
+                        }elseif ($total_hari == 1) {
+                             // LAYOUT
+                             BarangMasukDatalayout::where('lk_celana_pelatih_id', $LkCelanaPelatih->id)->delete();
+                             $barangMasukDataLayoutData = [
+                                 'users_layout_id' => $lk->layout_id,
+                                 'barang_masuk_id' => $lk->id,
+                                 'deadline' => $createDate->format('Y-m-d'),
+                             ];
+                             if (isset($LkCelanaKiper) && ($LkCelanaKiper->status_celana_kiper == "Full print")) {
+                                 $barangMasukDataLayoutData['lk_celana_kiper_id'] = $LkCelanaKiper->id;
+                             }
+                             $barangMasukDataLayout = BarangMasukDatalayout::create($barangMasukDataLayoutData);
+                             // AKHIR LAYOUT
+
+                             // MESIN
+                             $barangPressMesin = [
+                                 'no_order_id' => $lk->id,
+                                 'penanggung_jawab_id' => optional($lk->BarangMasukDisainer->DataMesinCs->first())->User->id,
+                                 'barang_masuk_layout_id' => $barangMasukDataLayout->id,
+                                 'deadline' => $createDate->format('Y-m-d'),
+                             ];
+                             if (isset($LkCelanaKiper) && ($LkCelanaKiper->status_celana_kiper == "Full print")) {
+                                 $barangPressMesin['lk_celana_kiper_id'] = $LkCelanaKiper->id;
+                             }
+                             $barangMasukPressMesin = DataPress::create($barangPressMesin);
+                             // AKHIR MESIN
+
+
+                             // PRESS KAIN
+                             $barangMasukPressKainData = [
+                                 'no_order_id' => $lk->id,
+                                 'mesin_atexco_id' => $barangMasukPressMesin->id,
+                                 'deadline' => $createDate->format('Y-m-d'),
+                             ];
+                             if (isset($LkCelanaKiper) && ($LkCelanaKiper->status_celana_kiper == "Full print")) {
+                                 $barangMasukPressKainData['lk_celana_kiper_id'] = $LkCelanaKiper->id;
+                             }
+                             $barangMasuPressKain = DataPressKain::create($barangMasukPressKainData);
+                         // AKHIR PRESS KAIN
+
+                             // CUT PRINT
+                             $barangMasukDataCutPrintData = [
+                                 'no_order_id' => $lk->id,
+                                 'press_kain_id' => $barangMasuPressKain->id,
+                                 'deadline' => $createDate->format('Y-m-d'),
+                             ];
+                             if (isset($LkCelanaKiper) && ($LkCelanaKiper->status_celana_kiper == "Full print")) {
+                                 $barangMasukDataCutPrintData['lk_celana_kiper_id'] = $LkCelanaKiper->id;
+                             }
+                             $barangMasukCutPrin = DataLaserCut::create($barangMasukDataCutPrintData);
+                             // AHIR CUT PRINT
+
+                             // DATA SORTIR
+                             $barangMasukDataSortirData = [
+                                 'no_order_id' => $lk->id,
+                                 'laser_cut_id' => $barangMasukCutPrin->id,
+                                 'deadline' => $createDate->format('Y-m-d'),
+                             ];
+                             if (isset($LkCelanaKiper) && ($LkCelanaKiper->status_celana_kiper == "Full print")) {
+                                 $barangMasukDataSortirData['lk_celana_kiper_id'] = $LkCelanaKiper->id;
+                             }
+                             $barangMasukSortir = DataSortir::create($barangMasukDataSortirData);
+                             // AKHIR DATA SORTIR
+
+                             // JAHIT
+                             $barangMasukDataJahitrData = [
+                                 'no_order_id' => $lk->id,
+                                 'sortir_id' => $barangMasukSortir->id,
+                                 'deadline' => $createDate->format('Y-m-d'),
+                             ];
+                             if (isset($LkCelanaKiper) && ($LkCelanaKiper->status_celana_kiper == "Full print")) {
+                                 $barangMasukDataJahitrData['lk_celana_kiper_id'] = $LkCelanaKiper->id;
+                             }
+                             $barangMasukJahit = Jahit::create($barangMasukDataJahitrData);
+                             // AKHIR JAHIT
+
+                             // FINIS
+                             $barangMasukDataFinisData = [
+                                 'no_order_id' => $lk->id,
+                                 'jahit_baju_id' => $barangMasukJahit->id,
+                                 'deadline' => $createDate->format('Y-m-d'),
+                             ];
+                             if (isset($LkCelanaKiper) && ($LkCelanaKiper->status_celana_kiper == "Full print")) {
+                                 $barangMasukDataFinisData['lk_celana_kiper_id'] = $LkCelanaKiper->id;
+                             }
+                             $barangMasukFinis = Finish::create($barangMasukDataFinisData);
+                             // AKHIR FINIS
+
+                             // LAPORAN
+                                 Laporan::create([
+                                     'barang_masuk_costumer_services_id' => $lk->id,
+                                     'barang_masuk_layout_id' => $barangMasukDataLayout->id,
+                                     'barang_masuk_mesin_atexco_id' => $barangMasukPressMesin->id ,
+                                     'barang_masuk_presskain_id' => $barangMasuPressKain->id,
+                                     'barang_masuk_lasercut_id' => $barangMasukCutPrin->id,
+                                     'barang_masuk_sortir_id' => $barangMasukSortir->id,
+                                     'jahit_id' => $barangMasukJahit->id,
+                                     'finis_id' => $barangMasukFinis->id,
+                                 ]);
+                             // AKHIR LAPORAN
+                        }
+                         elseif ($total_hari == 2) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_celana_pelatih_id', $LkCelanaPelatih->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -21420,7 +23153,7 @@ class CostumerServicesController extends Controller
 
                     // HALFT PRINT
                     if ($LkCelanaKiper->status_celana_kiper == "Half print") {
-                        if ($total_hari == 1) {
+                        if ($total_hari == 0) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_celana_pelatih_id', $LkCelanaPelatih->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -21531,7 +23264,119 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                                 ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 2) {
+                        }elseif ($total_hari == 1) {
+                            // LAYOUT
+                            BarangMasukDatalayout::where('lk_celana_pelatih_id', $LkCelanaPelatih->id)->delete();
+                            $barangMasukDataLayoutData = [
+                                'users_layout_id' => $lk->layout_id,
+                                'barang_masuk_id' => $lk->id,
+                                'deadline' => $createDate->format('Y-m-d'),
+                            ];
+                            if (isset($LkCelanaKiper) && ($LkCelanaKiper->status_celana_kiper == "Half print")) {
+                                $barangMasukDataLayoutData['lk_celana_kiper_id'] = $LkCelanaKiper->id;
+                            }
+                            $barangMasukDataLayout = BarangMasukDatalayout::create($barangMasukDataLayoutData);
+                            // AKHIR LAYOUT
+
+                        // MESIN
+                            $barangPressMesin = [
+                                'no_order_id' => $lk->id,
+                                'penanggung_jawab_id' => optional($lk->BarangMasukDisainer->DataMesinCs->first())->User->id,
+                                'barang_masuk_layout_id' => $barangMasukDataLayout->id,
+                                'deadline' => $createDate->format('Y-m-d'),
+                            ];
+                            if (isset($LkCelanaKiper) && ($LkCelanaKiper->status_celana_kiper == "Half print")) {
+                                $barangPressMesin['lk_celana_kiper_id'] = $LkCelanaKiper->id;
+                            }
+                            $barangMasukPressMesin = DataPress::create($barangPressMesin);
+                            // AKHIR MESIN
+
+
+                            // PRESS KAIN
+                                $barangMasukPressKainData = [
+                                    'no_order_id' => $lk->id,
+                                    'mesin_atexco_id' => $barangMasukPressMesin->id,
+                                    'deadline' => $createDate->format('Y-m-d'),
+                                ];
+                                if (isset($LkCelanaKiper) && ($LkCelanaKiper->status_celana_kiper == "Half print")) {
+                                    $barangMasukPressKainData['lk_celana_kiper_id'] = $LkCelanaKiper->id;
+                                }
+                                $barangMasuPressKain = DataPressKain::create($barangMasukPressKainData);
+                            // AKHIR PRESS KAIN
+
+                            // CUT PRINT
+                            $barangMasukDataCutPrintData = [
+                                'no_order_id' => $lk->id,
+                                'press_kain_id' => $barangMasuPressKain->id,
+                                'deadline' => $createDate->format('Y-m-d'),
+                            ];
+                            if (isset($LkCelanaKiper) && ($LkCelanaKiper->status_celana_kiper == "Half print")) {
+                                $barangMasukDataCutPrintData['lk_celana_kiper_id'] = $LkCelanaKiper->id;
+                            }
+                            $barangMasukCutPrin = DataLaserCut::create($barangMasukDataCutPrintData);
+                            $barangMasukDataCutManualData = [
+                                'no_order_id' => $lk->id,
+                                'laser_cut_id' => $barangMasukCutPrin->id,
+                                'deadline' => $createDate->format('Y-m-d'),
+                            ];
+                            if (isset($LkCelanaKiper) && ($LkCelanaKiper->status_celana_kiper == "Half print")) {
+                                $barangMasukDataCutManualData['lk_celana_kiper_id'] = $LkCelanaKiper->id;
+                            }
+                            $barangMasukCutManual = DataManualCut::create($barangMasukDataCutManualData);
+                            // AHIR CUT PRINT
+
+                            // DATA SORTIR
+                            $barangMasukDataSortirData = [
+                                'no_order_id' => $lk->id,
+                                'manual_cut_id' => $barangMasukCutManual->id,
+                                'laser_cut_id' => $barangMasukCutPrin->id,
+                                'deadline' => $createDate->format('Y-m-d'),
+                            ];
+                            if (isset($LkCelanaKiper) && ($LkCelanaKiper->status_celana_kiper == "Half print")) {
+                                $barangMasukDataSortirData['lk_celana_kiper_id'] = $LkCelanaKiper->id;
+                            }
+                            $barangMasukSortir = DataSortir::create($barangMasukDataSortirData);
+                            // AKHIR DATA SORTIR
+
+                            // JAHIT
+                            $barangMasukDataJahitrData = [
+                                'no_order_id' => $lk->id,
+                                'sortir_id' => $barangMasukSortir->id,
+                                'deadline' => $createDate->format('Y-m-d'),
+                            ];
+                            if (isset($LkCelanaKiper) && ($LkCelanaKiper->status_celana_kiper == "Half print")) {
+                                $barangMasukDataJahitrData['lk_celana_kiper_id'] = $LkCelanaKiper->id;
+                            }
+                            $barangMasukJahit = Jahit::create($barangMasukDataJahitrData);
+                            // AKHIR JAHIT
+
+                            // FINIS
+                            $barangMasukDataFinisData = [
+                                'no_order_id' => $lk->id,
+                                'jahit_baju_id' => $barangMasukJahit->id,
+                                'deadline' => $createDate->format('Y-m-d'),
+                            ];
+                            if (isset($LkCelanaKiper) && ($LkCelanaKiper->status_celana_kiper == "Half print")) {
+                                $barangMasukDataFinisData['lk_celana_kiper_id'] = $LkCelanaKiper->id;
+                            }
+                            $barangMasukFinis = Finish::create($barangMasukDataFinisData);
+                            // AKHIR FINIS
+
+                            // LAPORAN
+                                Laporan::create([
+                                'barang_masuk_costumer_services_id' => $lk->id,
+                                'barang_masuk_layout_id' => $barangMasukDataLayout->id,
+                                'barang_masuk_mesin_atexco_id' => $barangMasukPressMesin->id ,
+                                'barang_masuk_presskain_id' => $barangMasuPressKain->id,
+                                'barang_masuk_lasercut_id' => $barangMasukCutPrin->id,
+                                'barang_masuk_manualcut_id' => $barangMasukCutManual->id,
+                                'barang_masuk_sortir_id' => $barangMasukSortir->id,
+                                'jahit_id' => $barangMasukJahit->id,
+                                'finis_id' => $barangMasukFinis->id,
+                                ]);
+                            // AKHIR LAPORAN
+                        }
+                         elseif ($total_hari == 2) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_celana_pelatih_id', $LkCelanaPelatih->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -22757,7 +24602,7 @@ class CostumerServicesController extends Controller
 
                     // POLOS
                     if ($LkCelanaKiper->status_celana_kiper == "Polos") {
-                        if ($total_hari == 1) {
+                        if ($total_hari == 0) {
                             // CUT PRINT
                             BarangMasukDatalayout::where('lk_celana_kiper_id', $LkCelanaKiper->id)->delete();
                             DataManualCut::where('lk_celana_kiper_id', $LkCelanaKiper->id)->delete();
@@ -22817,7 +24662,68 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 2) {
+                        }elseif ($total_hari == 1) {
+                                                        // CUT PRINT
+                                                        BarangMasukDatalayout::where('lk_celana_kiper_id', $LkCelanaKiper->id)->delete();
+                                                        DataManualCut::where('lk_celana_kiper_id', $LkCelanaKiper->id)->delete();
+                                                        $barangMasukDataCutManualData = [
+                                                            'no_order_id' => $lk->id,
+                                                            'deadline' => $createDate->format('Y-m-d'),
+                                                        ];
+                                                        if (isset($LkCelanaKiper) && ($LkCelanaKiper->status_celana_kiper == "Polos")) {
+                                                            $barangMasukDataCutManualData['lk_celana_kiper_id'] = $LkCelanaKiper->id;
+                                                        }
+                                                        $barangMasukCutManual = DataManualCut::create($barangMasukDataCutManualData);
+                                                        // AHIR CUT PRINT
+
+                                                        // DATA SORTIR
+                                                        $barangMasukDataSortirData = [
+                                                            'no_order_id' => $lk->id,
+                                                            'manual_cut_id' => $barangMasukCutManual->id,
+                                                            // 'laser_cut_id' => $barangMasukCutPrin->id,
+                                                            'deadline' => $createDate->format('Y-m-d'),
+                                                        ];
+                                                        if (isset($LkCelanaKiper) && ($LkCelanaKiper->status_celana_kiper == "Polos")) {
+                                                            $barangMasukDataSortirData['lk_celana_kiper_id'] = $LkCelanaKiper->id;
+                                                        }
+                                                        $barangMasukSortir = DataSortir::create($barangMasukDataSortirData);
+                                                        // AKHIR DATA SORTIR
+
+                                                        // JAHIT
+                                                        $barangMasukDataJahitrData = [
+                                                            'no_order_id' => $lk->id,
+                                                            'sortir_id' => $barangMasukSortir->id,
+                                                            'deadline' => $createDate->format('Y-m-d'),
+                                                        ];
+                                                        if (isset($LkCelanaKiper) && ($LkCelanaKiper->status_celana_kiper == "Polos")) {
+                                                            $barangMasukDataJahitrData['lk_celana_kiper_id'] = $LkCelanaKiper->id;
+                                                        }
+                                                        $barangMasukJahit = Jahit::create($barangMasukDataJahitrData);
+                                                        // AKHIR JAHIT
+
+                                                        // FINIS
+                                                        $barangMasukDataFinisData = [
+                                                            'no_order_id' => $lk->id,
+                                                            'jahit_baju_id' => $barangMasukJahit->id,
+                                                            'deadline' => $createDate->format('Y-m-d'),
+                                                        ];
+                                                        if (isset($LkCelanaKiper) && ($LkCelanaKiper->status_celana_kiper == "Polos")) {
+                                                            $barangMasukDataFinisData['lk_celana_kiper_id'] = $LkCelanaKiper->id;
+                                                        }
+                                                        $barangMasukFinis = Finish::create($barangMasukDataFinisData);
+                                                        // AKHIR FINIS
+
+                                                        // LAPORAN
+                                                        Laporan::create([
+                                                            'barang_masuk_costumer_services_id' => $lk->id,
+                                                            'barang_masuk_manualcut_id' => $barangMasukCutManual->id,
+                                                            'barang_masuk_sortir_id' => $barangMasukSortir->id,
+                                                            'jahit_id' => $barangMasukJahit->id,
+                                                            'finis_id' => $barangMasukFinis->id,
+                                                        ]);
+                                                        // AKHIR LAPORAN
+                        }
+                         elseif ($total_hari == 2) {
                             // CUT PRINT
                             BarangMasukDatalayout::where('lk_celana_kiper_id', $LkCelanaKiper->id)->delete();
                             DataManualCut::where('lk_celana_kiper_id', $LkCelanaKiper->id)->delete();
@@ -23484,7 +25390,7 @@ class CostumerServicesController extends Controller
                 if (isset($gambar->file_celana_1)) {
                     // FULL PRINT
                     if ($LkCelana1->status_celana_1 == "Full print") {
-                        if ($total_hari == 1) {
+                        if ($total_hari == 0) {
                             // LAYOUT
                              BarangMasukDatalayout::where('lk_celana_1_id', $LkCelana1->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -23584,7 +25490,108 @@ class CostumerServicesController extends Controller
                                     'finis_id' => $barangMasukFinis->id,
                                 ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 2) {
+                        }elseif ($total_hari == 1) {
+                            // LAYOUT
+                            BarangMasukDatalayout::where('lk_celana_1_id', $LkCelana1->id)->delete();
+                            $barangMasukDataLayoutData = [
+                                'users_layout_id' => $lk->layout_id,
+                                'barang_masuk_id' => $lk->id,
+                                'deadline' => $createDate->format('Y-m-d'),
+                            ];
+                            if (isset($LkCelana1) && ($LkCelana1->status_celana_1 == "Full print")) {
+                                $barangMasukDataLayoutData['lk_celana_1_id'] = $LkCelana1->id;
+                            }
+                            $barangMasukDataLayout = BarangMasukDatalayout::create($barangMasukDataLayoutData);
+                            // AKHIR LAYOUT
+
+                        // MESIN
+                            $barangPressMesin = [
+                                'no_order_id' => $lk->id,
+                                'penanggung_jawab_id' => optional($lk->BarangMasukDisainer->DataMesinCs->first())->User->id,
+                                'barang_masuk_layout_id' => $barangMasukDataLayout->id,
+                                'deadline' => $createDate->format('Y-m-d'),
+                            ];
+                            if (isset($LkCelana1) && ($LkCelana1->status_celana_1 == "Full print")) {
+                                $barangPressMesin['lk_celana_1_id'] = $LkCelana1->id;
+                            }
+                            $barangMasukPressMesin = DataPress::create($barangPressMesin);
+                            // AKHIR MESIN
+
+
+                            // PRESS KAIN
+                                $barangMasukPressKainData = [
+                                    'no_order_id' => $lk->id,
+                                    'mesin_atexco_id' => $barangMasukPressMesin->id,
+                                    'deadline' => $createDate->format('Y-m-d'),
+                                ];
+                                if (isset($LkCelana1) && ($LkCelana1->status_celana_1 == "Full print")) {
+                                    $barangMasukPressKainData['lk_celana_1_id'] = $LkCelana1->id;
+                                }
+                                $barangMasuPressKain = DataPressKain::create($barangMasukPressKainData);
+                            // AKHIR PRESS KAIN
+
+                            // CUT PRINT
+                            $barangMasukDataCutPrintData = [
+                                'no_order_id' => $lk->id,
+                                'press_kain_id' => $barangMasuPressKain->id,
+                                'deadline' => $createDate->format('Y-m-d'),
+                            ];
+                            if (isset($LkCelana1) && ($LkCelana1->status_celana_1 == "Full print")) {
+                                $barangMasukDataCutPrintData['lk_celana_1_id'] = $LkCelana1->id;
+                            }
+                            $barangMasukCutPrin = DataLaserCut::create($barangMasukDataCutPrintData);
+                            // AHIR CUT PRINT
+
+                            // DATA SORTIR
+                            $barangMasukDataSortirData = [
+                                'no_order_id' => $lk->id,
+                                'laser_cut_id' => $barangMasukCutPrin->id,
+                                'deadline' => $createDate->format('Y-m-d'),
+                            ];
+                            if (isset($LkCelana1) && ($LkCelana1->status_celana_1 == "Full print")) {
+                                $barangMasukDataSortirData['lk_celana_1_id'] = $LkCelana1->id;
+                            }
+                            $barangMasukSortir = DataSortir::create($barangMasukDataSortirData);
+                            // AKHIR DATA SORTIR
+
+                            // JAHIT
+                            $barangMasukDataJahitrData = [
+                                'no_order_id' => $lk->id,
+                                'sortir_id' => $barangMasukSortir->id,
+                                'deadline' => $createDate->format('Y-m-d'),
+                            ];
+                            if (isset($LkCelana1) && ($LkCelana1->status_celana_1 == "Full print")) {
+                                $barangMasukDataJahitrData['lk_celana_1_id'] = $LkCelana1->id;
+                            }
+                            $barangMasukJahit = Jahit::create($barangMasukDataJahitrData);
+                            // AKHIR JAHIT
+
+                            // FINIS
+                            $barangMasukDataFinisData = [
+                                'no_order_id' => $lk->id,
+                                'jahit_baju_id' => $barangMasukJahit->id,
+                                'deadline' => $createDate->format('Y-m-d'),
+                            ];
+                            if (isset($LkCelana1) && ($LkCelana1->status_celana_1 == "Full print")) {
+                                $barangMasukDataFinisData['lk_celana_1_id'] = $LkCelana1->id;
+                            }
+                            $barangMasukFinis = Finish::create($barangMasukDataFinisData);
+                            // AKHIR FINIS
+
+                            // LAPORAN
+                                Laporan::create([
+                                    'barang_masuk_costumer_services_id' => $lk->id,
+                                    'barang_masuk_layout_id' => $barangMasukDataLayout->id,
+                                    'barang_masuk_mesin_atexco_id' => $barangMasukPressMesin->id ,
+                                    'barang_masuk_presskain_id' => $barangMasuPressKain->id,
+                                    'barang_masuk_lasercut_id' => $barangMasukCutPrin->id,
+                                    'barang_masuk_sortir_id' => $barangMasukSortir->id,
+                                    'jahit_id' => $barangMasukJahit->id,
+                                    'finis_id' => $barangMasukFinis->id,
+                                ]);
+                            // AKHIR LAPORAN
+                        }
+                         elseif ($total_hari == 2) {
                             // LAYOUT
                              BarangMasukDatalayout::where('lk_celana_1_id', $LkCelana1->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -24690,7 +26697,7 @@ class CostumerServicesController extends Controller
 
                     // HALFT PRINT
                     if ($LkCelana1->status_celana_1 == "Half print") {
-                        if ($total_hari == 1) {
+                        if ($total_hari == 0) {
                             // LAYOUT
                              BarangMasukDatalayout::where('lk_celana_1_id', $LkCelana1->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -24801,7 +26808,119 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                                 ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 2) {
+                        }elseif ($total_hari == 1) {
+                            // LAYOUT
+                            BarangMasukDatalayout::where('lk_celana_1_id', $LkCelana1->id)->delete();
+                            $barangMasukDataLayoutData = [
+                                'users_layout_id' => $lk->layout_id,
+                                'barang_masuk_id' => $lk->id,
+                                'deadline' => $createDate->format('Y-m-d'),
+                            ];
+                            if (isset($LkCelana1) && ($LkCelana1->status_celana_1 == "Half print")) {
+                                $barangMasukDataLayoutData['lk_celana_1_id'] = $LkCelana1->id;
+                            }
+                            $barangMasukDataLayout = BarangMasukDatalayout::create($barangMasukDataLayoutData);
+                            // AKHIR LAYOUT
+
+                            // MESIN
+                            $barangPressMesin = [
+                                'no_order_id' => $lk->id,
+                                'penanggung_jawab_id' => optional($lk->BarangMasukDisainer->DataMesinCs->first())->User->id,
+                                'barang_masuk_layout_id' => $barangMasukDataLayout->id,
+                                'deadline' => $createDate->format('Y-m-d'),
+                            ];
+                            if (isset($LkCelana1) && ($LkCelana1->status_celana_1 == "Half print")) {
+                                $barangPressMesin['lk_celana_1_id'] = $LkCelana1->id;
+                            }
+                            $barangMasukPressMesin = DataPress::create($barangPressMesin);
+                            // AKHIR MESIN
+
+
+                            // PRESS KAIN
+                                $barangMasukPressKainData = [
+                                    'no_order_id' => $lk->id,
+                                    'mesin_atexco_id' => $barangMasukPressMesin->id,
+                                    'deadline' => $createDate->format('Y-m-d'),
+                                ];
+                                if (isset($LkCelana1) && ($LkCelana1->status_celana_1 == "Half print")) {
+                                    $barangMasukPressKainData['lk_celana_1_id'] = $LkCelana1->id;
+                                }
+                                $barangMasuPressKain = DataPressKain::create($barangMasukPressKainData);
+                            // AKHIR PRESS KAIN
+
+                            // CUT PRINT
+                            $barangMasukDataCutPrintData = [
+                                'no_order_id' => $lk->id,
+                                'press_kain_id' => $barangMasuPressKain->id,
+                                'deadline' => $createDate->format('Y-m-d'),
+                            ];
+                            if (isset($LkCelana1) && ($LkCelana1->status_celana_1 == "Half print")) {
+                                $barangMasukDataCutPrintData['lk_celana_1_id'] = $LkCelana1->id;
+                            }
+                            $barangMasukCutPrin = DataLaserCut::create($barangMasukDataCutPrintData);
+                            $barangMasukDataCutManualData = [
+                                'no_order_id' => $lk->id,
+                                'laser_cut_id' => $barangMasukCutPrin->id,
+                                'deadline' => $createDate->format('Y-m-d'),
+                            ];
+                            if (isset($LkCelana1) && ($LkCelana1->status_celana_1 == "Half print")) {
+                                $barangMasukDataCutManualData['lk_celana_1_id'] = $LkCelana1->id;
+                            }
+                            $barangMasukCutManual = DataManualCut::create($barangMasukDataCutManualData);
+                            // AHIR CUT PRINT
+
+                            // DATA SORTIR
+                            $barangMasukDataSortirData = [
+                                'no_order_id' => $lk->id,
+                                'manual_cut_id' => $barangMasukCutManual->id,
+                                'laser_cut_id' => $barangMasukCutPrin->id,
+                                'deadline' => $createDate->format('Y-m-d'),
+                            ];
+                            if (isset($LkCelana1) && ($LkCelana1->status_celana_1 == "Half print")) {
+                                $barangMasukDataSortirData['lk_celana_1_id'] = $LkCelana1->id;
+                            }
+                            $barangMasukSortir = DataSortir::create($barangMasukDataSortirData);
+                            // AKHIR DATA SORTIR
+
+                            // JAHIT
+                            $barangMasukDataJahitrData = [
+                                'no_order_id' => $lk->id,
+                                'sortir_id' => $barangMasukSortir->id,
+                                'deadline' => $createDate->format('Y-m-d'),
+                            ];
+                            if (isset($LkCelana1) && ($LkCelana1->status_celana_1 == "Half print")) {
+                                $barangMasukDataJahitrData['lk_celana_1_id'] = $LkCelana1->id;
+                            }
+                            $barangMasukJahit = Jahit::create($barangMasukDataJahitrData);
+                            // AKHIR JAHIT
+
+                            // FINIS
+                            $barangMasukDataFinisData = [
+                                'no_order_id' => $lk->id,
+                                'jahit_baju_id' => $barangMasukJahit->id,
+                                'deadline' => $createDate->format('Y-m-d'),
+                            ];
+                            if (isset($LkCelana1) && ($LkCelana1->status_celana_1 == "Half print")) {
+                                $barangMasukDataFinisData['lk_celana_1_id'] = $LkCelana1->id;
+                            }
+                            $barangMasukFinis = Finish::create($barangMasukDataFinisData);
+                            // AKHIR FINIS
+
+                            // LAPORAN
+                                Laporan::create([
+                                    'barang_masuk_costumer_services_id' => $lk->id,
+                                'barang_masuk_layout_id' => $barangMasukDataLayout->id,
+                                'barang_masuk_mesin_atexco_id' => $barangMasukPressMesin->id ,
+                                'barang_masuk_presskain_id' => $barangMasuPressKain->id,
+                                'barang_masuk_lasercut_id' => $barangMasukCutPrin->id,
+                                'barang_masuk_manualcut_id' => $barangMasukCutManual->id,
+                                'barang_masuk_sortir_id' => $barangMasukSortir->id,
+                                'jahit_id' => $barangMasukJahit->id,
+                                'finis_id' => $barangMasukFinis->id,
+                                ]);
+                            // AKHIR LAPORAN
+                        }
+                         elseif ($total_hari == 2) {
                             // LAYOUT
                              BarangMasukDatalayout::where('lk_celana_1_id', $LkCelana1->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -26028,7 +28147,7 @@ class CostumerServicesController extends Controller
 
                     // POLOS
                     if ($LkCelana1->status_celana_1 == "Polos") {
-                        if ($total_hari == 1) {
+                        if ($total_hari == 0) {
                             // CUT PRINT
                             BarangMasukDatalayout::where('lk_celana_1_id', $LkCelana1->id)->delete();
                             DataManualCut::where('lk_celana_1_id', $LkCelana1->id)->delete();
@@ -26088,7 +28207,68 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 2) {
+                        }elseif ($total_hari == 1) {
+                             // CUT PRINT
+                             BarangMasukDatalayout::where('lk_celana_1_id', $LkCelana1->id)->delete();
+                             DataManualCut::where('lk_celana_1_id', $LkCelana1->id)->delete();
+                             $barangMasukDataCutManualData = [
+                                 'no_order_id' => $lk->id,
+                                 'deadline' => $createDate->format('Y-m-d'),
+                             ];
+                             if (isset($LkCelana1) && ($LkCelana1->status_celana_1 == "Polos")) {
+                                 $barangMasukDataCutManualData['lk_celana_1_id'] = $LkCelana1->id;
+                             }
+                             $barangMasukCutManual = DataManualCut::create($barangMasukDataCutManualData);
+                             // AHIR CUT PRINT
+
+                             // DATA SORTIR
+                             $barangMasukDataSortirData = [
+                                 'no_order_id' => $lk->id,
+                                 'manual_cut_id' => $barangMasukCutManual->id,
+                                 // 'laser_cut_id' => $barangMasukCutPrin->id,
+                                 'deadline' => $createDate->format('Y-m-d'),
+                             ];
+                             if (isset($LkCelana1) && ($LkCelana1->status_celana_1 == "Polos")) {
+                                 $barangMasukDataSortirData['lk_celana_1_id'] = $LkCelana1->id;
+                             }
+                             $barangMasukSortir = DataSortir::create($barangMasukDataSortirData);
+                             // AKHIR DATA SORTIR
+
+                             // JAHIT
+                             $barangMasukDataJahitrData = [
+                                 'no_order_id' => $lk->id,
+                                 'sortir_id' => $barangMasukSortir->id,
+                                 'deadline' => $createDate->format('Y-m-d'),
+                             ];
+                             if (isset($LkCelana1) && ($LkCelana1->status_celana_1 == "Polos")) {
+                                 $barangMasukDataJahitrData['lk_celana_1_id'] = $LkCelana1->id;
+                             }
+                             $barangMasukJahit = Jahit::create($barangMasukDataJahitrData);
+                             // AKHIR JAHIT
+
+                             // FINIS
+                             $barangMasukDataFinisData = [
+                                 'no_order_id' => $lk->id,
+                                 'jahit_baju_id' => $barangMasukJahit->id,
+                                 'deadline' => $createDate->format('Y-m-d'),
+                             ];
+                             if (isset($LkCelana1) && ($LkCelana1->status_celana_1 == "Polos")) {
+                                 $barangMasukDataFinisData['lk_celana_1_id'] = $LkCelana1->id;
+                             }
+                             $barangMasukFinis = Finish::create($barangMasukDataFinisData);
+                             // AKHIR FINIS
+
+                             // LAPORAN
+                             Laporan::create([
+                                 'barang_masuk_costumer_services_id' => $lk->id,
+                                 'barang_masuk_manualcut_id' => $barangMasukCutManual->id,
+                                 'barang_masuk_sortir_id' => $barangMasukSortir->id,
+                                 'jahit_id' => $barangMasukJahit->id,
+                                 'finis_id' => $barangMasukFinis->id,
+                             ]);
+                             // AKHIR LAPORAN
+                        }
+                        elseif ($total_hari == 2) {
                             // CUT PRINT
                             BarangMasukDatalayout::where('lk_celana_1_id', $LkCelana1->id)->delete();
                             DataManualCut::where('lk_celana_1_id', $LkCelana1->id)->delete();
@@ -27120,7 +29300,7 @@ class CostumerServicesController extends Controller
             if (isset($gambar->file_baju_player)) {
                 // FULL PRINT
                 if ($LkPlayer->status_player == "Full print") {
-                    if ($total_hari == 1) {
+                    if ($total_hari == 0) {
                         // LAYOUT
                         $barangMasukDataLayoutData = [
                             'users_layout_id' => $lk->layout_id,
@@ -27218,7 +29398,105 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                         // AKHIR LAPORAN
-                    } elseif ($total_hari == 2) {
+                    } elseif ($total_hari == 1){
+                        // LAYOUT
+                        $barangMasukDataLayoutData = [
+                            'users_layout_id' => $lk->layout_id,
+                            'barang_masuk_id' => $lk->id,
+                            'deadline' => $createDate->format('Y-m-d'),
+                        ];
+                        if (isset($LkPlayer) && ($LkPlayer->status_player == "Full print")) {
+                            $barangMasukDataLayoutData['lk_player_id'] = $LkPlayer->id;
+                        }
+                        $barangMasukDataLayout = BarangMasukDatalayout::create($barangMasukDataLayoutData);
+                        // AKHIR LAYOUT
+
+                        // MESIN
+                        $barangPressMesin = [
+                            'no_order_id' => $lk->id,
+                            'penanggung_jawab_id' => optional($lk->BarangMasukDisainer->DataMesinCs->first())->User->id,
+                            'barang_masuk_layout_id' => $barangMasukDataLayout->id,
+                            'deadline' => $createDate->format('Y-m-d'),
+                        ];
+                        if (isset($LkPlayer) && ($LkPlayer->status_player == "Full print")) {
+                            $barangPressMesin['lk_player_id'] = $LkPlayer->id;
+                        }
+                        $barangMasukPressMesin = DataPress::create($barangPressMesin);
+                        // AKHIR MESIN
+
+                        // PRESS KAIN
+                        $barangMasukPressKainData = [
+                            'no_order_id' => $lk->id,
+                            'mesin_atexco_id' => $barangMasukPressMesin->id,
+                            'deadline' => $createDate->format('Y-m-d'),
+                        ];
+                        if (isset($LkPlayer) && ($LkPlayer->status_player == "Full print")) {
+                            $barangMasukPressKainData['lk_player_id'] = $LkPlayer->id;
+                        }
+                        $barangMasuPressKain = DataPressKain::create($barangMasukPressKainData);
+                        // AKHIR PRESS KAIN
+
+                        // CUT PRINT
+                        $barangMasukDataCutPrintData = [
+                            'no_order_id' => $lk->id,
+                            'press_kain_id' => $barangMasuPressKain->id,
+                            'deadline' => $createDate->format('Y-m-d'),
+                        ];
+                        if (isset($LkPlayer) && ($LkPlayer->status_player == "Full print")) {
+                            $barangMasukDataCutPrintData['lk_player_id'] = $LkPlayer->id;
+                        }
+                        $barangMasukCutPrin = DataLaserCut::create($barangMasukDataCutPrintData);
+                        // AHIR CUT PRINT
+
+                        // DATA SORTIR
+                        $barangMasukDataSortirData = [
+                            'no_order_id' => $lk->id,
+                            'laser_cut_id' => $barangMasukCutPrin->id,
+                            'deadline' => $createDate->format('Y-m-d'),
+                        ];
+                        if (isset($LkPlayer) && ($LkPlayer->status_player == "Full print")) {
+                            $barangMasukDataSortirData['lk_player_id'] = $LkPlayer->id;
+                        }
+                        $barangMasukSortir = DataSortir::create($barangMasukDataSortirData);
+                        // AKHIR DATA SORTIR
+
+                        // JAHIT
+                        $barangMasukDataJahitrData = [
+                            'no_order_id' => $lk->id,
+                            'sortir_id' => $barangMasukSortir->id,
+                            'deadline' => $createDate->format('Y-m-d'),
+                        ];
+                        if (isset($LkPlayer) && ($LkPlayer->status_player == "Full print")) {
+                            $barangMasukDataJahitrData['lk_player_id'] = $LkPlayer->id;
+                        }
+                        $barangMasukJahit = Jahit::create($barangMasukDataJahitrData);
+                        // AKHIR JAHIT
+
+                        // FINIS
+                        $barangMasukDataFinisData = [
+                            'no_order_id' => $lk->id,
+                            'jahit_baju_id' => $barangMasukJahit->id,
+                            'deadline' => $createDate->format('Y-m-d'),
+                        ];
+                        if (isset($LkPlayer) && ($LkPlayer->status_player == "Full print")) {
+                            $barangMasukDataFinisData['lk_player_id'] = $LkPlayer->id;
+                        }
+                        $barangMasukFinis = Finish::create($barangMasukDataFinisData);
+                        // AKHIR FINIS
+
+                        // LAPORAN
+                            Laporan::create([
+                                'barang_masuk_costumer_services_id' => $lk->id,
+                                'barang_masuk_layout_id' => $barangMasukDataLayout->id,
+                                'barang_masuk_mesin_atexco_id' => $barangMasukPressMesin->id ,
+                                'barang_masuk_presskain_id' => $barangMasuPressKain->id,
+                                'barang_masuk_lasercut_id' => $barangMasukCutPrin->id,
+                                'barang_masuk_sortir_id' => $barangMasukSortir->id,
+                                'jahit_id' => $barangMasukJahit->id,
+                                'finis_id' => $barangMasukFinis->id,
+                            ]);
+                        // AKHIR LAPORAN
+                    }elseif ($total_hari == 2) {
                         // LAYOUT
                         $barangMasukDataLayoutData = [
                             'users_layout_id' => $lk->layout_id,
@@ -28314,7 +30592,7 @@ class CostumerServicesController extends Controller
 
                 // HALFT PRINT
                 if ($LkPlayer->status_player == "Half print") {
-                    if ($total_hari == 1) {
+                    if ($total_hari == 0) {
                         // LAYOUT
                         $barangMasukDataLayoutData = [
                             'users_layout_id' => $lk->layout_id,
@@ -28423,7 +30701,117 @@ class CostumerServicesController extends Controller
                             'finis_id' => $barangMasukFinis->id,
                         ]);
                         // AKHIR LAPORAN
-                    } elseif ($total_hari == 2) {
+                    } elseif ($total_hari == 1) {
+                         // LAYOUT
+                         $barangMasukDataLayoutData = [
+                            'users_layout_id' => $lk->layout_id,
+                            'barang_masuk_id' => $lk->id,
+                            'deadline' => $createDate->format('Y-m-d'),
+                        ];
+                        if (isset($LkPlayer) && ($LkPlayer->status_player == "Half print")) {
+                            $barangMasukDataLayoutData['lk_player_id'] = $LkPlayer->id;
+                        }
+                        $barangMasukDataLayout = BarangMasukDatalayout::create($barangMasukDataLayoutData);
+                        // AKHIR LAYOUT
+
+                        // MESIN
+                        $barangPressMesin = [
+                            'no_order_id' => $lk->id,
+                            'penanggung_jawab_id' => optional($lk->BarangMasukDisainer->DataMesinCs->first())->User->id,
+                            'barang_masuk_layout_id' => $barangMasukDataLayout->id,
+                            'deadline' => $createDate->format('Y-m-d'),
+                        ];
+                        if (isset($LkPlayer) && ($LkPlayer->status_player == "Half print")) {
+                            $barangPressMesin['lk_player_id'] = $LkPlayer->id;
+                        }
+                        $barangMasukPressMesin = DataPress::create($barangPressMesin);
+                        // AKHIR MESIN
+
+
+                        // PRESS KAIN
+                        $barangMasukPressKainData = [
+                            'no_order_id' => $lk->id,
+                            'mesin_atexco_id' => $barangMasukPressMesin->id,
+                            'deadline' => $createDate->format('Y-m-d'),
+                        ];
+                        if (isset($LkPlayer) && ($LkPlayer->status_player == "Half print")) {
+                            $barangMasukPressKainData['lk_player_id'] = $LkPlayer->id;
+                        }
+                        $barangMasuPressKain = DataPressKain::create($barangMasukPressKainData);
+                        // AKHIR PRESS KAIN
+
+                        // CUT PRINT
+                        $barangMasukDataCutPrintData = [
+                            'no_order_id' => $lk->id,
+                            'press_kain_id' => $barangMasuPressKain->id,
+                            'deadline' => $createDate->format('Y-m-d'),
+                        ];
+                        if (isset($LkPlayer) && ($LkPlayer->status_player == "Half print")) {
+                            $barangMasukDataCutPrintData['lk_player_id'] = $LkPlayer->id;
+                        }
+                        $barangMasukCutPrin = DataLaserCut::create($barangMasukDataCutPrintData);
+                        $barangMasukDataCutManualData = [
+                            'no_order_id' => $lk->id,
+                            'laser_cut_id' => $barangMasukCutPrin->id,
+                            'deadline' => $createDate->format('Y-m-d'),
+                        ];
+                        if (isset($LkPlayer) && ($LkPlayer->status_player == "Half print")) {
+                            $barangMasukDataCutManualData['lk_player_id'] = $LkPlayer->id;
+                        }
+                        $barangMasukCutManual = DataManualCut::create($barangMasukDataCutManualData);
+                        // AHIR CUT PRINT
+
+                        // DATA SORTIR
+                        $barangMasukDataSortirData = [
+                            'no_order_id' => $lk->id,
+                            'manual_cut_id' => $barangMasukCutManual->id,
+                            'laser_cut_id' => $barangMasukCutPrin->id,
+                            'deadline' => $createDate->format('Y-m-d'),
+                        ];
+                        if (isset($LkPlayer) && ($LkPlayer->status_player == "Half print")) {
+                            $barangMasukDataSortirData['lk_player_id'] = $LkPlayer->id;
+                        }
+                        $barangMasukSortir = DataSortir::create($barangMasukDataSortirData);
+                        // AKHIR DATA SORTIR
+
+                        // JAHIT
+                        $barangMasukDataJahitrData = [
+                            'no_order_id' => $lk->id,
+                            'sortir_id' => $barangMasukSortir->id,
+                            'deadline' => $createDate->format('Y-m-d'),
+                        ];
+                        if (isset($LkPlayer) && ($LkPlayer->status_player == "Half print")) {
+                            $barangMasukDataJahitrData['lk_player_id'] = $LkPlayer->id;
+                        }
+                        $barangMasukJahit = Jahit::create($barangMasukDataJahitrData);
+                        // AKHIR JAHIT
+
+                        // FINIS
+                        $barangMasukDataFinisData = [
+                            'no_order_id' => $lk->id,
+                            'jahit_baju_id' => $barangMasukJahit->id,
+                            'deadline' => $createDate->format('Y-m-d'),
+                        ];
+                        if (isset($LkPlayer) && ($LkPlayer->status_player == "Half print")) {
+                            $barangMasukDataFinisData['lk_player_id'] = $LkPlayer->id;
+                        }
+                        $barangMasukFinis = Finish::create($barangMasukDataFinisData);
+                        // AKHIR FINIS
+
+                        // LAPORAN
+                        Laporan::create([
+                            'barang_masuk_costumer_services_id' => $lk->id,
+                            'barang_masuk_layout_id' => $barangMasukDataLayout->id,
+                            'barang_masuk_mesin_atexco_id' => $barangMasukPressMesin->id ,
+                            'barang_masuk_presskain_id' => $barangMasuPressKain->id,
+                            'barang_masuk_lasercut_id' => $barangMasukCutPrin->id,
+                            'barang_masuk_sortir_id' => $barangMasukSortir->id,
+                            'jahit_id' => $barangMasukJahit->id,
+                            'finis_id' => $barangMasukFinis->id,
+                        ]);
+                        // AKHIR LAPORAN
+                    }
+                    elseif ($total_hari == 2) {
                         // LAYOUT
                         $barangMasukDataLayoutData = [
                             'users_layout_id' => $lk->layout_id,
@@ -29651,7 +32039,7 @@ class CostumerServicesController extends Controller
 
                 // POLOS
                 if ($LkPlayer->status_player == "Polos") {
-                    if ($total_hari == 1) {
+                    if ($total_hari == 0) {
                         // CUT PRINT
                         $barangMasukDataCutManualData = [
                             'no_order_id' => $lk->id,
@@ -29710,7 +32098,67 @@ class CostumerServicesController extends Controller
                             'status' => "Manual Cut"
                         ]);
                         // AKHIR LAPORAN
-                    } elseif ($total_hari == 2) {
+                    }elseif ($total_hari == 1) {
+                        // CUT PRINT
+                        $barangMasukDataCutManualData = [
+                            'no_order_id' => $lk->id,
+                            'deadline' => $createDate->format('Y-m-d'),
+                        ];
+                        if (isset($LkPlayer) && ($LkPlayer->status_player == "Polos")) {
+                            $barangMasukDataCutManualData['lk_player_id'] = $LkPlayer->id;
+                        }
+                        $barangMasukCutManual = DataManualCut::create($barangMasukDataCutManualData);
+                        // AHIR CUT PRINT
+
+                        // DATA SORTIR
+                        $barangMasukDataSortirData = [
+                            'no_order_id' => $lk->id,
+                            'manual_cut_id' => $barangMasukCutManual->id,
+                            // 'laser_cut_id' => $barangMasukCutPrin->id,
+                            'deadline' => $createDate->format('Y-m-d'),
+                        ];
+                        if (isset($LkPlayer) && ($LkPlayer->status_player == "Polos")) {
+                            $barangMasukDataSortirData['lk_player_id'] = $LkPlayer->id;
+                        }
+                        $barangMasukSortir = DataSortir::create($barangMasukDataSortirData);
+                        // AKHIR DATA SORTIR
+
+                        // JAHIT
+                        $barangMasukDataJahitrData = [
+                            'no_order_id' => $lk->id,
+                            'sortir_id' => $barangMasukSortir->id,
+                            'deadline' => $createDate->format('Y-m-d'),
+                        ];
+                        if (isset($LkPlayer) && ($LkPlayer->status_player == "Polos")) {
+                            $barangMasukDataJahitrData['lk_player_id'] = $LkPlayer->id;
+                        }
+                        $barangMasukJahit = Jahit::create($barangMasukDataJahitrData);
+                        // AKHIR JAHIT
+
+                        // FINIS
+                        $barangMasukDataFinisData = [
+                            'no_order_id' => $lk->id,
+                            'jahit_baju_id' => $barangMasukJahit->id,
+                            'deadline' => $createDate->format('Y-m-d'),
+                        ];
+                        if (isset($LkPlayer) && ($LkPlayer->status_player == "Polos")) {
+                            $barangMasukDataFinisData['lk_player_id'] = $LkPlayer->id;
+                        }
+                        $barangMasukFinis = Finish::create($barangMasukDataFinisData);
+                        // AKHIR FINIS
+
+                        // LAPORAN
+                        Laporan::create([
+                            'barang_masuk_costumer_services_id' => $lk->id,
+                            'barang_masuk_manualcut_id' => $barangMasukCutManual->id,
+                            'barang_masuk_sortir_id' => $barangMasukSortir->id,
+                            'jahit_id' => $barangMasukJahit->id,
+                            'finis_id' => $barangMasukFinis->id,
+                            'status' => "Manual Cut"
+                        ]);
+                        // AKHIR LAPORAN
+                    }
+                     elseif ($total_hari == 2) {
                         // CUT PRINT
                         $barangMasukDataCutManualData = [
                             'no_order_id' => $lk->id,
@@ -30367,7 +32815,7 @@ class CostumerServicesController extends Controller
             if (isset($gambar->file_baju_pelatih)) {
                 // FULL PRINT
                 if ($LkPelatih->status_pelatih == "Full print") {
-                    if ($total_hari == 1) {
+                    if ($total_hari == 0) {
                         // LAYOUT
                         $barangMasukDataLayoutData = [
                             'users_layout_id' => $lk->layout_id,
@@ -30467,7 +32915,107 @@ class CostumerServicesController extends Controller
                             'finis_id' => $barangMasukFinis->id,
                         ]);
                     // AKHIR LAPORAN
-                    } elseif ($total_hari == 2) {
+                    } elseif ($total_hari == 1) {
+                        // LAYOUT
+                        $barangMasukDataLayoutData = [
+                            'users_layout_id' => $lk->layout_id,
+                            'barang_masuk_id' => $lk->id,
+                            'deadline' => $createDate->format('Y-m-d'),
+                        ];
+                        if (isset($LkPelatih) && ($LkPelatih->status_pelatih == "Full print")) {
+                            $barangMasukDataLayoutData['lk_pelatih_id'] = $LkPelatih->id;
+                        }
+                        $barangMasukDataLayout = BarangMasukDatalayout::create($barangMasukDataLayoutData);
+                        // AKHIR LAYOUT
+
+                        // MESIN
+                        $barangPressMesin = [
+                            'no_order_id' => $lk->id,
+                            'penanggung_jawab_id' => optional($lk->BarangMasukDisainer->DataMesinCs->first())->User->id,
+                            'barang_masuk_layout_id' => $barangMasukDataLayout->id,
+                            'deadline' => $createDate->format('Y-m-d'),
+                        ];
+                        if (isset($LkPelatih) && ($LkPelatih->status_pelatih == "Full print")) {
+                            $barangPressMesin['lk_pelatih_id'] = $LkPelatih->id;
+                        }
+                        $barangMasukPressMesin = DataPress::create($barangPressMesin);
+                        // AKHIR MESIN
+
+
+                        // PRESS KAIN
+                        $barangMasukPressKainData = [
+                            'no_order_id' => $lk->id,
+                            'mesin_atexco_id' => $barangMasukPressMesin->id,
+                            'deadline' => $createDate->format('Y-m-d'),
+                        ];
+                        if (isset($LkPelatih) && ($LkPelatih->status_pelatih == "Full print")) {
+                            $barangMasukPressKainData['lk_pelatih_id'] = $LkPelatih->id;
+                        }
+                        $barangMasuPressKain = DataPressKain::create($barangMasukPressKainData);
+                    // AKHIR PRESS KAIN
+
+
+                        // CUT PRINT
+                        $barangMasukDataCutPrintData = [
+                            'no_order_id' => $lk->id,
+                            'press_kain_id' => $barangMasuPressKain->id,
+                            'deadline' => $createDate->format('Y-m-d'),
+                        ];
+                        if (isset($LkPelatih) && ($LkPelatih->status_pelatih == "Full print")) {
+                            $barangMasukDataCutPrintData['lk_pelatih_id'] = $LkPelatih->id;
+                        }
+                        $barangMasukCutPrin = DataLaserCut::create($barangMasukDataCutPrintData);
+                        // AHIR CUT PRINT
+
+                        // DATA SORTIR
+                        $barangMasukDataSortirData = [
+                            'no_order_id' => $lk->id,
+                            'laser_cut_id' => $barangMasukCutPrin->id,
+                            'deadline' => $createDate->format('Y-m-d'),
+                        ];
+                        if (isset($LkPelatih) && ($LkPelatih->status_pelatih == "Full print")) {
+                            $barangMasukDataSortirData['lk_pelatih_id'] = $LkPelatih->id;
+                        }
+                        $barangMasukSortir = DataSortir::create($barangMasukDataSortirData);
+                        // AKHIR DATA SORTIR
+
+                        // JAHIT
+                        $barangMasukDataJahitrData = [
+                            'no_order_id' => $lk->id,
+                            'sortir_id' => $barangMasukSortir->id,
+                            'deadline' => $createDate->format('Y-m-d'),
+                        ];
+                        if (isset($LkPelatih) && ($LkPelatih->status_pelatih == "Full print")) {
+                            $barangMasukDataJahitrData['lk_pelatih_id'] = $LkPelatih->id;
+                        }
+                        $barangMasukJahit = Jahit::create($barangMasukDataJahitrData);
+                        // AKHIR JAHIT
+
+                        // FINIS
+                        $barangMasukDataFinisData = [
+                            'no_order_id' => $lk->id,
+                            'jahit_baju_id' => $barangMasukJahit->id,
+                            'deadline' => $createDate->format('Y-m-d'),
+                        ];
+                        if (isset($LkPelatih) && ($LkPelatih->status_pelatih == "Full print")) {
+                            $barangMasukDataFinisData['lk_pelatih_id'] = $LkPelatih->id;
+                        }
+                        $barangMasukFinis = Finish::create($barangMasukDataFinisData);
+                        // AKHIR FINIS
+
+                        // LAPORAN
+                        Laporan::create([
+                            'barang_masuk_costumer_services_id' => $lk->id,
+                            'barang_masuk_layout_id' => $barangMasukDataLayout->id,
+                            'barang_masuk_mesin_atexco_id' => $barangMasukPressMesin->id ,
+                            'barang_masuk_presskain_id' => $barangMasuPressKain->id,
+                            'barang_masuk_lasercut_id' => $barangMasukCutPrin->id,
+                            'barang_masuk_sortir_id' => $barangMasukSortir->id,
+                            'jahit_id' => $barangMasukJahit->id,
+                            'finis_id' => $barangMasukFinis->id,
+                        ]);
+                    // AKHIR LAPORAN
+                    }elseif ($total_hari == 2) {
                         // LAYOUT
                         $barangMasukDataLayoutData = [
                             'users_layout_id' => $lk->layout_id,
@@ -31573,7 +34121,7 @@ class CostumerServicesController extends Controller
 
                 // HALFT PRINT
                 if ($LkPelatih->status_pelatih == "Half print") {
-                    if ($total_hari == 1) {
+                    if ($total_hari == 0) {
                         // LAYOUT
                         $barangMasukDataLayoutData = [
                             'users_layout_id' => $lk->layout_id,
@@ -31682,7 +34230,116 @@ class CostumerServicesController extends Controller
                             'finis_id' => $barangMasukFinis->id,
                         ]);
                     // AKHIR LAPORAN
-                    } elseif ($total_hari == 2) {
+                    } elseif ($total_hari == 1) {
+                        // LAYOUT
+                        $barangMasukDataLayoutData = [
+                            'users_layout_id' => $lk->layout_id,
+                            'barang_masuk_id' => $lk->id,
+                            'deadline' => $createDate->format('Y-m-d'),
+                        ];
+                        if (isset($LkPelatih) && ($LkPelatih->status_pelatih == "Half print")) {
+                            $barangMasukDataLayoutData['lk_pelatih_id'] = $LkPelatih->id;
+                        }
+                        $barangMasukDataLayout = BarangMasukDatalayout::create($barangMasukDataLayoutData);
+                        // AKHIR LAYOUT
+
+                        // MESIN
+                        $barangPressMesin = [
+                            'no_order_id' => $lk->id,
+                            'penanggung_jawab_id' => optional($lk->BarangMasukDisainer->DataMesinCs->first())->User->id,
+                            'barang_masuk_layout_id' => $barangMasukDataLayout->id,
+                            'deadline' => $createDate->format('Y-m-d'),
+                        ];
+                        if (isset($LkPelatih) && ($LkPelatih->status_pelatih == "Half print")) {
+                            $barangPressMesin['lk_pelatih_id'] = $LkPelatih->id;
+                        }
+                        $barangMasukPressMesin = DataPress::create($barangPressMesin);
+                        // AKHIR MESIN
+
+                        // PRESS KAIN
+                        $barangMasukPressKainData = [
+                            'no_order_id' => $lk->id,
+                            'mesin_atexco_id' => $barangMasukPressMesin->id,
+                            'deadline' => $createDate->format('Y-m-d'),
+                        ];
+                        if (isset($LkPelatih) && ($LkPelatih->status_pelatih == "Half print")) {
+                            $barangMasukPressKainData['lk_pelatih_id'] = $LkPelatih->id;
+                        }
+                        $barangMasuPressKain = DataPressKain::create($barangMasukPressKainData);
+                        // AKHIR PRESS KAIN
+
+                        // CUT PRINT
+                        $barangMasukDataCutPrintData = [
+                            'no_order_id' => $lk->id,
+                            'press_kain_id' => $barangMasuPressKain->id,
+                            'deadline' => $createDate->format('Y-m-d'),
+                        ];
+                        if (isset($LkPelatih) && ($LkPelatih->status_pelatih == "Half print")) {
+                            $barangMasukDataCutPrintData['lk_pelatih_id'] = $LkPelatih->id;
+                        }
+                        $barangMasukCutPrin = DataLaserCut::create($barangMasukDataCutPrintData);
+                        $barangMasukDataCutManualData = [
+                            'no_order_id' => $lk->id,
+                            'laser_cut_id' => $barangMasukCutPrin->id,
+                            'deadline' => $createDate->format('Y-m-d'),
+                        ];
+                        if (isset($LkPelatih) && ($LkPelatih->status_pelatih == "Half print")) {
+                            $barangMasukDataCutManualData['lk_pelatih_id'] = $LkPelatih->id;
+                        }
+                        $barangMasukCutManual = DataManualCut::create($barangMasukDataCutManualData);
+                        // AHIR CUT PRINT
+
+                        // DATA SORTIR
+                        $barangMasukDataSortirData = [
+                            'no_order_id' => $lk->id,
+                            'manual_cut_id' => $barangMasukCutManual->id,
+                            'laser_cut_id' => $barangMasukCutPrin->id,
+                            'deadline' => $createDate->format('Y-m-d'),
+                        ];
+                        if (isset($LkPelatih) && ($LkPelatih->status_pelatih == "Half print")) {
+                            $barangMasukDataSortirData['lk_pelatih_id'] = $LkPelatih->id;
+                        }
+                        $barangMasukSortir = DataSortir::create($barangMasukDataSortirData);
+                        // AKHIR DATA SORTIR
+
+                        // JAHIT
+                        $barangMasukDataJahitrData = [
+                            'no_order_id' => $lk->id,
+                            'sortir_id' => $barangMasukSortir->id,
+                            'deadline' => $createDate->format('Y-m-d'),
+                        ];
+                        if (isset($LkPelatih) && ($LkPelatih->status_pelatih == "Half print")) {
+                            $barangMasukDataJahitrData['lk_pelatih_id'] = $LkPelatih->id;
+                        }
+                        $barangMasukJahit = Jahit::create($barangMasukDataJahitrData);
+                        // AKHIR JAHIT
+
+                        // FINIS
+                        $barangMasukDataFinisData = [
+                            'no_order_id' => $lk->id,
+                            'jahit_baju_id' => $barangMasukJahit->id,
+                            'deadline' => $createDate->format('Y-m-d'),
+                        ];
+                        if (isset($LkPelatih) && ($LkPelatih->status_pelatih == "Half print")) {
+                            $barangMasukDataFinisData['lk_pelatih_id'] = $LkPelatih->id;
+                        }
+                        $barangMasukFinis = Finish::create($barangMasukDataFinisData);
+                        // AKHIR FINIS
+
+                        // LAPORAN
+                        Laporan::create([
+                            'barang_masuk_costumer_services_id' => $lk->id,
+                            'barang_masuk_layout_id' => $barangMasukDataLayout->id,
+                            'barang_masuk_mesin_atexco_id' => $barangMasukPressMesin->id ,
+                            'barang_masuk_presskain_id' => $barangMasuPressKain->id,
+                            'barang_masuk_lasercut_id' => $barangMasukCutPrin->id,
+                            'barang_masuk_manualcut_id' => $barangMasukCutManual->id,
+                            'barang_masuk_sortir_id' => $barangMasukSortir->id,
+                            'jahit_id' => $barangMasukJahit->id,
+                            'finis_id' => $barangMasukFinis->id,
+                        ]);
+                    // AKHIR LAPORAN
+                    }elseif ($total_hari == 2) {
                         // LAYOUT
                         $barangMasukDataLayoutData = [
                             'users_layout_id' => $lk->layout_id,
@@ -32909,7 +35566,7 @@ class CostumerServicesController extends Controller
 
                 // POLOS
                 if ($LkPelatih->status_pelatih == "Polos") {
-                    if ($total_hari == 1) {
+                    if ($total_hari == 0) {
                         // CUT PRINT
                         $barangMasukDataCutManualData = [
                             'no_order_id' => $lk->id,
@@ -32968,7 +35625,66 @@ class CostumerServicesController extends Controller
                              'status' => "Manual Cut"
                         ]);
                         // AKHIR LAPORAN
-                    } elseif ($total_hari == 2) {
+                    } elseif ($total_hari == 1) {
+                         // CUT PRINT
+                         $barangMasukDataCutManualData = [
+                            'no_order_id' => $lk->id,
+                            'deadline' => $createDate->format('Y-m-d'),
+                        ];
+                        if (isset($LkPelatih) && ($LkPelatih->status_pelatih == "Polos")) {
+                            $barangMasukDataCutManualData['lk_pelatih_id'] = $LkPelatih->id;
+                        }
+                        $barangMasukCutManual = DataManualCut::create($barangMasukDataCutManualData);
+                        // AHIR CUT PRINT
+
+                        // DATA SORTIR
+                        $barangMasukDataSortirData = [
+                            'no_order_id' => $lk->id,
+                            'manual_cut_id' => $barangMasukCutManual->id,
+                            // 'laser_cut_id' => $barangMasukCutPrin->id,
+                            'deadline' => $createDate->format('Y-m-d'),
+                        ];
+                        if (isset($LkPelatih) && ($LkPelatih->status_pelatih == "Polos")) {
+                            $barangMasukDataSortirData['lk_pelatih_id'] = $LkPelatih->id;
+                        }
+                        $barangMasukSortir = DataSortir::create($barangMasukDataSortirData);
+                        // AKHIR DATA SORTIR
+
+                        // JAHIT
+                        $barangMasukDataJahitrData = [
+                            'no_order_id' => $lk->id,
+                            'sortir_id' => $barangMasukSortir->id,
+                            'deadline' => $createDate->format('Y-m-d'),
+                        ];
+                        if (isset($LkPelatih) && ($LkPelatih->status_pelatih == "Polos")) {
+                            $barangMasukDataJahitrData['lk_pelatih_id'] = $LkPelatih->id;
+                        }
+                        $barangMasukJahit = Jahit::create($barangMasukDataJahitrData);
+                        // AKHIR JAHIT
+
+                        // FINIS
+                        $barangMasukDataFinisData = [
+                            'no_order_id' => $lk->id,
+                            'jahit_baju_id' => $barangMasukJahit->id,
+                            'deadline' => $createDate->format('Y-m-d'),
+                        ];
+                        if (isset($LkPelatih) && ($LkPelatih->status_pelatih == "Polos")) {
+                            $barangMasukDataFinisData['lk_pelatih_id'] = $LkPelatih->id;
+                        }
+                        $barangMasukFinis = Finish::create($barangMasukDataFinisData);
+                        // AKHIR FINIS
+
+                        // LAPORAN
+                        Laporan::create([
+                            'barang_masuk_costumer_services_id' => $lk->id,
+                            'barang_masuk_manualcut_id' => $barangMasukCutManual->id,
+                            'barang_masuk_sortir_id' => $barangMasukSortir->id,
+                            'jahit_id' => $barangMasukJahit->id,
+                            'finis_id' => $barangMasukFinis->id,
+                             'status' => "Manual Cut"
+                        ]);
+                        // AKHIR LAPORAN
+                    }elseif ($total_hari == 2) {
                         // CUT PRINT
                         $barangMasukDataCutManualData = [
                             'no_order_id' => $lk->id,
@@ -33625,7 +36341,7 @@ class CostumerServicesController extends Controller
             if (isset($gambar->file_baju_kiper)) {
                 // FULL PRINT
                 if ($LkKiper->status_kiper == "Full print") {
-                    if ($total_hari == 1) {
+                    if ($total_hari == 0) {
                         // LAYOUT
                         $barangMasukDataLayoutData = [
                             'users_layout_id' => $lk->layout_id,
@@ -33725,7 +36441,107 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                         // AKHIR LAPORAN
-                    } elseif ($total_hari == 2) {
+                    } elseif ($total_hari == 1) {
+                         // LAYOUT
+                         $barangMasukDataLayoutData = [
+                            'users_layout_id' => $lk->layout_id,
+                            'barang_masuk_id' => $lk->id,
+                            'deadline' => $createDate->format('Y-m-d'),
+                        ];
+                        if (isset($LkKiper) && ($LkKiper->status_kiper == "Full print")) {
+                            $barangMasukDataLayoutData['lk_kiper_id'] = $LkKiper->id;
+                        }
+                        $barangMasukDataLayout = BarangMasukDatalayout::create($barangMasukDataLayoutData);
+                        // AKHIR LAYOUT
+
+                        // MESIN
+                        $barangPressMesin = [
+                            'no_order_id' => $lk->id,
+                            'penanggung_jawab_id' => optional($lk->BarangMasukDisainer->DataMesinCs->first())->User->id,
+                            'barang_masuk_layout_id' => $barangMasukDataLayout->id,
+                            'deadline' => $createDate->format('Y-m-d'),
+                        ];
+                        if (isset($LkKiper) && ($LkKiper->status_kiper == "Full print")) {
+                            $barangPressMesin['lk_kiper_id'] = $LkKiper->id;
+                        }
+                        $barangMasukPressMesin = DataPress::create($barangPressMesin);
+                        // AKHIR MESIN
+
+
+                    // PRESS KAIN
+                            $barangMasukPressKainData = [
+                                'no_order_id' => $lk->id,
+                                'mesin_atexco_id' => $barangMasukPressMesin->id,
+                                'deadline' => $createDate->format('Y-m-d'),
+                            ];
+                            if (isset($LkKiper) && ($LkKiper->status_kiper == "Full print")) {
+                                $barangMasukPressKainData['lk_kiper_id'] = $LkKiper->id;
+                            }
+                            $barangMasuPressKain = DataPressKain::create($barangMasukPressKainData);
+                        // AKHIR PRESS KAIN
+
+
+                        // CUT PRINT
+                        $barangMasukDataCutPrintData = [
+                            'no_order_id' => $lk->id,
+                            'press_kain_id' => $barangMasuPressKain->id,
+                            'deadline' => $createDate->format('Y-m-d'),
+                        ];
+                        if (isset($LkKiper) && ($LkKiper->status_kiper == "Full print")) {
+                            $barangMasukDataCutPrintData['lk_kiper_id'] = $LkKiper->id;
+                        }
+                        $barangMasukCutPrin = DataLaserCut::create($barangMasukDataCutPrintData);
+                        // AHIR CUT PRINT
+
+                        // DATA SORTIR
+                        $barangMasukDataSortirData = [
+                            'no_order_id' => $lk->id,
+                            'laser_cut_id' => $barangMasukCutPrin->id,
+                            'deadline' => $createDate->format('Y-m-d'),
+                        ];
+                        if (isset($LkKiper) && ($LkKiper->status_kiper == "Full print")) {
+                            $barangMasukDataSortirData['lk_kiper_id'] = $LkKiper->id;
+                        }
+                        $barangMasukSortir = DataSortir::create($barangMasukDataSortirData);
+                        // AKHIR DATA SORTIR
+
+                        // JAHIT
+                        $barangMasukDataJahitrData = [
+                            'no_order_id' => $lk->id,
+                            'sortir_id' => $barangMasukSortir->id,
+                            'deadline' => $createDate->format('Y-m-d'),
+                        ];
+                        if (isset($LkKiper) && ($LkKiper->status_kiper == "Full print")) {
+                            $barangMasukDataJahitrData['lk_kiper_id'] = $LkKiper->id;
+                        }
+                        $barangMasukJahit = Jahit::create($barangMasukDataJahitrData);
+                        // AKHIR JAHIT
+
+                        // FINIS
+                        $barangMasukDataFinisData = [
+                            'no_order_id' => $lk->id,
+                            'jahit_baju_id' => $barangMasukJahit->id,
+                            'deadline' => $createDate->format('Y-m-d'),
+                        ];
+                        if (isset($LkKiper) && ($LkKiper->status_kiper == "Full print")) {
+                            $barangMasukDataFinisData['lk_kiper_id'] = $LkKiper->id;
+                        }
+                        $barangMasukFinis = Finish::create($barangMasukDataFinisData);
+                        // AKHIR FINIS
+
+                        // LAPORAN
+                            Laporan::create([
+                                'barang_masuk_costumer_services_id' => $lk->id,
+                                'barang_masuk_layout_id' => $barangMasukDataLayout->id,
+                                'barang_masuk_mesin_atexco_id' => $barangMasukPressMesin->id ,
+                                'barang_masuk_presskain_id' => $barangMasuPressKain->id,
+                                'barang_masuk_lasercut_id' => $barangMasukCutPrin->id,
+                                'barang_masuk_sortir_id' => $barangMasukSortir->id,
+                                'jahit_id' => $barangMasukJahit->id,
+                                'finis_id' => $barangMasukFinis->id,
+                            ]);
+                        // AKHIR LAPORAN
+                    }elseif ($total_hari == 2) {
                         // LAYOUT
                         $barangMasukDataLayoutData = [
                             'users_layout_id' => $lk->layout_id,
@@ -34831,7 +37647,118 @@ class CostumerServicesController extends Controller
 
                 // HALFT PRINT
                 if ($LkKiper->status_kiper == "Half print") {
-                    if ($total_hari == 1) {
+                    if ($total_hari == 0) {
+                        // LAYOUT
+                        $barangMasukDataLayoutData = [
+                            'users_layout_id' => $lk->layout_id,
+                            'barang_masuk_id' => $lk->id,
+                            'deadline' => $createDate->format('Y-m-d'),
+                        ];
+                        if (isset($LkKiper) && ($LkKiper->status_kiper == "Half print")) {
+                            $barangMasukDataLayoutData['lk_kiper_id'] = $LkKiper->id;
+                        }
+                        $barangMasukDataLayout = BarangMasukDatalayout::create($barangMasukDataLayoutData);
+                        // AKHIR LAYOUT
+
+                        // MESIN
+                        $barangPressMesin = [
+                            'no_order_id' => $lk->id,
+                            'penanggung_jawab_id' => optional($lk->BarangMasukDisainer->DataMesinCs->first())->User->id,
+                            'barang_masuk_layout_id' => $barangMasukDataLayout->id,
+                            'deadline' => $createDate->format('Y-m-d'),
+                        ];
+                        if (isset($LkKiper) && ($LkKiper->status_kiper == "Half print")) {
+                            $barangPressMesin['lk_kiper_id'] = $LkKiper->id;
+                        }
+                        $barangMasukPressMesin = DataPress::create($barangPressMesin);
+                        // AKHIR MESIN
+
+
+                    // PRESS KAIN
+                            $barangMasukPressKainData = [
+                                'no_order_id' => $lk->id,
+                                'mesin_atexco_id' => $barangMasukPressMesin->id,
+                                'deadline' => $createDate->format('Y-m-d'),
+                            ];
+                            if (isset($LkKiper) && ($LkKiper->status_kiper == "Half print")) {
+                                $barangMasukPressKainData['lk_kiper_id'] = $LkKiper->id;
+                            }
+                            $barangMasuPressKain = DataPressKain::create($barangMasukPressKainData);
+                        // AKHIR PRESS KAIN
+
+
+                        // CUT PRINT
+                        $barangMasukDataCutPrintData = [
+                            'no_order_id' => $lk->id,
+                            'press_kain_id' => $barangMasuPressKain->id,
+                            'deadline' => $createDate->format('Y-m-d'),
+                        ];
+                        if (isset($LkKiper) && ($LkKiper->status_kiper == "Half print")) {
+                            $barangMasukDataCutPrintData['lk_kiper_id'] = $LkKiper->id;
+                        }
+                        $barangMasukCutPrin = DataLaserCut::create($barangMasukDataCutPrintData);
+                        $barangMasukDataCutManualData = [
+                            'no_order_id' => $lk->id,
+                            'laser_cut_id' => $barangMasukCutPrin->id,
+                            'deadline' => $createDate->format('Y-m-d'),
+                        ];
+                        if (isset($LkKiper) && ($LkKiper->status_kiper == "Half print")) {
+                            $barangMasukDataCutManualData['lk_kiper_id'] = $LkKiper->id;
+                        }
+                        $barangMasukCutManual = DataManualCut::create($barangMasukDataCutManualData);
+                        // AHIR CUT PRINT
+
+                        // DATA SORTIR
+                        $barangMasukDataSortirData = [
+                            'no_order_id' => $lk->id,
+                            'manual_cut_id' => $barangMasukCutManual->id,
+                            'laser_cut_id' => $barangMasukCutPrin->id,
+                            'deadline' => $createDate->format('Y-m-d'),
+                        ];
+                        if (isset($LkKiper) && ($LkKiper->status_kiper == "Half print")) {
+                            $barangMasukDataSortirData['lk_kiper_id'] = $LkKiper->id;
+                        }
+                        $barangMasukSortir = DataSortir::create($barangMasukDataSortirData);
+                        // AKHIR DATA SORTIR
+
+                        // JAHIT
+                        $barangMasukDataJahitrData = [
+                            'no_order_id' => $lk->id,
+                            'sortir_id' => $barangMasukSortir->id,
+                            'deadline' => $createDate->format('Y-m-d'),
+                        ];
+                        if (isset($LkKiper) && ($LkKiper->status_kiper == "Half print")) {
+                            $barangMasukDataJahitrData['lk_kiper_id'] = $LkKiper->id;
+                        }
+                        $barangMasukJahit = Jahit::create($barangMasukDataJahitrData);
+                        // AKHIR JAHIT
+
+                        // FINIS
+                        $barangMasukDataFinisData = [
+                            'no_order_id' => $lk->id,
+                            'jahit_baju_id' => $barangMasukJahit->id,
+                            'deadline' => $createDate->format('Y-m-d'),
+                        ];
+                        if (isset($LkKiper) && ($LkKiper->status_kiper == "Half print")) {
+                            $barangMasukDataFinisData['lk_kiper_id'] = $LkKiper->id;
+                        }
+                        $barangMasukFinis = Finish::create($barangMasukDataFinisData);
+                        // AKHIR FINIS
+
+                        // LAPORAN
+                            Laporan::create([
+                                'barang_masuk_costumer_services_id' => $lk->id,
+                            'barang_masuk_layout_id' => $barangMasukDataLayout->id,
+                            'barang_masuk_mesin_atexco_id' => $barangMasukPressMesin->id ,
+                            'barang_masuk_presskain_id' => $barangMasuPressKain->id,
+                            'barang_masuk_lasercut_id' => $barangMasukCutPrin->id,
+                            'barang_masuk_manualcut_id' => $barangMasukCutManual->id,
+                            'barang_masuk_sortir_id' => $barangMasukSortir->id,
+                            'jahit_id' => $barangMasukJahit->id,
+                            'finis_id' => $barangMasukFinis->id,
+                            ]);
+                        // AKHIR LAPORAN
+                    } elseif ($total_hari == 1) {
                         // LAYOUT
                         $barangMasukDataLayoutData = [
                             'users_layout_id' => $lk->layout_id,
@@ -36169,7 +39096,7 @@ class CostumerServicesController extends Controller
 
                 // POLOS
                 if ($LkKiper->status_kiper == "Polos") {
-                    if ($total_hari == 1) {
+                    if ($total_hari == 0) {
                         // CUT PRINT
                         $barangMasukDataCutManualData = [
                             'no_order_id' => $lk->id,
@@ -36227,7 +39154,65 @@ class CostumerServicesController extends Controller
                             'finis_id' => $barangMasukFinis->id,
                         ]);
                         // AKHIR LAPORAN
-                    } elseif ($total_hari == 2) {
+                    } elseif ($total_hari == 1) {
+                        // CUT PRINT
+                        $barangMasukDataCutManualData = [
+                            'no_order_id' => $lk->id,
+                            'deadline' => $createDate->format('Y-m-d'),
+                        ];
+                        if (isset($LkKiper) && ($LkKiper->status_kiper == "Polos")) {
+                            $barangMasukDataCutManualData['lk_kiper_id'] = $LkKiper->id;
+                        }
+                        $barangMasukCutManual = DataManualCut::create($barangMasukDataCutManualData);
+                        // AHIR CUT PRINT
+
+                        // DATA SORTIR
+                        $barangMasukDataSortirData = [
+                            'no_order_id' => $lk->id,
+                            'manual_cut_id' => $barangMasukCutManual->id,
+                            // 'laser_cut_id' => $barangMasukCutPrin->id,
+                            'deadline' => $createDate->format('Y-m-d'),
+                        ];
+                        if (isset($LkKiper) && ($LkKiper->status_kiper == "Polos")) {
+                            $barangMasukDataSortirData['lk_kiper_id'] = $LkKiper->id;
+                        }
+                        $barangMasukSortir = DataSortir::create($barangMasukDataSortirData);
+                        // AKHIR DATA SORTIR
+
+                        // JAHIT
+                        $barangMasukDataJahitrData = [
+                            'no_order_id' => $lk->id,
+                            'sortir_id' => $barangMasukSortir->id,
+                            'deadline' => $createDate->format('Y-m-d'),
+                        ];
+                        if (isset($LkKiper) && ($LkKiper->status_kiper == "Polos")) {
+                            $barangMasukDataJahitrData['lk_kiper_id'] = $LkKiper->id;
+                        }
+                        $barangMasukJahit = Jahit::create($barangMasukDataJahitrData);
+                        // AKHIR JAHIT
+
+                        // FINIS
+                        $barangMasukDataFinisData = [
+                            'no_order_id' => $lk->id,
+                            'jahit_baju_id' => $barangMasukJahit->id,
+                            'deadline' => $createDate->format('Y-m-d'),
+                        ];
+                        if (isset($LkKiper) && ($LkKiper->status_kiper == "Polos")) {
+                            $barangMasukDataFinisData['lk_kiper_id'] = $LkKiper->id;
+                        }
+                        $barangMasukFinis = Finish::create($barangMasukDataFinisData);
+                        // AKHIR FINIS
+
+                        // LAPORAN
+                        Laporan::create([
+                            'barang_masuk_costumer_services_id' => $lk->id,
+                            'barang_masuk_manualcut_id' => $barangMasukCutManual->id,
+                            'barang_masuk_sortir_id' => $barangMasukSortir->id,
+                            'jahit_id' => $barangMasukJahit->id,
+                            'finis_id' => $barangMasukFinis->id,
+                        ]);
+                        // AKHIR LAPORAN
+                    }elseif ($total_hari == 2) {
                         // CUT PRINT
                         $barangMasukDataCutManualData = [
                             'no_order_id' => $lk->id,
@@ -36884,7 +39869,7 @@ class CostumerServicesController extends Controller
             if (isset($gambar->file_baju_1)) {
                 // FULL PRINT
                 if ($LkBaju1->status_baju_1 == "Full print") {
-                    if ($total_hari == 1) {
+                    if ($total_hari == 0) {
                         // LAYOUT
                         $barangMasukDataLayoutData = [
                             'users_layout_id' => $lk->layout_id,
@@ -36984,6 +39969,106 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                         // AKHIR LAPORAN
+                    } elseif ($total_hari == 1) {
+                                                // LAYOUT
+                                                $barangMasukDataLayoutData = [
+                                                    'users_layout_id' => $lk->layout_id,
+                                                    'barang_masuk_id' => $lk->id,
+                                                    'deadline' => $createDate->format('Y-m-d'),
+                                                ];
+                                                if (isset($LkBaju1) && ($LkBaju1->status_baju_1 == "Full print")) {
+                                                    $barangMasukDataLayoutData['lk_1_id'] = $LkBaju1->id;
+                                                }
+                                                $barangMasukDataLayout = BarangMasukDatalayout::create($barangMasukDataLayoutData);
+                                                // AKHIR LAYOUT
+
+                                                // MESIN
+                                                $barangPressMesin = [
+                                                    'no_order_id' => $lk->id,
+                                                    'penanggung_jawab_id' => optional($lk->BarangMasukDisainer->DataMesinCs->first())->User->id,
+                                                    'barang_masuk_layout_id' => $barangMasukDataLayout->id,
+                                                    'deadline' => $createDate->format('Y-m-d'),
+                                                ];
+                                                if (isset($LkBaju1) && ($LkBaju1->status_baju_1 == "Full print")) {
+                                                    $barangPressMesin['lk_1_id'] = $LkBaju1->id;
+                                                }
+                                                $barangMasukPressMesin = DataPress::create($barangPressMesin);
+                                                // AKHIR MESIN
+
+
+                                                // PRESS KAIN
+                                                    $barangMasukPressKainData = [
+                                                        'no_order_id' => $lk->id,
+                                                        'mesin_atexco_id' => $barangMasukPressMesin->id,
+                                                        'deadline' => $createDate->format('Y-m-d'),
+                                                    ];
+                                                    if (isset($LkBaju1) && ($LkBaju1->status_baju_1 == "Full print")) {
+                                                        $barangMasukPressKainData['lk_1_id'] = $LkBaju1->id;
+                                                    }
+                                                    $barangMasuPressKain = DataPressKain::create($barangMasukPressKainData);
+                                                // AKHIR PRESS KAIN
+
+
+                                                // CUT PRINT
+                                                $barangMasukDataCutPrintData = [
+                                                    'no_order_id' => $lk->id,
+                                                    'press_kain_id' => $barangMasuPressKain->id,
+                                                    'deadline' => $createDate->format('Y-m-d'),
+                                                ];
+                                                if (isset($LkBaju1) && ($LkBaju1->status_baju_1 == "Full print")) {
+                                                    $barangMasukDataCutPrintData['lk_1_id'] = $LkBaju1->id;
+                                                }
+                                                $barangMasukCutPrin = DataLaserCut::create($barangMasukDataCutPrintData);
+                                                // AHIR CUT PRINT
+
+                                                // DATA SORTIR
+                                                $barangMasukDataSortirData = [
+                                                    'no_order_id' => $lk->id,
+                                                    'laser_cut_id' => $barangMasukCutPrin->id,
+                                                    'deadline' => $createDate->format('Y-m-d'),
+                                                ];
+                                                if (isset($LkBaju1) && ($LkBaju1->status_baju_1 == "Full print")) {
+                                                    $barangMasukDataSortirData['lk_1_id'] = $LkBaju1->id;
+                                                }
+                                                $barangMasukSortir = DataSortir::create($barangMasukDataSortirData);
+                                                // AKHIR DATA SORTIR
+
+                                                // JAHIT
+                                                $barangMasukDataJahitrData = [
+                                                    'no_order_id' => $lk->id,
+                                                    'sortir_id' => $barangMasukSortir->id,
+                                                    'deadline' => $createDate->format('Y-m-d'),
+                                                ];
+                                                if (isset($LkBaju1) && ($LkBaju1->status_baju_1 == "Full print")) {
+                                                    $barangMasukDataJahitrData['lk_1_id'] = $LkBaju1->id;
+                                                }
+                                                $barangMasukJahit = Jahit::create($barangMasukDataJahitrData);
+                                                // AKHIR JAHIT
+
+                                                // FINIS
+                                                $barangMasukDataFinisData = [
+                                                    'no_order_id' => $lk->id,
+                                                    'jahit_baju_id' => $barangMasukJahit->id,
+                                                    'deadline' => $createDate->format('Y-m-d'),
+                                                ];
+                                                if (isset($LkBaju1) && ($LkBaju1->status_baju_1 == "Full print")) {
+                                                    $barangMasukDataFinisData['lk_1_id'] = $LkBaju1->id;
+                                                }
+                                                $barangMasukFinis = Finish::create($barangMasukDataFinisData);
+                                                // AKHIR FINIS
+
+                                                // LAPORAN
+                                                    Laporan::create([
+                                                        'barang_masuk_costumer_services_id' => $lk->id,
+                                                        'barang_masuk_layout_id' => $barangMasukDataLayout->id,
+                                                        'barang_masuk_mesin_atexco_id' => $barangMasukPressMesin->id ,
+                                                        'barang_masuk_presskain_id' => $barangMasuPressKain->id,
+                                                        'barang_masuk_lasercut_id' => $barangMasukCutPrin->id,
+                                                        'barang_masuk_sortir_id' => $barangMasukSortir->id,
+                                                        'jahit_id' => $barangMasukJahit->id,
+                                                        'finis_id' => $barangMasukFinis->id,
+                                                    ]);
+                                                // AKHIR LAPORAN
                     } elseif ($total_hari == 2) {
                         // LAYOUT
                         $barangMasukDataLayoutData = [
@@ -38090,7 +41175,7 @@ class CostumerServicesController extends Controller
 
                 // HALFT PRINT
                 if ($LkBaju1->status_baju_1 == "Half print") {
-                    if ($total_hari == 1) {
+                    if ($total_hari == 0) {
                         // LAYOUT
                         $barangMasukDataLayoutData = [
                             'users_layout_id' => $lk->layout_id,
@@ -38201,7 +41286,118 @@ class CostumerServicesController extends Controller
                             'finis_id' => $barangMasukFinis->id,
                             ]);
                         // AKHIR LAPORAN
-                    } elseif ($total_hari == 2) {
+                    } elseif ($total_hari == 1) {
+                        // LAYOUT
+                        $barangMasukDataLayoutData = [
+                            'users_layout_id' => $lk->layout_id,
+                            'barang_masuk_id' => $lk->id,
+                            'deadline' => $createDate->format('Y-m-d'),
+                        ];
+                        if (isset($LkBaju1) && ($LkBaju1->status_baju_1 == "Half print")) {
+                            $barangMasukDataLayoutData['lk_1_id'] = $LkBaju1->id;
+                        }
+                        $barangMasukDataLayout = BarangMasukDatalayout::create($barangMasukDataLayoutData);
+                        // AKHIR LAYOUT
+
+                        // MESIN
+                        $barangPressMesin = [
+                            'no_order_id' => $lk->id,
+                            'penanggung_jawab_id' => optional($lk->BarangMasukDisainer->DataMesinCs->first())->User->id,
+                            'barang_masuk_layout_id' => $barangMasukDataLayout->id,
+                            'deadline' => $createDate->format('Y-m-d'),
+                        ];
+                        if (isset($LkBaju1) && ($LkBaju1->status_baju_1 == "Half print")) {
+                            $barangPressMesin['lk_1_id'] = $LkBaju1->id;
+                        }
+                        $barangMasukPressMesin = DataPress::create($barangPressMesin);
+                        // AKHIR MESIN
+
+
+                        // PRESS KAIN
+                            $barangMasukPressKainData = [
+                                'no_order_id' => $lk->id,
+                                'mesin_atexco_id' => $barangMasukPressMesin->id,
+                                'deadline' => $createDate->format('Y-m-d'),
+                            ];
+                            if (isset($LkBaju1) && ($LkBaju1->status_baju_1 == "Half print")) {
+                                $barangMasukPressKainData['lk_1_id'] = $LkBaju1->id;
+                            }
+                            $barangMasuPressKain = DataPressKain::create($barangMasukPressKainData);
+                        // AKHIR PRESS KAIN
+
+
+                        // CUT PRINT
+                        $barangMasukDataCutPrintData = [
+                            'no_order_id' => $lk->id,
+                            'press_kain_id' => $barangMasuPressKain->id,
+                            'deadline' => $createDate->format('Y-m-d'),
+                        ];
+                        if (isset($LkBaju1) && ($LkBaju1->status_baju_1 == "Half print")) {
+                            $barangMasukDataCutPrintData['lk_1_id'] = $LkBaju1->id;
+                        }
+                        $barangMasukCutPrin = DataLaserCut::create($barangMasukDataCutPrintData);
+                        $barangMasukDataCutManualData = [
+                            'no_order_id' => $lk->id,
+                            'laser_cut_id' => $barangMasukCutPrin->id,
+                            'deadline' => $createDate->format('Y-m-d'),
+                        ];
+                        if (isset($LkBaju1) && ($LkBaju1->status_baju_1 == "Half print")) {
+                            $barangMasukDataCutManualData['lk_1_id'] = $LkBaju1->id;
+                        }
+                        $barangMasukCutManual = DataManualCut::create($barangMasukDataCutManualData);
+                        // AHIR CUT PRINT
+
+                        // DATA SORTIR
+                        $barangMasukDataSortirData = [
+                            'no_order_id' => $lk->id,
+                            'manual_cut_id' => $barangMasukCutManual->id,
+                            'laser_cut_id' => $barangMasukCutPrin->id,
+                            'deadline' => $createDate->format('Y-m-d'),
+                        ];
+                        if (isset($LkBaju1) && ($LkBaju1->status_baju_1 == "Half print")) {
+                            $barangMasukDataSortirData['lk_1_id'] = $LkBaju1->id;
+                        }
+                        $barangMasukSortir = DataSortir::create($barangMasukDataSortirData);
+                        // AKHIR DATA SORTIR
+
+                        // JAHIT
+                        $barangMasukDataJahitrData = [
+                            'no_order_id' => $lk->id,
+                            'sortir_id' => $barangMasukSortir->id,
+                            'deadline' => $createDate->format('Y-m-d'),
+                        ];
+                        if (isset($LkBaju1) && ($LkBaju1->status_baju_1 == "Half print")) {
+                            $barangMasukDataJahitrData['lk_1_id'] = $LkBaju1->id;
+                        }
+                        $barangMasukJahit = Jahit::create($barangMasukDataJahitrData);
+                        // AKHIR JAHIT
+
+                        // FINIS
+                        $barangMasukDataFinisData = [
+                            'no_order_id' => $lk->id,
+                            'jahit_baju_id' => $barangMasukJahit->id,
+                            'deadline' => $createDate->format('Y-m-d'),
+                        ];
+                        if (isset($LkBaju1) && ($LkBaju1->status_baju_1 == "Half print")) {
+                            $barangMasukDataFinisData['lk_1_id'] = $LkBaju1->id;
+                        }
+                        $barangMasukFinis = Finish::create($barangMasukDataFinisData);
+                        // AKHIR FINIS
+
+                        // LAPORAN
+                            Laporan::create([
+                                'barang_masuk_costumer_services_id' => $lk->id,
+                            'barang_masuk_layout_id' => $barangMasukDataLayout->id,
+                            'barang_masuk_mesin_atexco_id' => $barangMasukPressMesin->id ,
+                            'barang_masuk_presskain_id' => $barangMasuPressKain->id,
+                            'barang_masuk_lasercut_id' => $barangMasukCutPrin->id,
+                            'barang_masuk_manualcut_id' => $barangMasukCutManual->id,
+                            'barang_masuk_sortir_id' => $barangMasukSortir->id,
+                            'jahit_id' => $barangMasukJahit->id,
+                            'finis_id' => $barangMasukFinis->id,
+                            ]);
+                        // AKHIR LAPORAN
+                    }elseif ($total_hari == 2) {
                         // LAYOUT
                         $barangMasukDataLayoutData = [
                             'users_layout_id' => $lk->layout_id,
@@ -39428,7 +42624,7 @@ class CostumerServicesController extends Controller
 
                 // POLOS
                 if ($LkBaju1->status_baju_1 == "Polos") {
-                    if ($total_hari == 1) {
+                    if ($total_hari == 0) {
                         // CUT PRINT
                         $barangMasukDataCutManualData = [
                             'no_order_id' => $lk->id,
@@ -39487,7 +42683,67 @@ class CostumerServicesController extends Controller
                              'status' => "Manual Cut"
                         ]);
                         // AKHIR LAPORAN
-                    } elseif ($total_hari == 2) {
+                    } elseif ($total_hari == 1) {
+                        // CUT PRINT
+                        $barangMasukDataCutManualData = [
+                            'no_order_id' => $lk->id,
+                            'deadline' => $createDate->format('Y-m-d'),
+                        ];
+                        if (isset($LkBaju1) && ($LkBaju1->status_baju_1 == "Polos")) {
+                            $barangMasukDataCutManualData['lk_1_id'] = $LkBaju1->id;
+                        }
+                        $barangMasukCutManual = DataManualCut::create($barangMasukDataCutManualData);
+                        // AHIR CUT PRINT
+
+                        // DATA SORTIR
+                        $barangMasukDataSortirData = [
+                            'no_order_id' => $lk->id,
+                            'manual_cut_id' => $barangMasukCutManual->id,
+                            // 'laser_cut_id' => $barangMasukCutPrin->id,
+                            'deadline' => $createDate->format('Y-m-d'),
+                        ];
+                        if (isset($LkBaju1) && ($LkBaju1->status_baju_1 == "Polos")) {
+                            $barangMasukDataSortirData['lk_1_id'] = $LkBaju1->id;
+                        }
+                        $barangMasukSortir = DataSortir::create($barangMasukDataSortirData);
+                        // AKHIR DATA SORTIR
+
+                        // JAHIT
+                        $barangMasukDataJahitrData = [
+                            'no_order_id' => $lk->id,
+                            'sortir_id' => $barangMasukSortir->id,
+                            'deadline' => $createDate->format('Y-m-d'),
+                        ];
+                        if (isset($LkBaju1) && ($LkBaju1->status_baju_1 == "Polos")) {
+                            $barangMasukDataJahitrData['lk_1_id'] = $LkBaju1->id;
+                        }
+                        $barangMasukJahit = Jahit::create($barangMasukDataJahitrData);
+                        // AKHIR JAHIT
+
+                        // FINIS
+                        $barangMasukDataFinisData = [
+                            'no_order_id' => $lk->id,
+                            'jahit_baju_id' => $barangMasukJahit->id,
+                            'deadline' => $createDate->format('Y-m-d'),
+                        ];
+                        if (isset($LkBaju1) && ($LkBaju1->status_baju_1 == "Polos")) {
+                            $barangMasukDataFinisData['lk_1_id'] = $LkBaju1->id;
+                        }
+                        $barangMasukFinis = Finish::create($barangMasukDataFinisData);
+                        // AKHIR FINIS
+
+                        // LAPORAN
+                        Laporan::create([
+                            'barang_masuk_costumer_services_id' => $lk->id,
+                            'barang_masuk_manualcut_id' => $barangMasukCutManual->id,
+                            'barang_masuk_sortir_id' => $barangMasukSortir->id,
+                            'jahit_id' => $barangMasukJahit->id,
+                            'finis_id' => $barangMasukFinis->id,
+                             'status' => "Manual Cut"
+                        ]);
+                        // AKHIR LAPORAN
+                    }
+                    elseif ($total_hari == 2) {
                         // CUT PRINT
                         $barangMasukDataCutManualData = [
                             'no_order_id' => $lk->id,
@@ -40144,7 +43400,7 @@ class CostumerServicesController extends Controller
             if (isset($gambar->file_celana_player)) {
                 // FULL PRINT
                 if ($LkCelanaPlayer->status_celana_player == "Full print") {
-                    if ($total_hari == 1) {
+                    if ($total_hari == 0) {
                         // LAYOUT
                         $barangMasukDataLayoutData = [
                             'users_layout_id' => $lk->layout_id,
@@ -40243,7 +43499,106 @@ class CostumerServicesController extends Controller
                             'finis_id' => $barangMasukFinis->id,
                         ]);
                     // AKHIR LAPORAN
-                    } elseif ($total_hari == 2) {
+                    } elseif ($total_hari == 1) {
+                        // LAYOUT
+                        $barangMasukDataLayoutData = [
+                            'users_layout_id' => $lk->layout_id,
+                            'barang_masuk_id' => $lk->id,
+                            'deadline' => $createDate->format('Y-m-d'),
+                        ];
+                        if (isset($LkCelanaPlayer) && ($LkCelanaPlayer->status_celana_player == "Full print")) {
+                            $barangMasukDataLayoutData['lk_celana_player_id'] = $LkCelanaPlayer->id;
+                        }
+                        $barangMasukDataLayout = BarangMasukDatalayout::create($barangMasukDataLayoutData);
+                        // AKHIR LAYOUT
+
+                    // MESIN
+                    $barangPressMesin = [
+                        'no_order_id' => $lk->id,
+                        'penanggung_jawab_id' => optional($lk->BarangMasukDisainer->DataMesinCs->first())->User->id,
+                        'barang_masuk_layout_id' => $barangMasukDataLayout->id,
+                        'deadline' => $createDate->format('Y-m-d'),
+                    ];
+                    if (isset($LkCelanaPlayer) && ($LkCelanaPlayer->status_celana_player == "Full print")) {
+                        $barangPressMesin['lk_celana_player_id'] = $LkCelanaPlayer->id;
+                    }
+                    $barangMasukPressMesin = DataPress::create($barangPressMesin);
+                    // AKHIR MESIN
+
+
+                        // PRESS KAIN
+                        $barangMasukPressKainData = [
+                            'no_order_id' => $lk->id,
+                            'mesin_atexco_id' => $barangMasukPressMesin->id,
+                            'deadline' => $createDate->format('Y-m-d'),
+                        ];
+                        if (isset($LkCelanaPlayer) && ($LkCelanaPlayer->status_celana_player == "Full print")) {
+                            $barangMasukPressKainData['lk_celana_player_id'] = $LkCelanaPlayer->id;
+                        }
+                        $barangMasuPressKain = DataPressKain::create($barangMasukPressKainData);
+                    // AKHIR PRESS KAIN
+
+                        // CUT PRINT
+                        $barangMasukDataCutPrintData = [
+                            'no_order_id' => $lk->id,
+                            'press_kain_id' => $barangMasuPressKain->id,
+                            'deadline' => $createDate->format('Y-m-d'),
+                        ];
+                        if (isset($LkCelanaPlayer) && ($LkCelanaPlayer->status_celana_player == "Full print")) {
+                            $barangMasukDataCutPrintData['lk_celana_player_id'] = $LkCelanaPlayer->id;
+                        }
+                        $barangMasukCutPrin = DataLaserCut::create($barangMasukDataCutPrintData);
+                        // AHIR CUT PRINT
+
+                        // DATA SORTIR
+                        $barangMasukDataSortirData = [
+                            'no_order_id' => $lk->id,
+                            'laser_cut_id' => $barangMasukCutPrin->id,
+                            'deadline' => $createDate->format('Y-m-d'),
+                        ];
+                        if (isset($LkCelanaPlayer) && ($LkCelanaPlayer->status_celana_player == "Full print")) {
+                            $barangMasukDataSortirData['lk_celana_player_id'] = $LkCelanaPlayer->id;
+                        }
+                        $barangMasukSortir = DataSortir::create($barangMasukDataSortirData);
+                        // AKHIR DATA SORTIR
+
+                        // JAHIT
+                        $barangMasukDataJahitrData = [
+                            'no_order_id' => $lk->id,
+                            'sortir_id' => $barangMasukSortir->id,
+                            'deadline' => $createDate->format('Y-m-d'),
+                        ];
+                        if (isset($LkCelanaPlayer) && ($LkCelanaPlayer->status_celana_player == "Full print")) {
+                            $barangMasukDataJahitrData['lk_celana_player_id'] = $LkCelanaPlayer->id;
+                        }
+                        $barangMasukJahit = Jahit::create($barangMasukDataJahitrData);
+                        // AKHIR JAHIT
+
+                        // FINIS
+                        $barangMasukDataFinisData = [
+                            'no_order_id' => $lk->id,
+                            'jahit_baju_id' => $barangMasukJahit->id,
+                            'deadline' => $createDate->format('Y-m-d'),
+                        ];
+                        if (isset($LkCelanaPlayer) && ($LkCelanaPlayer->status_celana_player == "Full print")) {
+                            $barangMasukDataFinisData['lk_celana_player_id'] = $LkCelanaPlayer->id;
+                        }
+                        $barangMasukFinis = Finish::create($barangMasukDataFinisData);
+                        // AKHIR FINIS
+
+                        // LAPORAN
+                        Laporan::create([
+                            'barang_masuk_costumer_services_id' => $lk->id,
+                            'barang_masuk_layout_id' => $barangMasukDataLayout->id,
+                            'barang_masuk_mesin_atexco_id' => $barangMasukPressMesin->id ,
+                            'barang_masuk_presskain_id' => $barangMasuPressKain->id,
+                            'barang_masuk_lasercut_id' => $barangMasukCutPrin->id,
+                            'barang_masuk_sortir_id' => $barangMasukSortir->id,
+                            'jahit_id' => $barangMasukJahit->id,
+                            'finis_id' => $barangMasukFinis->id,
+                        ]);
+                    // AKHIR LAPORAN
+                    }elseif ($total_hari == 2) {
                         // LAYOUT
                         $barangMasukDataLayoutData = [
                             'users_layout_id' => $lk->layout_id,
@@ -41337,7 +44692,7 @@ class CostumerServicesController extends Controller
 
                 // HALFT PRINT
                 if ($LkCelanaPlayer->status_celana_player == "Half print") {
-                    if ($total_hari == 1) {
+                    if ($total_hari == 0) {
                         // LAYOUT
                         $barangMasukDataLayoutData = [
                             'users_layout_id' => $lk->layout_id,
@@ -41447,7 +44802,117 @@ class CostumerServicesController extends Controller
                             'finis_id' => $barangMasukFinis->id,
                         ]);
                     // AKHIR LAPORAN
-                    } elseif ($total_hari == 2) {
+                    } elseif ($total_hari == 1) {
+                        // LAYOUT
+                        $barangMasukDataLayoutData = [
+                            'users_layout_id' => $lk->layout_id,
+                            'barang_masuk_id' => $lk->id,
+                            'deadline' => $createDate->format('Y-m-d'),
+                        ];
+                        if (isset($LkCelanaPlayer) && ($LkCelanaPlayer->status_celana_player == "Half print")) {
+                            $barangMasukDataLayoutData['lk_celana_player_id'] = $LkCelanaPlayer->id;
+                        }
+                        $barangMasukDataLayout = BarangMasukDatalayout::create($barangMasukDataLayoutData);
+                        // AKHIR LAYOUT
+
+                        // MESIN
+                        $barangPressMesin = [
+                            'no_order_id' => $lk->id,
+                            'penanggung_jawab_id' => optional($lk->BarangMasukDisainer->DataMesinCs->first())->User->id,
+                            'barang_masuk_layout_id' => $barangMasukDataLayout->id,
+                            'deadline' => $createDate->format('Y-m-d'),
+                        ];
+                        if (isset($LkCelanaPlayer) && ($LkCelanaPlayer->status_celana_player == "Half print")) {
+                            $barangPressMesin['lk_celana_player_id'] = $LkCelanaPlayer->id;
+                        }
+                        $barangMasukPressMesin = DataPress::create($barangPressMesin);
+                        // AKHIR MESIN
+
+
+                        // PRESS KAIN
+                        $barangMasukPressKainData = [
+                            'no_order_id' => $lk->id,
+                            'mesin_atexco_id' => $barangMasukPressMesin->id,
+                            'deadline' => $createDate->format('Y-m-d'),
+                        ];
+                        if (isset($LkCelanaPlayer) && ($LkCelanaPlayer->status_celana_player == "Half print")) {
+                            $barangMasukPressKainData['lk_celana_player_id'] = $LkCelanaPlayer->id;
+                        }
+                        $barangMasuPressKain = DataPressKain::create($barangMasukPressKainData);
+                        // AKHIR PRESS KAIN
+
+                        // CUT PRINT
+                        $barangMasukDataCutPrintData = [
+                            'no_order_id' => $lk->id,
+                            'press_kain_id' => $barangMasuPressKain->id,
+                            'deadline' => $createDate->format('Y-m-d'),
+                        ];
+                        if (isset($LkCelanaPlayer) && ($LkCelanaPlayer->status_celana_player == "Half print")) {
+                            $barangMasukDataCutPrintData['lk_celana_player_id'] = $LkCelanaPlayer->id;
+                        }
+                        $barangMasukCutPrin = DataLaserCut::create($barangMasukDataCutPrintData);
+                        $barangMasukDataCutManualData = [
+                            'no_order_id' => $lk->id,
+                            'laser_cut_id' => $barangMasukCutPrin->id,
+                            'deadline' => $createDate->format('Y-m-d'),
+                        ];
+                        if (isset($LkCelanaPlayer) && ($LkCelanaPlayer->status_celana_player == "Half print")) {
+                            $barangMasukDataCutManualData['lk_celana_player_id'] = $LkCelanaPlayer->id;
+                        }
+                        $barangMasukCutManual = DataManualCut::create($barangMasukDataCutManualData);
+                        // AHIR CUT PRINT
+
+                        // DATA SORTIR
+                        $barangMasukDataSortirData = [
+                            'no_order_id' => $lk->id,
+                            'manual_cut_id' => $barangMasukCutManual->id,
+                            'laser_cut_id' => $barangMasukCutPrin->id,
+                            'deadline' => $createDate->format('Y-m-d'),
+                        ];
+                        if (isset($LkCelanaPlayer) && ($LkCelanaPlayer->status_celana_player == "Half print")) {
+                            $barangMasukDataSortirData['lk_celana_player_id'] = $LkCelanaPlayer->id;
+                        }
+                        $barangMasukSortir = DataSortir::create($barangMasukDataSortirData);
+                        // AKHIR DATA SORTIR
+
+                        // JAHIT
+                        $barangMasukDataJahitrData = [
+                            'no_order_id' => $lk->id,
+                            'sortir_id' => $barangMasukSortir->id,
+                            'deadline' => $createDate->format('Y-m-d'),
+                        ];
+                        if (isset($LkCelanaPlayer) && ($LkCelanaPlayer->status_celana_player == "Half print")) {
+                            $barangMasukDataJahitrData['lk_celana_player_id'] = $LkCelanaPlayer->id;
+                        }
+                        $barangMasukJahit = Jahit::create($barangMasukDataJahitrData);
+                        // AKHIR JAHIT
+
+                        // FINIS
+                        $barangMasukDataFinisData = [
+                            'no_order_id' => $lk->id,
+                            'jahit_baju_id' => $barangMasukJahit->id,
+                            'deadline' => $createDate->format('Y-m-d'),
+                        ];
+                        if (isset($LkCelanaPlayer) && ($LkCelanaPlayer->status_celana_player == "Half print")) {
+                            $barangMasukDataFinisData['lk_celana_player_id'] = $LkCelanaPlayer->id;
+                        }
+                        $barangMasukFinis = Finish::create($barangMasukDataFinisData);
+                        // AKHIR FINIS
+
+                        // LAPORAN
+                        Laporan::create([
+                            'barang_masuk_costumer_services_id' => $lk->id,
+                            'barang_masuk_layout_id' => $barangMasukDataLayout->id,
+                            'barang_masuk_mesin_atexco_id' => $barangMasukPressMesin->id ,
+                            'barang_masuk_presskain_id' => $barangMasuPressKain->id,
+                            'barang_masuk_lasercut_id' => $barangMasukCutPrin->id,
+                            'barang_masuk_manualcut_id' => $barangMasukCutManual->id,
+                            'barang_masuk_sortir_id' => $barangMasukSortir->id,
+                            'jahit_id' => $barangMasukJahit->id,
+                            'finis_id' => $barangMasukFinis->id,
+                        ]);
+                        // AKHIR LAPORAN
+                        }elseif ($total_hari == 2) {
                         // LAYOUT
                         $barangMasukDataLayoutData = [
                             'users_layout_id' => $lk->layout_id,
@@ -42663,7 +46128,7 @@ class CostumerServicesController extends Controller
 
                 // POLOS
                 if ($LkCelanaPlayer->status_celana_player == "Polos") {
-                    if ($total_hari == 1) {
+                    if ($total_hari == 0) {
                         // CUT PRINT
                         $barangMasukDataCutManualData = [
                             'no_order_id' => $lk->id,
@@ -42722,7 +46187,66 @@ class CostumerServicesController extends Controller
                              'status' => "Manual Cut"
                         ]);
                         // AKHIR LAPORAN
-                    } elseif ($total_hari == 2) {
+                    } elseif ($total_hari == 1) {
+                        // CUT PRINT
+                        $barangMasukDataCutManualData = [
+                            'no_order_id' => $lk->id,
+                            'deadline' => $createDate->format('Y-m-d'),
+                        ];
+                        if (isset($LkCelanaPlayer) && ($LkCelanaPlayer->status_celana_player == "Polos")) {
+                            $barangMasukDataCutManualData['lk_celana_player_id'] = $LkCelanaPlayer->id;
+                        }
+                        $barangMasukCutManual = DataManualCut::create($barangMasukDataCutManualData);
+                        // AHIR CUT PRINT
+
+                        // DATA SORTIR
+                        $barangMasukDataSortirData = [
+                            'no_order_id' => $lk->id,
+                            'manual_cut_id' => $barangMasukCutManual->id,
+                            // 'laser_cut_id' => $barangMasukCutPrin->id,
+                            'deadline' => $createDate->format('Y-m-d'),
+                        ];
+                        if (isset($LkCelanaPlayer) && ($LkCelanaPlayer->status_celana_player == "Polos")) {
+                            $barangMasukDataSortirData['lk_celana_player_id'] = $LkCelanaPlayer->id;
+                        }
+                        $barangMasukSortir = DataSortir::create($barangMasukDataSortirData);
+                        // AKHIR DATA SORTIR
+
+                        // JAHIT
+                        $barangMasukDataJahitrData = [
+                            'no_order_id' => $lk->id,
+                            'sortir_id' => $barangMasukSortir->id,
+                            'deadline' => $createDate->format('Y-m-d'),
+                        ];
+                        if (isset($LkCelanaPlayer) && ($LkCelanaPlayer->status_celana_player == "Polos")) {
+                            $barangMasukDataJahitrData['lk_celana_player_id'] = $LkCelanaPlayer->id;
+                        }
+                        $barangMasukJahit = Jahit::create($barangMasukDataJahitrData);
+                        // AKHIR JAHIT
+
+                        // FINIS
+                        $barangMasukDataFinisData = [
+                            'no_order_id' => $lk->id,
+                            'jahit_baju_id' => $barangMasukJahit->id,
+                            'deadline' => $createDate->format('Y-m-d'),
+                        ];
+                        if (isset($LkCelanaPlayer) && ($LkCelanaPlayer->status_celana_player == "Polos")) {
+                            $barangMasukDataFinisData['lk_celana_player_id'] = $LkCelanaPlayer->id;
+                        }
+                        $barangMasukFinis = Finish::create($barangMasukDataFinisData);
+                        // AKHIR FINIS
+
+                        // LAPORAN
+                        Laporan::create([
+                            'barang_masuk_costumer_services_id' => $lk->id,
+                            'barang_masuk_manualcut_id' => $barangMasukCutManual->id,
+                            'barang_masuk_sortir_id' => $barangMasukSortir->id,
+                            'jahit_id' => $barangMasukJahit->id,
+                            'finis_id' => $barangMasukFinis->id,
+                             'status' => "Manual Cut"
+                        ]);
+                        // AKHIR LAPORAN
+                    }elseif ($total_hari == 2) {
                         // CUT PRINT
                         $barangMasukDataCutManualData = [
                             'no_order_id' => $lk->id,
@@ -43379,7 +46903,7 @@ class CostumerServicesController extends Controller
             if (isset($gambar->file_celana_pelatih)) {
                 // FULL PRINT
                 if ($LkCelanaPelatih->status_celana_pelatih == "Full print") {
-                    if ($total_hari == 1) {
+                    if ($total_hari == 0) {
                         // LAYOUT
                         $barangMasukDataLayoutData = [
                             'users_layout_id' => $lk->layout_id,
@@ -43478,7 +47002,107 @@ class CostumerServicesController extends Controller
                             'finis_id' => $barangMasukFinis->id,
                         ]);
                     // AKHIR LAPORAN
-                    } elseif ($total_hari == 2) {
+                    } elseif ($total_hari == 1) {
+                        // LAYOUT
+                        $barangMasukDataLayoutData = [
+                            'users_layout_id' => $lk->layout_id,
+                            'barang_masuk_id' => $lk->id,
+                            'deadline' => $createDate->format('Y-m-d'),
+                        ];
+                        if (isset($LkCelanaPelatih) && ($LkCelanaPelatih->status_celana_pelatih == "Full print")) {
+                            $barangMasukDataLayoutData['lk_celana_pelatih_id'] = $LkCelanaPelatih->id;
+                        }
+                        $barangMasukDataLayout = BarangMasukDatalayout::create($barangMasukDataLayoutData);
+                        // AKHIR LAYOUT
+
+                        // MESIN
+                        $barangPressMesin = [
+                            'no_order_id' => $lk->id,
+                            'penanggung_jawab_id' => optional($lk->BarangMasukDisainer->DataMesinCs->first())->User->id,
+                            'barang_masuk_layout_id' => $barangMasukDataLayout->id,
+                            'deadline' => $createDate->format('Y-m-d'),
+                        ];
+                        if (isset($LkCelanaPelatih) && ($LkCelanaPelatih->status_celana_pelatih == "Full print")) {
+                            $barangPressMesin['lk_celana_pelatih_id'] = $LkCelanaPelatih->id;
+                        }
+                        $barangMasukPressMesin = DataPress::create($barangPressMesin);
+                        // AKHIR MESIN
+
+
+                        // PRESS KAIN
+                        $barangMasukPressKainData = [
+                            'no_order_id' => $lk->id,
+                            'mesin_atexco_id' => $barangMasukPressMesin->id,
+                            'deadline' => $createDate->format('Y-m-d'),
+                        ];
+                        if (isset($LkCelanaPelatih) && ($LkCelanaPelatih->status_celana_pelatih == "Full print")) {
+                            $barangMasukPressKainData['lk_celana_pelatih_id'] = $LkCelanaPelatih->id;
+                        }
+                        $barangMasuPressKain = DataPressKain::create($barangMasukPressKainData);
+                    // AKHIR PRESS KAIN
+
+                        // CUT PRINT
+                        $barangMasukDataCutPrintData = [
+                            'no_order_id' => $lk->id,
+                            'press_kain_id' => $barangMasuPressKain->id,
+                            'deadline' => $createDate->format('Y-m-d'),
+                        ];
+                        if (isset($LkCelanaPelatih) && ($LkCelanaPelatih->status_celana_pelatih == "Full print")) {
+                            $barangMasukDataCutPrintData['lk_celana_pelatih_id'] = $LkCelanaPelatih->id;
+                        }
+                        $barangMasukCutPrin = DataLaserCut::create($barangMasukDataCutPrintData);
+                        // AHIR CUT PRINT
+
+                        // DATA SORTIR
+                        $barangMasukDataSortirData = [
+                            'no_order_id' => $lk->id,
+                            'laser_cut_id' => $barangMasukCutPrin->id,
+                            'deadline' => $createDate->format('Y-m-d'),
+                        ];
+                        if (isset($LkCelanaPelatih) && ($LkCelanaPelatih->status_celana_pelatih == "Full print")) {
+                            $barangMasukDataSortirData['lk_celana_pelatih_id'] = $LkCelanaPelatih->id;
+                        }
+                        $barangMasukSortir = DataSortir::create($barangMasukDataSortirData);
+                        // AKHIR DATA SORTIR
+
+                        // JAHIT
+                        $barangMasukDataJahitrData = [
+                            'no_order_id' => $lk->id,
+                            'sortir_id' => $barangMasukSortir->id,
+                            'deadline' => $createDate->format('Y-m-d'),
+                        ];
+                        if (isset($LkCelanaPelatih) && ($LkCelanaPelatih->status_celana_pelatih == "Full print")) {
+                            $barangMasukDataJahitrData['lk_celana_pelatih_id'] = $LkCelanaPelatih->id;
+                        }
+                        $barangMasukJahit = Jahit::create($barangMasukDataJahitrData);
+                        // AKHIR JAHIT
+
+                        // FINIS
+                        $barangMasukDataFinisData = [
+                            'no_order_id' => $lk->id,
+                            'jahit_baju_id' => $barangMasukJahit->id,
+                            'deadline' => $createDate->format('Y-m-d'),
+                        ];
+                        if (isset($LkCelanaPelatih) && ($LkCelanaPelatih->status_celana_pelatih == "Full print")) {
+                            $barangMasukDataFinisData['lk_celana_pelatih_id'] = $LkCelanaPelatih->id;
+                        }
+                        $barangMasukFinis = Finish::create($barangMasukDataFinisData);
+                        // AKHIR FINIS
+
+                        // LAPORAN
+                        Laporan::create([
+                            'barang_masuk_costumer_services_id' => $lk->id,
+                            'barang_masuk_layout_id' => $barangMasukDataLayout->id,
+                            'barang_masuk_mesin_atexco_id' => $barangMasukPressMesin->id ,
+                            'barang_masuk_presskain_id' => $barangMasuPressKain->id,
+                            'barang_masuk_lasercut_id' => $barangMasukCutPrin->id,
+                            'barang_masuk_sortir_id' => $barangMasukSortir->id,
+                            'jahit_id' => $barangMasukJahit->id,
+                            'finis_id' => $barangMasukFinis->id,
+                        ]);
+                    // AKHIR LAPORAN
+                    }
+                    elseif ($total_hari == 2) {
                         // LAYOUT
                         $barangMasukDataLayoutData = [
                             'users_layout_id' => $lk->layout_id,
@@ -44573,7 +48197,7 @@ class CostumerServicesController extends Controller
 
                 // HALFT PRINT
                 if ($LkCelanaPelatih->status_celana_pelatih == "Half print") {
-                    if ($total_hari == 1) {
+                    if ($total_hari == 0) {
                         // LAYOUT
                         $barangMasukDataLayoutData = [
                             'users_layout_id' => $lk->layout_id,
@@ -44683,7 +48307,118 @@ class CostumerServicesController extends Controller
                             'finis_id' => $barangMasukFinis->id,
                         ]);
                     // AKHIR LAPORAN
-                    } elseif ($total_hari == 2) {
+                    }elseif ($total_hari == 1) {
+                        // LAYOUT
+                        $barangMasukDataLayoutData = [
+                            'users_layout_id' => $lk->layout_id,
+                            'barang_masuk_id' => $lk->id,
+                            'deadline' => $createDate->format('Y-m-d'),
+                        ];
+                        if (isset($LkCelanaPelatih) && ($LkCelanaPelatih->status_celana_pelatih == "Half print")) {
+                            $barangMasukDataLayoutData['lk_celana_pelatih_id'] = $LkCelanaPelatih->id;
+                        }
+                        $barangMasukDataLayout = BarangMasukDatalayout::create($barangMasukDataLayoutData);
+                        // AKHIR LAYOUT
+
+                        // MESIN
+                        $barangPressMesin = [
+                            'no_order_id' => $lk->id,
+                            'penanggung_jawab_id' => optional($lk->BarangMasukDisainer->DataMesinCs->first())->User->id,
+                            'barang_masuk_layout_id' => $barangMasukDataLayout->id,
+                            'deadline' => $createDate->format('Y-m-d'),
+                        ];
+                        if (isset($LkCelanaPelatih) && ($LkCelanaPelatih->status_celana_pelatih == "Half print")) {
+                            $barangPressMesin['lk_celana_pelatih_id'] = $LkCelanaPelatih->id;
+                        }
+                        $barangMasukPressMesin = DataPress::create($barangPressMesin);
+                        // AKHIR MESIN
+
+
+                        // PRESS KAIN
+                        $barangMasukPressKainData = [
+                            'no_order_id' => $lk->id,
+                            'mesin_atexco_id' => $barangMasukPressMesin->id,
+                            'deadline' => $createDate->format('Y-m-d'),
+                        ];
+                        if (isset($LkCelanaPelatih) && ($LkCelanaPelatih->status_celana_pelatih == "Half print")) {
+                            $barangMasukPressKainData['lk_celana_pelatih_id'] = $LkCelanaPelatih->id;
+                        }
+                        $barangMasuPressKain = DataPressKain::create($barangMasukPressKainData);
+                    // AKHIR PRESS KAIN
+
+                        // CUT PRINT
+                        $barangMasukDataCutPrintData = [
+                            'no_order_id' => $lk->id,
+                            'press_kain_id' => $barangMasuPressKain->id,
+                            'deadline' => $createDate->format('Y-m-d'),
+                        ];
+                        if (isset($LkCelanaPelatih) && ($LkCelanaPelatih->status_celana_pelatih == "Half print")) {
+                            $barangMasukDataCutPrintData['lk_celana_pelatih_id'] = $LkCelanaPelatih->id;
+                        }
+                        $barangMasukCutPrin = DataLaserCut::create($barangMasukDataCutPrintData);
+                        $barangMasukDataCutManualData = [
+                            'no_order_id' => $lk->id,
+                            'laser_cut_id' => $barangMasukCutPrin->id,
+                            'deadline' => $createDate->format('Y-m-d'),
+                        ];
+                        if (isset($LkCelanaPelatih) && ($LkCelanaPelatih->status_celana_pelatih == "Half print")) {
+                            $barangMasukDataCutManualData['lk_celana_pelatih_id'] = $LkCelanaPelatih->id;
+                        }
+                        $barangMasukCutManual = DataManualCut::create($barangMasukDataCutManualData);
+                        // AHIR CUT PRINT
+
+                        // DATA SORTIR
+                        $barangMasukDataSortirData = [
+                            'no_order_id' => $lk->id,
+                            'manual_cut_id' => $barangMasukCutManual->id,
+                            'laser_cut_id' => $barangMasukCutPrin->id,
+                            'deadline' => $createDate->format('Y-m-d'),
+                        ];
+                        if (isset($LkCelanaPelatih) && ($LkCelanaPelatih->status_celana_pelatih == "Half print")) {
+                            $barangMasukDataSortirData['lk_celana_pelatih_id'] = $LkCelanaPelatih->id;
+                        }
+                        $barangMasukSortir = DataSortir::create($barangMasukDataSortirData);
+                        // AKHIR DATA SORTIR
+
+                        // JAHIT
+                        $barangMasukDataJahitrData = [
+                            'no_order_id' => $lk->id,
+                            'sortir_id' => $barangMasukSortir->id,
+                            'deadline' => $createDate->format('Y-m-d'),
+                        ];
+                        if (isset($LkCelanaPelatih) && ($LkCelanaPelatih->status_celana_pelatih == "Half print")) {
+                            $barangMasukDataJahitrData['lk_celana_pelatih_id'] = $LkCelanaPelatih->id;
+                        }
+                        $barangMasukJahit = Jahit::create($barangMasukDataJahitrData);
+                        // AKHIR JAHIT
+
+                        // FINIS
+                        $barangMasukDataFinisData = [
+                            'no_order_id' => $lk->id,
+                            'jahit_baju_id' => $barangMasukJahit->id,
+                            'deadline' => $createDate->format('Y-m-d'),
+                        ];
+                        if (isset($LkCelanaPelatih) && ($LkCelanaPelatih->status_celana_pelatih == "Half print")) {
+                            $barangMasukDataFinisData['lk_celana_pelatih_id'] = $LkCelanaPelatih->id;
+                        }
+                        $barangMasukFinis = Finish::create($barangMasukDataFinisData);
+                        // AKHIR FINIS
+
+                        // LAPORAN
+                        Laporan::create([
+                            'barang_masuk_costumer_services_id' => $lk->id,
+                            'barang_masuk_layout_id' => $barangMasukDataLayout->id,
+                            'barang_masuk_mesin_atexco_id' => $barangMasukPressMesin->id ,
+                            'barang_masuk_presskain_id' => $barangMasuPressKain->id,
+                            'barang_masuk_lasercut_id' => $barangMasukCutPrin->id,
+                            'barang_masuk_manualcut_id' => $barangMasukCutManual->id,
+                            'barang_masuk_sortir_id' => $barangMasukSortir->id,
+                            'jahit_id' => $barangMasukJahit->id,
+                            'finis_id' => $barangMasukFinis->id,
+                        ]);
+                    // AKHIR LAPORAN
+                    }
+                     elseif ($total_hari == 2) {
                         // LAYOUT
                         $barangMasukDataLayoutData = [
                             'users_layout_id' => $lk->layout_id,
@@ -45897,7 +49632,7 @@ class CostumerServicesController extends Controller
 
                 // POLOS
                 if ($LkCelanaPelatih->status_celana_pelatih == "Polos") {
-                    if ($total_hari == 1) {
+                    if ($total_hari == 0) {
                         // CUT PRINT
                         $barangMasukDataCutManualData = [
                             'no_order_id' => $lk->id,
@@ -45956,7 +49691,67 @@ class CostumerServicesController extends Controller
                              'status' => "Manual Cut"
                         ]);
                         // AKHIR LAPORAN
-                    } elseif ($total_hari == 2) {
+                    }elseif ($total_hari == 1) {
+                         // CUT PRINT
+                         $barangMasukDataCutManualData = [
+                            'no_order_id' => $lk->id,
+                            'deadline' => $createDate->format('Y-m-d'),
+                        ];
+                        if (isset($LkCelanaPelatih) && ($LkCelanaPelatih->status_celana_pelatih == "Polos")) {
+                            $barangMasukDataCutManualData['lk_celana_pelatih_id'] = $LkCelanaPelatih->id;
+                        }
+                        $barangMasukCutManual = DataManualCut::create($barangMasukDataCutManualData);
+                        // AHIR CUT PRINT
+
+                        // DATA SORTIR
+                        $barangMasukDataSortirData = [
+                            'no_order_id' => $lk->id,
+                            'manual_cut_id' => $barangMasukCutManual->id,
+                            // 'laser_cut_id' => $barangMasukCutPrin->id,
+                            'deadline' => $createDate->format('Y-m-d'),
+                        ];
+                        if (isset($LkCelanaPelatih) && ($LkCelanaPelatih->status_celana_pelatih == "Polos")) {
+                            $barangMasukDataSortirData['lk_celana_pelatih_id'] = $LkCelanaPelatih->id;
+                        }
+                        $barangMasukSortir = DataSortir::create($barangMasukDataSortirData);
+                        // AKHIR DATA SORTIR
+
+                        // JAHIT
+                        $barangMasukDataJahitrData = [
+                            'no_order_id' => $lk->id,
+                            'sortir_id' => $barangMasukSortir->id,
+                            'deadline' => $createDate->format('Y-m-d'),
+                        ];
+                        if (isset($LkCelanaPelatih) && ($LkCelanaPelatih->status_celana_pelatih == "Polos")) {
+                            $barangMasukDataJahitrData['lk_celana_pelatih_id'] = $LkCelanaPelatih->id;
+                        }
+                        $barangMasukJahit = Jahit::create($barangMasukDataJahitrData);
+                        // AKHIR JAHIT
+
+                        // FINIS
+                        $barangMasukDataFinisData = [
+                            'no_order_id' => $lk->id,
+                            'jahit_baju_id' => $barangMasukJahit->id,
+                            'deadline' => $createDate->format('Y-m-d'),
+                        ];
+                        if (isset($LkCelanaPelatih) && ($LkCelanaPelatih->status_celana_pelatih == "Polos")) {
+                            $barangMasukDataFinisData['lk_celana_pelatih_id'] = $LkCelanaPelatih->id;
+                        }
+                        $barangMasukFinis = Finish::create($barangMasukDataFinisData);
+                        // AKHIR FINIS
+
+                        // LAPORAN
+                        Laporan::create([
+                            'barang_masuk_costumer_services_id' => $lk->id,
+                            'barang_masuk_manualcut_id' => $barangMasukCutManual->id,
+                            'barang_masuk_sortir_id' => $barangMasukSortir->id,
+                            'jahit_id' => $barangMasukJahit->id,
+                            'finis_id' => $barangMasukFinis->id,
+                             'status' => "Manual Cut"
+                        ]);
+                        // AKHIR LAPORAN
+                    }
+                     elseif ($total_hari == 2) {
                         // CUT PRINT
                         $barangMasukDataCutManualData = [
                             'no_order_id' => $lk->id,
@@ -46613,7 +50408,7 @@ class CostumerServicesController extends Controller
             if (isset($gambar->file_celana_kiper)) {
                 // FULL PRINT
                 if ($LkCelanaKiper->status_celana_kiper == "Full print") {
-                    if ($total_hari == 1) {
+                    if ($total_hari == 0) {
                         // LAYOUT
                         $barangMasukDataLayoutData = [
                             'users_layout_id' => $lk->layout_id,
@@ -46712,7 +50507,107 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                         // AKHIR LAPORAN
-                    } elseif ($total_hari == 2) {
+                    }elseif ($total_hari == 1) {
+                        // LAYOUT
+                        $barangMasukDataLayoutData = [
+                            'users_layout_id' => $lk->layout_id,
+                            'barang_masuk_id' => $lk->id,
+                            'deadline' => $createDate->format('Y-m-d'),
+                        ];
+                        if (isset($LkCelanaKiper) && ($LkCelanaKiper->status_celana_kiper == "Full print")) {
+                            $barangMasukDataLayoutData['lk_celana_kiper_id'] = $LkCelanaKiper->id;
+                        }
+                        $barangMasukDataLayout = BarangMasukDatalayout::create($barangMasukDataLayoutData);
+                        // AKHIR LAYOUT
+
+                        // MESIN
+                        $barangPressMesin = [
+                            'no_order_id' => $lk->id,
+                            'penanggung_jawab_id' => optional($lk->BarangMasukDisainer->DataMesinCs->first())->User->id,
+                            'barang_masuk_layout_id' => $barangMasukDataLayout->id,
+                            'deadline' => $createDate->format('Y-m-d'),
+                        ];
+                        if (isset($LkCelanaKiper) && ($LkCelanaKiper->status_celana_kiper == "Full print")) {
+                            $barangPressMesin['lk_celana_kiper_id'] = $LkCelanaKiper->id;
+                        }
+                        $barangMasukPressMesin = DataPress::create($barangPressMesin);
+                        // AKHIR MESIN
+
+
+                        // PRESS KAIN
+                        $barangMasukPressKainData = [
+                            'no_order_id' => $lk->id,
+                            'mesin_atexco_id' => $barangMasukPressMesin->id,
+                            'deadline' => $createDate->format('Y-m-d'),
+                        ];
+                        if (isset($LkCelanaKiper) && ($LkCelanaKiper->status_celana_kiper == "Full print")) {
+                            $barangMasukPressKainData['lk_celana_kiper_id'] = $LkCelanaKiper->id;
+                        }
+                        $barangMasuPressKain = DataPressKain::create($barangMasukPressKainData);
+                    // AKHIR PRESS KAIN
+
+                        // CUT PRINT
+                        $barangMasukDataCutPrintData = [
+                            'no_order_id' => $lk->id,
+                            'press_kain_id' => $barangMasuPressKain->id,
+                            'deadline' => $createDate->format('Y-m-d'),
+                        ];
+                        if (isset($LkCelanaKiper) && ($LkCelanaKiper->status_celana_kiper == "Full print")) {
+                            $barangMasukDataCutPrintData['lk_celana_kiper_id'] = $LkCelanaKiper->id;
+                        }
+                        $barangMasukCutPrin = DataLaserCut::create($barangMasukDataCutPrintData);
+                        // AHIR CUT PRINT
+
+                        // DATA SORTIR
+                        $barangMasukDataSortirData = [
+                            'no_order_id' => $lk->id,
+                            'laser_cut_id' => $barangMasukCutPrin->id,
+                            'deadline' => $createDate->format('Y-m-d'),
+                        ];
+                        if (isset($LkCelanaKiper) && ($LkCelanaKiper->status_celana_kiper == "Full print")) {
+                            $barangMasukDataSortirData['lk_celana_kiper_id'] = $LkCelanaKiper->id;
+                        }
+                        $barangMasukSortir = DataSortir::create($barangMasukDataSortirData);
+                        // AKHIR DATA SORTIR
+
+                        // JAHIT
+                        $barangMasukDataJahitrData = [
+                            'no_order_id' => $lk->id,
+                            'sortir_id' => $barangMasukSortir->id,
+                            'deadline' => $createDate->format('Y-m-d'),
+                        ];
+                        if (isset($LkCelanaKiper) && ($LkCelanaKiper->status_celana_kiper == "Full print")) {
+                            $barangMasukDataJahitrData['lk_celana_kiper_id'] = $LkCelanaKiper->id;
+                        }
+                        $barangMasukJahit = Jahit::create($barangMasukDataJahitrData);
+                        // AKHIR JAHIT
+
+                        // FINIS
+                        $barangMasukDataFinisData = [
+                            'no_order_id' => $lk->id,
+                            'jahit_baju_id' => $barangMasukJahit->id,
+                            'deadline' => $createDate->format('Y-m-d'),
+                        ];
+                        if (isset($LkCelanaKiper) && ($LkCelanaKiper->status_celana_kiper == "Full print")) {
+                            $barangMasukDataFinisData['lk_celana_kiper_id'] = $LkCelanaKiper->id;
+                        }
+                        $barangMasukFinis = Finish::create($barangMasukDataFinisData);
+                        // AKHIR FINIS
+
+                        // LAPORAN
+                            Laporan::create([
+                                'barang_masuk_costumer_services_id' => $lk->id,
+                                'barang_masuk_layout_id' => $barangMasukDataLayout->id,
+                                'barang_masuk_mesin_atexco_id' => $barangMasukPressMesin->id ,
+                                'barang_masuk_presskain_id' => $barangMasuPressKain->id,
+                                'barang_masuk_lasercut_id' => $barangMasukCutPrin->id,
+                                'barang_masuk_sortir_id' => $barangMasukSortir->id,
+                                'jahit_id' => $barangMasukJahit->id,
+                                'finis_id' => $barangMasukFinis->id,
+                            ]);
+                        // AKHIR LAPORAN
+                    }
+                     elseif ($total_hari == 2) {
                         // LAYOUT
                         $barangMasukDataLayoutData = [
                             'users_layout_id' => $lk->layout_id,
@@ -47807,7 +51702,7 @@ class CostumerServicesController extends Controller
 
                 // HALFT PRINT
                 if ($LkCelanaKiper->status_celana_kiper == "Half print") {
-                    if ($total_hari == 1) {
+                    if ($total_hari == 0) {
                         // LAYOUT
                         $barangMasukDataLayoutData = [
                             'users_layout_id' => $lk->layout_id,
@@ -47917,7 +51812,118 @@ class CostumerServicesController extends Controller
                             'finis_id' => $barangMasukFinis->id,
                             ]);
                         // AKHIR LAPORAN
-                    } elseif ($total_hari == 2) {
+                    }elseif ($total_hari == 1) {
+                        // LAYOUT
+                        $barangMasukDataLayoutData = [
+                            'users_layout_id' => $lk->layout_id,
+                            'barang_masuk_id' => $lk->id,
+                            'deadline' => $createDate->format('Y-m-d'),
+                        ];
+                        if (isset($LkCelanaKiper) && ($LkCelanaKiper->status_celana_kiper == "Half print")) {
+                            $barangMasukDataLayoutData['lk_celana_kiper_id'] = $LkCelanaKiper->id;
+                        }
+                        $barangMasukDataLayout = BarangMasukDatalayout::create($barangMasukDataLayoutData);
+                        // AKHIR LAYOUT
+
+                    // MESIN
+                        $barangPressMesin = [
+                            'no_order_id' => $lk->id,
+                            'penanggung_jawab_id' => optional($lk->BarangMasukDisainer->DataMesinCs->first())->User->id,
+                            'barang_masuk_layout_id' => $barangMasukDataLayout->id,
+                            'deadline' => $createDate->format('Y-m-d'),
+                        ];
+                        if (isset($LkCelanaKiper) && ($LkCelanaKiper->status_celana_kiper == "Half print")) {
+                            $barangPressMesin['lk_celana_kiper_id'] = $LkCelanaKiper->id;
+                        }
+                        $barangMasukPressMesin = DataPress::create($barangPressMesin);
+                        // AKHIR MESIN
+
+
+                        // PRESS KAIN
+                            $barangMasukPressKainData = [
+                                'no_order_id' => $lk->id,
+                                'mesin_atexco_id' => $barangMasukPressMesin->id,
+                                'deadline' => $createDate->format('Y-m-d'),
+                            ];
+                            if (isset($LkCelanaKiper) && ($LkCelanaKiper->status_celana_kiper == "Half print")) {
+                                $barangMasukPressKainData['lk_celana_kiper_id'] = $LkCelanaKiper->id;
+                            }
+                            $barangMasuPressKain = DataPressKain::create($barangMasukPressKainData);
+                        // AKHIR PRESS KAIN
+
+                        // CUT PRINT
+                        $barangMasukDataCutPrintData = [
+                            'no_order_id' => $lk->id,
+                            'press_kain_id' => $barangMasuPressKain->id,
+                            'deadline' => $createDate->format('Y-m-d'),
+                        ];
+                        if (isset($LkCelanaKiper) && ($LkCelanaKiper->status_celana_kiper == "Half print")) {
+                            $barangMasukDataCutPrintData['lk_celana_kiper_id'] = $LkCelanaKiper->id;
+                        }
+                        $barangMasukCutPrin = DataLaserCut::create($barangMasukDataCutPrintData);
+                        $barangMasukDataCutManualData = [
+                            'no_order_id' => $lk->id,
+                            'laser_cut_id' => $barangMasukCutPrin->id,
+                            'deadline' => $createDate->format('Y-m-d'),
+                        ];
+                        if (isset($LkCelanaKiper) && ($LkCelanaKiper->status_celana_kiper == "Half print")) {
+                            $barangMasukDataCutManualData['lk_celana_kiper_id'] = $LkCelanaKiper->id;
+                        }
+                        $barangMasukCutManual = DataManualCut::create($barangMasukDataCutManualData);
+                        // AHIR CUT PRINT
+
+                        // DATA SORTIR
+                        $barangMasukDataSortirData = [
+                            'no_order_id' => $lk->id,
+                            'manual_cut_id' => $barangMasukCutManual->id,
+                            'laser_cut_id' => $barangMasukCutPrin->id,
+                            'deadline' => $createDate->format('Y-m-d'),
+                        ];
+                        if (isset($LkCelanaKiper) && ($LkCelanaKiper->status_celana_kiper == "Half print")) {
+                            $barangMasukDataSortirData['lk_celana_kiper_id'] = $LkCelanaKiper->id;
+                        }
+                        $barangMasukSortir = DataSortir::create($barangMasukDataSortirData);
+                        // AKHIR DATA SORTIR
+
+                        // JAHIT
+                        $barangMasukDataJahitrData = [
+                            'no_order_id' => $lk->id,
+                            'sortir_id' => $barangMasukSortir->id,
+                            'deadline' => $createDate->format('Y-m-d'),
+                        ];
+                        if (isset($LkCelanaKiper) && ($LkCelanaKiper->status_celana_kiper == "Half print")) {
+                            $barangMasukDataJahitrData['lk_celana_kiper_id'] = $LkCelanaKiper->id;
+                        }
+                        $barangMasukJahit = Jahit::create($barangMasukDataJahitrData);
+                        // AKHIR JAHIT
+
+                        // FINIS
+                        $barangMasukDataFinisData = [
+                            'no_order_id' => $lk->id,
+                            'jahit_baju_id' => $barangMasukJahit->id,
+                            'deadline' => $createDate->format('Y-m-d'),
+                        ];
+                        if (isset($LkCelanaKiper) && ($LkCelanaKiper->status_celana_kiper == "Half print")) {
+                            $barangMasukDataFinisData['lk_celana_kiper_id'] = $LkCelanaKiper->id;
+                        }
+                        $barangMasukFinis = Finish::create($barangMasukDataFinisData);
+                        // AKHIR FINIS
+
+                        // LAPORAN
+                            Laporan::create([
+                            'barang_masuk_costumer_services_id' => $lk->id,
+                            'barang_masuk_layout_id' => $barangMasukDataLayout->id,
+                            'barang_masuk_mesin_atexco_id' => $barangMasukPressMesin->id ,
+                            'barang_masuk_presskain_id' => $barangMasuPressKain->id,
+                            'barang_masuk_lasercut_id' => $barangMasukCutPrin->id,
+                            'barang_masuk_manualcut_id' => $barangMasukCutManual->id,
+                            'barang_masuk_sortir_id' => $barangMasukSortir->id,
+                            'jahit_id' => $barangMasukJahit->id,
+                            'finis_id' => $barangMasukFinis->id,
+                            ]);
+                        // AKHIR LAPORAN
+                    }
+                     elseif ($total_hari == 2) {
                         // LAYOUT
                         $barangMasukDataLayoutData = [
                             'users_layout_id' => $lk->layout_id,
@@ -49132,7 +53138,7 @@ class CostumerServicesController extends Controller
 
                 // POLOS
                 if ($LkCelanaKiper->status_celana_kiper == "Polos") {
-                    if ($total_hari == 1) {
+                    if ($total_hari == 0) {
                         // CUT PRINT
                         $barangMasukDataCutManualData = [
                             'no_order_id' => $lk->id,
@@ -49191,7 +53197,67 @@ class CostumerServicesController extends Controller
                              'status' => "Manual Cut"
                         ]);
                         // AKHIR LAPORAN
-                    } elseif ($total_hari == 2) {
+                    }elseif ($total_hari == 1) {
+                        // CUT PRINT
+                        $barangMasukDataCutManualData = [
+                            'no_order_id' => $lk->id,
+                            'deadline' => $createDate->format('Y-m-d'),
+                        ];
+                        if (isset($LkCelanaKiper) && ($LkCelanaKiper->status_celana_kiper == "Polos")) {
+                            $barangMasukDataCutManualData['lk_celana_kiper_id'] = $LkCelanaKiper->id;
+                        }
+                        $barangMasukCutManual = DataManualCut::create($barangMasukDataCutManualData);
+                        // AHIR CUT PRINT
+
+                        // DATA SORTIR
+                        $barangMasukDataSortirData = [
+                            'no_order_id' => $lk->id,
+                            'manual_cut_id' => $barangMasukCutManual->id,
+                            // 'laser_cut_id' => $barangMasukCutPrin->id,
+                            'deadline' => $createDate->format('Y-m-d'),
+                        ];
+                        if (isset($LkCelanaKiper) && ($LkCelanaKiper->status_celana_kiper == "Polos")) {
+                            $barangMasukDataSortirData['lk_celana_kiper_id'] = $LkCelanaKiper->id;
+                        }
+                        $barangMasukSortir = DataSortir::create($barangMasukDataSortirData);
+                        // AKHIR DATA SORTIR
+
+                        // JAHIT
+                        $barangMasukDataJahitrData = [
+                            'no_order_id' => $lk->id,
+                            'sortir_id' => $barangMasukSortir->id,
+                            'deadline' => $createDate->format('Y-m-d'),
+                        ];
+                        if (isset($LkCelanaKiper) && ($LkCelanaKiper->status_celana_kiper == "Polos")) {
+                            $barangMasukDataJahitrData['lk_celana_kiper_id'] = $LkCelanaKiper->id;
+                        }
+                        $barangMasukJahit = Jahit::create($barangMasukDataJahitrData);
+                        // AKHIR JAHIT
+
+                        // FINIS
+                        $barangMasukDataFinisData = [
+                            'no_order_id' => $lk->id,
+                            'jahit_baju_id' => $barangMasukJahit->id,
+                            'deadline' => $createDate->format('Y-m-d'),
+                        ];
+                        if (isset($LkCelanaKiper) && ($LkCelanaKiper->status_celana_kiper == "Polos")) {
+                            $barangMasukDataFinisData['lk_celana_kiper_id'] = $LkCelanaKiper->id;
+                        }
+                        $barangMasukFinis = Finish::create($barangMasukDataFinisData);
+                        // AKHIR FINIS
+
+                        // LAPORAN
+                        Laporan::create([
+                            'barang_masuk_costumer_services_id' => $lk->id,
+                            'barang_masuk_manualcut_id' => $barangMasukCutManual->id,
+                            'barang_masuk_sortir_id' => $barangMasukSortir->id,
+                            'jahit_id' => $barangMasukJahit->id,
+                            'finis_id' => $barangMasukFinis->id,
+                             'status' => "Manual Cut"
+                        ]);
+                        // AKHIR LAPORAN
+                    }
+                     elseif ($total_hari == 2) {
                         // CUT PRINT
                         $barangMasukDataCutManualData = [
                             'no_order_id' => $lk->id,
@@ -49850,7 +53916,7 @@ class CostumerServicesController extends Controller
             if (isset($gambar->file_celana_1)) {
                 // FULL PRINT
                 if ($LkCelana1->status_celana_1 == "Full print") {
-                    if ($total_hari == 1) {
+                    if ($total_hari == 0) {
                         // LAYOUT
                         $barangMasukDataLayoutData = [
                             'users_layout_id' => $lk->layout_id,
@@ -49949,7 +54015,107 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                         // AKHIR LAPORAN
-                    } elseif ($total_hari == 2) {
+                    } elseif ($total_hari == 1) {
+                         // LAYOUT
+                         $barangMasukDataLayoutData = [
+                            'users_layout_id' => $lk->layout_id,
+                            'barang_masuk_id' => $lk->id,
+                            'deadline' => $createDate->format('Y-m-d'),
+                        ];
+                        if (isset($LkCelana1) && ($LkCelana1->status_celana_1 == "Full print")) {
+                            $barangMasukDataLayoutData['lk_celana_1_id'] = $LkCelana1->id;
+                        }
+                        $barangMasukDataLayout = BarangMasukDatalayout::create($barangMasukDataLayoutData);
+                        // AKHIR LAYOUT
+
+                    // MESIN
+                        $barangPressMesin = [
+                            'no_order_id' => $lk->id,
+                            'penanggung_jawab_id' => optional($lk->BarangMasukDisainer->DataMesinCs->first())->User->id,
+                            'barang_masuk_layout_id' => $barangMasukDataLayout->id,
+                            'deadline' => $createDate->format('Y-m-d'),
+                        ];
+                        if (isset($LkCelana1) && ($LkCelana1->status_celana_1 == "Full print")) {
+                            $barangPressMesin['lk_celana_1_id'] = $LkCelana1->id;
+                        }
+                        $barangMasukPressMesin = DataPress::create($barangPressMesin);
+                        // AKHIR MESIN
+
+
+                        // PRESS KAIN
+                            $barangMasukPressKainData = [
+                                'no_order_id' => $lk->id,
+                                'mesin_atexco_id' => $barangMasukPressMesin->id,
+                                'deadline' => $createDate->format('Y-m-d'),
+                            ];
+                            if (isset($LkCelana1) && ($LkCelana1->status_celana_1 == "Full print")) {
+                                $barangMasukPressKainData['lk_celana_1_id'] = $LkCelana1->id;
+                            }
+                            $barangMasuPressKain = DataPressKain::create($barangMasukPressKainData);
+                        // AKHIR PRESS KAIN
+
+                        // CUT PRINT
+                        $barangMasukDataCutPrintData = [
+                            'no_order_id' => $lk->id,
+                            'press_kain_id' => $barangMasuPressKain->id,
+                            'deadline' => $createDate->format('Y-m-d'),
+                        ];
+                        if (isset($LkCelana1) && ($LkCelana1->status_celana_1 == "Full print")) {
+                            $barangMasukDataCutPrintData['lk_celana_1_id'] = $LkCelana1->id;
+                        }
+                        $barangMasukCutPrin = DataLaserCut::create($barangMasukDataCutPrintData);
+                        // AHIR CUT PRINT
+
+                        // DATA SORTIR
+                        $barangMasukDataSortirData = [
+                            'no_order_id' => $lk->id,
+                            'laser_cut_id' => $barangMasukCutPrin->id,
+                            'deadline' => $createDate->format('Y-m-d'),
+                        ];
+                        if (isset($LkCelana1) && ($LkCelana1->status_celana_1 == "Full print")) {
+                            $barangMasukDataSortirData['lk_celana_1_id'] = $LkCelana1->id;
+                        }
+                        $barangMasukSortir = DataSortir::create($barangMasukDataSortirData);
+                        // AKHIR DATA SORTIR
+
+                        // JAHIT
+                        $barangMasukDataJahitrData = [
+                            'no_order_id' => $lk->id,
+                            'sortir_id' => $barangMasukSortir->id,
+                            'deadline' => $createDate->format('Y-m-d'),
+                        ];
+                        if (isset($LkCelana1) && ($LkCelana1->status_celana_1 == "Full print")) {
+                            $barangMasukDataJahitrData['lk_celana_1_id'] = $LkCelana1->id;
+                        }
+                        $barangMasukJahit = Jahit::create($barangMasukDataJahitrData);
+                        // AKHIR JAHIT
+
+                        // FINIS
+                        $barangMasukDataFinisData = [
+                            'no_order_id' => $lk->id,
+                            'jahit_baju_id' => $barangMasukJahit->id,
+                            'deadline' => $createDate->format('Y-m-d'),
+                        ];
+                        if (isset($LkCelana1) && ($LkCelana1->status_celana_1 == "Full print")) {
+                            $barangMasukDataFinisData['lk_celana_1_id'] = $LkCelana1->id;
+                        }
+                        $barangMasukFinis = Finish::create($barangMasukDataFinisData);
+                        // AKHIR FINIS
+
+                        // LAPORAN
+                            Laporan::create([
+                                'barang_masuk_costumer_services_id' => $lk->id,
+                                'barang_masuk_layout_id' => $barangMasukDataLayout->id,
+                                'barang_masuk_mesin_atexco_id' => $barangMasukPressMesin->id ,
+                                'barang_masuk_presskain_id' => $barangMasuPressKain->id,
+                                'barang_masuk_lasercut_id' => $barangMasukCutPrin->id,
+                                'barang_masuk_sortir_id' => $barangMasukSortir->id,
+                                'jahit_id' => $barangMasukJahit->id,
+                                'finis_id' => $barangMasukFinis->id,
+                            ]);
+                        // AKHIR LAPORAN
+                    }
+                     elseif ($total_hari == 2) {
                         // LAYOUT
                         $barangMasukDataLayoutData = [
                             'users_layout_id' => $lk->layout_id,
@@ -51044,7 +55210,7 @@ class CostumerServicesController extends Controller
 
                 // HALFT PRINT
                 if ($LkCelana1->status_celana_1 == "Half print") {
-                    if ($total_hari == 1) {
+                    if ($total_hari == 0) {
                         // LAYOUT
                         $barangMasukDataLayoutData = [
                             'users_layout_id' => $lk->layout_id,
@@ -51154,7 +55320,118 @@ class CostumerServicesController extends Controller
                             'finis_id' => $barangMasukFinis->id,
                             ]);
                         // AKHIR LAPORAN
-                    } elseif ($total_hari == 2) {
+                    }elseif ($total_hari == 1) {
+                        // LAYOUT
+                        $barangMasukDataLayoutData = [
+                            'users_layout_id' => $lk->layout_id,
+                            'barang_masuk_id' => $lk->id,
+                            'deadline' => $createDate->format('Y-m-d'),
+                        ];
+                        if (isset($LkCelana1) && ($LkCelana1->status_celana_1 == "Half print")) {
+                            $barangMasukDataLayoutData['lk_celana_1_id'] = $LkCelana1->id;
+                        }
+                        $barangMasukDataLayout = BarangMasukDatalayout::create($barangMasukDataLayoutData);
+                        // AKHIR LAYOUT
+
+                        // MESIN
+                        $barangPressMesin = [
+                            'no_order_id' => $lk->id,
+                            'penanggung_jawab_id' => optional($lk->BarangMasukDisainer->DataMesinCs->first())->User->id,
+                            'barang_masuk_layout_id' => $barangMasukDataLayout->id,
+                            'deadline' => $createDate->format('Y-m-d'),
+                        ];
+                        if (isset($LkCelana1) && ($LkCelana1->status_celana_1 == "Half print")) {
+                            $barangPressMesin['lk_celana_1_id'] = $LkCelana1->id;
+                        }
+                        $barangMasukPressMesin = DataPress::create($barangPressMesin);
+                        // AKHIR MESIN
+
+
+                        // PRESS KAIN
+                            $barangMasukPressKainData = [
+                                'no_order_id' => $lk->id,
+                                'mesin_atexco_id' => $barangMasukPressMesin->id,
+                                'deadline' => $createDate->format('Y-m-d'),
+                            ];
+                            if (isset($LkCelana1) && ($LkCelana1->status_celana_1 == "Half print")) {
+                                $barangMasukPressKainData['lk_celana_1_id'] = $LkCelana1->id;
+                            }
+                            $barangMasuPressKain = DataPressKain::create($barangMasukPressKainData);
+                        // AKHIR PRESS KAIN
+
+                        // CUT PRINT
+                        $barangMasukDataCutPrintData = [
+                            'no_order_id' => $lk->id,
+                            'press_kain_id' => $barangMasuPressKain->id,
+                            'deadline' => $createDate->format('Y-m-d'),
+                        ];
+                        if (isset($LkCelana1) && ($LkCelana1->status_celana_1 == "Half print")) {
+                            $barangMasukDataCutPrintData['lk_celana_1_id'] = $LkCelana1->id;
+                        }
+                        $barangMasukCutPrin = DataLaserCut::create($barangMasukDataCutPrintData);
+                        $barangMasukDataCutManualData = [
+                            'no_order_id' => $lk->id,
+                            'laser_cut_id' => $barangMasukCutPrin->id,
+                            'deadline' => $createDate->format('Y-m-d'),
+                        ];
+                        if (isset($LkCelana1) && ($LkCelana1->status_celana_1 == "Half print")) {
+                            $barangMasukDataCutManualData['lk_celana_1_id'] = $LkCelana1->id;
+                        }
+                        $barangMasukCutManual = DataManualCut::create($barangMasukDataCutManualData);
+                        // AHIR CUT PRINT
+
+                        // DATA SORTIR
+                        $barangMasukDataSortirData = [
+                            'no_order_id' => $lk->id,
+                            'manual_cut_id' => $barangMasukCutManual->id,
+                            'laser_cut_id' => $barangMasukCutPrin->id,
+                            'deadline' => $createDate->format('Y-m-d'),
+                        ];
+                        if (isset($LkCelana1) && ($LkCelana1->status_celana_1 == "Half print")) {
+                            $barangMasukDataSortirData['lk_celana_1_id'] = $LkCelana1->id;
+                        }
+                        $barangMasukSortir = DataSortir::create($barangMasukDataSortirData);
+                        // AKHIR DATA SORTIR
+
+                        // JAHIT
+                        $barangMasukDataJahitrData = [
+                            'no_order_id' => $lk->id,
+                            'sortir_id' => $barangMasukSortir->id,
+                            'deadline' => $createDate->format('Y-m-d'),
+                        ];
+                        if (isset($LkCelana1) && ($LkCelana1->status_celana_1 == "Half print")) {
+                            $barangMasukDataJahitrData['lk_celana_1_id'] = $LkCelana1->id;
+                        }
+                        $barangMasukJahit = Jahit::create($barangMasukDataJahitrData);
+                        // AKHIR JAHIT
+
+                        // FINIS
+                        $barangMasukDataFinisData = [
+                            'no_order_id' => $lk->id,
+                            'jahit_baju_id' => $barangMasukJahit->id,
+                            'deadline' => $createDate->format('Y-m-d'),
+                        ];
+                        if (isset($LkCelana1) && ($LkCelana1->status_celana_1 == "Half print")) {
+                            $barangMasukDataFinisData['lk_celana_1_id'] = $LkCelana1->id;
+                        }
+                        $barangMasukFinis = Finish::create($barangMasukDataFinisData);
+                        // AKHIR FINIS
+
+                        // LAPORAN
+                            Laporan::create([
+                                'barang_masuk_costumer_services_id' => $lk->id,
+                            'barang_masuk_layout_id' => $barangMasukDataLayout->id,
+                            'barang_masuk_mesin_atexco_id' => $barangMasukPressMesin->id ,
+                            'barang_masuk_presskain_id' => $barangMasuPressKain->id,
+                            'barang_masuk_lasercut_id' => $barangMasukCutPrin->id,
+                            'barang_masuk_manualcut_id' => $barangMasukCutManual->id,
+                            'barang_masuk_sortir_id' => $barangMasukSortir->id,
+                            'jahit_id' => $barangMasukJahit->id,
+                            'finis_id' => $barangMasukFinis->id,
+                            ]);
+                        // AKHIR LAPORAN
+                    }
+                     elseif ($total_hari == 2) {
                         // LAYOUT
                         $barangMasukDataLayoutData = [
                             'users_layout_id' => $lk->layout_id,
@@ -52370,7 +56647,7 @@ class CostumerServicesController extends Controller
 
                 // POLOS
                 if ($LkCelana1->status_celana_1 == "Polos") {
-                    if ($total_hari == 1) {
+                    if ($total_hari == 0) {
                         // CUT PRINT
                         $barangMasukDataCutManualData = [
                             'no_order_id' => $lk->id,
@@ -52429,7 +56706,67 @@ class CostumerServicesController extends Controller
                              'status' => "Manual Cut"
                         ]);
                         // AKHIR LAPORAN
-                    } elseif ($total_hari == 2) {
+                    }elseif ($total_hari == 1) {
+                        // CUT PRINT
+                        $barangMasukDataCutManualData = [
+                            'no_order_id' => $lk->id,
+                            'deadline' => $createDate->format('Y-m-d'),
+                        ];
+                        if (isset($LkCelana1) && ($LkCelana1->status_celana_1 == "Polos")) {
+                            $barangMasukDataCutManualData['lk_celana_1_id'] = $LkCelana1->id;
+                        }
+                        $barangMasukCutManual = DataManualCut::create($barangMasukDataCutManualData);
+                        // AHIR CUT PRINT
+
+                        // DATA SORTIR
+                        $barangMasukDataSortirData = [
+                            'no_order_id' => $lk->id,
+                            'manual_cut_id' => $barangMasukCutManual->id,
+                            // 'laser_cut_id' => $barangMasukCutPrin->id,
+                            'deadline' => $createDate->format('Y-m-d'),
+                        ];
+                        if (isset($LkCelana1) && ($LkCelana1->status_celana_1 == "Polos")) {
+                            $barangMasukDataSortirData['lk_celana_1_id'] = $LkCelana1->id;
+                        }
+                        $barangMasukSortir = DataSortir::create($barangMasukDataSortirData);
+                        // AKHIR DATA SORTIR
+
+                        // JAHIT
+                        $barangMasukDataJahitrData = [
+                            'no_order_id' => $lk->id,
+                            'sortir_id' => $barangMasukSortir->id,
+                            'deadline' => $createDate->format('Y-m-d'),
+                        ];
+                        if (isset($LkCelana1) && ($LkCelana1->status_celana_1 == "Polos")) {
+                            $barangMasukDataJahitrData['lk_celana_1_id'] = $LkCelana1->id;
+                        }
+                        $barangMasukJahit = Jahit::create($barangMasukDataJahitrData);
+                        // AKHIR JAHIT
+
+                        // FINIS
+                        $barangMasukDataFinisData = [
+                            'no_order_id' => $lk->id,
+                            'jahit_baju_id' => $barangMasukJahit->id,
+                            'deadline' => $createDate->format('Y-m-d'),
+                        ];
+                        if (isset($LkCelana1) && ($LkCelana1->status_celana_1 == "Polos")) {
+                            $barangMasukDataFinisData['lk_celana_1_id'] = $LkCelana1->id;
+                        }
+                        $barangMasukFinis = Finish::create($barangMasukDataFinisData);
+                        // AKHIR FINIS
+
+                        // LAPORAN
+                        Laporan::create([
+                            'barang_masuk_costumer_services_id' => $lk->id,
+                            'barang_masuk_manualcut_id' => $barangMasukCutManual->id,
+                            'barang_masuk_sortir_id' => $barangMasukSortir->id,
+                            'jahit_id' => $barangMasukJahit->id,
+                            'finis_id' => $barangMasukFinis->id,
+                             'status' => "Manual Cut"
+                        ]);
+                        // AKHIR LAPORAN
+                    }
+                     elseif ($total_hari == 2) {
                         // CUT PRINT
                         $barangMasukDataCutManualData = [
                             'no_order_id' => $lk->id,
