@@ -610,27 +610,41 @@ class CostumerServicesController extends Controller
                         } elseif ($hasil_hari == 1) {
                              // LAYOUT
                              BarangMasukDatalayout::where('lk_player_id', $LkPlayer->id)->delete();
-                             $barangMasukDataLayoutData = [
-                                 'users_layout_id' => $lk->layout_id,
-                                 'barang_masuk_id' => $lk->id,
-                                 'deadline' => $createDate->format('Y-m-d'),
-                             ];
-                             if (isset($LkPlayer) && ($LkPlayer->status_player == "Full print")) {
-                                 $barangMasukDataLayoutData['lk_player_id'] = $LkPlayer->id;
-                             }
-                             $barangMasukDataLayout = BarangMasukDatalayout::create($barangMasukDataLayoutData);
-                             // AKHIR LAYOUT
+                            $barangMasukDataLayoutData = [
+                                'users_layout_id' => $lk->layout_id,
+                                'barang_masuk_id' => $lk->id,
+                                'deadline' => $createDate->format('Y-m-d'),
+                            ];
+                            if (isset($LkPlayer) && ($LkPlayer->status_player == "Full print")) {
+                                $barangMasukDataLayoutData['lk_player_id'] = $LkPlayer->id;
+                            }
+                            $barangMasukDataLayout = BarangMasukDatalayout::create($barangMasukDataLayoutData);
+                            // AKHIR LAYOUT
 
-                             $barangMasukPressKainData = [
-                                 'no_order_id' => $lk->id,
-                                 'mesin_atexco_id' => $barangMasukPressMesin->id,
-                                 'deadline' => $createDate->format('Y-m-d'),
-                             ];
-                             if (isset($LkPlayer) && ($LkPlayer->status_player == "Full print")) {
-                                 $barangMasukPressKainData['lk_player_id'] = $LkPlayer->id;
-                             }
-                             $barangMasuPressKain = DataPressKain::create($barangMasukPressKainData);
-                             // AKHIR PRESS KAIN
+                            // MESIN
+                            $barangPressMesin = [
+                                'no_order_id' => $lk->id,
+                                'penanggung_jawab_id' => optional($lk->BarangMasukDisainer->DataMesinCs->first())->User->id,
+                                'barang_masuk_layout_id' => $barangMasukDataLayout->id,
+                                'deadline' => $createDate->format('Y-m-d'),
+                            ];
+                            if (isset($LkPlayer) && ($LkPlayer->status_player == "Full print")) {
+                                $barangPressMesin['lk_player_id'] = $LkPlayer->id;
+                            }
+                            $barangMasukPressMesin = DataPress::create($barangPressMesin);
+                            // AKHIR MESIN
+
+                            // PRESS KAIN
+                            $barangMasukPressKainData = [
+                                'no_order_id' => $lk->id,
+                                'mesin_atexco_id' => $barangMasukPressMesin->id,
+                                'deadline' => $createDate->format('Y-m-d'),
+                            ];
+                            if (isset($LkPlayer) && ($LkPlayer->status_player == "Full print")) {
+                                $barangMasukPressKainData['lk_player_id'] = $LkPlayer->id;
+                            }
+                            $barangMasuPressKain = DataPressKain::create($barangMasukPressKainData);
+                            // AKHIR PRESS KAIN
 
                              // CUT PRINT
                              $barangMasukDataCutPrintData = [
