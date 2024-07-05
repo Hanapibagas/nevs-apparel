@@ -184,9 +184,6 @@ class CostumerServicesController extends Controller
             $hasil_hari = abs($hasil_hari);
         }
 
-        return response()->json([
-            $hasil_hari,
-        ]);
         // AKHIR PENENTUAN TANGGAL
 
          // UPDATE DATA
