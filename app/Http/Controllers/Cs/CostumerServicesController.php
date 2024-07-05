@@ -30568,7 +30568,7 @@ class CostumerServicesController extends Controller
                         $barangMasukDataFinisData = [
                             'no_order_id' => $lk->id,
                             'jahit_baju_id' => $barangMasukJahit->id,
-                            'deadline' => $createDate12->format('Y-m-d'),
+                            'deadline' => $request->deadline,
                         ];
                         if (isset($LkPlayer) && ($LkPlayer->status_player == "Full print")) {
                             $barangMasukDataFinisData['lk_player_id'] = $LkPlayer->id;
@@ -32014,7 +32014,7 @@ class CostumerServicesController extends Controller
                         $barangMasukDataFinisData = [
                             'no_order_id' => $lk->id,
                             'jahit_baju_id' => $barangMasukJahit->id,
-                            'deadline' => $createDate12->format('Y-m-d'),
+                            'deadline' => $request->deadline,
                         ];
                         if (isset($LkPlayer) && ($LkPlayer->status_player == "Half print")) {
                             $barangMasukDataFinisData['lk_player_id'] = $LkPlayer->id;
@@ -32791,7 +32791,7 @@ class CostumerServicesController extends Controller
                         $barangMasukDataFinisData = [
                             'no_order_id' => $lk->id,
                             'jahit_baju_id' => $barangMasukJahit->id,
-                            'deadline' => $createDate12->format('Y-m-d'),
+                            'deadline' => $request->deadline,
                         ];
                         if (isset($LkPlayer) && ($LkPlayer->status_player == "Polos")) {
                             $barangMasukDataFinisData['lk_player_id'] = $LkPlayer->id;
@@ -34097,7 +34097,7 @@ class CostumerServicesController extends Controller
                         $barangMasukDataFinisData = [
                             'no_order_id' => $lk->id,
                             'jahit_baju_id' => $barangMasukJahit->id,
-                            'deadline' => $createDate12->format('Y-m-d'),
+                            'deadline' => $request->deadline,
                         ];
                         if (isset($LkPelatih) && ($LkPelatih->status_pelatih == "Full print")) {
                             $barangMasukDataFinisData['lk_pelatih_id'] = $LkPelatih->id;
@@ -35541,7 +35541,7 @@ class CostumerServicesController extends Controller
                         $barangMasukDataFinisData = [
                             'no_order_id' => $lk->id,
                             'jahit_baju_id' => $barangMasukJahit->id,
-                            'deadline' => $createDate12->format('Y-m-d'),
+                            'deadline' => $request->deadline,
                         ];
                         if (isset($LkPelatih) && ($LkPelatih->status_pelatih == "Half print")) {
                             $barangMasukDataFinisData['lk_pelatih_id'] = $LkPelatih->id;
@@ -36317,7 +36317,7 @@ class CostumerServicesController extends Controller
                         $barangMasukDataFinisData = [
                             'no_order_id' => $lk->id,
                             'jahit_baju_id' => $barangMasukJahit->id,
-                            'deadline' => $createDate12->format('Y-m-d'),
+                            'deadline' => $request->deadline,
                         ];
                         if (isset($LkPelatih) && ($LkPelatih->status_pelatih == "Polos")) {
                             $barangMasukDataFinisData['lk_pelatih_id'] = $LkPelatih->id;
@@ -37623,7 +37623,7 @@ class CostumerServicesController extends Controller
                         $barangMasukDataFinisData = [
                             'no_order_id' => $lk->id,
                             'jahit_baju_id' => $barangMasukJahit->id,
-                            'deadline' => $createDate12->format('Y-m-d'),
+                            'deadline' => $request->deadline,
                         ];
                         if (isset($LkKiper) && ($LkKiper->status_kiper == "Full print")) {
                             $barangMasukDataFinisData['lk_kiper_id'] = $LkKiper->id;
@@ -39071,7 +39071,7 @@ class CostumerServicesController extends Controller
                         $barangMasukDataFinisData = [
                             'no_order_id' => $lk->id,
                             'jahit_baju_id' => $barangMasukJahit->id,
-                            'deadline' => $createDate12->format('Y-m-d'),
+                            'deadline' => $request->deadline,
                         ];
                         if (isset($LkKiper) && ($LkKiper->status_kiper == "Half print")) {
                             $barangMasukDataFinisData['lk_kiper_id'] = $LkKiper->id;
@@ -39845,7 +39845,7 @@ class CostumerServicesController extends Controller
                         $barangMasukDataFinisData = [
                             'no_order_id' => $lk->id,
                             'jahit_baju_id' => $barangMasukJahit->id,
-                            'deadline' => $createDate12->format('Y-m-d'),
+                            'deadline' => $request->deadline,
                         ];
                         if (isset($LkKiper) && ($LkKiper->status_kiper == "Polos")) {
                             $barangMasukDataFinisData['lk_kiper_id'] = $LkKiper->id;
@@ -41151,7 +41151,7 @@ class CostumerServicesController extends Controller
                         $barangMasukDataFinisData = [
                             'no_order_id' => $lk->id,
                             'jahit_baju_id' => $barangMasukJahit->id,
-                            'deadline' => $createDate12->format('Y-m-d'),
+                            'deadline' => $request->deadline,
                         ];
                         if (isset($LkBaju1) && ($LkBaju1->status_baju_1 == "Full print")) {
                             $barangMasukDataFinisData['lk_1_id'] = $LkBaju1->id;
@@ -42599,7 +42599,7 @@ class CostumerServicesController extends Controller
                         $barangMasukDataFinisData = [
                             'no_order_id' => $lk->id,
                             'jahit_baju_id' => $barangMasukJahit->id,
-                            'deadline' => $createDate12->format('Y-m-d'),
+                            'deadline' => $request->deadline,
                         ];
                         if (isset($LkBaju1) && ($LkBaju1->status_baju_1 == "Half print")) {
                             $barangMasukDataFinisData['lk_1_id'] = $LkBaju1->id;
@@ -43376,7 +43376,7 @@ class CostumerServicesController extends Controller
                         $barangMasukDataFinisData = [
                             'no_order_id' => $lk->id,
                             'jahit_baju_id' => $barangMasukJahit->id,
-                            'deadline' => $createDate12->format('Y-m-d'),
+                            'deadline' => $request->deadline,
                         ];
                         if (isset($LkBaju1) && ($LkBaju1->status_baju_1 == "Polos")) {
                             $barangMasukDataFinisData['lk_1_id'] = $LkBaju1->id;
@@ -44668,7 +44668,7 @@ class CostumerServicesController extends Controller
                         $barangMasukDataFinisData = [
                             'no_order_id' => $lk->id,
                             'jahit_baju_id' => $barangMasukJahit->id,
-                            'deadline' => $createDate12->format('Y-m-d'),
+                            'deadline' => $request->deadline,
                         ];
                         if (isset($LkCelanaPlayer) && ($LkCelanaPlayer->status_celana_player == "Full print")) {
                             $barangMasukDataFinisData['lk_celana_player_id'] = $LkCelanaPlayer->id;
@@ -46103,7 +46103,7 @@ class CostumerServicesController extends Controller
                         $barangMasukDataFinisData = [
                             'no_order_id' => $lk->id,
                             'jahit_baju_id' => $barangMasukJahit->id,
-                            'deadline' => $createDate12->format('Y-m-d'),
+                            'deadline' => $request->deadline,
                         ];
                         if (isset($LkCelanaPlayer) && ($LkCelanaPlayer->status_celana_player == "Half print")) {
                             $barangMasukDataFinisData['lk_celana_player_id'] = $LkCelanaPlayer->id;
@@ -46879,7 +46879,7 @@ class CostumerServicesController extends Controller
                         $barangMasukDataFinisData = [
                             'no_order_id' => $lk->id,
                             'jahit_baju_id' => $barangMasukJahit->id,
-                            'deadline' => $createDate12->format('Y-m-d'),
+                            'deadline' => $request->deadline,
                         ];
                         if (isset($LkCelanaPlayer) && ($LkCelanaPlayer->status_celana_player == "Polos")) {
                             $barangMasukDataFinisData['lk_celana_player_id'] = $LkCelanaPlayer->id;
@@ -48173,7 +48173,7 @@ class CostumerServicesController extends Controller
                         $barangMasukDataFinisData = [
                             'no_order_id' => $lk->id,
                             'jahit_baju_id' => $barangMasukJahit->id,
-                            'deadline' => $createDate12->format('Y-m-d'),
+                            'deadline' => $request->deadline,
                         ];
                         if (isset($LkCelanaPelatih) && ($LkCelanaPelatih->status_celana_pelatih == "Full print")) {
                             $barangMasukDataFinisData['lk_celana_pelatih_id'] = $LkCelanaPelatih->id;
@@ -49607,7 +49607,7 @@ class CostumerServicesController extends Controller
                         $barangMasukDataFinisData = [
                             'no_order_id' => $lk->id,
                             'jahit_baju_id' => $barangMasukJahit->id,
-                            'deadline' => $createDate12->format('Y-m-d'),
+                            'deadline' => $request->deadline,
                         ];
                         if (isset($LkCelanaPelatih) && ($LkCelanaPelatih->status_celana_pelatih == "Half print")) {
                             $barangMasukDataFinisData['lk_celana_pelatih_id'] = $LkCelanaPelatih->id;
@@ -50384,7 +50384,7 @@ class CostumerServicesController extends Controller
                         $barangMasukDataFinisData = [
                             'no_order_id' => $lk->id,
                             'jahit_baju_id' => $barangMasukJahit->id,
-                            'deadline' => $createDate12->format('Y-m-d'),
+                            'deadline' => $request->deadline,
                         ];
                         if (isset($LkCelanaPelatih) && ($LkCelanaPelatih->status_celana_pelatih == "Polos")) {
                             $barangMasukDataFinisData['lk_celana_pelatih_id'] = $LkCelanaPelatih->id;
@@ -51678,7 +51678,7 @@ class CostumerServicesController extends Controller
                         $barangMasukDataFinisData = [
                             'no_order_id' => $lk->id,
                             'jahit_baju_id' => $barangMasukJahit->id,
-                            'deadline' => $createDate12->format('Y-m-d'),
+                            'deadline' => $request->deadline,
                         ];
                         if (isset($LkCelanaKiper) && ($LkCelanaKiper->status_celana_kiper == "Full print")) {
                             $barangMasukDataFinisData['lk_celana_kiper_id'] = $LkCelanaKiper->id;
@@ -53113,7 +53113,7 @@ class CostumerServicesController extends Controller
                         $barangMasukDataFinisData = [
                             'no_order_id' => $lk->id,
                             'jahit_baju_id' => $barangMasukJahit->id,
-                            'deadline' => $createDate12->format('Y-m-d'),
+                            'deadline' => $request->deadline,
                         ];
                         if (isset($LkCelanaKiper) && ($LkCelanaKiper->status_celana_kiper == "Half print")) {
                             $barangMasukDataFinisData['lk_celana_kiper_id'] = $LkCelanaKiper->id;
@@ -53890,7 +53890,7 @@ class CostumerServicesController extends Controller
                         $barangMasukDataFinisData = [
                             'no_order_id' => $lk->id,
                             'jahit_baju_id' => $barangMasukJahit->id,
-                            'deadline' => $createDate12->format('Y-m-d'),
+                            'deadline' => $request->deadline,
                         ];
                         if (isset($LkCelanaKiper) && ($LkCelanaKiper->status_celana_kiper == "Polos")) {
                             $barangMasukDataFinisData['lk_celana_kiper_id'] = $LkCelanaKiper->id;
@@ -55186,7 +55186,7 @@ class CostumerServicesController extends Controller
                         $barangMasukDataFinisData = [
                             'no_order_id' => $lk->id,
                             'jahit_baju_id' => $barangMasukJahit->id,
-                            'deadline' => $createDate12->format('Y-m-d'),
+                            'deadline' => $request->deadline,
                         ];
                         if (isset($LkCelana1) && ($LkCelana1->status_celana_1 == "Full print")) {
                             $barangMasukDataFinisData['lk_celana_1_id'] = $LkCelana1->id;
@@ -56622,7 +56622,7 @@ class CostumerServicesController extends Controller
                         $barangMasukDataFinisData = [
                             'no_order_id' => $lk->id,
                             'jahit_baju_id' => $barangMasukJahit->id,
-                            'deadline' => $createDate12->format('Y-m-d'),
+                            'deadline' => $request->deadline,
                         ];
                         if (isset($LkCelana1) && ($LkCelana1->status_celana_1 == "Half print")) {
                             $barangMasukDataFinisData['lk_celana_1_id'] = $LkCelana1->id;
@@ -57399,7 +57399,7 @@ class CostumerServicesController extends Controller
                         $barangMasukDataFinisData = [
                             'no_order_id' => $lk->id,
                             'jahit_baju_id' => $barangMasukJahit->id,
-                            'deadline' => $createDate12->format('Y-m-d'),
+                            'deadline' => $request->deadline,
                         ];
                         if (isset($LkCelana1) && ($LkCelana1->status_celana_1 == "Polos")) {
                             $barangMasukDataFinisData['lk_celana_1_id'] = $LkCelana1->id;
