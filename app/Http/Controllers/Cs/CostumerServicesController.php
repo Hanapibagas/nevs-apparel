@@ -171,21 +171,22 @@ class CostumerServicesController extends Controller
         // PENENTUAN TANGGAL
         $tanggal_masuk = \Carbon\Carbon::parse($lk->tanggal_masuk);
         $deadline = \Carbon\Carbon::parse($request->deadline);
-        $total_hari = $tanggal_masuk->diffInDays($deadline);
+        $total_hari = 0;
         for ($date = clone $tanggal_masuk; $date->lte($deadline); $date->addDay()) {
-            if ($date->dayOfWeek === Carbon::SUNDAY) {
-                $total_hari--;
+            if ($date->dayOfWeek !== Carbon::SUNDAY) {
+                $total_hari++;
             }
         }
 
         $pengurangan = 1;
         $hasil_hari = $total_hari - $pengurangan;
+        if ($hasil_hari < 0) {
+            $hasil_hari = abs($hasil_hari);
+        }
 
-        // if ($hasil_hari >= 1 && $hasil_hari <= 9) {
-        //     $keterangan = "Express";
-        // } else {
-        //     $keterangan = "Normal";
-        // }
+        return response()->json([
+            $hasil_hari,
+        ]);
         // AKHIR PENENTUAN TANGGAL
 
          // UPDATE DATA
@@ -524,7 +525,7 @@ class CostumerServicesController extends Controller
                 if (isset($gambar->file_baju_player)) {
                     // FULL PRINT
                     if ($LkPlayer->status_player == "Full print") {
-                        if ($total_hari == 0) {
+                        if ($hasil_hari == 0) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_player_id', $LkPlayer->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -609,7 +610,7 @@ class CostumerServicesController extends Controller
                                     'finis_id' => $barangMasukFinis->id,
                                 ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 1) {
+                        } elseif ($hasil_hari == 1) {
                              // LAYOUT
                              BarangMasukDatalayout::where('lk_player_id', $LkPlayer->id)->delete();
                              $barangMasukDataLayoutData = [
@@ -695,7 +696,7 @@ class CostumerServicesController extends Controller
                                  ]);
                              // AKHIR LAPORAN
                         }
-                        elseif ($total_hari == 2) {
+                        elseif ($hasil_hari == 2) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_player_id', $LkPlayer->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -794,7 +795,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 3) {
+                        } elseif ($hasil_hari == 3) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_player_id', $LkPlayer->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -895,7 +896,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 4) {
+                        } elseif ($hasil_hari == 4) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_player_id', $LkPlayer->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -994,7 +995,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 5) {
+                        } elseif ($hasil_hari == 5) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_player_id', $LkPlayer->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -1093,7 +1094,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 6) {
+                        } elseif ($hasil_hari == 6) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_player_id', $LkPlayer->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -1192,7 +1193,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 7) {
+                        } elseif ($hasil_hari == 7) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_player_id', $LkPlayer->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -1292,7 +1293,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 8) {
+                        } elseif ($hasil_hari == 8) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_player_id', $LkPlayer->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -1393,7 +1394,7 @@ class CostumerServicesController extends Controller
                                     'finis_id' => $barangMasukFinis->id,
                                 ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 9) {
+                        } elseif ($hasil_hari == 9) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_player_id', $LkPlayer->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -1493,7 +1494,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 10) {
+                        } elseif ($hasil_hari == 10) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_player_id', $LkPlayer->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -1594,7 +1595,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 11) {
+                        } elseif ($hasil_hari == 11) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_player_id', $LkPlayer->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -1695,7 +1696,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari >= 12 && $total_hari <= 9999) {
+                        } elseif ($hasil_hari >= 12 && $hasil_hari <= 9999) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_player_id', $LkPlayer->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -1802,7 +1803,7 @@ class CostumerServicesController extends Controller
 
                     // HALFT PRINT
                     if ($LkPlayer->status_player == "Half print") {
-                        if ($total_hari == 0) {
+                        if ($hasil_hari == 0) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_player_id', $LkPlayer->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -1912,7 +1913,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                             // AKHIR LAPORAN
-                        }elseif ($total_hari == 1) {
+                        }elseif ($hasil_hari == 1) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_player_id', $LkPlayer->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -2023,7 +2024,7 @@ class CostumerServicesController extends Controller
                             ]);
                             // AKHIR LAPORAN
                         }
-                         elseif ($total_hari == 2) {
+                         elseif ($hasil_hari == 2) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_player_id', $LkPlayer->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -2135,7 +2136,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 3) {
+                        } elseif ($hasil_hari == 3) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_player_id', $LkPlayer->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -2247,7 +2248,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 4) {
+                        } elseif ($hasil_hari == 4) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_player_id', $LkPlayer->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -2359,7 +2360,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 5) {
+                        } elseif ($hasil_hari == 5) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_player_id', $LkPlayer->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -2471,7 +2472,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 6) {
+                        } elseif ($hasil_hari == 6) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_player_id', $LkPlayer->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -2583,7 +2584,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 7) {
+                        } elseif ($hasil_hari == 7) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_player_id', $LkPlayer->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -2695,7 +2696,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 8) {
+                        } elseif ($hasil_hari == 8) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_player_id', $LkPlayer->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -2807,7 +2808,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 9) {
+                        } elseif ($hasil_hari == 9) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_player_id', $LkPlayer->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -2920,7 +2921,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 10) {
+                        } elseif ($hasil_hari == 10) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_player_id', $LkPlayer->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -3032,7 +3033,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 11) {
+                        } elseif ($hasil_hari == 11) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_player_id', $LkPlayer->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -3144,7 +3145,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari >= 12 && $total_hari <= 9999) {
+                        } elseif ($hasil_hari >= 12 && $hasil_hari <= 9999) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_player_id', $LkPlayer->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -3262,7 +3263,7 @@ class CostumerServicesController extends Controller
 
                     // POLOS
                     if ($LkPlayer->status_player == "Polos") {
-                        if ($total_hari == 0) {
+                        if ($hasil_hari == 0) {
                             // CUT
                             BarangMasukDatalayout::where('lk_player_id', $LkPlayer->id)->delete();
                             DataManualCut::where('lk_player_id', $LkPlayer->id)->delete();
@@ -3322,7 +3323,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 1) {
+                        } elseif ($hasil_hari == 1) {
                             // CUT
                             BarangMasukDatalayout::where('lk_player_id', $LkPlayer->id)->delete();
                             DataManualCut::where('lk_player_id', $LkPlayer->id)->delete();
@@ -3383,7 +3384,7 @@ class CostumerServicesController extends Controller
                             ]);
                             // AKHIR LAPORAN
                         }
-                        elseif ($total_hari == 2) {
+                        elseif ($hasil_hari == 2) {
                             // CUT PRINT
                             BarangMasukDatalayout::where('lk_player_id', $LkPlayer->id)->delete();
                             DataManualCut::where('lk_player_id', $LkPlayer->id)->delete();
@@ -3443,7 +3444,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 3) {
+                        } elseif ($hasil_hari == 3) {
                             // CUT PRINT
                             BarangMasukDatalayout::where('lk_player_id', $LkPlayer->id)->delete();
                             DataManualCut::where('lk_player_id', $LkPlayer->id)->delete();
@@ -3503,7 +3504,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 4) {
+                        } elseif ($hasil_hari == 4) {
                             // CUT PRINT
                             BarangMasukDatalayout::where('lk_player_id', $LkPlayer->id)->delete();
                             DataManualCut::where('lk_player_id', $LkPlayer->id)->delete();
@@ -3563,7 +3564,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 5) {
+                        } elseif ($hasil_hari == 5) {
                             // CUT PRINT
                             BarangMasukDatalayout::where('lk_player_id', $LkPlayer->id)->delete();
                             DataManualCut::where('lk_player_id', $LkPlayer->id)->delete();
@@ -3623,7 +3624,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 6) {
+                        } elseif ($hasil_hari == 6) {
                             // CUT PRINT
                             BarangMasukDatalayout::where('lk_player_id', $LkPlayer->id)->delete();
                             DataManualCut::where('lk_player_id', $LkPlayer->id)->delete();
@@ -3683,7 +3684,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 7) {
+                        } elseif ($hasil_hari == 7) {
                             // CUT PRINT
                             BarangMasukDatalayout::where('lk_player_id', $LkPlayer->id)->delete();
                             DataManualCut::where('lk_player_id', $LkPlayer->id)->delete();
@@ -3743,7 +3744,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 8) {
+                        } elseif ($hasil_hari == 8) {
                             // CUT PRINT
                             BarangMasukDatalayout::where('lk_player_id', $LkPlayer->id)->delete();
                             DataManualCut::where('lk_player_id', $LkPlayer->id)->delete();
@@ -3803,7 +3804,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 9) {
+                        } elseif ($hasil_hari == 9) {
                             // CUT PRINT
                             BarangMasukDatalayout::where('lk_player_id', $LkPlayer->id)->delete();
                             DataManualCut::where('lk_player_id', $LkPlayer->id)->delete();
@@ -3863,7 +3864,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 10) {
+                        } elseif ($hasil_hari == 10) {
                             // CUT PRINT
                             BarangMasukDatalayout::where('lk_player_id', $LkPlayer->id)->delete();
                             DataManualCut::where('lk_player_id', $LkPlayer->id)->delete();
@@ -3923,7 +3924,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 11) {
+                        } elseif ($hasil_hari == 11) {
                             // CUT PRINT
                             BarangMasukDatalayout::where('lk_player_id', $LkPlayer->id)->delete();
                             DataManualCut::where('lk_player_id', $LkPlayer->id)->delete();
@@ -3983,7 +3984,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari >= 12 && $total_hari <= 9999) {
+                        } elseif ($hasil_hari >= 12 && $hasil_hari <= 9999) {
                             // CUT PRINT
                             BarangMasukDatalayout::where('lk_player_id', $LkPlayer->id)->delete();
                             DataManualCut::where('lk_player_id', $LkPlayer->id)->delete();
@@ -4050,7 +4051,7 @@ class CostumerServicesController extends Controller
                 if (isset($gambar->file_baju_pelatih)) {
                     // FULL PRINT
                     if ($LkPelatih->status_pelatih == "Full print") {
-                        if ($total_hari == 0) {
+                        if ($hasil_hari == 0) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_pelatih_id', $LkPelatih->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -4151,7 +4152,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 1) {
+                        } elseif ($hasil_hari == 1) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_pelatih_id', $LkPelatih->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -4253,7 +4254,7 @@ class CostumerServicesController extends Controller
                             ]);
                             // AKHIR LAPORAN
                         }
-                        elseif ($total_hari == 2) {
+                        elseif ($hasil_hari == 2) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_pelatih_id', $LkPelatih->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -4354,7 +4355,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 3) {
+                        } elseif ($hasil_hari == 3) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_pelatih_id', $LkPelatih->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -4455,7 +4456,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 4) {
+                        } elseif ($hasil_hari == 4) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_pelatih_id', $LkPelatih->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -4556,7 +4557,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 5) {
+                        } elseif ($hasil_hari == 5) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_pelatih_id', $LkPelatih->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -4657,7 +4658,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 6) {
+                        } elseif ($hasil_hari == 6) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_pelatih_id', $LkPelatih->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -4758,7 +4759,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 7) {
+                        } elseif ($hasil_hari == 7) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_pelatih_id', $LkPelatih->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -4859,7 +4860,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 8) {
+                        } elseif ($hasil_hari == 8) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_pelatih_id', $LkPelatih->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -4960,7 +4961,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 9) {
+                        } elseif ($hasil_hari == 9) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_pelatih_id', $LkPelatih->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -5061,7 +5062,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 10) {
+                        } elseif ($hasil_hari == 10) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_pelatih_id', $LkPelatih->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -5162,7 +5163,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 11) {
+                        } elseif ($hasil_hari == 11) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_pelatih_id', $LkPelatih->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -5263,7 +5264,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari >= 12 && $total_hari <= 9999) {
+                        } elseif ($hasil_hari >= 12 && $hasil_hari <= 9999) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_pelatih_id', $LkPelatih->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -5370,7 +5371,7 @@ class CostumerServicesController extends Controller
 
                     // HALFT PRINT
                     if ($LkPelatih->status_pelatih == "Half print") {
-                        if ($total_hari == 0) {
+                        if ($hasil_hari == 0) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_pelatih_id', $LkPelatih->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -5480,7 +5481,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                             // AKHIR LAPORAN
-                        }elseif ($total_hari == 1) {
+                        }elseif ($hasil_hari == 1) {
                              // LAYOUT
                              BarangMasukDatalayout::where('lk_pelatih_id', $LkPelatih->id)->delete();
                              $barangMasukDataLayoutData = [
@@ -5591,7 +5592,7 @@ class CostumerServicesController extends Controller
                              ]);
                              // AKHIR LAPORAN
                         }
-                         elseif ($total_hari == 2) {
+                         elseif ($hasil_hari == 2) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_pelatih_id', $LkPelatih->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -5703,7 +5704,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 3) {
+                        } elseif ($hasil_hari == 3) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_pelatih_id', $LkPelatih->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -5815,7 +5816,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 4) {
+                        } elseif ($hasil_hari == 4) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_pelatih_id', $LkPelatih->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -5927,7 +5928,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 5) {
+                        } elseif ($hasil_hari == 5) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_pelatih_id', $LkPelatih->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -6039,7 +6040,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 6) {
+                        } elseif ($hasil_hari == 6) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_pelatih_id', $LkPelatih->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -6151,7 +6152,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 7) {
+                        } elseif ($hasil_hari == 7) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_pelatih_id', $LkPelatih->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -6263,7 +6264,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 8) {
+                        } elseif ($hasil_hari == 8) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_pelatih_id', $LkPelatih->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -6375,7 +6376,7 @@ class CostumerServicesController extends Controller
                                     'finis_id' => $barangMasukFinis->id,
                                 ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 9) {
+                        } elseif ($hasil_hari == 9) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_pelatih_id', $LkPelatih->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -6487,7 +6488,7 @@ class CostumerServicesController extends Controller
                                     'finis_id' => $barangMasukFinis->id,
                                 ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 10) {
+                        } elseif ($hasil_hari == 10) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_pelatih_id', $LkPelatih->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -6599,7 +6600,7 @@ class CostumerServicesController extends Controller
                                     'finis_id' => $barangMasukFinis->id,
                                 ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 11) {
+                        } elseif ($hasil_hari == 11) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_pelatih_id', $LkPelatih->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -6711,7 +6712,7 @@ class CostumerServicesController extends Controller
                                     'finis_id' => $barangMasukFinis->id,
                                 ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari >= 12 && $total_hari <= 9999) {
+                        } elseif ($hasil_hari >= 12 && $hasil_hari <= 9999) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_pelatih_id', $LkPelatih->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -6829,7 +6830,7 @@ class CostumerServicesController extends Controller
 
                     // POLOS
                     if ($LkPelatih->status_pelatih == "Polos") {
-                        if ($total_hari == 0) {
+                        if ($hasil_hari == 0) {
                             // CUT PRINT
                             BarangMasukDatalayout::where('lk_pelatih_id', $LkPelatih->id)->delete();
                             DataManualCut::where('lk_pelatih_id', $LkPelatih->id)->delete();
@@ -6889,7 +6890,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                             // AKHIR LAPORAN
-                        }elseif ($total_hari == 1) {
+                        }elseif ($hasil_hari == 1) {
                             // CUT PRINT
                             BarangMasukDatalayout::where('lk_pelatih_id', $LkPelatih->id)->delete();
                             DataManualCut::where('lk_pelatih_id', $LkPelatih->id)->delete();
@@ -6950,7 +6951,7 @@ class CostumerServicesController extends Controller
                             ]);
                             // AKHIR LAPORAN
                         }
-                         elseif ($total_hari == 2) {
+                         elseif ($hasil_hari == 2) {
                             // CUT PRINT
                             BarangMasukDatalayout::where('lk_pelatih_id', $LkPelatih->id)->delete();
                             DataManualCut::where('lk_pelatih_id', $LkPelatih->id)->delete();
@@ -7010,7 +7011,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 3) {
+                        } elseif ($hasil_hari == 3) {
                             // CUT PRINT
                             BarangMasukDatalayout::where('lk_pelatih_id', $LkPelatih->id)->delete();
                             DataManualCut::where('lk_pelatih_id', $LkPelatih->id)->delete();
@@ -7070,7 +7071,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 4) {
+                        } elseif ($hasil_hari == 4) {
                             // CUT PRINT
                             BarangMasukDatalayout::where('lk_pelatih_id', $LkPelatih->id)->delete();
                             DataManualCut::where('lk_pelatih_id', $LkPelatih->id)->delete();
@@ -7130,7 +7131,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 5) {
+                        } elseif ($hasil_hari == 5) {
                             // CUT PRINT
                             BarangMasukDatalayout::where('lk_pelatih_id', $LkPelatih->id)->delete();
                             DataManualCut::where('lk_pelatih_id', $LkPelatih->id)->delete();
@@ -7190,7 +7191,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 6) {
+                        } elseif ($hasil_hari == 6) {
                             // CUT PRINT
                             BarangMasukDatalayout::where('lk_pelatih_id', $LkPelatih->id)->delete();
                             DataManualCut::where('lk_pelatih_id', $LkPelatih->id)->delete();
@@ -7250,7 +7251,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 7) {
+                        } elseif ($hasil_hari == 7) {
                             // CUT PRINT
                             BarangMasukDatalayout::where('lk_pelatih_id', $LkPelatih->id)->delete();
                             DataManualCut::where('lk_pelatih_id', $LkPelatih->id)->delete();
@@ -7310,7 +7311,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 8) {
+                        } elseif ($hasil_hari == 8) {
                             // CUT PRINT
                             BarangMasukDatalayout::where('lk_pelatih_id', $LkPelatih->id)->delete();
                             DataManualCut::where('lk_pelatih_id', $LkPelatih->id)->delete();
@@ -7370,7 +7371,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 9) {
+                        } elseif ($hasil_hari == 9) {
                             // CUT PRINT
                             BarangMasukDatalayout::where('lk_pelatih_id', $LkPelatih->id)->delete();
                             DataManualCut::where('lk_pelatih_id', $LkPelatih->id)->delete();
@@ -7430,7 +7431,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 10) {
+                        } elseif ($hasil_hari == 10) {
                             // CUT PRINT
                             BarangMasukDatalayout::where('lk_pelatih_id', $LkPelatih->id)->delete();
                             DataManualCut::where('lk_pelatih_id', $LkPelatih->id)->delete();
@@ -7490,7 +7491,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 11) {
+                        } elseif ($hasil_hari == 11) {
                             // CUT PRINT
                             BarangMasukDatalayout::where('lk_pelatih_id', $LkPelatih->id)->delete();
                             DataManualCut::where('lk_pelatih_id', $LkPelatih->id)->delete();
@@ -7550,7 +7551,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari >= 12 && $total_hari <= 9999) {
+                        } elseif ($hasil_hari >= 12 && $hasil_hari <= 9999) {
                             // CUT PRINT
                             BarangMasukDatalayout::where('lk_pelatih_id', $LkPelatih->id)->delete();
                             DataManualCut::where('lk_pelatih_id', $LkPelatih->id)->delete();
@@ -7617,7 +7618,7 @@ class CostumerServicesController extends Controller
                 if (isset($gambar->file_baju_kiper)) {
                     // FULL PRINT
                     if ($LkKiper->status_kiper == "Full print") {
-                        if ($total_hari == 0) {
+                        if ($hasil_hari == 0) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_kiper_id', $LkKiper->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -7718,7 +7719,7 @@ class CostumerServicesController extends Controller
                                     'finis_id' => $barangMasukFinis->id,
                                 ]);
                             // AKHIR LAPORAN
-                        }elseif ($total_hari == 1) {
+                        }elseif ($hasil_hari == 1) {
                              // LAYOUT
                              BarangMasukDatalayout::where('lk_kiper_id', $LkKiper->id)->delete();
                              $barangMasukDataLayoutData = [
@@ -7820,7 +7821,7 @@ class CostumerServicesController extends Controller
                                  ]);
                              // AKHIR LAPORAN
                         }
-                         elseif ($total_hari == 2) {
+                         elseif ($hasil_hari == 2) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_kiper_id', $LkKiper->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -7921,7 +7922,7 @@ class CostumerServicesController extends Controller
                                     'finis_id' => $barangMasukFinis->id,
                                 ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 3) {
+                        } elseif ($hasil_hari == 3) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_kiper_id', $LkKiper->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -8022,7 +8023,7 @@ class CostumerServicesController extends Controller
                                     'finis_id' => $barangMasukFinis->id,
                                 ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 4) {
+                        } elseif ($hasil_hari == 4) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_kiper_id', $LkKiper->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -8123,7 +8124,7 @@ class CostumerServicesController extends Controller
                                     'finis_id' => $barangMasukFinis->id,
                                 ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 5) {
+                        } elseif ($hasil_hari == 5) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_kiper_id', $LkKiper->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -8224,7 +8225,7 @@ class CostumerServicesController extends Controller
                                     'finis_id' => $barangMasukFinis->id,
                                 ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 6) {
+                        } elseif ($hasil_hari == 6) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_kiper_id', $LkKiper->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -8325,7 +8326,7 @@ class CostumerServicesController extends Controller
                                     'finis_id' => $barangMasukFinis->id,
                                 ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 7) {
+                        } elseif ($hasil_hari == 7) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_kiper_id', $LkKiper->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -8426,7 +8427,7 @@ class CostumerServicesController extends Controller
                                     'finis_id' => $barangMasukFinis->id,
                                 ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 8) {
+                        } elseif ($hasil_hari == 8) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_kiper_id', $LkKiper->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -8527,7 +8528,7 @@ class CostumerServicesController extends Controller
                                     'finis_id' => $barangMasukFinis->id,
                                 ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 9) {
+                        } elseif ($hasil_hari == 9) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_kiper_id', $LkKiper->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -8628,7 +8629,7 @@ class CostumerServicesController extends Controller
                                     'finis_id' => $barangMasukFinis->id,
                                 ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 10) {
+                        } elseif ($hasil_hari == 10) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_kiper_id', $LkKiper->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -8729,7 +8730,7 @@ class CostumerServicesController extends Controller
                                     'finis_id' => $barangMasukFinis->id,
                                 ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 11) {
+                        } elseif ($hasil_hari == 11) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_kiper_id', $LkKiper->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -8830,7 +8831,7 @@ class CostumerServicesController extends Controller
                                     'finis_id' => $barangMasukFinis->id,
                                 ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari >= 12 && $total_hari <= 9999) {
+                        } elseif ($hasil_hari >= 12 && $hasil_hari <= 9999) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_kiper_id', $LkKiper->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -8937,7 +8938,7 @@ class CostumerServicesController extends Controller
 
                     // HALFT PRINT
                     if ($LkKiper->status_kiper == "Half print") {
-                        if ($total_hari == 0) {
+                        if ($hasil_hari == 0) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_kiper_id', $LkKiper->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -9049,7 +9050,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                                 ]);
                             // AKHIR LAPORAN
-                        }elseif ($total_hari == 1) {
+                        }elseif ($hasil_hari == 1) {
                              // LAYOUT
                              BarangMasukDatalayout::where('lk_kiper_id', $LkKiper->id)->delete();
                              $barangMasukDataLayoutData = [
@@ -9162,7 +9163,7 @@ class CostumerServicesController extends Controller
                                  ]);
                              // AKHIR LAPORAN
                         }
-                         elseif ($total_hari == 2) {
+                         elseif ($hasil_hari == 2) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_kiper_id', $LkKiper->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -9274,7 +9275,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                                 ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 3) {
+                        } elseif ($hasil_hari == 3) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_kiper_id', $LkKiper->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -9386,7 +9387,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                                 ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 4) {
+                        } elseif ($hasil_hari == 4) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_kiper_id', $LkKiper->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -9498,7 +9499,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                                 ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 5) {
+                        } elseif ($hasil_hari == 5) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_kiper_id', $LkKiper->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -9610,7 +9611,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                                 ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 6) {
+                        } elseif ($hasil_hari == 6) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_kiper_id', $LkKiper->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -9722,7 +9723,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                                 ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 7) {
+                        } elseif ($hasil_hari == 7) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_kiper_id', $LkKiper->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -9834,7 +9835,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                                 ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 8) {
+                        } elseif ($hasil_hari == 8) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_kiper_id', $LkKiper->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -9946,7 +9947,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                                 ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 9) {
+                        } elseif ($hasil_hari == 9) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_kiper_id', $LkKiper->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -10058,7 +10059,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                                 ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 10) {
+                        } elseif ($hasil_hari == 10) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_kiper_id', $LkKiper->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -10170,7 +10171,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                                 ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 11) {
+                        } elseif ($hasil_hari == 11) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_kiper_id', $LkKiper->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -10282,7 +10283,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                                 ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari >= 12 && $total_hari <= 9999) {
+                        } elseif ($hasil_hari >= 12 && $hasil_hari <= 9999) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_kiper_id', $LkKiper->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -10400,7 +10401,7 @@ class CostumerServicesController extends Controller
 
                     // POLOS
                     if ($LkKiper->status_kiper == "Polos") {
-                        if ($total_hari == 0) {
+                        if ($hasil_hari == 0) {
                             // CUT PRINT
                             BarangMasukDatalayout::where('lk_kiper_id', $LkKiper->id)->delete();
                             DataManualCut::where('lk_kiper_id', $LkKiper->id)->delete();
@@ -10460,7 +10461,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                             // AKHIR LAPORAN
-                        }elseif ($total_hari == 1) {
+                        }elseif ($hasil_hari == 1) {
                              // CUT PRINT
                              BarangMasukDatalayout::where('lk_kiper_id', $LkKiper->id)->delete();
                              DataManualCut::where('lk_kiper_id', $LkKiper->id)->delete();
@@ -10521,7 +10522,7 @@ class CostumerServicesController extends Controller
                              ]);
                              // AKHIR LAPORAN
                         }
-                         elseif ($total_hari == 2) {
+                         elseif ($hasil_hari == 2) {
                             // CUT PRINT
                             BarangMasukDatalayout::where('lk_kiper_id', $LkKiper->id)->delete();
                             DataManualCut::where('lk_kiper_id', $LkKiper->id)->delete();
@@ -10581,7 +10582,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 3) {
+                        } elseif ($hasil_hari == 3) {
                             // CUT PRINT
                             BarangMasukDatalayout::where('lk_kiper_id', $LkKiper->id)->delete();
                             DataManualCut::where('lk_kiper_id', $LkKiper->id)->delete();
@@ -10641,7 +10642,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 4) {
+                        } elseif ($hasil_hari == 4) {
                             // CUT PRINT
                             BarangMasukDatalayout::where('lk_kiper_id', $LkKiper->id)->delete();
                             DataManualCut::where('lk_kiper_id', $LkKiper->id)->delete();
@@ -10701,7 +10702,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 5) {
+                        } elseif ($hasil_hari == 5) {
                             // CUT PRINT
                             BarangMasukDatalayout::where('lk_kiper_id', $LkKiper->id)->delete();
                             DataManualCut::where('lk_kiper_id', $LkKiper->id)->delete();
@@ -10761,7 +10762,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 6) {
+                        } elseif ($hasil_hari == 6) {
                             // CUT PRINT
                             BarangMasukDatalayout::where('lk_kiper_id', $LkKiper->id)->delete();
                             DataManualCut::where('lk_kiper_id', $LkKiper->id)->delete();
@@ -10821,7 +10822,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 7) {
+                        } elseif ($hasil_hari == 7) {
                             // CUT PRINT
                             BarangMasukDatalayout::where('lk_kiper_id', $LkKiper->id)->delete();
                             DataManualCut::where('lk_kiper_id', $LkKiper->id)->delete();
@@ -10881,7 +10882,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 8) {
+                        } elseif ($hasil_hari == 8) {
                             // CUT PRINT
                             BarangMasukDatalayout::where('lk_kiper_id', $LkKiper->id)->delete();
                             DataManualCut::where('lk_kiper_id', $LkKiper->id)->delete();
@@ -10941,7 +10942,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 9) {
+                        } elseif ($hasil_hari == 9) {
                             // CUT PRINT
                             BarangMasukDatalayout::where('lk_kiper_id', $LkKiper->id)->delete();
                             DataManualCut::where('lk_kiper_id', $LkKiper->id)->delete();
@@ -11001,7 +11002,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 10) {
+                        } elseif ($hasil_hari == 10) {
                             // CUT PRINT
                             BarangMasukDatalayout::where('lk_kiper_id', $LkKiper->id)->delete();
                             DataManualCut::where('lk_kiper_id', $LkKiper->id)->delete();
@@ -11061,7 +11062,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 11) {
+                        } elseif ($hasil_hari == 11) {
                             // CUT PRINT
                             BarangMasukDatalayout::where('lk_kiper_id', $LkKiper->id)->delete();
                             DataManualCut::where('lk_kiper_id', $LkKiper->id)->delete();
@@ -11121,7 +11122,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari >= 12 && $total_hari <= 9999) {
+                        } elseif ($hasil_hari >= 12 && $hasil_hari <= 9999) {
                             // CUT PRINT
                             BarangMasukDatalayout::where('lk_kiper_id', $LkKiper->id)->delete();
                             DataManualCut::where('lk_kiper_id', $LkKiper->id)->delete();
@@ -11188,7 +11189,7 @@ class CostumerServicesController extends Controller
                 if (isset($gambar->file_baju_1)) {
                     // FULL PRINT
                     if ($LkBaju1->status_baju_1 == "Full print") {
-                        if ($total_hari == 0) {
+                        if ($hasil_hari == 0) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_1_id', $LkBaju1->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -11289,7 +11290,7 @@ class CostumerServicesController extends Controller
                                     'finis_id' => $barangMasukFinis->id,
                                 ]);
                             // AKHIR LAPORAN
-                        }elseif ($total_hari == 1) {
+                        }elseif ($hasil_hari == 1) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_1_id', $LkBaju1->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -11391,7 +11392,7 @@ class CostumerServicesController extends Controller
                                 ]);
                             // AKHIR LAPORAN
                         }
-                         elseif ($total_hari == 2) {
+                         elseif ($hasil_hari == 2) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_1_id', $LkBaju1->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -11492,7 +11493,7 @@ class CostumerServicesController extends Controller
                                     'finis_id' => $barangMasukFinis->id,
                                 ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 3) {
+                        } elseif ($hasil_hari == 3) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_1_id', $LkBaju1->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -11593,7 +11594,7 @@ class CostumerServicesController extends Controller
                                     'finis_id' => $barangMasukFinis->id,
                                 ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 4) {
+                        } elseif ($hasil_hari == 4) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_1_id', $LkBaju1->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -11694,7 +11695,7 @@ class CostumerServicesController extends Controller
                                     'finis_id' => $barangMasukFinis->id,
                                 ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 5) {
+                        } elseif ($hasil_hari == 5) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_1_id', $LkBaju1->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -11795,7 +11796,7 @@ class CostumerServicesController extends Controller
                                     'finis_id' => $barangMasukFinis->id,
                                 ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 6) {
+                        } elseif ($hasil_hari == 6) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_1_id', $LkBaju1->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -11896,7 +11897,7 @@ class CostumerServicesController extends Controller
                                     'finis_id' => $barangMasukFinis->id,
                                 ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 7) {
+                        } elseif ($hasil_hari == 7) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_1_id', $LkBaju1->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -11997,7 +11998,7 @@ class CostumerServicesController extends Controller
                                     'finis_id' => $barangMasukFinis->id,
                                 ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 8) {
+                        } elseif ($hasil_hari == 8) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_1_id', $LkBaju1->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -12098,7 +12099,7 @@ class CostumerServicesController extends Controller
                                     'finis_id' => $barangMasukFinis->id,
                                 ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 9) {
+                        } elseif ($hasil_hari == 9) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_1_id', $LkBaju1->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -12199,7 +12200,7 @@ class CostumerServicesController extends Controller
                                     'finis_id' => $barangMasukFinis->id,
                                 ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 10) {
+                        } elseif ($hasil_hari == 10) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_1_id', $LkBaju1->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -12300,7 +12301,7 @@ class CostumerServicesController extends Controller
                                     'finis_id' => $barangMasukFinis->id,
                                 ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 11) {
+                        } elseif ($hasil_hari == 11) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_1_id', $LkBaju1->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -12401,7 +12402,7 @@ class CostumerServicesController extends Controller
                                     'finis_id' => $barangMasukFinis->id,
                                 ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari >= 12 && $total_hari <= 9999) {
+                        } elseif ($hasil_hari >= 12 && $hasil_hari <= 9999) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_1_id', $LkBaju1->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -12508,7 +12509,7 @@ class CostumerServicesController extends Controller
 
                     // HALFT PRINT
                     if ($LkBaju1->status_baju_1 == "Half print") {
-                        if ($total_hari == 0) {
+                        if ($hasil_hari == 0) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_1_id', $LkBaju1->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -12620,7 +12621,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                                 ]);
                             // AKHIR LAPORAN
-                        }elseif ($total_hari == 1) {
+                        }elseif ($hasil_hari == 1) {
                              // LAYOUT
                              BarangMasukDatalayout::where('lk_1_id', $LkBaju1->id)->delete();
                              $barangMasukDataLayoutData = [
@@ -12733,7 +12734,7 @@ class CostumerServicesController extends Controller
                                  ]);
                              // AKHIR LAPORAN
                         }
-                         elseif ($total_hari == 2) {
+                         elseif ($hasil_hari == 2) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_1_id', $LkBaju1->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -12845,7 +12846,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                                 ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 3) {
+                        } elseif ($hasil_hari == 3) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_1_id', $LkBaju1->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -12957,7 +12958,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                                 ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 4) {
+                        } elseif ($hasil_hari == 4) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_1_id', $LkBaju1->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -13069,7 +13070,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                                 ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 5) {
+                        } elseif ($hasil_hari == 5) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_1_id', $LkBaju1->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -13181,7 +13182,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                                 ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 6) {
+                        } elseif ($hasil_hari == 6) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_1_id', $LkBaju1->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -13293,7 +13294,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                                 ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 7) {
+                        } elseif ($hasil_hari == 7) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_1_id', $LkBaju1->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -13405,7 +13406,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                                 ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 8) {
+                        } elseif ($hasil_hari == 8) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_1_id', $LkBaju1->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -13517,7 +13518,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                                 ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 9) {
+                        } elseif ($hasil_hari == 9) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_1_id', $LkBaju1->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -13629,7 +13630,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                                 ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 10) {
+                        } elseif ($hasil_hari == 10) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_1_id', $LkBaju1->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -13741,7 +13742,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                                 ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 11) {
+                        } elseif ($hasil_hari == 11) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_1_id', $LkBaju1->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -13853,7 +13854,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                                 ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari >= 12 && $total_hari <= 9999) {
+                        } elseif ($hasil_hari >= 12 && $hasil_hari <= 9999) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_1_id', $LkBaju1->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -13971,7 +13972,7 @@ class CostumerServicesController extends Controller
 
                     // POLOS
                     if ($LkBaju1->status_baju_1 == "Polos") {
-                        if ($total_hari == 0) {
+                        if ($hasil_hari == 0) {
                             // CUT
                             BarangMasukDatalayout::where('lk_1_id', $LkBaju1->id)->delete();
                             DataManualCut::where('lk_1_id', $LkBaju1->id)->delete();
@@ -14031,7 +14032,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                             // AKHIR LAPORAN
-                        }elseif ($total_hari == 1) {
+                        }elseif ($hasil_hari == 1) {
                             // CUT
                             BarangMasukDatalayout::where('lk_1_id', $LkBaju1->id)->delete();
                             DataManualCut::where('lk_1_id', $LkBaju1->id)->delete();
@@ -14092,7 +14093,7 @@ class CostumerServicesController extends Controller
                             ]);
                             // AKHIR LAPORAN
                         }
-                        elseif ($total_hari == 2) {
+                        elseif ($hasil_hari == 2) {
                             // CUT PRINT
                             BarangMasukDatalayout::where('lk_1_id', $LkBaju1->id)->delete();
                             DataManualCut::where('lk_1_id', $LkBaju1->id)->delete();
@@ -14152,7 +14153,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 3) {
+                        } elseif ($hasil_hari == 3) {
                             // CUT PRINT
                             BarangMasukDatalayout::where('lk_1_id', $LkBaju1->id)->delete();
                             DataManualCut::where('lk_1_id', $LkBaju1->id)->delete();
@@ -14212,7 +14213,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 4) {
+                        } elseif ($hasil_hari == 4) {
                             // CUT PRINT
                             BarangMasukDatalayout::where('lk_1_id', $LkBaju1->id)->delete();
                             DataManualCut::where('lk_1_id', $LkBaju1->id)->delete();
@@ -14272,7 +14273,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 5) {
+                        } elseif ($hasil_hari == 5) {
                             // CUT PRINT
                             BarangMasukDatalayout::where('lk_1_id', $LkBaju1->id)->delete();
                             DataManualCut::where('lk_1_id', $LkBaju1->id)->delete();
@@ -14332,7 +14333,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 6) {
+                        } elseif ($hasil_hari == 6) {
                             // CUT PRINT
                             BarangMasukDatalayout::where('lk_1_id', $LkBaju1->id)->delete();
                             DataManualCut::where('lk_1_id', $LkBaju1->id)->delete();
@@ -14392,7 +14393,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 7) {
+                        } elseif ($hasil_hari == 7) {
                             // CUT PRINT
                             BarangMasukDatalayout::where('lk_1_id', $LkBaju1->id)->delete();
                             DataManualCut::where('lk_1_id', $LkBaju1->id)->delete();
@@ -14452,7 +14453,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 8) {
+                        } elseif ($hasil_hari == 8) {
                             // CUT PRINT
                             BarangMasukDatalayout::where('lk_1_id', $LkBaju1->id)->delete();
                             DataManualCut::where('lk_1_id', $LkBaju1->id)->delete();
@@ -14512,7 +14513,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 9) {
+                        } elseif ($hasil_hari == 9) {
                             // CUT PRINT
                             BarangMasukDatalayout::where('lk_1_id', $LkBaju1->id)->delete();
                             DataManualCut::where('lk_1_id', $LkBaju1->id)->delete();
@@ -14572,7 +14573,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 10) {
+                        } elseif ($hasil_hari == 10) {
                             // CUT PRINT
                             BarangMasukDatalayout::where('lk_1_id', $LkBaju1->id)->delete();
                             DataManualCut::where('lk_1_id', $LkBaju1->id)->delete();
@@ -14632,7 +14633,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 11) {
+                        } elseif ($hasil_hari == 11) {
                             // CUT PRINT
                             BarangMasukDatalayout::where('lk_1_id', $LkBaju1->id)->delete();
                             DataManualCut::where('lk_1_id', $LkBaju1->id)->delete();
@@ -14692,7 +14693,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari >= 12 && $total_hari <= 9999) {
+                        } elseif ($hasil_hari >= 12 && $hasil_hari <= 9999) {
                             // CUT PRINT
                             BarangMasukDatalayout::where('lk_1_id', $LkBaju1->id)->delete();
                             DataManualCut::where('lk_1_id', $LkBaju1->id)->delete();
@@ -14759,7 +14760,7 @@ class CostumerServicesController extends Controller
                 if (isset($gambar->file_celana_player)) {
                     // FULL PRINT
                     if ($LkCelanaPlayer->status_celana_player == "Full print") {
-                        if ($total_hari == 0) {
+                        if ($hasil_hari == 0) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_celana_player_id', $LkCelanaPlayer->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -14859,7 +14860,7 @@ class CostumerServicesController extends Controller
                                     'finis_id' => $barangMasukFinis->id,
                                 ]);
                             // AKHIR LAPORAN
-                        }elseif ($total_hari == 1) {
+                        }elseif ($hasil_hari == 1) {
                              // LAYOUT
                              BarangMasukDatalayout::where('lk_celana_player_id', $LkCelanaPlayer->id)->delete();
                              $barangMasukDataLayoutData = [
@@ -14960,7 +14961,7 @@ class CostumerServicesController extends Controller
                                  ]);
                              // AKHIR LAPORAN
                         }
-                         elseif ($total_hari == 2) {
+                         elseif ($hasil_hari == 2) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_celana_player_id', $LkCelanaPlayer->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -15060,7 +15061,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 3) {
+                        } elseif ($hasil_hari == 3) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_celana_player_id', $LkCelanaPlayer->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -15160,7 +15161,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 4) {
+                        } elseif ($hasil_hari == 4) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_celana_player_id', $LkCelanaPlayer->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -15260,7 +15261,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 5) {
+                        } elseif ($hasil_hari == 5) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_celana_player_id', $LkCelanaPlayer->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -15360,7 +15361,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 6) {
+                        } elseif ($hasil_hari == 6) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_celana_player_id', $LkCelanaPlayer->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -15460,7 +15461,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 7) {
+                        } elseif ($hasil_hari == 7) {
                             // LAYOUT
                              BarangMasukDatalayout::where('lk_celana_player_id', $LkCelanaPlayer->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -15560,7 +15561,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 8) {
+                        } elseif ($hasil_hari == 8) {
                             // LAYOUT
                              BarangMasukDatalayout::where('lk_celana_player_id', $LkCelanaPlayer->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -15660,7 +15661,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 9) {
+                        } elseif ($hasil_hari == 9) {
                             // LAYOUT
                              BarangMasukDatalayout::where('lk_celana_player_id', $LkCelanaPlayer->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -15759,7 +15760,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 10) {
+                        } elseif ($hasil_hari == 10) {
                             // LAYOUT
                              BarangMasukDatalayout::where('lk_celana_player_id', $LkCelanaPlayer->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -15859,7 +15860,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 11) {
+                        } elseif ($hasil_hari == 11) {
                             // LAYOUT
                              BarangMasukDatalayout::where('lk_celana_player_id', $LkCelanaPlayer->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -15959,7 +15960,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari >= 12 && $total_hari <= 9999) {
+                        } elseif ($hasil_hari >= 12 && $hasil_hari <= 9999) {
                             // LAYOUT
                              BarangMasukDatalayout::where('lk_celana_player_id', $LkCelanaPlayer->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -16065,7 +16066,7 @@ class CostumerServicesController extends Controller
 
                     // HALFT PRINT
                     if ($LkCelanaPlayer->status_celana_player == "Half print") {
-                        if ($total_hari == 0) {
+                        if ($hasil_hari == 0) {
                             // LAYOUT
                              BarangMasukDatalayout::where('lk_celana_player_id', $LkCelanaPlayer->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -16176,7 +16177,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                         // AKHIR LAPORAN
-                        } elseif ($total_hari == 1) {
+                        } elseif ($hasil_hari == 1) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_celana_player_id', $LkCelanaPlayer->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -16288,7 +16289,7 @@ class CostumerServicesController extends Controller
                             ]);
                         // AKHIR LAPORAN
                         }
-                        elseif ($total_hari == 2) {
+                        elseif ($hasil_hari == 2) {
                             // LAYOUT
                              BarangMasukDatalayout::where('lk_celana_player_id', $LkCelanaPlayer->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -16399,7 +16400,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                         // AKHIR LAPORAN
-                        } elseif ($total_hari == 3) {
+                        } elseif ($hasil_hari == 3) {
                             // LAYOUT
                              BarangMasukDatalayout::where('lk_celana_player_id', $LkCelanaPlayer->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -16510,7 +16511,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                         // AKHIR LAPORAN
-                        } elseif ($total_hari == 4) {
+                        } elseif ($hasil_hari == 4) {
                             // LAYOUT
                              BarangMasukDatalayout::where('lk_celana_player_id', $LkCelanaPlayer->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -16621,7 +16622,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                         // AKHIR LAPORAN
-                        } elseif ($total_hari == 5) {
+                        } elseif ($hasil_hari == 5) {
                             // LAYOUT
                              BarangMasukDatalayout::where('lk_celana_player_id', $LkCelanaPlayer->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -16732,7 +16733,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                         // AKHIR LAPORAN
-                        } elseif ($total_hari == 6) {
+                        } elseif ($hasil_hari == 6) {
                             // LAYOUT
                              BarangMasukDatalayout::where('lk_celana_player_id', $LkCelanaPlayer->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -16843,7 +16844,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                         // AKHIR LAPORAN
-                        } elseif ($total_hari == 7) {
+                        } elseif ($hasil_hari == 7) {
                             // LAYOUT
                              BarangMasukDatalayout::where('lk_celana_player_id', $LkCelanaPlayer->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -16954,7 +16955,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                         // AKHIR LAPORAN
-                        } elseif ($total_hari == 8) {
+                        } elseif ($hasil_hari == 8) {
                             // LAYOUT
                              BarangMasukDatalayout::where('lk_celana_player_id', $LkCelanaPlayer->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -17065,7 +17066,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                         // AKHIR LAPORAN
-                        } elseif ($total_hari == 9) {
+                        } elseif ($hasil_hari == 9) {
                             // LAYOUT
                              BarangMasukDatalayout::where('lk_celana_player_id', $LkCelanaPlayer->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -17176,7 +17177,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                         // AKHIR LAPORAN
-                        } elseif ($total_hari == 10) {
+                        } elseif ($hasil_hari == 10) {
                             // LAYOUT
                              BarangMasukDatalayout::where('lk_celana_player_id', $LkCelanaPlayer->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -17287,7 +17288,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                         // AKHIR LAPORAN
-                        } elseif ($total_hari == 11) {
+                        } elseif ($hasil_hari == 11) {
                             // LAYOUT
                              BarangMasukDatalayout::where('lk_celana_player_id', $LkCelanaPlayer->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -17398,7 +17399,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                         // AKHIR LAPORAN
-                        } elseif ($total_hari >= 12 && $total_hari <= 9999) {
+                        } elseif ($hasil_hari >= 12 && $hasil_hari <= 9999) {
                             // LAYOUT
                              BarangMasukDatalayout::where('lk_celana_player_id', $LkCelanaPlayer->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -17515,7 +17516,7 @@ class CostumerServicesController extends Controller
 
                     // POLOS
                     if ($LkCelanaPlayer->status_celana_player == "Polos") {
-                        if ($total_hari == 0) {
+                        if ($hasil_hari == 0) {
                             // CUT PRINT
                             BarangMasukDatalayout::where('lk_celana_player_id', $LkCelanaPlayer->id)->delete();
                             DataManualCut::where('lk_celana_player_id', $LkCelanaPlayer->id)->delete();
@@ -17575,7 +17576,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                             // AKHIR LAPORAN
-                        }elseif ($total_hari == 1) {
+                        }elseif ($hasil_hari == 1) {
                             // CUT PRINT
                             BarangMasukDatalayout::where('lk_celana_player_id', $LkCelanaPlayer->id)->delete();
                             DataManualCut::where('lk_celana_player_id', $LkCelanaPlayer->id)->delete();
@@ -17636,7 +17637,7 @@ class CostumerServicesController extends Controller
                             ]);
                             // AKHIR LAPORAN
                         }
-                         elseif ($total_hari == 2) {
+                         elseif ($hasil_hari == 2) {
                             // CUT PRINT
                             BarangMasukDatalayout::where('lk_celana_player_id', $LkCelanaPlayer->id)->delete();
                             DataManualCut::where('lk_celana_player_id', $LkCelanaPlayer->id)->delete();
@@ -17696,7 +17697,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 3) {
+                        } elseif ($hasil_hari == 3) {
                             // CUT PRINT
                             BarangMasukDatalayout::where('lk_celana_player_id', $LkCelanaPlayer->id)->delete();
                             DataManualCut::where('lk_celana_player_id', $LkCelanaPlayer->id)->delete();
@@ -17756,7 +17757,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 4) {
+                        } elseif ($hasil_hari == 4) {
                             // CUT PRINT
                             BarangMasukDatalayout::where('lk_celana_player_id', $LkCelanaPlayer->id)->delete();
                             DataManualCut::where('lk_celana_player_id', $LkCelanaPlayer->id)->delete();
@@ -17816,7 +17817,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 5) {
+                        } elseif ($hasil_hari == 5) {
                             // CUT PRINT
                             BarangMasukDatalayout::where('lk_celana_player_id', $LkCelanaPlayer->id)->delete();
                             DataManualCut::where('lk_celana_player_id', $LkCelanaPlayer->id)->delete();
@@ -17876,7 +17877,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 6) {
+                        } elseif ($hasil_hari == 6) {
                             // CUT PRINT
                             BarangMasukDatalayout::where('lk_celana_player_id', $LkCelanaPlayer->id)->delete();
                             DataManualCut::where('lk_celana_player_id', $LkCelanaPlayer->id)->delete();
@@ -17936,7 +17937,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 7) {
+                        } elseif ($hasil_hari == 7) {
                             // CUT PRINT
                             BarangMasukDatalayout::where('lk_celana_player_id', $LkCelanaPlayer->id)->delete();
                             DataManualCut::where('lk_celana_player_id', $LkCelanaPlayer->id)->delete();
@@ -17996,7 +17997,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 8) {
+                        } elseif ($hasil_hari == 8) {
                             // CUT PRINT
                             BarangMasukDatalayout::where('lk_celana_player_id', $LkCelanaPlayer->id)->delete();
                             DataManualCut::where('lk_celana_player_id', $LkCelanaPlayer->id)->delete();
@@ -18056,7 +18057,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 9) {
+                        } elseif ($hasil_hari == 9) {
                             // CUT PRINT
                             BarangMasukDatalayout::where('lk_celana_player_id', $LkCelanaPlayer->id)->delete();
                             DataManualCut::where('lk_celana_player_id', $LkCelanaPlayer->id)->delete();
@@ -18116,7 +18117,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 10) {
+                        } elseif ($hasil_hari == 10) {
                             // CUT PRINT
                             BarangMasukDatalayout::where('lk_celana_player_id', $LkCelanaPlayer->id)->delete();
                             DataManualCut::where('lk_celana_player_id', $LkCelanaPlayer->id)->delete();
@@ -18176,7 +18177,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 11) {
+                        } elseif ($hasil_hari == 11) {
                             // CUT PRINT
                             BarangMasukDatalayout::where('lk_celana_player_id', $LkCelanaPlayer->id)->delete();
                             DataManualCut::where('lk_celana_player_id', $LkCelanaPlayer->id)->delete();
@@ -18236,7 +18237,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari >= 12 && $total_hari <= 9999) {
+                        } elseif ($hasil_hari >= 12 && $hasil_hari <= 9999) {
                             // CUT PRINT
                             BarangMasukDatalayout::where('lk_celana_player_id', $LkCelanaPlayer->id)->delete();
                             DataManualCut::where('lk_celana_player_id', $LkCelanaPlayer->id)->delete();
@@ -18303,7 +18304,7 @@ class CostumerServicesController extends Controller
                 if (isset($gambar->file_celana_pelatih)) {
                      // FULL PRINT
                     if ($LkCelanaPelatih->status_celana_pelatih == "Full print") {
-                        if ($total_hari == 0) {
+                        if ($hasil_hari == 0) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_celana_pelatih_id', $LkCelanaPelatih->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -18403,7 +18404,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                         // AKHIR LAPORAN
-                        }elseif ($total_hari == 1) {
+                        }elseif ($hasil_hari == 1) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_celana_pelatih_id', $LkCelanaPelatih->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -18504,7 +18505,7 @@ class CostumerServicesController extends Controller
                             ]);
                         // AKHIR LAPORAN
                         }
-                         elseif ($total_hari == 2) {
+                         elseif ($hasil_hari == 2) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_celana_pelatih_id', $LkCelanaPelatih->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -18604,7 +18605,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                         // AKHIR LAPORAN
-                        } elseif ($total_hari == 3) {
+                        } elseif ($hasil_hari == 3) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_celana_pelatih_id', $LkCelanaPelatih->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -18704,7 +18705,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                         // AKHIR LAPORAN
-                        } elseif ($total_hari == 4) {
+                        } elseif ($hasil_hari == 4) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_celana_pelatih_id', $LkCelanaPelatih->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -18804,7 +18805,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                         // AKHIR LAPORAN
-                        } elseif ($total_hari == 5) {
+                        } elseif ($hasil_hari == 5) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_celana_pelatih_id', $LkCelanaPelatih->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -18904,7 +18905,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                         // AKHIR LAPORAN
-                        } elseif ($total_hari == 6) {
+                        } elseif ($hasil_hari == 6) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_celana_pelatih_id', $LkCelanaPelatih->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -19004,7 +19005,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                         // AKHIR LAPORAN
-                        } elseif ($total_hari == 7) {
+                        } elseif ($hasil_hari == 7) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_celana_pelatih_id', $LkCelanaPelatih->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -19104,7 +19105,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                         // AKHIR LAPORAN
-                        } elseif ($total_hari == 8) {
+                        } elseif ($hasil_hari == 8) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_celana_pelatih_id', $LkCelanaPelatih->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -19204,7 +19205,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                         // AKHIR LAPORAN
-                        } elseif ($total_hari == 9) {
+                        } elseif ($hasil_hari == 9) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_celana_pelatih_id', $LkCelanaPelatih->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -19305,7 +19306,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                         // AKHIR LAPORAN
-                        } elseif ($total_hari == 10) {
+                        } elseif ($hasil_hari == 10) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_celana_pelatih_id', $LkCelanaPelatih->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -19405,7 +19406,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                         // AKHIR LAPORAN
-                        } elseif ($total_hari == 11) {
+                        } elseif ($hasil_hari == 11) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_celana_pelatih_id', $LkCelanaPelatih->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -19505,7 +19506,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                         // AKHIR LAPORAN
-                        } elseif ($total_hari >= 12 && $total_hari <= 9999) {
+                        } elseif ($hasil_hari >= 12 && $hasil_hari <= 9999) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_celana_pelatih_id', $LkCelanaPelatih->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -19610,7 +19611,7 @@ class CostumerServicesController extends Controller
 
                     // HALFT PRINT
                     if ($LkCelanaPelatih->status_celana_pelatih == "Half print") {
-                        if ($total_hari == 0) {
+                        if ($hasil_hari == 0) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_celana_pelatih_id', $LkCelanaPelatih->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -19721,7 +19722,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                         // AKHIR LAPORAN
-                        }elseif ($total_hari == 1) {
+                        }elseif ($hasil_hari == 1) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_celana_pelatih_id', $LkCelanaPelatih->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -19833,7 +19834,7 @@ class CostumerServicesController extends Controller
                             ]);
                         // AKHIR LAPORAN
                         }
-                         elseif ($total_hari == 2) {
+                         elseif ($hasil_hari == 2) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_celana_pelatih_id', $LkCelanaPelatih->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -19944,7 +19945,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                         // AKHIR LAPORAN
-                        } elseif ($total_hari == 3) {
+                        } elseif ($hasil_hari == 3) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_celana_pelatih_id', $LkCelanaPelatih->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -20055,7 +20056,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                         // AKHIR LAPORAN
-                        } elseif ($total_hari == 4) {
+                        } elseif ($hasil_hari == 4) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_celana_pelatih_id', $LkCelanaPelatih->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -20166,7 +20167,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                         // AKHIR LAPORAN
-                        } elseif ($total_hari == 5) {
+                        } elseif ($hasil_hari == 5) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_celana_pelatih_id', $LkCelanaPelatih->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -20277,7 +20278,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                         // AKHIR LAPORAN
-                        } elseif ($total_hari == 6) {
+                        } elseif ($hasil_hari == 6) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_celana_pelatih_id', $LkCelanaPelatih->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -20388,7 +20389,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                         // AKHIR LAPORAN
-                        } elseif ($total_hari == 7) {
+                        } elseif ($hasil_hari == 7) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_celana_pelatih_id', $LkCelanaPelatih->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -20499,7 +20500,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                         // AKHIR LAPORAN
-                        } elseif ($total_hari == 8) {
+                        } elseif ($hasil_hari == 8) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_celana_pelatih_id', $LkCelanaPelatih->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -20609,7 +20610,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                         // AKHIR LAPORAN
-                        } elseif ($total_hari == 9) {
+                        } elseif ($hasil_hari == 9) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_celana_pelatih_id', $LkCelanaPelatih->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -20720,7 +20721,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                         // AKHIR LAPORAN
-                        } elseif ($total_hari == 10) {
+                        } elseif ($hasil_hari == 10) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_celana_pelatih_id', $LkCelanaPelatih->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -20830,7 +20831,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                         // AKHIR LAPORAN
-                        } elseif ($total_hari == 11) {
+                        } elseif ($hasil_hari == 11) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_celana_pelatih_id', $LkCelanaPelatih->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -20941,7 +20942,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                         // AKHIR LAPORAN
-                        } elseif ($total_hari >= 12 && $total_hari <= 9999) {
+                        } elseif ($hasil_hari >= 12 && $hasil_hari <= 9999) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_celana_pelatih_id', $LkCelanaPelatih->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -21058,7 +21059,7 @@ class CostumerServicesController extends Controller
 
                     // POLOS
                     if ($LkCelanaPelatih->status_celana_pelatih == "Polos") {
-                        if ($total_hari == 0) {
+                        if ($hasil_hari == 0) {
                             // CUT PRINT
                             BarangMasukDatalayout::where('lk_celana_pelatih_id', $LkCelanaPelatih->id)->delete();
                             DataManualCut::where('lk_celana_pelatih_id', $LkCelanaPelatih->id)->delete();
@@ -21118,7 +21119,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                             // AKHIR LAPORAN
-                        }elseif ($total_hari == 1) {
+                        }elseif ($hasil_hari == 1) {
                             // CUT PRINT
                             BarangMasukDatalayout::where('lk_celana_pelatih_id', $LkCelanaPelatih->id)->delete();
                             DataManualCut::where('lk_celana_pelatih_id', $LkCelanaPelatih->id)->delete();
@@ -21179,7 +21180,7 @@ class CostumerServicesController extends Controller
                             ]);
                             // AKHIR LAPORAN
                         }
-                         elseif ($total_hari == 2) {
+                         elseif ($hasil_hari == 2) {
                             // CUT PRINT
                             BarangMasukDatalayout::where('lk_celana_pelatih_id', $LkCelanaPelatih->id)->delete();
                             DataManualCut::where('lk_celana_pelatih_id', $LkCelanaPelatih->id)->delete();
@@ -21239,7 +21240,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 3) {
+                        } elseif ($hasil_hari == 3) {
                             // CUT PRINT
                             BarangMasukDatalayout::where('lk_celana_pelatih_id', $LkCelanaPelatih->id)->delete();
                             DataManualCut::where('lk_celana_pelatih_id', $LkCelanaPelatih->id)->delete();
@@ -21299,7 +21300,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 4) {
+                        } elseif ($hasil_hari == 4) {
                             // CUT PRINT
                             BarangMasukDatalayout::where('lk_celana_pelatih_id', $LkCelanaPelatih->id)->delete();
                             DataManualCut::where('lk_celana_pelatih_id', $LkCelanaPelatih->id)->delete();
@@ -21359,7 +21360,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 5) {
+                        } elseif ($hasil_hari == 5) {
                             // CUT PRINT
                             BarangMasukDatalayout::where('lk_celana_pelatih_id', $LkCelanaPelatih->id)->delete();
                             DataManualCut::where('lk_celana_pelatih_id', $LkCelanaPelatih->id)->delete();
@@ -21419,7 +21420,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 6) {
+                        } elseif ($hasil_hari == 6) {
                             // CUT PRINT
                             BarangMasukDatalayout::where('lk_celana_pelatih_id', $LkCelanaPelatih->id)->delete();
                             DataManualCut::where('lk_celana_pelatih_id', $LkCelanaPelatih->id)->delete();
@@ -21479,7 +21480,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 7) {
+                        } elseif ($hasil_hari == 7) {
                             // CUT PRINT
                             BarangMasukDatalayout::where('lk_celana_pelatih_id', $LkCelanaPelatih->id)->delete();
                             DataManualCut::where('lk_celana_pelatih_id', $LkCelanaPelatih->id)->delete();
@@ -21539,7 +21540,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 8) {
+                        } elseif ($hasil_hari == 8) {
                             // CUT PRINT
                             BarangMasukDatalayout::where('lk_celana_pelatih_id', $LkCelanaPelatih->id)->delete();
                             DataManualCut::where('lk_celana_pelatih_id', $LkCelanaPelatih->id)->delete();
@@ -21599,7 +21600,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 9) {
+                        } elseif ($hasil_hari == 9) {
                             // CUT PRINT
                             BarangMasukDatalayout::where('lk_celana_pelatih_id', $LkCelanaPelatih->id)->delete();
                             DataManualCut::where('lk_celana_pelatih_id', $LkCelanaPelatih->id)->delete();
@@ -21659,7 +21660,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 10) {
+                        } elseif ($hasil_hari == 10) {
                             // CUT PRINT
                             BarangMasukDatalayout::where('lk_celana_pelatih_id', $LkCelanaPelatih->id)->delete();
                             DataManualCut::where('lk_celana_pelatih_id', $LkCelanaPelatih->id)->delete();
@@ -21719,7 +21720,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 11) {
+                        } elseif ($hasil_hari == 11) {
                             // CUT PRINT
                             BarangMasukDatalayout::where('lk_celana_pelatih_id', $LkCelanaPelatih->id)->delete();
                             DataManualCut::where('lk_celana_pelatih_id', $LkCelanaPelatih->id)->delete();
@@ -21779,7 +21780,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari >= 12 && $total_hari <= 9999) {
+                        } elseif ($hasil_hari >= 12 && $hasil_hari <= 9999) {
                             // CUT PRINT
                             BarangMasukDatalayout::where('lk_celana_pelatih_id', $LkCelanaPelatih->id)->delete();
                             DataManualCut::where('lk_celana_pelatih_id', $LkCelanaPelatih->id)->delete();
@@ -21846,7 +21847,7 @@ class CostumerServicesController extends Controller
                 if (isset($gambar->file_celana_kiper)) {
                     // FULL PRINT
                     if ($LkCelanaKiper->status_celana_kiper == "Full print") {
-                        if ($total_hari == 0) {
+                        if ($hasil_hari == 0) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_celana_pelatih_id', $LkCelanaPelatih->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -21946,7 +21947,7 @@ class CostumerServicesController extends Controller
                                     'finis_id' => $barangMasukFinis->id,
                                 ]);
                             // AKHIR LAPORAN
-                        }elseif ($total_hari == 1) {
+                        }elseif ($hasil_hari == 1) {
                              // LAYOUT
                              BarangMasukDatalayout::where('lk_celana_pelatih_id', $LkCelanaPelatih->id)->delete();
                              $barangMasukDataLayoutData = [
@@ -22047,7 +22048,7 @@ class CostumerServicesController extends Controller
                                  ]);
                              // AKHIR LAPORAN
                         }
-                         elseif ($total_hari == 2) {
+                         elseif ($hasil_hari == 2) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_celana_pelatih_id', $LkCelanaPelatih->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -22147,7 +22148,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                         // AKHIR LAPORAN
-                        } elseif ($total_hari == 3) {
+                        } elseif ($hasil_hari == 3) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_celana_pelatih_id', $LkCelanaPelatih->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -22247,7 +22248,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                         // AKHIR LAPORAN
-                        } elseif ($total_hari == 4) {
+                        } elseif ($hasil_hari == 4) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_celana_pelatih_id', $LkCelanaPelatih->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -22347,7 +22348,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                         // AKHIR LAPORAN
-                        } elseif ($total_hari == 5) {
+                        } elseif ($hasil_hari == 5) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_celana_pelatih_id', $LkCelanaPelatih->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -22447,7 +22448,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                         // AKHIR LAPORAN
-                        } elseif ($total_hari == 6) {
+                        } elseif ($hasil_hari == 6) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_celana_pelatih_id', $LkCelanaPelatih->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -22547,7 +22548,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                         // AKHIR LAPORAN
-                        } elseif ($total_hari == 7) {
+                        } elseif ($hasil_hari == 7) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_celana_pelatih_id', $LkCelanaPelatih->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -22647,7 +22648,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                         // AKHIR LAPORAN
-                        } elseif ($total_hari == 8) {
+                        } elseif ($hasil_hari == 8) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_celana_pelatih_id', $LkCelanaPelatih->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -22747,7 +22748,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                         // AKHIR LAPORAN
-                        } elseif ($total_hari == 9) {
+                        } elseif ($hasil_hari == 9) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_celana_pelatih_id', $LkCelanaPelatih->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -22847,7 +22848,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 10) {
+                        } elseif ($hasil_hari == 10) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_celana_pelatih_id', $LkCelanaPelatih->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -22947,7 +22948,7 @@ class CostumerServicesController extends Controller
                                     'finis_id' => $barangMasukFinis->id,
                                 ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 11) {
+                        } elseif ($hasil_hari == 11) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_celana_pelatih_id', $LkCelanaPelatih->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -23047,7 +23048,7 @@ class CostumerServicesController extends Controller
                                     'finis_id' => $barangMasukFinis->id,
                                 ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari >= 12 && $total_hari <= 9999) {
+                        } elseif ($hasil_hari >= 12 && $hasil_hari <= 9999) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_celana_pelatih_id', $LkCelanaPelatih->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -23153,7 +23154,7 @@ class CostumerServicesController extends Controller
 
                     // HALFT PRINT
                     if ($LkCelanaKiper->status_celana_kiper == "Half print") {
-                        if ($total_hari == 0) {
+                        if ($hasil_hari == 0) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_celana_pelatih_id', $LkCelanaPelatih->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -23264,7 +23265,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                                 ]);
                             // AKHIR LAPORAN
-                        }elseif ($total_hari == 1) {
+                        }elseif ($hasil_hari == 1) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_celana_pelatih_id', $LkCelanaPelatih->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -23376,7 +23377,7 @@ class CostumerServicesController extends Controller
                                 ]);
                             // AKHIR LAPORAN
                         }
-                         elseif ($total_hari == 2) {
+                         elseif ($hasil_hari == 2) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_celana_pelatih_id', $LkCelanaPelatih->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -23487,7 +23488,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                                 ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 3) {
+                        } elseif ($hasil_hari == 3) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_celana_pelatih_id', $LkCelanaPelatih->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -23598,7 +23599,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                                 ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 4) {
+                        } elseif ($hasil_hari == 4) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_celana_pelatih_id', $LkCelanaPelatih->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -23709,7 +23710,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                                 ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 5) {
+                        } elseif ($hasil_hari == 5) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_celana_pelatih_id', $LkCelanaPelatih->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -23820,7 +23821,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                                 ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 6) {
+                        } elseif ($hasil_hari == 6) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_celana_pelatih_id', $LkCelanaPelatih->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -23931,7 +23932,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                                 ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 7) {
+                        } elseif ($hasil_hari == 7) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_celana_pelatih_id', $LkCelanaPelatih->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -24042,7 +24043,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                                 ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 8) {
+                        } elseif ($hasil_hari == 8) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_celana_pelatih_id', $LkCelanaPelatih->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -24153,7 +24154,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                                 ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 9) {
+                        } elseif ($hasil_hari == 9) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_celana_pelatih_id', $LkCelanaPelatih->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -24264,7 +24265,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                                 ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 10) {
+                        } elseif ($hasil_hari == 10) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_celana_pelatih_id', $LkCelanaPelatih->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -24375,7 +24376,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                                 ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 11) {
+                        } elseif ($hasil_hari == 11) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_celana_pelatih_id', $LkCelanaPelatih->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -24486,7 +24487,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                                 ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari >= 12 && $total_hari <= 9999) {
+                        } elseif ($hasil_hari >= 12 && $hasil_hari <= 9999) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_celana_pelatih_id', $LkCelanaPelatih->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -24602,7 +24603,7 @@ class CostumerServicesController extends Controller
 
                     // POLOS
                     if ($LkCelanaKiper->status_celana_kiper == "Polos") {
-                        if ($total_hari == 0) {
+                        if ($hasil_hari == 0) {
                             // CUT PRINT
                             BarangMasukDatalayout::where('lk_celana_kiper_id', $LkCelanaKiper->id)->delete();
                             DataManualCut::where('lk_celana_kiper_id', $LkCelanaKiper->id)->delete();
@@ -24662,7 +24663,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                             // AKHIR LAPORAN
-                        }elseif ($total_hari == 1) {
+                        }elseif ($hasil_hari == 1) {
                                                         // CUT PRINT
                                                         BarangMasukDatalayout::where('lk_celana_kiper_id', $LkCelanaKiper->id)->delete();
                                                         DataManualCut::where('lk_celana_kiper_id', $LkCelanaKiper->id)->delete();
@@ -24723,7 +24724,7 @@ class CostumerServicesController extends Controller
                                                         ]);
                                                         // AKHIR LAPORAN
                         }
-                         elseif ($total_hari == 2) {
+                         elseif ($hasil_hari == 2) {
                             // CUT PRINT
                             BarangMasukDatalayout::where('lk_celana_kiper_id', $LkCelanaKiper->id)->delete();
                             DataManualCut::where('lk_celana_kiper_id', $LkCelanaKiper->id)->delete();
@@ -24783,7 +24784,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 3) {
+                        } elseif ($hasil_hari == 3) {
                             // CUT PRINT
                             BarangMasukDatalayout::where('lk_celana_kiper_id', $LkCelanaKiper->id)->delete();
                             DataManualCut::where('lk_celana_kiper_id', $LkCelanaKiper->id)->delete();
@@ -24843,7 +24844,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 4) {
+                        } elseif ($hasil_hari == 4) {
                             // CUT PRINT
                             BarangMasukDatalayout::where('lk_celana_kiper_id', $LkCelanaKiper->id)->delete();
                             DataManualCut::where('lk_celana_kiper_id', $LkCelanaKiper->id)->delete();
@@ -24903,7 +24904,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 5) {
+                        } elseif ($hasil_hari == 5) {
                             // CUT PRINT
                             BarangMasukDatalayout::where('lk_celana_kiper_id', $LkCelanaKiper->id)->delete();
                             DataManualCut::where('lk_celana_kiper_id', $LkCelanaKiper->id)->delete();
@@ -24963,7 +24964,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 6) {
+                        } elseif ($hasil_hari == 6) {
                             // CUT PRINT
                             BarangMasukDatalayout::where('lk_celana_kiper_id', $LkCelanaKiper->id)->delete();
                             DataManualCut::where('lk_celana_kiper_id', $LkCelanaKiper->id)->delete();
@@ -25023,7 +25024,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 7) {
+                        } elseif ($hasil_hari == 7) {
                             // CUT PRINT
                             BarangMasukDatalayout::where('lk_celana_kiper_id', $LkCelanaKiper->id)->delete();
                             DataManualCut::where('lk_celana_kiper_id', $LkCelanaKiper->id)->delete();
@@ -25083,7 +25084,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 8) {
+                        } elseif ($hasil_hari == 8) {
                             // CUT PRINT
                             BarangMasukDatalayout::where('lk_celana_kiper_id', $LkCelanaKiper->id)->delete();
                             DataManualCut::where('lk_celana_kiper_id', $LkCelanaKiper->id)->delete();
@@ -25143,7 +25144,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 9) {
+                        } elseif ($hasil_hari == 9) {
                             // CUT PRINT
                             BarangMasukDatalayout::where('lk_celana_kiper_id', $LkCelanaKiper->id)->delete();
                             DataManualCut::where('lk_celana_kiper_id', $LkCelanaKiper->id)->delete();
@@ -25203,7 +25204,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 10) {
+                        } elseif ($hasil_hari == 10) {
                             // CUT PRINT
                             BarangMasukDatalayout::where('lk_celana_kiper_id', $LkCelanaKiper->id)->delete();
                             DataManualCut::where('lk_celana_kiper_id', $LkCelanaKiper->id)->delete();
@@ -25263,7 +25264,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 11) {
+                        } elseif ($hasil_hari == 11) {
                             // CUT PRINT
                             BarangMasukDatalayout::where('lk_celana_kiper_id', $LkCelanaKiper->id)->delete();
                             DataManualCut::where('lk_celana_kiper_id', $LkCelanaKiper->id)->delete();
@@ -25323,7 +25324,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari >= 12 && $total_hari <= 9999) {
+                        } elseif ($hasil_hari >= 12 && $hasil_hari <= 9999) {
                             // CUT PRINT
                             BarangMasukDatalayout::where('lk_celana_kiper_id', $LkCelanaKiper->id)->delete();
                             DataManualCut::where('lk_celana_kiper_id', $LkCelanaKiper->id)->delete();
@@ -25390,7 +25391,7 @@ class CostumerServicesController extends Controller
                 if (isset($gambar->file_celana_1)) {
                     // FULL PRINT
                     if ($LkCelana1->status_celana_1 == "Full print") {
-                        if ($total_hari == 0) {
+                        if ($hasil_hari == 0) {
                             // LAYOUT
                              BarangMasukDatalayout::where('lk_celana_1_id', $LkCelana1->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -25490,7 +25491,7 @@ class CostumerServicesController extends Controller
                                     'finis_id' => $barangMasukFinis->id,
                                 ]);
                             // AKHIR LAPORAN
-                        }elseif ($total_hari == 1) {
+                        }elseif ($hasil_hari == 1) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_celana_1_id', $LkCelana1->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -25591,7 +25592,7 @@ class CostumerServicesController extends Controller
                                 ]);
                             // AKHIR LAPORAN
                         }
-                         elseif ($total_hari == 2) {
+                         elseif ($hasil_hari == 2) {
                             // LAYOUT
                              BarangMasukDatalayout::where('lk_celana_1_id', $LkCelana1->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -25691,7 +25692,7 @@ class CostumerServicesController extends Controller
                                     'finis_id' => $barangMasukFinis->id,
                                 ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 3) {
+                        } elseif ($hasil_hari == 3) {
                             // LAYOUT
                              BarangMasukDatalayout::where('lk_celana_1_id', $LkCelana1->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -25791,7 +25792,7 @@ class CostumerServicesController extends Controller
                                     'finis_id' => $barangMasukFinis->id,
                                 ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 4) {
+                        } elseif ($hasil_hari == 4) {
                             // LAYOUT
                              BarangMasukDatalayout::where('lk_celana_1_id', $LkCelana1->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -25891,7 +25892,7 @@ class CostumerServicesController extends Controller
                                     'finis_id' => $barangMasukFinis->id,
                                 ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 5) {
+                        } elseif ($hasil_hari == 5) {
                             // LAYOUT
                              BarangMasukDatalayout::where('lk_celana_1_id', $LkCelana1->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -25991,7 +25992,7 @@ class CostumerServicesController extends Controller
                                     'finis_id' => $barangMasukFinis->id,
                                 ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 6) {
+                        } elseif ($hasil_hari == 6) {
                             // LAYOUT
                              BarangMasukDatalayout::where('lk_celana_1_id', $LkCelana1->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -26091,7 +26092,7 @@ class CostumerServicesController extends Controller
                                     'finis_id' => $barangMasukFinis->id,
                                 ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 7) {
+                        } elseif ($hasil_hari == 7) {
                             // LAYOUT
                              BarangMasukDatalayout::where('lk_celana_1_id', $LkCelana1->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -26191,7 +26192,7 @@ class CostumerServicesController extends Controller
                                     'finis_id' => $barangMasukFinis->id,
                                 ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 8) {
+                        } elseif ($hasil_hari == 8) {
                             // LAYOUT
                              BarangMasukDatalayout::where('lk_celana_1_id', $LkCelana1->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -26291,7 +26292,7 @@ class CostumerServicesController extends Controller
                                     'finis_id' => $barangMasukFinis->id,
                                 ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 9) {
+                        } elseif ($hasil_hari == 9) {
                             // LAYOUT
                              BarangMasukDatalayout::where('lk_celana_1_id', $LkCelana1->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -26391,7 +26392,7 @@ class CostumerServicesController extends Controller
                                     'finis_id' => $barangMasukFinis->id,
                                 ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 10) {
+                        } elseif ($hasil_hari == 10) {
                             // LAYOUT
                              BarangMasukDatalayout::where('lk_celana_1_id', $LkCelana1->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -26491,7 +26492,7 @@ class CostumerServicesController extends Controller
                                     'finis_id' => $barangMasukFinis->id,
                                 ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 11) {
+                        } elseif ($hasil_hari == 11) {
                             // LAYOUT
                              BarangMasukDatalayout::where('lk_celana_1_id', $LkCelana1->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -26591,7 +26592,7 @@ class CostumerServicesController extends Controller
                                     'finis_id' => $barangMasukFinis->id,
                                 ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari >= 12 && $total_hari <= 9999) {
+                        } elseif ($hasil_hari >= 12 && $hasil_hari <= 9999) {
                             // LAYOUT
                              BarangMasukDatalayout::where('lk_celana_1_id', $LkCelana1->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -26697,7 +26698,7 @@ class CostumerServicesController extends Controller
 
                     // HALFT PRINT
                     if ($LkCelana1->status_celana_1 == "Half print") {
-                        if ($total_hari == 0) {
+                        if ($hasil_hari == 0) {
                             // LAYOUT
                              BarangMasukDatalayout::where('lk_celana_1_id', $LkCelana1->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -26808,7 +26809,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                                 ]);
                             // AKHIR LAPORAN
-                        }elseif ($total_hari == 1) {
+                        }elseif ($hasil_hari == 1) {
                             // LAYOUT
                             BarangMasukDatalayout::where('lk_celana_1_id', $LkCelana1->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -26920,7 +26921,7 @@ class CostumerServicesController extends Controller
                                 ]);
                             // AKHIR LAPORAN
                         }
-                         elseif ($total_hari == 2) {
+                         elseif ($hasil_hari == 2) {
                             // LAYOUT
                              BarangMasukDatalayout::where('lk_celana_1_id', $LkCelana1->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -27031,7 +27032,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                                 ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 3) {
+                        } elseif ($hasil_hari == 3) {
                             // LAYOUT
                              BarangMasukDatalayout::where('lk_celana_1_id', $LkCelana1->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -27142,7 +27143,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                                 ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 4) {
+                        } elseif ($hasil_hari == 4) {
                             // LAYOUT
                              BarangMasukDatalayout::where('lk_celana_1_id', $LkCelana1->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -27253,7 +27254,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                                 ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 5) {
+                        } elseif ($hasil_hari == 5) {
                             // LAYOUT
                              BarangMasukDatalayout::where('lk_celana_1_id', $LkCelana1->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -27364,7 +27365,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                                 ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 6) {
+                        } elseif ($hasil_hari == 6) {
                             // LAYOUT
                              BarangMasukDatalayout::where('lk_celana_1_id', $LkCelana1->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -27475,7 +27476,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                                 ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 7) {
+                        } elseif ($hasil_hari == 7) {
                             // LAYOUT
                              BarangMasukDatalayout::where('lk_celana_1_id', $LkCelana1->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -27586,7 +27587,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                                 ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 8) {
+                        } elseif ($hasil_hari == 8) {
                             // LAYOUT
                              BarangMasukDatalayout::where('lk_celana_1_id', $LkCelana1->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -27697,7 +27698,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                                 ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 9) {
+                        } elseif ($hasil_hari == 9) {
                             // LAYOUT
                              BarangMasukDatalayout::where('lk_celana_1_id', $LkCelana1->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -27808,7 +27809,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                                 ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 10) {
+                        } elseif ($hasil_hari == 10) {
                             // LAYOUT
                              BarangMasukDatalayout::where('lk_celana_1_id', $LkCelana1->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -27919,7 +27920,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                                 ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 11) {
+                        } elseif ($hasil_hari == 11) {
                             // LAYOUT
                              BarangMasukDatalayout::where('lk_celana_1_id', $LkCelana1->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -28030,7 +28031,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                                 ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari >= 12 && $total_hari <= 9999) {
+                        } elseif ($hasil_hari >= 12 && $hasil_hari <= 9999) {
                             // LAYOUT
                              BarangMasukDatalayout::where('lk_celana_1_id', $LkCelana1->id)->delete();
                             $barangMasukDataLayoutData = [
@@ -28147,7 +28148,7 @@ class CostumerServicesController extends Controller
 
                     // POLOS
                     if ($LkCelana1->status_celana_1 == "Polos") {
-                        if ($total_hari == 0) {
+                        if ($hasil_hari == 0) {
                             // CUT PRINT
                             BarangMasukDatalayout::where('lk_celana_1_id', $LkCelana1->id)->delete();
                             DataManualCut::where('lk_celana_1_id', $LkCelana1->id)->delete();
@@ -28207,7 +28208,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                             // AKHIR LAPORAN
-                        }elseif ($total_hari == 1) {
+                        }elseif ($hasil_hari == 1) {
                              // CUT PRINT
                              BarangMasukDatalayout::where('lk_celana_1_id', $LkCelana1->id)->delete();
                              DataManualCut::where('lk_celana_1_id', $LkCelana1->id)->delete();
@@ -28268,7 +28269,7 @@ class CostumerServicesController extends Controller
                              ]);
                              // AKHIR LAPORAN
                         }
-                        elseif ($total_hari == 2) {
+                        elseif ($hasil_hari == 2) {
                             // CUT PRINT
                             BarangMasukDatalayout::where('lk_celana_1_id', $LkCelana1->id)->delete();
                             DataManualCut::where('lk_celana_1_id', $LkCelana1->id)->delete();
@@ -28328,7 +28329,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 3) {
+                        } elseif ($hasil_hari == 3) {
                             // CUT PRINT
                             BarangMasukDatalayout::where('lk_celana_1_id', $LkCelana1->id)->delete();
                             DataManualCut::where('lk_celana_1_id', $LkCelana1->id)->delete();
@@ -28388,7 +28389,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 4) {
+                        } elseif ($hasil_hari == 4) {
                             // CUT PRINT
                             BarangMasukDatalayout::where('lk_celana_1_id', $LkCelana1->id)->delete();
                             DataManualCut::where('lk_celana_1_id', $LkCelana1->id)->delete();
@@ -28448,7 +28449,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 5) {
+                        } elseif ($hasil_hari == 5) {
                             // CUT PRINT
                             BarangMasukDatalayout::where('lk_celana_1_id', $LkCelana1->id)->delete();
                             DataManualCut::where('lk_celana_1_id', $LkCelana1->id)->delete();
@@ -28508,7 +28509,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 6) {
+                        } elseif ($hasil_hari == 6) {
                             // CUT PRINT
                             BarangMasukDatalayout::where('lk_celana_1_id', $LkCelana1->id)->delete();
                             DataManualCut::where('lk_celana_1_id', $LkCelana1->id)->delete();
@@ -28568,7 +28569,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 7) {
+                        } elseif ($hasil_hari == 7) {
                             // CUT PRINT
                             BarangMasukDatalayout::where('lk_celana_1_id', $LkCelana1->id)->delete();
                             DataManualCut::where('lk_celana_1_id', $LkCelana1->id)->delete();
@@ -28628,7 +28629,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 8) {
+                        } elseif ($hasil_hari == 8) {
                             // CUT PRINT
                             BarangMasukDatalayout::where('lk_celana_1_id', $LkCelana1->id)->delete();
                             DataManualCut::where('lk_celana_1_id', $LkCelana1->id)->delete();
@@ -28688,7 +28689,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 9) {
+                        } elseif ($hasil_hari == 9) {
                             // CUT PRINT
                             BarangMasukDatalayout::where('lk_celana_1_id', $LkCelana1->id)->delete();
                             DataManualCut::where('lk_celana_1_id', $LkCelana1->id)->delete();
@@ -28748,7 +28749,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 10) {
+                        } elseif ($hasil_hari == 10) {
                             // CUT PRINT
                             BarangMasukDatalayout::where('lk_celana_1_id', $LkCelana1->id)->delete();
                             DataManualCut::where('lk_celana_1_id', $LkCelana1->id)->delete();
@@ -28808,7 +28809,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari == 11) {
+                        } elseif ($hasil_hari == 11) {
                             // CUT PRINT
                             BarangMasukDatalayout::where('lk_celana_1_id', $LkCelana1->id)->delete();
                             DataManualCut::where('lk_celana_1_id', $LkCelana1->id)->delete();
@@ -28868,7 +28869,7 @@ class CostumerServicesController extends Controller
                                 'finis_id' => $barangMasukFinis->id,
                             ]);
                             // AKHIR LAPORAN
-                        } elseif ($total_hari >= 12 && $total_hari <= 9999) {
+                        } elseif ($hasil_hari >= 12 && $hasil_hari <= 9999) {
                             // CUT PRINT
                             BarangMasukDatalayout::where('lk_celana_1_id', $LkCelana1->id)->delete();
                             DataManualCut::where('lk_celana_1_id', $LkCelana1->id)->delete();
@@ -28953,22 +28954,12 @@ class CostumerServicesController extends Controller
         // PENENTUAN TANGGAL
         $tanggal_masuk = \Carbon\Carbon::parse($lk->tanggal_masuk);
         $deadline = \Carbon\Carbon::parse($request->deadline);
-        $total_hari = $tanggal_masuk->diffInDays($deadline);
+        $total_hari = 0;
         for ($date = clone $tanggal_masuk; $date->lte($deadline); $date->addDay()) {
-            if ($date->dayOfWeek === Carbon::SUNDAY) {
-                $total_hari--;
+            if ($date->dayOfWeek !== Carbon::SUNDAY) {
+                $total_hari++;
             }
         }
-
-        $pengurangan = 1;
-        $hasil_hari = $total_hari - $pengurangan;
-
-        // if ($hasil_hari >= 1 && $hasil_hari <= 9) {
-        //     $keterangan = "Express";
-        // } else {
-        //     $keterangan = "Normal";
-        // }
-
         // AKHIR PENENTUAN TANGGAL
 
         // UPDATE DATA
@@ -28980,7 +28971,7 @@ class CostumerServicesController extends Controller
 
             'layout_id' => $request->layout_id,
             'jenis_produksi' => $request->jenis_produksi,
-            'pola' => $hasil_hari,
+            'pola' => $total_hari,
             'deadline' => $request->deadline,
             'ket_hari' => $request->keterangan,
 
