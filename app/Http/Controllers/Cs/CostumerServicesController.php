@@ -89,7 +89,7 @@ class CostumerServicesController extends Controller
     public function getIndexCs()
     {
         $auth = Auth::user();
-        $users = User::where('roles', 'layout')->where('non_aktif', '1')->get();
+        $users = User::where('roles', 'disainer')->where('non_aktif', '1')->get();
         $disainer = BarangMasukDisainer::where('nama_cs', $auth->id)
             ->orderBy('created_at', 'desc')
             ->with('Users', 'DataMesin')
