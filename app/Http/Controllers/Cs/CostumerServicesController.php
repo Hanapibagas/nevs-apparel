@@ -89,7 +89,7 @@ class CostumerServicesController extends Controller
     public function getIndexCs()
     {
         $auth = Auth::user();
-        $users = User::where('roles', 'disainer')->get();
+        $users = User::where('roles', 'layout')->where('non_aktif', '1')->get();
         $disainer = BarangMasukDisainer::where('nama_cs', $auth->id)
             ->orderBy('created_at', 'desc')
             ->with('Users', 'DataMesin')
@@ -110,7 +110,7 @@ class CostumerServicesController extends Controller
     public function postToTimDisainer(Request $request)
     {
 
-        $user = User::where('roles', 'layout')->where('non_aktif', '1')->get();
+        $user = Auth::user();
         BarangMasukDisainer::create([
             'nama_cs' => $user->id,
             'nama_tim' => $request->input('nama_tim'),
