@@ -1440,7 +1440,7 @@ class HomeController extends Controller
             'BarangMasukCostumerServicesLkCelana1.CelanaCelana1',
         )->findOrFail($id);
 
-        $layout = BarangMasukDatalayout::with('GamarTangkaplayar')->where('barang_masuk_id', $dataLk->BarangMasukDisainer->id)->get();
+        $layout = BarangMasukDatalayout::with('GamarTangkaplayar')->where('barang_masuk_id', $id)->get();
 
         view()->share('dataLk', $dataLk->BarangMasukDisainer->nama_tim);
 
@@ -1552,25 +1552,27 @@ class HomeController extends Controller
         $dari = $request->input('dari');
         $ke = $request->input('ke');
 
-        $data = LaporanCetakPresskain::select('kain_id', 'daerah', LaporanCetakPresskain::raw('SUM(total_kain) as total_kain'))
+        $data = LaporanCetakPresskain::select('kain_id', 'daerah',
+            LaporanCetakPresskain::raw('SUM(CAST(REPLACE(total_kain, \',\', \'.\') as DECIMAL(10,2))) as total_kain'))
             ->whereBetween('created_at', [$dari, $ke])
             ->groupBy('kain_id', 'daerah')
             ->with('Kain')
             ->get();
 
-        $cutPolos =  LaporanCetakCutPolos::select('kain_id', 'daerah', LaporanCetakPresskain::raw('SUM(total_kain) as total_kain'))
+        $cutPolos =  LaporanCetakCutPolos::select('kain_id', 'daerah',
+            LaporanCetakPresskain::raw('SUM(CAST(REPLACE(total_kain, \',\', \'.\') as DECIMAL(10,2))) as total_kain'))
             ->whereBetween('created_at', [$dari, $ke])
             ->groupBy('kain_id', 'daerah')
             ->with('Kain')
             ->get();
 
 
-        $sortir = LaporanCetakSortir::select('kain_id', 'daerah', LaporanCetakPresskain::raw('SUM(total_kain) as total_kain'))
+        $sortir = LaporanCetakSortir::select('kain_id', 'daerah',
+            LaporanCetakPresskain::raw('SUM(CAST(REPLACE(total_kain, \',\', \'.\') as DECIMAL(10,2))) as total_kain'))
             ->whereBetween('created_at', [$dari, $ke])
             ->groupBy('kain_id', 'daerah')
             ->with('Kain')
             ->get();
-        // return response()->json($sortir);
 
 
         view()->share('laporan', 'laporan');

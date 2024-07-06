@@ -110,7 +110,7 @@ class CostumerServicesController extends Controller
     public function postToTimDisainer(Request $request)
     {
 
-        $user = Auth::user();
+        $user = User::where('roles', 'layout')->where('non_aktif', '1')->get();
         BarangMasukDisainer::create([
             'nama_cs' => $user->id,
             'nama_tim' => $request->input('nama_tim'),
