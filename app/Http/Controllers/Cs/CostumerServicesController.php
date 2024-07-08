@@ -126,9 +126,6 @@ class CostumerServicesController extends Controller
         $userCounts = [];
         foreach ($users as $user) {
             $userId = $user->id;
-            // $barangMasukCount = BarangMasukCostumerServices::where('layout_id', $userId)
-            //     ->where('tanda_telah_mengerjakan', 0)
-            //     ->count();
             $barangMasukCount = BarangMasukDatalayout::where('users_layout_id', $userId)
                 ->where('tanda_telah_mengerjakan', 0)
                 ->count();
@@ -140,7 +137,7 @@ class CostumerServicesController extends Controller
         $lengan = PolaLengan::where('id', '>', 1)->get();
         $celana = PolaCeleana::all();
 
-        // return response()->json($userCounts);
+        // return response()->json($oderCs);
         return view('component.Cs.costumer-service-order-pegawai.create', compact('oderCs', 'users', 'userCounts', 'kera', 'lengan', 'celana'));
     }
 

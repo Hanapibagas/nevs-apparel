@@ -166,7 +166,7 @@ class DisainerController extends Controller
         $fileCelana1 = null;
 
         if ($request->file('file_baju_player')) {
-            $filebajuplayer = $request->file('file_baju_player')->store('file-dari-disainer-to-Cs-baju', 'public');
+            $filebajuplayer = $request->file('file_baju_player')->store('file-dari-disainer-to-Cs-baju-1', 'public');
             // $uploadFile = $request->file('file_baju_player');
             // // $originalFileName = $uploadFile->getClientOriginalName();
             // $filebajuplayer = $uploadFile->storeAs('file-dari-disainer-to-Cs-baju', 'public');
@@ -175,44 +175,44 @@ class DisainerController extends Controller
             // $uploadFile = $request->file('file_baju_pelatih');
             // // $originalFileName = $uploadFile->getClientOriginalName();
             // $filebajupelatih = $uploadFile->storeAs('file-dari-disainer-to-Cs-baju', 'public');
-            $filebajupelatih = $request->file('file_baju_pelatih')->store('file-dari-disainer-to-Cs-baju', 'public');
+            $filebajupelatih = $request->file('file_baju_pelatih')->store('file-dari-disainer-to-Cs-baju-2', 'public');
         }
         if ($request->file('file_baju_kiper')) {
             // $uploadFile = $request->file('file_baju_kiper');
             // $originalFileName = $uploadFile->getClientOriginalName();
             // $filebajukiper = $uploadFile->storeAs('file-dari-disainer-to-Cs-baju', 'public');
-            $filebajukiper = $request->file('file_baju_kiper')->store('file-dari-disainer-to-Cs-baju', 'public');
+            $filebajukiper = $request->file('file_baju_kiper')->store('file-dari-disainer-to-Cs-baju-3', 'public');
         }
         if ($request->file('file_baju_1')) {
             // $uploadFile = $request->file('file_baju_1');
             // $originalFileName = $uploadFile->getClientOriginalName();
             // $filebaju1 = $uploadFile->storeAs('file-dari-disainer-to-Cs-baju', 'public');
-            $filebaju1 = $request->file('file_baju_1')->store('file-dari-disainer-to-Cs-baju', 'public');
+            $filebaju1 = $request->file('file_baju_1')->store('file-dari-disainer-to-Cs-baju-4', 'public');
         }
 
         if ($request->file('file_celana_player')) {
             // $uploadFile = $request->file('file_celana_player');
             // $originalFileName = $uploadFile->getClientOriginalName();
             // $fileCelanaplayer = $uploadFile->storeAs('file-dari-disainer-to-Cs-celana', 'public');
-            $fileCelanaplayer = $request->file('file_celana_player')->store('file-dari-disainer-to-Cs-celana', 'public');
+            $fileCelanaplayer = $request->file('file_celana_player')->store('file-dari-disainer-to-Cs-celana-5', 'public');
         }
         if ($request->file('file_celana_pelatih')) {
             // $uploadFile = $request->file('file_celana_pelatih');
             // $originalFileName = $uploadFile->getClientOriginalName();
             // $fileCelanapelatih = $uploadFile->storeAs('file-dari-disainer-to-Cs-celana', 'public');
-            $fileCelanapelatih = $request->file('file_celana_pelatih')->store('file-dari-disainer-to-Cs-celana', 'public');
+            $fileCelanapelatih = $request->file('file_celana_pelatih')->store('file-dari-disainer-to-Cs-celana-6', 'public');
         }
         if ($request->file('file_celana_kiper')) {
             // $uploadFile = $request->file('file_celana_kiper');
             // $originalFileName = $uploadFile->getClientOriginalName();
             // $fileCelanakiper = $uploadFile->storeAs('file-dari-disainer-to-Cs-celana', 'public');
-            $fileCelanakiper = $request->file('file_celana_kiper')->store('file-dari-disainer-to-Cs-celana', 'public');
+            $fileCelanakiper = $request->file('file_celana_kiper')->store('file-dari-disainer-to-Cs-celana-7', 'public');
         }
         if ($request->file('file_celana_1')) {
             // $uploadFile = $request->file('file_celana_1');
             // $originalFileName = $uploadFile->getClientOriginalName();
             // $fileCelana1 = $uploadFile->storeAs('file-dari-disainer-to-Cs-celana', 'public');
-            $fileCelana1 = $request->file('file_celana_1')->store('file-dari-disainer-to-Cs-celana', 'public');
+            $fileCelana1 = $request->file('file_celana_1')->store('file-dari-disainer-to-Cs-celana-8', 'public');
         }
         if ($request->file('file_corel_disainer')) {
             $uploadFile = $request->file('file_corel_disainer');

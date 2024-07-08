@@ -102,12 +102,12 @@
                                         @if ($gambar->file_baju_player)
                                         <div class="card mb-4">
                                             <div class="card-body">
-                                                <h4 class="fw-bold py-3 mb-4">Keterangan Produksi
+                                                <h4 class="fw-bold py-3 mb-4">Keterangan Produksi player
                                                     <i class="bx bx-show" style="cursor: pointer;"
                                                         data-bs-toggle="modal" data-bs-target="#modalCenterPlayer"></i>
                                                 </h4>
                                                 <hr>
-                                                <div class="row">
+                                                {{-- <div class="row">
                                                     <div class="mb-3 col-md-6">
                                                         <label class="form-label" for="country">Status <i
                                                                 class="text-danger"
@@ -191,7 +191,7 @@
                                                         <textarea required class="form-control"
                                                             name="keterangan_baju_pelayer"></textarea>
                                                     </div>
-                                                </div>
+                                                </div> --}}
                                                 <div class="modal fade" id="modalCenterPlayer" tabindex="-1"
                                                     aria-hidden="true">
                                                     <div class="modal-dialog modal-dialog-centered" role="document">
@@ -218,12 +218,12 @@
                                         @if ($gambar->file_baju_pelatih)
                                         <div class="card mb-4">
                                             <div class="card-body">
-                                                <h4 class="fw-bold py-3 mb-4">Keterangan Produksi
+                                                <h4 class="fw-bold py-3 mb-4">Keterangan Produksi pelatih
                                                     <i class="bx bx-show" style="cursor: pointer;"
                                                         data-bs-toggle="modal" data-bs-target="#modalCenterPelatih"></i>
                                                 </h4>
                                                 <hr>
-                                                <div class="row">
+                                                {{-- <div class="row">
                                                     <div class="mb-3 col-md-6">
                                                         <label class="form-label" for="country">Status <i
                                                                 class="text-danger"
@@ -307,7 +307,7 @@
                                                         <textarea required class="form-control"
                                                             name="keterangan_baju_pelatih"></textarea>
                                                     </div>
-                                                </div>
+                                                </div> --}}
                                                 <div class="modal fade" id="modalCenterPelatih" tabindex="-1"
                                                     aria-hidden="true">
                                                     <div class="modal-dialog modal-dialog-centered" role="document">
@@ -334,12 +334,12 @@
                                         @if ($gambar->file_baju_kiper)
                                         <div class="card mb-4">
                                             <div class="card-body">
-                                                <h4 class="fw-bold py-3 mb-4">Keterangan Produksi
+                                                <h4 class="fw-bold py-3 mb-4">Keterangan Produksi kiper
                                                     <i class="bx bx-show" style="cursor: pointer;"
                                                         data-bs-toggle="modal" data-bs-target="#modalCenterKiper"></i>
                                                 </h4>
                                                 <hr>
-                                                <div class="row">
+                                                {{-- <div class="row">
                                                     <div class="mb-3 col-md-6">
                                                         <label class="form-label" for="country">Status<i
                                                                 class="text-danger"
@@ -423,7 +423,7 @@
                                                         <textarea required class="form-control"
                                                             name="keterangan_baju_kiper"></textarea>
                                                     </div>
-                                                </div>
+                                                </div> --}}
                                                 <div class="modal fade" id="modalCenterKiper" tabindex="-1"
                                                     aria-hidden="true">
                                                     <div class="modal-dialog modal-dialog-centered" role="document">
@@ -450,12 +450,12 @@
                                         @if ($gambar->file_baju_1)
                                         <div class="card mb-4">
                                             <div class="card-body">
-                                                <h4 class="fw-bold py-3 mb-4">Keterangan Produksi
+                                                <h4 class="fw-bold py-3 mb-4">Keterangan Produksi 1
                                                     <i class="bx bx-show" style="cursor: pointer;"
                                                         data-bs-toggle="modal" data-bs-target="#modalCenter1"></i>
                                                 </h4>
                                                 <hr>
-                                                <div class="row">
+                                                {{-- <div class="row">
                                                     <div class="mb-3 col-md-6">
                                                         <label class="form-label" for="country">Status <i
                                                                 class="text-danger"
@@ -539,7 +539,7 @@
                                                         <textarea required class="form-control"
                                                             name="keterangan_baju_1"></textarea>
                                                     </div>
-                                                </div>
+                                                </div> --}}
                                                 <div class="modal fade" id="modalCenter1" tabindex="-1"
                                                     aria-hidden="true">
                                                     <div class="modal-dialog modal-dialog-centered" role="document">
@@ -687,7 +687,7 @@
                                                 <h4 class="fw-bold py-3 mb-4">Keterangan Produksi
                                                     <i class="bx bx-show" style="cursor: pointer;"
                                                         data-bs-toggle="modal"
-                                                        data-bs-target="#modalCenterCelanaPlayer"></i>
+                                                        data-bs-target="#modalCenterCelanaPlayer1"></i>
                                                 </h4>
                                                 <hr>
                                                 <div class="row">
@@ -775,7 +775,7 @@
                                                             name="keterangan_celana_pelatih"></textarea>
                                                     </div>
                                                 </div>
-                                                <div class="modal fade" id="modalCenterCelanaPlayer" tabindex="-1"
+                                                <div class="modal fade" id="modalCenterCelanaPlayer1" tabindex="-1"
                                                     aria-hidden="true">
                                                     <div class="modal-dialog modal-dialog-centered" role="document">
                                                         <div class="modal-content">
@@ -804,7 +804,7 @@
                                                 <h4 class="fw-bold py-3 mb-4">Keterangan Produksi
                                                     <i class="bx bx-show" style="cursor: pointer;"
                                                         data-bs-toggle="modal"
-                                                        data-bs-target="#modalCenterCelanaPlayer"></i>
+                                                        data-bs-target="#modalCenterCelanaPlayer2"></i>
                                                 </h4>
                                                 <hr>
                                                 <div class="row">
@@ -892,7 +892,7 @@
                                                             name="keterangan_celana_kiper"></textarea>
                                                     </div>
                                                 </div>
-                                                <div class="modal fade" id="modalCenterCelanaPlayer" tabindex="-1"
+                                                <div class="modal fade" id="modalCenterCelanaPlayer2" tabindex="-1"
                                                     aria-hidden="true">
                                                     <div class="modal-dialog modal-dialog-centered" role="document">
                                                         <div class="modal-content">
@@ -921,7 +921,7 @@
                                                 <h4 class="fw-bold py-3 mb-4">Keterangan Produksi
                                                     <i class="bx bx-show" style="cursor: pointer;"
                                                         data-bs-toggle="modal"
-                                                        data-bs-target="#modalCenterCelanaPlayer"></i>
+                                                        data-bs-target="#modalCenterCelanaPlayer3"></i>
                                                 </h4>
                                                 <hr>
                                                 <div class="row">
@@ -1009,7 +1009,7 @@
                                                             name="keterangan_celana_1"></textarea>
                                                     </div>
                                                 </div>
-                                                <div class="modal fade" id="modalCenterCelanaPlayer" tabindex="-1"
+                                                <div class="modal fade" id="modalCenterCelanaPlayer3" tabindex="-1"
                                                     aria-hidden="true">
                                                     <div class="modal-dialog modal-dialog-centered" role="document">
                                                         <div class="modal-content">

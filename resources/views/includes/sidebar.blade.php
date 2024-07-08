@@ -100,7 +100,7 @@ $activeList = $listData ? 'active' : '';
                 </li>
                 <li class="menu-item {{ request()->is('mesin-atexco-admin')  ? 'active' : '' }}">
                     <a href="{{ route('getIndexMesinAtexco') }}" class="menu-link">
-                        <div data-i18n="Connections">Press Mesin</div>
+                        <div data-i18n="Connections">Mesin Print</div>
                     </a>
                 </li>
                 {{-- <li class="menu-item {{ request()->is('mesin-mimaki-admin')  ? 'active' : '' }}">
