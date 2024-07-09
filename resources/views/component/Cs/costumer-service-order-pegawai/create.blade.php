@@ -102,7 +102,7 @@
                                         @if ($gambar->file_baju_player)
                                         <div class="card mb-4">
                                             <div class="card-body">
-                                                <h4 class="fw-bold py-3 mb-4">Keterangan Produksi player
+                                                <h4 class="fw-bold py-3 mb-4">Keterangan Produksi
                                                     <i class="bx bx-show" style="cursor: pointer;"
                                                         data-bs-toggle="modal" data-bs-target="#modalCenterPlayer"></i>
                                                 </h4>
@@ -218,7 +218,7 @@
                                         @if ($gambar->file_baju_pelatih)
                                         <div class="card mb-4">
                                             <div class="card-body">
-                                                <h4 class="fw-bold py-3 mb-4">Keterangan Produksi pelatih
+                                                <h4 class="fw-bold py-3 mb-4">Keterangan Produksi
                                                     <i class="bx bx-show" style="cursor: pointer;"
                                                         data-bs-toggle="modal" data-bs-target="#modalCenterPelatih"></i>
                                                 </h4>
@@ -334,7 +334,7 @@
                                         @if ($gambar->file_baju_kiper)
                                         <div class="card mb-4">
                                             <div class="card-body">
-                                                <h4 class="fw-bold py-3 mb-4">Keterangan Produksi kiper
+                                                <h4 class="fw-bold py-3 mb-4">Keterangan Produksi
                                                     <i class="bx bx-show" style="cursor: pointer;"
                                                         data-bs-toggle="modal" data-bs-target="#modalCenterKiper"></i>
                                                 </h4>
@@ -450,7 +450,7 @@
                                         @if ($gambar->file_baju_1)
                                         <div class="card mb-4">
                                             <div class="card-body">
-                                                <h4 class="fw-bold py-3 mb-4">Keterangan Produksi 1
+                                                <h4 class="fw-bold py-3 mb-4">Keterangan Produksi
                                                     <i class="bx bx-show" style="cursor: pointer;"
                                                         data-bs-toggle="modal" data-bs-target="#modalCenter1"></i>
                                                 </h4>
