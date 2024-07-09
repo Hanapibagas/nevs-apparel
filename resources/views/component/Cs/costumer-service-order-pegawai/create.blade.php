@@ -107,7 +107,7 @@
                                                         data-bs-toggle="modal" data-bs-target="#modalCenterPlayer"></i>
                                                 </h4>
                                                 <hr>
-                                                {{-- <div class="row">
+                                                <div class="row">
                                                     <div class="mb-3 col-md-6">
                                                         <label class="form-label" for="country">Status <i
                                                                 class="text-danger"
@@ -191,7 +191,7 @@
                                                         <textarea required class="form-control"
                                                             name="keterangan_baju_pelayer"></textarea>
                                                     </div>
-                                                </div> --}}
+                                                </div>
                                                 <div class="modal fade" id="modalCenterPlayer" tabindex="-1"
                                                     aria-hidden="true">
                                                     <div class="modal-dialog modal-dialog-centered" role="document">
@@ -223,7 +223,7 @@
                                                         data-bs-toggle="modal" data-bs-target="#modalCenterPelatih"></i>
                                                 </h4>
                                                 <hr>
-                                                {{-- <div class="row">
+                                                <div class="row">
                                                     <div class="mb-3 col-md-6">
                                                         <label class="form-label" for="country">Status <i
                                                                 class="text-danger"
@@ -307,7 +307,7 @@
                                                         <textarea required class="form-control"
                                                             name="keterangan_baju_pelatih"></textarea>
                                                     </div>
-                                                </div> --}}
+                                                </div>
                                                 <div class="modal fade" id="modalCenterPelatih" tabindex="-1"
                                                     aria-hidden="true">
                                                     <div class="modal-dialog modal-dialog-centered" role="document">
@@ -339,7 +339,7 @@
                                                         data-bs-toggle="modal" data-bs-target="#modalCenterKiper"></i>
                                                 </h4>
                                                 <hr>
-                                                {{-- <div class="row">
+                                                <div class="row">
                                                     <div class="mb-3 col-md-6">
                                                         <label class="form-label" for="country">Status<i
                                                                 class="text-danger"
@@ -423,7 +423,7 @@
                                                         <textarea required class="form-control"
                                                             name="keterangan_baju_kiper"></textarea>
                                                     </div>
-                                                </div> --}}
+                                                </div>
                                                 <div class="modal fade" id="modalCenterKiper" tabindex="-1"
                                                     aria-hidden="true">
                                                     <div class="modal-dialog modal-dialog-centered" role="document">
@@ -455,7 +455,7 @@
                                                         data-bs-toggle="modal" data-bs-target="#modalCenter1"></i>
                                                 </h4>
                                                 <hr>
-                                                {{-- <div class="row">
+                                                <div class="row">
                                                     <div class="mb-3 col-md-6">
                                                         <label class="form-label" for="country">Status <i
                                                                 class="text-danger"
@@ -539,7 +539,7 @@
                                                         <textarea required class="form-control"
                                                             name="keterangan_baju_1"></textarea>
                                                     </div>
-                                                </div> --}}
+                                                </div>
                                                 <div class="modal fade" id="modalCenter1" tabindex="-1"
                                                     aria-hidden="true">
                                                     <div class="modal-dialog modal-dialog-centered" role="document">
