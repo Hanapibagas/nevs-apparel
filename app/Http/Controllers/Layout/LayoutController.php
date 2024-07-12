@@ -835,24 +835,26 @@ class LayoutController extends Controller
             }
         }
 
+
         if ($keterangan == "- $selisihHari") {
-            PembagianKomisi::create([
+            $data = PembagianKomisi::create([
                 'user_id' => $user->id,
                 'layout_id' => $request->player_id,
                 'tanggal' => Carbon::now(),
                 'jumlah_komisi' => $totalHarga,
                 'kota' => $dataPlayer->kota_produksi,
             ]);
+            return response()->json($data);
         } else {
-            PembagianKomisi::create([
+            $hello = PembagianKomisi::create([
                 'user_id' => $user->id,
                 'layout_id' => $dataPlayer->id,
                 'tanggal' => Carbon::now(),
                 'jumlah_komisi' => "0",
                 'kota' => $dataPlayer->kota_produksi,
             ]);
+            return response()->json( $hello);
         }
-
         // if ($dataPlayer->jenis_mesin == 'mimaki') {
         //     if ($request->player_id) {
         //         $laporanPlayer = Laporan::where('barang_masuk_layout_id', $request->player_id)->first();
