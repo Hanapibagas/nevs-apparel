@@ -844,7 +844,7 @@ class LayoutController extends Controller
                 'jumlah_komisi' => $totalHarga,
                 'kota' => $dataPlayer->kota_produksi,
             ]);
-            return response()->json($data);
+            // return response()->json($data);
         } else {
             $hello = PembagianKomisi::create([
                 'user_id' => $user->id,
@@ -853,7 +853,7 @@ class LayoutController extends Controller
                 'jumlah_komisi' => "0",
                 'kota' => $dataPlayer->kota_produksi,
             ]);
-            return response()->json( $hello);
+            // return response()->json( $hello);
         }
         // if ($dataPlayer->jenis_mesin == 'mimaki') {
         //     if ($request->player_id) {
