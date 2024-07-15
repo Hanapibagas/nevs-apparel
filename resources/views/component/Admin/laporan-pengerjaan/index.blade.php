@@ -78,7 +78,7 @@
                                         @elseif ($laporan->status == 'Mesin Mimaki')
                                         <span class="badge bg-warning">Berada di {{ $laporan->status }}</span>
                                         @elseif ($laporan->status == 'Mesin Press')
-                                        <span class="badge bg-warning">Berada di {{ $laporan->status }}</span>
+                                        <span class="badge bg-warning">Berada di Mesin Cetak</span>
                                         @elseif ($laporan->status == 'Press Kain')
                                         <span class="badge bg-warning">Berada di {{ $laporan->status }}</span>
                                         @elseif ($laporan->status == 'Laser Cut')

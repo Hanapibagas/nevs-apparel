@@ -412,7 +412,7 @@
 
         @if ($laporans->whereNotNull('barang_masuk_mesin_atexco_id')->count() > 0)
         <div class="card">
-            <h5 class="card-header">Data masuk press mesin</h5>
+            <h5 class="card-header">Data masuk mesin cetak</h5>
             <div class="card-body">
                 <div class="table-responsive text-nowrap">
                     <table id="atexco" class="table">
