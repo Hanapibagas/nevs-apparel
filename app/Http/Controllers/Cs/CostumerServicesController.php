@@ -318,6 +318,8 @@ class CostumerServicesController extends Controller
                         'keterangan_celana_kiper' => $request->keterangan_celana_kiper,
                         'status_celana_kiper' => $request->status_celana_kiper,
                     ]);
+
+                    return response()->json($LkCelanaPelatih);
                 }
                 if (isset($gambar->file_celana_kiper)) {
                     LkCelanaKiper::where('barang_masuk_id', $lk->id)->delete();
