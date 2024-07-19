@@ -305,7 +305,7 @@ class CostumerServicesController extends Controller
                 }
                 if (isset($gambar->file_celana_pelatih)) {
                     LkCelanaKiper::where('barang_masuk_id', $lk->id)->delete();
-                    $LkCelanaKiper = LkCelanaKiper::create([
+                    $LkCelanaPelatih = LkCelanaKiper::create([
                         'barang_masuk_id' => $lk->id,
                         'total_celana_kiper' => $request->total_celana_kiper,
                         'kerah_celana_kiper_id' => $request->kerah_celana_kiper_id,

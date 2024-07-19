@@ -33,9 +33,8 @@
         {{$dataLk->BarangMasukDisainer->nama_tim }} <br> {{ $dataLk->no_order }}</h3><br>
     <h4 style="text-transform: uppercase; margin-left: 541px; margin-top: -80px">
         @if ($dataLk->ket_hari == 'Express')
-        <span style="color: red">DEADLINE Express <br> </span> <span style="color: red;margin-left: 40px;">{{
-            $formattedDari
-            }}</span>
+        <span style="color: red">DEADLINE Express <br> </span> <span style="color: red;margin-left: 30px;">{{
+            $formattedDari}}</span>
         @elseif ($dataLk->ket_hari == 'Normal')
         DEADLINE Normal <br> <span style="margin-left: 40px;">{{
             $formattedDari
@@ -144,7 +143,7 @@
         {{$dataLk->BarangMasukDisainer->nama_tim }} <br> {{ $dataLk->no_order }}</h3><br>
     <h4 style="text-transform: uppercase; margin-left: 541px; margin-top: -80px">
         @if ($dataLk->ket_hari == 'Express')
-        <span style="color: red">DEADLINE Express <br> </span> <span style="color: red;margin-left: 40px;">{{
+        <span style="color: red">DEADLINE Express <br> </span> <span style="color: red;margin-left: 30px;">{{
             $formattedDari
             }}</span>
         @elseif ($dataLk->ket_hari == 'Normal')
@@ -253,7 +252,7 @@
         {{$dataLk->BarangMasukDisainer->nama_tim }} <br> {{ $dataLk->no_order }}</h3><br>
     <h4 style="text-transform: uppercase; margin-left: 541px; margin-top: -80px">
         @if ($dataLk->ket_hari == 'Express')
-        <span style="color: red">DEADLINE Express <br> </span> <span style="color: red;margin-left: 40px;">{{
+        <span style="color: red">DEADLINE Express <br> </span> <span style="color: red;margin-left: 30px;">{{
             $formattedDari
             }}</span>
         @elseif ($dataLk->ket_hari == 'Normal')
@@ -362,7 +361,7 @@
         {{$dataLk->BarangMasukDisainer->nama_tim }} <br> {{ $dataLk->no_order }}</h3><br>
     <h4 style="text-transform: uppercase; margin-left: 541px; margin-top: -80px">
         @if ($dataLk->ket_hari == 'Express')
-        <span style="color: red">DEADLINE Express <br> </span> <span style="color: red;margin-left: 40px;">{{
+        <span style="color: red">DEADLINE Express <br> </span> <span style="color: red;margin-left: 30px;">{{
             $formattedDari
             }}</span>
         @elseif ($dataLk->ket_hari == 'Normal')
@@ -471,7 +470,7 @@
         {{$dataLk->BarangMasukDisainer->nama_tim }} <br> {{ $dataLk->no_order }}</h3><br>
     <h4 style="text-transform: uppercase; margin-left: 541px; margin-top: -80px">
         @if ($dataLk->ket_hari == 'Express')
-        <span style="color: red">DEADLINE Express <br> </span> <span style="color: red;margin-left: 40px;">{{
+        <span style="color: red">DEADLINE Express <br> </span> <span style="color: red;margin-left: 30px;">{{
             $formattedDari
             }}</span>
         @elseif ($dataLk->ket_hari == 'Normal')
@@ -580,7 +579,7 @@
         {{$dataLk->BarangMasukDisainer->nama_tim }} <br> {{ $dataLk->no_order }}</h3><br>
     <h4 style="text-transform: uppercase; margin-left: 541px; margin-top: -80px">
         @if ($dataLk->ket_hari == 'Express')
-        <span style="color: red">DEADLINE Express <br> </span> <span style="color: red;margin-left: 40px;">{{
+        <span style="color: red">DEADLINE Express <br> </span> <span style="color: red;margin-left: 30px;">{{
             $formattedDari
             }}</span>
         @elseif ($dataLk->ket_hari == 'Normal')
@@ -689,7 +688,7 @@
         {{$dataLk->BarangMasukDisainer->nama_tim }} <br> {{ $dataLk->no_order }}</h3><br>
     <h4 style="text-transform: uppercase; margin-left: 541px; margin-top: -80px">
         @if ($dataLk->ket_hari == 'Express')
-        <span style="color: red">DEADLINE Express <br> </span> <span style="color: red;margin-left: 40px;">{{
+        <span style="color: red">DEADLINE Express <br> </span> <span style="color: red;margin-left: 30px;">{{
             $formattedDari
             }}</span>
         @elseif ($dataLk->ket_hari == 'Normal')
@@ -798,7 +797,7 @@
         {{$dataLk->BarangMasukDisainer->nama_tim }} <br> {{ $dataLk->no_order }}</h3><br>
     <h4 style="text-transform: uppercase; margin-left: 541px; margin-top: -80px">
         @if ($dataLk->ket_hari == 'Express')
-        <span style="color: red">DEADLINE Express <br> </span> <span style="color: red;margin-left: 40px;">{{
+        <span style="color: red">DEADLINE Express <br> </span> <span style="color: red;margin-left: 30px;">{{
             $formattedDari
             }}</span>
         @elseif ($dataLk->ket_hari == 'Normal')
