@@ -304,8 +304,8 @@ class CostumerServicesController extends Controller
                     ]);
                 }
                 if (isset($gambar->file_celana_pelatih)) {
-                    LkCelanaKiper::where('barang_masuk_id', $lk->id)->delete();
-                    $LkCelanaPelatih = LkCelanaKiper::create([
+                    LkCelanaPelatih::where('barang_masuk_id', $lk->id)->delete();
+                    $LkCelanaPelatih = LkCelanaPelatih::create([
                         'barang_masuk_id' => $lk->id,
                         'total_celana_kiper' => $request->total_celana_kiper,
                         'kerah_celana_kiper_id' => $request->kerah_celana_kiper_id,
@@ -320,8 +320,8 @@ class CostumerServicesController extends Controller
                     ]);
                 }
                 if (isset($gambar->file_celana_kiper)) {
-                    LkCelanaPelatih::where('baraang_masuk_id', $lk->id)->delete();
-                    $LkCelanaKiper = LkCelanaPelatih::create([
+                    LkCelanaKiper::where('baraang_masuk_id', $lk->id)->delete();
+                    $LkCelanaKiper = LkCelanaKiper::create([
                         'baraang_masuk_id' => $lk->id,
                         'total_celana_pelatih' => $request->total_celana_pelatih,
                         'kerah_celana_pelatih_id' => $request->kerah_celana_pelatih_id,
@@ -351,6 +351,8 @@ class CostumerServicesController extends Controller
                         'status_celana_1' => $request->status_celana_1,
                     ]);
                 }
+
+                // return response()->json($)
             }
             // AKHIR PEMBUATAN LK BARU
 
