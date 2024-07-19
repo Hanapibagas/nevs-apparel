@@ -304,7 +304,7 @@ class CostumerServicesController extends Controller
                     ]);
                 }
                 if (isset($gambar->file_celana_pelatih)) {
-                    LkCelanaPelatih::where('barang_masuk_id', $lk->id)->delete();
+                    LkCelanaPelatih::where('baraang_masuk_id', $lk->id)->delete();
                     $LkCelanaPelatih = LkCelanaPelatih::create([
                         'barang_masuk_id' => $lk->id,
                         'total_celana_kiper' => $request->total_celana_kiper,
@@ -320,7 +320,7 @@ class CostumerServicesController extends Controller
                     ]);
                 }
                 if (isset($gambar->file_celana_kiper)) {
-                    LkCelanaKiper::where('baraang_masuk_id', $lk->id)->delete();
+                    LkCelanaKiper::where('barang_masuk_id', $lk->id)->delete();
                     $LkCelanaKiper = LkCelanaKiper::create([
                         'baraang_masuk_id' => $lk->id,
                         'total_celana_pelatih' => $request->total_celana_pelatih,
