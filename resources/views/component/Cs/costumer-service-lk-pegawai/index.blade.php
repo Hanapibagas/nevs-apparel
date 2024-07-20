@@ -110,14 +110,14 @@
                                         Edit LK</a>
                                     @endif
                                     @endif --}}
-                                    {{-- <a href="{{ route('getEditIndexLkCsPegawai', $disainers->id) }}"
+                                    <a href="{{ route('getEditIndexLkCsPegawai', $disainers->id) }}"
                                         class="btn btn-primary">
                                         <i class="menu-icon tf-icons bx bx-pencil"></i>
-                                        Edit LK</a> --}}
-                                    <a href="" style="color: white"
+                                        Edit LK</a>
+                                    {{-- <a href="" style="color: white"
                                         class="btn btn-primary">
                                         <i class="menu-icon tf-icons bx bx-pencil"></i>
-                                        Fitur Edit Dalam Perbaikan</a>
+                                        Fitur Edit Dalam Perbaikan</a> --}}
                                     <a target="_blank" href="{{ route('getCetakDataLk', $disainers->id) }}"
                                         class="btn btn-danger">
                                         <i class="menu-icon tf-icons bx bxs-file-pdf"></i>Download PDF LK</a>

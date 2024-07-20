@@ -164,7 +164,7 @@ class CostumerServicesController extends Controller
 
     public function putDataLk(Request $request, $id)
     {
-        // return response()->json($request->all());
+        // return response()->json($request->());
         $lk = BarangMasukCostumerServices::with('BarangMasukDisainer.DataMesinCs.User', 'GambarCreateLK')->find($id);
 
         // return response()->json($lk);
@@ -306,24 +306,6 @@ class CostumerServicesController extends Controller
                 if (isset($gambar->file_celana_pelatih)) {
                     LkCelanaPelatih::where('baraang_masuk_id', $lk->id)->delete();
                     $LkCelanaPelatih = LkCelanaPelatih::create([
-                        'barang_masuk_id' => $lk->id,
-                        'total_celana_kiper' => $request->total_celana_kiper,
-                        'kerah_celana_kiper_id' => $request->kerah_celana_kiper_id,
-                        'jenis_sablon_celana_kiper' => $request->jenis_sablon_celana_kiper,
-                        'pola_celana_kiper_id' => $request->pola_celana_kiper_id,
-                        'jenis_kain_celana_kiper' => $request->jenis_kain_celana_kiper,
-                        'ket_warna_kain_celana_kiper' => $request->ket_warna_kain_celana_kiper,
-                        'ket_bis_celana_celana_kiper' => $request->ket_bis_celana_celana_kiper,
-                        'ket_tambahan_celana_kiper' => $request->ket_tambahan_celana_kiper,
-                        'keterangan_celana_kiper' => $request->keterangan_celana_kiper,
-                        'status_celana_kiper' => $request->status_celana_kiper,
-                    ]);
-
-                    return response()->json($LkCelanaPelatih);
-                }
-                if (isset($gambar->file_celana_kiper)) {
-                    LkCelanaKiper::where('barang_masuk_id', $lk->id)->delete();
-                    $LkCelanaKiper = LkCelanaKiper::create([
                         'baraang_masuk_id' => $lk->id,
                         'total_celana_pelatih' => $request->total_celana_pelatih,
                         'kerah_celana_pelatih_id' => $request->kerah_celana_pelatih_id,
@@ -335,6 +317,22 @@ class CostumerServicesController extends Controller
                         'ket_tambahan_celana_pelatih' => $request->ket_tambahan_celana_pelatih,
                         'keterangan_celana_pelatih' => $request->keterangan_celana_pelatih,
                         'status_celana_pelatih' => $request->status_celana_pelatih,
+                    ]);
+                }
+                if (isset($gambar->file_celana_kiper)) {
+                    LkCelanaKiper::where('barang_masuk_id', $lk->id)->delete();
+                    $LkCelanaKiper = LkCelanaKiper::create([
+                        'barang_masuk_id' => $lk->id,
+                        'total_celana_kiper' => $request->total_celana_kiper,
+                        'kerah_celana_kiper_id' => $request->kerah_celana_kiper_id,
+                        'jenis_sablon_celana_kiper' => $request->jenis_sablon_celana_kiper,
+                        'pola_celana_kiper_id' => $request->pola_celana_kiper_id,
+                        'jenis_kain_celana_kiper' => $request->jenis_kain_celana_kiper,
+                        'ket_warna_kain_celana_kiper' => $request->ket_warna_kain_celana_kiper,
+                        'ket_bis_celana_celana_kiper' => $request->ket_bis_celana_celana_kiper,
+                        'ket_tambahan_celana_kiper' => $request->ket_tambahan_celana_kiper,
+                        'keterangan_celana_kiper' => $request->keterangan_celana_kiper,
+                        'status_celana_kiper' => $request->status_celana_kiper,
                     ]);
                 }
                 if (isset($gambar->file_celana_1)) {
@@ -354,7 +352,11 @@ class CostumerServicesController extends Controller
                     ]);
                 }
 
-                // return response()->json($)
+                // return response()->json([
+
+                //     $LkCelanaPlayer,
+                //     $LkCelanaKiper,
+                // ]);
             }
             // AKHIR PEMBUATAN LK BARU
 
