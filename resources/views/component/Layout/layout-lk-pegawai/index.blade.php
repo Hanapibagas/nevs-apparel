@@ -63,15 +63,42 @@
                                 </td>
                                 <td>
                                     <script>
+                                        // Menghitung jumlah hari tidak termasuk hari Minggu
+                                        function calculateElapsedDays(startDate, endDate) {
+                                            var days = 0;
+                                            while (startDate < endDate) {
+                                                var day = startDate.getDay();
+                                                if (day !== 0) { // Tidak termasuk hari Minggu (0)
+                                                    days++;
+                                                }
+                                                startDate.setDate(startDate.getDate() + 1);
+                                            }
+                                            return days;
+                                        }
+
+                                        // Menghitung jumlah hari tersisa tidak termasuk hari Minggu
+                                        function calculateRemainingDays(startDate, endDate) {
+                                            var days = 0;
+                                            while (startDate <= endDate) {
+                                                var day = startDate.getDay();
+                                                if (day !== 0) { // Tidak termasuk hari Minggu (0)
+                                                    days++;
+                                                }
+                                                startDate.setDate(startDate.getDate() + 1);
+                                            }
+                                            return days;
+                                        }
+
                                         var deadlineDate = new Date("{{ $disainers->deadline }}");
                                         var currentDate = new Date();
-                                        var elapsedDays = Math.floor((currentDate - deadlineDate) / (1000 * 60 * 60 * 24));
-                                        if (elapsedDays > 0) {
+
+                                        if (currentDate > deadlineDate) {
+                                            var elapsedDays = calculateElapsedDays(deadlineDate, currentDate);
                                             document.write('<span class="badge bg-label-danger">' + elapsedDays + ' hari terlewatkan</span>');
-                                        } else if (elapsedDays === 0) {
+                                        } else if (currentDate.toDateString() === deadlineDate.toDateString()) {
                                             document.write('<span class="badge bg-label-danger">Hari ini adalah batas waktu</span>');
                                         } else {
-                                            var remainingDays = Math.ceil((-elapsedDays));
+                                            var remainingDays = calculateRemainingDays(currentDate, deadlineDate);
                                             document.write('<span class="badge bg-label-success">Sisa ' + remainingDays + ' hari</span>');
                                         }
                                     </script>

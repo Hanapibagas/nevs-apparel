@@ -73,7 +73,7 @@
                                             var currentDate = new Date(startDate);
                                             while (currentDate <= endDate) {
                                                 var dayOfWeek = currentDate.getDay();
-                                                if (dayOfWeek !== 0) { // 0 is Sunday
+                                                if (dayOfWeek !== 0) {
                                                     count++;
                                                 }
                                                 currentDate.setDate(currentDate.getDate() + 1);
