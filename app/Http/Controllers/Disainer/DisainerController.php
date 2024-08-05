@@ -148,13 +148,23 @@ class DisainerController extends Controller
 
         $last_order_number = BarangMasukCostumerServices::latest()->value('no_order');
         if ($last_order_number) {
-            $last_sequence = substr($last_order_number, -3);
-            $next_sequence = intval($last_sequence) + 1;
+            $parts = explode('-', $last_order_number);
+            $last_bulan = substr($parts[0], 1);
+            $last_tahun = substr($parts[1], 0, 2);
+            $last_sequence = substr($parts[1], 2);
+
+            if ($bulan_sekarang == $last_bulan && $tahun_sekarang == $last_tahun) {
+                $next_sequence = intval($last_sequence) + 1;
+            } else {
+                $next_sequence = 1;
+            }
         } else {
             $next_sequence = 1;
         }
 
+
         $new_order_number = '#' . $bulan_sekarang . '-' . $tahun_sekarang . str_pad($next_sequence, 3, '0', STR_PAD_LEFT);
+
 
         $filebajuplayer = null;
         $filebajupelatih = null;
