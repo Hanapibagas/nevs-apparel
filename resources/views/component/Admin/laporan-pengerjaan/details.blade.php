@@ -244,7 +244,7 @@
                                     {{ strtoupper($laporanData['celana_player'][0]['users_layout_id']) }}
                                 </td>
                                 <td>
-                                    {{ strtoupper($laporanData['player'][0]['kertas_id']) }}
+                                    {{ strtoupper($laporanData['celana_player'][0]['kertas_id']) }}
                                 </td>
                                 <td>
                                     @if($laporanData['celana_player'][0]['panjang_kertas_celana_pelayer'])
@@ -1304,8 +1304,8 @@
                                     @endif
                                 </td>
                                 <td>
-                                    @if($laporanDataPressKain['player'][0]['kain_id'])
-                                    {{ $laporanDataPressKain['player'][0]['kain_id'] }}
+                                    @if($laporanDataPressKain['celana_player'][0]['kain_id'])
+                                    {{ $laporanDataPressKain['celana_player'][0]['kain_id'] }}
                                     @else
                                     <p>BELUM MELAKUKAN UPDATE DATA</p>
                                     @endif
@@ -1362,8 +1362,8 @@
                                     @endif
                                 </td>
                                 <td>
-                                    @if($laporanDataPressKain['player'][0]['kain_id'])
-                                    {{ $laporanDataPressKain['player'][0]['kain_id'] }}
+                                    @if($laporanDataPressKain['celana_pelatih'][0]['kain_id'])
+                                    {{ $laporanDataPressKain['celana_pelatih'][0]['kain_id'] }}
                                     @else
                                     <p>BELUM MELAKUKAN UPDATE DATA</p>
                                     @endif
