@@ -1283,7 +1283,7 @@ class HomeController extends Controller
         //     $laporanDataJahit,
         //     $laporanDataFinis,
         // ]);
-        // return response()->json($laporanDataSortir);
+        // return response()->json($laporanDataPressKain['celana_pelatih'][0]['kain_id']);
 
         return view('component.Admin.laporan-pengerjaan.details', compact(
             'laporans',

@@ -48,6 +48,11 @@ class BarangMasukCostumerServices extends Model
         return $this->belongsTo(User::class, 'jenis_mesin');
     }
 
+    public function Layout()
+    {
+        return $this->belongsTo(User::class, 'layout_id');
+    }
+
     public function Gambar()
     {
         return $this->hasMany(Gambar::class, 'barang_masuk_costumer_services_id');

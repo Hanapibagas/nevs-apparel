@@ -1361,16 +1361,16 @@
                                     <p>BELUM MELAKUKAN UPDATE DATA</p>
                                     @endif
                                 </td>
-                                <td>
+                                {{-- <td>
                                     @if($laporanDataPressKain['celana_pelatih'][0]['kain_id'])
                                     {{ $laporanDataPressKain['celana_pelatih'][0]['kain_id'] }}
                                     @else
                                     <p>BELUM MELAKUKAN UPDATE DATA</p>
                                     @endif
-                                </td>
+                                </td> --}}
                                 <td>
                                     @if($laporanDataPressKain['celana_pelatih'][0]['kain_celana_pelatih'])
-                                    {{ $laporanDataPressKain['celana_pelatih'][0]['kain_celana_pelatih'] }} Meter
+                                    {{ $laporanDataPressKain['celana_pelatih'][0]['kain_celana_pelatih'] }}
                                     @else
                                     <p>BELUM MELAKUKAN UPDATE DATA</p>
                                     @endif
@@ -1420,8 +1420,8 @@
                                     @endif
                                 </td>
                                 <td>
-                                    @if($laporanDataPressKain['player'][0]['kain_id'])
-                                    {{ $laporanDataPressKain['player'][0]['kain_id'] }}
+                                    @if($laporanDataPressKain['celana_kiper'][0]['kain_id'])
+                                    {{ $laporanDataPressKain['celana_kiper'][0]['kain_id'] }}
                                     @else
                                     <p>BELUM MELAKUKAN UPDATE DATA</p>
                                     @endif

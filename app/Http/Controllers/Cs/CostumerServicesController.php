@@ -152,8 +152,9 @@ class CostumerServicesController extends Controller
                 ->count();
             $userCounts[$userId] = $barangMasukCount;
         }
-        $oderCs = BarangMasukCostumerServices::with('BarangMasukDisainer', 'Gambar', 'Users', 'UsersOrder', 'UserMesin')->find($id);
+        $oderCs = BarangMasukCostumerServices::with('Layout', 'BarangMasukCostumerServicesLkPlyer', 'BarangMasukDisainer' ,'Gambar', 'Users', 'UsersOrder', 'UserMesin')->find($id);
 
+        return response()->json($oderCs);
         // return response()->json($userCounts);
         $kera = KeraBaju::where('id', '>', 1)->get();
         $lengan = PolaLengan::where('id', '>', 1)->get();
