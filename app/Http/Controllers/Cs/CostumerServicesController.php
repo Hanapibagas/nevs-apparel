@@ -154,7 +154,7 @@ class CostumerServicesController extends Controller
         }
         $oderCs = BarangMasukCostumerServices::with('Layout', 'BarangMasukCostumerServicesLkPlyer', 'BarangMasukDisainer' ,'Gambar', 'Users', 'UsersOrder', 'UserMesin')->find($id);
 
-        return response()->json($oderCs);
+        // return response()->json($oderCs);
         // return response()->json($userCounts);
         $kera = KeraBaju::where('id', '>', 1)->get();
         $lengan = PolaLengan::where('id', '>', 1)->get();
